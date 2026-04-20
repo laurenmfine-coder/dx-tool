@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: James Okoye",
-      "icd": "Z00.00",
+      "problem": "Right homonymous hemianopia \u2014 post-left MCA stroke",
+      "icd": "H53.461",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "James Okoye. Stroke 2 months ago. Now noticing missing right visual field. Bumping into objects right side."
+    },
+    {
+      "problem": "Driving unsafe \u2014 right visual field loss",
+      "icd": "Z87.39",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Cannot legally drive with <120\u00b0 visual field. Must be counseled and documented."
+    },
+    {
+      "problem": "Reading difficulty \u2014 right field loss disrupts saccades",
+      "icd": "H53.12",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Loses place when reading \u2014 right field loss disrupts rightward saccades needed for reading"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 81mg daily",
+      "sig": "Antiplatelet for secondary stroke prevention",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 80mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "09/05/2024",
+      "study": "MRI Brain (acute stroke)",
+      "indication": "Left MCA stroke",
+      "findings": "Left MCA territory infarct including posterior parietal and occipital involvement \u2014 explains right visual field loss.",
+      "impression": "Left MCA infarct with optic radiation involvement causing right homonymous hemianopia."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-stroke-optometry",
-    "diagnosis": "See diagnosis \u2014 James Okoye",
+    "diagnosis": "Post-Stroke Month 2 \u2014 Right Homonymous Hemianopia, OD Assessment and Adaptive Strategies",
     "acuity": 3,
     "presentation": "James Okoye",
     "category": "ophthalmic"
@@ -178,12 +208,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "James Okoye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Right homonymous hemianopia post-left MCA stroke \u2014 OD management (correct)",
+      "Bitemporal hemianopia \u2014 would indicate chiasmal lesion, not hemispheric",
+      "Right monocular field loss \u2014 homonymous means BOTH eyes have the same field loss (right side both eyes)",
+      "Normal visual fields \u2014 HVF automated perimetry objectively confirms field loss",
+      "Glaucoma causing field loss \u2014 pattern is arcuate/nasal step, not hemianopic",
+      "Retinal detachment \u2014 different presentation, different exam findings"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +223,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: James Okoye. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) James presents to your optometry practice 2 months post-stroke. He has a dense right homonymous hemianopia on confrontation testing. He asks if he can drive again. His wife says he needs to drive for independence. What visual field testing confirms the hemianopia pattern \u2014 and what is your evidence-based counseling on driving, prism therapy, and compensatory scanning training? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: right homonymous hemianopia from left MCA stroke. Key OD learning: (1) Homonymous hemianopia anatomy: left MCA stroke damages left optic radiation (Meyer's loop and posterior optic radiation) \u2192 loss of RIGHT visual field in BOTH eyes. 'Homonymous' = same-sided field loss in both eyes. This is the most common visual complication of stroke. (2) The OD's unique role: measure and document the visual field loss formally (Humphrey VF 24-2), assess driving safety, prescribe adaptive strategies. Neurologist and physiatrist may not assess visual fields formally. (3) Driving \u2014 non-negotiable conversation: legal requirement for binocular field >120\u00b0. Patient with right homonymous hemianopia typically has <120\u00b0 binocular field. Document the counseling: 'Patient counseled that current visual field loss disqualifies them from driving per state DMV standards. Patient verbalized understanding.' Do not avoid this conversation. (4) Reading rehabilitation: right field loss disrupts rightward saccades essential for reading (from end of one line to start of next, and tracking within a line). Strategies: ruler or finger tracking, text-to-speech technology, larger font, rotating paper. Neuro-vision rehabilitation referral if available. (5) Prism glasses for hemianopia: sector prisms on the right lens expand effective visual field for navigation. 40% of patients find them useful. Worth trialing. Visual field restoration therapy (Novavis) has limited but emerging evidence."
     }
   }
 };

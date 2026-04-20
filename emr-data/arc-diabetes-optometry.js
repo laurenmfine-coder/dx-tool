@@ -23,19 +23,41 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Robert Diaz",
-      "icd": "Z00.00",
+      "problem": "Non-proliferative diabetic retinopathy \u2014 mild, bilateral",
+      "icd": "E11.311",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Robert Diaz. First dilated exam ever. Microaneurysms only \u2014 mild NPDR."
+    },
+    {
+      "problem": "T2DM \u2014 poorly controlled, A1c 9.8%",
+      "icd": "E11.9",
+      "onset": "2020",
+      "status": "Active",
+      "notes": "A1c 9.8% is driving DR progression risk. Annual OD visit is the management anchor."
+    },
+    {
+      "problem": "Undiagnosed refractive error \u2014 needs glasses",
+      "icd": "H52.219",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "BCVA 20/50 OD, 20/40 OS. Refractive correction improves to 20/25. New glasses prescribed."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
+      "name": "Metformin 1000mg BID (primary care)",
+      "sig": "Take twice daily with meals",
+      "prescriber": "Dr. Kim",
+      "start": "2020",
+      "refills": 6,
+      "status": "Active"
+    },
+    {
+      "name": "Semaglutide 0.5mg SQ weekly (primary care)",
+      "sig": "Subcutaneous weekly \u2014 GLP-1, added 6 months ago",
+      "prescriber": "Dr. Kim",
+      "start": "2024",
       "refills": 3,
       "status": "Active"
     }
@@ -97,8 +119,37 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/01/2024",
+      "panel": "Diabetes Monitoring",
+      "results": [
+        {
+          "test": "HbA1c",
+          "value": "9.8",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "BP at eye exam",
+          "value": "142/88",
+          "unit": "mmHg",
+          "ref": "<130/80 target",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Fundus Photography + OCT Macula Bilateral",
+      "indication": "First dilated exam \u2014 T2DM",
+      "findings": "OD: Scattered microaneurysms (3-5) in mid-periphery. No hemorrhages, exudates, or neovascularization. OCT macula: central subfield thickness 274 \u03bcm, no DME. OS: 2 microaneurysms inferotemporal. OCT macula: 268 \u03bcm, no DME.",
+      "impression": "Mild NPDR bilateral \u2014 ETDRS level 20. No diabetic macular edema. Annual dilated exam recommended. Systemic control is critical \u2014 A1c 9.8% and BP 142/88 will accelerate progression."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +181,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-diabetes-optometry",
-    "diagnosis": "See diagnosis \u2014 Robert Diaz",
+    "diagnosis": "T2DM A1c 9.8% \u2014 First Dilated Eye Exam: Mild NPDR, Education Priority, Co-Management Letter",
     "acuity": 3,
     "presentation": "Robert Diaz",
     "category": "ophthalmic"
@@ -178,12 +229,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Robert Diaz \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Mild NPDR \u2014 annual follow-up, co-management letter (correct)",
+      "No retinopathy \u2014 microaneurysms ARE mild NPDR, not normal",
+      "Moderate NPDR \u2014 not yet, insufficient hemorrhage count",
+      "DME present \u2014 OCT confirms no macular edema",
+      "Proliferative DR \u2014 no neovascularization",
+      "Hypertensive retinopathy as primary \u2014 diabetes context, microaneurysms are diabetic"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +244,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Robert Diaz. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) This is Robert's first dilated eye exam in 4 years. You find: bilateral dot-blot hemorrhages, microaneurysms, two cotton wool spots OD, no neovascularization. VA 20/20 OU. Classify the DR severity, determine your referral timing, and tell him specifically what systemic control targets will most reduce his risk of progression to vision-threatening disease. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: mild NPDR, first dilated exam. Key OD learning: (1) Communicate the findings to the patient in plain language: 'I found very early signs of diabetes affecting your eyes \u2014 tiny leakages from small blood vessels called microaneurysms. This is the earliest stage. The good news is that we caught it early and your macula \u2014 the center of your vision \u2014 is not affected yet. The most important thing you can do is get your blood sugar closer to the goal.' (2) Communicate the findings to the PCP: write a co-management letter within 48 hours. 'Robert Diaz had his first dilated eye exam today. Findings: mild NPDR bilateral, no DME. A1c 9.8% and BP 142/88 noted. These systemic factors are the primary drivers of retinopathy progression. Annual dilated exam scheduled. Request intensification of glycemic and blood pressure management.' (3) Annual exam interval for mild NPDR: the ETDRS recommendation is 12 months. If A1c remains >9%, consider 6-month follow-up. (4) The refractive finding matters: BCVA 20/50 is functionally significant. Many diabetic patients have never had an eye exam \u2014 new glasses in the same visit is a major quality-of-life intervention. (5) Patient education priority: for a patient with mild NPDR and A1c 9.8%, the most powerful intervention is improving glycemic control \u2014 not laser, not injections, not surgery. Frame it: 'Every point your A1c drops reduces your risk of vision loss by 30%.'"
     }
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/crao.js — EMR case data for Central Retinal Artery Occlusion (CRAO) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Dolores Eriksen",
@@ -15,81 +15,62 @@ window.EMR_DATA = {
     "address": "3063 Poplar Ave, Minneapolis, MN 55401",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "Publix Pharmacy — Broward Blvd",
+    "pharmacy": "Publix Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "Priya Baker",
       "phone": "(317) 555-3658",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "I can't see out of my left eye Left eye — complete",
+    "chiefComplaint": "I can't see out of my left eye Left eye \u2014 complete",
     "diagnosis": "Central Retinal Artery Occlusion (CRAO)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Atrial fibrillation",
+      "problem": "Central retinal artery occlusion \u2014 acute, 2 hours ago",
+      "icd": "H34.11",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Sudden painless vision loss. Cherry red spot. Within 4.5h treatment window."
     },
     {
-      "id": "prob-2",
-      "description": "Hypertension",
+      "problem": "Carotid stenosis \u2014 likely embolic source",
+      "icd": "I65.21",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Carotid bruit on exam. Embolic source most probable."
     },
     {
-      "id": "prob-3",
-      "description": "Hyperlipidemia",
+      "problem": "Stroke risk \u2014 10-15% at 90 days post-CRAO",
+      "icd": "G45.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Carotid stenosis",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CRAO is equivalent to TIA/minor stroke for 90-day cerebrovascular risk"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Apixaban",
-      "dose": "5mg BID (admits missing doses frequently)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Aspirin 325mg loading dose \u2014 immediate",
+      "sig": "Antiplatelet loading \u2014 give while awaiting ED transfer",
+      "prescriber": "Dr. Chen OD",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Metoprolol",
-      "dose": "50mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michael Torres, DO"
+      "name": "Ocular massage \u2014 digital IOP lowering",
+      "sig": "Firm digital pressure over closed eyelid for 5-10 seconds, release, repeat \u2014 dislodge embolus",
+      "prescriber": "Dr. Chen OD",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Performed"
     },
     {
-      "id": "med-3",
-      "name": "Atorvastatin",
-      "dose": "40mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
-    },
-    {
-      "id": "med-4",
-      "name": "Lisinopril",
-      "dose": "10mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "IV tPA \u2014 if within 4.5 hour window (ED decision)",
+      "sig": "Systemic thrombolysis \u2014 OD starts transfer to ED immediately. ED team makes tPA decision.",
+      "prescriber": "ED Neurology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "ED decision"
     }
   ],
   "allergies": [
@@ -107,7 +88,7 @@ window.EMR_DATA = {
       "bp": "158/86",
       "hr": "78 (irregularly irregular)",
       "rr": "14",
-      "temp": "36.9°C",
+      "temp": "36.9\u00b0C",
       "spo2": "98%",
       "pain": "/10",
       "bmi": "25",
@@ -120,216 +101,21 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "I can't see out of my left eye Left eye — complete",
-      "hpi": "Dolores Eriksen is a 50-year-old female presenting with i can't see out of my left eye left eye — complete. Past medical history includes Atrial fibrillation, Hypertension, Hyperlipidemia, Carotid stenosis. See chart for full details.",
+      "cc": "I can't see out of my left eye Left eye \u2014 complete",
+      "hpi": "Dolores Eriksen is a 50-year-old female presenting with i can't see out of my left eye left eye \u2014 complete. Past medical history includes Atrial fibrillation, Hypertension, Hyperlipidemia, Carotid stenosis. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Central Retinal Artery Occlusion (CRAO) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Central Retinal Artery Occlusion (CRAO) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
-  "labs": [
-    {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-586214",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
-        {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "47",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "143",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "10",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "108",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "ESR",
-              "value": "18",
-              "unit": "mm/hr",
-              "range": "<20",
-              "flag": ""
-            },
-            {
-              "test": "CRP",
-              "value": "0.6",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": ""
-            },
-            {
-              "test": "PT/INR",
-              "value": "1.1",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "labs": [],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-651554",
-      "clinical": "I can't see out of my left eye Left eye — complete",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-817175",
-      "clinical": "I can't see out of my left eye Left eye — complete",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial hemorrhage. No mass. Old lacunar infarcts in bilateral basal ganglia. Mild generalized atrophy.",
-      "impression": "No acute stroke on CT — note that retinal artery occlusion may not show on standard brain CT",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "CTA Head and Neck",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-392599",
-      "clinical": "I can't see out of my left eye Left eye — complete",
-      "technique": "Standard protocol",
-      "findings": "70% stenosis of left internal carotid artery at the bifurcation with heterogeneous plaque. Right ICA: 40% stenosis. Intracranial vessels: no large vessel occlusion. Left ophthalmic artery patent but diminished caliber.",
-      "impression": "Significant left ICA stenosis — likely source of retinal embolism. Consider carotid endarterectomy.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-292893",
-      "clinical": "I can't see out of my left eye Left eye — complete",
-      "technique": "Standard 12-lead",
-      "findings": "Atrial fibrillation at 78 bpm. No ST changes. Left ventricular hypertrophy",
-      "impression": "Atrial fibrillation — probable embolic source for retinal artery occlusion",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Fundoscopy + OCT Macula \u2014 Right Eye",
+      "indication": "Acute painless vision loss",
+      "findings": "Right eye: Diffuse inner retinal whitening (opacification) from ischemia. Cherry-red spot at fovea (intact choroidal perfusion through thin foveal tissue). Boxcar segmentation of blood column in arterioles. No visible emboli at disc. Left eye: Normal fundoscopy.",
+      "impression": "Central retinal artery occlusion right eye \u2014 acute. Cherry-red spot is diagnostic. Refer to ED immediately for stroke workup and tPA consideration if within 4.5h window."
     }
   ],
   "immunizations": [
@@ -437,13 +223,12 @@ window.EMR_DATA = {
       "Neurological screening examination": "No focal motor or sensory deficits, speech clear, facial symmetry intact"
     },
     "ddxTargets": [
-      "Central retinal artery occlusion (correct diagnosis)",
-      "Retinal detachment",
-      "Acute angle-closure glaucoma",
-      "Stroke with homonymous hemianopia",
-      "Giant cell arteritis",
-      "Optic neuritis",
-      "Vitreous hemorrhage"
+      "CRAO \u2014 acute, refer to ED for stroke protocol and tPA (correct)",
+      "Branch retinal artery occlusion \u2014 sectoral loss, not total",
+      "Anterior ischemic optic neuropathy (AION) \u2014 disc swelling, no cherry red spot",
+      "Giant cell arteritis CRAO \u2014 elevated ESR/CRP would distinguish",
+      "Central retinal vein occlusion \u2014 flame hemorrhages everywhere, very different picture",
+      "Functional vision loss \u2014 cherry red spot is objective, cannot be fabricated"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on stroke given family history and cardiovascular risk factors, potentially missing the ophthalmologic emergency",
@@ -453,7 +238,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several concerning possibilities for acute vision loss. As you prepare to interview Dolores, what key historical features would help you differentiate between retinal, optic nerve, and cerebrovascular causes? Consider her cardiovascular risk factors - how might they predispose to different mechanisms of vision loss?",
       "phase5": "Now that you've completed your history and physical, let's analyze your findings. You found complete monocular vision loss with a relative afferent pupillary defect and fundoscopic changes. What does this constellation of findings tell you about the anatomical location of the problem? How does the time course and her cardiovascular history fit with your leading diagnosis?",
-      "finalDebrief": "This case highlights how cardiovascular risk factors like atrial fibrillation and carotid stenosis can lead to embolic central retinal artery occlusion - truly an 'eye stroke.' Notice how the complete monocular vision loss, RAPD, and fundoscopic findings pointed to retinal rather than cortical pathology. The key was recognizing this as a retinal emergency requiring immediate intervention, not just another stroke workup. What does this teach you about the importance of a focused ophthalmologic examination in acute vision loss?"
+      "finalDebrief": "This case highlights how cardiovascular risk factors like atrial fibrillation and carotid stenosis can lead to embolic central retinal artery occlusion - truly an 'eye stroke.' Notice how the complete monocular vision loss, RAPD, and fundoscopic findings pointed to retinal rather than cortical pathology. The key was recognizing this as a retinal emergency requiring immediate intervention, not just another stroke workup. What does this teach you about the importance of a focused ophthalmologic examination in acute vision loss?",
+      "final": "Diagnosis: acute CRAO \u2014 OD role is immediate referral and bridge treatment. Key OD learning: (1) The OD's window is narrow: CRAO without treatment causes permanent vision loss from retinal infarction. Inner retina tolerates ischemia ~100 minutes. After 4 hours: central vision rarely recovers. The OD's actions in the first 5 minutes determine whether this patient has any chance of visual recovery. (2) In-office bridge measures: (a) Ocular massage \u2014 digital pressure alternating with release, aims to dislodge embolus distally. Lowers IOP transiently to improve perfusion gradient. Low evidence but no harm. (b) Anterior chamber paracentesis \u2014 rapidly lowers IOP (specialist skill; OD can refer immediately). (c) Aspirin 325mg \u2014 antiplatelet, minimal benefit for retinal recovery but starts stroke prevention. (3) Transfer protocol: CRAO = stroke of the eye. Call 911 or drive directly to nearest comprehensive stroke center \u2014 NOT urgent care, NOT ophthalmology clinic. The treating team is neurology. (4) Why systemic thrombolysis (tPA): same mechanism as ischemic stroke \u2014 clot in retinal artery (embolic). Evidence for IV tPA is limited but emerging \u2014 EAGLE study. Benefit most likely if central embolic occlusion within 4.5h. (5) The 90-day stroke risk is real: 10-15% within 90 days \u2014 highest in first 2 weeks. Carotid ultrasound, echo, ECG, and antiplatelet/statin are initiated at the stroke visit."
     }
+  },
+  "meta": {
+    "diagnosis": "Central Retinal Artery Occlusion \u2014 Acute, Within Treatment Window, Urgent Stroke Protocol",
+    "caseId": "crao"
   }
 };

@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Wound Infection Day 5 Post-Laceration",
-      "icd": "Z00.00",
+      "problem": "Wound infection \u2014 cellulitis, day 5 post-laceration",
+      "icd": "L03.115",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Wound edges: erythema 2cm beyond margins, warmth, purulent drainage. T 38.2\u00b0C. MRSA risk factors."
+    },
+    {
+      "problem": "Diabetes T2DM \u2014 impaired wound healing",
+      "icd": "E11.9",
+      "onset": "2020",
+      "status": "Active",
+      "notes": "A1c 8.2% \u2014 hyperglycemia impairs neutrophil function and collagen synthesis"
+    },
+    {
+      "problem": "MRSA risk \u2014 prior hospitalization this year",
+      "icd": "Z87.39",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Prior hospital admission increases MRSA colonization risk \u2014 empiric TMP-SMX + Cephalexin"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "TMP-SMX DS (Bactrim DS) 1 tab PO BID x7 days \u2014 MRSA coverage",
+      "sig": "Take 1 double-strength tablet twice daily for 7 days \u2014 MRSA soft tissue infection",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Cephalexin 500mg PO QID x7 days \u2014 streptococcal coverage (added)",
+      "sig": "Take 1 capsule four times daily \u2014 beta-hemolytic strep coverage not covered by TMP-SMX",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Wound I&D \u2014 PERFORMED if fluctuance present",
+      "sig": "If fluctuant abscess: incision and drainage. Culture the drainage. This is definitive treatment.",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Performed \u2014 no fluctuance on exam"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to pa. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Wound Infection Workup",
+      "results": [
+        {
+          "test": "Wound culture (superficial swab)",
+          "value": "Pending \u2014 gram stain shows gram-positive cocci",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "13.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "4.8",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
+        },
+        {
+          "test": "Glucose (point of care)",
+          "value": "248",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pa-wound-complication",
-    "diagnosis": "See diagnosis \u2014 Wound Infection Day 5 Post-Laceration",
+    "diagnosis": "Wound Infection Day 5 Post-Laceration Repair \u2014 Cellulitis Extending Beyond Wound, Antibiotics Required",
     "acuity": 3,
     "presentation": "Wound Infection Day 5 Post-Laceration",
     "category": "infectious"
@@ -175,12 +240,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Wound Infection Day 5 Post-Laceration \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Wound cellulitis with MRSA risk \u2014 TMP-SMX + cephalexin (correct)",
+      "Cephalexin alone \u2014 inadequate MRSA coverage given risk factors",
+      "Amoxicillin-clavulanate \u2014 adequate coverage but no MRSA activity",
+      "No antibiotics \u2014 cellulitis 2cm beyond margins with fever needs antibiotics",
+      "IV antibiotics in hospital \u2014 PA-appropriate to treat outpatient with oral antibiotics for uncomplicated cellulitis",
+      "MRSA coverage with TMP-SMX alone \u2014 misses beta-hemolytic strep, combination preferred"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +255,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pa case with chief complaint: Wound Infection Day 5 Post-Laceration. What are the most important questions for a pa to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pa perspective, what is the most critical finding that narrows this differential? What is the pa-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pa's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pa. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pa assessment revealed the key discriminating features. (3) Walk through your wound assessment, outpatient versus refer decision, and antibiotic selection including MRSA risk. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: wound cellulitis, MRSA risk factors \u2014 combination antibiotic strategy. Key PA learning: (1) When to treat wound infection: antibiotics for: (a) erythema >2cm beyond wound margins, (b) fever, (c) systemic signs, (d) lymphangitis, (e) immunocompromised host. Erythema \u22642cm and no systemic signs = wound observation + close follow-up. This patient has all three criteria: >2cm erythema, fever 38.2\u00b0C, and diabetes. (2) MRSA risk factors requiring TMP-SMX coverage: prior MRSA infection/colonization, recent hospitalization or healthcare contact, injection drug use, crowded living conditions, competitive athletes, men who have sex with men, or known MRSA contact. This patient has prior hospitalization \u2192 treat empirically for MRSA. (3) Why dual coverage: TMP-SMX is excellent for CA-MRSA but has gaps in beta-hemolytic Strep coverage. Cellulitis is often streptococcal. Adding cephalexin covers MSSA and Strep without adding significant MRSA coverage. (4) I&D for abscesses: If fluctuance is present, I&D is the treatment \u2014 antibiotics alone are insufficient. Always culture the drainage for targeted therapy. This patient has no fluctuance \u2014 antibiotics are appropriate primary treatment. (5) Glucose 248: hyperglycemia impairs wound healing and immune function. Contact PCP for glucose management \u2014 do not ignore this incidental finding in a wound care context."
     }
   }
 };
