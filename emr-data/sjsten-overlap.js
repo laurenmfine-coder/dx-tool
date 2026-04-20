@@ -1,4 +1,4 @@
-/* emr-data/sjsten-overlap.js — Multi-Setting Allergy Case: SJS/TEN Overlap */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "5525 Birch Ln, Louisville, KY 40204",
       "insurance": "Oscar Health",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Alejandro Patel",
         "phone": "(803) 555-5573",
@@ -64,13 +64,13 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
+        "chiefComplaint": "Widespread blistering rash with mucosal involvement \u2014 18% BSA detachment",
         "diagnosis": "SJS/TEN Overlap"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
+          "description": "Seizure disorder \u2014 started lamotrigine 3 weeks ago",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -103,7 +103,7 @@ window.EMR_DATA = {
           "bp": "98/58",
           "hr": "118",
           "rr": "22",
-          "temp": "39.4°C",
+          "temp": "39.4\u00b0C",
           "spo2": "95%",
           "pain": "10/10",
           "bmi": "33",
@@ -128,7 +128,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "2.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -149,7 +149,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -238,23 +238,23 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/01/2026",
           "provider": "Dr. ED Attending",
-          "cc": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
-          "hpi": "Ananya Patel is a 25-year-old female presenting with widespread blistering rash with mucosal involvement — 18% bsa detachment. Past medical history includes Seizure disorder — started lamotrigine 3 weeks ago. See chart for full details.",
+          "cc": "Widespread blistering rash with mucosal involvement \u2014 18% BSA detachment",
+          "hpi": "Ananya Patel is a 25-year-old female presenting with widespread blistering rash with mucosal involvement \u2014 18% bsa detachment. Past medical history includes Seizure disorder \u2014 started lamotrigine 3 weeks ago. See chart for full details.",
           "exam": "See physical examination documentation.",
-          "assessment": "SJS/TEN Overlap — clinical presentation and workup consistent with diagnosis.",
+          "assessment": "SJS/TEN Overlap \u2014 clinical presentation and workup consistent with diagnosis.",
           "plan": "See orders and management plan."
         }
       ]
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Transfer to burn unit for SJS/TEN overlap — mucosal involvement",
+        "chiefComplaint": "Transfer to burn unit for SJS/TEN overlap \u2014 mucosal involvement",
         "diagnosis": "SJS/TEN Overlap"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
+          "description": "Seizure disorder \u2014 started lamotrigine 3 weeks ago",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -296,7 +296,7 @@ window.EMR_DATA = {
           "bp": "102/64",
           "hr": "108",
           "rr": "20",
-          "temp": "38.4°C",
+          "temp": "38.4\u00b0C",
           "spo2": "96%",
           "pain": "8/10"
         }
@@ -319,7 +319,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "2.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -340,7 +340,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -429,8 +429,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Transfer to burn unit for SJS/TEN overlap — mucosal involvement",
-          "hpi": "Ananya Patel — Transfer to burn unit for SJS/TEN overlap — mucosal involvement",
+          "cc": "Transfer to burn unit for SJS/TEN overlap \u2014 mucosal involvement",
+          "hpi": "Ananya Patel \u2014 Transfer to burn unit for SJS/TEN overlap \u2014 mucosal involvement",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -439,13 +439,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — culprit drug identification, HLA testing consideration",
+        "chiefComplaint": "A/I consult \u2014 culprit drug identification, HLA testing consideration",
         "diagnosis": "SJS/TEN Overlap"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
+          "description": "Seizure disorder \u2014 started lamotrigine 3 weeks ago",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -478,7 +478,7 @@ window.EMR_DATA = {
           "bp": "110/68",
           "hr": "88",
           "rr": "16",
-          "temp": "37.4°C",
+          "temp": "37.4\u00b0C",
           "spo2": "98%",
           "pain": "5/10"
         }
@@ -501,7 +501,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "2.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -522,7 +522,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -611,8 +611,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — culprit drug identification, HLA testing consideration",
-          "hpi": "Ananya Patel — A/I consult — culprit drug identification, HLA testing consideration",
+          "cc": "A/I consult \u2014 culprit drug identification, HLA testing consideration",
+          "hpi": "Ananya Patel \u2014 A/I consult \u2014 culprit drug identification, HLA testing consideration",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -621,13 +621,13 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up 6 weeks post-SJS/TEN — ophthalmology co-management, scar assessment",
+        "chiefComplaint": "Follow-up 6 weeks post-SJS/TEN \u2014 ophthalmology co-management, scar assessment",
         "diagnosis": "SJS/TEN Overlap"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
+          "description": "Seizure disorder \u2014 started lamotrigine 3 weeks ago",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -641,7 +641,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -664,7 +664,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "2.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -685,7 +685,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -774,8 +774,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up 6 weeks post-SJS/TEN — ophthalmology co-management, scar assessment",
-          "hpi": "Ananya Patel — Follow-up 6 weeks post-SJS/TEN — ophthalmology co-management, scar assessment",
+          "cc": "Follow-up 6 weeks post-SJS/TEN \u2014 ophthalmology co-management, scar assessment",
+          "hpi": "Ananya Patel \u2014 Follow-up 6 weeks post-SJS/TEN \u2014 ophthalmology co-management, scar assessment",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -797,42 +797,70 @@ window.EMR_DATA = {
     "address": "9613 Cottonwood Ave, Detroit, MI 48202",
     "insurance": "Oscar Health",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Alejandro Patel",
       "phone": "(505) 555-9785",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
+    "chiefComplaint": "Widespread blistering rash with mucosal involvement \u2014 18% BSA detachment",
     "diagnosis": "SJS/TEN Overlap"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Seizure disorder — started lamotrigine 3 weeks ago",
+      "problem": "Stevens-Johnson syndrome \u2014 carbamazepine, <10% BSA",
+      "icd": "L51.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "David Wong, 31M \u2014 carbamazepine started 5 weeks ago. Oral and conjunctival erosions, atypical targets, 7% BSA detachment."
+    },
+    {
+      "problem": "Carbamazepine \u2014 high-risk aromatic anticonvulsant for SJS/TEN",
+      "icd": "L51.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Carbamazepine and HLA-B*15:02 (Southeast Asian populations) \u2014 very strong association with SJS/TEN. Genetic screening now recommended before use."
+    },
+    {
+      "problem": "Alternative anticonvulsant needed \u2014 non-aromatic ring compound",
+      "icd": "G40.909",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Carbamazepine, phenytoin, phenobarbital, oxcarbazepine (aromatic ring, cross-reactive) \u2014 ALL must be avoided. Levetiracetam or valproate as alternatives."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Lamotrigine",
-      "dose": "50mg",
-      "route": "PO",
-      "frequency": "Daily (uptitrating)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "STOP carbamazepine \u2014 permanent discontinuation",
+      "sig": "Document allergy. Aromatic anticonvulsant cross-reactivity \u2014 avoid carbamazepine, phenytoin, phenobarbital, oxcarbazepine.",
+      "prescriber": "Neurology/Dermatology",
+      "start": "DISCONTINUE",
+      "refills": 0,
+      "status": "DISCONTINUED"
     },
     {
-      "id": "med-2",
-      "name": "Levetiracetam",
-      "dose": "1000mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Levetiracetam 500mg BID \u2014 replace carbamazepine",
+      "sig": "Non-aromatic anticonvulsant \u2014 safe alternative. No cross-reactivity with carbamazepine-induced SJS.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active \u2014 replacement"
+    },
+    {
+      "name": "Cyclosporine 3mg/kg/day \u2014 adjunct for SJS",
+      "sig": "T-cell inhibitor \u2014 adjunct for mucosal SJS. Monitor renal function and blood pressure.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Ophthalmology \u2014 urgent conjunctival assessment",
+      "sig": "Pseudomembrane removal, lubricating drops, amniotic membrane if severe.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 urgent consult"
     }
   ],
   "allergies": [
@@ -850,7 +878,7 @@ window.EMR_DATA = {
       "bp": "98/58",
       "hr": "118",
       "rr": "22",
-      "temp": "39.4°C",
+      "temp": "39.4\u00b0C",
       "spo2": "95%",
       "pain": "10/10",
       "bmi": "33",
@@ -863,130 +891,52 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
-      "hpi": "Ananya Patel is a 25-year-old female presenting with widespread blistering rash with mucosal involvement — 18% bsa detachment. Past medical history includes Seizure disorder — started lamotrigine 3 weeks ago. See chart for full details.",
+      "cc": "Widespread blistering rash with mucosal involvement \u2014 18% BSA detachment",
+      "hpi": "Ananya Patel is a 25-year-old female presenting with widespread blistering rash with mucosal involvement \u2014 18% bsa detachment. Past medical history includes Seizure disorder \u2014 started lamotrigine 3 weeks ago. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "SJS/TEN Overlap — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "SJS/TEN Overlap \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-753551",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "SJS Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "2.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "BSA detachment",
+          "value": "7",
+          "unit": "%",
+          "ref": "<10% = SJS",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "4.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Albumin",
-              "value": "2.4",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": "L"
-            }
-          ]
+          "test": "Eosinophils",
+          "value": "0.6",
+          "unit": "K/\u03bcL",
+          "ref": "<0.5",
+          "flag": "H"
+        },
+        {
+          "test": "HLA-B*15:02 testing",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative in European populations",
+          "flag": "H"
+        },
+        {
+          "test": "Albumin",
+          "value": "3.2",
+          "unit": "g/dL",
+          "ref": "3.5-5.0",
+          "flag": "L"
         }
       ]
     }
@@ -1097,13 +1047,12 @@ window.EMR_DATA = {
       "Pulmonary examination": "Clear breath sounds bilaterally, no respiratory distress."
     },
     "ddxTargets": [
-      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis (correct diagnosis)",
-      "Staphylococcal Scalded Skin Syndrome",
-      "Bullous pemphigoid",
-      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
-      "Pemphigus vulgaris",
-      "Erythema multiforme major",
-      "Acute generalized exanthematous pustulosis (AGEP)"
+      "SJS \u2014 carbamazepine, HLA-B*15:02, mucosal involvement (correct)",
+      "TEN \u2014 BSA 7% is SJS range (<10%); monitor for progression",
+      "EM major \u2014 true 3-zone target lesions; SJS has flat atypical targets",
+      "DRESS \u2014 eosinophilia present but no multiorgan failure; look for overlap; skin detachment distinguishes",
+      "Fixed drug eruption \u2014 localized, recurrent; not generalized with mucosal involvement",
+      "Viral exanthem \u2014 no mucosal erosions, no detachment, no atypical targets"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'rash' and consider common dermatologic conditions rather than recognizing the severity suggesting SJS/TEN",
@@ -1113,7 +1062,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some key differentials for blistering rash. What specific historical details about medication timing and the progression of skin findings would help you narrow this list? What questions about mucosal involvement are critical here?",
       "phase5": "Now that you've noted the extensive epidermal detachment, mucosal involvement, and recent lamotrigine initiation, how does this constellation of findings refine your differential? What is the significance of 18% BSA involvement in your diagnostic thinking?",
-      "finalDebrief": "This case illustrates classic SJS/TEN from lamotrigine with rapid uptitration. How did the triad of mucosal involvement, epidermal detachment, and recent high-risk drug exposure guide your diagnosis? What made you consider or dismiss other blistering disorders along the way?"
+      "finalDebrief": "This case illustrates classic SJS/TEN from lamotrigine with rapid uptitration. How did the triad of mucosal involvement, epidermal detachment, and recent high-risk drug exposure guide your diagnosis? What made you consider or dismiss other blistering disorders along the way?",
+      "final": "Diagnosis: SJS \u2014 carbamazepine, HLA-B*15:02. Key learning: (1) HLA-B*15:02 and carbamazepine: HLA-B*15:02 allele is present in ~5-10% of Southeast and East Asian populations (Han Chinese, Thai, Malaysian, Filipino, Vietnamese). Carriers have >10x risk of SJS/TEN with carbamazepine. The FDA mandates HLA-B*15:02 testing before carbamazepine in patients of Asian ancestry. Negative test does not eliminate risk but significantly reduces it. (2) HLA-B*58:01: also relevant for allopurinol SJS/TEN in Asian populations. Two actionable pharmacogenomic tests in dermatology. (3) BSA monitoring: SJS patients require daily BSA assessment \u2014 progression from <10% to >30% can occur rapidly. Monitor for Nikolsky sign spread. ICU transfer if BSA expanding or systemic deterioration. (4) Aromatic anticonvulsant cross-reactivity: the aromatic ring structure (benzene ring in carbamazepine, phenytoin, phenobarbital) is the immunogenic epitope. Cross-reactivity among these three drugs is 40-80%. Oxcarbazepine has a similar structure \u2014 also typically avoided. Safe non-aromatic alternatives: levetiracetam, valproate, lamotrigine (paradoxically can cause SJS but different mechanism \u2014 slower titration reduces risk), gabapentin. (5) Oral and ocular care: oral: rinse with saline, topical anesthetic mouthwash, avoid trauma. Ocular: pseudomembrane removal with glass rod by ophthalmology, lubricating drops q1-2h, amniotic membrane if corneal involvement. Preventing ocular scarring is a major management priority."
     }
+  },
+  "meta": {
+    "diagnosis": "SJS \u2014 Carbamazepine, Mucosal Involvement, Hospital Management and Allergy Evaluation",
+    "caseId": "sjsten-overlap"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/severe-allergic-reaction.js — Multi-Setting Allergy Case: Severe Allergic Reaction — Drug */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,14 +16,14 @@ window.EMR_DATA = {
       "address": "7472 Daisy Ave, Milwaukee, WI 53210",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "Publix Pharmacy — Weston Rd",
+      "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
       "emergencyContact": {
         "name": "Jennifer Rivera",
         "phone": "(620) 555-2208",
         "relationship": "Spouse"
       },
       "chiefComplaint": "Diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate",
-      "diagnosis": "Severe Allergic Reaction — Drug"
+      "diagnosis": "Severe Allergic Reaction \u2014 Drug"
     },
     "allergies": [
       {
@@ -74,7 +74,7 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "cc": "Diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate",
-      "dx": "Severe Allergic Reaction — Drug",
+      "dx": "Severe Allergic Reaction \u2014 Drug",
       "problems": [
         "Acute sinusitis (treated with amoxicillin-clavulanate today)"
       ],
@@ -90,7 +90,7 @@ window.EMR_DATA = {
         "bp": "118/72",
         "hr": "98",
         "rr": "20",
-        "temp": "37.2°C",
+        "temp": "37.2\u00b0C",
         "spo2": "98%",
         "pain": "4/10"
       },
@@ -101,7 +101,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.4",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -122,7 +122,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "242",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             }
@@ -207,7 +207,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "cc": "Brief observation after severe allergic drug reaction",
-      "dx": "Drug allergy — amoxicillin, resolved",
+      "dx": "Drug allergy \u2014 amoxicillin, resolved",
       "problems": [
         "Amoxicillin allergy (new)",
         "Sinusitis (needs alternative antibiotic)"
@@ -236,7 +236,7 @@ window.EMR_DATA = {
         "bp": "122/76",
         "hr": "78",
         "rr": "14",
-        "temp": "37.0°C",
+        "temp": "37.0\u00b0C",
         "spo2": "99%",
         "pain": "1/10"
       },
@@ -247,7 +247,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.4",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -268,7 +268,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "242",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             }
@@ -344,7 +344,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Observation after drug allergic reaction",
-          "hpi": "42M, 6h post-reaction. Urticaria 80% resolved. Facial edema improving. Tolerating PO. Plan: observe 4 more hours, if stable → discharge on prednisone taper and doxycycline for sinusitis. A/I referral for beta-lactam allergy evaluation.",
+          "hpi": "42M, 6h post-reaction. Urticaria 80% resolved. Facial edema improving. Tolerating PO. Plan: observe 4 more hours, if stable \u2192 discharge on prednisone taper and doxycycline for sinusitis. A/I referral for beta-lactam allergy evaluation.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -352,12 +352,12 @@ window.EMR_DATA = {
       ]
     },
     "consult": {
-      "cc": "A/I consult — evaluate beta-lactam allergy, patient needs cephalosporin for upcoming surgery",
+      "cc": "A/I consult \u2014 evaluate beta-lactam allergy, patient needs cephalosporin for upcoming surgery",
       "dx": "Beta-lactam allergy evaluation",
       "problems": [
         "Amoxicillin allergy (urticaria/angioedema)",
         "Sulfa allergy (rash)",
-        "Scheduled knee surgery — surgeon requests cefazolin clearance"
+        "Scheduled knee surgery \u2014 surgeon requests cefazolin clearance"
       ],
       "meds": [
         {
@@ -377,7 +377,7 @@ window.EMR_DATA = {
         "bp": "128/78",
         "hr": "72",
         "rr": "14",
-        "temp": "36.8°C",
+        "temp": "36.8\u00b0C",
         "spo2": "99%",
         "pain": "0/10"
       },
@@ -386,14 +386,14 @@ window.EMR_DATA = {
           "name": "ALLERGY TESTING",
           "results": [
             {
-              "test": "Penicillin SPT — Major determinant",
+              "test": "Penicillin SPT \u2014 Major determinant",
               "value": "Negative",
               "unit": "",
               "range": "",
               "flag": ""
             },
             {
-              "test": "Penicillin SPT — Minor determinant",
+              "test": "Penicillin SPT \u2014 Minor determinant",
               "value": "Negative",
               "unit": "",
               "range": "",
@@ -424,7 +424,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
           "cc": "Beta-lactam allergy evaluation",
-          "hpi": "42M referred for beta-lactam evaluation before knee surgery. Skin prick testing: penicillin major/minor determinants negative, amoxicillin intradermal positive. Indicates aminopenicillin-specific allergy (side chain). Cephalosporins have different side chain — low cross-reactivity risk. Recommend: graded cefazolin challenge in monitored setting. Can proceed safely for surgical prophylaxis.",
+          "hpi": "42M referred for beta-lactam evaluation before knee surgery. Skin prick testing: penicillin major/minor determinants negative, amoxicillin intradermal positive. Indicates aminopenicillin-specific allergy (side chain). Cephalosporins have different side chain \u2014 low cross-reactivity risk. Recommend: graded cefazolin challenge in monitored setting. Can proceed safely for surgical prophylaxis.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -432,12 +432,12 @@ window.EMR_DATA = {
       ]
     },
     "clinic": {
-      "cc": "Follow-up after allergy evaluation — post-cefazolin challenge",
+      "cc": "Follow-up after allergy evaluation \u2014 post-cefazolin challenge",
       "dx": "Amoxicillin allergy (confirmed), cephalosporin tolerant",
       "problems": [
-        "Amoxicillin allergy — confirmed aminopenicillin-specific",
-        "Cephalosporin tolerance — confirmed by graded challenge",
-        "Sulfa — rash (childhood, consider delabeling)"
+        "Amoxicillin allergy \u2014 confirmed aminopenicillin-specific",
+        "Cephalosporin tolerance \u2014 confirmed by graded challenge",
+        "Sulfa \u2014 rash (childhood, consider delabeling)"
       ],
       "meds": [
         {
@@ -451,7 +451,7 @@ window.EMR_DATA = {
         "bp": "124/76",
         "hr": "74",
         "rr": "14",
-        "temp": "36.8°C",
+        "temp": "36.8\u00b0C",
         "spo2": "99%",
         "pain": "0/10"
       },
@@ -464,7 +464,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Drug allergy follow-up",
-          "hpi": "42M completed cefazolin graded challenge without reaction. Cephalosporins safe. EMR updated: amoxicillin allergy confirmed, cephalosporins tolerated. Discussion: sulfa allergy from childhood — rash only — could consider delabeling evaluation at future visit. Annual follow-up.",
+          "hpi": "42M completed cefazolin graded challenge without reaction. Cephalosporins safe. EMR updated: amoxicillin allergy confirmed, cephalosporins tolerated. Discussion: sulfa allergy from childhood \u2014 rash only \u2014 could consider delabeling evaluation at future visit. Annual follow-up.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -486,33 +486,62 @@ window.EMR_DATA = {
     "address": "9730 Spruce St, Pittsburgh, PA 15210",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
     "emergencyContact": {
       "name": "Jennifer Rivera",
       "phone": "(702) 555-2215",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate",
-    "diagnosis": "Severe Allergic Reaction — Drug"
+    "diagnosis": "Severe Allergic Reaction \u2014 Drug"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Acute sinusitis (treated with amoxicillin-clavulanate today)",
+      "problem": "Perioperative anaphylaxis \u2014 intraoperative cardiovascular collapse",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Karen Williams, 52F \u2014 BP dropped to 60/30, diffuse urticaria, bronchospasm during induction. Succinylcholine given 2 min before collapse."
+    },
+    {
+      "problem": "Succinylcholine allergy \u2014 neuromuscular blocking agent, most common perioperative allergen",
+      "icd": "T78.2XXA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "NMBAs (neuromuscular blocking agents) are the most common cause of perioperative anaphylaxis \u2014 50-70% of OR anaphylaxis cases."
+    },
+    {
+      "problem": "Allergy workup deferred to post-operative allergy referral",
+      "icd": "T78.2XXA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Skin testing for all perioperative drugs given in 24h prior to reaction \u2014 identifies causative agent and safe alternatives for future surgery."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Amoxicillin-Clavulanate",
-      "dose": "875mg",
-      "route": "PO",
-      "frequency": "BID (1st dose today)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Epinephrine 0.3mg IM (then infusion) \u2014 anaphylaxis treatment",
+      "sig": "IV access present in OR \u2014 epinephrine 0.1-1mg IV bolus for perioperative anaphylaxis, then infusion if needed.",
+      "prescriber": "Anesthesia",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
+    },
+    {
+      "name": "Diphenhydramine 50mg IV + ranitidine 50mg IV \u2014 adjunct",
+      "sig": "H1 + H2 blockade after epinephrine stabilizes patient.",
+      "prescriber": "Anesthesia",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
+    },
+    {
+      "name": "Allergy/immunology referral \u2014 4-6 weeks post-reaction",
+      "sig": "Skin test all agents given perioperatively. Identify causative agent. Document safe alternatives for future anesthesia.",
+      "prescriber": "Allergy",
+      "start": "After discharge",
+      "refills": 0,
+      "status": "Referral placed"
     }
   ],
   "allergies": [
@@ -536,7 +565,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "98",
       "rr": "20",
-      "temp": "37.2°C",
+      "temp": "37.2\u00b0C",
       "spo2": "98%",
       "pain": "4/10"
     }
@@ -556,109 +585,36 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-544346",
-      "collected": "03/02/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Perioperative Anaphylaxis Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Tryptase (drawn during reaction)",
+          "value": "38.4",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Tryptase at 24h (baseline)",
+          "value": "4.6",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
+        },
+        {
+          "test": "Histamine (plasma \u2014 drawn immediately)",
+          "value": "Markedly elevated",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "CBC \u2014 eosinophils",
+          "value": "1.2",
+          "unit": "K/\u03bcL",
+          "ref": "<0.5",
+          "flag": "H"
         }
       ]
     }
@@ -746,13 +702,13 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Drug-induced anaphylaxis: IgE-mediated (requires prior sensitization — not first exposure) vs non-IgE pseudo-allergic (direct mast cell activation — can occur on first exposure, e.g., vancomycin RMS, radiocontrast, NSAIDs).",
-      "Kounis syndrome: anaphylaxis-associated acute coronary syndrome. Mast cell mediators (histamine, prostaglandins, leukotrienes) → coronary vasospasm or plaque rupture → MI during anaphylaxis. ECG changes during anaphylaxis = Kounis until proven otherwise.",
+      "Drug-induced anaphylaxis: IgE-mediated (requires prior sensitization \u2014 not first exposure) vs non-IgE pseudo-allergic (direct mast cell activation \u2014 can occur on first exposure, e.g., vancomycin RMS, radiocontrast, NSAIDs).",
+      "Kounis syndrome: anaphylaxis-associated acute coronary syndrome. Mast cell mediators (histamine, prostaglandins, leukotrienes) \u2192 coronary vasospasm or plaque rupture \u2192 MI during anaphylaxis. ECG changes during anaphylaxis = Kounis until proven otherwise.",
       "Drug allergy evaluation after reaction: skin testing (where validated), graded challenge, or de-labeling based on risk stratification. Most drug 'allergies' are not IgE-mediated and can be safely re-evaluated."
     ],
     "boardPearls": [
       "Drug anaphylaxis most common causes: beta-lactam antibiotics (#1), NSAIDs, chemotherapy (platinum agents after multiple cycles), biologic agents.",
-      "Kounis syndrome: anaphylaxis + ECG ischemic changes → treat anaphylaxis first (epinephrine), then cardiology evaluation. Avoid vasospastic agents.",
+      "Kounis syndrome: anaphylaxis + ECG ischemic changes \u2192 treat anaphylaxis first (epinephrine), then cardiology evaluation. Avoid vasospastic agents.",
       "Perioperative anaphylaxis: neuromuscular blocking agents (NMBAs) most common cause (#1 in OR). Chlorhexidine, latex, antibiotics also common.",
       "Management: epinephrine IM first. IV fluids for hypotension. Glucagon if beta-blocker therapy (reverses epinephrine resistance).",
       "After drug anaphylaxis: avoid culprit AND cross-reactive drugs until formal evaluation. Allergist referral mandatory."
@@ -813,17 +769,16 @@ window.EMR_DATA = {
       "Lymph node palpation": "No lymphadenopathy palpated in cervical, axillary, or inguinal regions.",
       "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds.",
       "Neurological assessment including mental status": "Alert and oriented x3, anxious but appropriate affect, no focal neurological deficits.",
-      "Vital signs assessment": "BP 118/72 stable, HR 98 regular, afebrile at 37.2°C, SpO2 98% on room air.",
+      "Vital signs assessment": "BP 118/72 stable, HR 98 regular, afebrile at 37.2\u00b0C, SpO2 98% on room air.",
       "Assessment of mucous membranes": "Pink and moist, no cyanosis or pallor noted."
     },
     "ddxTargets": [
-      "Drug-induced allergic reaction/urticaria (correct diagnosis)",
-      "Angioedema (hereditary or acquired)",
-      "Anaphylaxis (mild/early)",
-      "Stevens-Johnson syndrome/TEN (must-not-miss)",
-      "Acute severe asthma with urticaria (must-not-miss)",
-      "Viral exanthem with facial swelling",
-      "Contact dermatitis with secondary angioedema"
+      "Perioperative anaphylaxis \u2014 succinylcholine, classic timing (correct)",
+      "Anaphylactoid reaction (non-IgE) \u2014 drugs like vancomycin, morphine can cause non-IgE histamine release; tryptase rise less dramatic",
+      "Vasovagal reaction during induction \u2014 no urticaria or bronchospasm",
+      "Laryngospasm from intubation \u2014 respiratory without cardiovascular collapse + urticaria",
+      "Transfusion reaction \u2014 blood products given? Not in this case",
+      "Tension pneumothorax \u2014 cardiovascular collapse but no urticaria or bronchospasm"
     ],
     "biasFlags": {
       "anchoring": "The clear temporal relationship with antibiotic administration may cause anchoring on drug allergy, potentially missing other causes like food allergies or environmental exposures that coincidentally occurred around the same time.",
@@ -833,7 +788,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider the key features that distinguish different types of allergic reactions. What historical elements would help you differentiate between localized drug reaction, angioedema, and early anaphylaxis? Think about the timeline and systemic involvement.",
       "phase5": "Now that you've completed your assessment, reflect on the constellation of findings. How do the physical exam findings help risk-stratify this patient? What features suggest this is localized versus systemic? Consider what monitoring or escalation might be needed.",
-      "finalDebrief": "This case illustrates a classic IgE-mediated drug hypersensitivity reaction. Notice how the family history, timing, and distribution of symptoms supported the diagnosis. Discuss how you differentiated this from anaphylaxis and what your monitoring plan would include. What patient education about future antibiotic use is crucial here?"
+      "finalDebrief": "This case illustrates a classic IgE-mediated drug hypersensitivity reaction. Notice how the family history, timing, and distribution of symptoms supported the diagnosis. Discuss how you differentiated this from anaphylaxis and what your monitoring plan would include. What patient education about future antibiotic use is crucial here?",
+      "final": "Diagnosis: perioperative anaphylaxis \u2014 succinylcholine. Key learning: (1) Perioperative anaphylaxis timing: occurs within minutes of drug administration during induction. Triad: hypotension + bronchospasm + urticaria/flush. Urticaria may be absent in 15-20% of cases (esp. under drapes) \u2014 cardiovascular collapse + bronchospasm alone = anaphylaxis until proven otherwise in the OR. (2) Most common causative agents in OR anaphylaxis: NMBAs (50-70% \u2014 succinylcholine, rocuronium), antibiotics (cefazolin most common), latex (~12%), blue dyes (isosulfan blue for sentinel node), colloids, opioids. (3) Tryptase timing in OR: draw during reaction + at 1h + at 24h (baseline). Acute tryptase markedly elevated + normal baseline = mast cell-mediated (IgE or anaphylactoid). Normal acute tryptase does NOT exclude anaphylaxis \u2014 early drawing may miss the peak. (4) Allergy workup timing: refer to allergy 4-6 weeks post-reaction (acute phase masks testing results). Skin prick and intradermal testing to all drugs given perioperatively \u2014 identifies specific causative agent. Cross-reactive NMBAs should be tested. Safe alternatives documented in chart. (5) Rocuronium (NMBA) allergy: most common individual NMBA cause. Sugammadex can reverse rocuronium \u2014 some centers prefer rocuronium over succinylcholine for RSI given immediate reversal option. However, sugammadex itself can rarely cause anaphylaxis."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Perioperative, Neuromuscular Blocking Agent (Succinylcholine), Most Common OR Anaphylaxis Trigger",
+    "caseId": "severe-allergic-reaction"
   }
 };

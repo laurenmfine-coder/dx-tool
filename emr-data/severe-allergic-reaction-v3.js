@@ -1,4 +1,4 @@
-/* emr-data/severe-allergic-reaction-v3.js — Variation: Severe Allergic Reaction */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "9609 Cedar Blvd, Minneapolis, MN 55411",
       "insurance": "University student plan",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Sarah Mitchell",
         "phone": "(702) 555-2479",
@@ -45,11 +45,11 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "College athlete (basketball) — needs wisdom tooth extraction, surgeon won't operate without \"clearing\" amoxicillin allergy"
+        "College athlete (basketball) \u2014 needs wisdom tooth extraction, surgeon won't operate without \"clearing\" amoxicillin allergy"
       ],
       [
         "History",
-        "Rash at age 5 during ear infection — likely viral exanthem, not true drug allergy"
+        "Rash at age 5 during ear infection \u2014 likely viral exanthem, not true drug allergy"
       ],
       [
         "Impact",
@@ -64,13 +64,13 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Not an ED case — but illustrates how false allergy labels cause downstream problems",
+        "chiefComplaint": "Not an ED case \u2014 but illustrates how false allergy labels cause downstream problems",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Amoxicillin \"allergy\" from childhood — likely viral exanthem",
+          "description": "Amoxicillin \"allergy\" from childhood \u2014 likely viral exanthem",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -98,7 +98,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "62",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -121,7 +121,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -135,7 +135,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -198,7 +198,7 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Not an ED case — but illustrates how false allergy labels cause downstream problems",
+          "cc": "Not an ED case \u2014 but illustrates how false allergy labels cause downstream problems",
           "hpi": "22M college basketball player referred for allergy evaluation before wisdom tooth extraction. Surgeon requires amoxicillin clearance or will use clindamycin prophylaxis. History: morbilliform rash at age 5 during amoxicillin course for otitis media. This pattern (morbilliform rash during acute infection in young child) is >90% likely to be viral exanthem, not drug allergy. The \"allergy\" label has persisted for 17 years.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -208,7 +208,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "N/A — outpatient evaluation",
+        "chiefComplaint": "N/A \u2014 outpatient evaluation",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
@@ -228,7 +228,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "62",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -251,7 +251,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -265,7 +265,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -328,7 +328,7 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "N/A — outpatient evaluation",
+          "cc": "N/A \u2014 outpatient evaluation",
           "hpi": "Outpatient evaluation only.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -338,27 +338,27 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — amoxicillin allergy evaluation for pre-surgical clearance",
+        "chiefComplaint": "A/I consult \u2014 amoxicillin allergy evaluation for pre-surgical clearance",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Amoxicillin \"allergy\" — childhood morbilliform rash, almost certainly viral exanthem",
+          "description": "Amoxicillin \"allergy\" \u2014 childhood morbilliform rash, almost certainly viral exanthem",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Pre-surgical evaluation — surgeon needs clearance for amoxicillin prophylaxis",
+          "description": "Pre-surgical evaluation \u2014 surgeon needs clearance for amoxicillin prophylaxis",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Alternative (clindamycin) — inferior coverage, C. diff risk, should be avoided if possible",
+          "description": "Alternative (clindamycin) \u2014 inferior coverage, C. diff risk, should be avoided if possible",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -372,7 +372,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "62",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -395,7 +395,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -409,7 +409,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -466,14 +466,14 @@ window.EMR_DATA = {
               "name": "ALLERGY TESTING",
               "results": [
                 {
-                  "test": "Penicillin SPT — Major",
+                  "test": "Penicillin SPT \u2014 Major",
                   "value": "Negative",
                   "unit": "",
                   "range": "<3mm",
                   "flag": ""
                 },
                 {
-                  "test": "Penicillin SPT — Minor",
+                  "test": "Penicillin SPT \u2014 Minor",
                   "value": "Negative",
                   "unit": "",
                   "range": "<3mm",
@@ -488,14 +488,14 @@ window.EMR_DATA = {
                 },
                 {
                   "test": "Oral amoxicillin challenge 250mg",
-                  "value": "Tolerated — no reaction at 1h",
+                  "value": "Tolerated \u2014 no reaction at 1h",
                   "unit": "",
                   "range": "",
                   "flag": ""
                 },
                 {
                   "test": "Oral amoxicillin challenge 500mg",
-                  "value": "Tolerated — no reaction at 1h",
+                  "value": "Tolerated \u2014 no reaction at 1h",
                   "unit": "",
                   "range": "",
                   "flag": ""
@@ -512,8 +512,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — amoxicillin allergy evaluation for pre-surgical clearance",
-          "hpi": "A/I consult: 22M with 17-year amoxicillin \"allergy\" label based on childhood morbilliform rash during ear infection. Skin testing: all negative. Graded oral challenge: tolerated 250mg then 500mg amoxicillin without reaction. ALLERGY DELABELED. EMR updated. Surgeon notified — can use amoxicillin prophylaxis (superior coverage, no C. diff risk). This case illustrates the cascade harm of false allergy labels: delayed surgery → inferior antibiotic choice → unnecessary C. diff risk → all from a viral rash 17 years ago.",
+          "cc": "A/I consult \u2014 amoxicillin allergy evaluation for pre-surgical clearance",
+          "hpi": "A/I consult: 22M with 17-year amoxicillin \"allergy\" label based on childhood morbilliform rash during ear infection. Skin testing: all negative. Graded oral challenge: tolerated 250mg then 500mg amoxicillin without reaction. ALLERGY DELABELED. EMR updated. Surgeon notified \u2014 can use amoxicillin prophylaxis (superior coverage, no C. diff risk). This case illustrates the cascade harm of false allergy labels: delayed surgery \u2192 inferior antibiotic choice \u2192 unnecessary C. diff risk \u2192 all from a viral rash 17 years ago.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -522,20 +522,20 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Post-surgery follow-up — amoxicillin used successfully, allergy permanently removed",
+        "chiefComplaint": "Post-surgery follow-up \u2014 amoxicillin used successfully, allergy permanently removed",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Amoxicillin allergy — DELABELED after negative testing",
+          "description": "Amoxicillin allergy \u2014 DELABELED after negative testing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Wisdom tooth extraction completed with amoxicillin prophylaxis — no reaction",
+          "description": "Wisdom tooth extraction completed with amoxicillin prophylaxis \u2014 no reaction",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -554,7 +554,7 @@ window.EMR_DATA = {
           "name": "Amoxicillin",
           "dose": "500mg",
           "route": "PO",
-          "frequency": "TID x7 days (post-surgical — tolerated)",
+          "frequency": "TID x7 days (post-surgical \u2014 tolerated)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -566,7 +566,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "64",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -589,7 +589,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -603,7 +603,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -666,8 +666,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Post-surgery follow-up — amoxicillin used successfully, allergy permanently removed",
-          "hpi": "22M returns after successful wisdom tooth extraction. Used amoxicillin prophylaxis and post-op course — zero reaction. Allergy permanently removed from all records. Back to basketball practice.",
+          "cc": "Post-surgery follow-up \u2014 amoxicillin used successfully, allergy permanently removed",
+          "hpi": "22M returns after successful wisdom tooth extraction. Used amoxicillin prophylaxis and post-op course \u2014 zero reaction. Allergy permanently removed from all records. Back to basketball practice.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -689,39 +689,64 @@ window.EMR_DATA = {
     "address": "3184 S Halsted St, Phoenix, AZ 85004",
     "insurance": "University student plan",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Sarah Mitchell",
       "phone": "(505) 555-8581",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Not an ED case — but illustrates how false allergy labels cause downstream problems",
+    "chiefComplaint": "Not an ED case \u2014 but illustrates how false allergy labels cause downstream problems",
     "diagnosis": "Severe Allergic Reaction"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Amoxicillin \"allergy\" from childhood — likely viral exanthem",
+      "problem": "Idiopathic anaphylaxis \u2014 no trigger identified after full workup",
+      "icd": "T78.2XXA",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Rachel Torres, 35F \u2014 5 episodes of anaphylaxis over 18 months, no identifiable trigger. Extensive workup negative."
     },
     {
-      "id": "prob-2",
-      "description": "Surgical delay due to allergy label",
+      "problem": "Mastocytosis excluded \u2014 baseline tryptase normal, bone marrow negative",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Baseline tryptase 5.8 ng/mL (normal). Bone marrow biopsy: no mast cell aggregates. KIT D816V negative. Mastocytosis excluded."
     },
     {
-      "id": "prob-3",
-      "description": "Alternative antibiotic (clindamycin) carries C. diff risk",
+      "problem": "Omalizumab initiated \u2014 prevention of recurrent idiopathic anaphylaxis",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Omalizumab 300mg q4 weeks \u2014 anti-IgE reduces anaphylaxis frequency and severity in idiopathic anaphylaxis."
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Omalizumab 300mg SQ q4 weeks \u2014 prevention",
+      "sig": "Anti-IgE \u2014 reduces free IgE available for mast cell/basophil sensitization. Significantly reduces recurrence frequency and severity.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Cetirizine 10mg BID + famotidine 40mg BID \u2014 daily maintenance",
+      "sig": "Daily H1/H2 antihistamine \u2014 reduces baseline mast cell mediator effects and may reduce severity of breakthrough reactions.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "EpiPen 0.3mg x2 \u2014 always carry",
+      "sig": "Mandatory \u2014 idiopathic anaphylaxis can recur without warning. Two auto-injectors at all times.",
+      "prescriber": "Allergy",
+      "start": "2023",
+      "refills": 1,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
       "allergen": "Amoxicillin",
@@ -737,7 +762,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "62",
       "rr": "14",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "0/10"
     }
@@ -748,7 +773,7 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "Not an ED case — but illustrates how false allergy labels cause downstream problems",
+      "cc": "Not an ED case \u2014 but illustrates how false allergy labels cause downstream problems",
       "hpi": "22M college basketball player referred for allergy evaluation before wisdom tooth extraction. Surgeon requires amoxicillin clearance or will use clindamycin prophylaxis. History: morbilliform rash at age 5 during amoxicillin course for otitis media. This pattern (morbilliform rash during acute infection in young child) is >90% likely to be viral exanthem, not drug allergy. The \"allergy\" label has persisted for 17 years.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
@@ -757,88 +782,50 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-747420",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Idiopathic Anaphylaxis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Baseline tryptase",
+          "value": "5.8",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "KIT D816V mutation",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Bone marrow biopsy",
+          "value": "No mast cell aggregates \u2014 mastocytosis excluded",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "C4, C1-INH",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Comprehensive allergen panel",
+          "value": "No relevant sensitization",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "24h urine histamine",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
@@ -858,11 +845,11 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "College athlete (basketball) — needs wisdom tooth extraction, surgeon won't operate without \"clearing\" amoxicillin allergy"
+      "College athlete (basketball) \u2014 needs wisdom tooth extraction, surgeon won't operate without \"clearing\" amoxicillin allergy"
     ],
     [
       "History",
-      "Rash at age 5 during ear infection — likely viral exanthem, not true drug allergy"
+      "Rash at age 5 during ear infection \u2014 likely viral exanthem, not true drug allergy"
     ],
     [
       "Impact",
@@ -936,7 +923,7 @@ window.EMR_DATA = {
         ">90% with PCN label NOT truly allergic",
         ">80% lose sensitivity after 10 years",
         "Morbilliform rash in children = usually viral exanthem",
-        "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+        "False PCN allergy \u2192 MRSA, C. diff, longer stays, higher mortality"
       ]
     }
   ],
@@ -995,13 +982,12 @@ window.EMR_DATA = {
       "Neurological screening examination": "Alert and oriented, normal speech and cognition. No focal neurological deficits."
     },
     "ddxTargets": [
-      "Mislabeled drug allergy - viral exanthem (correct diagnosis)",
-      "True IgE-mediated penicillin allergy",
-      "Delayed-type hypersensitivity reaction",
-      "Stevens-Johnson syndrome history",
-      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
-      "Concurrent viral illness with coincidental rash",
-      "Contact dermatitis misattributed to medication"
+      "Idiopathic anaphylaxis \u2014 extensive workup negative, omalizumab indicated (correct)",
+      "Systemic mastocytosis \u2014 excluded by bone marrow biopsy and normal tryptase",
+      "Mast cell activation syndrome (MCAS) \u2014 normal tryptase and triggers; MCAS is controversial and diagnosis of exclusion",
+      "Hereditary alpha-tryptasemia \u2014 elevated tryptase from extra gene copies; normal tryptase here",
+      "Occult food allergy \u2014 possible but comprehensive allergen testing negative; FDEIA possible if exercise-related",
+      "HAE type III \u2014 recurrent angioedema in women, estrogen-related; no angioedema predominance here"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the 'allergy' label without questioning the validity of a childhood reaction that occurred during concurrent viral illness",
@@ -1011,7 +997,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient has been labeled with an amoxicillin allergy since childhood. What key historical features would help you distinguish between a true IgE-mediated drug allergy versus a viral exanthem that was coincidentally attributed to the antibiotic?",
       "phase5": "Based on your history and physical exam, what elements of this patient's story make you more or less concerned about a true penicillin allergy? Consider the timing, clinical context, and description of the reaction.",
-      "finalDebrief": "This case highlights how false drug allergy labels create downstream clinical problems. What red flags suggested this was likely a viral exanthem rather than true drug allergy? How does this mislabeling impact antibiotic selection and surgical prophylaxis decisions?"
+      "finalDebrief": "This case highlights how false drug allergy labels create downstream clinical problems. What red flags suggested this was likely a viral exanthem rather than true drug allergy? How does this mislabeling impact antibiotic selection and surgical prophylaxis decisions?",
+      "final": "Diagnosis: idiopathic anaphylaxis \u2014 omalizumab treatment. Key learning: (1) Idiopathic anaphylaxis workup: after confirming anaphylaxis criteria, exclude: (a) food allergen (comprehensive IgE panel, supervised oral challenges for suspected foods), (b) Hymenoptera venom, (c) medications, (d) latex, (e) mastocytosis (baseline tryptase + bone marrow if tryptase >20), (f) HAE (complement panel), (g) MCAS (24h urine histamine/prostaglandin D2), (h) exercise and cofactors. If ALL excluded: idiopathic anaphylaxis. (2) Idiopathic anaphylaxis management: EpiPen mandatory + daily antihistamines + consider omalizumab. Historical practice included systemic steroids and antihistamines as daily prophylaxis \u2014 omalizumab has largely replaced this for frequent recurrences. (3) Omalizumab mechanism in anaphylaxis: binds free IgE \u2192 reduces IgE available to crosslink Fc\u03b5RI on mast cells and basophils \u2192 reduces mast cell sensitivity. Reduces frequency AND severity of idiopathic anaphylaxis reactions. (4) MCAS controversy: mast cell activation syndrome is a controversial diagnosis \u2014 requires documentation of symptoms consistent with mast cell degranulation + elevated mast cell mediators during a symptomatic episode + response to mast cell-directed therapy. Normal baseline tryptase does not exclude MCAS, but a negative 24h urine histamine during symptoms makes it less likely. (5) Prognosis: idiopathic anaphylaxis tends to remit over time (50% remission within 5 years). Continue omalizumab until 1 year free of episodes, then taper."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Idiopathic, Mastocytosis Excluded, Omalizumab Initiated for Prevention",
+    "caseId": "severe-allergic-reaction-v3"
   }
 };

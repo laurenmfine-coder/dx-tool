@@ -1,4 +1,4 @@
-/* emr-data/sjs-ten-v2.js — Variation: SJS/TEN */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "737 Clover St, Denver, CO 80211",
       "insurance": "Aetna HMO",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Okonkwo",
         "phone": "(412) 555-9341",
@@ -45,7 +45,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "Epilepsy — started lamotrigine 3 weeks ago, titrated too fast"
+        "Epilepsy \u2014 started lamotrigine 3 weeks ago, titrated too fast"
       ],
       [
         "Severity",
@@ -53,52 +53,52 @@ window.EMR_DATA = {
       ],
       [
         "HLA",
-        "West African descent — higher prevalence HLA-B*15:13 associated with lamotrigine SJS"
+        "West African descent \u2014 higher prevalence HLA-B*15:13 associated with lamotrigine SJS"
       ],
       [
         "Ophthalmology",
-        "Corneal involvement — risk of permanent visual impairment"
+        "Corneal involvement \u2014 risk of permanent visual impairment"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement — 3 weeks after starting lamotrigine (titrated too rapidly)",
+        "chiefComplaint": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement \u2014 3 weeks after starting lamotrigine (titrated too rapidly)",
         "diagnosis": "SJS/TEN"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS/TEN (30% BSA) — lamotrigine culprit",
+          "description": "SJS/TEN (30% BSA) \u2014 lamotrigine culprit",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Rapid titration (should have been 25mg daily x2 weeks, then increase — was started at 100mg)",
+          "description": "Rapid titration (should have been 25mg daily x2 weeks, then increase \u2014 was started at 100mg)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Oral mucosal erosions — unable to eat",
+          "description": "Oral mucosal erosions \u2014 unable to eat",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Bilateral conjunctival involvement — ophthalmology STAT",
+          "description": "Bilateral conjunctival involvement \u2014 ophthalmology STAT",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Epilepsy — needs alternative anticonvulsant",
+          "description": "Epilepsy \u2014 needs alternative anticonvulsant",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -158,7 +158,7 @@ window.EMR_DATA = {
           "bp": "98/58",
           "hr": "112",
           "rr": "22",
-          "temp": "38.8°C",
+          "temp": "38.8\u00b0C",
           "spo2": "95%",
           "pain": "9/10"
         }
@@ -181,7 +181,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "2.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -195,7 +195,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -284,8 +284,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement — 3 weeks after starting lamotrigine (titrated too rapidly)",
-          "hpi": "28F with new epilepsy started on lamotrigine 100mg daily 3 weeks ago (should have been 25mg with slow titration). Developed targetoid rash → rapidly progressing to epidermal detachment. Now 30% BSA detachment with positive Nikolsky sign, hemorrhagic oral erosions, and bilateral conjunctival pseudomembrane formation. SCORTEN 3 = 35.3% mortality risk. Transferred to burn unit. KEY ISSUE: lamotrigine requires SLOW titration to prevent SJS — this was a prescribing error. HLA-B*15:13 testing sent — associated with lamotrigine SJS in patients of African descent.",
+          "cc": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement \u2014 3 weeks after starting lamotrigine (titrated too rapidly)",
+          "hpi": "28F with new epilepsy started on lamotrigine 100mg daily 3 weeks ago (should have been 25mg with slow titration). Developed targetoid rash \u2192 rapidly progressing to epidermal detachment. Now 30% BSA detachment with positive Nikolsky sign, hemorrhagic oral erosions, and bilateral conjunctival pseudomembrane formation. SCORTEN 3 = 35.3% mortality risk. Transferred to burn unit. KEY ISSUE: lamotrigine requires SLOW titration to prevent SJS \u2014 this was a prescribing error. HLA-B*15:13 testing sent \u2014 associated with lamotrigine SJS in patients of African descent.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -294,55 +294,55 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Burn unit admission — SJS/TEN 30% BSA, ophthalmology co-management, wound care",
+        "chiefComplaint": "Burn unit admission \u2014 SJS/TEN 30% BSA, ophthalmology co-management, wound care",
         "diagnosis": "SJS/TEN"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS/TEN — 30% BSA, SCORTEN 3",
+          "description": "SJS/TEN \u2014 30% BSA, SCORTEN 3",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Burn unit wound care — non-adherent dressings, strict aseptic technique",
+          "description": "Burn unit wound care \u2014 non-adherent dressings, strict aseptic technique",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Ophthalmology — daily amniotic membrane grafts for corneal protection",
+          "description": "Ophthalmology \u2014 daily amniotic membrane grafts for corneal protection",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Nutrition — unable to eat, TPN started",
+          "description": "Nutrition \u2014 unable to eat, TPN started",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Pain management — morphine PCA",
+          "description": "Pain management \u2014 morphine PCA",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-6",
-          "description": "Lamotrigine — culprit, permanently contraindicated",
+          "description": "Lamotrigine \u2014 culprit, permanently contraindicated",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-7",
-          "description": "Neurology — alternative anticonvulsant (levetiracetam started)",
+          "description": "Neurology \u2014 alternative anticonvulsant (levetiracetam started)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -363,7 +363,7 @@ window.EMR_DATA = {
           "name": "TPN",
           "dose": "",
           "route": "IV",
-          "frequency": "Cannot eat — oral erosions",
+          "frequency": "Cannot eat \u2014 oral erosions",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -402,7 +402,7 @@ window.EMR_DATA = {
           "bp": "102/62",
           "hr": "98",
           "rr": "18",
-          "temp": "38.2°C",
+          "temp": "38.2\u00b0C",
           "spo2": "97%",
           "pain": "7/10"
         }
@@ -425,7 +425,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -439,7 +439,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -502,8 +502,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Burn unit admission — SJS/TEN 30% BSA, ophthalmology co-management, wound care",
-          "hpi": "28F day 3 in burn unit. BSA stable at 30% — not progressing. Cyclosporine started early — may be limiting extension. Ophthalmology performing daily slit lamp and amniotic membrane placement — corneal epithelial defects bilateral but no perforation. Nutrition via TPN. Pain managed on PCA. Neurology switched to levetiracetam for seizure control. HLA-B*15:13 testing: POSITIVE — this patient has the genetic susceptibility marker. First-degree relatives should be tested before any aromatic anticonvulsant use.",
+          "cc": "Burn unit admission \u2014 SJS/TEN 30% BSA, ophthalmology co-management, wound care",
+          "hpi": "28F day 3 in burn unit. BSA stable at 30% \u2014 not progressing. Cyclosporine started early \u2014 may be limiting extension. Ophthalmology performing daily slit lamp and amniotic membrane placement \u2014 corneal epithelial defects bilateral but no perforation. Nutrition via TPN. Pain managed on PCA. Neurology switched to levetiracetam for seizure control. HLA-B*15:13 testing: POSITIVE \u2014 this patient has the genetic susceptibility marker. First-degree relatives should be tested before any aromatic anticonvulsant use.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -512,27 +512,27 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — culprit drug identification, cross-reactivity, permanent drug avoidance list, HLA implications",
+        "chiefComplaint": "A/I consult \u2014 culprit drug identification, cross-reactivity, permanent drug avoidance list, HLA implications",
         "diagnosis": "SJS/TEN"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS/TEN — lamotrigine culprit (confirmed by timeline, HLA positive)",
+          "description": "SJS/TEN \u2014 lamotrigine culprit (confirmed by timeline, HLA positive)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Aromatic anticonvulsants — cross-reactivity risk (phenytoin, carbamazepine, oxcarbazepine all carry SJS risk)",
+          "description": "Aromatic anticonvulsants \u2014 cross-reactivity risk (phenytoin, carbamazepine, oxcarbazepine all carry SJS risk)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "HLA-B*15:13 positive — family screening recommended",
+          "description": "HLA-B*15:13 positive \u2014 family screening recommended",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -588,7 +588,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "82",
           "rr": "16",
-          "temp": "37.2°C",
+          "temp": "37.2\u00b0C",
           "spo2": "98%",
           "pain": "4/10"
         }
@@ -611,7 +611,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -625,7 +625,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -688,8 +688,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — culprit drug identification, cross-reactivity, permanent drug avoidance list, HLA implications",
-          "hpi": "A/I consult: 28F with lamotrigine SJS/TEN. Drug avoidance list: ALL aromatic anticonvulsants (lamotrigine, carbamazepine, phenytoin, phenobarbital, oxcarbazepine) — cross-reactive aromatic amine structure. Safe anticonvulsants: levetiracetam, valproate, topiramate, lacosamide, gabapentin. HLA-B*15:13 positive — siblings and children should be tested BEFORE any aromatic anticonvulsant. Medical alert: \"SJS/TEN — Lamotrigine. Avoid ALL aromatic anticonvulsants.\" Dermatology, ophthalmology, gynecology (mucosal scarring) follow-up arranged.",
+          "cc": "A/I consult \u2014 culprit drug identification, cross-reactivity, permanent drug avoidance list, HLA implications",
+          "hpi": "A/I consult: 28F with lamotrigine SJS/TEN. Drug avoidance list: ALL aromatic anticonvulsants (lamotrigine, carbamazepine, phenytoin, phenobarbital, oxcarbazepine) \u2014 cross-reactive aromatic amine structure. Safe anticonvulsants: levetiracetam, valproate, topiramate, lacosamide, gabapentin. HLA-B*15:13 positive \u2014 siblings and children should be tested BEFORE any aromatic anticonvulsant. Medical alert: \"SJS/TEN \u2014 Lamotrigine. Avoid ALL aromatic anticonvulsants.\" Dermatology, ophthalmology, gynecology (mucosal scarring) follow-up arranged.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -698,27 +698,27 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "SJS/TEN follow-up — 8 weeks, skin healing, eye assessment, drug avoidance review",
+        "chiefComplaint": "SJS/TEN follow-up \u2014 8 weeks, skin healing, eye assessment, drug avoidance review",
         "diagnosis": "SJS/TEN"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS/TEN — healed, post-inflammatory hyperpigmentation",
+          "description": "SJS/TEN \u2014 healed, post-inflammatory hyperpigmentation",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Eyes — bilateral dry eye syndrome (permanent sequelae), no corneal scarring (amniotic membranes prevented)",
+          "description": "Eyes \u2014 bilateral dry eye syndrome (permanent sequelae), no corneal scarring (amniotic membranes prevented)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Skin — 15% area with hypertrophic scarring",
+          "description": "Skin \u2014 15% area with hypertrophic scarring",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -739,7 +739,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-6",
-          "description": "HLA results shared with family — sister tested positive, informed her neurologist",
+          "description": "HLA results shared with family \u2014 sister tested positive, informed her neurologist",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -790,7 +790,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -813,7 +813,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -827,7 +827,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -890,8 +890,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "SJS/TEN follow-up — 8 weeks, skin healing, eye assessment, drug avoidance review",
-          "hpi": "28F 8 weeks post-SJS/TEN. Skin healed with post-inflammatory hyperpigmentation and some hypertrophic scarring — dermatology managing. Eyes: bilateral chronic dry eye (meibomian gland dysfunction from inflammation) but NO corneal scarring — early amniotic membranes saved her vision. Seizures well-controlled on levetiracetam. Sister HLA-B*15:13 positive — her neurologist notified, will avoid aromatic anticonvulsants. Patient processing psychological trauma — PTSD screening positive, therapy referral placed. Medical alert bracelet and pharmacy database all updated.",
+          "cc": "SJS/TEN follow-up \u2014 8 weeks, skin healing, eye assessment, drug avoidance review",
+          "hpi": "28F 8 weeks post-SJS/TEN. Skin healed with post-inflammatory hyperpigmentation and some hypertrophic scarring \u2014 dermatology managing. Eyes: bilateral chronic dry eye (meibomian gland dysfunction from inflammation) but NO corneal scarring \u2014 early amniotic membranes saved her vision. Seizures well-controlled on levetiracetam. Sister HLA-B*15:13 positive \u2014 her neurologist notified, will avoid aromatic anticonvulsants. Patient processing psychological trauma \u2014 PTSD screening positive, therapy referral placed. Medical alert bracelet and pharmacy database all updated.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -913,97 +913,70 @@ window.EMR_DATA = {
     "address": "7587 N Western Ave, Milwaukee, WI 53207",
     "insurance": "Aetna HMO",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Okonkwo",
       "phone": "(312) 555-1742",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement — 3 weeks after starting lamotrigine (titrated too rapidly)",
+    "chiefComplaint": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement \u2014 3 weeks after starting lamotrigine (titrated too rapidly)",
     "diagnosis": "SJS/TEN"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "SJS/TEN (30% BSA) — lamotrigine culprit",
+      "problem": "SJS/TEN overlap \u2014 18% BSA epidermal detachment, lamotrigine",
+      "icd": "L51.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Fatima Hassan, 29F \u2014 lamotrigine started 3 weeks ago for epilepsy. Fever, atypical targets, mucosal erosions, skin sloughing 18% BSA."
     },
     {
-      "id": "prob-2",
-      "description": "Rapid titration (should have been 25mg daily x2 weeks, then increase — was started at 100mg)",
+      "problem": "Mucosal involvement \u2014 oral, conjunctival, genital erosions",
+      "icd": "L51.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Oral hemorrhagic crusting, bilateral conjunctival erosions, urogenital mucosal involvement. All 3 mucosal sites affected."
     },
     {
-      "id": "prob-3",
-      "description": "Oral mucosal erosions — unable to eat",
+      "problem": "Sepsis risk \u2014 loss of skin barrier, secondary bacteremia",
+      "icd": "L51.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Bilateral conjunctival involvement — ophthalmology STAT",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Epilepsy — needs alternative anticonvulsant",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Skin barrier disruption = open wound \u2014 similar to burns. ICU burn unit setting provides wound care expertise, infection monitoring, and nutritional support."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Lamotrigine",
-      "dose": "STOPPED",
-      "route": "",
-      "frequency": "Culprit drug",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "STOP lamotrigine \u2014 causative drug",
+      "sig": "Immediate discontinuation mandatory. Document allergy. Cross-reactivity with aromatic anticonvulsants possible.",
+      "prescriber": "Neurology/Dermatology",
+      "start": "DISCONTINUE",
+      "refills": 0,
+      "status": "DISCONTINUED"
     },
     {
-      "id": "med-2",
-      "name": "Cyclosporine",
-      "dose": "3mg/kg/day",
-      "route": "IV",
-      "frequency": "SJS/TEN treatment",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "IVIG 1g/kg/day x3 days \u2014 adjunct immunomodulation",
+      "sig": "High-dose IVIG \u2014 blocks Fas-FasL pathway (apoptosis mechanism in TEN). Evidence supports use in SJS/TEN \u226510% BSA.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Morphine PCA",
-      "dose": "",
-      "route": "IV",
-      "frequency": "Severe pain management",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cyclosporine 3-5mg/kg/day \u2014 immunosuppression",
+      "sig": "Cyclosporine inhibits T-cell activation driving keratinocyte apoptosis. Some evidence supports superior outcomes vs IVIG in TEN.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 with ophthalmology monitoring"
     },
     {
-      "id": "med-4",
-      "name": "IV Fluids",
-      "dose": "LR",
-      "route": "IV",
-      "frequency": "Burn-like fluid resuscitation",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
-    },
-    {
-      "id": "med-5",
-      "name": "Moxifloxacin eye drops",
-      "dose": "",
-      "route": "Ophthalmic",
-      "frequency": "Prevent secondary infection",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Wound care \u2014 non-adherent dressings, no debridement",
+      "sig": "Denuded skin treated like partial-thickness burns. Non-adherent silicone dressings. Do NOT debride viable skin. Daily wound assessment.",
+      "prescriber": "Burn Unit",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -1021,7 +994,7 @@ window.EMR_DATA = {
       "bp": "98/58",
       "hr": "112",
       "rr": "22",
-      "temp": "38.8°C",
+      "temp": "38.8\u00b0C",
       "spo2": "95%",
       "pain": "9/10"
     }
@@ -1032,8 +1005,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement — 3 weeks after starting lamotrigine (titrated too rapidly)",
-      "hpi": "28F with new epilepsy started on lamotrigine 100mg daily 3 weeks ago (should have been 25mg with slow titration). Developed targetoid rash → rapidly progressing to epidermal detachment. Now 30% BSA detachment with positive Nikolsky sign, hemorrhagic oral erosions, and bilateral conjunctival pseudomembrane formation. SCORTEN 3 = 35.3% mortality risk. Transferred to burn unit. KEY ISSUE: lamotrigine requires SLOW titration to prevent SJS — this was a prescribing error. HLA-B*15:13 testing sent — associated with lamotrigine SJS in patients of African descent.",
+      "cc": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement \u2014 3 weeks after starting lamotrigine (titrated too rapidly)",
+      "hpi": "28F with new epilepsy started on lamotrigine 100mg daily 3 weeks ago (should have been 25mg with slow titration). Developed targetoid rash \u2192 rapidly progressing to epidermal detachment. Now 30% BSA detachment with positive Nikolsky sign, hemorrhagic oral erosions, and bilateral conjunctival pseudomembrane formation. SCORTEN 3 = 35.3% mortality risk. Transferred to burn unit. KEY ISSUE: lamotrigine requires SLOW titration to prevent SJS \u2014 this was a prescribing error. HLA-B*15:13 testing sent \u2014 associated with lamotrigine SJS in patients of African descent.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -1041,114 +1014,50 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-638424",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "TEN Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "2.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "SCORTEN score",
+          "value": "3",
+          "unit": "/7 points",
+          "ref": "Score 3 = ~35% mortality",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Glucose",
+          "value": "168",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
         },
         {
-          "name": "SJS MARKERS",
-          "results": [
-            {
-              "test": "Granulysin",
-              "value": "Elevated",
-              "unit": "",
-              "range": "",
-              "flag": "H"
-            },
-            {
-              "test": "Bicarbonate",
-              "value": "18",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": "L"
-            },
-            {
-              "test": "SCORTEN",
-              "value": "3 (35.3% mortality)",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Albumin",
+          "value": "2.8",
+          "unit": "g/dL",
+          "ref": "3.5-5.0",
+          "flag": "L"
+        },
+        {
+          "test": "BSA detachment",
+          "value": "18",
+          "unit": "%",
+          "ref": "<10% SJS",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "3.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "L"
         }
       ]
     }
@@ -1168,7 +1077,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "Epilepsy — started lamotrigine 3 weeks ago, titrated too fast"
+      "Epilepsy \u2014 started lamotrigine 3 weeks ago, titrated too fast"
     ],
     [
       "Severity",
@@ -1176,11 +1085,11 @@ window.EMR_DATA = {
     ],
     [
       "HLA",
-      "West African descent — higher prevalence HLA-B*15:13 associated with lamotrigine SJS"
+      "West African descent \u2014 higher prevalence HLA-B*15:13 associated with lamotrigine SJS"
     ],
     [
       "Ophthalmology",
-      "Corneal involvement — risk of permanent visual impairment"
+      "Corneal involvement \u2014 risk of permanent visual impairment"
     ]
   ],
   "references": [
@@ -1259,13 +1168,12 @@ window.EMR_DATA = {
       "Neurologic examination for seizure history": "Alert and oriented, no focal neurologic deficits, no recent seizure activity"
     },
     "ddxTargets": [
-      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis (correct diagnosis)",
-      "Erythema multiforme major",
-      "Staphylococcal scalded skin syndrome",
-      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
-      "Pemphigus vulgaris",
-      "Thermal burn injury",
-      "Viral exanthem with secondary bacterial infection"
+      "SJS/TEN overlap \u2014 18% BSA, mucosal erosions, lamotrigine (correct)",
+      "EM major \u2014 <10% BSA, true target lesions, HSV-triggered; atypical targets and detachment indicate SJS/TEN",
+      "SSSS (staphylococcal scalded skin) \u2014 children, no mucosal involvement, Nikolsky positive but superficial cleavage",
+      "Pemphigus vulgaris \u2014 acantholysis on biopsy, no drug history, chronic onset",
+      "Linear IgA bullous dermatosis \u2014 linear IgA on DIF; drug-induced variant possible",
+      "Bullous pemphigoid \u2014 elderly, tense blisters, eosinophilia, different DIF pattern"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'skin rash' and miss the severity and systemic nature of SJS/TEN, or focus only on dermatologic causes",
@@ -1275,7 +1183,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some concerning skin findings. What specific historical details would help you distinguish between different severe cutaneous drug reactions? Think about timing, medication history, and the pattern of involvement.",
       "phase5": "Now that you've examined the patient and noted the extensive skin detachment, mucosal involvement, and systemic signs - what classification criteria might help you determine the severity and guide urgent management needs?",
-      "finalDebrief": "This case highlights SJS/TEN from rapid lamotrigine titration. How did the 30% BSA involvement, mucosal erosions, and medication timing help distinguish this from other vesiculobullous disorders? What immediate interventions does this patient need, and why is ophthalmology consultation emergent?"
+      "finalDebrief": "This case highlights SJS/TEN from rapid lamotrigine titration. How did the 30% BSA involvement, mucosal erosions, and medication timing help distinguish this from other vesiculobullous disorders? What immediate interventions does this patient need, and why is ophthalmology consultation emergent?",
+      "final": "Diagnosis: SJS/TEN overlap (18% BSA). Key learning: (1) SJS/TEN classification by BSA detachment: SJS = <10%, SJS/TEN overlap = 10-30%, TEN = >30%. More BSA = higher mortality. All involve ATYPICAL target lesions (flat, 2-zone, dusky center + surrounding erythema \u2014 NOT the classic 3-zone EM target) and mucosal involvement (oral, ocular, genital). (2) SCORTEN prognostic score: Age >40, malignancy, HR >120, initial BSA >10%, BUN >28, serum glucose >252, bicarbonate <20. Each point = increasing mortality. Score 3 = ~35% mortality. Score \u22655 = >90%. Used to guide ICU triage. (3) Ophthalmologic emergency: conjunctival erosions in SJS/TEN cause symblepharon (adhesion of conjunctiva to lid) and corneal scarring \u2192 blindness. Ophthalmology consult DAILY from day 1. Amniotic membrane grafts if severe. This is the most preventable long-term complication. (4) IVIG vs cyclosporine: meta-analyses suggest cyclosporine (3-5 mg/kg/day) may have superior outcomes vs IVIG in TEN. Many centers now use cyclosporine first-line. TNF-alpha inhibitors (etanercept, thalidomide) \u2014 some evidence but not standard of care. Steroids are controversial. (5) Lamotrigine SJS/TEN: lamotrigine is one of the most common causes of SJS/TEN among anticonvulsants. Risk is highest in the first 8 weeks, with rapid titration, and in patients also on valproate (inhibits lamotrigine metabolism \u2192 higher drug levels \u2192 higher risk). Slow titration protocols exist precisely to reduce this risk."
     }
+  },
+  "meta": {
+    "diagnosis": "Stevens-Johnson Syndrome / TEN \u2014 Lamotrigine-Induced, Epidermal Detachment 18%, ICU Burn Unit Transfer",
+    "caseId": "sjs-ten-v2"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/sjsten-overlap-v2.js — Variation: SJS/TEN Overlap */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "9035 Lavender St, Detroit, MI 48201",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(212) 555-5506",
@@ -45,11 +45,11 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "HIV positive — started Bactrim prophylaxis, SJS at day 14"
+        "HIV positive \u2014 started Bactrim prophylaxis, SJS at day 14"
       ],
       [
         "Issue",
-        "Sulfa drugs are first-line PCP prophylaxis in HIV — now needs alternatives"
+        "Sulfa drugs are first-line PCP prophylaxis in HIV \u2014 now needs alternatives"
       ],
       [
         "Severity",
@@ -57,7 +57,7 @@ window.EMR_DATA = {
       ],
       [
         "Adherence",
-        "New HIV diagnosis — overwhelmed, now terrified of medications"
+        "New HIV diagnosis \u2014 overwhelmed, now terrified of medications"
       ]
     ]
   },
@@ -70,35 +70,35 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS/TEN overlap — TMP-SMX (sulfamethoxazole) culprit",
+          "description": "SJS/TEN overlap \u2014 TMP-SMX (sulfamethoxazole) culprit",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "HIV positive (CD4 180) — sulfa drugs needed for PCP prophylaxis",
+          "description": "HIV positive (CD4 180) \u2014 sulfa drugs needed for PCP prophylaxis",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "15% BSA detachment — overlap zone",
+          "description": "15% BSA detachment \u2014 overlap zone",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "New HIV diagnosis — medication fear now added to psychological burden",
+          "description": "New HIV diagnosis \u2014 medication fear now added to psychological burden",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Need alternative PCP prophylaxis — dapsone, atovaquone, or pentamidine",
+          "description": "Need alternative PCP prophylaxis \u2014 dapsone, atovaquone, or pentamidine",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -149,7 +149,7 @@ window.EMR_DATA = {
           "bp": "102/62",
           "hr": "104",
           "rr": "20",
-          "temp": "38.4°C",
+          "temp": "38.4\u00b0C",
           "spo2": "96%",
           "pain": "8/10"
         }
@@ -172,7 +172,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "3.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -186,7 +186,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "98",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": "L"
                 },
@@ -245,7 +245,7 @@ window.EMR_DATA = {
                 {
                   "test": "CD4 count",
                   "value": "180",
-                  "unit": "cells/µL",
+                  "unit": "cells/\u00b5L",
                   "range": ">500",
                   "flag": "L"
                 },
@@ -283,7 +283,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "24yo HIV+ female with SJS/TEN overlap (15% BSA) 14 days after starting TMP-SMX prophylaxis",
-          "hpi": "24F newly diagnosed HIV (CD4 180, VL 42,000) started on TMP-SMX for PCP prophylaxis 14 days ago. Developed targetoid rash → epidermal detachment now at 15% BSA (SJS/TEN overlap zone). Oral erosions present but no ocular involvement yet. HIV patients have 100x higher risk of sulfa drug SJS. NOW has 3 converging crises: (1) HIV requiring treatment, (2) SJS requiring treatment, (3) Fear of all medications. Alternative PCP prophylaxis needed — dapsone (check G6PD first), atovaquone, or inhaled pentamidine.",
+          "hpi": "24F newly diagnosed HIV (CD4 180, VL 42,000) started on TMP-SMX for PCP prophylaxis 14 days ago. Developed targetoid rash \u2192 epidermal detachment now at 15% BSA (SJS/TEN overlap zone). Oral erosions present but no ocular involvement yet. HIV patients have 100x higher risk of sulfa drug SJS. NOW has 3 converging crises: (1) HIV requiring treatment, (2) SJS requiring treatment, (3) Fear of all medications. Alternative PCP prophylaxis needed \u2014 dapsone (check G6PD first), atovaquone, or inhaled pentamidine.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -292,34 +292,34 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Burn unit — SJS/TEN overlap management, HIV medication coordination",
+        "chiefComplaint": "Burn unit \u2014 SJS/TEN overlap management, HIV medication coordination",
         "diagnosis": "SJS/TEN Overlap"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS/TEN overlap 15% BSA — improving on cyclosporine",
+          "description": "SJS/TEN overlap 15% BSA \u2014 improving on cyclosporine",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "HIV — ARV initiation delayed until SJS resolves (immune reconstitution could worsen SJS)",
+          "description": "HIV \u2014 ARV initiation delayed until SJS resolves (immune reconstitution could worsen SJS)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "PCP prophylaxis — G6PD checked (normal), switching to dapsone",
+          "description": "PCP prophylaxis \u2014 G6PD checked (normal), switching to dapsone",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Medication fear — psych consult for new HIV + SJS psychological trauma",
+          "description": "Medication fear \u2014 psych consult for new HIV + SJS psychological trauma",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -347,7 +347,7 @@ window.EMR_DATA = {
           "name": "Dapsone",
           "dose": "100mg",
           "route": "PO",
-          "frequency": "Daily (PCP prophylaxis — G6PD normal)",
+          "frequency": "Daily (PCP prophylaxis \u2014 G6PD normal)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -368,7 +368,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "86",
           "rr": "16",
-          "temp": "37.6°C",
+          "temp": "37.6\u00b0C",
           "spo2": "98%",
           "pain": "4/10"
         }
@@ -391,7 +391,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -405,7 +405,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -468,8 +468,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Burn unit — SJS/TEN overlap management, HIV medication coordination",
-          "hpi": "24F day 5 — BSA stable, re-epithelialization beginning. Cyclosporine taper started. G6PD normal — dapsone initiated for PCP prophylaxis. ARVs deferred — starting during active SJS could trigger immune reconstitution inflammatory syndrome. Psych seeing patient daily — processing HIV diagnosis AND drug reaction simultaneously. Social work: insurance coverage for specialty meds, housing stability assessment.",
+          "cc": "Burn unit \u2014 SJS/TEN overlap management, HIV medication coordination",
+          "hpi": "24F day 5 \u2014 BSA stable, re-epithelialization beginning. Cyclosporine taper started. G6PD normal \u2014 dapsone initiated for PCP prophylaxis. ARVs deferred \u2014 starting during active SJS could trigger immune reconstitution inflammatory syndrome. Psych seeing patient daily \u2014 processing HIV diagnosis AND drug reaction simultaneously. Social work: insurance coverage for specialty meds, housing stability assessment.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -478,27 +478,27 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — drug avoidance list for HIV patient, alternative prophylaxis, medication reintroduction counseling",
+        "chiefComplaint": "A/I consult \u2014 drug avoidance list for HIV patient, alternative prophylaxis, medication reintroduction counseling",
         "diagnosis": "SJS/TEN Overlap"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "ALL sulfonamides permanently contraindicated — TMP-SMX, sulfasalazine, sulfadiazine, dapsone CONTROVERSIAL (some tolerate, different mechanism)",
+          "description": "ALL sulfonamides permanently contraindicated \u2014 TMP-SMX, sulfasalazine, sulfadiazine, dapsone CONTROVERSIAL (some tolerate, different mechanism)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "HIV medication selection — avoid abacavir (hypersensitivity), nevirapine (SJS risk)",
+          "description": "HIV medication selection \u2014 avoid abacavir (hypersensitivity), nevirapine (SJS risk)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "G6PD normal — dapsone tolerated for PCP",
+          "description": "G6PD normal \u2014 dapsone tolerated for PCP",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -512,7 +512,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Cross-reactivity: sulfa antibiotics ≠ sulfa-containing non-antibiotics (thiazides, celecoxib generally safe)",
+          "description": "Cross-reactivity: sulfa antibiotics \u2260 sulfa-containing non-antibiotics (thiazides, celecoxib generally safe)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -533,7 +533,7 @@ window.EMR_DATA = {
           "name": "Tenofovir/emtricitabine/dolutegravir",
           "dose": "",
           "route": "PO",
-          "frequency": "Daily (when ready — safest ARV combo for SJS history)",
+          "frequency": "Daily (when ready \u2014 safest ARV combo for SJS history)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -545,7 +545,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -568,7 +568,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -582,7 +582,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -645,8 +645,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — drug avoidance list for HIV patient, alternative prophylaxis, medication reintroduction counseling",
-          "hpi": "A/I: 24F HIV+ with sulfa SJS. Drug guidance: (1) ALL sulfonamide antibiotics permanently avoided, (2) Dapsone is NOT a sulfonamide — different structure, generally safe (she's tolerating it), (3) Sulfa-containing non-antibiotics (thiazides, celecoxib, sumatriptan) are generally safe — cross-reactivity is a myth for non-antibiotic sulfonamides, (4) ARV selection: avoid abacavir (hypersensitivity risk) and nevirapine (SJS risk), (5) Recommended: bictegravir/TAF/emtricitabine or dolutegravir-based regimen. Medical alert bracelet: \"Sulfonamide SJS — Do NOT give TMP-SMX.\"",
+          "cc": "A/I consult \u2014 drug avoidance list for HIV patient, alternative prophylaxis, medication reintroduction counseling",
+          "hpi": "A/I: 24F HIV+ with sulfa SJS. Drug guidance: (1) ALL sulfonamide antibiotics permanently avoided, (2) Dapsone is NOT a sulfonamide \u2014 different structure, generally safe (she's tolerating it), (3) Sulfa-containing non-antibiotics (thiazides, celecoxib, sumatriptan) are generally safe \u2014 cross-reactivity is a myth for non-antibiotic sulfonamides, (4) ARV selection: avoid abacavir (hypersensitivity risk) and nevirapine (SJS risk), (5) Recommended: bictegravir/TAF/emtricitabine or dolutegravir-based regimen. Medical alert bracelet: \"Sulfonamide SJS \u2014 Do NOT give TMP-SMX.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -661,35 +661,35 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "SJS — fully healed, post-inflammatory hyperpigmentation",
+          "description": "SJS \u2014 fully healed, post-inflammatory hyperpigmentation",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "HIV — on bictegravir/TAF/emtricitabine, VL trending down",
+          "description": "HIV \u2014 on bictegravir/TAF/emtricitabine, VL trending down",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "PCP prophylaxis — tolerating dapsone",
+          "description": "PCP prophylaxis \u2014 tolerating dapsone",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Medication adherence — initially fearful, now taking pills without anxiety",
+          "description": "Medication adherence \u2014 initially fearful, now taking pills without anxiety",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Therapy — processing HIV + SJS dual trauma",
+          "description": "Therapy \u2014 processing HIV + SJS dual trauma",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -731,7 +731,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -754,7 +754,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -768,7 +768,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -832,7 +832,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "SJS resolved, ARVs started, medication adherence, psychological recovery",
-          "hpi": "24F 3 months post-SJS. Skin healed. HIV: VL dropping on bictegravir/TAF/FTC, CD4 rising (180→240). Tolerating dapsone without issues. Initially terrified of taking any pills — therapy helped her distinguish between rational medication caution and phobic avoidance. Drug allergy card in wallet, pharmacy systems flagged. Says: \"I went from being scared of every pill to understanding which ones are actually dangerous for me.\"",
+          "hpi": "24F 3 months post-SJS. Skin healed. HIV: VL dropping on bictegravir/TAF/FTC, CD4 rising (180\u2192240). Tolerating dapsone without issues. Initially terrified of taking any pills \u2014 therapy helped her distinguish between rational medication caution and phobic avoidance. Drug allergy card in wallet, pharmacy systems flagged. Says: \"I went from being scared of every pill to understanding which ones are actually dangerous for me.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -854,7 +854,7 @@ window.EMR_DATA = {
     "address": "1635 N Western Ave, Albuquerque, NM 87101",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(317) 555-2679",
@@ -865,77 +865,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "SJS/TEN overlap — TMP-SMX (sulfamethoxazole) culprit",
+      "problem": "SJS/TEN \u2014 sulfamethoxazole, 15% BSA detachment",
+      "icd": "L51.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Michael Torres, 44M \u2014 TMP-SMX started 2 weeks ago. Atypical targets, mucosal erosions, 15% epidermal detachment."
     },
     {
-      "id": "prob-2",
-      "description": "HIV positive (CD4 180) — sulfa drugs needed for PCP prophylaxis",
+      "problem": "Conjunctival involvement \u2014 bilateral pseudomembrane formation",
+      "icd": "H10.219",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Bilateral pseudomembranes forming on bulbar conjunctiva. Emergency ophthalmology \u2014 symblepharon lysis and amniotic membrane required."
     },
     {
-      "id": "prob-3",
-      "description": "15% BSA detachment — overlap zone",
+      "problem": "Nutritional support \u2014 hypermetabolic from skin loss and infection stress",
+      "icd": "E46",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "New HIV diagnosis — medication fear now added to psychological burden",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Need alternative PCP prophylaxis — dapsone, atovaquone, or pentamidine",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Denuded skin = major caloric loss. Enteral nutrition via NG tube immediately \u2014 caloric needs 35-40 kcal/kg/day in TEN."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "TMP-SMX",
-      "dose": "STOPPED",
-      "route": "",
-      "frequency": "Culprit drug",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "STOP TMP-SMX \u2014 causative drug",
+      "sig": "Immediate discontinuation. Alternative infection treatment required.",
+      "prescriber": "Medicine/Dermatology",
+      "start": "DISCONTINUE",
+      "refills": 0,
+      "status": "DISCONTINUED"
     },
     {
-      "id": "med-2",
-      "name": "Cyclosporine",
-      "dose": "3mg/kg/day",
-      "route": "IV",
-      "frequency": "SJS treatment",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cyclosporine 3mg/kg/day \u2014 T-cell inhibition",
+      "sig": "Inhibits keratinocyte apoptosis pathway \u2014 may halt disease progression if started early.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "IV Fluids",
-      "dose": "LR",
-      "route": "IV",
-      "frequency": "Fluid resuscitation",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Amniotic membrane transplantation \u2014 bilateral eyes",
+      "sig": "Applied by ophthalmology \u2014 provides anti-inflammatory substrate, reduces symblepharon, preserves cornea.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 procedure"
     },
     {
-      "id": "med-4",
-      "name": "Morphine PCA",
-      "dose": "",
-      "route": "IV",
-      "frequency": "Pain management",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "NG tube enteral nutrition \u2014 35-40 kcal/kg/day",
+      "sig": "High-calorie, high-protein formula. Start within 24h of ICU admission.",
+      "prescriber": "Nutrition/Burn Unit",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -953,7 +935,7 @@ window.EMR_DATA = {
       "bp": "102/62",
       "hr": "104",
       "rr": "20",
-      "temp": "38.4°C",
+      "temp": "38.4\u00b0C",
       "spo2": "96%",
       "pain": "8/10"
     }
@@ -965,7 +947,7 @@ window.EMR_DATA = {
       "date": "03/02/2026",
       "provider": "Dr. Attending",
       "cc": "24yo HIV+ female with SJS/TEN overlap (15% BSA) 14 days after starting TMP-SMX prophylaxis",
-      "hpi": "24F newly diagnosed HIV (CD4 180, VL 42,000) started on TMP-SMX for PCP prophylaxis 14 days ago. Developed targetoid rash → epidermal detachment now at 15% BSA (SJS/TEN overlap zone). Oral erosions present but no ocular involvement yet. HIV patients have 100x higher risk of sulfa drug SJS. NOW has 3 converging crises: (1) HIV requiring treatment, (2) SJS requiring treatment, (3) Fear of all medications. Alternative PCP prophylaxis needed — dapsone (check G6PD first), atovaquone, or inhaled pentamidine.",
+      "hpi": "24F newly diagnosed HIV (CD4 180, VL 42,000) started on TMP-SMX for PCP prophylaxis 14 days ago. Developed targetoid rash \u2192 epidermal detachment now at 15% BSA (SJS/TEN overlap zone). Oral erosions present but no ocular involvement yet. HIV patients have 100x higher risk of sulfa drug SJS. NOW has 3 converging crises: (1) HIV requiring treatment, (2) SJS requiring treatment, (3) Fear of all medications. Alternative PCP prophylaxis needed \u2014 dapsone (check G6PD first), atovaquone, or inhaled pentamidine.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -973,121 +955,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-226203",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "SJS/TEN Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "3.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "98",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "SCORTEN",
+          "value": "2",
+          "unit": "/7",
+          "ref": "Score 2 = ~12% mortality",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.2",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "BSA detachment",
+          "value": "15",
+          "unit": "%",
+          "ref": "10-30% = overlap",
+          "flag": "H"
         },
         {
-          "name": "SJS + HIV",
-          "results": [
-            {
-              "test": "CD4 count",
-              "value": "180",
-              "unit": "cells/µL",
-              "range": ">500",
-              "flag": "L"
-            },
-            {
-              "test": "HIV viral load",
-              "value": "42,000",
-              "unit": "copies/mL",
-              "range": "<20",
-              "flag": "H"
-            },
-            {
-              "test": "SCORTEN",
-              "value": "2 (3.2% mortality)",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            },
-            {
-              "test": "Granulysin",
-              "value": "Elevated",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            }
-          ]
+          "test": "Albumin",
+          "value": "2.6",
+          "unit": "g/dL",
+          "ref": "3.5-5.0",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
+        },
+        {
+          "test": "CRP",
+          "value": "168",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
         }
       ]
     }
@@ -1107,11 +1011,11 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "HIV positive — started Bactrim prophylaxis, SJS at day 14"
+      "HIV positive \u2014 started Bactrim prophylaxis, SJS at day 14"
     ],
     [
       "Issue",
-      "Sulfa drugs are first-line PCP prophylaxis in HIV — now needs alternatives"
+      "Sulfa drugs are first-line PCP prophylaxis in HIV \u2014 now needs alternatives"
     ],
     [
       "Severity",
@@ -1119,7 +1023,7 @@ window.EMR_DATA = {
     ],
     [
       "Adherence",
-      "New HIV diagnosis — overwhelmed, now terrified of medications"
+      "New HIV diagnosis \u2014 overwhelmed, now terrified of medications"
     ]
   ],
   "references": [
@@ -1192,19 +1096,18 @@ window.EMR_DATA = {
       "Conjunctival and ocular examination": "Mild conjunctival erythema and irritation, no corneal involvement or severe ocular complications noted",
       "Lymph node palpation": "Mild cervical and axillary lymphadenopathy, mobile and tender",
       "Assessment for Nikolsky sign": "Positive Nikolsky sign - lateral pressure causes separation of epidermis",
-      "Temperature and vital signs assessment": "Febrile at 38.4°C, tachycardic at 104 bpm, blood pressure 102/62 suggesting mild dehydration",
+      "Temperature and vital signs assessment": "Febrile at 38.4\u00b0C, tachycardic at 104 bpm, blood pressure 102/62 suggesting mild dehydration",
       "Respiratory examination": "Clear breath sounds bilaterally, no respiratory distress or pulmonary involvement",
       "Cardiac examination": "Tachycardic but regular rhythm, no murmurs or gallops",
       "Evaluation of hydration status": "Signs of mild dehydration with dry mucous membranes, poor skin turgor in unaffected areas"
     },
     "ddxTargets": [
-      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis overlap (correct diagnosis)",
-      "Drug-induced hypersensitivity syndrome (DRESS)",
-      "Erythema multiforme major",
-      "Staphylococcal scalded skin syndrome",
-      "Necrotizing fasciitis",
-      "Viral exanthem with secondary bacterial infection",
-      "Pemphigus vulgaris or bullous pemphigoid"
+      "SJS/TEN overlap \u2014 TMP-SMX, mucosal + skin detachment (correct)",
+      "EM major \u2014 true 3-zone targets, <10% BSA; this has atypical targets and >10% detachment",
+      "Staphylococcal scalded skin \u2014 children, no mucosal involvement, superficial cleavage plane",
+      "Drug hypersensitivity exanthem without detachment \u2014 no Nikolsky sign, BSA not detaching",
+      "DRESS \u2014 eosinophilia, lymphadenopathy, systemic organs; no epidermal detachment",
+      "Fixed drug eruption \u2014 localized, recurrent at same site; not generalized"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on HIV status and assuming all symptoms are HIV-related rather than recognizing the severe drug reaction requiring immediate intervention",
@@ -1214,7 +1117,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This young woman has a new HIV diagnosis and developed a rash after starting prophylactic antibiotics. What key features in the history would help you distinguish between a simple drug rash and a more serious condition? Think about the timeline, morphology, and associated symptoms that would be concerning.",
       "phase5": "You've identified targetoid lesions with significant epidermal detachment and mucous membrane involvement. What does the 15% body surface area involvement tell you about classification? How does this change your urgency and management approach, particularly in an immunocompromised patient?",
-      "finalDebrief": "This case illustrates the challenge of SJS/TEN overlap in HIV patients who need sulfa-based PCP prophylaxis. The 15% BSA puts her in the overlap zone between SJS and TEN. Key learning points include recognizing the clinical progression from targetoid lesions to epidermal detachment, the psychological impact of severe drug reactions in newly diagnosed HIV patients, and the need for alternative PCP prophylaxis options like dapsone or atovaquone."
+      "finalDebrief": "This case illustrates the challenge of SJS/TEN overlap in HIV patients who need sulfa-based PCP prophylaxis. The 15% BSA puts her in the overlap zone between SJS and TEN. Key learning points include recognizing the clinical progression from targetoid lesions to epidermal detachment, the psychological impact of severe drug reactions in newly diagnosed HIV patients, and the need for alternative PCP prophylaxis options like dapsone or atovaquone.",
+      "final": "Diagnosis: SJS/TEN \u2014 sulfonamide (TMP-SMX). Key learning: (1) Sulfonamides are among the most common causes of SJS/TEN worldwide \u2014 TMP-SMX, sulfasalazine, sulfadiazine. Other major culprits: allopurinol (#1 worldwide), aromatic anticonvulsants (carbamazepine, phenytoin, lamotrigine), NSAIDs (oxicam class), nevirapine. (2) Nikolsky sign in TEN: gentle lateral pressure on skin causes epidermal separation. Positive in TEN and SSSS but NOT in EM or drug rash without detachment. Demonstrates fragile dermo-epidermal junction. (3) Wound care principles: treat as partial-thickness burn \u2014 non-adherent dressings (Mepitel, Mepilex), daily gentle wound assessment, no forceful debridement of viable but detached skin. Temperature regulation (patient easily loses heat through denuded skin \u2014 warm room, warm IV fluids). (4) Infection monitoring: the primary cause of mortality in TEN after the acute phase is sepsis from loss of skin barrier. Daily blood cultures, wound cultures, low threshold for empiric antibiotics with clinical deterioration. (5) Long-term sequelae: ocular (vision loss, dry eye, photophobia), oral (xerostomia, mucosal scarring), genital (stenosis), pulmonary (bronchiectasis from bronchial mucosal involvement), skin (post-inflammatory dyspigmentation, nail loss). Long-term multidisciplinary follow-up required."
     }
+  },
+  "meta": {
+    "diagnosis": "SJS/TEN \u2014 Sulfonamide-Induced, Ophthalmologic Emergency, Burn Unit Protocol",
+    "caseId": "sjsten-overlap-v2"
   }
 };

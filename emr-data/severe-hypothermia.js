@@ -1,4 +1,4 @@
-/* emr-data/severe-hypothermia.js — EMR case data for Severe Accidental Hypothermia */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Jasmine Thompson",
@@ -15,33 +15,70 @@ window.EMR_DATA = {
     "address": "9829 Walnut Dr, Baltimore, MD 21206",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Karen Liu, DO",
-    "pharmacy": "Walmart Pharmacy — Pines Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Thomas Hill",
       "phone": "(713) 555-9796",
       "relationship": "Adult Child"
     },
-    "chiefComplaint": "EMS report: 'Found unresponsive in alley, ambient temp 18°F. Appears homeless. Slow pulse.' No specific pain reported — global obtundation",
+    "chiefComplaint": "EMS report: 'Found unresponsive in alley, ambient temp 18\u00b0F. Appears homeless. Slow pulse.' No specific pain reported \u2014 global obtundation",
     "diagnosis": "Severe Accidental Hypothermia"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Unknown — patient unidentified. Track marks on bilateral arms suggest IV drug use history. Appears malnourished. Possible chronic alcohol use.",
+      "problem": "Severe hypothermia \u2014 core temperature 28\u00b0C, altered consciousness",
+      "icd": "T68.XXXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "David Chen, 38M \u2014 found outdoors in winter, estimated exposure 6h. GCS 9. Temperature 28\u00b0C rectal. HR 38, AF on ECG."
+    },
+    {
+      "problem": "Hypothermic cardiac arrhythmia \u2014 atrial fibrillation with slow rate",
+      "icd": "I48.19",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "AF is expected at <30\u00b0C \u2014 do not cardiovert or give antiarrhythmics for hypothermic AF. Rewarm first."
+    },
+    {
+      "problem": "Do not diagnose death until warm and dead \u2014 core principle",
+      "icd": "T68.XXXA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "ECMO-mediated rewarming can save patients with cardiac arrest from hypothermia with potassium <12 mmol/L."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Unknown",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Active external rewarming \u2014 warming blankets, warm IV fluids (42\u00b0C)",
+      "sig": "Warm IV fluids, warming blankets, warming mattress. Target: raise core temp 1-2\u00b0C/hour. Avoid sudden warming of extremities before core (afterdrop).",
+      "prescriber": "ED/ICU",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Warm humidified oxygen \u2014 inhaled rewarming adjunct",
+      "sig": "Inhaled heated humidified oxygen (42-46\u00b0C) \u2014 provides direct core rewarming via airway. Used for moderate-severe hypothermia.",
+      "prescriber": "Respiratory/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "ECMO preparation \u2014 if cardiac arrest or refractory",
+      "sig": "Extracorporeal membrane oxygenation \u2014 the definitive rewarming method for hypothermic cardiac arrest. Potassium <12 mEq/L = ECMO candidate.",
+      "prescriber": "ICU/Cardiothoracic",
+      "start": "2024",
+      "refills": 0,
+      "status": "Standby \u2014 activate if arrest"
+    },
+    {
+      "name": "NO antiarrhythmics, NO cardioversion for hypothermic AF",
+      "sig": "Hypothermic AF is expected and will spontaneously convert with rewarming. Antiarrhythmics are ineffective and proarrhythmic at <30\u00b0C.",
+      "prescriber": "ICU",
+      "start": "DO NOT GIVE",
+      "refills": 0,
+      "status": "HOLD \u2014 rewarm first"
     }
   ],
   "allergies": [
@@ -56,11 +93,11 @@ window.EMR_DATA = {
     {
       "date": "03/03/2026",
       "time": "07:31",
-      "bp": "78/50 (difficult to obtain — vasoconstriction)",
+      "bp": "78/50 (difficult to obtain \u2014 vasoconstriction)",
       "hr": "34 (bradycardia)",
       "rr": "8 (slow, shallow)",
-      "temp": "82.4°F (28°C) rectal — core temp by esophageal probe preferred",
-      "spo2": "Unable to obtain (vasoconstriction — pulse ox unreliable in hypothermia)",
+      "temp": "82.4\u00b0F (28\u00b0C) rectal \u2014 core temp by esophageal probe preferred",
+      "spo2": "Unable to obtain (vasoconstriction \u2014 pulse ox unreliable in hypothermia)",
       "pain": "/10",
       "bmi": "27",
       "weight": "82 kg"
@@ -72,229 +109,64 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "EMS report: 'Found unresponsive in alley, ambient temp 18°F. Appears homeless. Slow pulse.' No specific pain reported — global obtundation",
-      "hpi": "Jasmine Thompson is a 62-year-old female presenting with ems report: 'found unresponsive in alley, ambient temp 18°f. appears homeless. slow pulse.' no specific pain reported — global obtundation. Past medical history includes Unknown — patient unidentified. Track marks on bilateral arms suggest IV drug use history. Appears malnourished. Possible chronic alcohol use.. See chart for full details.",
+      "cc": "EMS report: 'Found unresponsive in alley, ambient temp 18\u00b0F. Appears homeless. Slow pulse.' No specific pain reported \u2014 global obtundation",
+      "hpi": "Jasmine Thompson is a 62-year-old female presenting with ems report: 'found unresponsive in alley, ambient temp 18\u00b0f. appears homeless. slow pulse.' no specific pain reported \u2014 global obtundation. Past medical history includes Unknown \u2014 patient unidentified. Track marks on bilateral arms suggest IV drug use history. Appears malnourished. Possible chronic alcohol use.. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Severe Accidental Hypothermia — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Severe Accidental Hypothermia \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-142513",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Hypothermia Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "9",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "39",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "300",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Core temperature (rectal)",
+          "value": "28",
+          "unit": "\u00b0C",
+          "ref": "36.1-37.2",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "5.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "98",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "15",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "58",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Potassium",
+          "value": "4.8",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Core Temperature",
-              "value": "82.4°F (28°C)",
-              "unit": "",
-              "range": "97-99°F",
-              "flag": "H"
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.22",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "4.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Ethanol Level",
-              "value": "186",
-              "unit": "mg/dL",
-              "range": "0",
-              "flag": "H"
-            },
-            {
-              "test": "CK Total",
-              "value": "1,200",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            },
-            {
-              "test": "Amylase",
-              "value": "180",
-              "unit": "U/L",
-              "range": "30-110",
-              "flag": "H"
-            },
-            {
-              "test": "Urine Drug Screen",
-              "value": "Positive: opioids, benzodiazepines",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            }
-          ]
+          "test": "ABG \u2014 pH (temperature-corrected)",
+          "value": "7.31",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "188",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "ABG \u2014 PaO2",
+          "value": "72",
+          "unit": "mmHg",
+          "ref": "80-100",
+          "flag": "L"
+        },
+        {
+          "test": "Coagulation \u2014 PT/INR",
+          "value": "1.6",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-252798",
-      "clinical": "EMS report: 'Found unresponsive in alley, ambient temp 18°F. Appears homeless. Slow pulse.' No specific pain reported — global obtundation",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial pathology. No hemorrhage. Mild generalized atrophy.",
-      "impression": "Normal — AMS from hypothermia and intoxication, not structural",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-190213",
-      "clinical": "EMS report: 'Found unresponsive in alley, ambient temp 18°F. Appears homeless. Slow pulse.' No specific pain reported — global obtundation",
-      "technique": "Standard protocol",
-      "findings": "Low lung volumes. No focal consolidation. No aspiration pattern currently.",
-      "impression": "Low volumes from shallow breathing. Monitor for aspiration pneumonia.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-707385",
-      "clinical": "EMS report: 'Found unresponsive in alley, ambient temp 18°F. Appears homeless. Slow pulse.' No specific pain reported — global obtundation",
-      "technique": "Standard 12-lead",
-      "findings": "Marked bradycardia at 34 bpm. OSBORN (J) WAVES — pathognomonic for hypothermia (positive deflection at J-point, most prominent in inferior and lateral leads). Prolonged PR, QRS, and QT intervals. Atrial fibrillation (slow ventricular response). Baseline artifact from shivering/tremor",
-      "impression": "Osborn waves with slow AFib — classic hypothermic ECG. Cardiac rhythm is unstable — handle patient GENTLY (even minimal stimulation can trigger ventricular fibrillation in severe hypothermia).",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -321,19 +193,19 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Tobacco",
-      "Unknown — nicotine-stained fingers"
+      "Unknown \u2014 nicotine-stained fingers"
     ],
     [
       "Alcohol",
-      "Possible — alcohol odor on breath (alcohol causes peripheral vasodilation → faster heat loss)"
+      "Possible \u2014 alcohol odor on breath (alcohol causes peripheral vasodilation \u2192 faster heat loss)"
     ],
     [
       "Drugs",
-      "Track marks suggest IV drug use (possible heroin/fentanyl — opioids impair thermoregulation)"
+      "Track marks suggest IV drug use (possible heroin/fentanyl \u2014 opioids impair thermoregulation)"
     ],
     [
       "Occupation",
-      "Unknown — appears homeless"
+      "Unknown \u2014 appears homeless"
     ],
     [
       "Living",
@@ -385,7 +257,7 @@ window.EMR_DATA = {
       "Assessment for trauma or injuries from falls"
     ],
     "examFindings": {
-      "Core temperature measurement": "Rectal temperature 82.4°F (28°C), confirming severe hypothermia",
+      "Core temperature measurement": "Rectal temperature 82.4\u00b0F (28\u00b0C), confirming severe hypothermia",
       "Cardiovascular exam including heart rate and rhythm": "Heart rate 34 bpm, regular but bradycardic. Blood pressure 78/50. Weak peripheral pulses due to vasoconstriction.",
       "Neurologic assessment including mental status": "Altered mental status with confusion, slowed speech, and decreased responsiveness. Reflexes diminished.",
       "Respiratory exam": "Respirations slow and shallow at 8-10 per minute. Lung sounds difficult to assess due to shivering.",
@@ -395,13 +267,12 @@ window.EMR_DATA = {
       "Assessment for trauma or injuries from falls": "Minor abrasions on knees and hands consistent with falls. No obvious major trauma."
     },
     "ddxTargets": [
-      "Severe hypothermia (correct diagnosis)",
-      "Opioid overdose",
-      "Alcohol intoxication",
-      "Sepsis with shock",
-      "Diabetic ketoacidosis",
-      "Stroke or intracranial event",
-      "Acute myocardial infarction"
+      "Severe hypothermia \u2014 core temp 28\u00b0C, altered consciousness, hypothermic AF (correct)",
+      "Stroke mimicking hypothermia \u2014 altered consciousness, but rectal temperature is definitive",
+      "Sepsis with hypothermia \u2014 temperature paradox; consider sepsis workup but treat hypothermia simultaneously",
+      "Drug toxicity (opioid, alcohol) \u2014 intoxication lowers temperature; toxicology screen ordered",
+      "Hypothyroidism (myxedema coma) \u2014 extreme hypothyroidism causes hypothermia; TSH + thyroid panel ordered",
+      "Addisonian crisis \u2014 electrolyte and cortisol workup concurrently"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on substance use history and homeless status, potentially delaying recognition of life-threatening hypothermia",
@@ -409,9 +280,14 @@ window.EMR_DATA = {
       "availabilityBias": "May focus on more commonly seen overdose presentations rather than considering hypothermia in homeless populations during cold weather"
     },
     "coachPrompts": {
-      "phase2": "You've identified several concerning findings in this unresponsive patient found in freezing weather. What key vital sign measurement is essential in this environmental context, and how might the patient's social situation and the ambient temperature of 18°F guide your initial assessment priorities?",
-      "phase5": "Now that you've identified severe hypothermia with a core temperature of 82.4°F and bradycardia, what are the immediate life-threatening complications you're most concerned about? How do the track marks and possible substance use history factor into your management priorities compared to the hypothermia?",
-      "finalDebrief": "This case highlights how environmental factors and social determinants can create life-threatening medical emergencies. The key was recognizing that the combination of altered mental status, bradycardia, and cold exposure required immediate core temperature assessment. How did your differential diagnosis evolve from considering overdose to recognizing severe hypothermia as the primary problem requiring urgent rewarming?"
+      "phase2": "You've identified several concerning findings in this unresponsive patient found in freezing weather. What key vital sign measurement is essential in this environmental context, and how might the patient's social situation and the ambient temperature of 18\u00b0F guide your initial assessment priorities?",
+      "phase5": "Now that you've identified severe hypothermia with a core temperature of 82.4\u00b0F and bradycardia, what are the immediate life-threatening complications you're most concerned about? How do the track marks and possible substance use history factor into your management priorities compared to the hypothermia?",
+      "finalDebrief": "This case highlights how environmental factors and social determinants can create life-threatening medical emergencies. The key was recognizing that the combination of altered mental status, bradycardia, and cold exposure required immediate core temperature assessment. How did your differential diagnosis evolve from considering overdose to recognizing severe hypothermia as the primary problem requiring urgent rewarming?",
+      "final": "Diagnosis: severe hypothermia \u2014 active rewarming. Key learning: (1) Hypothermia classification: mild 32-35\u00b0C (shivering, confusion), moderate 28-32\u00b0C (shivering stops, decreased consciousness, AF, J-waves on ECG), severe <28\u00b0C (loss of consciousness, ventricular fibrillation risk, apparent death). (2) Osborn (J) wave: positive deflection at the J-point (junction of QRS and ST segment) \u2014 pathognomonic for hypothermia. More pronounced with lower temperatures. (3) 'Not dead until warm and dead': the critical principle. Patients with hypothermic cardiac arrest may be fully resuscitable. The threshold: potassium <12 mEq/L = ECMO candidate (hyperkalemia from cell death indicates irreversible injury; K+ >12 = not survivable with rewarming). Successful resuscitations after >45 min of cardiac arrest from hypothermia are well-documented. (4) Rewarming strategy by severity: mild = passive rewarming (blankets, warm room). Moderate = active external rewarming (warming blankets, warm fluids). Severe = active internal rewarming (warm IV fluids, warm humidified O2, bladder/pleural irrigation). Cardiac arrest = ECMO rewarming. (5) Afterdrop: cold blood from extremities returning to core after external rewarming causes further drop in core temperature. Prioritize core rewarming over peripheral warming. Warm IV fluids and warm humidified oxygen target the core directly."
     }
+  },
+  "meta": {
+    "diagnosis": "Severe Hypothermia \u2014 Core Temperature 28\u00b0C, Active Rewarming, ECMO if Cardiac Arrest",
+    "caseId": "severe-hypothermia"
   }
 };

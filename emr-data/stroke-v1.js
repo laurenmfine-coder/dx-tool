@@ -1,4 +1,4 @@
-/* emr-data/stroke-v1.js — Auto-generated EMR case data for Acute Ischemic Stroke */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Chen",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "1145 Elm St, Memphis, TN 38114",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Karen Chen",
       "phone": "(513) 555-6644",
@@ -26,70 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Atrial Fibrillation (not on anticoagulation)",
+      "problem": "Large vessel occlusion stroke \u2014 right MCA, NIHSS 20",
+      "icd": "I63.512",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "James Wilson, 74M \u2014 sudden left hemiplegia + gaze deviation + aphasia. NIHSS 20. CT perfusion: large mismatch. LVO on CTA."
     },
     {
-      "id": "prob-2",
-      "description": "Hypertension",
+      "problem": "Thrombectomy candidate \u2014 NIHSS 20, ASPECTS 8, LKW 8 hours ago",
+      "icd": "I63.512",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Extended window (up to 24h) if CT perfusion shows penumbra > core mismatch. DAWN/DEFUSE-3 trial criteria."
     },
     {
-      "id": "prob-3",
-      "description": "Hyperlipidemia",
+      "problem": "tPA not given \u2014 anticoagulated on apixaban (last dose 14h ago)",
+      "icd": "I63.512",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Prior TIA",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "On apixaban \u2014 tPA contraindicated within 48h of DOAC. Proceed directly to thrombectomy."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Metoprolol Tartrate",
-      "dose": "50mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Michelle Foster, MD"
+      "name": "Mechanical thrombectomy \u2014 activate neurointerventional radiology immediately",
+      "sig": "LVO + salvageable penumbra on CT perfusion = thrombectomy. No tPA required or indicated here. Time to groin puncture is the key metric.",
+      "prescriber": "Neurology/Neuroradiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 IR activated"
     },
     {
-      "id": "med-2",
-      "name": "Lisinopril",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Aspirin 325mg via NG tube \u2014 after thrombectomy (not before)",
+      "sig": "Antiplatelet started after procedure \u2014 not before thrombectomy (bleeding risk during procedure).",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "After thrombectomy"
     },
     {
-      "id": "med-3",
-      "name": "Atorvastatin",
-      "dose": "80mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wu, MD"
+      "name": "Atorvastatin 80mg via NG tube QHS \u2014 start immediately",
+      "sig": "High-intensity statin regardless of baseline LDL \u2014 reduces recurrent stroke.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Aspirin",
-      "dose": "325mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "BP management \u2014 permissive hypertension after thrombectomy",
+      "sig": "Allow BP up to 180/105 before thrombectomy (maintains penumbral perfusion). After thrombectomy with reperfusion: target <180/105 to prevent hyperperfusion hemorrhage.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 post-procedure protocol"
     }
   ],
   "allergies": [
@@ -107,7 +96,7 @@ window.EMR_DATA = {
       "bp": "188/102",
       "hr": "92",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "97%",
       "pain": "0/10",
       "bmi": "32",
@@ -123,165 +112,67 @@ window.EMR_DATA = {
       "cc": "Sudden left-sided weakness and slurred speech",
       "hpi": "Robert Chen is a 78-year-old male presenting with sudden left-sided weakness and slurred speech. Past medical history includes Atrial Fibrillation (not on anticoagulation), Hypertension, Hyperlipidemia, Prior TIA. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Ischemic Stroke — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Ischemic Stroke \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-697349",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Acute Stroke Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "NIHSS",
+          "value": "20",
+          "unit": "points",
+          "ref": "0 = normal",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "168",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Glucose",
+          "value": "138",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Inr",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            }
-          ]
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "Platelet count",
+          "value": "198",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        },
+        {
+          "test": "LDL",
+          "value": "112",
+          "unit": "mg/dL",
+          "ref": "<70 for stroke",
+          "flag": "H"
+        },
+        {
+          "test": "ASPECTS score (CT)",
+          "value": "8",
+          "unit": "/10",
+          "ref": "\u22656 = good territory",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-914320",
-      "clinical": "Sudden left-sided weakness and slurred speech",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial hemorrhage. No midline shift. Chronic microvascular ischemic changes.",
-      "impression": "No hemorrhage. Cannot exclude early ischemic changes. Consider CTA and tPA.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/01/2026",
-      "study": "CTA Head/Neck",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-402472",
-      "clinical": "Sudden left-sided weakness and slurred speech",
-      "technique": "Standard protocol",
-      "findings": "Acute occlusion of right middle cerebral artery M1 segment. No significant carotid stenosis.",
-      "impression": "Right MCA M1 occlusion. tPA candidate if within window. Consider thrombectomy.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Head/CTA/CT Perfusion Multimodal",
+      "indication": "Acute LVO stroke",
+      "findings": "CTA: right MCA M1 occlusion. CT perfusion: core infarct 18mL, penumbra 118mL \u2014 mismatch ratio 6.5x. ASPECTS 8. No hemorrhage.",
+      "impression": "Right MCA LVO with favorable penumbra-to-core mismatch. Thrombectomy candidate in extended window (LKW 8h). Activate IR immediately."
     }
   ],
   "immunizations": [
@@ -384,13 +275,12 @@ window.EMR_DATA = {
       "Cardiac examination for irregular rhythm": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs"
     },
     "ddxTargets": [
-      "Acute ischemic stroke (correct diagnosis)",
-      "Transient ischemic attack (TIA)",
-      "Intracerebral hemorrhage",
-      "Subdural hematoma",
-      "Brain tumor with acute presentation",
-      "Hypoglycemia with focal neurologic symptoms",
-      "Complex migraine with aura"
+      "LVO stroke \u2014 thrombectomy candidate, extended window (correct)",
+      "Lacunar infarct \u2014 small vessel, no LVO on CTA; NIHSS 20 is too high for lacunar",
+      "TIA \u2014 symptoms persisting; NIHSS 20 is not TIA",
+      "Hypoglycemic hemiplegia \u2014 glucose 138, not hypoglycemic",
+      "Hemiplegic migraine \u2014 no prior history, NIHSS 20 severity, LVO on CTA",
+      "Brain mass with Todd's paralysis \u2014 no prior seizure, CT perfusion pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's history of TIA and assuming this is another transient event, potentially delaying urgent stroke intervention",
@@ -400,7 +290,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some concerning possibilities in your differential. Given this patient's atrial fibrillation history and current presentation, what key historical details and timeline information will help you distinguish between your top differentials? What would make you most concerned about stroke versus TIA?",
       "phase5": "Your examination reveals significant focal neurological deficits. How does the NIHSS scoring and persistence of symptoms over 2 hours change your assessment? What does the combination of atrial fibrillation, no anticoagulation, and these findings suggest about the underlying pathophysiology?",
-      "finalDebrief": "This case highlights acute ischemic stroke in the setting of untreated atrial fibrillation. Notice how the patient's prior TIA history could have led to anchoring bias, but the severity and persistence of symptoms distinguished this from a transient event. What does this teach you about anticoagulation decisions in atrial fibrillation and stroke prevention?"
+      "finalDebrief": "This case highlights acute ischemic stroke in the setting of untreated atrial fibrillation. Notice how the patient's prior TIA history could have led to anchoring bias, but the severity and persistence of symptoms distinguished this from a transient event. What does this teach you about anticoagulation decisions in atrial fibrillation and stroke prevention?",
+      "final": "Diagnosis: LVO stroke \u2014 thrombectomy. Key learning: (1) LVO definition: occlusion of a proximal intracranial artery (ICA, MCA M1, basilar) causing a large-territory stroke. Requires CTA or MRA for detection. NIHSS \u22656 in the right clinical context should prompt CTA. (2) Thrombectomy window extension: DAWN trial (2018) and DEFUSE-3 trial (2018) extended thrombectomy to 16-24h using CT perfusion to identify salvageable penumbra. Key criterion: mismatch (penumbra significantly larger than core infarct). This revolutionized stroke care \u2014 patients presenting late with LVO and favorable mismatch can still be treated. (3) tPA + thrombectomy: when tPA is NOT contraindicated, give tPA AND proceed to thrombectomy ('drip and ship' or 'mothership' approach). tPA while catheter is being prepared does not reduce thrombectomy efficacy and may improve partial reperfusion. (4) ASPECTS score: Alberta Stroke Program Early CT Score \u2014 10 points for right MCA territory. Subtract 1 point for each region with early ischemic change. ASPECTS \u22656 = favorable anatomy for thrombectomy. ASPECTS <6 = large core infarct, lower thrombectomy benefit. (5) Hyperperfusion hemorrhage: after successful recanalization, the ischemic territory suddenly receives high blood flow \u2014 BP management critical. Target SBP <180/105 after reperfusion. Headache + seizure post-thrombectomy = hyperperfusion \u2014 emergency head CT."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Ischemic Stroke \u2014 Large Vessel Occlusion, Mechanical Thrombectomy Within 24 Hours",
+    "caseId": "stroke-v1"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/severe-pancreatitis.js — EMR case data for Acute Necrotizing Pancreatitis (Gallstone-Induced) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Sergio Moreno",
@@ -15,63 +15,70 @@ window.EMR_DATA = {
     "address": "2077 Larkspur Ln, Baltimore, MD 21216",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Walgreens — Pines Blvd",
+    "pharmacy": "Walgreens \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Brenda Stewart",
       "phone": "(415) 555-4777",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "Worst stomach pain of my life Epigastric — boring through to the back",
+    "chiefComplaint": "Worst stomach pain of my life Epigastric \u2014 boring through to the back",
     "diagnosis": "Acute Necrotizing Pancreatitis (Gallstone-Induced)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Gallstones",
+      "problem": "Severe acute pancreatitis \u2014 BISAP score 4, organ failure",
+      "icd": "K85.10",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Carmen Lopez, 48F \u2014 epigastric pain radiating to back, nausea x2 days. Lipase 4800. SIRS x2 criteria. Creatinine rising."
     },
     {
-      "id": "prob-2",
-      "description": "Obesity",
+      "problem": "Gallstone pancreatitis \u2014 cholelithiasis on ultrasound",
+      "icd": "K85.12",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Gallstones on US + elevated bilirubin + elevated AST \u2014 gallstone migration through common bile duct is the trigger."
     },
     {
-      "id": "prob-3",
-      "description": "Hypertension",
+      "problem": "Acute kidney injury \u2014 prerenal from third-spacing and SIRS",
+      "icd": "N17.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Type 2 Diabetes",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Creatinine 2.4 from baseline 0.9. Aggressive IVF resuscitation. Monitor urine output hourly."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Metformin",
-      "dose": "1000mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "Lactated Ringer's 250-500mL/h \u2014 aggressive IVF",
+      "sig": "LR preferred over NS in pancreatitis \u2014 reduces acidosis and may reduce SIRS severity. Target urine output >0.5 mL/kg/h.",
+      "prescriber": "GI/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Amlodipine",
-      "dose": "10mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Morphine 2-4mg IV q4h PRN \u2014 pain control",
+      "sig": "IV opioid for pain. Myth: morphine worsens pancreatitis via Sphincter of Oddi \u2014 not supported by evidence. Use appropriate analgesia.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Early enteral nutrition \u2014 start NG feeds within 24-48h if unable to eat",
+      "sig": "Enteral nutrition maintains gut barrier, reduces bacterial translocation, improves outcomes over TPN in severe pancreatitis. Do NOT make patient NPO for days.",
+      "prescriber": "GI/Nutrition",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 NG feeds"
+    },
+    {
+      "name": "ERCP \u2014 if choledocholithiasis confirmed or cholangitis develops",
+      "sig": "Urgent ERCP within 24-48h if concurrent cholangitis (Charcot's triad) or biliary obstruction. Not indicated for predicted severe pancreatitis alone.",
+      "prescriber": "GI",
+      "start": "2024",
+      "refills": 0,
+      "status": "Hold \u2014 pending MRCP/clinical assessment"
     }
   ],
   "allergies": [
@@ -89,7 +96,7 @@ window.EMR_DATA = {
       "bp": "142/88",
       "hr": "112",
       "rr": "22",
-      "temp": "38.0°C",
+      "temp": "38.0\u00b0C",
       "spo2": "94%",
       "pain": "10/10",
       "bmi": "25",
@@ -102,241 +109,77 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Worst stomach pain of my life Epigastric — boring through to the back",
-      "hpi": "Sergio Moreno is a 60-year-old male presenting with worst stomach pain of my life epigastric — boring through to the back. Past medical history includes Gallstones, Obesity, Hypertension, Type 2 Diabetes. See chart for full details.",
+      "cc": "Worst stomach pain of my life Epigastric \u2014 boring through to the back",
+      "hpi": "Sergio Moreno is a 60-year-old male presenting with worst stomach pain of my life epigastric \u2014 boring through to the back. Past medical history includes Gallstones, Obesity, Hypertension, Type 2 Diabetes. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Necrotizing Pancreatitis (Gallstone-Induced) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Necrotizing Pancreatitis (Gallstone-Induced) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-145167",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Severe Pancreatitis Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "16.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "34",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "165",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Lipase",
+          "value": "4800",
+          "unit": "U/L",
+          "ref": "<60",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "136",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "98",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "71",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "ALT",
+          "value": "280",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lipase",
-              "value": "4,200",
-              "unit": "U/L",
-              "range": "10-140",
-              "flag": "H"
-            },
-            {
-              "test": "Amylase",
-              "value": "1,800",
-              "unit": "U/L",
-              "range": "30-110",
-              "flag": "H"
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "4.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Direct Bilirubin",
-              "value": "3.6",
-              "unit": "mg/dL",
-              "range": "0.0-0.3",
-              "flag": "H"
-            },
-            {
-              "test": "ALT",
-              "value": "320",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "AST",
-              "value": "280",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "348",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": "H"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "180",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "2.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Total bilirubin",
+          "value": "3.4",
+          "unit": "mg/dL",
+          "ref": "0.1-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "2.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Hematocrit",
+          "value": "48",
+          "unit": "%",
+          "ref": "36-48",
+          "flag": ""
+        },
+        {
+          "test": "WBC",
+          "value": "18.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Calcium",
+          "value": "7.4",
+          "unit": "mg/dL",
+          "ref": "8.5-10.5",
+          "flag": "L"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-262954",
-      "clinical": "Worst stomach pain of my life Epigastric — boring through to the back",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Abdomen/Pelvis with Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-419827",
-      "clinical": "Worst stomach pain of my life Epigastric — boring through to the back",
-      "technique": "Standard protocol",
-      "findings": "ACUTE PANCREATITIS with extensive PERIPANCREATIC FAT STRANDING and FLUID COLLECTIONS. Pancreatic body and tail show AREAS OF NON-ENHANCEMENT consistent with NECROSIS (>30% of gland — necrotizing pancreatitis). Gallbladder distended with multiple gallstones. Common bile duct dilated to 12mm (normal <6mm) with possible distal CBD stone. Left pleural effusion (small). No pseudocyst. No portal vein thrombosis.",
-      "impression": "ACUTE NECROTIZING GALLSTONE PANCREATITIS with >30% glandular necrosis. CBD dilation with probable choledocholithiasis. GI/surgical consultation for ERCP to relieve biliary obstruction. ICU admission recommended given necrotizing disease.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-895191",
-      "clinical": "Worst stomach pain of my life Epigastric — boring through to the back",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 112 bpm. No ST changes",
-      "impression": "Sinus tachycardia — pain and volume depletion",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Abdomen/Pelvis With Contrast \u2014 CECT",
+      "indication": "Severe pancreatitis \u2014 necrosis assessment",
+      "findings": "Pancreatic edema and peripancreatic fat stranding. 30% pancreatic necrosis. No abscess. Gallstones in gallbladder. Common bile duct 7mm \u2014 mild dilation.",
+      "impression": "Moderate-severe necrotizing pancreatitis from gallstones. CTSI (CT Severity Index) 6/10. CBD dilation \u2014 MRCP to assess for choledocholithiasis."
     }
   ],
   "immunizations": [
@@ -370,7 +213,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — 1-2 drinks per week (not a heavy drinker)"
+      "Social \u2014 1-2 drinks per week (not a heavy drinker)"
     ],
     [
       "Drugs",
@@ -432,7 +275,7 @@ window.EMR_DATA = {
       "Pulmonary examination"
     ],
     "examFindings": {
-      "General appearance and vital signs": "Patient appears acutely ill, diaphoretic, and in significant distress. Positioned leaning forward. BP 142/88, HR 112, Temp 38.0°C, SpO2 94%",
+      "General appearance and vital signs": "Patient appears acutely ill, diaphoretic, and in significant distress. Positioned leaning forward. BP 142/88, HR 112, Temp 38.0\u00b0C, SpO2 94%",
       "Abdominal inspection": "Abdomen appears mildly distended, no obvious masses or discoloration visible",
       "Epigastric palpation": "Severe epigastric tenderness with guarding, patient winces and pulls away with gentle palpation",
       "Murphy's sign": "Negative - no arrest of inspiration with palpation under right costal margin",
@@ -444,13 +287,12 @@ window.EMR_DATA = {
       "Pulmonary examination": "Clear to auscultation bilaterally, no respiratory distress"
     },
     "ddxTargets": [
-      "Acute pancreatitis (correct diagnosis)",
-      "Acute cholangitis",
-      "Peptic ulcer disease with perforation",
-      "Myocardial infarction",
-      "Aortic dissection",
-      "Acute cholecystitis",
-      "Gastroesophageal reflux disease"
+      "Gallstone pancreatitis \u2014 lipase 4800, elevated AST/bilirubin, gallstones on US (correct)",
+      "Alcoholic pancreatitis \u2014 no alcohol history; AST/bilirubin pattern more consistent with biliary",
+      "Hypertriglyceridemia pancreatitis \u2014 triglycerides normal",
+      "Peptic ulcer perforation \u2014 lipase can rise, but free air; this is pancreatitis pattern",
+      "Mesenteric ischemia \u2014 lactate normal; different pain pattern; lipase distinguishes",
+      "ERCP-induced pancreatitis \u2014 no prior ERCP"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on gallstone history and assuming cholecystitis despite negative Murphy's sign and atypical pain radiation pattern",
@@ -460,7 +302,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, I see you're thinking about several abdominal conditions. What specific historical questions would help you differentiate between cholecystitis, pancreatitis, and peptic ulcer disease? Think about the classic presentations and what makes each condition unique.",
       "phase5": "Now that you've completed your history and physical, let's think through your findings systematically. You noted severe epigastric pain radiating to the back, negative Murphy's sign, and a family history of both gallstones and pancreatitis. How do these findings help refine your differential diagnosis?",
-      "finalDebrief": "This case illustrates how acute pancreatitis can present with classic boring epigastric pain radiating to the back. Notice how the family history of both gallstones and pancreatitis provided important clues, but the specific pain character and radiation pattern, along with the negative Murphy's sign, helped differentiate this from cholecystitis. What key diagnostic tests would you want to confirm this diagnosis?"
+      "finalDebrief": "This case illustrates how acute pancreatitis can present with classic boring epigastric pain radiating to the back. Notice how the family history of both gallstones and pancreatitis provided important clues, but the specific pain character and radiation pattern, along with the negative Murphy's sign, helped differentiate this from cholecystitis. What key diagnostic tests would you want to confirm this diagnosis?",
+      "final": "Diagnosis: severe gallstone pancreatitis. Key learning: (1) BISAP score (Bedside Index of Severity in Acute Pancreatitis): BUN >25 (+1), Impaired mental status (+1), SIRS criteria \u22652 (+1), Age >60 (+1), Pleural effusion (+1). Score 3-5 = high mortality risk (>15%). This patient: BISAP 4 = severe. (2) Etiology distinction: gallstone = elevated liver enzymes (ALT >3x normal is 95% PPV for gallstones), elevated bilirubin, gallstones on imaging, no alcohol history. ALT >150 IU/L in pancreatitis \u2192 gallstones until proven otherwise. (3) Aggressive fluid resuscitation: 250-500mL/h of LR for first 24h \u2014 reduces pancreatic microcirculation ischemia and systemic SIRS. LR preferred over NS (reduces acidosis). Reassess q4-6h for response. Stop if signs of fluid overload. (4) Enteral nutrition myth: patients with pancreatitis should NOT be kept strictly NPO for days. Early enteral feeding (within 24-48h via NG if unable to eat) reduces complications, maintains gut barrier, reduces infectious complications, and improves outcomes compared to TPN. (5) Antibiotics: NOT indicated for sterile pancreatic necrosis prophylactically. Reserve antibiotics for infected necrosis (fever + CT findings + FNA-positive culture) or concurrent cholangitis. Prophylactic antibiotics do not reduce mortality in pancreatitis."
     }
+  },
+  "meta": {
+    "diagnosis": "Severe Acute Pancreatitis \u2014 Gallstone Etiology, BISAP Score 4, ICU-Level Management",
+    "caseId": "severe-pancreatitis"
   }
 };

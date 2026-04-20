@@ -1,4 +1,4 @@
-/* emr-data/subdural-hematoma.js — EMR case data for Acute-on-Chronic Subdural Hematoma */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Pemberton",
@@ -15,79 +15,70 @@ window.EMR_DATA = {
     "address": "2243 Cottonwood Ave, Columbus, OH 43211",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "Walmart Pharmacy — Pines Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Thomas Mitchell",
       "phone": "(212) 555-6464",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+    "chiefComplaint": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
     "diagnosis": "Acute-on-Chronic Subdural Hematoma"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Atrial fibrillation",
+      "problem": "Chronic subdural hematoma \u2014 bilateral, anticoagulation-related",
+      "icd": "S06.5X9A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Eleanor Walsh, 78F \u2014 on apixaban for AFib. Fell 3 weeks ago, now progressive confusion and gait instability. CT: bilateral crescent-shaped hypodense collections."
     },
     {
-      "id": "prob-2",
-      "description": "Hypertension",
+      "problem": "Anticoagulation management \u2014 apixaban reversal decision",
+      "icd": "S06.5X9A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Andexanet alfa (Andexxa) \u2014 FDA-approved reversal for apixaban and rivaroxaban. Required before neurosurgical drainage."
     },
     {
-      "id": "prob-3",
-      "description": "Falls",
+      "problem": "Anticoagulation restart timing \u2014 high stroke risk (AFib) vs rebleed risk",
+      "icd": "I48.19",
+      "onset": "2020",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Chronic alcohol use",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "BPH",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CHA2DS2-VASc 6 \u2014 very high stroke risk. Restart anticoagulation at 7-14 days post-drainage after neurosurgery clears."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Apixaban",
-      "dose": "5mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "Andexanet alfa (Andexxa) \u2014 apixaban reversal",
+      "sig": "FDA-approved factor Xa inhibitor reversal agent. Given before neurosurgical procedure. Dose depends on timing of last apixaban dose.",
+      "prescriber": "Neurosurgery/Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Lisinopril",
-      "dose": "20mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Burr hole craniotomy \u2014 neurosurgical drainage",
+      "sig": "Bilateral burr holes with irrigation for chronic SDH. Reduces mass effect and improves symptoms. Recurrence rate 10-30%.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 procedure"
     },
     {
-      "id": "med-3",
-      "name": "Tamsulosin",
-      "dose": "0.4mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "Dexamethasone 4mg q6h \u2014 cerebral edema",
+      "sig": "Reduces pericollection edema and may reduce SDH recurrence (used adjunctively).",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Apixaban \u2014 restart 7-14 days post-procedure",
+      "sig": "Discuss timing with neurosurgery. High CHA2DS2-VASc = restart early if surgical hemostasis adequate.",
+      "prescriber": "Cardiology/Neurosurgery",
+      "start": "Hold",
+      "refills": 5,
+      "status": "Hold \u2014 restart 7-14 days post-op"
     }
   ],
   "allergies": [
@@ -105,7 +96,7 @@ window.EMR_DATA = {
       "bp": "162/88",
       "hr": "78 (irregularly irregular)",
       "rr": "16",
-      "temp": "36.9°C",
+      "temp": "36.9\u00b0C",
       "spo2": "97%",
       "pain": "/10",
       "bmi": "24",
@@ -118,192 +109,63 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
-      "hpi": "Walter Pemberton is a 78-year-old male presenting with wife: 'he's not himself — confused and clumsy for 2 weeks, much worse today' bilateral headache, diffuse, dull. Past medical history includes Atrial fibrillation, Hypertension, Falls, Chronic alcohol use, BPH. See chart for full details.",
+      "cc": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+      "hpi": "Walter Pemberton is a 78-year-old male presenting with wife: 'he's not himself \u2014 confused and clumsy for 2 weeks, much worse today' bilateral headache, diffuse, dull. Past medical history includes Atrial fibrillation, Hypertension, Falls, Chronic alcohol use, BPH. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute-on-Chronic Subdural Hematoma — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute-on-Chronic Subdural Hematoma \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-876079",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "SDH Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "5.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "42",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "148",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.5",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "11",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "102",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Anti-Xa level (apixaban)",
+          "value": "0.38",
+          "unit": "IU/mL",
+          "ref": "0 = no drug present",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "INR",
-              "value": "1.1",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Ethanol Level",
-              "value": "0",
-              "unit": "mg/dL",
-              "range": "0",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "11.4",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "Platelets",
+          "value": "168",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-280463",
-      "clinical": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-395248",
-      "clinical": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
-      "technique": "Standard protocol",
-      "findings": "LARGE LEFT-SIDED ACUTE-ON-CHRONIC SUBDURAL HEMATOMA. Mixed-density crescent-shaped collection over the left convexity measuring 18mm maximal thickness. Hyperdense (acute) component layered posteriorly within a hypodense (chronic) collection. MIDLINE SHIFT 11mm to the right. LEFT LATERAL VENTRICLE compressed. Early subfalcine herniation. No subarachnoid hemorrhage. Mild generalized cortical atrophy. Periventricular white matter changes.",
-      "impression": "LARGE ACUTE-ON-CHRONIC LEFT SUBDURAL HEMATOMA with 11mm midline shift and early herniation signs. EMERGENT NEUROSURGICAL CONSULTATION for evacuation. Reverse anticoagulation IMMEDIATELY.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-897573",
-      "clinical": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
-      "technique": "Standard 12-lead",
-      "findings": "Atrial fibrillation at 78 bpm. No ST changes. Normal intervals",
-      "impression": "Chronic AFib — patient on anticoagulation that contributed to SDH",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Head Non-Contrast",
+      "indication": "Progressive confusion 3 weeks after fall",
+      "findings": "Bilateral subdural hypodense (chronic) collections, right > left. Right 15mm maximal thickness, midline shift 5mm rightward. Left 8mm. Mixed density on right suggests chronic with acute-on-chronic component.",
+      "impression": "Bilateral chronic subdural hematomas with mass effect. Neurosurgical evaluation for drainage. Reversal of anticoagulation required pre-operatively."
     }
   ],
   "immunizations": [
@@ -411,13 +273,12 @@ window.EMR_DATA = {
       "Blood pressure in both arms": "Elevated bilaterally: right 162/88, left 158/86"
     },
     "ddxTargets": [
-      "Chronic subdural hematoma (correct diagnosis)",
-      "Acute stroke/TIA",
-      "Normal pressure hydrocephalus",
-      "Intracranial mass lesion",
-      "Acute subdural hematoma",
-      "Medication-related cognitive impairment",
-      "Alcohol-related encephalopathy"
+      "Chronic SDH \u2014 anticoagulated elderly, minor trauma, 3-week delay (correct)",
+      "Acute SDH \u2014 high-density (bright) on CT; this is chronic (hypodense, isodense)",
+      "Epidural hematoma \u2014 lens-shaped, arterial, acute; young patients, skull fracture",
+      "Brain tumor \u2014 ring enhancement with contrast, different time course",
+      "Normal pressure hydrocephalus \u2014 triad of dementia/gait/incontinence, ventricular not extraaxial",
+      "Dementia \u2014 SDH must be excluded before attributing confusion to dementia"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'headache' as primary complaint and pursue migraine or tension headache, missing the cognitive changes and anticoagulation context",
@@ -427,7 +288,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several reasonable possibilities. Given Walter's age, medication history, and the constellation of cognitive changes with headache, what specific risk factors should you explore? What key historical details might help you narrow your differential?",
       "phase5": "Excellent work gathering the history and exam findings. The combination of papilledema, cognitive changes, gait instability, and subtle focal findings in an anticoagulated patient with fall history is very telling. What does this clinical picture suggest to you?",
-      "finalDebrief": "This case highlights how chronic subdural hematoma can present insidiously in anticoagulated patients. The key was recognizing that the 'confusion' wasn't just delirium, but part of a syndrome including increased intracranial pressure. How did your thinking evolve as you gathered the fall history and noted the papilledema?"
+      "finalDebrief": "This case highlights how chronic subdural hematoma can present insidiously in anticoagulated patients. The key was recognizing that the 'confusion' wasn't just delirium, but part of a syndrome including increased intracranial pressure. How did your thinking evolve as you gathered the fall history and noted the papilledema?",
+      "final": "Diagnosis: chronic SDH \u2014 anticoagulated elderly. Key learning: (1) Chronic SDH in elderly anticoagulated patients: the combination of cerebral atrophy (larger subdural space), anticoagulation, and minor trauma creates ideal conditions for chronic SDH. The bridging veins tear with minimal force, bleeding is slow (venous, not arterial), and the hematoma liquefies over weeks. CT shows HYPODENSE (dark) collection \u2014 older blood and protein-rich fluid. (2) Density timeline on CT: acute SDH = hyperdense (bright, fresh blood). Subacute (1-3 weeks) = isodense (hard to see). Chronic (>3 weeks) = hypodense (dark). Mixed density = acute-on-chronic rebleed. (3) DOAC reversal: apixaban and rivaroxaban (Xa inhibitors) \u2192 andexanet alfa (Andexxa). Dabigatran \u2192 idarucizumab (Praxbind). Neither responds to FFP or vitamin K. (4) Chronic SDH drainage: burr hole craniotomy is standard \u2014 less invasive than craniotomy, adequate for chronic liquid collections. Recurrence ~10-30% \u2014 repeat CT at 2 weeks post-op, then reassess. Recurrence risk factors: anticoagulation, bilateral SDH, post-op collections. (5) Anticoagulation restart after intracranial surgery: for AFib, restart at 7-14 days if neurosurgical hemostasis adequate and no active bleeding. Early restart (by 7 days) acceptable for high CHA2DS2-VASc (\u22655) with low rebleed risk on repeat imaging. Shared decision with patient, neurosurgery, and cardiology."
     }
+  },
+  "meta": {
+    "diagnosis": "Chronic Subdural Hematoma \u2014 Elderly on Anticoagulation, Minor Trauma, Burr Hole Drainage",
+    "caseId": "subdural-hematoma"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/severe-allergic-reaction-v2.js — Variation: Severe Allergic Reaction */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "9111 Juniper Dr, Columbus, OH 43203",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Nguyen",
         "phone": "(313) 555-6236",
@@ -45,7 +45,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Language",
-        "Vietnamese — limited English"
+        "Vietnamese \u2014 limited English"
       ],
       [
         "Comorbidity",
@@ -53,18 +53,18 @@ window.EMR_DATA = {
       ],
       [
         "Context",
-        "Needed CT with contrast for pulmonary embolism workup — reacted to contrast"
+        "Needed CT with contrast for pulmonary embolism workup \u2014 reacted to contrast"
       ],
       [
         "Prior",
-        "Had contrast reaction 10 years ago — no premedication protocol given today"
+        "Had contrast reaction 10 years ago \u2014 no premedication protocol given today"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "65yo with anaphylactoid reaction to IV contrast during CT PE study — no premedication given despite documented prior reaction",
+        "chiefComplaint": "65yo with anaphylactoid reaction to IV contrast during CT PE study \u2014 no premedication given despite documented prior reaction",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
@@ -77,14 +77,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Prior contrast reaction documented in chart — premedication protocol NOT followed",
+          "description": "Prior contrast reaction documented in chart \u2014 premedication protocol NOT followed",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "CKD stage 3b — contrast also nephrotoxic",
+          "description": "CKD stage 3b \u2014 contrast also nephrotoxic",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -98,14 +98,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Language barrier — Vietnamese interpreter needed",
+          "description": "Language barrier \u2014 Vietnamese interpreter needed",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-6",
-          "description": "Patient safety event — medication error",
+          "description": "Patient safety event \u2014 medication error",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -156,7 +156,7 @@ window.EMR_DATA = {
           "bp": "86/52",
           "hr": "118",
           "rr": "24",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "92%",
           "pain": "7/10"
         }
@@ -179,7 +179,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -193,7 +193,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -275,8 +275,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "65yo with anaphylactoid reaction to IV contrast during CT PE study — no premedication given despite documented prior reaction",
-          "hpi": "65F with CKD 3b and DM2 sent for CT PE study. Prior contrast reaction documented in chart from 10 years ago. Premedication protocol (prednisone 50mg at 13h, 7h, 1h + diphenhydramine 50mg at 1h) was NOT given — ordering physician did not check allergy list. Within 5 min of iohexol injection: diffuse urticaria, facial angioedema, hypotension, bronchospasm. Patient safety event filed. Vietnamese interpreter called — patient very frightened, cannot communicate with staff.",
+          "cc": "65yo with anaphylactoid reaction to IV contrast during CT PE study \u2014 no premedication given despite documented prior reaction",
+          "hpi": "65F with CKD 3b and DM2 sent for CT PE study. Prior contrast reaction documented in chart from 10 years ago. Premedication protocol (prednisone 50mg at 13h, 7h, 1h + diphenhydramine 50mg at 1h) was NOT given \u2014 ordering physician did not check allergy list. Within 5 min of iohexol injection: diffuse urticaria, facial angioedema, hypotension, bronchospasm. Patient safety event filed. Vietnamese interpreter called \u2014 patient very frightened, cannot communicate with staff.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -291,28 +291,28 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "Contrast anaphylactoid reaction — resolved",
+          "description": "Contrast anaphylactoid reaction \u2014 resolved",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "AKI on CKD — creatinine rising (2.1 from baseline 1.8)",
+          "description": "AKI on CKD \u2014 creatinine rising (2.1 from baseline 1.8)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Patient safety event — premedication protocol not followed",
+          "description": "Patient safety event \u2014 premedication protocol not followed",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "PE still needs to be ruled out — will need V/Q scan instead of CT",
+          "description": "PE still needs to be ruled out \u2014 will need V/Q scan instead of CT",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -354,7 +354,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "2/10"
         }
@@ -377,7 +377,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -391,7 +391,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -455,7 +455,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Admitted for contrast reaction observation + AKI monitoring (contrast + baseline CKD)",
-          "hpi": "65F admitted after contrast reaction. Cr rising to 2.1 — aggressive hydration. V/Q scan ordered to evaluate PE (no contrast needed). Patient safety report filed — root cause analysis initiated. Vietnamese interpreter present for all discussions. Daughter (English-speaking) arrived.",
+          "hpi": "65F admitted after contrast reaction. Cr rising to 2.1 \u2014 aggressive hydration. V/Q scan ordered to evaluate PE (no contrast needed). Patient safety report filed \u2014 root cause analysis initiated. Vietnamese interpreter present for all discussions. Daughter (English-speaking) arrived.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -464,13 +464,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — formalize contrast allergy protocol, premedication regimen for any future contrast need",
+        "chiefComplaint": "A/I consult \u2014 formalize contrast allergy protocol, premedication regimen for any future contrast need",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Contrast anaphylactoid reaction — NON-IgE mediated (direct mast cell activation)",
+          "description": "Contrast anaphylactoid reaction \u2014 NON-IgE mediated (direct mast cell activation)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -484,7 +484,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "CKD — limits contrast use regardless",
+          "description": "CKD \u2014 limits contrast use regardless",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -498,7 +498,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Distinction: anaphylactoid (non-IgE) vs true allergy (IgE) — both dangerous but mechanism differs",
+          "description": "Distinction: anaphylactoid (non-IgE) vs true allergy (IgE) \u2014 both dangerous but mechanism differs",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -522,7 +522,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -545,7 +545,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -559,7 +559,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -622,8 +622,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — formalize contrast allergy protocol, premedication regimen for any future contrast need",
-          "hpi": "A/I consult: 65F with contrast anaphylactoid reaction. This is direct mast cell degranulation (non-IgE) — premedication reduces risk from 35% to <1% on re-exposure. Formalized protocol entered into EMR with hard stop alert. Also recommended: if contrast absolutely necessary, use low-osmolar non-ionic agent (iohexol or iopamidol) at lowest volume. Consider gadolinium-based alternatives when possible. KEY SYSTEM ISSUE: allergy was in the chart — the process failure was human, not data. Recommended adding pharmacist hard-stop verification for contrast orders in patients with documented reactions.",
+          "cc": "A/I consult \u2014 formalize contrast allergy protocol, premedication regimen for any future contrast need",
+          "hpi": "A/I consult: 65F with contrast anaphylactoid reaction. This is direct mast cell degranulation (non-IgE) \u2014 premedication reduces risk from 35% to <1% on re-exposure. Formalized protocol entered into EMR with hard stop alert. Also recommended: if contrast absolutely necessary, use low-osmolar non-ionic agent (iohexol or iopamidol) at lowest volume. Consider gadolinium-based alternatives when possible. KEY SYSTEM ISSUE: allergy was in the chart \u2014 the process failure was human, not data. Recommended adding pharmacist hard-stop verification for contrast orders in patients with documented reactions.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -632,20 +632,20 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — AKI resolved, contrast protocol in place, system improvement update",
+        "chiefComplaint": "Follow-up \u2014 AKI resolved, contrast protocol in place, system improvement update",
         "diagnosis": "Severe Allergic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Contrast allergy — premedication protocol permanently in EMR with hard stop alert",
+          "description": "Contrast allergy \u2014 premedication protocol permanently in EMR with hard stop alert",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "AKI resolved — Cr back to baseline 1.8",
+          "description": "AKI resolved \u2014 Cr back to baseline 1.8",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -659,7 +659,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Patient safety investigation complete — new pharmacy hard-stop implemented",
+          "description": "Patient safety investigation complete \u2014 new pharmacy hard-stop implemented",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -692,7 +692,7 @@ window.EMR_DATA = {
           "bp": "132/78",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -715,7 +715,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -729,7 +729,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -792,8 +792,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — AKI resolved, contrast protocol in place, system improvement update",
-          "hpi": "65F returns 4 weeks post-contrast reaction. Cr back to baseline 1.8. PE ruled out. Hospital implemented pharmacy hard-stop for contrast orders in patients with documented reactions — A/I recommendation adopted. Patient provided with Vietnamese-language card listing contrast allergy and premedication requirements to carry in wallet.",
+          "cc": "Follow-up \u2014 AKI resolved, contrast protocol in place, system improvement update",
+          "hpi": "65F returns 4 weeks post-contrast reaction. Cr back to baseline 1.8. PE ruled out. Hospital implemented pharmacy hard-stop for contrast orders in patients with documented reactions \u2014 A/I recommendation adopted. Patient provided with Vietnamese-language card listing contrast allergy and premedication requirements to carry in wallet.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -815,95 +815,62 @@ window.EMR_DATA = {
     "address": "6023 Birch Ln, Indianapolis, IN 46203",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Nguyen",
       "phone": "(713) 555-2063",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "65yo with anaphylactoid reaction to IV contrast during CT PE study — no premedication given despite documented prior reaction",
+    "chiefComplaint": "65yo with anaphylactoid reaction to IV contrast during CT PE study \u2014 no premedication given despite documented prior reaction",
     "diagnosis": "Severe Allergic Reaction"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Contrast anaphylactoid reaction",
+      "problem": "Food-dependent exercise-induced anaphylaxis \u2014 wheat + exercise",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Jason Kim, 28M \u2014 urticaria, wheeze, hypotension while jogging 2h after pasta dinner. Prior episodes identified retrospectively."
     },
     {
-      "id": "prob-2",
-      "description": "Prior contrast reaction documented in chart — premedication protocol NOT followed",
+      "problem": "Cofactor-driven anaphylaxis \u2014 neither food NOR exercise alone triggers reaction",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Neither pasta alone nor exercise alone causes reaction. The COMBINATION is the trigger \u2014 a unique anaphylaxis mechanism."
     },
     {
-      "id": "prob-3",
-      "description": "CKD stage 3b — contrast also nephrotoxic",
+      "problem": "Wheat omega-5 gliadin IgE \u2014 diagnostic biomarker for FDEIA",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Diabetes type 2",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Language barrier — Vietnamese interpreter needed",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-6",
-      "description": "Patient safety event — medication error",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Omega-5 gliadin-specific IgE is the diagnostic test of choice for wheat-FDEIA. RAST to whole wheat may be negative."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given x1",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Epinephrine 0.3mg IM \u2014 given in ED",
+      "sig": "First-line \u2014 anaphylaxis treatment.",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg x2 \u2014 discharge prescription",
+      "sig": "Carry at all times \u2014 especially during and after meals before any physical activity.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
-    },
-    {
-      "id": "med-4",
-      "name": "NS bolus",
-      "dose": "1L",
-      "route": "IV",
-      "frequency": "Rapid",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Avoidance \u2014 no exercise within 4-6 hours of wheat ingestion",
+      "sig": "Primary prevention: do not exercise within 4-6h of eating wheat. Alternatively: strict wheat avoidance if exercise is planned.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 dietary/activity restriction"
     }
   ],
   "allergies": [
@@ -921,7 +888,7 @@ window.EMR_DATA = {
       "bp": "86/52",
       "hr": "118",
       "rr": "24",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "92%",
       "pain": "7/10"
     }
@@ -932,8 +899,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "65yo with anaphylactoid reaction to IV contrast during CT PE study — no premedication given despite documented prior reaction",
-      "hpi": "65F with CKD 3b and DM2 sent for CT PE study. Prior contrast reaction documented in chart from 10 years ago. Premedication protocol (prednisone 50mg at 13h, 7h, 1h + diphenhydramine 50mg at 1h) was NOT given — ordering physician did not check allergy list. Within 5 min of iohexol injection: diffuse urticaria, facial angioedema, hypotension, bronchospasm. Patient safety event filed. Vietnamese interpreter called — patient very frightened, cannot communicate with staff.",
+      "cc": "65yo with anaphylactoid reaction to IV contrast during CT PE study \u2014 no premedication given despite documented prior reaction",
+      "hpi": "65F with CKD 3b and DM2 sent for CT PE study. Prior contrast reaction documented in chart from 10 years ago. Premedication protocol (prednisone 50mg at 13h, 7h, 1h + diphenhydramine 50mg at 1h) was NOT given \u2014 ordering physician did not check allergy list. Within 5 min of iohexol injection: diffuse urticaria, facial angioedema, hypotension, bronchospasm. Patient safety event filed. Vietnamese interpreter called \u2014 patient very frightened, cannot communicate with staff.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -941,107 +908,36 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-705281",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "FDEIA Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Omega-5 gliadin IgE (Tri a 19)",
+          "value": "8.4",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "38",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.1",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Wheat IgE (whole)",
+          "value": "1.2",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "REACTION MARKERS",
-          "results": [
-            {
-              "test": "Tryptase",
-              "value": "22",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine (baseline)",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            }
-          ]
+          "test": "Tryptase (post-reaction)",
+          "value": "26.4",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
+        },
+        {
+          "test": "Aspirin/NSAID use",
+          "value": "Ibuprofen taken for muscle soreness before run",
+          "unit": "",
+          "ref": "",
+          "flag": "H"
         }
       ]
     }
@@ -1061,7 +957,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Language",
-      "Vietnamese — limited English"
+      "Vietnamese \u2014 limited English"
     ],
     [
       "Comorbidity",
@@ -1069,11 +965,11 @@ window.EMR_DATA = {
     ],
     [
       "Context",
-      "Needed CT with contrast for pulmonary embolism workup — reacted to contrast"
+      "Needed CT with contrast for pulmonary embolism workup \u2014 reacted to contrast"
     ],
     [
       "Prior",
-      "Had contrast reaction 10 years ago — no premedication protocol given today"
+      "Had contrast reaction 10 years ago \u2014 no premedication protocol given today"
     ]
   ],
   "references": [
@@ -1136,7 +1032,7 @@ window.EMR_DATA = {
       "validates": [
         "Premedication: prednisone -13h/-7h/-1h + diphenhydramine -1h",
         "Anaphylactoid = non-IgE",
-        "Reduces recurrence 35% → <1%"
+        "Reduces recurrence 35% \u2192 <1%"
       ]
     }
   ],
@@ -1187,7 +1083,7 @@ window.EMR_DATA = {
       "Mental status evaluation"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 86/52, HR 118, RR 22, SpO2 92% on room air, afebrile at 36.8°C",
+      "Vital signs assessment": "BP 86/52, HR 118, RR 22, SpO2 92% on room air, afebrile at 36.8\u00b0C",
       "Skin examination for urticaria or angioedema": "Diffuse urticarial rash on trunk and extremities, mild facial flushing, no significant angioedema of lips or eyelids",
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak peripheral pulses consistent with hypotension",
       "Pulmonary examination": "Mild expiratory wheeze bilaterally, good air movement, no stridor",
@@ -1199,13 +1095,12 @@ window.EMR_DATA = {
       "Mental status evaluation": "Anxious but coherent, language barrier present, requesting interpreter"
     },
     "ddxTargets": [
-      "Anaphylactoid reaction to IV contrast (correct diagnosis)",
-      "IgE-mediated anaphylaxis to contrast",
-      "Acute asthma exacerbation",
-      "Pulmonary embolism",
-      "Acute myocardial infarction",
-      "Vasovagal reaction",
-      "Medication adverse reaction"
+      "FDEIA \u2014 wheat + exercise cofactor, omega-5 gliadin IgE positive (correct)",
+      "Exercise-induced anaphylaxis (no food) \u2014 no food cofactor required; different management",
+      "IgE-mediated wheat allergy \u2014 would react to wheat alone; exercise independence",
+      "Cholinergic urticaria \u2014 small wheals with exercise, heat; not anaphylaxis",
+      "Cardiac arrhythmia during exercise \u2014 ECG during episode; tryptase rise confirms allergic",
+      "NSAID + exercise cofactor \u2014 NSAIDs are a common cofactor (ibuprofen identified here \u2014 educate patient)"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the obvious contrast reaction and missing evaluation of the underlying PE that prompted the study, or assuming all contrast reactions are IgE-mediated",
@@ -1215,7 +1110,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, think about what key information you need regarding the timeline of events, previous contrast exposure, and what protocols should have been followed. What patient safety issues might be at play here?",
       "phase5": "You've identified a contrast reaction, but consider: What type of reaction is this based on the clinical presentation? What systems failure occurred? How does this patient's CKD factor into the decision-making? What are the immediate next steps?",
-      "finalDebrief": "This case highlights a preventable patient safety event. The documented prior reaction should have triggered premedication protocols. Discuss the difference between anaphylaxis and anaphylactoid reactions, and how systems-based approaches prevent such errors. What would you implement to prevent this in the future?"
+      "finalDebrief": "This case highlights a preventable patient safety event. The documented prior reaction should have triggered premedication protocols. Discuss the difference between anaphylaxis and anaphylactoid reactions, and how systems-based approaches prevent such errors. What would you implement to prevent this in the future?",
+      "final": "Diagnosis: wheat-dependent exercise-induced anaphylaxis (WDEIA/FDEIA). Key learning: (1) FDEIA mechanism: exercise after food ingestion \u2192 increased gut permeability + mast cell sensitization + augmented allergen absorption \u2192 threshold exceeded for mast cell degranulation. Neither the food nor exercise alone triggers reaction. (2) Omega-5 gliadin (Tri a 19): the specific wheat protein responsible for WDEIA. Standard wheat IgE testing may be negative or low \u2014 order OMEGA-5 GLIADIN IgE specifically in suspected WDEIA. High sensitivity and specificity for this condition. (3) Cofactors that lower threshold: exercise, NSAIDs (ibuprofen, aspirin), alcohol, menstruation, sleep deprivation. This patient had BOTH exercise AND ibuprofen \u2014 double cofactor. NSAIDs are a major trigger and must be on the avoidance list. (4) Management: primary prevention = avoid wheat within 4-6 hours of exercise OR avoid exercise within 4-6h of wheat meals. Some patients choose strict wheat elimination if physically active. EpiPen mandatory. (5) Non-wheat FDEIA triggers: other foods (shrimp, celery, peach, others depending on population). The mechanism is the same \u2014 food + cofactor = reaction. Pattern recognition is key \u2014 detailed history of timing and concurrent activities often reveals the diagnosis that would otherwise be missed."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Exercise-Induced Food-Dependent (FDEIA), Wheat Cofactor, Epinephrine and Avoidance Education",
+    "caseId": "severe-allergic-reaction-v2"
   }
 };
