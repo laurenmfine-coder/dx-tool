@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Kevin Torres",
-      "icd": "Z00.00",
+      "problem": "Chronic LBP \u2014 opioid-dependent, PT involvement",
+      "icd": "M54.5",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Kevin Torres, oxycodone 30mg/day. Pain management weaning. PT for functional restoration."
+    },
+    {
+      "problem": "Opioid-induced hyperalgesia \u2014 possible",
+      "icd": "G89.29",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Paradoxically worsening pain despite opioid escalation \u2014 OIH suspected"
+    },
+    {
+      "problem": "Deconditioning \u2014 14 months off work",
+      "icd": "Z73.6",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Previous construction worker \u2014 core strength grade 2/5, endurance severely reduced"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Oxycodone \u2014 weaning per pain management",
+      "sig": "Tapering schedule \u2014 PT should communicate exercise tolerance to pain team",
+      "prescriber": "Pain Management",
+      "start": "2022",
+      "refills": 2,
+      "status": "Active \u2014 tapering"
+    },
+    {
+      "name": "Duloxetine 60mg daily \u2014 chronic pain",
+      "sig": "Take daily",
+      "prescriber": "PCP",
+      "start": "2024",
+      "refills": 4,
       "status": "Active"
+    },
+    {
+      "name": "Cyclobenzaprine 5mg QHS PRN muscle spasm",
+      "sig": "At bedtime as needed",
+      "prescriber": "PCP",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -98,7 +128,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "06/15/2024",
+      "study": "MRI Lumbar Spine",
+      "indication": "Chronic LBP",
+      "findings": "L4-L5 Grade 1 anterolisthesis, moderate disc desiccation, mild foraminal narrowing. L5-S1 disc bulge, no root compression.",
+      "impression": "Mild degenerative changes \u2014 do not correlate with degree of disability. Age-appropriate findings."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +168,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-pain-pt",
-    "diagnosis": "See diagnosis \u2014 Kevin Torres",
+    "diagnosis": "Chronic LBP \u2014 PT Treating Fear-Avoidance with Graded Exercise, Opioid Weaning Support",
     "acuity": 3,
     "presentation": "Kevin Torres",
     "category": "musculoskeletal"
@@ -180,12 +218,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Kevin Torres \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Chronic LBP \u2014 functional restoration PT with opioid weaning (correct)",
+      "Surgical candidate \u2014 Grade 1 anterolisthesis is not surgical",
+      "Opioid dose increase needed \u2014 paradoxical worsening = possible OIH, not undertreated pain",
+      "Passive modalities only \u2014 evidence shows worse outcomes vs active exercise",
+      "Pain is structural \u2014 MRI findings are mild and non-correlating",
+      "Disability permanent \u2014 functional restoration is evidence-based treatment"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +233,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Kevin Torres. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) Kevin has been referred to PT. He refuses to exercise \u2014 he believes movement will cause permanent damage. His Tampa Scale is 48 (high fear-avoidance). He has tried PT before and stopped after one session that increased his pain. How do you approach the first session \u2014 and what graded exposure framework do you use to address kinesiophobia before any physical loading? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: chronic LBP \u2014 PT functional restoration with opioid weaning. Key PT learning: (1) Opioid-induced hyperalgesia (OIH): long-term opioids activate NMDA receptors and sensitize pain pathways \u2014 paradoxically increasing pain sensitivity. If pain is WORSENING despite dose increases, suspect OIH. PT communicates this pattern to the pain team. (2) Functional restoration approach: goal is not 'zero pain' but functional capacity. Quota-based progression: start at 50% of maximal effort, increase 10% per session regardless of pain. This breaks the pain-contingent exercise barrier. (3) PT scope in opioid weaning: PT provides the 'competing input' for the pain system \u2014 active exercise reduces central sensitization. PT communicates to pain team: 'Patient tolerating X minutes of graded exercise \u2014 opioid reduction may be supported by current functional progress.' (4) Core rehabilitation: construction worker with 2/5 core strength. Priority: stabilization exercises (McGill Big 3: curl-up, bird dog, side plank) before loading. (5) Return-to-work: functional capacity evaluation at 8-12 weeks \u2014 determines whether construction work is feasible or vocational retraining needed."
     }
   }
 };

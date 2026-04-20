@@ -23,21 +23,83 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: 4 Chronic Conditions",
-      "icd": "Z00.00",
+      "problem": "Polypharmacy \u2014 11 medications, medication-related fall",
+      "icd": "Z79.899",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "82yo with 4 Beers Criteria inappropriate medications \u2014 deprescribing review urgent after fall"
+    },
+    {
+      "problem": "Fall with scalp laceration \u2014 medication-related",
+      "icd": "W19.XXXA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Orthostatic hypotension from tamsulosin + antihypertensives. New confusion from diphenhydramine."
+    },
+    {
+      "problem": "Mild cognitive impairment \u2014 anticholinergic burden",
+      "icd": "G31.84",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "ACB (Anticholinergic Cognitive Burden) score 4 \u2014 diphenhydramine, oxybutynin contributing"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Amlodipine 5mg daily",
+      "sig": "Antihypertensive",
+      "prescriber": "Cardiology",
+      "start": "2018",
+      "refills": 5,
       "status": "Active"
+    },
+    {
+      "name": "Lisinopril 20mg daily",
+      "sig": "Antihypertensive/CKD",
+      "prescriber": "Cardiology",
+      "start": "2018",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Metoprolol 50mg BID",
+      "sig": "Rate control/HTN",
+      "prescriber": "Cardiology",
+      "start": "2019",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Tamsulosin 0.4mg QHS \u2014 BEERS CRITERIA",
+      "sig": "Urinary \u2014 high orthostatic hypotension risk in elderly",
+      "prescriber": "Urology",
+      "start": "2020",
+      "refills": 4,
+      "status": "Active \u2014 deprescribe review"
+    },
+    {
+      "name": "Diphenhydramine 25mg QHS PRN sleep \u2014 BEERS CRITERIA",
+      "sig": "OTC sleep aid \u2014 anticholinergic, causes delirium/falls",
+      "prescriber": "Self",
+      "start": "2022",
+      "refills": 0,
+      "status": "Active \u2014 HOLD immediately"
+    },
+    {
+      "name": "Oxybutynin 5mg BID \u2014 BEERS CRITERIA",
+      "sig": "Overactive bladder \u2014 anticholinergic, cognitive impairment risk",
+      "prescriber": "Urology",
+      "start": "2021",
+      "refills": 3,
+      "status": "Active \u2014 deprescribe review"
+    },
+    {
+      "name": "Diazepam 5mg QHS PRN anxiety \u2014 BEERS CRITERIA",
+      "sig": "Benzodiazepine \u2014 fall risk, cognitive impairment, avoid in elderly",
+      "prescriber": "PCP",
+      "start": "2020",
+      "refills": 2,
+      "status": "Active \u2014 deprescribe review"
     }
   ],
   "allergies": [
@@ -97,8 +159,58 @@ window.EMR_DATA = {
       "plan": "Referral to pa. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Post-Fall Workup",
+      "results": [
+        {
+          "test": "BP lying",
+          "value": "138/78",
+          "unit": "mmHg",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "BP standing (1 min)",
+          "value": "108/62",
+          "unit": "mmHg",
+          "ref": "drop <20 systolic normal",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "132",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "102",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "CT Head Without Contrast",
+      "indication": "Fall with scalp laceration, confusion",
+      "findings": "No acute intracranial hemorrhage. No midline shift. Mild diffuse cortical atrophy, age-appropriate.",
+      "impression": "No acute intracranial injury. Atrophy pattern consistent with age or mild cognitive impairment."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +242,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pa-geriatric-polypharmacy",
-    "diagnosis": "See diagnosis \u2014 4 Chronic Conditions",
+    "diagnosis": "Geriatric Polypharmacy \u2014 11 Medications, 4 Potentially Inappropriate per Beers Criteria, Fall Risk",
     "acuity": 3,
     "presentation": "4 Chronic Conditions",
     "category": "geriatric"
@@ -175,12 +287,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "82yo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Medication-related fall \u2014 polypharmacy, Beers Criteria drugs (correct)",
+      "Syncope from cardiac arrhythmia \u2014 orthostatic pattern, not arrhythmic",
+      "New neurological event \u2014 CT normal",
+      "Dementia causing falls \u2014 medication burden is primary, not dementia",
+      "Vitamin D deficiency \u2014 contributing but medications are primary cause",
+      "Environmental fall \u2014 medication effect is the modifiable primary factor"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +302,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pa case with chief complaint: 4 Chronic Conditions. What are the most important questions for a pa to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pa perspective, what is the most critical finding that narrows this differential? What is the pa-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pa's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pa. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pa assessment revealed the key discriminating features. (3) Identify the top two medication changes with the highest impact on fall risk using Beers Criteria reasoning. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: medication-related fall, 4 Beers Criteria inappropriate medications. Key PA learning: (1) Beers Criteria: AGS annually updated list of potentially inappropriate medications in adults \u226565. High-risk categories: benzodiazepines (diazepam), anticholinergics (diphenhydramine, oxybutynin), peripheral alpha-blockers with orthostatic risk (tamsulosin), sleep aids. Four PIMs in one patient = urgent deprescribing review. (2) Deprescribing sequence: most harmful first. Priority: STOP diphenhydramine (OTC, causing delirium + falls), TAPER diazepam (withdraw slowly \u2014 seizure risk with abrupt stop), REVIEW tamsulosin (can use mirabegron for OAB without orthostatic risk), SWITCH oxybutynin to mirabegron (beta-3 agonist, non-anticholinergic). (3) Orthostatic hypotension: lying BP 138/78 \u2192 standing 108/62 = drop of 30 mmHg systolic = positive orthostatic hypotension. This IS the fall mechanism. Address tamsulosin + antihypertensive combo. (4) Anticholinergic cognitive burden (ACB) score: diphenhydramine (ACB=3) + oxybutynin (ACB=3) = ACB 6. Scores >3 associated with cognitive decline and dementia. (5) The PA's priority communication: 'This patient has a medication-caused fall. I am stopping diphenhydramine today and initiating a taper plan for diazepam. Orthostatic hypotension is documented \u2014 tamsulosin review with urology is recommended.'"
     }
   }
 };

@@ -23,20 +23,65 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Annual Wellness",
-      "icd": "Z00.00",
+      "problem": "Type 2 diabetes \u2014 A1c 7.4%, near target",
+      "icd": "E11.9",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "A1c improved from 8.9% with GLP-1 agonist \u2014 continue and optimize"
+    },
+    {
+      "problem": "Hypertension \u2014 BP 128/76 at goal",
+      "icd": "I10",
+      "onset": "2017",
+      "status": "Active",
+      "notes": "At target on current regimen \u2014 continue"
+    },
+    {
+      "problem": "Hyperlipidemia \u2014 LDL 72 at target",
+      "icd": "E78.5",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "On statin \u2014 at guideline goal for diabetic"
+    },
+    {
+      "problem": "Depression \u2014 PHQ-9 score 6, mild",
+      "icd": "F32.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "New finding on screening \u2014 counseling recommended, no medication yet"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Metformin 1000mg BID",
+      "sig": "Twice daily with meals",
+      "prescriber": "Dr. Kim",
+      "start": "2019",
+      "refills": 6,
+      "status": "Active"
+    },
+    {
+      "name": "Semaglutide 1mg SQ weekly (Ozempic)",
+      "sig": "Subcutaneous weekly \u2014 GLP-1 agonist",
+      "prescriber": "Dr. Kim",
+      "start": "2023",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take daily",
+      "prescriber": "Dr. Kim",
+      "start": "2018",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 40mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Dr. Kim",
+      "start": "2019",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,7 +142,63 @@ window.EMR_DATA = {
       "plan": "Referral to pa. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/01/2024",
+      "panel": "Annual Wellness Labs",
+      "results": [
+        {
+          "test": "HbA1c",
+          "value": "7.4",
+          "unit": "%",
+          "ref": "<7.0 (near target)",
+          "flag": "H"
+        },
+        {
+          "test": "LDL",
+          "value": "72",
+          "unit": "mg/dL",
+          "ref": "<70 diabetic",
+          "flag": "H"
+        },
+        {
+          "test": "BP",
+          "value": "128/76",
+          "unit": "mmHg",
+          "ref": "<130/80 diabetic target",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.0",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "Urine albumin:creatinine",
+          "value": "18",
+          "unit": "mg/g",
+          "ref": "<30",
+          "flag": ""
+        },
+        {
+          "test": "PHQ-9 screen",
+          "value": "6",
+          "unit": "",
+          "ref": "0-4 minimal",
+          "flag": "H"
+        },
+        {
+          "test": "Colorectal cancer screen",
+          "value": "FIT test due \u2014 age 52",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +231,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pa-annual-wellness",
-    "diagnosis": "See diagnosis \u2014 Annual Wellness",
+    "diagnosis": "Annual Wellness Visit \u2014 Multi-Condition Chronic Disease Management, PA Preventive Care Priorities",
     "acuity": 3,
     "presentation": "Annual Wellness",
     "category": "other"
@@ -175,12 +276,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "45yo Annual Wellness \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Annual wellness \u2014 multi-condition optimization, depression newly identified (correct)",
+      "Diabetes inadequately controlled \u2014 A1c 7.4% is near target, not uncontrolled",
+      "Statin intensification needed \u2014 LDL 72 is at target",
+      "Hypertension uncontrolled \u2014 BP at goal",
+      "Add antidepressant now \u2014 PHQ-9 6 = mild, counseling first-line",
+      "Ignore PHQ-9 finding \u2014 under-recognition of depression is the most common error"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +291,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pa case with chief complaint: Annual Wellness. What are the most important questions for a pa to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pa perspective, what is the most critical finding that narrows this differential? What is the pa-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pa's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pa. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pa assessment revealed the key discriminating features. (3) What are your top three clinical priorities today \u2014 and what falls within your scope to address independently? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: annual wellness, near-target chronic conditions, new mild depression. Key PA learning: (1) PHQ-9 action thresholds: 0-4 = minimal (monitor), 5-9 = mild (counseling, return in 4-6 weeks), 10-14 = moderate (counseling + consider medication), 15-19 = moderately severe (medication indicated), 20-27 = severe (medication + urgent referral). This patient's score 6 = counseling + 4-6 week reassessment. Prescribing antidepressants for PHQ-9 of 6 is over-treatment. (2) Preventive care checklist at age 52: colorectal cancer screening (FIT annually or colonoscopy q10yr \u2014 due), mammogram (45-75 annually), BP check (done), diabetes complications surveillance (feet, eyes, urine albumin \u2014 all documented). (3) GLP-1 agonist + depression: semaglutide is associated with improved mood in some patients (indirect \u2014 weight loss, glucose control). Do not attribute PHQ-9 change to medication yet. (4) A1c 7.4%: near-target but not at goal. PA options: optimize semaglutide dose (can go to 2mg weekly), add SGLT2i (also has cardiovascular benefit), or wait and recheck in 3 months. Document shared decision-making. (5) PA scope: this full annual wellness visit including depression screening, preventive care, and chronic disease management is squarely within PA independent practice in Florida."
     }
   }
 };

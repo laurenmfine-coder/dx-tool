@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Fever 39.4",
-      "icd": "Z00.00",
+      "problem": "Febrile illness \u2014 18-month-old, fever 39.4\u00b0C",
+      "icd": "R50.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Fully vaccinated \u2014 pneumococcal, Hib, meningococcal dramatically reduce occult bacteremia risk"
+    },
+    {
+      "problem": "Viral URI \u2014 probable etiology",
+      "icd": "J06.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Rhinorrhea, mild pharyngeal injection, no source of bacterial infection identified"
+    },
+    {
+      "problem": "Parental anxiety \u2014 requesting antibiotics",
+      "icd": "Z71.19",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Education opportunity: vaccinated child with viral URI does not need antibiotics"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Acetaminophen 15mg/kg PO/PR q4-6h PRN fever >38.5\u00b0C",
+      "sig": "By mouth or rectally every 4-6 hours as needed",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
+    },
+    {
+      "name": "Ibuprofen 10mg/kg PO q6-8h PRN fever (alternate with acetaminophen)",
+      "sig": "Every 6-8 hours \u2014 alternate with acetaminophen for high fever",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -97,7 +119,63 @@ window.EMR_DATA = {
       "plan": "Referral to pa. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Pediatric Fever Workup",
+      "results": [
+        {
+          "test": "WBC",
+          "value": "12.4",
+          "unit": "K/\u03bcL",
+          "ref": "6-17 for age",
+          "flag": ""
+        },
+        {
+          "test": "Bands",
+          "value": "4",
+          "unit": "%",
+          "ref": "0-10",
+          "flag": ""
+        },
+        {
+          "test": "CRP",
+          "value": "0.8",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": ""
+        },
+        {
+          "test": "Rapid strep",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Rapid influenza A/B",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Temperature",
+          "value": "39.4",
+          "unit": "\u00b0C",
+          "ref": "<38.0",
+          "flag": "H"
+        },
+        {
+          "test": "SpO2",
+          "value": "99",
+          "unit": "%",
+          "ref": ">95",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +208,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pa-febrile-child",
-    "diagnosis": "See diagnosis \u2014 Fever 39.4",
+    "diagnosis": "Occult Bacteremia Ruled Out \u2014 Viral URI Most Likely in Vaccinated 18-Month-Old",
     "acuity": 2,
     "presentation": "Fever 39.4",
     "category": "pediatric"
@@ -175,12 +253,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "18mo Fever 39.4 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Viral URI \u2014 no antibiotic indicated (correct)",
+      "Occult bacteremia \u2014 very low risk in fully vaccinated child",
+      "Strep pharyngitis \u2014 rapid strep negative",
+      "Influenza \u2014 rapid test negative",
+      "UTI \u2014 no urinary symptoms, no dipstick urinalysis done",
+      "Meningitis \u2014 no meningismus, fontanelle normal, alert and interactive"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +268,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pa case with chief complaint: Fever 39.4. What are the most important questions for a pa to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pa perspective, what is the most critical finding that narrows this differential? What is the pa-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pa's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pa. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pa assessment revealed the key discriminating features. (3) Walk through your risk stratification \u2014 what makes you admit versus discharge with return precautions? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: viral URI \u2014 watchful waiting appropriate. Key PA learning: (1) Pre-vaccine era: occult bacteremia from S. pneumoniae occurred in 3-5% of febrile children <36 months with high fever. Post-PCV13 vaccination: risk <0.5%. Fully vaccinated children with non-toxic appearance and no source DO NOT need blood cultures or empiric antibiotics. (2) Fever management: 38.5\u00b0C is the treatment threshold (comfort, not organ protection). Fever itself does not cause brain damage below 42\u00b0C \u2014 educate parents. Alternating acetaminophen and ibuprofen is safe and effective for high fever. (3) Serious bacterial infection signs requiring workup: ill-appearing/toxic, petechiae/purpura (meningococcal), fever >5 days (Kawasaki), meningismus, dehydration, <3 months age. None present here. (4) Parent education is the PA's highest-value intervention: 'Antibiotics for viral illness increase antibiotic resistance, disrupt the microbiome, and cause side effects without benefit.' Deferred antibiotic prescription (fill only if worsening in 48h) is evidence-based shared decision-making. (5) Return precautions: fever >5 days, petechiae, difficulty breathing, stiff neck, inconsolable, dehydration signs \u2192 return immediately."
     }
   }
 };

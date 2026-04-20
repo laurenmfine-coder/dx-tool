@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: PHQ-9 14",
-      "icd": "Z00.00",
+      "problem": "Major depressive disorder \u2014 moderate severity",
+      "icd": "F32.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "PHQ-9 14 + somatic complaints + functional impairment \u2014 SSRI initiation appropriate"
+    },
+    {
+      "problem": "Somatic symptom disorder \u2014 complicating picture",
+      "icd": "F45.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Multiple body pain complaints, fatigue, GI symptoms \u2014 partially mediated by depression"
+    },
+    {
+      "problem": "Hypothyroidism ruled out \u2014 TSH normal",
+      "icd": "Z03.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "TSH 2.8 \u2014 organic cause excluded before SSRI initiation"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Sertraline 50mg daily \u2014 first-line SSRI",
+      "sig": "Take 1 tablet daily in the morning with food. Increase to 100mg at 4 weeks if tolerated.",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active \u2014 new"
+    },
+    {
+      "name": "Lorazepam 0.5mg PRN anxiety (short-term bridge only)",
+      "sig": "PRN anxiety \u2014 maximum 2 weeks, do NOT refill without reassessment",
+      "prescriber": "PA",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 limited"
     }
   ],
   "allergies": [
@@ -97,7 +119,49 @@ window.EMR_DATA = {
       "plan": "Referral to pa. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Depression Workup",
+      "results": [
+        {
+          "test": "TSH",
+          "value": "2.8",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "CBC \u2014 hemoglobin",
+          "value": "13.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": ""
+        },
+        {
+          "test": "Comprehensive metabolic panel",
+          "value": "All normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Vitamin B12",
+          "value": "388",
+          "unit": "pg/mL",
+          "ref": "200-900",
+          "flag": ""
+        },
+        {
+          "test": "PHQ-9",
+          "value": "14",
+          "unit": "",
+          "ref": "0-4 minimal",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +194,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pa-behavioral-health",
-    "diagnosis": "See diagnosis \u2014 PHQ-9 14",
+    "diagnosis": "Major Depressive Disorder, Moderate \u2014 PHQ-9 14, First Antidepressant Selection",
     "acuity": 3,
     "presentation": "PHQ-9 14",
     "category": "psychiatric"
@@ -175,12 +239,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "PHQ-9 14 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "MDD moderate \u2014 SSRI initiation appropriate (correct)",
+      "Hypothyroidism \u2014 TSH normal, excluded",
+      "Adjustment disorder \u2014 functional impairment and 14 PHQ-9 meets MDD threshold",
+      "Bipolar disorder \u2014 must screen (MDQ negative)",
+      "Somatic symptom disorder without depression \u2014 both present",
+      "Substance-induced mood disorder \u2014 no substance use"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +254,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pa case with chief complaint: PHQ-9 14. What are the most important questions for a pa to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pa perspective, what is the most critical finding that narrows this differential? What is the pa-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pa's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pa. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pa assessment revealed the key discriminating features. (3) How do you approach the medication conversation \u2014 and what is your follow-up plan if the patient declines? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: MDD moderate, first SSRI initiation. Key PA learning: (1) PHQ-9 action: score 14 = moderate depression \u2192 SSRI + counseling (both). First-line SSRIs are equivalent in efficacy \u2014 choice based on side effect profile, drug interactions, cost. Sertraline: FDA-approved for depression, anxiety, PTSD, OCD, well-tolerated. (2) SSRI counseling: onset 2-4 weeks for mood benefit. Side effects peak first 1-2 weeks (nausea, insomnia). Critically: 'The medication might make you feel more anxious briefly before it helps depression \u2014 this is normal, do NOT stop.' Discontinuation syndrome if stopped abruptly \u2014 taper. (3) Bipolar screening before SSRI: MDQ (Mood Disorder Questionnaire) in clinical practice. SSRI monotherapy in bipolar can trigger mania. Screen with 'Have you ever had a period of unusually elevated mood, decreased need for sleep, increased energy that lasted days to weeks?' (4) Benzos in depression: acceptable for short-term anxiety co-treatment (2 weeks maximum) while SSRI titrates. Document limited refill plan upfront. Do NOT continue benzos chronically in depression. (5) Follow-up: 2-week phone check for side effects and safety, 4-week office visit for PHQ-9 reassessment and dose titration if needed. Safety plan if any suicidal ideation."
     }
   }
 };

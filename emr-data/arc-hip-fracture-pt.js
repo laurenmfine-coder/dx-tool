@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Margaret Chen",
-      "icd": "Z00.00",
+      "problem": "Post-ORIF hip fracture \u2014 PT Day 3",
+      "icd": "S72.001A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Margaret Chen, 78F \u2014 WBAT right hip per surgeon. PT evaluating mobility for discharge planning."
+    },
+    {
+      "problem": "Pre-existing sarcopenia \u2014 fall risk factor",
+      "icd": "M62.84",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Grip strength 14kg (low). Baseline TUG 22 seconds pre-injury."
+    },
+    {
+      "problem": "Delirium \u2014 resolving, impacts PT participation",
+      "icd": "F05",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "CAM positive yesterday, now negative \u2014 cognitive fluctuation affects therapy engagement"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Oxycodone 5mg PO q4h PRN \u2014 pain management",
+      "sig": "PRN for PT participation \u2014 give 30-45 min before session",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily",
+      "sig": "DVT prophylaxis",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Acetaminophen 650mg q6h scheduled",
+      "sig": "Scheduled opioid-sparing",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -98,7 +128,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/17/2024",
+      "study": "Post-Op Hip X-ray AP/Lateral",
+      "indication": "Post-ORIF Day 2 check",
+      "findings": "Right hip: Cephalomedullary nail in good position. Fracture lines aligned. No hardware failure. Acetabulum intact.",
+      "impression": "Stable fixation. WBAT as tolerated per surgeon."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +168,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hip-fracture-pt",
-    "diagnosis": "See diagnosis \u2014 Margaret Chen",
+    "diagnosis": "Post-ORIF Hip Day 3 \u2014 PT: Weight-Bearing Progression, Fall Prevention, Discharge Mobility Criteria",
     "acuity": 3,
     "presentation": "Margaret Chen",
     "category": "orthopedic"
@@ -180,12 +218,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Margaret Chen \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-ORIF hip \u2014 PT discharge mobility criterion not yet met (correct)",
+      "Cleared for discharge \u2014 functional mobility not yet assessed",
+      "Require SNF \u2014 premature without PT functional assessment",
+      "Non-weight bearing required \u2014 surgeon has cleared WBAT",
+      "Delirium contraindication to PT \u2014 resolving delirium is not a PT contraindication",
+      "Hardware failure \u2014 x-ray confirms stable fixation"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +233,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Margaret Chen. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) You are evaluating Margaret on post-op day 3. The order says weight-bearing as tolerated. She has mild dementia (MMSE 21) and anxiety about falling. She cannot reliably follow multi-step instructions. What is your weight-bearing progression strategy \u2014 and how does her cognitive status change your gait training approach? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-ORIF hip, PT Day 3 \u2014 discharge planning. Key PT learning: (1) Discharge mobility criteria for home: ambulate 150+ feet with appropriate assistive device, safely negotiate stairs if home has them, independent or supervised bed-to-chair transfer, toilet transfer with supervision. If not met \u2192 SNF or extended acute rehab. (2) Weight-bearing prescription: WBAT means the patient sets their comfort limit. PT teaches proper gait pattern with walker: step-to or step-through depending on strength. Do NOT equate WBAT with full weight bearing \u2014 patient demonstrates tolerance. (3) Delirium and PT: resolving delirium is NOT a contraindication to PT \u2014 in fact, mobilization is the most powerful delirium treatment. Reorient at start of each session, use simple one-step commands, keep sessions shorter (15-20 min) and more frequent. (4) Pain timing: coordinate with nursing so oxycodone is given 30-45 min before PT session. Pain-free movement = better motor learning, better compliance, less fear-avoidance developing. (5) Fall risk documentation: Morse Fall Score \u226545 = high risk. PT's role: recommend assistive device for discharge, initiate hip precaution education, assess home safety and recommend modifications."
     }
   }
 };
