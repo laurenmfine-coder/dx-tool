@@ -1,4 +1,4 @@
-/* emr-data/gi-bleed-syncope.js — EMR case data for Upper GI Hemorrhage with Syncope */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Hansen",
@@ -15,65 +15,62 @@ window.EMR_DATA = {
     "address": "9001 Maple St, San Antonio, TX 78205",
     "insurance": "Medicaid",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Publix Pharmacy — University Dr",
+    "pharmacy": "Publix Pharmacy \u2014 University Dr",
     "emergencyContact": {
       "name": "Edward Murphy",
       "phone": "(404) 555-8179",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Passed out in the bathroom No pain location — main issue is dizziness and passing out",
+    "chiefComplaint": "Passed out in the bathroom No pain location \u2014 main issue is dizziness and passing out",
     "diagnosis": "Upper GI Hemorrhage with Syncope"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Osteoarthritis",
+      "problem": "Upper GI hemorrhage presenting as syncope",
+      "icd": "K25.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Melena 2 days, syncope today \u2014 BP 88/54 standing, hemoglobin 7.1. Orthostatic syncope from blood loss."
     },
     {
-      "id": "prob-2",
-      "description": "Chronic back pain",
+      "problem": "Hemodynamic instability \u2014 class III hemorrhagic shock",
+      "icd": "R57.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Lost estimated 1,500-2,000mL blood. IV resuscitation before endoscopy."
     },
     {
-      "id": "prob-3",
-      "description": "Peptic ulcer disease",
+      "problem": "Peptic ulcer disease \u2014 NSAIDs + H. pylori",
+      "icd": "K25.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Daily aspirin + ibuprofen, dyspepsia x3 months \u2014 dual etiology for PUD"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Ibuprofen",
-      "dose": "600mg TID (self-medicating for 3 months)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michael Torres, DO"
+      "name": "2 large-bore IVs + LR 1L bolus x2",
+      "sig": "IV resuscitation \u2014 target HR <100, SBP >90 before endoscopy",
+      "prescriber": "ED/GI",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Aspirin",
-      "dose": "81mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Pantoprazole 80mg IV bolus THEN 8mg/hr",
+      "sig": "High-dose PPI infusion \u2014 start before endoscopy",
+      "prescriber": "GI",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Omeprazole",
-      "dose": "20mg daily (not taking regularly)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "pRBC transfusion target Hgb >7-8 g/dL",
+      "sig": "Transfuse 2 units pRBC \u2014 restrictive transfusion strategy (TRIGGER-II)",
+      "prescriber": "ED/GI",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -88,10 +85,10 @@ window.EMR_DATA = {
     {
       "date": "03/03/2026",
       "time": "06:45",
-      "bp": "94/62 (supine) → 72/48 (sitting)",
-      "hr": "118 (supine) → 136 (sitting)",
+      "bp": "94/62 (supine) \u2192 72/48 (sitting)",
+      "hr": "118 (supine) \u2192 136 (sitting)",
       "rr": "20",
-      "temp": "36.4°C",
+      "temp": "36.4\u00b0C",
       "spo2": "97%",
       "pain": "/10",
       "bmi": "24",
@@ -104,213 +101,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Passed out in the bathroom No pain location — main issue is dizziness and passing out",
-      "hpi": "Dorothy Hansen is a 66-year-old female presenting with passed out in the bathroom no pain location — main issue is dizziness and passing out. Past medical history includes Osteoarthritis, Chronic back pain, Peptic ulcer disease. See chart for full details.",
+      "cc": "Passed out in the bathroom No pain location \u2014 main issue is dizziness and passing out",
+      "hpi": "Dorothy Hansen is a 66-year-old female presenting with passed out in the bathroom no pain location \u2014 main issue is dizziness and passing out. Past medical history includes Osteoarthritis, Chronic back pain, Peptic ulcer disease. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Upper GI Hemorrhage with Syncope — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Upper GI Hemorrhage with Syncope \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-925654",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "GI Bleed Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "10.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "6.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "37",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "188",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "7.1",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "144",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.9",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "27",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "48",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.3",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "83",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "8.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "BUN",
+          "value": "52",
+          "unit": "mg/dL",
+          "ref": "7-20",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.6",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "PT/INR",
-              "value": "1.1",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Type and Crossmatch",
-              "value": "A positive, crossmatch 2 units pRBC",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            },
-            {
-              "test": "Hepatic Function Panel",
-              "value": "AST 42, ALT 38, Alk Phos 98, Albumin 3.0",
-              "unit": "",
-              "range": "",
-              "flag": "H"
-            },
-            {
-              "test": "Troponin I",
-              "value": "0.06",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
-            }
-          ]
+          "test": "BUN:Creatinine",
+          "value": "44:1",
+          "unit": "",
+          "ref": "<20",
+          "flag": "H"
+        },
+        {
+          "test": "INR",
+          "value": "1.2",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": "H"
+        },
+        {
+          "test": "Platelets",
+          "value": "168",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-929060",
-      "clinical": "Passed out in the bathroom No pain location — main issue is dizziness and passing out",
-      "technique": "Standard protocol",
-      "findings": "No acute cardiopulmonary process. Normal cardiac silhouette.",
-      "impression": "No acute findings",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Abdominal X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-863673",
-      "clinical": "Passed out in the bathroom No pain location — main issue is dizziness and passing out",
-      "technique": "Standard protocol",
-      "findings": "Nonspecific bowel gas pattern. No free air. No obstruction.",
-      "impression": "Non-contributory",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-325652",
-      "clinical": "Passed out in the bathroom No pain location — main issue is dizziness and passing out",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 118 bpm. No ST elevations or depressions. No arrhythmia",
-      "impression": "Sinus tachycardia — appropriate for hypovolemia/hemorrhagic shock",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "EGD (after resuscitation \u2014 within 12 hours)",
+      "indication": "UGIB requiring endoscopic evaluation",
+      "findings": "Duodenal bulb: 1.2cm ulcer posterior wall with active oozing (Forrest Ib). Clot overlying visible vessel. Endoscopic hemostasis performed: bipolar coagulation + hemoclip. Stomach: diffuse erosions, no active bleeding. No varices.",
+      "impression": "Forrest Ib duodenal ulcer \u2014 successfully treated endoscopically. Recommend IV PPI x72h then transition to oral. H. pylori testing performed (CLO test)."
     }
   ],
   "immunizations": [
@@ -418,13 +272,12 @@ window.EMR_DATA = {
       "Lymph node examination": "No lymphadenopathy appreciated"
     },
     "ddxTargets": [
-      "Gastrointestinal bleeding with anemia (correct diagnosis)",
-      "Orthostatic hypotension secondary to dehydration",
-      "Medication-induced bleeding",
-      "Myocardial infarction",
-      "Aortic stenosis",
-      "Vasovagal syncope",
-      "Vertigo/vestibular disorder"
+      "UGIB \u2014 duodenal ulcer, Forrest Ib, endoscopic hemostasis (correct)",
+      "Variceal bleeding \u2014 no liver disease, no varices on EGD",
+      "Diverticular bleed \u2014 lower GI, bright red blood not melena",
+      "Aorto-enteric fistula \u2014 history of aortic graft would be present",
+      "Hemobilia \u2014 biliary tree bleeding, rare, jaundice",
+      "Mallory-Weiss tear \u2014 no forceful vomiting preceding hematemesis"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'dizziness' and pursue vestibular causes without considering systemic causes like bleeding",
@@ -434,7 +287,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at this 66-year-old woman with syncope and your differential diagnosis, what key historical points would help you distinguish between these possibilities? Consider her medication list carefully - what complications might arise from her current regimen?",
       "phase5": "Now that you've completed your history and physical exam, let's reconsider your differential diagnosis. What do the orthostatic vital signs and physical findings tell you? How does the combination of her medications, positive occult blood, and pallor change your thinking about the underlying pathophysiology?",
-      "finalDebrief": "This case illustrates how medication-induced GI bleeding can present as syncope in elderly patients. The combination of dual antiplatelet therapy (aspirin and ibuprofen) significantly increased her bleeding risk despite PPI use. How did your differential diagnosis evolve as you gathered more clinical data? What red flags should have pointed you toward GI bleeding early in the evaluation?"
+      "finalDebrief": "This case illustrates how medication-induced GI bleeding can present as syncope in elderly patients. The combination of dual antiplatelet therapy (aspirin and ibuprofen) significantly increased her bleeding risk despite PPI use. How did your differential diagnosis evolve as you gathered more clinical data? What red flags should have pointed you toward GI bleeding early in the evaluation?",
+      "final": "Diagnosis: duodenal ulcer with UGIB, presenting as syncope. Key learning: (1) GI bleed as syncope: orthostatic syncope is a clue to significant blood loss. Any syncope in a patient with melena/hematemesis = GI bleed + significant volume loss. Urgent resuscitation before endoscopy. (2) Transfusion strategy: TRIGGER-II trial showed restrictive transfusion (transfuse when Hgb <7 g/dL) was superior to liberal (Hgb <9) in non-variceal UGIB \u2014 fewer units, less rebleeding, lower mortality. Exception: known cardiac disease \u2192 Hgb target >8. (3) Glasgow-Blatchford score: used pre-endoscopy to determine inpatient vs outpatient management. Score 0 = can be managed outpatient. Score \u22651 = hospital. This patient: BUN 52 (+6), Hgb 7.1 (+6), SBP 88 (+3) = score 15 = very high risk, inpatient with ICU monitoring. (4) Forrest Ib (active oozing): rebleed risk 22%. Endoscopic treatment required and was performed. Post-procedure: PPI infusion x72h, admit for monitoring, NPO initially. (5) H. pylori in all UGIB: CLO test or urease test performed at endoscopy. If positive \u2192 eradication therapy at discharge (PPI + amoxicillin + clarithromycin x14 days). Eradication reduces rebleed risk from 67% to <5% at 1 year."
     }
+  },
+  "meta": {
+    "diagnosis": "Upper GI Bleed \u2014 Peptic Ulcer Disease with Syncope, Forrest Classification, Resuscitation",
+    "caseId": "gi-bleed-syncope"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/aortic-dissection-back.js — Auto-generated EMR case data for Aortic Dissection */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Raymond Foster",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "2907 Lavender St, New Orleans, LA 70124",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "Rite Aid — Palm Ave",
+    "pharmacy": "Rite Aid \u2014 Palm Ave",
     "emergencyContact": {
       "name": "Rachel Foster",
       "phone": "(702) 555-1154",
@@ -26,36 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Hypertension (poorly controlled)",
+      "problem": "Type B aortic dissection \u2014 descending thoracic aorta",
+      "icd": "I71.01",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Tearing back pain, unequal BP arms (20mmHg), CT confirms \u2014 Stanford Type B (distal to L subclavian)"
     },
     {
-      "id": "prob-2",
-      "description": "Marfan habitus",
+      "problem": "Hypertension \u2014 uncontrolled, dissection driver",
+      "icd": "I10",
+      "onset": "2015",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "BP 188/102 right arm \u2014 hypertension is the #1 risk factor for aortic dissection"
     },
     {
-      "id": "prob-3",
-      "description": "Bicuspid aortic valve",
+      "problem": "Malperfusion risk \u2014 branch vessel involvement",
+      "icd": "I71.01",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CT shows celiac and SMA arise from true lumen \u2014 serial imaging and clinical monitoring for end-organ ischemia"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Hydrochlorothiazide",
-      "dose": "25mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Esmolol infusion \u2014 rate titration, target HR 60-70",
+      "sig": "IV infusion \u2014 reduce aortic wall stress by reducing HR and dP/dt. FIRST drug before vasodilators.",
+      "prescriber": "Cardiac Surgery/Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Nicardipine infusion \u2014 BP target SBP 100-120",
+      "sig": "IV infusion \u2014 after HR controlled, titrate BP. Never vasodilate before rate control.",
+      "prescriber": "Cardiac Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Morphine 4mg IV PRN pain control",
+      "sig": "IV PRN \u2014 pain control also reduces sympathetic surge driving BP",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
     }
   ],
   "allergies": [
@@ -73,7 +88,7 @@ window.EMR_DATA = {
       "bp": "198/110",
       "hr": "110",
       "rr": "24",
-      "temp": "36.6°C",
+      "temp": "36.6\u00b0C",
       "spo2": "95%",
       "pain": "10/10",
       "bmi": "37",
@@ -89,148 +104,67 @@ window.EMR_DATA = {
       "cc": "Sudden tearing chest pain radiating to back",
       "hpi": "Raymond Foster is a 67-year-old male presenting with abrupt onset chest pain. Past medical history includes Hypertension (poorly controlled), Marfan habitus, Bicuspid aortic valve. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Aortic Dissection — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Aortic Dissection \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-316263",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Aortic Dissection Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "D-dimer",
+          "value": "4,200",
+          "unit": "ng/mL",
+          "ref": "<500",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.06",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.3",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "13.8",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": ""
+        },
+        {
+          "test": "BP right arm",
+          "value": "188/102",
+          "unit": "mmHg",
+          "ref": "",
+          "flag": "H"
+        },
+        {
+          "test": "BP left arm",
+          "value": "162/88",
+          "unit": "mmHg",
+          "ref": "",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CTA Chest/Abdomen/Pelvis",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-216397",
-      "clinical": "Sudden tearing chest pain radiating to back",
-      "technique": "Standard protocol",
-      "findings": "Stanford Type A dissection with intimal flap originating at the aortic root, extending through the ascending aorta, arch, and into the descending aorta to the level of the renal arteries. Moderate pericardial effusion. No frank aortic rupture.",
-      "impression": "Acute Stanford Type A aortic dissection. Emergent surgical consultation.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/18/2024",
+      "study": "CT Angiography Chest/Abdomen/Pelvis",
+      "indication": "Tearing back pain, BP differential, aortic dissection protocol",
+      "findings": "Intimal flap extending from distal to left subclavian artery through descending thoracic and abdominal aorta to iliac bifurcation. True lumen compressed in distal thoracic segment. Celiac, SMA, right renal artery arise from true lumen. Left renal artery arises from false lumen \u2014 early enhancement suggesting partial perfusion. No pericardial effusion. No hemothorax.",
+      "impression": "Stanford Type B aortic dissection. Left renal malperfusion from false lumen involvement. Urgent vascular surgery and cardiac surgery consultation. Medical management with anti-impulse therapy first-line for uncomplicated Type B."
     }
   ],
   "immunizations": [
@@ -330,13 +264,12 @@ window.EMR_DATA = {
       "Assessment for pulse deficits": "Weak left upper extremity pulses, asymmetric blood pressures"
     },
     "ddxTargets": [
-      "Aortic dissection (correct diagnosis)",
-      "ST-elevation myocardial infarction",
-      "Pulmonary embolism",
-      "Hypertensive emergency",
-      "Cocaine-induced coronary artery spasm",
-      "Musculoskeletal chest pain",
-      "Gastroesophageal reflux disease"
+      "Stanford Type B aortic dissection \u2014 medical management (correct)",
+      "Stanford Type A \u2014 intimal flap extends proximal to L subclavian, would require emergent surgery",
+      "PE with pleuritic chest pain \u2014 D-dimer elevated but CT aorta is diagnostic",
+      "Acute MI \u2014 troponin mildly elevated but dissection can cause by coronary involvement",
+      "Musculoskeletal back pain \u2014 severity, radiation, BP differential exclude this",
+      "Pericarditis \u2014 no pericardial effusion, tearing quality and BP differential point to dissection"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on cocaine use and assuming cocaine-induced MI or coronary spasm, missing the aortic dissection despite classic presentation",
@@ -346,7 +279,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This 67-year-old presents with acute chest pain. Before you interview him, consider his risk factors: Marfan habitus, bicuspid aortic valve, and poorly controlled hypertension. What life-threatening conditions should be at the top of your differential? How might his physical habitus and valve disease influence your thinking?",
       "phase5": "You've identified some concerning findings - the blood pressure differential between arms and the new diastolic murmur are particularly significant. In a patient with Marfan habitus and bicuspid aortic valve, what do these asymmetric findings suggest? How does this change your leading diagnosis from your initial differential?",
-      "finalDebrief": "This case demonstrates how risk factors can guide diagnosis. Raymond's Marfan habitus, bicuspid aortic valve, and severe hypertension created the perfect storm for aortic dissection. The cocaine use was a red herring that could have led to anchoring bias. The key diagnostic clues were the blood pressure differential and new aortic regurgitation murmur. How will you remember to look for these findings in future cases with similar risk factors?"
+      "finalDebrief": "This case demonstrates how risk factors can guide diagnosis. Raymond's Marfan habitus, bicuspid aortic valve, and severe hypertension created the perfect storm for aortic dissection. The cocaine use was a red herring that could have led to anchoring bias. The key diagnostic clues were the blood pressure differential and new aortic regurgitation murmur. How will you remember to look for these findings in future cases with similar risk factors?",
+      "final": "Diagnosis: Stanford Type B aortic dissection. Key learning: (1) Stanford classification: Type A = involves ascending aorta (proximal to L subclavian) \u2192 emergent surgical repair (mortality 1-2%/hour untreated). Type B = descending only (distal to L subclavian) \u2192 medical management first-line. Type B with complications (malperfusion, rupture, rapid expansion) \u2192 TEVAR (thoracic endovascular aortic repair). (2) BP differential: \u226520 mmHg between arms suggests subclavian/arch vessel involvement \u2014 classic but only present in 20% of dissections. (3) Anti-impulse therapy sequence: BETA-BLOCKER FIRST (reduce HR, reduce dP/dt = force of cardiac contraction), THEN vasodilator. If vasodilate first \u2192 reflex tachycardia \u2192 increased dP/dt \u2192 propagates dissection. This sequence is non-negotiable. (4) Malperfusion syndrome: branch vessel involvement causing end-organ ischemia is the primary complication requiring intervention. Left renal artery from false lumen \u2192 renal infarction. Mesenteric ischemia \u2192 bowel necrosis. Check lactate, renal function, bowel sounds. (5) Long-term: BP control (<120 systolic) indefinitely. Lifelong imaging surveillance (MRA q6-12 months). Genetic testing for connective tissue disorder in young patients (Marfan, Loeys-Dietz)."
     }
+  },
+  "meta": {
+    "diagnosis": "Type B Aortic Dissection \u2014 Stanford Classification, Medical Management vs Intervention Decision",
+    "caseId": "aortic-dissection-back"
   }
 };

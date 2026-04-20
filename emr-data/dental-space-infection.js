@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Mandibular Molar Abscess",
-      "icd": "Z00.00",
+      "problem": "Deep space neck infection \u2014 masticator + submandibular",
+      "icd": "K12.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Tooth #18 source, swelling beyond vestibule, limited opening 20mm \u2014 deep space involvement confirmed"
+    },
+    {
+      "problem": "Airway at risk \u2014 trismus 20mm, swelling trajectory",
+      "icd": "J38.4",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Not yet Ludwig's (unilateral, no floor of mouth elevation) but monitoring for spread"
+    },
+    {
+      "problem": "Dental neglect \u2014 multiple caries, last dental visit 8 years ago",
+      "icd": "K02.9",
+      "onset": "2016",
+      "status": "Active",
+      "notes": "Multiple carious teeth. Tooth #18 necrotic pulp with periapical abscess extending to space infection."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Ampicillin-sulbactam 3g IV q6h",
+      "sig": "IV infusion every 6 hours \u2014 polymicrobial coverage (gram+, gram-, anaerobes)",
+      "prescriber": "OMFS/Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 8mg IV q8h",
+      "sig": "IV q8h \u2014 reduce edema and inflammatory progression",
+      "prescriber": "OMFS",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Metronidazole 500mg IV q8h (added for anaerobic coverage)",
+      "sig": "IV q8h \u2014 enhanced anaerobic coverage for deep space",
+      "prescriber": "OMFS",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,8 +127,58 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Infection Panel",
+      "results": [
+        {
+          "test": "WBC",
+          "value": "19.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Bands",
+          "value": "22",
+          "unit": "%",
+          "ref": "0-10",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "22.4",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
+        },
+        {
+          "test": "Blood culture x2",
+          "value": "Pending",
+          "unit": "",
+          "ref": "No growth",
+          "flag": ""
+        },
+        {
+          "test": "Glucose",
+          "value": "188",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "CT Neck with Contrast",
+      "indication": "Deep space neck infection \u2014 map extent, airway evaluation",
+      "findings": "Right masticator space: phlegmon with early central fluid collection. Right submandibular space: inflammatory fat stranding. Bilateral sublingual spaces: not involved. Airway: patent, no displacement. Gas formation: absent (not necrotizing). Right internal jugular vein: patent.",
+      "impression": "Right masticator + right submandibular space involvement. Early abscess formation right masticator space. No involvement of bilateral sublingual spaces (not yet Ludwig's). No carotid space involvement. Airway patent. Surgical drainage indicated for masticator space abscess."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +210,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-space-infection",
-    "diagnosis": "See diagnosis \u2014 Mandibular Molar Abscess",
+    "diagnosis": "Deep Space Neck Infection \u2014 Mandibular Molar Source, Masticator and Submandibular Spaces, Airway Monitoring",
     "acuity": 2,
     "presentation": "Mandibular Molar Abscess",
     "category": "infectious"
@@ -176,12 +256,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Mandibular Molar Abscess \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Deep space neck infection \u2014 masticator + submandibular (correct, NOT yet Ludwig's)",
+      "Ludwig's angina \u2014 bilateral sublingual involvement absent (unilateral here)",
+      "Peritonsillar abscess \u2014 different location, different anatomy",
+      "Parotitis \u2014 parotid space distinct from masticator space",
+      "Masseteric hypertrophy \u2014 no infection signs",
+      "Lymphoma \u2014 acute infectious presentation with fever and WBC"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +271,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Mandibular Molar Abscess. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) Map the potential spread of this infection through fascial spaces. At what point does this become an airway emergency \u2014 and what is the appropriate setting for surgical drainage? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: deep space neck infection \u2014 masticator/submandibular, NOT yet Ludwig's. Key dentistry learning: (1) Spread patterns from mandibular molars: Lower wisdom tooth (third molar) \u2192 vestibular space \u2192 masticator space (above mylohyoid) OR submandibular space (below mylohyoid). Bilateral spread to both sublingual spaces = Ludwig's. Unilateral submandibular + masticator = serious but not yet Ludwig's. (2) Fascial space priority: masticator space (primary) \u2192 may spread to parapharyngeal space \u2192 retropharyngeal space \u2192 posterior mediastinum (descending necrotizing mediastinitis \u2014 lethal). CT determines how far spread has progressed. (3) Surgical drainage: phlegmon (early) = antibiotics alone. Frank abscess = surgical I&D under general anesthesia (trismus prevents adequate local anesthesia). This patient has early abscess in masticator space = OR within 12-24h. (4) Monitoring intervals: reassess airway hourly \u2014 trismus 20mm and not deteriorating. If trismus worsens, stridor develops, or CT shows progression toward parapharyngeal \u2192 awake fiberoptic intubation NOW before edema progresses. (5) Source control: tooth #18 extraction or root canal is the definitive source control \u2014 performed at time of I&D under GA or immediately after acute infection resolves."
     }
   }
 };

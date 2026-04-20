@@ -1,4 +1,4 @@
-/* emr-data/cardiac-tamponade.js — EMR case data for Cardiac Tamponade (Malignant Pericardial Effusion) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Moreno",
@@ -15,74 +15,62 @@ window.EMR_DATA = {
     "address": "8147 Spruce St, Memphis, TN 38114",
     "insurance": "Medicare",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Walmart Pharmacy — Broward Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "James Morris",
       "phone": "(412) 555-5678",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "I can't breathe Chest — pressure/fullness sensation, diffuse",
+    "chiefComplaint": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
     "diagnosis": "Cardiac Tamponade (Malignant Pericardial Effusion)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Non-small cell lung cancer",
+      "problem": "Cardiac tamponade \u2014 malignant pericardial effusion",
+      "icd": "I31.4",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Beck's triad: hypotension, muffled heart sounds, JVD. Pulsus paradoxus 22mmHg. Lung cancer history."
     },
     {
-      "id": "prob-2",
-      "description": "Completed 4 cycles of carboplatin/pemetrexed 2 months ago — disease progression",
+      "problem": "Metastatic lung cancer \u2014 pericardial metastasis",
+      "icd": "C34.12",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Known Stage IV NSCLC \u2014 malignant effusion is common complication. Cytology from pericardiocentesis."
     },
     {
-      "id": "prob-3",
-      "description": "Brain metastases",
+      "problem": "Pulsus paradoxus \u2014 22mmHg",
+      "icd": "I31.4",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Inspiratory BP drop >10mmHg \u2014 pathological in tamponade (normal <10mmHg)"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Dexamethasone",
-      "dose": "4mg BID (for brain mets edema)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "IV fluid bolus 500mL NS \u2014 temporizing measure",
+      "sig": "IV bolus \u2014 increases preload, temporizes until pericardiocentesis. NOT the definitive treatment.",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 bridge"
     },
     {
-      "id": "med-2",
-      "name": "Levetiracetam",
-      "dose": "500mg BID (seizure prophylaxis)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Atropine 0.5mg IV PRN bradycardia",
+      "sig": "IV PRN \u2014 vasovagal reflex during pericardiocentesis can cause bradycardia",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN procedure"
     },
     {
-      "id": "med-3",
-      "name": "Ondansetron",
-      "dose": "8mg PRN nausea",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
-    },
-    {
-      "id": "med-4",
-      "name": "Oxycodone",
-      "dose": "5mg PRN pain",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Emergency pericardiocentesis \u2014 bedside echo-guided",
+      "sig": "Definitive treatment \u2014 remove pericardial fluid immediately",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "EMERGENT procedure"
     }
   ],
   "allergies": [
@@ -97,10 +85,10 @@ window.EMR_DATA = {
     {
       "date": "03/03/2026",
       "time": "09:43",
-      "bp": "94/78 (NARROW PULSE PRESSURE — 16mmHg; normal >25-30mmHg)",
+      "bp": "94/78 (NARROW PULSE PRESSURE \u2014 16mmHg; normal >25-30mmHg)",
       "hr": "118",
       "rr": "26",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "92%",
       "pain": "34/10",
       "bmi": "31",
@@ -113,199 +101,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "I can't breathe Chest — pressure/fullness sensation, diffuse",
-      "hpi": "Patricia Moreno is a 64-year-old female presenting with i can't breathe chest — pressure/fullness sensation, diffuse. Past medical history includes Non-small cell lung cancer, Completed 4 cycles of carboplatin/pemetrexed 2 months ago — disease progression, Brain metastases. See chart for full details.",
+      "cc": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "hpi": "Patricia Moreno is a 64-year-old female presenting with i can't breathe chest \u2014 pressure/fullness sensation, diffuse. Past medical history includes Non-small cell lung cancer, Completed 4 cycles of carboplatin/pemetrexed 2 months ago \u2014 disease progression, Brain metastases. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Cardiac Tamponade (Malignant Pericardial Effusion) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Cardiac Tamponade (Malignant Pericardial Effusion) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-656017",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Tamponade Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "44",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "290",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "BP",
+          "value": "80/60",
+          "unit": "mmHg",
+          "ref": "",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "141",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "17",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.3",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "88",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "8.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "HR",
+          "value": "118",
+          "unit": "bpm",
+          "ref": "60-100",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Troponin I",
-              "value": "0.02",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": ""
-            },
-            {
-              "test": "BNP",
-              "value": "620",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "3.6",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Pulsus paradoxus",
+          "value": "22",
+          "unit": "mmHg",
+          "ref": "<10",
+          "flag": "H"
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.08",
+          "unit": "mg/dL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "10.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "BNP",
+          "value": "288",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "POCUS – Cardiac",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-937131",
-      "clinical": "I can't breathe Chest — pressure/fullness sensation, diffuse",
-      "technique": "Standard protocol",
-      "findings": "LARGE CIRCUMFERENTIAL PERICARDIAL EFFUSION (>2cm). RIGHT ATRIAL COLLAPSE in diastole (earliest sign of tamponade — RA has lowest intracardiac pressure). RIGHT VENTRICULAR DIASTOLIC COLLAPSE (confirms hemodynamic significance). IVC plethoric (>2.1cm) with <50% respirophasic variation (elevated RA pressure). SWINGING HEART within effusion (corresponds to electrical alternans). No left-sided collapse. LV function appears hyperdynamic (small, underfilled ventricle contracting vigorously).",
-      "impression": "LARGE PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY — RA and RV diastolic collapse, plethoric IVC. EMERGENT PERICARDIOCENTESIS REQUIRED.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-527314",
-      "clinical": "I can't breathe Chest — pressure/fullness sensation, diffuse",
-      "technique": "Standard protocol",
-      "findings": "ENLARGED CARDIAC SILHOUETTE with 'water-bottle' configuration. Bilateral small pleural effusions. Left hilar mass (known primary lung cancer). No pneumothorax.",
-      "impression": "Massive pericardial effusion with enlarged silhouette. Known lung cancer.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-174726",
-      "clinical": "I can't breathe Chest — pressure/fullness sensation, diffuse",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 118 bpm. LOW VOLTAGE throughout (QRS amplitude <5mm in limb leads — pericardial fluid attenuates signal). ELECTRICAL ALTERNANS (QRS amplitude alternates beat-to-beat — swinging heart within fluid). No ST changes",
-      "impression": "Classic ECG triad: tachycardia + low voltage + electrical alternans = PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Bedside Echocardiogram \u2014 Emergency",
+      "indication": "Hypotension, JVD, muffled heart sounds \u2014 tamponade evaluation",
+      "findings": "Large circumferential pericardial effusion >2cm. Right atrial systolic collapse. Right ventricular diastolic collapse. Respiratory variation in mitral inflow >25%. Plethoric inferior vena cava.",
+      "impression": "Echocardiographic tamponade physiology confirmed. Right heart chamber collapse = intracardiac pressure exceeds filling pressure. EMERGENT pericardiocentesis required."
     }
   ],
   "immunizations": [
@@ -346,7 +205,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "On disability — former construction supervisor"
+      "On disability \u2014 former construction supervisor"
     ],
     [
       "Living",
@@ -412,13 +271,12 @@ window.EMR_DATA = {
       "Abdominal examination for hepatomegaly": "Mild hepatomegaly with tender liver edge palpable 2 cm below costal margin"
     },
     "ddxTargets": [
-      "Pericardial effusion with tamponade (correct diagnosis)",
-      "Congestive heart failure",
-      "Pulmonary embolism",
-      "Superior vena cava syndrome",
-      "Tension pneumothorax",
-      "Pleural effusion",
-      "Pneumonia"
+      "Cardiac tamponade \u2014 malignant effusion, pericardiocentesis (correct)",
+      "Tension pneumothorax \u2014 absent breath sounds unilaterally, tracheal deviation (no JVD here)",
+      "Cardiogenic shock \u2014 EF would be reduced, no pericardial effusion",
+      "Distributive shock (sepsis) \u2014 different hemodynamic profile, no JVD",
+      "Right heart failure \u2014 JVD present but no pulsus paradoxus",
+      "Constrictive pericarditis \u2014 chronic, different echo pattern, no effusion"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on cancer history and assuming all symptoms are progression of malignancy rather than cardiac emergency",
@@ -428,7 +286,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several reasonable possibilities for dyspnea in a cancer patient. As you interview Patricia, pay particular attention to the timeline and associated cardiovascular symptoms. What specific physical exam findings would help you distinguish between these diagnoses?",
       "phase5": "You've gathered excellent information about Patricia's presentation. The combination of her narrow pulse pressure (16 mmHg), elevated JVD, and distant heart sounds should be raising red flags. What do these findings together suggest about her cardiovascular status, and how does this change your diagnostic thinking?",
-      "finalDebrief": "This case highlights pericardial tamponade as a oncologic emergency that can develop in cancer patients, particularly with lung cancer. The classic Beck's triad (elevated JVP, distant heart sounds, hypotension) along with pulsus paradoxus and narrow pulse pressure pointed to tamponade. How did recognizing these findings help you move from thinking about primary pulmonary causes to this cardiac emergency?"
+      "finalDebrief": "This case highlights pericardial tamponade as a oncologic emergency that can develop in cancer patients, particularly with lung cancer. The classic Beck's triad (elevated JVP, distant heart sounds, hypotension) along with pulsus paradoxus and narrow pulse pressure pointed to tamponade. How did recognizing these findings help you move from thinking about primary pulmonary causes to this cardiac emergency?",
+      "final": "Diagnosis: cardiac tamponade \u2014 malignant effusion. Key learning: (1) Beck's triad: hypotension + muffled heart sounds + JVD. Sensitivity ~40% \u2014 most patients don't have all three. Pulsus paradoxus >10mmHg is more sensitive. Echo is the diagnostic gold standard. (2) Pulsus paradoxus mechanism: inspiration \u2192 negative intrathoracic pressure \u2192 increased RV filling \u2192 RV expands \u2192 interventricular septum shifts left \u2192 decreased LV stroke volume \u2192 BP falls >10mmHg. In tamponade: pericardial constraint amplifies this effect. (3) Echo findings = definitive diagnosis: RA systolic collapse (earliest), RV diastolic collapse (most specific), IVC plethora (no inspiratory collapse), respiratory mitral valve variation >25%. Any of these + clinical picture = tamponade. (4) Pericardiocentesis: subxiphoid approach under echo guidance, drain into pericardial space. Even removing 50-100mL dramatically improves hemodynamics (Frank-Starling curve). Send fluid: cytology (malignant cells), culture (infectious), chemistry (transudative vs exudative). (5) Malignant effusion: lung cancer, breast cancer, lymphoma are most common causes. Malignant tamponade = poor prognosis \u2014 often managed with pericardial window (surgical drainage) to prevent recurrence."
     }
+  },
+  "meta": {
+    "diagnosis": "Cardiac Tamponade \u2014 Beck's Triad, Pulsus Paradoxus, Emergency Pericardiocentesis",
+    "caseId": "cardiac-tamponade"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/cauda-equina.js — EMR case data for Cauda Equina Syndrome */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Frances Yamamoto",
@@ -15,65 +15,62 @@ window.EMR_DATA = {
     "address": "5732 Clover St, Birmingham, AL 35209",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Walgreens — Pines Blvd",
+    "pharmacy": "Walgreens \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Charles Lewis",
       "phone": "(619) 555-9698",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+    "chiefComplaint": "Back pain shooting down both legs Low back, radiating down both legs \u2014 back of thighs and into calves",
     "diagnosis": "Cauda Equina Syndrome"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Lumbar disc herniation",
+      "problem": "Cauda equina syndrome \u2014 L4-L5 disc herniation",
+      "icd": "G83.4",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Bilateral leg weakness, saddle anesthesia, urinary retention \u2014 CES until proven otherwise"
     },
     {
-      "id": "prob-2",
-      "description": "Hypertension",
+      "problem": "Urinary retention \u2014 neurogenic bladder from CES",
+      "icd": "R33.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Bladder scan 620mL \u2014 Foley placed. Bladder dysfunction confirms cauda equina involvement."
     },
     {
-      "id": "prob-3",
-      "description": "Obesity",
+      "problem": "Saddle anesthesia \u2014 bilateral perineal numbness",
+      "icd": "R20.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Numbness inner thighs, perineum, perianal area \u2014 pathognomonic for cauda equina"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Ibuprofen",
-      "dose": "800mg TID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "Foley catheter \u2014 urinary decompression",
+      "sig": "Placed immediately \u2014 neurogenic urinary retention",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Cyclobenzaprine",
-      "dose": "10mg TID PRN",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "Dexamethasone 10mg IV x1 \u2014 spinal cord edema (controversial)",
+      "sig": "Single dose \u2014 limited evidence but commonly used for acute cord/nerve compression",
+      "prescriber": "Neurosurgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Hydrochlorothiazide",
-      "dose": "25mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michael Torres, DO"
+      "name": "Morphine 4mg IV PRN \u2014 pain control",
+      "sig": "IV PRN \u2014 severe radicular pain management",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
     }
   ],
   "allergies": [
@@ -91,7 +88,7 @@ window.EMR_DATA = {
       "bp": "152/92",
       "hr": "94",
       "rr": "18",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "98%",
       "pain": "9/10",
       "bmi": "33",
@@ -104,216 +101,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
-      "hpi": "Frances Yamamoto is a 62-year-old female presenting with back pain shooting down both legs low back, radiating down both legs — back of thighs and into calves. Past medical history includes Lumbar disc herniation, Hypertension, Obesity. See chart for full details.",
+      "cc": "Back pain shooting down both legs Low back, radiating down both legs \u2014 back of thighs and into calves",
+      "hpi": "Frances Yamamoto is a 62-year-old female presenting with back pain shooting down both legs low back, radiating down both legs \u2014 back of thighs and into calves. Past medical history includes Lumbar disc herniation, Hypertension, Obesity. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Cauda Equina Syndrome — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Cauda Equina Syndrome \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-590860",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "CES Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "37",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "316",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "9.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "142",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "5",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "99",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "27",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "102",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "ESR",
+          "value": "18",
+          "unit": "mm/hr",
+          "ref": "0-20",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "ESR",
-              "value": "12",
-              "unit": "mm/hr",
-              "range": "<20",
-              "flag": ""
-            },
-            {
-              "test": "CRP",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Urinalysis",
-              "value": "Normal",
-              "unit": "",
-              "range": "Normal",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "0.8",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": ""
+        },
+        {
+          "test": "Glucose",
+          "value": "104",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "Bladder scan",
+          "value": "620",
+          "unit": "mL",
+          "ref": "<300",
+          "flag": "H"
+        },
+        {
+          "test": "PSA (male patient, 52yo)",
+          "value": "1.8",
+          "unit": "ng/mL",
+          "ref": "<4.0",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-763573",
-      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "MRI Brain",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-403965",
-      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
-      "technique": "Standard protocol",
-      "findings": "LARGE CENTRAL DISC HERNIATION at L4-L5 with caudal migration. Disc fragment compresses the cauda equina nerve roots significantly. Effacement of the thecal sac. Bilateral L5 and S1 nerve root compression. No epidural abscess. No spinal cord signal abnormality above the conus.",
-      "impression": "CAUDA EQUINA SYNDROME — large L4-L5 disc herniation with cauda equina compression. EMERGENT NEUROSURGICAL DECOMPRESSION REQUIRED within 24-48 hours for best outcomes.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Abdominal X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-490085",
-      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
-      "technique": "Standard protocol",
-      "findings": "Distended bladder occupying lower pelvis. Stool burden in colon. No free air. Lumbar degenerative changes.",
-      "impression": "Distended bladder consistent with urinary retention. Constipation noted.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-272055",
-      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus rhythm at 94 bpm. No ST changes. Normal intervals",
-      "impression": "Normal ECG",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "MRI Lumbar Spine Without Contrast \u2014 EMERGENT",
+      "indication": "Bilateral leg weakness, saddle anesthesia, urinary retention",
+      "findings": "L4-L5 level: large central disc herniation with massive extrusion \u2014 disc material occupies >75% of spinal canal diameter. Severe compression of cauda equina nerve roots. No epidural abscess or tumor. Disc material is non-calcified (acute extrusion). Conus medullaris at T12-L1 level (normal).",
+      "impression": "Large central L4-L5 disc herniation causing cauda equina syndrome. Emergency surgical decompression indicated \u2014 outcome depends on time to decompression. No malignant or infectious cause."
     }
   ],
   "immunizations": [
@@ -355,7 +206,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "Warehouse supervisor — on modified duty for back pain"
+      "Warehouse supervisor \u2014 on modified duty for back pain"
     ],
     [
       "Living",
@@ -421,13 +272,12 @@ window.EMR_DATA = {
       "Crossed straight leg raise test": "Negative bilaterally"
     },
     "ddxTargets": [
-      "Central lumbar spinal stenosis (correct diagnosis)",
-      "Lumbar disc herniation with bilateral radiculopathy",
-      "Spondylolisthesis with neurogenic claudication",
-      "Cauda equina syndrome (must-not-miss diagnosis 1)",
-      "Spinal tumor or metastases (must-not-miss diagnosis 2)",
-      "Peripheral arterial disease with claudication (common mimic 1)",
-      "Piriformis syndrome (common mimic 2)"
+      "Cauda equina syndrome \u2014 emergency discectomy (correct)",
+      "Conus medullaris syndrome \u2014 higher level, bilateral, different pattern (conus at T12-L1, normal)",
+      "Spinal epidural abscess \u2014 fever, elevated inflammatory markers (absent)",
+      "Malignant cord compression \u2014 ESR/CRP normal, no cancer history",
+      "Bilateral lumbar radiculopathy \u2014 could explain leg pain but NOT bladder and saddle anesthesia",
+      "Aortic dissection causing spinal ischemia \u2014 no tearing pain, dissection not on imaging"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on previous diagnosis of lumbar disc herniation and not considering spinal stenosis as the primary pathology causing bilateral symptoms",
@@ -437,7 +287,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at this 62-year-old patient with bilateral leg pain, what questions would help you distinguish between different causes of neurogenic vs vascular claudication? What red flags do you need to rule out given the bilateral nature of her symptoms?",
       "phase5": "Now that you've found bilateral positive straight leg raises with S1 distribution findings, how does the bilateral nature of her symptoms and her age influence your differential diagnosis? What anatomical structure could cause this pattern of bilateral radiculopathy?",
-      "finalDebrief": "This case illustrates how spinal stenosis can present similarly to disc herniation but with key differences - the bilateral symptoms, age of patient, and positional worsening with sitting are classic for central stenosis. How did the bilateral presentation help narrow your differential from your initial disc herniation consideration?"
+      "finalDebrief": "This case illustrates how spinal stenosis can present similarly to disc herniation but with key differences - the bilateral symptoms, age of patient, and positional worsening with sitting are classic for central stenosis. How did the bilateral presentation help narrow your differential from your initial disc herniation consideration?",
+      "final": "Diagnosis: cauda equina syndrome \u2014 surgical emergency. Key learning: (1) CES red flags (all must be assessed in any back pain): saddle anesthesia (inner thighs/perineum/perianal), bowel or bladder dysfunction (retention or incontinence), bilateral leg weakness or neurological deficit. Any one of these = emergency MRI NOW. (2) Surgical timing: outcomes data shows best recovery when decompressed within 48 hours of symptom onset, ideally within 24 hours. EVERY HOUR matters \u2014 delayed surgery = permanent bowel/bladder dysfunction and leg weakness. This is a true surgical emergency. (3) Saddle anesthesia is pathognomonic: the sacral nerve roots (S2-S4) supplying the perineum travel through the lowest portion of the cauda equina \u2014 compressed first by central disc herniation. This finding alone in a back pain patient = emergent MRI regardless of other symptoms. (4) Bladder retention vs incontinence: retention is more common in CES (detrusor underactivity from S2-S4 damage). Incontinence suggests overflow or more complete injury. Either = emergent evaluation. (5) Informed consent for surgery: explain prognosis honestly. If complete CES (absent bladder/bowel/saddle sensation) for >48h = high risk of permanent deficit even with surgery. Early incomplete CES = 70-80% recovery of bladder function with prompt surgery."
     }
+  },
+  "meta": {
+    "diagnosis": "Cauda Equina Syndrome \u2014 L4-L5 Large Disc Herniation, Emergency Surgery Within 48 Hours",
+    "caseId": "cauda-equina"
   }
 };

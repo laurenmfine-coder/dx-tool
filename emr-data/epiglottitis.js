@@ -1,4 +1,4 @@
-/* emr-data/epiglottitis.js — EMR case data for Acute Epiglottitis */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Mason Williams",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "6425 Willow Way, Denver, CO 80201",
     "insurance": "Cigna",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "Walmart Pharmacy — Broward Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "Kenneth Parker",
       "phone": "(713) 555-7246",
@@ -26,36 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Up to date on vaccinations",
+      "problem": "Acute epiglottitis \u2014 adult",
+      "icd": "J05.10",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Severe odynophagia, drooling, muffled 'hot potato' voice, tripod positioning \u2014 adult epiglottitis"
     },
     {
-      "id": "prob-2",
-      "description": "No prior hospitalizations",
+      "problem": "Airway emergency \u2014 rapid progression risk",
+      "icd": "J05.10",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Adult epiglottitis can progress to complete airway obstruction within hours. ENT and anesthesia called."
     },
     {
-      "id": "prob-3",
-      "description": "No immune deficiency",
+      "problem": "Unknown etiology \u2014 H. influenzae in adults rare",
+      "icd": "J05.10",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Adult epiglottitis: H. influenzae type B (Hib) rare since vaccine. S. pyogenes, S. aureus, polymicrobial more common."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Acetaminophen",
-      "dose": "Given at home for fever",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Ceftriaxone 2g IV daily \u2014 empiric antibiotics",
+      "sig": "IV once daily \u2014 broad-spectrum coverage for epiglottitis organisms",
+      "prescriber": "ED/ENT",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 10mg IV q6h \u2014 reduce edema",
+      "sig": "IV corticosteroid \u2014 reduces supraglottic edema",
+      "prescriber": "ED/ENT",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Heliox 70/30 \u2014 bridge if stridor develops",
+      "sig": "Reduce airway resistance while preparing for definitive airway",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Standby"
+    },
+    {
+      "name": "Controlled intubation in OR \u2014 ENT + anesthesia",
+      "sig": "Awake fiberoptic or inhalational induction \u2014 do NOT attempt rapid sequence in epiglottitis without surgical backup",
+      "prescriber": "ENT/Anesthesia",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Planned OR airway"
     }
   ],
   "allergies": [
@@ -73,7 +96,7 @@ window.EMR_DATA = {
       "bp": "90/60",
       "hr": "156",
       "rr": "32",
-      "temp": "40.1°C",
+      "temp": "40.1\u00b0C",
       "spo2": "92%",
       "pain": "/10",
       "bmi": "32",
@@ -89,196 +112,60 @@ window.EMR_DATA = {
       "cc": "My child can't breathe right Throat/neck",
       "hpi": "Mason Williams is a 4-year-old male presenting with my child can't breathe right throat/neck. Past medical history includes Up to date on vaccinations, No prior hospitalizations, No immune deficiency. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Epiglottitis — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Epiglottitis \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-952482",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Epiglottitis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "22.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "34",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "314",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "18.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "141",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.9",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "9",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.9",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "12.8",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "CRP",
-              "value": "14.8",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Blood Cultures",
-              "value": "Pending",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            },
-            {
-              "test": "Lactate",
-              "value": "2.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Blood cultures x2",
+          "value": "Pending",
+          "unit": "",
+          "ref": "No growth",
+          "flag": ""
+        },
+        {
+          "test": "SpO2",
+          "value": "96",
+          "unit": "%",
+          "ref": ">95",
+          "flag": ""
+        },
+        {
+          "test": "Temperature",
+          "value": "39.2",
+          "unit": "\u00b0C",
+          "ref": "<38.0",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Cervical Spine X-ray",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-964734",
-      "clinical": "My child can't breathe right Throat/neck",
-      "technique": "Standard protocol",
-      "findings": "THUMBPRINT SIGN — enlarged, rounded epiglottis visible on lateral soft tissue neck view. Thickened aryepiglottic folds. Narrowed vallecular space. Subglottic region normal (not croup).",
-      "impression": "EPIGLOTTITIS — thumbprint sign confirms swollen epiglottis. Prepare for emergent airway management.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-595216",
-      "clinical": "My child can't breathe right Throat/neck",
-      "technique": "Standard protocol",
-      "findings": "Clear lung fields. No focal consolidation. No foreign body.",
-      "impression": "No pulmonary complication",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-508373",
-      "clinical": "My child can't breathe right Throat/neck",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 156 bpm. Normal pediatric morphology. No arrhythmia",
-      "impression": "Sinus tachycardia — age-appropriate for fever and distress",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Lateral Soft Tissue X-ray Neck \u2014 (performed with ENT bedside)",
+      "indication": "Drooling, muffled voice, odynophagia \u2014 epiglottitis evaluation",
+      "findings": "Lateral neck: Enlarged, rounded epiglottis \u2014 'thumb sign' \u2014 normally the epiglottis appears as a thin sliver. Supraglottic soft tissue swelling. Subglottic airway appears patent on this image. Prevertebral soft tissue within normal limits.",
+      "impression": "Radiographic epiglottitis confirmed \u2014 thumb sign. Do NOT leave patient unattended. Controlled airway management in OR with ENT and anesthesia present."
     }
   ],
   "immunizations": [
@@ -308,7 +195,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Tobacco",
-      "N/A — no household smokers"
+      "N/A \u2014 no household smokers"
     ],
     [
       "Alcohol",
@@ -320,7 +207,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "N/A — preschool student"
+      "N/A \u2014 preschool student"
     ],
     [
       "Living",
@@ -386,13 +273,12 @@ window.EMR_DATA = {
       "Drooling and swallowing assessment": "Continuous drooling, refuses to attempt swallowing, holds neck in extended position"
     },
     "ddxTargets": [
-      "Acute epiglottitis (correct diagnosis)",
-      "Severe croup (laryngotracheobronchitis)",
-      "Bacterial tracheitis",
-      "Foreign body aspiration",
-      "Retropharyngeal abscess",
-      "Severe viral pharyngitis",
-      "Peritonsillar abscess"
+      "Acute epiglottitis \u2014 controlled OR airway (correct)",
+      "Croup (laryngotracheobronchitis) \u2014 child, barky cough, steeple sign NOT thumb sign",
+      "Peritonsillar abscess \u2014 uvular deviation, muffled voice, less drooling",
+      "Retropharyngeal abscess \u2014 prevertebral swelling on lateral X-ray",
+      "Angioedema \u2014 no fever, no infectious prodrome",
+      "Ludwig's angina \u2014 floor of mouth, different anatomy"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'breathing problems' and immediately thinking croup, missing the key differentiating features of drooling, tripod positioning, and refusal to lie down that suggest epiglottitis",
@@ -402,7 +288,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, I notice you're considering several causes of stridor in children. What key clinical features would help you distinguish between epiglottitis and croup? Think about positioning, drooling, and voice changes - how might these guide your interview questions?",
       "phase5": "Now that you've gathered your history and physical findings, let's think through the classic presentations. You noted the tripod positioning, drooling, and muffled voice. How does this constellation of findings help narrow your differential? What's concerning about this particular combination of symptoms?",
-      "finalDebrief": "This case demonstrates the classic presentation of acute epiglottitis - the 4 D's: drooling, dysphagia, distress, and dysphonia. Notice how the tripod positioning and refusal to lie down were key differentiating features from croup. While rare in the Hib vaccine era, epiglottitis remains a true pediatric emergency requiring immediate airway management. How did your thinking evolve as you gathered more data?"
+      "finalDebrief": "This case demonstrates the classic presentation of acute epiglottitis - the 4 D's: drooling, dysphagia, distress, and dysphonia. Notice how the tripod positioning and refusal to lie down were key differentiating features from croup. While rare in the Hib vaccine era, epiglottitis remains a true pediatric emergency requiring immediate airway management. How did your thinking evolve as you gathered more data?",
+      "final": "Diagnosis: adult epiglottitis \u2014 controlled airway emergency. Key learning: (1) Thumb sign vs steeple sign: Epiglottitis = thumb sign (enlarged round epiglottis on lateral X-ray). Croup = steeple sign (subglottic narrowing on AP X-ray). Do not confuse the two. (2) DO NOT examine the throat of suspected epiglottitis \u2014 direct visualization can trigger laryngospasm and complete airway obstruction. This is one of the few times in medicine where the physical exam can kill. If epiglottitis suspected, call ENT and anesthesia FIRST. (3) Drooling + tripod position: signs the patient cannot swallow secretions. Posterior pharyngeal pooling. Progressive airway compromise. These are immediate ENT activation signs. (4) Airway management: AWAKE fiberoptic intubation with ENT at bedside (can immediately convert to tracheotomy if intubation fails). Rapid sequence induction risks complete laryngospasm with complete obstruction \u2014 contraindicated as sole approach. (5) Adult vs pediatric epiglottitis: adult disease is less rapidly progressive than pediatric but still life-threatening. Hib vaccination has nearly eliminated pediatric epiglottitis (Hib was #1 cause pre-vaccine). Adults: S. pyogenes, S. aureus, polymicrobial. Occasionally: thermal injury, direct trauma."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Epiglottitis \u2014 Adult, 'Thumb Sign' on Lateral X-ray, Controlled Airway in OR",
+    "caseId": "epiglottitis"
   }
 };

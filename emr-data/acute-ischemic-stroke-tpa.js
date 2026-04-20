@@ -438,97 +438,90 @@ window.EMR_DATA = {
     }
   ],
   "meta": {
-    "diagnosis": "Acute Ischemic Stroke \u2014 tPA Eligible, 2.5-Hour Onset, NIHSS 14",
+    "diagnosis": "Acute Ischemic Stroke \u2014 Left MCA, NIHSS 14, tPA Eligible, Door-to-Needle 38 Minutes",
     "caseId": "acute-ischemic-stroke-tpa"
   },
   "problems": [
     {
-      "problem": "Acute ischemic stroke \u2014 MCA territory",
+      "problem": "Acute ischemic stroke \u2014 left MCA territory",
       "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "NIHSS 14, last known well 2.5h ago \u2014 within tPA window. No contraindications identified."
+      "notes": "James Okoye, NIHSS 14 \u2014 last known well 3h ago. tPA given door-to-needle 38 min."
     },
     {
-      "problem": "Atrial fibrillation \u2014 new, likely cardioembolic source",
+      "problem": "Hypertension \u2014 longstanding",
+      "icd": "I10",
+      "onset": "2016",
+      "status": "Active",
+      "notes": "BP 188/104 on arrival \u2014 treated per tPA protocol (target <180/105 before and during infusion)"
+    },
+    {
+      "problem": "Atrial fibrillation \u2014 detected on monitor, probable embolic source",
       "icd": "I48.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "Irregularly irregular rhythm on ECG \u2014 first detected today. Cardioembolic stroke mechanism."
-    },
-    {
-      "problem": "BP 194/108 \u2014 must lower before tPA",
-      "icd": "I63.512",
-      "onset": "2024",
-      "status": "Active",
-      "notes": "BP >185/110 is absolute contraindication to tPA \u2014 must reach <185/110 before administration"
+      "notes": "New AFib detected on arrival monitor \u2014 embolic stroke. Anticoagulation timing decision at 48-72h."
     }
   ],
   "medications": [
     {
-      "name": "Labetalol 10mg IV x2 \u2014 BP reduction before tPA",
-      "sig": "IV push, may repeat q10 min \u2014 target BP <185/110 before tPA",
+      "name": "Alteplase (tPA) 0.9mg/kg IV (max 90mg) \u2014 GIVEN",
+      "sig": "10% as bolus over 1 min, remainder over 60 min. Now monitoring.",
       "prescriber": "Neurology",
       "start": "11/2024",
       "refills": 0,
-      "status": "Active pre-tPA"
+      "status": "Given \u2014 monitoring for hemorrhagic transformation"
     },
     {
-      "name": "Alteplase (tPA) 0.9mg/kg IV (max 90mg) \u2014 10% bolus over 1 min, rest over 1h",
-      "sig": "Weight-based dose \u2014 10% bolus immediately, remainder over 60 minutes",
+      "name": "Labetalol 10mg IV x1 \u2014 BP management pre-tPA",
+      "sig": "Given to reduce BP <185/110 before tPA. Current BP 176/102.",
       "prescriber": "Neurology",
       "start": "11/2024",
       "refills": 0,
-      "status": "Active"
+      "status": "Given"
     },
     {
-      "name": "Aspirin \u2014 HOLD x24h after tPA",
-      "sig": "Do not give aspirin for 24 hours after tPA \u2014 bleeding risk",
+      "name": "Aspirin 325mg via NG \u2014 24h post-tPA",
+      "sig": "Start 24 hours after tPA \u2014 not before (bleeding risk)",
       "prescriber": "Neurology",
       "start": "11/2024",
       "refills": 0,
-      "status": "HOLD 24h post-tPA"
+      "status": "Scheduled for 24h post-tPA"
     },
     {
-      "name": "Apixaban 5mg BID \u2014 start after 24h imaging confirms no hemorrhage",
-      "sig": "Anticoagulation for AFib \u2014 start once tPA hemorrhage window cleared",
+      "name": "DVT prophylaxis \u2014 HOLD 24h (tPA given)",
+      "sig": "Hold mechanical + pharmacological prophylaxis 24h post-tPA",
       "prescriber": "Neurology",
       "start": "11/2024",
-      "refills": 5,
-      "status": "Start 24h post-tPA pending imaging"
+      "refills": 0,
+      "status": "HELD 24h"
     }
   ],
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "Stroke Workup \u2014 Pre-tPA",
+      "panel": "Stroke Code Labs",
       "results": [
         {
-          "test": "Glucose (POC)",
-          "value": "112",
+          "test": "Glucose",
+          "value": "142",
           "unit": "mg/dL",
-          "ref": "70-400 acceptable for tPA",
-          "flag": ""
+          "ref": "70-180",
+          "flag": "H"
         },
         {
           "test": "INR",
           "value": "1.0",
           "unit": "",
-          "ref": "<1.7 for tPA",
+          "ref": "0.9-1.1",
           "flag": ""
         },
         {
           "test": "Platelets",
           "value": "228",
           "unit": "K/\u03bcL",
-          "ref": ">100,000 for tPA",
-          "flag": ""
-        },
-        {
-          "test": "PTT",
-          "value": "28",
-          "unit": "sec",
-          "ref": "<40 for tPA",
+          "ref": "150-400",
           "flag": ""
         },
         {
@@ -537,6 +530,13 @@ window.EMR_DATA = {
           "unit": "mg/dL",
           "ref": "0.6-1.2",
           "flag": ""
+        },
+        {
+          "test": "LDL",
+          "value": "148",
+          "unit": "mg/dL",
+          "ref": "<70 for stroke",
+          "flag": "H"
         }
       ]
     }
@@ -544,23 +544,23 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "11/18/2024",
-      "study": "CT Head Non-Contrast + CT Angiography Head/Neck",
-      "indication": "Acute neurological deficit \u2014 stroke protocol",
-      "findings": "CT Head: No hemorrhage. No hyper-dense MCA sign. No early ischemic changes (ASPECTS 9). CTA: Left M1 occlusion. Adequate collaterals. No cervical carotid stenosis. CTP (if performed): Ischemic core <10mL, penumbra 80mL \u2014 large salvageable tissue.",
-      "impression": "Left M1 occlusion \u2014 LARGE ischemic penumbra. IV tPA eligible. Also candidate for mechanical thrombectomy (large vessel occlusion). Activate neurointerventional team for concurrent thrombectomy planning."
+      "study": "CT Brain Without Contrast + CT Angiography Head/Neck",
+      "indication": "Stroke code \u2014 rule out hemorrhage, identify occlusion",
+      "findings": "CT brain: No acute hemorrhage. No established infarct. Hyperdense MCA sign left M2 segment. ASPECTS score 9 (early ischemic changes left MCA territory \u2014 1 point loss for subtle insular ribbon sign). CTA: Left M2 occlusion. Proximal MCA patent. Moderate cervical ICA stenosis bilaterally (40% right, 35% left).",
+      "impression": "Acute left M2 occlusion. No hemorrhage. ASPECTS 9. tPA administered. Mechanical thrombectomy considered \u2014 M2 occlusion with NIHSS 14, consider endovascular intervention."
     }
   ],
   "guided": {
     "ddxTargets": [
-      "Acute ischemic stroke \u2014 tPA eligible, M1 occlusion (correct)",
-      "Hemorrhagic stroke \u2014 CT shows no hemorrhage",
-      "Todd's paralysis \u2014 no seizure history, acute onset, CT/CTA shows occlusion",
-      "Hypoglycemic hemiplegia \u2014 glucose 112, not hypoglycemic",
-      "Complex migraine \u2014 no migraine history, M1 occlusion confirmed",
-      "Hypertensive encephalopathy \u2014 would be bilateral, diffuse"
+      "Acute ischemic stroke \u2014 tPA given, M2 occlusion (correct)",
+      "Hemorrhagic stroke \u2014 CT head negative for hemorrhage",
+      "Todd's paralysis \u2014 post-ictal, but no witnessed seizure and CT/CTA consistent with stroke",
+      "Hypoglycemia mimicking stroke \u2014 glucose 142, rules out",
+      "Complex migraine \u2014 no prior history, NIHSS 14 too severe",
+      "Brain tumor \u2014 CT no mass, acute onset"
     ],
     "coachPrompts": {
-      "final": "Diagnosis: acute ischemic stroke, M1 occlusion, tPA eligible. Key learning: (1) Time = brain: 1.9 million neurons die per minute in untreated LVO stroke. Door-to-needle time goal <60 minutes. (2) tPA eligibility checklist \u2014 key contraindications: hemorrhage on CT (absolute), BP >185/110 (must treat first), glucose <50 or >400, INR >1.7 (anticoagulated), platelets <100K, known arteriovenous malformation, recent surgery/trauma within 3 months (relative). (3) BP management: lower to <185/110 before tPA using labetalol or nicardipine. After tPA: maintain <180/105 for 24h to prevent hemorrhagic transformation. (4) Large vessel occlusion \u2192 mechanical thrombectomy: M1 occlusion + large penumbra = ideal candidate for thrombectomy (DAWN/DEFUSE trials extend window to 24h with imaging selection). tPA + thrombectomy is superior to tPA alone for LVO. Activate interventional neuro simultaneously. (5) AFib detected acutely: confirms cardioembolic mechanism. Anticoagulate AFTER hemorrhage excluded at 24-hour imaging. DOAC preferred over warfarin for AFib-related stroke."
+      "final": "Diagnosis: acute left MCA stroke \u2014 tPA given door-to-needle 38 min. Key learning: (1) tPA eligibility checklist: onset <4.5h (3h here \u2713), age \u226518 \u2713, measurable deficit \u2713, CT no hemorrhage \u2713, BP <185/110 (treated \u2713), glucose 50-400 (142 \u2713), INR <1.7 \u2713, platelets >100K \u2713. Extended window (3-4.5h) additional criteria: no prior stroke + DM combination, no prior stroke within 3 months, NIHSS \u226425. All met. (2) Door-to-needle time: target <60 minutes, benchmark <45 min. 38 min = excellent. Each 15-minute reduction in DNT improves functional outcome. (3) M2 occlusion + mechanical thrombectomy: NIHSS 14 with M2 occlusion is in the 'borderline' zone for thrombectomy. Current guidelines (DAWN/DEFUSE-3): strong evidence for M1 and ICA occlusion. M2 = emerging evidence for thrombectomy when clinical-core mismatch is present (substantial NIHSS with small core on imaging). Neurovascular surgery consult is appropriate. (4) Hemorrhagic transformation monitoring: post-tPA protocol: BP q15min x2h, then q30min x6h, then q1h x16h. Neurological exam hourly. Any deterioration \u2192 STAT CT head. (5) Anticoagulation for AFib: wait 48-72h after large stroke before starting DOAC (hemorrhagic transformation risk). 'Time-to-anticoagulate' depends on infarct size \u2014 neurology decision."
     }
   }
 };

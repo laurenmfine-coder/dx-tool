@@ -1,4 +1,4 @@
-/* emr-data/fournier-gangrene.js — EMR case data for Fournier Gangrene (Necrotizing Perineal Fasciitis) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Jefferson",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "9671 Poplar Ave, Detroit, MI 48219",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "Walgreens — University Dr",
+    "pharmacy": "Walgreens \u2014 University Dr",
     "emergencyContact": {
       "name": "Gerald Phillips",
       "phone": "(312) 555-1821",
@@ -26,61 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Type 2 Diabetes",
+      "problem": "Fournier's gangrene \u2014 perineal necrotizing fasciitis",
+      "icd": "N49.3",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Perineal pain, crepitus, erythema spreading to scrotum/perineum \u2014 polymicrobial synergistic infection"
     },
     {
-      "id": "prob-2",
-      "description": "Obesity",
+      "problem": "Type 2 diabetes mellitus \u2014 primary risk factor",
+      "icd": "E11.9",
+      "onset": "2017",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "A1c 11.2% \u2014 poor glycemic control is the dominant risk factor for Fournier's"
     },
     {
-      "id": "prob-3",
-      "description": "Recurrent perianal abscesses",
+      "problem": "Sepsis \u2014 from anaerobic/synergistic necrotizing infection",
+      "icd": "A41.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Peripheral vascular disease",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "HR 118, BP 96/68, temp 39.4\u00b0C \u2014 septic from polymicrobial gas-forming infection"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Insulin glargine",
-      "dose": "40 units QHS (often misses doses)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Piperacillin-tazobactam 4.5g IV q8h + metronidazole 500mg IV q8h + vancomycin",
+      "sig": "Triple antibiotic therapy \u2014 gram-positive (vanco) + gram-negative/anaerobic (pip-tazo + metro)",
+      "prescriber": "Surgery/ID",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Metformin",
-      "dose": "1000mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "NS 30 mL/kg IV bolus \u2014 sepsis resuscitation",
+      "sig": "IV bolus \u2014 target MAP >65",
+      "prescriber": "Surgery/ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Aspirin",
-      "dose": "81mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Emergency surgical debridement \u2014 radical excision of necrotic tissue",
+      "sig": "Radical debridement of all necrotic tissue \u2014 antibiotics alone are INSUFFICIENT",
+      "prescriber": "Urology/Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "EMERGENT OR within 6h"
     }
   ],
   "allergies": [
@@ -98,7 +88,7 @@ window.EMR_DATA = {
       "bp": "92/58",
       "hr": "128",
       "rr": "26",
-      "temp": "39.7°C",
+      "temp": "39.7\u00b0C",
       "spo2": "93%",
       "pain": "10/10",
       "bmi": "30",
@@ -114,203 +104,74 @@ window.EMR_DATA = {
       "cc": "Pain down there that's getting worse fast Perineum, scrotum, extending to bilateral inguinal creases and lower abdominal wall",
       "hpi": "Marcus Jefferson is a 58-year-old male presenting with pain down there that's getting worse fast perineum, scrotum, extending to bilateral inguinal creases and lower abdominal wall. Past medical history includes Type 2 Diabetes, Obesity, Recurrent perianal abscesses, Peripheral vascular disease. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Fournier Gangrene (Necrotizing Perineal Fasciitis) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Fournier Gangrene (Necrotizing Perineal Fasciitis) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-171016",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Fournier's Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "26.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "47",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "182",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "24.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "130",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "4.7",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "105",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "27",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "386",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "10.3",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Bands",
+          "value": "38",
+          "unit": "%",
+          "ref": "0-10",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "6.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "CRP",
-              "value": "32.4",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Blood Cultures",
-              "value": "Pending — drawn before antibiotics",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.26",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            }
-          ]
+          "test": "Glucose",
+          "value": "382",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "HbA1c",
+          "value": "11.2",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "2.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "4.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "28.4",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-511415",
-      "clinical": "Pain down there that's getting worse fast Perineum, scrotum, extending to bilateral inguinal creases and lower abdominal wall",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Abdomen/Pelvis with Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-468243",
-      "clinical": "Pain down there that's getting worse fast Perineum, scrotum, extending to bilateral inguinal creases and lower abdominal wall",
-      "technique": "Standard protocol",
-      "findings": "Extensive soft tissue gas tracking through the perineum, bilateral inguinal regions, and lower anterior abdominal wall. Fat stranding and fluid collection in the perineum. Left inguinal abscess with gas. Fascial plane thickening. No intra-abdominal abscess. Testes appear normal.",
-      "impression": "FOURNIER GANGRENE — extensive necrotizing fasciitis of perineum with gas gangrene. EMERGENT SURGICAL DEBRIDEMENT REQUIRED.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-512252",
-      "clinical": "Pain down there that's getting worse fast Perineum, scrotum, extending to bilateral inguinal creases and lower abdominal wall",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 128 bpm. No ST changes",
-      "impression": "Sinus tachycardia — sepsis and pain",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "CT Pelvis/Perineum with Contrast",
+      "indication": "Perineal swelling, crepitus, sepsis \u2014 evaluate extent of necrotizing infection",
+      "findings": "Subcutaneous gas within perineal soft tissues, extending along fascial planes to scrotum, perineal body, and medial thighs bilaterally. Fascial plane thickening and fat stranding consistent with necrotizing fasciitis. No abscess requiring separate drainage \u2014 diffuse process. Rectum and bladder intact.",
+      "impression": "Fournier's gangrene confirmed \u2014 subcutaneous gas tracking along fascial planes. Emergency surgical debridement required \u2014 extent is larger than clinical exam suggests."
     }
   ],
   "immunizations": [
@@ -351,7 +212,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "Disabled — not working"
+      "Disabled \u2014 not working"
     ],
     [
       "Living",
@@ -417,13 +278,12 @@ window.EMR_DATA = {
       "Digital rectal examination": "Deferred due to patient's severe pain and clinical picture"
     },
     "ddxTargets": [
-      "Fournier's gangrene (correct diagnosis)",
-      "Severe cellulitis",
-      "Perianal abscess",
-      "Necrotizing soft tissue infection",
-      "Gas gangrene",
-      "Scrotal abscess",
-      "Parinaud's gangrene variant"
+      "Fournier's gangrene \u2014 emergency debridement (correct)",
+      "Scrotal abscess \u2014 localized, no fascial plane gas",
+      "Epididymo-orchitis \u2014 no crepitus, no systemic sepsis of this severity",
+      "Perineal cellulitis \u2014 no gas on CT, less severe",
+      "Strangulated hernia \u2014 inguinal anatomy, different location",
+      "Ecthyma gangrenosum \u2014 Pseudomonas, immunocompromised, different appearance"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's history of recurrent perianal abscesses and assuming this is just another abscess rather than recognizing the necrotizing process",
@@ -433,7 +293,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at this 58-year-old diabetic man with severe perineal pain, what aspects of his presentation and risk factors should guide your history-taking? Consider what red flags you'd want to specifically ask about given his comorbidities.",
       "phase5": "Now that you've examined Marcus and found crepitus, necrosis, and systemic toxicity, how does this change your assessment? What does the combination of his diabetes, the rapid progression, and these physical findings tell you about the urgency and nature of this condition?",
-      "finalDebrief": "Fournier's gangrene is a urological emergency requiring immediate surgical debridement. Let's discuss how the key features - diabetic patient, rapid progression, crepitus, necrosis, and systemic toxicity - distinguish this from simple cellulitis or abscess. What made this diagnosis challenging to recognize early, and how might we avoid delays in similar cases?"
+      "finalDebrief": "Fournier's gangrene is a urological emergency requiring immediate surgical debridement. Let's discuss how the key features - diabetic patient, rapid progression, crepitus, necrosis, and systemic toxicity - distinguish this from simple cellulitis or abscess. What made this diagnosis challenging to recognize early, and how might we avoid delays in similar cases?",
+      "final": "Diagnosis: Fournier's gangrene \u2014 perineal necrotizing fasciitis. Key learning: (1) Fournier's = necrotizing fasciitis of the perineum/scrotum. Polymicrobial synergism: aerobic organisms consume oxygen \u2192 create anaerobic microenvironment \u2192 anaerobes proliferate \u2192 gas production (crepitus). Synergy between aerobic and anaerobic organisms makes this MORE virulent than either alone. (2) Risk factors: diabetes (A1c 11.2% here \u2014 dominant risk), immunosuppression, obesity, alcohol. Diabetes impairs neutrophil function, microvascular perfusion, and wound healing \u2014 perfect environment for necrotizing infection. (3) LRINEC score: Laboratory Risk Indicator for Necrotizing Fasciitis: CRP + WBC + Hgb + sodium + creatinine + glucose. Score \u22656 = high probability. This patient: very high score. CT with gas in fascial planes = radiographic confirmation. (4) Antibiotics are NOT enough: fascial planes are avascular once necrotic \u2014 antibiotics cannot penetrate. Only surgical debridement removes infected tissue. Radical excision with 2-3cm margins of healthy tissue. Multiple re-look operations every 24-48h are standard. (5) Mortality: 20-40% despite treatment. Correlates with extent of disease, delay to surgery, APACHE II score. Each hour of delay in debridement increases mortality."
     }
+  },
+  "meta": {
+    "diagnosis": "Fournier's Gangrene \u2014 Necrotizing Fasciitis of Perineum, Polymicrobial, Emergency Debridement",
+    "caseId": "fournier-gangrene"
   }
 };

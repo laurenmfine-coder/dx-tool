@@ -1,8 +1,8 @@
-/* emr-data/compartment-syndrome.js — EMR case data for Acute Compartment Syndrome (Tibial Fracture) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Fernandez",
-    "patientHPI": "The pain in the front of my right shin is severe and getting worse by the hour — it feels like intense pressure building up inside my leg, and nothing I do makes it better.",
+    "patientHPI": "The pain in the front of my right shin is severe and getting worse by the hour \u2014 it feels like intense pressure building up inside my leg, and nothing I do makes it better.",
     "dob": "06/15/2002",
     "age": "24",
     "sex": "Male",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "4362 Ash St, Minneapolis, MN 55407",
     "insurance": "Medicare",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "CVS Pharmacy — Federal Hwy",
+    "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Diana Bailey",
       "phone": "(404) 555-1823",
@@ -26,22 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "None — healthy 26-year-old",
+      "problem": "Acute compartment syndrome \u2014 right lower leg",
+      "icd": "M79.A11",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Tibial fracture 6h ago, compartment pressure 44 mmHg, 5 Ps \u2014 emergency fasciotomy"
+    },
+    {
+      "problem": "Tibial shaft fracture \u2014 mechanism",
+      "icd": "S82.201A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "MVC mechanism. ORIF planned \u2014 fasciotomy required first to prevent muscle necrosis."
+    },
+    {
+      "problem": "Pain out of proportion \u2014 cardinal symptom",
+      "icd": "M79.A11",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Pain with passive stretch of toes \u2014 most sensitive early finding. Paresthesias developing."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "None",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "HOLD elevation above heart level \u2014 CONTRAINDICATED in compartment syndrome",
+      "sig": "Do NOT elevate limb \u2014 reduces perfusion pressure. Keep at heart level.",
+      "prescriber": "Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 important order"
+    },
+    {
+      "name": "Morphine 4mg IV PRN \u2014 adequate analgesia",
+      "sig": "IV PRN \u2014 pain control while preparing for emergency fasciotomy",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "Emergency fasciotomy \u2014 bedside or OR",
+      "sig": "Definitive treatment \u2014 four-compartment fasciotomy right lower leg",
+      "prescriber": "Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 within 1 hour"
     }
   ],
   "allergies": [
@@ -59,7 +88,7 @@ window.EMR_DATA = {
       "bp": "158/92 (pain-induced hypertension)",
       "hr": "118",
       "rr": "22",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "10/10",
       "bmi": "29",
@@ -72,199 +101,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
-      "hpi": "Mateo Fernandez is a 24-year-old male presenting with severe right shin pain. Past medical history includes None — healthy 26-year-old. See chart for full details.",
+      "cc": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",
+      "hpi": "Mateo Fernandez is a 24-year-old male presenting with severe right shin pain. Past medical history includes None \u2014 healthy 26-year-old. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Compartment Syndrome (Tibial Fracture) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Compartment Syndrome (Tibial Fracture) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-653401",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Compartment Syndrome Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "9.1",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.9",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "190",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Compartment pressure (Stryker)",
+          "value": "44",
+          "unit": "mmHg",
+          "ref": "<30 (threshold for fasciotomy)",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "145",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "98",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "8",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "89",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "CK",
+          "value": "8,800",
+          "unit": "U/L",
+          "ref": "22-198",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "CK Total",
-              "value": "2,800",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            },
-            {
-              "test": "Myoglobin (Urine)",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "2.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Myoglobin (urine)",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "2.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "Potassium",
+          "value": "5.2",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-874022",
-      "clinical": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "X-ray Tibia/Fibula",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-492295",
-      "clinical": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
-      "technique": "Standard protocol",
-      "findings": "Transverse fracture of the right tibial shaft at the junction of the middle and distal thirds. Minimally displaced. Associated distal fibula fracture. No intra-articular extension. Adequate alignment in splint.",
-      "impression": "Right tibial shaft fracture with distal fibula fracture. No gross malalignment. Clinical concern for compartment syndrome — measurement of compartment pressures recommended.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-339048",
-      "clinical": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 118 bpm. Normal intervals",
-      "impression": "Sinus tachycardia — pain",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Right Tibial X-ray AP/Lateral",
+      "indication": "MVC lower leg injury",
+      "findings": "Comminuted mid-shaft tibial fracture. Fibula fracture at same level. Soft tissue swelling significant. No vascular injury identified on imaging but clinical compartment syndrome supersedes imaging.",
+      "impression": "Comminuted tibial shaft fracture. Clinical diagnosis of acute compartment syndrome \u2014 emergency fasciotomy indicated before ORIF."
     }
   ],
   "immunizations": [
@@ -371,13 +271,12 @@ window.EMR_DATA = {
       "Deep peroneal nerve sensation testing": "Decreased sensation in deep peroneal nerve distribution"
     },
     "ddxTargets": [
-      "Acute anterior compartment syndrome (correct diagnosis)",
-      "Tibial stress fracture",
-      "Shin splints (medial tibial stress syndrome)",
-      "Deep vein thrombosis",
-      "Necrotizing fasciitis",
-      "Tibial fracture",
-      "Severe contusion with hematoma"
+      "Acute compartment syndrome \u2014 emergency fasciotomy (correct)",
+      "Deep vein thrombosis \u2014 different pathophysiology, soft tender cord, positive duplex",
+      "Peripheral artery occlusion \u2014 absent pulses (present here early)",
+      "Fracture pain alone \u2014 pressure measurement confirms compartment syndrome",
+      "Rhabdomyolysis without compartment syndrome \u2014 CK elevated from muscle injury but pressure confirms",
+      "Neuropraxia from fracture \u2014 sensory changes, but pressure measurement is diagnostic"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'shin splints' or simple contusion given patient's athletic background and mechanism of injury during training",
@@ -387,7 +286,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Compartment syndrome can be limb-threatening - what key historical features would help you identify this emergency? Think about the timeline and character of pain that might distinguish it from more common injuries.",
       "phase5": "Your exam findings are concerning. You noted tense compartments, pain with passive stretch, and neurovascular changes. How do these findings fit together, and what does this constellation suggest about the urgency of the situation?",
-      "finalDebrief": "This case highlights how compartment syndrome can evolve from seemingly minor trauma. The key was recognizing the progressive nature of severe pain, the classic 'pressure' sensation, pain with passive stretch, and early neurovascular compromise. Time is muscle in compartment syndrome - delays can lead to permanent disability."
+      "finalDebrief": "This case highlights how compartment syndrome can evolve from seemingly minor trauma. The key was recognizing the progressive nature of severe pain, the classic 'pressure' sensation, pain with passive stretch, and early neurovascular compromise. Time is muscle in compartment syndrome - delays can lead to permanent disability.",
+      "final": "Diagnosis: acute compartment syndrome \u2014 emergency fasciotomy. Key learning: (1) 6 Ps: Pain (out of proportion), Pressure (tense compartment on palpation), Paresthesias (tingling), Paralysis (late), Pallor (late), Pulselessness (late). LATE signs (pallor, pulselessness) = irreversible damage already occurring. Pain with passive stretch of toes is the EARLIEST sign. Trust pain out of proportion. (2) Fasciotomy threshold: delta pressure (diastolic BP - compartment pressure) \u226430 mmHg = fasciotomy. OR compartment pressure alone >40-45 mmHg. Compartment pressure 44 mmHg with diastolic 70 = delta 26 = fasciotomy clearly indicated. (3) NEVER elevate the limb \u2014 conventional wisdom from swelling management is WRONG in compartment syndrome. Elevation reduces perfusion pressure (which = MAP - compartment pressure). Heart level or below. (4) Rhabdomyolysis: CK 8,800 and rising. Concurrent aggressive hydration to prevent AKI from myoglobin. After fasciotomy, reperfusion increases CK further \u2014 monitor and hydrate. (5) Time to fasciotomy: irreversible muscle necrosis begins at 6 hours of elevated compartment pressure. Nerve damage at 4 hours. This patient is at 6 hours \u2014 fasciotomy now saves function. After fasciotomy, ORIF of tibial fracture can proceed."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Compartment Syndrome \u2014 Anterior Tibial Compartment, Pressure >40 mmHg, Emergency Fasciotomy",
+    "caseId": "compartment-syndrome"
   }
 };

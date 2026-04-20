@@ -801,112 +801,112 @@ window.EMR_DATA = {
     }
   ],
   "meta": {
-    "diagnosis": "Severe Eosinophilic Asthma \u2014 Type 2 Inflammation, Dupilumab or Benralizumab Candidate",
+    "diagnosis": "Severe Persistent Asthma \u2014 Eosinophilic Phenotype, Biologic Therapy (Dupilumab) Candidate",
     "caseId": "severe-asthma-biologics"
   },
   "problems": [
     {
-      "problem": "Severe persistent asthma \u2014 Step 5 refractory",
-      "icd": "J45.50",
-      "onset": "2016",
+      "problem": "Severe persistent asthma \u2014 uncontrolled on high-dose ICS/LABA",
+      "icd": "J45.51",
+      "onset": "2018",
       "status": "Active",
-      "notes": "On high-dose ICS/LABA + LAMA + OCS burst x4/year \u2014 FeNO 72, eos 620 \u2014 type 2 high"
+      "notes": "2 hospitalizations + 4 ED visits past year. FEV1 62% predicted on maximal inhaled therapy."
     },
     {
-      "problem": "Eosinophilic asthma \u2014 blood eos 620",
-      "icd": "J45.50",
+      "problem": "Eosinophilic asthma phenotype \u2014 biologic candidate",
+      "icd": "J45.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "Eos >300 = IL-5 pathway target; >150 with high FeNO = IL-4/13 pathway target \u2014 both biologics indicated"
+      "notes": "Blood eosinophils 480 cells/\u03bcL + FeNO 52 ppb = type 2 inflammatory phenotype"
     },
     {
-      "problem": "Prednisone dependence \u2014 adrenal suppression risk",
-      "icd": "E27.3",
-      "onset": "2023",
+      "problem": "Oral corticosteroid dependence \u2014 cumulative toxicity",
+      "icd": "M81.8",
+      "onset": "2024",
       "status": "Active",
-      "notes": "3-4 burst courses per year = steroid toxicity risk: osteoporosis, diabetes, cataracts, HPA suppression"
+      "notes": "4 prednisone courses this year = osteoporosis, hyperglycemia, adrenal suppression risk"
     }
   ],
   "medications": [
     {
-      "name": "Fluticasone-salmeterol 500/50 BID \u2014 Step 4 ICS/LABA",
-      "sig": "1 puff twice daily",
-      "prescriber": "Pulmonology",
-      "start": "2019",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Tiotropium 18mcg daily \u2014 LAMA add-on",
-      "sig": "1 capsule inhaled daily via HandiHaler",
+      "name": "Fluticasone-Salmeterol 500/50mcg inhaled BID",
+      "sig": "2 puffs twice daily \u2014 high-dose ICS/LABA",
       "prescriber": "Pulmonology",
       "start": "2021",
       "refills": 5,
       "status": "Active"
     },
     {
-      "name": "Prednisone 40mg PO x5 days \u2014 burst (4th this year)",
-      "sig": "Take daily for 5 days \u2014 acute exacerbation",
+      "name": "Tiotropium 18mcg inhaled daily \u2014 add-on LAMA",
+      "sig": "1 capsule inhaled daily via HandiHaler",
+      "prescriber": "Pulmonology",
+      "start": "2023",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Dupilumab 300mg SQ q2 weeks \u2014 biologic PENDING approval",
+      "sig": "Subcutaneous injection every 2 weeks \u2014 IL-4/IL-13 receptor antagonist",
+      "prescriber": "Pulmonology/Allergy",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Prior auth pending"
+    },
+    {
+      "name": "Prednisone 40mg PO daily x5 days (exacerbation burst)",
+      "sig": "Take daily for 5 days \u2014 current exacerbation",
       "prescriber": "Pulmonology",
       "start": "11/2024",
       "refills": 0,
-      "status": "Active \u2014 this is the trigger for biologic discussion"
-    },
-    {
-      "name": "Dupilumab 300mg SQ q2 weeks \u2014 INITIATING",
-      "sig": "Subcutaneous injection every 2 weeks \u2014 IL-4/13 receptor antagonist",
-      "prescriber": "Pulmonology/Allergy",
-      "start": "11/2024",
-      "refills": 6,
-      "status": "Active \u2014 new biologic"
+      "status": "Active \u2014 current burst"
     }
   ],
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "Severe Asthma Biologic Eligibility",
+      "panel": "Asthma Phenotyping",
       "results": [
         {
           "test": "Blood eosinophils",
-          "value": "620",
+          "value": "480",
           "unit": "cells/\u03bcL",
-          "ref": "<300 (100-300 borderline)",
-          "flag": "H"
-        },
-        {
-          "test": "FeNO (fractional exhaled NO)",
-          "value": "72",
-          "unit": "ppb",
-          "ref": "<25 (25-50 borderline, >50 high)",
+          "ref": "<150 normal",
           "flag": "H"
         },
         {
           "test": "Total IgE",
-          "value": "428",
+          "value": "420",
           "unit": "IU/mL",
           "ref": "<100",
           "flag": "H"
         },
         {
-          "test": "Periostin",
-          "value": "Elevated \u2014 62 ng/mL",
-          "unit": "ng/mL",
-          "ref": "<23",
+          "test": "FeNO (exhaled nitric oxide)",
+          "value": "52",
+          "unit": "ppb",
+          "ref": "<25 normal",
           "flag": "H"
         },
         {
-          "test": "Spirometry FEV1",
-          "value": "58",
-          "unit": "% predicted",
-          "ref": ">80",
+          "test": "FEV1 (% predicted)",
+          "value": "62",
+          "unit": "%",
+          "ref": ">80%",
           "flag": "L"
         },
         {
-          "test": "FEV1/FVC",
-          "value": "0.64",
+          "test": "FEV1/FVC ratio",
+          "value": "0.68",
           "unit": "",
-          "ref": ">0.7",
+          "ref": ">0.70",
           "flag": "L"
+        },
+        {
+          "test": "Periostin",
+          "value": "Elevated",
+          "unit": "ng/mL",
+          "ref": "<23",
+          "flag": "H"
         }
       ]
     }
@@ -915,22 +915,22 @@ window.EMR_DATA = {
     {
       "date": "11/18/2024",
       "study": "High-Resolution CT Chest",
-      "indication": "Severe asthma \u2014 evaluate for complicating bronchiectasis or other pathology",
-      "findings": "Bilateral bronchial wall thickening consistent with asthma. Mild air trapping. No mucous plugging. No bronchiectasis. No consolidation.",
-      "impression": "Chronic airway changes consistent with severe persistent asthma. No complications."
+      "indication": "Severe asthma \u2014 rule out structural disease, ABPA",
+      "findings": "Mild mucus plugging bilateral lower lobes. No bronchiectasis. No consolidation. Air trapping on expiratory phase. No mediastinal adenopathy. No fungal infiltrates.",
+      "impression": "CT consistent with severe asthma. No structural bronchiectasis. No ABPA features. Air trapping consistent with severe obstructive disease."
     }
   ],
   "guided": {
     "ddxTargets": [
-      "Severe eosinophilic asthma \u2014 biologic therapy indicated (correct)",
-      "Mild-moderate asthma \u2014 misclassification, this is Step 5 refractory",
-      "ABPA (allergic bronchopulmonary aspergillosis) \u2014 eosinophilia + asthma, but no mucous plugging",
-      "Eosinophilic granulomatosis with polyangiitis (EGPA/Churg-Strauss) \u2014 asthma + eos, but no neuropathy",
-      "COPD with eosinophilia \u2014 pure COPD without eosinophilic component",
-      "Hypereosinophilic syndrome \u2014 systemic eosinophilia >1500, organ involvement"
+      "Severe eosinophilic asthma \u2014 biologic candidate (correct)",
+      "ABPA \u2014 IgE elevated but no bronchiectasis or fungal hyphae on CT",
+      "Vocal cord dysfunction \u2014 spirometry flow-volume loop would show",
+      "COPD \u2014 age and non-smoker history inconsistent",
+      "Eosinophilic granulomatosis with polyangiitis (EGPA) \u2014 systemic vasculitis features absent",
+      "Cardiac asthma \u2014 BNP normal, no effusion"
     ],
     "coachPrompts": {
-      "final": "Diagnosis: severe eosinophilic asthma \u2014 biologic candidate. Key learning: (1) Type 2 inflammation fingerprint: FeNO >50 + blood eos >300 = classic Type 2 high. Mechanism: IL-4 \u2192 IgE production + mucus; IL-13 \u2192 airway remodeling; IL-5 \u2192 eosinophil survival. All targetable by approved biologics. (2) Biologic selection algorithm: Eos >300 AND FeNO >25 \u2192 dupilumab (IL-4R\u03b1, blocks IL-4 and IL-13) \u2014 best efficacy for mixed eos/IgE phenotype. Eos >300 only \u2192 mepolizumab or benralizumab (IL-5/IL-5R\u03b1). High IgE + perennial allergen sensitization \u2192 omalizumab (anti-IgE). (3) Evidence: dupilumab LIBERTY ASTHMA QUEST trial: 70% reduction in severe exacerbations, 45% reduction in OCS use. Benralizumab SIROCCO: 51% exacerbation reduction. (4) OCS burden: 4 bursts/year + likely between bursts = significant HPA suppression. Morning cortisol stimulation test if surgery planned. Adrenal crisis risk. Biologics are OCS-sparing \u2014 the 4th burst this year is the clinical decision point to initiate. (5) Biologic coverage: specialty pharmacy prior authorization required. Step 5 documentation (high-dose ICS/LABA + add-on agent + multiple OCS bursts) is the insurance requirement. Pulmonologist/allergist writes the PA. Most approved for eos >300 or FeNO >25 \u2014 this patient qualifies on all criteria."
+      "final": "Diagnosis: severe eosinophilic asthma \u2014 biologic-eligible. Key learning: (1) Severe asthma definition: requires high-dose ICS + second controller AND remains uncontrolled, OR requires OCS to maintain control. This patient meets criteria (high-dose ICS/LABA/LAMA + 2 hospitalizations + OCS bursts). (2) Phenotyping guides biologic selection: Type 2 (T2) high = eosinophils \u2265150 cells/\u03bcL + FeNO >25 ppb \u2192 anti-IL-5 (mepolizumab, benralizumab) or anti-IL-4/IL-13 (dupilumab). Type 2 low/negative \u2192 thermoplasty or tezepelumab (TSLP inhibitor, works in both T2 high and low). (3) Biologic comparison for eosinophilic asthma: mepolizumab/benralizumab = anti-IL-5 (eosinophil clearance). Dupilumab = anti-IL-4R\u03b1 (blocks IL-4 + IL-13 signaling) \u2014 preferred if atopic dermatitis or eosinophilic esophagitis coexist. (4) Biologic efficacy: 50-60% reduction in exacerbations. May achieve OCS-free remission in some patients. Effect takes 3-6 months to fully develop. (5) OCS burden: 4 courses/year = significant cumulative toxicity. Biologic initiation is partially justified by OCS-sparing effect. Document OCS exposure formally (cumulative dose per year) \u2014 this supports prior authorization."
     }
   }
 };

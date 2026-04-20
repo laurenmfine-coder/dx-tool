@@ -23,20 +23,66 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Post-MI Week 3",
-      "icd": "Z00.00",
+      "problem": "Post-myocardial infarction \u2014 cardiac rehab entry",
+      "icd": "I21.4",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "STEMI 3 weeks ago, stent placed LAD. EF 48%. Cardiac rehab referral. LVEF and stress test guide exercise Rx."
+    },
+    {
+      "problem": "Exercise-induced angina risk \u2014 post-MI",
+      "icd": "I20.8",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Stress test performed: no ischemia at 85% max HR. No arrhythmia. Cleared for Phase II rehab."
+    },
+    {
+      "problem": "Depression post-MI \u2014 30% prevalence, screening positive",
+      "icd": "F32.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "PHQ-9 score 11 \u2014 moderate depression. Exercise has proven antidepressant effect in post-MI."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 81mg daily",
+      "sig": "Take daily",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Ticagrelor 90mg BID \u2014 dual antiplatelet",
+      "sig": "Take twice daily \u2014 DAPT post-stent, minimum 12 months",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Metoprolol succinate 50mg daily",
+      "sig": "Take daily \u2014 cardioprotective beta-blocker",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 80mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 5mg daily \u2014 post-MI, EF 48%",
+      "sig": "Take daily \u2014 ACEi for EF preservation",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,7 +143,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/15/2024",
+      "panel": "Post-MI Week 3 Assessment",
+      "results": [
+        {
+          "test": "Exercise stress test \u2014 MET capacity",
+          "value": "8.2",
+          "unit": "METs",
+          "ref": ">10 normal",
+          "flag": "L"
+        },
+        {
+          "test": "Peak HR achieved",
+          "value": "148",
+          "unit": "bpm",
+          "ref": "85% max = 144",
+          "flag": ""
+        },
+        {
+          "test": "EF (repeat echo week 2)",
+          "value": "48",
+          "unit": "%",
+          "ref": ">55% normal",
+          "flag": "L"
+        },
+        {
+          "test": "LDL",
+          "value": "62",
+          "unit": "mg/dL",
+          "ref": "<55 post-ACS target",
+          "flag": "H"
+        },
+        {
+          "test": "BNP",
+          "value": "88",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +218,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pt-cardiac-rehab-post-mi",
-    "diagnosis": "See diagnosis \u2014 Post-MI Week 3",
+    "diagnosis": "Post-MI Week 3 \u2014 Cardiac Rehabilitation Phase II: Risk Stratification and Exercise Prescription",
     "acuity": 3,
     "presentation": "Post-MI Week 3",
     "category": "cardiovascular"
@@ -180,12 +268,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Post-MI Week 3 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-MI \u2014 Phase II cardiac rehab, exercise prescription (correct)",
+      "Exercise contraindicated post-MI \u2014 evidence supports early activity after stent",
+      "Phase I only (inpatient) \u2014 Phase II is outpatient, ongoing",
+      "Exercise without monitoring \u2014 Phase II requires ECG monitoring for first 18 sessions",
+      "Return to full activity immediately \u2014 graded return is safer and more effective",
+      "Defer rehab until 3 months \u2014 delayed start reduces adherence and outcomes"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +283,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Post-MI Week 3. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) How do you risk-stratify this post-MI patient before initiating cardiac rehab \u2014 and what heart rate range, RPE target, and warning signs guide your exercise prescription? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-STEMI week 3 \u2014 Phase II cardiac rehab. Key PT learning: (1) Cardiac rehab phases: Phase I = inpatient (ambulation post-MI/surgery). Phase II = outpatient supervised exercise, 36 sessions, ECG-monitored. Phase III = community unsupervised maintenance. Phase II reduces cardiac mortality 25% and improves quality of life \u2014 but only 20-30% of eligible patients are referred. PT advocates for referral. (2) Exercise prescription post-MI: Karvonen formula: Target HR = resting HR + training % \u00d7 (max HR - resting HR). Use stress test peak HR as max HR surrogate. Start at 50-60% HRR, progress to 70-85% over weeks. (3) FITT prescription: Frequency 3-5x/week, Intensity 50-85% HRR, Time 20-45 min aerobic, Type: walking, cycling, rowing, combination. (4) Post-MI exercise warning signs \u2014 stop and call physician: chest pain or pressure, significant shortness of breath, dizziness, palpitations, claudication. PT teaches patients these stopping criteria before home exercise. (5) Depression and cardiac rehab: PHQ-9 11 = moderate depression. Exercise is evidence-based treatment for post-MI depression. Cardiac rehab improves depression scores. Additionally, depression doubles cardiac mortality post-MI \u2014 treating it is part of cardiac rehab's scope."
     }
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/epidural-hematoma.js — EMR case data for Epidural Hematoma */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Reeves",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "9797 Oak Ave, Memphis, TN 38112",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Sarah Mitchell, MD",
-    "pharmacy": "Walmart Pharmacy — Federal Hwy",
+    "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Michael Walker",
       "phone": "(212) 555-7455",
@@ -26,14 +26,53 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "None significant",
+      "problem": "Epidural hematoma \u2014 right temporal, middle meningeal artery",
+      "icd": "S06.4X0A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Lucid interval x4h, now deteriorating \u2014 classic EDH presentation. Temporal bone fracture."
+    },
+    {
+      "problem": "Herniation risk \u2014 transtentorial",
+      "icd": "G93.5",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Left pupil dilation developing \u2014 ipsilateral CN III compression from uncal herniation. Emergency craniotomy."
+    },
+    {
+      "problem": "GCS 12 and falling \u2014 herniation syndrome",
+      "icd": "S09.90XA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "GCS dropped from 15 (lucid interval) to 12 over 2 hours \u2014 neurological deterioration"
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Mannitol 1g/kg IV over 20 min \u2014 herniation treatment",
+      "sig": "IV bolus \u2014 osmotic diuresis reduces intracranial pressure as bridge to surgery",
+      "prescriber": "Neurosurgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "HOB 30\u00b0 elevation",
+      "sig": "Head of bed 30 degrees \u2014 reduces ICP without compromising CPP",
+      "prescriber": "Neurosurgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Emergency craniotomy \u2014 within 1-2 hours",
+      "sig": "Definitive treatment \u2014 evacuation of epidural hematoma",
+      "prescriber": "Neurosurgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "EMERGENT OR"
+    }
+  ],
   "allergies": [
     {
       "allergen": "Sulfa drugs",
@@ -49,7 +88,7 @@ window.EMR_DATA = {
       "bp": "162/88",
       "hr": "56",
       "rr": "14",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "98%",
       "pain": "4/10",
       "bmi": "34",
@@ -65,206 +104,67 @@ window.EMR_DATA = {
       "cc": "Fell and hit my head Left side of my head where I hit it",
       "hpi": "Tyler Reeves is a 22-year-old male presenting with fell and hit my head left side of my head where i hit it. Past medical history includes None significant. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Epidural Hematoma — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Epidural Hematoma \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-275449",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "EDH Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "12.1",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "37",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "268",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "GCS at arrival (lucid interval)",
+          "value": "15",
+          "unit": "",
+          "ref": "15",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "10",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "GCS at 2 hours",
+          "value": "12",
+          "unit": "",
+          "ref": "15",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "PT/INR",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Ethanol",
-              "value": "<10",
-              "unit": "mg/dL",
-              "range": "<10",
-              "flag": ""
-            }
-          ]
+          "test": "Left pupil",
+          "value": "5mm, sluggish",
+          "unit": "",
+          "ref": "Equal, brisk",
+          "flag": "H"
+        },
+        {
+          "test": "Right pupil",
+          "value": "3mm, brisk",
+          "unit": "",
+          "ref": "Equal, brisk",
+          "flag": ""
+        },
+        {
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "13.8",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-884181",
-      "clinical": "Fell and hit my head Left side of my head where I hit it",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-662400",
-      "clinical": "Fell and hit my head Left side of my head where I hit it",
-      "technique": "Standard protocol",
-      "findings": "Large BICONVEX (lens-shaped) hyperdense collection in the left temporal-parietal region measuring approximately 15mm in maximal thickness. Mass effect with 8mm leftward-to-rightward midline shift. Effacement of the left lateral ventricle. Left temporal bone fracture crossing the middle meningeal artery groove. No underlying parenchymal contusion.",
-      "impression": "ACUTE EPIDURAL HEMATOMA — left temporal-parietal, 15mm thick, 8mm midline shift. NEUROSURGICAL EMERGENCY — requires emergent craniotomy.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "CT Cervical Spine",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-621401",
-      "clinical": "Fell and hit my head Left side of my head where I hit it",
-      "technique": "Standard protocol",
-      "findings": "No fracture or subluxation. Normal alignment. No prevertebral soft tissue swelling.",
-      "impression": "No acute cervical spine injury — clear c-spine",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-495873",
-      "clinical": "Fell and hit my head Left side of my head where I hit it",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus bradycardia at 56 bpm. Normal intervals. No ST changes",
-      "impression": "Sinus bradycardia — Cushing response (bradycardia + hypertension = increased ICP)",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "CT Head Non-Contrast \u2014 Emergency",
+      "indication": "Head trauma, lucid interval, now deteriorating",
+      "findings": "Right temporal epidural hematoma \u2014 biconvex (lenticular) hyperdense collection 4.5cm, 45mL volume. Midline shift 7mm left. Right temporal bone fracture through middle meningeal artery groove. Ipsilateral sulcal effacement. No contrecoup injury. No subdural hematoma.",
+      "impression": "Classic epidural hematoma from middle meningeal artery. Significant midline shift \u2014 herniation risk. Emergency neurosurgical evacuation required."
     }
   ],
   "immunizations": [
@@ -372,13 +272,12 @@ window.EMR_DATA = {
       "Vital signs assessment": "Hypertensive at 162/88, bradycardic at 56 - concerning for Cushing's triad"
     },
     "ddxTargets": [
-      "Epidural hematoma (correct diagnosis)",
-      "Subdural hematoma",
-      "Traumatic brain injury with cerebral contusion",
-      "Intracranial hemorrhage",
-      "Skull fracture with brain injury",
-      "Concussion with post-concussive syndrome",
-      "Intoxication or substance use"
+      "Epidural hematoma \u2014 emergency craniotomy (correct)",
+      "Subdural hematoma \u2014 crescent-shaped, crosses suture lines, venous (different shape and mechanism)",
+      "Subarachnoid hemorrhage \u2014 blood in cisterns/sulci, thunderclap headache",
+      "Diffuse axonal injury \u2014 no focal collection, scattered white matter changes",
+      "Intracerebral hemorrhage \u2014 intraparenchymal, different location",
+      "Cerebral contusion \u2014 no biconvex collection, in brain parenchyma"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'simple concussion' in a young, healthy patient and missing the lucid interval and evolving epidural hematoma",
@@ -388,7 +287,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified head trauma as the key issue. This patient is showing neurological decline hours after injury. What specific complications of head trauma should you be most concerned about in someone with this timeline? Think about the classic patterns of intracranial bleeding.",
       "phase5": "You've found anisocoria, declining mental status, and hypertension with bradycardia hours after temporal impact. This constellation of findings should make you think of a specific neurosurgical emergency. What's the most likely anatomical location and type of bleeding?",
-      "finalDebrief": "This case illustrates the classic 'lucid interval' of epidural hematoma - initial relatively normal function followed by rapid deterioration. The temporal impact, anisocoria, Cushing's triad, and timeline all point to arterial bleeding requiring emergent neurosurgical intervention. How did your differential diagnosis evolve as you gathered more data?"
+      "finalDebrief": "This case illustrates the classic 'lucid interval' of epidural hematoma - initial relatively normal function followed by rapid deterioration. The temporal impact, anisocoria, Cushing's triad, and timeline all point to arterial bleeding requiring emergent neurosurgical intervention. How did your differential diagnosis evolve as you gathered more data?",
+      "final": "Diagnosis: epidural hematoma \u2014 lucid interval pathognomonic. Key learning: (1) Lucid interval mechanism: injury \u2192 brief LOC (concussive) \u2192 regains consciousness (lucid interval) \u2192 arterial hematoma expands \u2192 herniation. Lucid interval occurs because EDH is arterial (fast bleeding but tolerated briefly by compensatory mechanisms) whereas SDH is venous (slower). Duration of lucid interval: minutes to hours. (2) CT appearance: biconvex (lenticular) hyperdense collection that does NOT cross suture lines (periosteal dura is firmly attached at suture lines, confining the epidural space). Compare to SDH: crescent-shaped, crosses sutures freely. (3) Middle meningeal artery: runs in groove on inner temporal bone. Temporal bone fracture + middle meningeal artery laceration = classic EDH. (4) CN III compression: uncus (medial temporal lobe) herniates over tentorium \u2192 compresses ipsilateral CN III \u2192 ipsilateral pupil dilation (blown pupil). This is a herniation emergency \u2014 craniotomy within 30-60 minutes or death. (5) Surgery threshold: EDH >30mL OR thickness >15mm OR midline shift >5mm OR clinical herniation = immediate surgery. This patient meets multiple criteria. Outcome after evacuation of acute EDH: 90%+ good neurological recovery IF operated before herniation becomes complete."
     }
+  },
+  "meta": {
+    "diagnosis": "Epidural Hematoma \u2014 Classic 'Lucid Interval', Middle Meningeal Artery, Emergency Craniotomy",
+    "caseId": "epidural-hematoma"
   }
 };

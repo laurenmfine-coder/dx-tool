@@ -1006,51 +1006,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Allergic rhinitis \u2014 moderate-severe, uncontrolled",
-      "icd": "J30.9",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "Daily symptoms, nasal congestion, postnasal drip, sleep disruption \u2014 on OTC antihistamine only"
-    },
-    {
-      "problem": "Allergic sensitization \u2014 dust mite and cat dander",
+      "problem": "Allergic rhinitis \u2014 persistent, moderate-severe",
       "icd": "J30.1",
-      "onset": "2019",
+      "onset": "2018",
       "status": "Active",
-      "notes": "Skin prick testing: 3+ dust mite, 2+ cat dander \u2014 perennial allergens, unavoidable indoors"
+      "notes": "Poorly controlled despite cetirizine daily. Nasal corticosteroid technique is incorrect \u2014 pointing toward septum not turbinates."
     },
     {
-      "problem": "Allergic conjunctivitis \u2014 concurrent",
-      "icd": "H10.10",
-      "onset": "2019",
+      "problem": "Allergen sensitization \u2014 perennial (dust mite, pet dander) + seasonal (tree, grass)",
+      "icd": "J30.1",
+      "onset": "2018",
       "status": "Active",
-      "notes": "Bilateral eye itching/redness \u2014 common AR comorbidity, same inflammatory mechanism"
+      "notes": "Skin prick testing: ++++ dust mite, +++ cat dander, +++ grass pollen. Multi-allergen sensitization."
+    },
+    {
+      "problem": "Comorbid conjunctivitis and asthma \u2014 united airway disease",
+      "icd": "J30.1",
+      "onset": "2020",
+      "status": "Active",
+      "notes": "AR + allergic conjunctivitis + mild asthma = classic united airway disease. Treat AR improves asthma control."
     }
   ],
   "medications": [
     {
-      "name": "Fluticasone propionate nasal spray 50mcg \u2014 2 sprays per nostril daily",
-      "sig": "Spray twice into each nostril daily \u2014 most effective monotherapy for AR",
-      "prescriber": "Allergy",
+      "name": "Fluticasone propionate 50mcg nasal spray 2 sprays each nostril daily",
+      "sig": "CORRECT TECHNIQUE: Tilt head slightly forward, angle tip toward outer corner of eye (NOT toward septum), sniff gently, breathe through mouth",
+      "prescriber": "Dr. Torres, Allergy",
       "start": "11/2024",
-      "refills": 3,
-      "status": "Active \u2014 step-up"
+      "refills": 4,
+      "status": "Active \u2014 technique corrected"
     },
     {
-      "name": "Cetirizine 10mg daily \u2014 oral antihistamine (adjunct)",
-      "sig": "Take daily \u2014 adjunct for breakthrough symptoms, especially itching",
-      "prescriber": "Allergy",
-      "start": "11/2024",
+      "name": "Cetirizine 10mg PO daily \u2014 continue",
+      "sig": "Take daily \u2014 good for pruritus and sneezing, insufficient alone for congestion",
+      "prescriber": "Dr. Torres",
+      "start": "2021",
       "refills": 5,
       "status": "Active"
     },
     {
-      "name": "Olopatadine 0.2% ophthalmic drops BID",
-      "sig": "1 drop each eye twice daily \u2014 allergic conjunctivitis",
-      "prescriber": "Allergy",
+      "name": "Azelastine 0.1% nasal spray 1 spray each nostril BID",
+      "sig": "Add-on \u2014 topical antihistamine for breakthrough symptoms",
+      "prescriber": "Dr. Torres",
       "start": "11/2024",
-      "refills": 2,
-      "status": "Active"
+      "refills": 3,
+      "status": "Active \u2014 new"
+    },
+    {
+      "name": "Allergen immunotherapy \u2014 subcutaneous, year 1",
+      "sig": "Build-up phase: weekly injections. Maintenance: q4 weeks. Curative intent.",
+      "prescriber": "Dr. Torres, Allergy",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 initiating"
     }
   ],
   "allergies": [
@@ -1100,42 +1108,42 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "11/18/2024",
-      "panel": "Allergy Testing",
+      "date": "10/15/2024",
+      "panel": "Allergic Rhinitis Workup",
       "results": [
         {
-          "test": "Skin prick test \u2014 House dust mite (D. farinae)",
-          "value": "Wheal 9mm / Flare 22mm",
-          "unit": "",
-          "ref": "Positive \u22653mm wheal",
-          "flag": "H"
-        },
-        {
-          "test": "Skin prick test \u2014 Cat dander",
-          "value": "Wheal 7mm / Flare 18mm",
-          "unit": "",
-          "ref": "Positive \u22653mm",
-          "flag": "H"
-        },
-        {
-          "test": "Skin prick test \u2014 Dog dander",
-          "value": "Wheal 3mm \u2014 borderline",
-          "unit": "",
-          "ref": "\u22653mm",
-          "flag": ""
-        },
-        {
           "test": "Total IgE",
-          "value": "388",
+          "value": "340",
           "unit": "IU/mL",
           "ref": "<100",
           "flag": "H"
         },
         {
-          "test": "FeNO (fractional exhaled nitric oxide)",
-          "value": "28",
-          "unit": "ppb",
-          "ref": "<25",
+          "test": "Skin prick test \u2014 dust mite (Derp 1)",
+          "value": "8mm wheal",
+          "unit": "mm",
+          "ref": "<3mm negative",
+          "flag": "H"
+        },
+        {
+          "test": "Skin prick test \u2014 grass pollen",
+          "value": "7mm wheal",
+          "unit": "mm",
+          "ref": "<3mm negative",
+          "flag": "H"
+        },
+        {
+          "test": "Skin prick test \u2014 cat dander",
+          "value": "6mm wheal",
+          "unit": "mm",
+          "ref": "<3mm negative",
+          "flag": "H"
+        },
+        {
+          "test": "Eosinophils",
+          "value": "420",
+          "unit": "cells/\u03bcL",
+          "ref": "<150 normal",
           "flag": "H"
         }
       ]
@@ -1260,12 +1268,12 @@ window.EMR_DATA = {
       "Assessment of nasal voice quality": "Hyponasal speech pattern due to nasal obstruction"
     },
     "ddxTargets": [
-      "Allergic rhinitis uncontrolled \u2014 intranasal steroid step-up (correct)",
-      "Non-allergic rhinitis \u2014 SPT positive, allergy confirmed",
-      "Chronic sinusitis \u2014 no facial pressure/purulent discharge, no imaging findings",
-      "Nasal polyps \u2014 not identified on exam",
+      "Allergic rhinitis \u2014 poor technique + multi-allergen, immunotherapy candidate (correct)",
+      "Non-allergic rhinitis \u2014 IgE and skin testing positive for allergens",
+      "Chronic sinusitis \u2014 no imaging findings, rhinitis is the primary",
       "Vasomotor rhinitis \u2014 triggered by irritants not allergens",
-      "NARES (non-allergic rhinitis with eosinophilia) \u2014 negative SPT, not the case here"
+      "Nasal polyps \u2014 endoscopy not yet done but unilateral obstruction absent",
+      "Rhinitis medicamentosa \u2014 not using decongestant nasal spray"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'allergy patient' and missing structural causes like severe turbinate hypertrophy that may require surgical intervention",
@@ -1276,11 +1284,11 @@ window.EMR_DATA = {
       "phase2": "You've identified allergic rhinitis in your differential. What specific aspects of Derek's presentation might help you determine severity and identify why his current comprehensive medical regimen isn't providing adequate relief?",
       "phase5": "Derek's physical exam shows significant turbinate hypertrophy despite maximal medical therapy. How does this finding change your assessment of disease severity and management approach? What additional interventions might you consider?",
       "finalDebrief": "This case illustrates severe perennial allergic rhinitis with secondary turbinate hypertrophy - a condition where optimal medical therapy may be insufficient. How did the physical exam findings of enlarged turbinates and the patient's poor response to multiple medications guide you toward considering more aggressive interventions like immunotherapy or surgical options?",
-      "final": "Diagnosis: uncontrolled moderate-severe AR \u2014 step-up to intranasal corticosteroid (INCS). Key learning: (1) INCS is the most effective monotherapy for AR \u2014 superior to oral antihistamines for congestion, postnasal drip, and overall symptom control (2A level evidence). Should be first-line for moderate-severe persistent AR, not step-up. If patient was started on antihistamine first, step up now. (2) Correct INCS technique: tilt head slightly forward, aim spray toward outer eye/ear (not the septum), sniff gently. Septum-directed spray causes epistaxis \u2014 the most common reason patients stop. (3) Immunotherapy: the only disease-modifying treatment for AR. Subcutaneous immunotherapy (SCIT) or sublingual (SLIT) \u2014 both effective for dust mite and animal danders. After 3-5 years, induces long-term tolerance. Consider for any patient who: (a) inadequately controlled on pharmacotherapy, (b) wants to reduce medication burden, (c) has comorbid asthma (reduces risk of asthma development). (4) FeNO 28: borderline elevated \u2014 suggests eosinophilic airway inflammation. If asthma symptoms develop, this is a pre-morbid marker. Counsel on asthma prevention (early treatment of AR reduces asthma risk). (5) Cat avoidance: if cat is in the home, immunotherapy is preferable to removal for many patients \u2014 removal of a beloved pet causes significant quality of life impact and adherence is poor."
+      "final": "Diagnosis: allergic rhinitis uncontrolled \u2014 technique failure + multi-allergen, immunotherapy initiation. Key learning: (1) Intranasal steroid technique is the single most common reason for perceived treatment failure. Correct technique: aim the bottle AWAY from the septum, toward the outer corner of the eye (lateral, toward the turbinates). Pointing toward septum = drug hits the septum, causes bleeding, misses the turbinates where the effect is needed. Re-demonstrate technique at every visit. (2) Treatment ladder (ARIA guidelines): Mild intermittent \u2192 antihistamine PRN. Moderate-severe persistent \u2192 intranasal corticosteroid (INCS) daily as first-line. Uncontrolled on INCS \u2192 add azelastine (topical antihistamine) OR combine INCS + antihistamine in single spray (Dymista). (3) Allergen immunotherapy (SCIT): indicated when: (a) inadequate response to pharmacotherapy, (b) adverse effects from medications, (c) desire for long-term remission. SCIT: 30-50% reduction in symptoms, 40% reduction in asthma exacerbations, disease modification lasting years after discontinuation. (4) United airway disease: allergic rhinitis and asthma share the same type 2 inflammatory mechanism. Treating AR reduces bronchial hyperreactivity. Ask about lower respiratory symptoms in every AR patient. (5) Dust mite avoidance counseling: mattress covers, pillow covers, wash bedding weekly in hot water (>130\u00b0F), reduce humidity <50%. Pet avoidance for cat dander: rehome pet ideally (most effective) or keep pet out of bedroom."
     }
   },
   "meta": {
-    "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled on Monotherapy, Step-Up to Intranasal Steroid + Immunotherapy Discussion",
+    "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled Despite Antihistamine, Inadequate Intranasal Steroid Technique",
     "caseId": "allergic-rhinitis-uncontrolled"
   }
 };

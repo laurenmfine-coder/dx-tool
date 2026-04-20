@@ -465,55 +465,47 @@ window.EMR_DATA = {
     }
   ],
   "meta": {
-    "diagnosis": "Occupational Asthma \u2014 Isocyanate-Induced, Auto Body Painter, Workplace Exposure Confirmed",
+    "diagnosis": "Occupational Asthma \u2014 Isocyanate-Induced, Serial Peak Flow Monitoring Confirmatory",
     "caseId": "occupational-asthma-isocyanate"
   },
   "problems": [
     {
       "problem": "Occupational asthma \u2014 isocyanate sensitization",
-      "icd": "J45.990",
+      "icd": "J68.3",
       "onset": "2024",
       "status": "Active",
-      "notes": "Auto body painter x8 years, work-related bronchospasm confirmed by serial PEF monitoring"
+      "notes": "Auto body painter, symptoms worsen at work and improve on weekends/vacation \u2014 classic OA pattern"
     },
     {
-      "problem": "New-onset asthma in adult \u2014 red flag for occupational cause",
-      "icd": "J45.20",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "New asthma at age 34 without childhood history \u2014 OA until proven otherwise in any new-onset adult asthma"
-    },
-    {
-      "problem": "Isocyanate sensitization \u2014 permanent \u2014 cannot return to exposure",
-      "icd": "J45.990",
+      "problem": "Work-related asthma \u2014 legal and disability implications",
+      "icd": "Z57.5",
       "onset": "2024",
       "status": "Active",
-      "notes": "Once sensitized to isocyanate, any re-exposure causes severe bronchospasm \u2014 workplace removal mandatory"
+      "notes": "OA diagnosis = workplace exposure documentation, workers' comp, potential job reassignment"
+    },
+    {
+      "problem": "Isocyanate sensitization \u2014 complete avoidance required",
+      "icd": "J68.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Once sensitized, even trace isocyanate exposure causes severe bronchospasm \u2014 no safe level"
     }
   ],
   "medications": [
     {
-      "name": "Fluticasone-salmeterol 250/50 inhaled BID",
-      "sig": "1 puff twice daily \u2014 ICS/LABA combination",
-      "prescriber": "Pulmonology",
-      "start": "11/2024",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Albuterol 90mcg MDI 2 puffs PRN",
-      "sig": "Rescue inhaler as needed",
+      "name": "Albuterol 90mcg MDI 2 puffs PRN \u2014 rescue inhaler",
+      "sig": "2 puffs as needed \u2014 start immediately",
       "prescriber": "Pulmonology",
       "start": "11/2024",
       "refills": 3,
-      "status": "PRN"
+      "status": "Active"
     },
     {
-      "name": "Montelukast 10mg daily",
-      "sig": "Take daily \u2014 leukotriene modifier adjunct",
+      "name": "Fluticasone 250mcg inhaled BID \u2014 controller",
+      "sig": "2 puffs twice daily \u2014 ICS for ongoing airway inflammation",
       "prescriber": "Pulmonology",
       "start": "11/2024",
-      "refills": 6,
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -523,63 +515,62 @@ window.EMR_DATA = {
       "panel": "Occupational Asthma Workup",
       "results": [
         {
-          "test": "Spirometry FEV1 (work day)",
-          "value": "2.1",
-          "unit": "L",
-          "ref": "Predicted 3.2L",
+          "test": "Methacholine challenge \u2014 PC20",
+          "value": "4.2",
+          "unit": "mg/mL",
+          "ref": ">16 = normal",
+          "flag": "H"
+        },
+        {
+          "test": "Serial peak flow \u2014 work days (mean)",
+          "value": "320",
+          "unit": "L/min",
+          "ref": "predicted 530",
           "flag": "L"
         },
         {
-          "test": "Spirometry FEV1 (off work, 2 weeks)",
-          "value": "2.8",
-          "unit": "L",
-          "ref": "Predicted 3.2L",
+          "test": "Serial peak flow \u2014 off-work days (mean)",
+          "value": "488",
+          "unit": "L/min",
+          "ref": "predicted 530",
           "flag": ""
         },
         {
-          "test": "FEV1 improvement with off-work period",
-          "value": "33%",
-          "unit": "%",
-          "ref": ">15% = work-related",
-          "flag": "H"
-        },
-        {
-          "test": "Methacholine challenge (off work)",
-          "value": "PC20 4 mg/mL \u2014 nonspecific hyperresponsiveness",
-          "unit": "",
-          "ref": "<8 mg/mL = positive",
-          "flag": "H"
-        },
-        {
           "test": "Isocyanate-specific IgE",
-          "value": "Positive \u2014 0.42 kU/L",
+          "value": "Positive (0.46 kU/L)",
           "unit": "kU/L",
-          "ref": "<0.35",
+          "ref": "<0.35 negative",
           "flag": "H"
+        },
+        {
+          "test": "FEV1 pre-work shift",
+          "value": "82",
+          "unit": "% predicted",
+          "ref": ">80%",
+          "flag": ""
+        },
+        {
+          "test": "FEV1 post-work shift (same day)",
+          "value": "68",
+          "unit": "% predicted",
+          "ref": ">80%",
+          "flag": "L"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "11/18/2024",
-      "study": "High-Resolution CT Chest",
-      "indication": "Occupational asthma \u2014 rule out hypersensitivity pneumonitis from isocyanate",
-      "findings": "Bilateral ground-glass opacities predominantly in lower lobes \u2014 mild. No honeycombing. No consolidation. Air trapping on expiratory phase.",
-      "impression": "Bilateral ground-glass opacities may represent hypersensitivity pneumonitis component in addition to OA. Bronchoalveolar lavage considered if clinical suspicion high. Air trapping supports hyperresponsive airways."
-    }
-  ],
+  "imaging": [],
   "guided": {
     "ddxTargets": [
-      "Occupational asthma \u2014 isocyanate sensitization (correct)",
-      "Intrinsic asthma \u2014 no occupational relationship",
-      "COPD \u2014 non-smoker, reversible airflow obstruction",
-      "Work-exacerbated asthma \u2014 pre-existing asthma worsened by workplace (different from OA)",
-      "Hypersensitivity pneumonitis \u2014 possible concurrent, CT ground-glass opacities",
-      "Vocal cord dysfunction \u2014 episodic inspiratory stridor, not bronchospasm"
+      "Occupational asthma \u2014 isocyanate (correct)",
+      "Allergic asthma from non-occupational allergen \u2014 work-pattern is diagnostic",
+      "Work-aggravated asthma \u2014 pre-existing asthma worsened by work (no prior history)",
+      "Chemical bronchitis \u2014 no reversibility feature",
+      "RADS (reactive airway dysfunction syndrome) \u2014 single high-level exposure, not sensitization",
+      "Vocal cord dysfunction \u2014 spirometry flow-volume loop would show"
     ],
     "coachPrompts": {
-      "final": "Diagnosis: occupational asthma, isocyanate-sensitized. Key learning: (1) Isocyanates (MDI, TDI, HDI in spray paints) are the #1 cause of OA worldwide. Painters, foamers, and plastics workers are highest risk. Once sensitized, trace exposures cause severe bronchospasm \u2014 LIFELONG workplace removal required. (2) Diagnosis criteria: (a) New or worsening asthma, (b) Temporal relationship to work exposure (worse at work, better on holidays), (c) Objective confirmation: serial PEF (>20% AM-PM variation on work vs non-work days), methacholine challenge off work vs at work, specific inhalation challenge (gold standard). (3) FEV1 improvement of 33% on 2-week off-work period = strong evidence for OA. Specific IgE to isocyanate = sensitization confirmed. (4) Workplace removal is medicine: removing the worker from isocyanate exposure is the most effective treatment \u2014 more effective than any drug. Duration of exposure before diagnosis correlates with permanence of airway changes. Early diagnosis saves lung function. (5) Compensation and legal implications: OA has workers' compensation and occupational disease reporting implications. Allergist/pulmonologist writes the medicolegal report. Patient may be entitled to retraining benefits."
+      "final": "Diagnosis: isocyanate-induced occupational asthma \u2014 isocyanate-specific IgE and serial peak flow confirmatory. Key learning: (1) OA diagnosis criteria: (a) Work-related symptoms (better on weekends/vacation), (b) Objective evidence of variable airflow limitation (serial peak flow \u226520% variability, methacholine PC20 <4, or pre/post-shift FEV1 drop \u226510%), (c) Agent identified. Serial peak flow monitoring is the most practical confirmatory test (every 2 hours for 2 weeks, work and non-work days). (2) Isocyanate specifically: most common cause of OA worldwide. Sources: spray painting, polyurethane foam, rubber curing. Acts as both IgE-mediated sensitizer AND non-IgE-mediated irritant. Once sensitized: ANY exposure triggers asthma, even minutes of exposure to 1 ppb. (3) Management: REMOVE from exposure permanently. Continued exposure worsens sensitization and causes irreversible airway remodeling. Respirators do NOT provide adequate protection against isocyanates for sensitized workers. (4) Medico-legal: OA diagnosis triggers workers' compensation claim, workplace modification requirement (OSHA), and potential disability determination. Pulmonologist's documentation must be specific: 'isocyanate-induced occupational asthma, confirmed by serial peak flow and specific IgE.' (5) Prognosis: 30% fully recover after removal, 50% improve but retain some obstruction, 20% continue to worsen despite removal. Early diagnosis and prompt removal = best prognosis."
     }
   }
 };

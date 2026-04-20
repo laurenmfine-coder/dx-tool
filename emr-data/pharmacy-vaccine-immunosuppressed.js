@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Starting Methotrexate Then TNF Inhibitor",
-      "icd": "Z00.00",
+      "problem": "Immunocompromised \u2014 starting methotrexate then adalimumab",
+      "icd": "Z79.4",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "RA patient, 65yo, starting MTX then TNF inhibitor. Vaccine review required before immunosuppression."
+    },
+    {
+      "problem": "Rheumatoid arthritis \u2014 DMARD therapy initiation",
+      "icd": "M05.59",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "MTX + adalimumab (Humira) planned. Window to complete vaccines before immunosuppression is critical."
+    },
+    {
+      "problem": "Live vaccine contraindication \u2014 TNF inhibitor era",
+      "icd": "Z23",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Live vaccines (shingles/Zostavax, varicella, MMR) contraindicated while on biologics. Switch to Shingrix (recombinant)."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Methotrexate 15mg PO weekly \u2014 starting in 3 weeks",
+      "sig": "Weekly \u2014 hold vaccines 3 months before starting for optimal immune response",
+      "prescriber": "Rheumatology",
+      "start": "Pending",
+      "refills": 0,
+      "status": "Pending start"
+    },
+    {
+      "name": "Adalimumab (Humira) 40mg SQ q2 weeks \u2014 starting month 2",
+      "sig": "Subcutaneous q2 weeks \u2014 biologic DMARD",
+      "prescriber": "Rheumatology",
+      "start": "Pending",
+      "refills": 0,
+      "status": "Pending start"
     }
   ],
   "allergies": [
@@ -97,7 +119,49 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Pre-Immunosuppression Vaccine Screen",
+      "results": [
+        {
+          "test": "Hepatitis B surface antigen",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Hepatitis B surface antibody",
+          "value": "Negative (<10 mIU/mL)",
+          "unit": "mIU/mL",
+          "ref": ">10 = immune",
+          "flag": "L"
+        },
+        {
+          "test": "Varicella IgG",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Positive = immune",
+          "flag": ""
+        },
+        {
+          "test": "MMR IgG (measles, mumps, rubella)",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Positive = immune",
+          "flag": ""
+        },
+        {
+          "test": "Pneumococcal antibody titers",
+          "value": "Not checked \u2014 give PPSV23 and PCV15",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +194,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pharmacy-vaccine-immunosuppressed",
-    "diagnosis": "See diagnosis \u2014 Starting Methotrexate Then TNF Inhibitor",
+    "diagnosis": "Vaccine Safety in Immunosuppression \u2014 Methotrexate + TNF Inhibitor: Live Vaccines Contraindicated",
     "acuity": 3,
     "presentation": "Starting Methotrexate Then TNF Inhibitor",
     "category": "infectious"
@@ -173,12 +237,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "65yo Starting Methotrexate Then TNF Inhibitor \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Give Shingrix, PCV15/PPSV23, HepB series before starting biologics (correct)",
+      "Give Zostavax (live zoster vaccine) \u2014 CONTRAINDICATED on biologics",
+      "No vaccines needed \u2014 incorrect, immunocompromised patients need specific vaccines",
+      "Delay all vaccines until biologics started \u2014 opposite; vaccinate BEFORE",
+      "Give MMR booster \u2014 already immune (IgG positive), not needed",
+      "Influenza vaccine not needed in immunosuppressed \u2014 actually MORE important"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +252,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: Starting Methotrexate Then TNF Inhibitor. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) Which vaccines must be given BEFORE immunosuppression starts \u2014 and which are contraindicated after? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: pre-immunosuppression vaccine optimization \u2014 pharmacist review. Key pharmacy learning: (1) Live vaccine contraindications: Zostavax (live zoster \u2014 use Shingrix instead), varicella (patient immune, not needed), MMR (patient immune). Live vaccines must NOT be given during TNF inhibitor therapy OR within 3-4 weeks before starting. (2) Shingrix (recombinant zoster vaccine) is recommended for all adults \u226550 AND for immunocompromised patients regardless of age. Two-dose series. Can be given WHILE on biologic therapy (non-live). This is a pharmacist-detected intervention \u2014 Shingrix should be given NOW before MTX/adalimumab start. (3) Hepatitis B: HBV seronegative (anti-HBs negative) + starting immunosuppression = risk of HBV reactivation. Must test HBsAg and anti-HBc before biologics. If prior HBV infection (anti-HBc positive) \u2192 prophylactic antiviral (entecavir or tenofovir). If never vaccinated (like this patient) \u2192 complete HepB series before biologics. (4) Pneumococcal vaccines: all immunocompromised patients should receive PCV15 or PCV20 (pneumococcal conjugate) AND PPSV23 if not already given. Sequence matters: PCV first, PPSV23 at least 8 weeks later. (5) Influenza: inactivated influenza vaccine annually \u2014 safe during immunosuppression. Live attenuated influenza (FluMist nasal) is contraindicated."
     }
   }
 };

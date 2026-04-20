@@ -1,4 +1,4 @@
-/* emr-data/ectopic-pregnancy.js — EMR case data for Ruptured Ectopic Pregnancy */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Aisha Mohammed",
@@ -15,47 +15,62 @@ window.EMR_DATA = {
     "address": "2499 Hickory Rd, Albuquerque, NM 87103",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Walmart Pharmacy — University Dr",
+    "pharmacy": "Walmart Pharmacy \u2014 University Dr",
     "emergencyContact": {
       "name": "William Hill",
       "phone": "(414) 555-2684",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
+    "chiefComplaint": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
     "diagnosis": "Ruptured Ectopic Pregnancy"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Chlamydia infection",
+      "problem": "Ruptured ectopic pregnancy \u2014 left tube",
+      "icd": "O00.102",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Beta-hCG 4,800, no intrauterine pregnancy on transvaginal US, free fluid \u2014 ruptured ectopic"
     },
     {
-      "id": "prob-2",
-      "description": "No prior pregnancies",
+      "problem": "Hemoperitoneum \u2014 hemorrhagic shock developing",
+      "icd": "K66.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "BP 96/62, HR 116, 500mL free fluid in pelvis \u2014 internal hemorrhage from ruptured fallopian tube"
     },
     {
-      "id": "prob-3",
-      "description": "Endometriosis",
+      "problem": "IUD in place \u2014 not protective against ectopic",
+      "icd": "Z97.5",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "IUD prevents intrauterine pregnancy but NOT ectopic implantation \u2014 relative risk of ectopic INCREASED with IUD failure"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Norethindrone",
-      "dose": "0.35mg daily (progestin-only pill — started 4 months ago)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "2 large-bore IVs, LR 1L IV bolus",
+      "sig": "IV fluids \u2014 permissive hypotension if massive hemorrhage, target MAP 65",
+      "prescriber": "OB/Gyn + ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Type and Crossmatch \u2014 4 units pRBC",
+      "sig": "Blood ordered \u2014 hemorrhage risk",
+      "prescriber": "OB/Gyn",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Emergency laparoscopic salpingectomy",
+      "sig": "Definitive treatment \u2014 remove ruptured tube and control hemorrhage",
+      "prescriber": "OB/Gyn",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "EMERGENT OR"
     }
   ],
   "allergies": [
@@ -73,7 +88,7 @@ window.EMR_DATA = {
       "bp": "92/58",
       "hr": "124",
       "rr": "22",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "98%",
       "pain": "9/10",
       "bmi": "33",
@@ -86,223 +101,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
-      "hpi": "Aisha Mohammed is a 29-year-old female presenting with really bad pain in my lower belly right lower abdomen and pelvis — sudden onset. Past medical history includes Chlamydia infection, No prior pregnancies, Endometriosis. See chart for full details.",
+      "cc": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "hpi": "Aisha Mohammed is a 29-year-old female presenting with really bad pain in my lower belly right lower abdomen and pelvis \u2014 sudden onset. Past medical history includes Chlamydia infection, No prior pregnancies, Endometriosis. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Ruptured Ectopic Pregnancy — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Ruptured Ectopic Pregnancy \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-632165",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Ectopic Pregnancy Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "13.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "8.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "48",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "198",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Beta-hCG quantitative",
+          "value": "4,800",
+          "unit": "mIU/mL",
+          "ref": "",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "136",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.5",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "101",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "27",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "13",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.7",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "85",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "8.9",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "9.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "β-hCG",
-              "value": "4,200",
-              "unit": "mIU/mL",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "Type and Crossmatch",
-              "value": "O negative, 2 units pRBC crossmatched",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            },
-            {
-              "test": "Lactate",
-              "value": "4.1",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "PT/INR",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            }
-          ]
+          "test": "Hematocrit",
+          "value": "27",
+          "unit": "%",
+          "ref": "36-46",
+          "flag": "L"
+        },
+        {
+          "test": "Type and Screen",
+          "value": "AB positive \u2014 4 units pRBC ordered",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "INR",
+          "value": "1.1",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "0.9",
+          "unit": "mg/dL",
+          "ref": "0.5-1.1 pregnant",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-728537",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "POCUS – FAST Exam",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-926737",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "POSITIVE FREE FLUID in Morrison pouch and pelvis. Moderate amount of free fluid in pelvis (cul-de-sac). No intrauterine pregnancy visible in uterus. EMPTY UTERUS with endometrial stripe.",
-      "impression": "FREE INTRAPERITONEAL FLUID + positive β-hCG + empty uterus = RUPTURED ECTOPIC PREGNANCY. OB/GYN to OR emergently.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "POCUS – Cardiac",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-148980",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "Hyperdynamic LV function. Small, underfilled chambers (hypovolemia). No pericardial effusion.",
-      "impression": "Hyperdynamic and volume-depleted — consistent with hemorrhagic shock",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-317314",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 124 bpm. No ST changes",
-      "impression": "Sinus tachycardia — hemorrhagic shock",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Transvaginal Ultrasound + Pelvic US",
+      "indication": "Positive beta-hCG, pelvic pain, spotting, IUD in place",
+      "findings": "Uterus: IUD in appropriate position. No intrauterine gestational sac. Left adnexa: heterogeneous complex mass 3.2cm with ring-of-fire sign on Doppler \u2014 consistent with ectopic pregnancy. Free fluid: 500mL+ in pelvis and abdomen \u2014 consistent with hemoperitoneum. Right adnexa: normal ovary.",
+      "impression": "Left ectopic pregnancy with hemoperitoneum \u2014 ruptured. No intrauterine pregnancy. Emergency surgical management required."
     }
   ],
   "immunizations": [
@@ -410,13 +272,12 @@ window.EMR_DATA = {
       "Adnexal mass assessment": "Possible right adnexal fullness and tenderness, difficult to assess due to patient discomfort."
     },
     "ddxTargets": [
-      "Ruptured ectopic pregnancy (correct diagnosis)",
-      "Ovarian torsion",
-      "Ruptured ovarian cyst",
-      "Appendicitis (must-not-miss diagnosis 1)",
-      "Septic abortion (must-not-miss diagnosis 2)",
-      "Pelvic inflammatory disease (common mimic 1)",
-      "Endometriosis flare (common mimic 2)"
+      "Ruptured ectopic pregnancy \u2014 emergency salpingectomy (correct)",
+      "Ruptured ovarian cyst \u2014 beta-hCG positive distinguishes ectopic from functional cyst",
+      "Intrauterine pregnancy with threatened abortion \u2014 no IUP on TVU, ectopic confirmed",
+      "Appendicitis \u2014 beta-hCG positive and adnexal mass; left-sided, not RLQ",
+      "PID with tubo-ovarian abscess \u2014 fever, bilateral, no beta-hCG elevation",
+      "Miscarriage \u2014 no intrauterine sac visible, ring-of-fire sign ectopic-specific"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on appendicitis due to right lower quadrant pain and McBurney's point tenderness, potentially missing gynecologic causes",
@@ -426,7 +287,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. I notice you're considering both GI and GYN causes - that's appropriate for this presentation. What key historical elements will help you differentiate between these diagnoses? Think about what additional information might be most crucial given her demographics and presentation.",
       "phase5": "Excellent work gathering the history and physical findings. Let's synthesize what you've learned - you have a young woman with acute pelvic pain, hemodynamic instability, and some key examination findings. How do her vital signs and physical exam findings help narrow your differential? What's the most likely diagnosis given the constellation of findings?",
-      "finalDebrief": "This case highlights the importance of considering ectopic pregnancy in any woman of reproductive age with abdominal pain, especially with risk factors like endometriosis, prior chlamydia, and family history. The combination of acute onset pain, hemodynamic instability, shoulder pain, and cervical motion tenderness should raise immediate concern for rupture. How did the patient's presentation and your examination findings guide you toward the correct diagnosis?"
+      "finalDebrief": "This case highlights the importance of considering ectopic pregnancy in any woman of reproductive age with abdominal pain, especially with risk factors like endometriosis, prior chlamydia, and family history. The combination of acute onset pain, hemodynamic instability, shoulder pain, and cervical motion tenderness should raise immediate concern for rupture. How did the patient's presentation and your examination findings guide you toward the correct diagnosis?",
+      "final": "Diagnosis: ruptured ectopic pregnancy. Key learning: (1) Classic triad: missed period + pelvic pain + vaginal bleeding in a patient with positive beta-hCG. But: only 50% have all three. ANY woman of reproductive age with pelvic pain and positive beta-hCG = ectopic until proven otherwise. (2) Discriminatory zone: beta-hCG >1,500-2,000 mIU/mL should show intrauterine gestational sac on transvaginal US if intrauterine. No IUP at beta-hCG 4,800 + adnexal mass = ectopic pregnancy. (3) IUD and ectopic: IUDs are 99%+ effective against intrauterine pregnancy but do NOT protect against ectopic. If IUD fails (rare), the pregnancy is more likely to be ectopic than intrauterine (relative risk 10x higher). Never reassure a patient with an IUD that pregnancy cannot occur. (4) Ring of fire (Doppler): trophoblastic tissue is highly vascular \u2014 hypervascularity around the ectopic mass creates this characteristic Doppler appearance. (5) Methotrexate vs surgery: MTX (inhibits trophoblast) is appropriate for UNRUPTURED ectopic with beta-hCG <5,000 and hemodynamically stable. Ruptured ectopic with hemoperitoneum = emergency surgery (laparoscopy if stable, laparotomy if unstable). This patient is ruptured \u2014 MTX not appropriate."
     }
+  },
+  "meta": {
+    "diagnosis": "Ruptured Ectopic Pregnancy \u2014 Hemoperitoneum, Emergency Salpingectomy",
+    "caseId": "ectopic-pregnancy"
   }
 };
