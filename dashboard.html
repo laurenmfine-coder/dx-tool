@@ -171,6 +171,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href=(window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co'>
   <link rel="dns-prefetch" href="https://api.anthropic.com">
+<link rel="canonical" href="https://www.reasondx.com/dashboard.html">
 </head>
 <body>
 <a href="#rdx-dash-header" style="position:absolute;top:-100px;left:0;background:#2874A6;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:10000;transition:top .15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to dashboard</a>
@@ -216,7 +217,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
             <div class="pcw-week" id="pcw-week-label">Loading...</div>
           </div>
         </div>
-        <button class="pcw-collapse" onclick="toggleBrief()">Collapse ▲</button>
+        <button class="pcw-collapse" onclick="toggleBrief()" aria-label="Collapse brief panel">Collapse ▲</button>
       </div>
       <div class="pcw-body" id="pcw-body">
         <div class="pcw-loading"><div class="pcw-spinner"></div>Generating your coaching brief...</div>
@@ -228,7 +229,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="pcw-actions" id="pcw-actions" style="display:none">
         <a class="pcw-btn pcw-btn-primary" id="pcw-primary-btn" href="/browse.html">Top Recommendation →</a>
         <a class="pcw-btn pcw-btn-secondary" href="/ipe-crda.html">🤝 IPE Session</a>
-        <button class="pcw-btn pcw-btn-secondary" onclick="refreshBrief()">↺ Refresh</button>
+        <button class="pcw-btn pcw-btn-secondary" onclick="refreshBrief()" aria-label="Refresh clinical brief">↺ Refresh</button>
       </div>
     </div>
   </div>
@@ -266,7 +267,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px;color:#475569">
       <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
-        <input type="checkbox" id="rdx-email-optin" checked style="width:16px;height:16px;accent-color:#2874a6;cursor:pointer" onchange="window.RDXRetention&&window.RDXRetention.setEmailOptIn(this.checked)">
+        <input type="checkbox" id="rdx-email-optin" checked style="width:16px;height:16px;accent-color:#2874a6;cursor:pointer" onchange="window.RDXRetention&&window.RDXRetention.setEmailOptIn(this.checked)" aria-label="Opt in to email updates">
         <span>Weekly case email</span>
       </label>
     </div>
@@ -278,7 +279,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <div style="font-size:13px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.06em">Specialty Coverage</div>
       <div style="display:flex;gap:12px;align-items:center">
-        <button onclick="rdxShowFullHistory()" style="font-size:12px;color:#2874A6;font-weight:600;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;padding:0">See all history →</button>
+        <button onclick="rdxShowFullHistory()" style="font-size:12px;color:#2874A6;font-weight:600;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;padding:0" aria-label="See full case history">See all history →</button>
         <a href="/browse.html" style="font-size:12px;color:#64748B;font-weight:600;text-decoration:none">Browse cases →</a>
       </div>
     </div>
@@ -371,7 +372,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div style="font-size:13px;color:#475569">ReasonDx is free. Share it with your study group — it works for medicine, nursing, pharmacy, PT, OT, and more.</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="rdxCopyInviteLink()" id="rdx-invite-copy-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Copy invite link</button>
+        <button onclick="rdxCopyInviteLink()" id="rdx-invite-copy-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit" aria-label="Copy referral invite link">Copy invite link</button>
         <a href="mailto:?subject=Free clinical reasoning practice&body=I've been using ReasonDx for clinical reasoning practice and thought you might find it useful. It\'s free and works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry and more.%0A%0Ahttps://reasondx.com" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Email a friend →</a>
       </div>
     </div>
@@ -394,6 +395,170 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       });
     } catch(e) {}
   }
+  </script>
+
+  <!-- R-02: Continue Where You Left Off -->
+  <div id="rdx-continue-panel" style="display:none;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:16px;padding:20px 24px;margin:0 auto 20px;max-width:900px;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:28px">▶️</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1e40af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Continue Where You Left Off</div>
+          <div id="rdx-continue-title" style="font-size:15px;font-weight:600;color:#1e293b"></div>
+          <div id="rdx-continue-meta" style="font-size:12px;color:#64748b;margin-top:2px"></div>
+        </div>
+      </div>
+      <a id="rdx-continue-btn" href="#" style="padding:10px 22px;background:#2874A6;color:#fff;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">Resume Case →</a>
+    </div>
+  </div>
+  <script>
+  (function() {
+    function renderContinuePanel() {
+      try {
+        var saved = localStorage.getItem('rdx-session-resume');
+        if (!saved) return;
+        var s = JSON.parse(saved);
+        if (!s.caseId || !s.savedAt) return;
+        // Only show if saved within 7 days
+        var age = Date.now() - new Date(s.savedAt).getTime();
+        if (age > 7 * 24 * 60 * 60 * 1000) return;
+        var panel = document.getElementById('rdx-continue-panel');
+        var titleEl = document.getElementById('rdx-continue-title');
+        var metaEl = document.getElementById('rdx-continue-meta');
+        var btn = document.getElementById('rdx-continue-btn');
+        if (!panel || !titleEl || !metaEl || !btn) return;
+        titleEl.textContent = s.caseName || s.caseId;
+        var phaseName = s.phase ? 'Phase ' + s.phase : 'In progress';
+        var dateStr = new Date(s.savedAt).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+        metaEl.textContent = phaseName + ' · Last active ' + dateStr;
+        btn.href = '/simulation-engine.html?case=' + encodeURIComponent(s.caseId) + '&resume=1';
+        panel.style.display = 'block';
+      } catch(e) {}
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderContinuePanel);
+    } else {
+      renderContinuePanel();
+    }
+  })();
+  </script>
+
+  <!-- S-06/R-04: Bias Profile Panel -->
+  <div id="rdx-bias-panel" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin:0 auto 20px;max-width:900px;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.06em">Your Reasoning Profile</div>
+        <div style="font-size:12px;color:#64748b;margin-top:2px">Bias patterns detected across your cases</div>
+      </div>
+      <span style="font-size:20px">🧠</span>
+    </div>
+    <div id="rdx-bias-list" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div id="rdx-bias-empty" style="display:none;font-size:13px;color:#94a3b8;font-style:italic">Complete more cases to build your reasoning profile.</div>
+  </div>
+  <script>
+  (function() {
+    var BIAS_LABELS = {
+      anchoring: 'Anchoring Bias', availability: 'Availability Bias',
+      premature_closure: 'Premature Closure', representativeness: 'Representativeness',
+      diagnostic_momentum: 'Diagnostic Momentum', confirmation: 'Confirmation Bias',
+      framing: 'Framing Effect', commission: 'Commission Bias'
+    };
+    var BIAS_COLORS = {
+      anchoring:'#DC2626', availability:'#D97706', premature_closure:'#7C3AED',
+      representativeness:'#0891B2', diagnostic_momentum:'#059669', confirmation:'#DB2777',
+      framing:'#EA580C', commission:'#4338CA'
+    };
+    function renderBiasPanel() {
+      try {
+        var raw = localStorage.getItem('rdx-bias-profile');
+        if (!raw) return;
+        var profile = JSON.parse(raw);
+        var entries = Object.entries(profile)
+          .filter(function(e) { return e[1] > 0; })
+          .sort(function(a,b) { return b[1]-a[1]; })
+          .slice(0,4);
+        if (!entries.length) return;
+        var panel = document.getElementById('rdx-bias-panel');
+        var list = document.getElementById('rdx-bias-list');
+        var empty = document.getElementById('rdx-bias-empty');
+        if (!panel || !list) return;
+        panel.style.display = 'block';
+        var maxVal = entries[0][1];
+        list.innerHTML = entries.map(function(e) {
+          var key = e[0], count = e[1];
+          var label = BIAS_LABELS[key] || key;
+          var color = BIAS_COLORS[key] || '#2874A6';
+          var pct = Math.round((count/maxVal)*100);
+          var trend = count > 2 ? '↑ Frequent' : count > 1 ? '↗ Occasional' : '→ Detected';
+          var trendColor = count > 2 ? '#DC2626' : count > 1 ? '#D97706' : '#059669';
+          return '<div style="display:flex;align-items:center;gap:12px">' +
+            '<div style="flex:1;min-width:0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">' +
+                '<span style="font-size:13px;font-weight:600;color:#1e293b">' + label + '</span>' +
+                '<span style="font-size:11px;font-weight:700;color:' + trendColor + '">' + trend + ' (' + count + 'x)</span>' +
+              '</div>' +
+              '<div style="height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden">' +
+                '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:3px;transition:width .4s"></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      } catch(e) {}
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderBiasPanel);
+    } else {
+      renderBiasPanel();
+    }
+  })();
+  </script>
+
+  <!-- R-03/S-08: Spaced Repetition Queue -->
+  <div id="rdx-srs-panel" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin:0 auto 20px;max-width:900px;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.06em">Due for Review</div>
+        <div id="rdx-srs-subtitle" style="font-size:12px;color:#64748b;margin-top:2px"></div>
+      </div>
+      <span style="font-size:20px">🔁</span>
+    </div>
+    <div id="rdx-srs-list" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+  <script>
+  (function() {
+    function renderSRSPanel() {
+      try {
+        var raw = localStorage.getItem('rdx-srs-cards');
+        if (!raw) return;
+        var cards = JSON.parse(raw);
+        var now = Date.now();
+        var due = cards.filter(function(c) {
+          return c.nextReview && new Date(c.nextReview).getTime() <= now + 86400000;
+        }).slice(0, 5);
+        if (!due.length) return;
+        var panel = document.getElementById('rdx-srs-panel');
+        var list = document.getElementById('rdx-srs-list');
+        var sub = document.getElementById('rdx-srs-subtitle');
+        if (!panel || !list) return;
+        panel.style.display = 'block';
+        sub.textContent = due.length + ' case' + (due.length > 1 ? 's' : '') + ' ready for spaced review today';
+        list.innerHTML = due.map(function(c) {
+          var overdue = new Date(c.nextReview).getTime() < now;
+          var tag = overdue
+            ? '<span style="font-size:11px;font-weight:700;color:#DC2626;background:#fef2f2;padding:2px 8px;border-radius:6px">Overdue</span>'
+            : '<span style="font-size:11px;font-weight:700;color:#059669;background:#f0fdf4;padding:2px 8px;border-radius:6px">Due today</span>';
+          return '<a href="/simulation-engine.html?case=' + encodeURIComponent(c.caseId) + '&mode=review" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background=\'#f1f5f9\'" onmouseout="this.style.background=\'#f8fafc\'">' +
+            '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:15px">🔁</span><span style="font-size:13px;font-weight:500">' + (c.caseName || c.caseId) + '</span></div>' +
+            tag + '</a>';
+        }).join('');
+      } catch(e) {}
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderSRSPanel);
+    } else {
+      renderSRSPanel();
+    }
+  })();
   </script>
 
   <!-- Recently Completed Cases strip -->
@@ -435,6 +600,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   })();
   </script>
 
+  <main role="main" aria-label="Dashboard">
   <div class="stats">
     <div class="stat"><div class="stat-num" data-rdx-stat="cases">&ndash;</div><div class="stat-label">Clinical Cases</div></div>
     <div class="stat"><div class="stat-num" data-rdx-stat="specialties">&ndash;</div><div class="stat-label">Specialties</div></div>

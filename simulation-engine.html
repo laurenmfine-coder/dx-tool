@@ -365,13 +365,13 @@ function startStudy() {
     if (!window.CRT_DATA || !window.CRT_DATA[selectedCase]) {
       if (document.querySelector('script[src*="crt-data.js"]')) {
         // Already loading or loaded — case genuinely doesn't exist
-        addMessage('system', 'Case not found: ' + selectedCase + '. <a href="browse.html">Browse all cases</a>.');
+        addMessage('system', '<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:20px 24px;margin:4px 0"><div style="font-size:18px;margin-bottom:8px">⚠️ Case Not Found</div><p style="color:rgba(255,255,255,.7);margin-bottom:16px">The case <strong>' + selectedCase + '</strong> could not be located. It may have been moved or the link may be incorrect.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="browse.html" style="padding:10px 20px;background:#2874A6;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none">← Browse All Cases</a><button onclick="location.reload()" style="padding:10px 20px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">🔄 Retry</button></div></div>');
         return;
       }
       var _crtScript = document.createElement('script');
       _crtScript.src = 'emr-data/crt-data.js';
       _crtScript.onload = function() { startStudy(); };
-      _crtScript.onerror = function() { addMessage('system', 'Could not load case data. Please refresh and try again.'); };
+      _crtScript.onerror = function() { addMessage('system', '<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:20px 24px;margin:4px 0"><div style="font-size:18px;margin-bottom:8px">⚠️ Could Not Load Case</div><p style="color:rgba(255,255,255,.7);margin-bottom:16px">There was a problem loading case data. This may be a temporary network issue.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button onclick="location.reload()" style="padding:10px 20px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">🔄 Reload Page</button><a href="browse.html" style="padding:10px 20px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;font-size:14px;font-weight:700;text-decoration:none">Browse Cases</a></div></div>'); };
       document.head.appendChild(_crtScript);
       return; // will retry via onload
     }
@@ -385,7 +385,7 @@ function startStudy() {
     setTimeout(function() { RDXOnboarding.show(); }, 2000);
   }
   if (!caseData) {
-    addMessage('system', 'Case not found: ' + selectedCase + '. <a href="browse.html">Return to Browse</a>.');
+    addMessage('system', '<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:20px 24px;margin:4px 0"><div style="font-size:18px;margin-bottom:8px">⚠️ Case Not Found</div><p style="color:rgba(255,255,255,.7);margin-bottom:16px">The requested case could not be loaded. It may not exist or the data may be unavailable.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="browse.html" style="padding:10px 20px;background:#2874A6;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none">← Browse All Cases</a><button onclick="location.reload()" style="padding:10px 20px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">🔄 Retry</button></div></div>');
     return;
   }
 
@@ -496,6 +496,13 @@ function startStudy() {
       try {
         localStorage.setItem('rdx-active-session-' + (state.caseId||selectedCase), JSON.stringify(saveData));
         localStorage.setItem('rdx-active-session', JSON.stringify(saveData)); // keep canonical key too
+        // Bridge for dashboard "Continue where you left off" panel
+        localStorage.setItem('rdx-session-resume', JSON.stringify({
+          caseId: state.caseId,
+          caseName: caseData.presentation.chiefComplaint || caseData.caseId,
+          phase: state.currentPhase,
+          savedAt: new Date().toISOString()
+        }));
       } catch(e) {
         if (e.name === 'QuotaExceededError') {
           addMessage('system', '⚠️ Your browser storage is full. Create a free account to save progress to the cloud — your data won\'t be lost.');
@@ -1789,6 +1796,20 @@ function enterPhase(phase) {
       var cards = AgentTools.generateSpacedRepCards(gaps, state.sessionId, caseData.caseId);
       if (cards.length > 0) {
         try { localStorage.setItem('radStudy_cards_' + state.sessionId, JSON.stringify(cards)); } catch(e) {}
+        // Also persist to the dashboard-readable key
+        try {
+          var _existingCards = JSON.parse(localStorage.getItem('rdx-srs-cards') || '[]');
+          var _newCards = cards.map(function(c) {
+            return {
+              caseId: caseData.caseId,
+              caseName: caseData.presentation.chiefComplaint || caseData.caseId,
+              concept: c.concept || c.front || '',
+              nextReview: c.nextReview || new Date(Date.now() + 86400000).toISOString()
+            };
+          });
+          var _merged = _existingCards.filter(function(c) { return c.caseId !== caseData.caseId; }).concat(_newCards);
+          localStorage.setItem('rdx-srs-cards', JSON.stringify(_merged.slice(-50)));
+        } catch(e) {}
         if(RDX_DEBUG) window.RDX_DEBUG && console.log('SpacedRep cards generated:', cards.length);
       }
 
@@ -1822,6 +1843,12 @@ function enterPhase(phase) {
                   representativeness:  'Representativeness Bias — matching to a prototype rather than the specific patient'
                 };
                 var biasName = biasLabels[_caseEntry.biasTarget] || _caseEntry.biasTarget;
+                // Update dashboard bias profile
+                try {
+                  var _bp = JSON.parse(localStorage.getItem('rdx-bias-profile') || '{}');
+                  _bp[_caseEntry.biasTarget] = (_bp[_caseEntry.biasTarget] || 0) + 1;
+                  localStorage.setItem('rdx-bias-profile', JSON.stringify(_bp));
+                } catch(_bpe) {}
                 var conflictNote = _caseEntry.scriptConflict
                   ? '\n\n⚠️ Script Conflict: In this case, a prior professional heuristic can lead reasoning in the wrong direction. Recognizing when your background creates a blind spot is a core debiasing skill.'
                   : '';
@@ -2842,7 +2869,7 @@ async function exportStudyData() {
   // Supabase export — skip if practice-only mode (student declined consent)
   if (window._rdxPracticeOnly) {
     window.RDX_DEBUG && console.log('Practice-only mode — session data not saved to Supabase (no consent).');
-    addMessage('system', 'Session complete. (Practice mode — data not recorded.)');
+    addMessage('system', '<div style="background:linear-gradient(135deg,rgba(40,116,166,.15),rgba(27,79,114,.1));border:1px solid rgba(40,116,166,.3);border-radius:12px;padding:20px 24px;margin:4px 0"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:20px">💾</span><strong style="font-size:15px;color:#fff">Save Your Progress</strong></div><p style="color:rgba(255,255,255,.7);font-size:14px;margin-bottom:14px">You completed this case in guest mode — your results weren\'t saved. Create a free account to track bias patterns, review your case history, and unlock spaced repetition.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="/auth/register.html" style="padding:10px 20px;background:#2874A6;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none">Create Free Account</a><a href="/auth/login.html" style="padding:10px 20px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Sign In</a></div></div>');
     return;
   }
   if (!sb) { console.warn('Supabase not initialized — data saved to console only.'); return; }
@@ -2880,6 +2907,8 @@ async function exportStudyData() {
         if (window.clearAutoSaveOnComplete) {
           window.clearAutoSaveOnComplete();
         }
+        // Clear the dashboard Continue panel — case is done
+        try { localStorage.removeItem('rdx-session-resume'); } catch(e) {}
 
         // ── EMAIL CAPTURE INTEGRATION ──
         if (window.RDXSessionManager && !window._rdxPracticeOnly) {
