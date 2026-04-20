@@ -14,9 +14,9 @@ window.EMR_DATA = {
       "phone": "(415) 555-3858",
       "email": "miguel.x@email.com",
       "address": "9747 Hickory Rd, Louisville, KY 40202",
-      "insurance": "Uninsured — Self-Pay",
+      "insurance": "Uninsured \u2014 Self-Pay",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(314) 555-1422",
@@ -45,11 +45,11 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Occupation",
-        "Landscape worker — daily outdoor insect exposure, cannot change careers"
+        "Landscape worker \u2014 daily outdoor insect exposure, cannot change careers"
       ],
       [
         "Insurance",
-        "Uninsured — cannot afford EpiPen ($600) or VIT ($200-400/visit)"
+        "Uninsured \u2014 cannot afford EpiPen ($600) or VIT ($200-400/visit)"
       ],
       [
         "Income",
@@ -68,27 +68,27 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "45yo landscape worker — first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
+        "chiefComplaint": "45yo landscape worker \u2014 first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
         "diagnosis": "Hymenoptera Venom Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Wasp venom anaphylaxis — first systemic reaction",
+          "description": "Wasp venom anaphylaxis \u2014 first systemic reaction",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Outdoor worker — daily exposure, cannot avoid",
+          "description": "Outdoor worker \u2014 daily exposure, cannot avoid",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Uninsured — EpiPen and VIT unaffordable",
+          "description": "Uninsured \u2014 EpiPen and VIT unaffordable",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -102,7 +102,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Spanish-only — need interpreter",
+          "description": "Spanish-only \u2014 need interpreter",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -144,7 +144,7 @@ window.EMR_DATA = {
           "bp": "86/54",
           "hr": "126",
           "rr": "24",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "92%",
           "pain": "6/10"
         }
@@ -167,7 +167,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -181,7 +181,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -256,8 +256,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "45yo landscape worker — first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
-          "hpi": "45M landscape worker stung by wasp while trimming hedges. First systemic reaction despite 15+ prior stings (local only). Escalation pattern typical. Cannot change careers — sole income for family. Cannot afford EpiPen ($600) or VIT. Social work for patient assistance programs essential.",
+          "cc": "45yo landscape worker \u2014 first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
+          "hpi": "45M landscape worker stung by wasp while trimming hedges. First systemic reaction despite 15+ prior stings (local only). Escalation pattern typical. Cannot change careers \u2014 sole income for family. Cannot afford EpiPen ($600) or VIT. Social work for patient assistance programs essential.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -266,34 +266,34 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Observation — connecting to financial assistance for VIT and EpiPen",
+        "chiefComplaint": "Observation \u2014 connecting to financial assistance for VIT and EpiPen",
         "diagnosis": "Hymenoptera Venom Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Wasp anaphylaxis — resolved",
+          "description": "Wasp anaphylaxis \u2014 resolved",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Social work — EpiPen patient assistance program approved",
+          "description": "Social work \u2014 EpiPen patient assistance program approved",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "County allergy clinic — VIT on sliding scale ($20/visit)",
+          "description": "County allergy clinic \u2014 VIT on sliding scale ($20/visit)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "OSHA — employer must provide protective gear and nest removal",
+          "description": "OSHA \u2014 employer must provide protective gear and nest removal",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -326,7 +326,7 @@ window.EMR_DATA = {
           "bp": "112/72",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "1/10"
         }
@@ -349,7 +349,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -363,7 +363,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -426,7 +426,7 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Observation — connecting to financial assistance for VIT and EpiPen",
+          "cc": "Observation \u2014 connecting to financial assistance for VIT and EpiPen",
           "hpi": "45M stable. Social work connected to EpiPen manufacturer assistance (free 1 year) and county hospital sliding-scale VIT ($20/visit). Employer notified of OSHA requirements for protective gear.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -436,7 +436,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — venom testing, VIT initiation, occupational safety",
+        "chiefComplaint": "A/I consult \u2014 venom testing, VIT initiation, occupational safety",
         "diagnosis": "Hymenoptera Venom Anaphylaxis"
       },
       "problems": [
@@ -449,7 +449,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "VIT — cluster protocol for faster build-up before outdoor season",
+          "description": "VIT \u2014 cluster protocol for faster build-up before outdoor season",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -463,7 +463,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Baseline tryptase normal — no mastocytosis",
+          "description": "Baseline tryptase normal \u2014 no mastocytosis",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -496,7 +496,7 @@ window.EMR_DATA = {
           "bp": "122/76",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -519,7 +519,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -533,7 +533,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -629,7 +629,7 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — venom testing, VIT initiation, occupational safety",
+          "cc": "A/I consult \u2014 venom testing, VIT initiation, occupational safety",
           "hpi": "A/I at county clinic: Vespid panel positive. Cluster VIT protocol started. VIT will reduce recurrence risk from 60% to <5%. Minimum 5 years treatment, possibly lifelong given daily occupational exposure.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -639,34 +639,34 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "VIT maintenance — stung again, only local reaction. VIT working.",
+        "chiefComplaint": "VIT maintenance \u2014 stung again, only local reaction. VIT working.",
         "diagnosis": "Hymenoptera Venom Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Vespid allergy — on VIT maintenance",
+          "description": "Vespid allergy \u2014 on VIT maintenance",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Stung by YJ 2 months ago — LOCAL reaction only (no systemic!)",
+          "description": "Stung by YJ 2 months ago \u2014 LOCAL reaction only (no systemic!)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "VIT working — prior to VIT, last sting caused anaphylaxis",
+          "description": "VIT working \u2014 prior to VIT, last sting caused anaphylaxis",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Workers comp claim resolved — employer compliant",
+          "description": "Workers comp claim resolved \u2014 employer compliant",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -699,7 +699,7 @@ window.EMR_DATA = {
           "bp": "126/78",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -722,7 +722,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -736,7 +736,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -799,8 +799,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "VIT maintenance — stung again, only local reaction. VIT working.",
-          "hpi": "45M 6 months on VIT. Stung at work — only local reaction. VIT is working. \"I can do my job without being afraid.\" Continue monthly maintenance.",
+          "cc": "VIT maintenance \u2014 stung again, only local reaction. VIT working.",
+          "hpi": "45M 6 months on VIT. Stung at work \u2014 only local reaction. VIT is working. \"I can do my job without being afraid.\" Continue monthly maintenance.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -820,81 +820,64 @@ window.EMR_DATA = {
     "phone": "(317) 555-1243",
     "email": "miguel.x@email.com",
     "address": "2177 Birch Ln, Memphis, TN 38114",
-    "insurance": "Uninsured — Self-Pay",
+    "insurance": "Uninsured \u2014 Self-Pay",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(504) 555-4898",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "45yo landscape worker — first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
+    "chiefComplaint": "45yo landscape worker \u2014 first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
     "diagnosis": "Hymenoptera Venom Anaphylaxis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Wasp venom anaphylaxis — first systemic reaction",
+      "problem": "Wasp venom anaphylaxis \u2014 Grade 2 (cutaneous + respiratory)",
+      "icd": "T63.461A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Landscaper; first systemic reaction; wasp-specific IgE 4.2 kUA/L; high-risk occupation for re-exposure"
     },
     {
-      "id": "prob-2",
-      "description": "Outdoor worker — daily exposure, cannot avoid",
+      "problem": "Occupational hymenoptera exposure \u2014 landscape worker",
+      "icd": "Z57.5",
+      "onset": "2010",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Daily outdoor work \u2014 estimated 10-20 stings/year historically; prior reactions all local"
     },
     {
-      "id": "prob-3",
-      "description": "Uninsured — EpiPen and VIT unaffordable",
+      "problem": "Mild intermittent asthma",
+      "icd": "J45.20",
+      "onset": "2016",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "60% recurrence risk without VIT",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Spanish-only — need interpreter",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "On albuterol PRN; well-controlled; complicates VIT tolerability \u2014 pre-treat with antihistamine at injections"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given by coworker",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg IM x2",
+      "sig": "Inject at first sign of systemic reaction; call 911; carry at all times \u2014 especially at work site",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Albuterol 90mcg MDI 2 puffs q4h PRN",
+      "sig": "2 puffs every 4 hours as needed for wheezing",
+      "prescriber": "Dr. Kim",
+      "start": "2016",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Venom immunotherapy \u2014 Vespula (wasp) mix 100mcg maintenance (starting)",
+      "sig": "Escalation phase: weekly injections, dose escalation per protocol; maintenance: 100mcg q4-6 weeks x5 years",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 12,
+      "status": "Active \u2014 beginning"
     }
   ],
   "allergies": [
@@ -912,7 +895,7 @@ window.EMR_DATA = {
       "bp": "86/54",
       "hr": "126",
       "rr": "24",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "92%",
       "pain": "6/10"
     }
@@ -923,8 +906,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "45yo landscape worker — first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
-      "hpi": "45M landscape worker stung by wasp while trimming hedges. First systemic reaction despite 15+ prior stings (local only). Escalation pattern typical. Cannot change careers — sole income for family. Cannot afford EpiPen ($600) or VIT. Social work for patient assistance programs essential.",
+      "cc": "45yo landscape worker \u2014 first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",
+      "hpi": "45M landscape worker stung by wasp while trimming hedges. First systemic reaction despite 15+ prior stings (local only). Escalation pattern typical. Cannot change careers \u2014 sole income for family. Cannot afford EpiPen ($600) or VIT. Social work for patient assistance programs essential.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -932,100 +915,50 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-709430",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/16/2024",
+      "panel": "Venom Allergy Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Wasp venom IgE (Vespula mix)",
+          "value": "4.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Yellow Jacket IgE",
+          "value": "3.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "VENOM",
-          "results": [
-            {
-              "test": "Tryptase (acute)",
-              "value": "42",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Honeybee IgE",
+          "value": "0.3",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Polistes (paper wasp) IgE",
+          "value": "1.9",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Serum Tryptase (post-sting peak)",
+          "value": "19.8",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
+        },
+        {
+          "test": "Baseline Tryptase (48h later)",
+          "value": "8.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
         }
       ]
     }
@@ -1045,11 +978,11 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Landscape worker — daily outdoor insect exposure, cannot change careers"
+      "Landscape worker \u2014 daily outdoor insect exposure, cannot change careers"
     ],
     [
       "Insurance",
-      "Uninsured — cannot afford EpiPen ($600) or VIT ($200-400/visit)"
+      "Uninsured \u2014 cannot afford EpiPen ($600) or VIT ($200-400/visit)"
     ],
     [
       "Income",
@@ -1078,7 +1011,7 @@ window.EMR_DATA = {
         "SCIT protocols",
         "Cluster/rush protocols",
         "ACE inhibitors increase VIT reactions",
-        "VIT ≥5 years"
+        "VIT \u22655 years"
       ]
     },
     {
@@ -1157,13 +1090,12 @@ window.EMR_DATA = {
       "Check capillary refill and peripheral perfusion": "Capillary refill 2 seconds, extremities warm and well-perfused"
     },
     "ddxTargets": [
-      "Anaphylaxis secondary to wasp venom (correct diagnosis)",
-      "Severe local allergic reaction",
-      "Vasovagal reaction to sting",
-      "Sepsis or systemic infection",
-      "Acute myocardial infarction",
-      "Anxiety/panic attack",
-      "Heat-related illness"
+      "Wasp venom anaphylaxis \u2014 IgE-mediated, Grade 2; VIT indicated (correct)",
+      "Large local reaction \u2014 extensive local swelling only, no systemic signs; VIT NOT indicated for LLR",
+      "Honeybee anaphylaxis \u2014 honeybee IgE low; Vespula was the stinging insect identified",
+      "Toxic reaction \u2014 multiple simultaneous stings; dose-dependent, not IgE-mediated; normal tryptase",
+      "Mastocytosis \u2014 baseline tryptase normal at 48h; does not support SM but warrants follow-up",
+      "Exercise-induced anaphylaxis \u2014 no exercise cofactor; sting was direct allergen"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'just another bug bite' given patient's history of multiple prior stings without systemic reaction",
@@ -1173,7 +1105,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. What specific historical details would help you distinguish between a severe local reaction versus true anaphylaxis? Think about the timeline and systemic symptoms. Also consider what makes this case unique - why might someone have their first systemic reaction after years of tolerance?",
       "phase5": "You've gathered good information. Let's think through the clinical criteria for anaphylaxis - does this patient meet them? What are the key features that distinguish this from his previous sting reactions? Consider both the immediate management and the long-term implications for someone in his occupation.",
-      "finalDebrief": "This case illustrates classic anaphylaxis with the added complexity of occupational and socioeconomic factors. Notice how your differential likely evolved from considering local reactions to recognizing systemic involvement. What does this teach you about allergic sensitization patterns and the challenges of managing anaphylaxis in high-risk occupations with limited resources?"
+      "finalDebrief": "This case illustrates classic anaphylaxis with the added complexity of occupational and socioeconomic factors. Notice how your differential likely evolved from considering local reactions to recognizing systemic involvement. What does this teach you about allergic sensitization patterns and the challenges of managing anaphylaxis in high-risk occupations with limited resources?",
+      "final": "Diagnosis: wasp venom anaphylaxis, Grade 2, VIT indicated; baseline tryptase normal (mastocytosis unlikely). Key teaching points: (1) VIT is uniquely curative for Hymenoptera anaphylaxis \u2014 reduces re-sting systemic reaction risk from 40-60% to 2-5%. Unlike food allergy, effective immunotherapy exists. Duration: 5 years standard; indefinite if elevated baseline tryptase, severe index reaction, or systemic reaction during VIT. (2) Distinguish LLR from systemic \u2014 LLR = extensive local swelling at sting site >10cm but NO systemic signs; VIT NOT indicated for LLR. Any systemic symptom = VIT candidate. (3) Occupational context amplifies urgency \u2014 exposure is near-daily; cannot avoid occupation. Occupational medicine consult appropriate. (4) Baseline tryptase normal at 48h is reassuring. If it had remained elevated: workup for systemic mastocytosis (bone marrow biopsy), and VIT recommendation would be lifelong. (5) VIT logistics: 15-20 week escalation phase \u2192 monthly maintenance. Asthma must be controlled to minimize VIT systemic reaction risk."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Wasp Venom (Vespula), Occupational Risk; Venom Immunotherapy Indicated"
   }
 };

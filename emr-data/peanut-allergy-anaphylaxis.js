@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6080 Sycamore Dr, Memphis, TN 38122",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Jennifer Park",
         "phone": "(620) 555-4971",
@@ -52,7 +52,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Exposure",
-        "Ate cake at birthday party — unknown peanut ingredient"
+        "Ate cake at birthday party \u2014 unknown peanut ingredient"
       ],
       [
         "EpiPen",
@@ -68,7 +68,7 @@ window.EMR_DATA = {
     "ed": {
       "patient": {
         "chiefComplaint": "8-year-old with facial swelling, vomiting, and wheezing after birthday party",
-        "diagnosis": "Peanut Allergy — Anaphylaxis"
+        "diagnosis": "Peanut Allergy \u2014 Anaphylaxis"
       },
       "problems": [
         {
@@ -113,7 +113,7 @@ window.EMR_DATA = {
           "bp": "85/52",
           "hr": "142",
           "rr": "32",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "91%",
           "pain": "7/10"
         }
@@ -136,7 +136,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -150,7 +150,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -214,7 +214,7 @@ window.EMR_DATA = {
           "cc": "8-year-old with facial swelling, vomiting, and wheezing after birthday party",
           "hpi": "Jayden Park presents with 8-year-old with facial swelling, vomiting, and wheezing after birthday party.",
           "exam": "See documentation.",
-          "assessment": "Peanut Allergy — Anaphylaxis",
+          "assessment": "Peanut Allergy \u2014 Anaphylaxis",
           "plan": "See orders."
         }
       ]
@@ -285,7 +285,7 @@ window.EMR_DATA = {
           "bp": "92/58",
           "hr": "108",
           "rr": "22",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "97%",
           "pain": "4/10"
         }
@@ -308,7 +308,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -322,7 +322,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -384,7 +384,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "8yo admitted for biphasic reaction monitoring after peanut anaphylaxis",
-          "hpi": "Jayden Park — 8yo admitted for biphasic reaction monitoring after peanut anaphylaxis",
+          "hpi": "Jayden Park \u2014 8yo admitted for biphasic reaction monitoring after peanut anaphylaxis",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -393,7 +393,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — peanut allergy confirmation, tree nut cross-reactivity, school action plan",
+        "chiefComplaint": "A/I consult \u2014 peanut allergy confirmation, tree nut cross-reactivity, school action plan",
         "diagnosis": "Peanut Allergy Anaphylaxis"
       },
       "problems": [
@@ -439,7 +439,7 @@ window.EMR_DATA = {
           "bp": "102/62",
           "hr": "86",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -462,7 +462,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -476,7 +476,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -537,8 +537,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — peanut allergy confirmation, tree nut cross-reactivity, school action plan",
-          "hpi": "Jayden Park — A/I consult — peanut allergy confirmation, tree nut cross-reactivity, school action plan",
+          "cc": "A/I consult \u2014 peanut allergy confirmation, tree nut cross-reactivity, school action plan",
+          "hpi": "Jayden Park \u2014 A/I consult \u2014 peanut allergy confirmation, tree nut cross-reactivity, school action plan",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -547,7 +547,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Peanut allergy follow-up — discuss OIT candidacy, update action plan for school",
+        "chiefComplaint": "Peanut allergy follow-up \u2014 discuss OIT candidacy, update action plan for school",
         "diagnosis": "Peanut Allergy Anaphylaxis"
       },
       "problems": [
@@ -584,7 +584,7 @@ window.EMR_DATA = {
           "bp": "108/66",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -607,7 +607,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -621,7 +621,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -682,8 +682,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Peanut allergy follow-up — discuss OIT candidacy, update action plan for school",
-          "hpi": "Jayden Park — Peanut allergy follow-up — discuss OIT candidacy, update action plan for school",
+          "cc": "Peanut allergy follow-up \u2014 discuss OIT candidacy, update action plan for school",
+          "hpi": "Jayden Park \u2014 Peanut allergy follow-up \u2014 discuss OIT candidacy, update action plan for school",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -705,49 +705,62 @@ window.EMR_DATA = {
     "address": "3047 Oak Ave, Minneapolis, MN 55405",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Jennifer Park",
       "phone": "(415) 555-7437",
       "relationship": "Parent"
     },
     "chiefComplaint": "8-year-old with facial swelling, vomiting, and wheezing after birthday party",
-    "diagnosis": "Peanut Allergy — Anaphylaxis"
+    "diagnosis": "Peanut Allergy \u2014 Anaphylaxis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Known peanut allergy",
+      "problem": "Peanut anaphylaxis \u2014 IgE-mediated",
+      "icd": "T78.1XXA",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "8yo; accidental peanut exposure at birthday party; Ara h 2 IgE 22 kUA/L \u2014 high systemic risk"
     },
     {
-      "id": "prob-2",
-      "description": "Asthma (mild persistent)",
+      "problem": "Prior reaction history \u2014 3 episodes",
+      "icd": "Z91.018",
+      "onset": "2021",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "First reaction age 5; increasing severity pattern; currently on elimination diet"
+    },
+    {
+      "problem": "Peanut oral immunotherapy candidate",
+      "icd": "Z91.018",
+      "onset": "2024",
+      "status": "Under evaluation",
+      "notes": "Palforzia FDA-approved for ages 4-17; reduces severity of accidental exposures"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Fluticasone",
-      "dose": "44mcg",
-      "route": "INH",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen Jr 0.15mg IM x2",
+      "sig": "Inject at first sign of systemic reaction; call 911; may repeat in 5-15 min; carry at ALL times",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2021",
+      "refills": 1,
+      "status": "Active \u2014 updated prescription"
     },
     {
-      "id": "med-2",
-      "name": "Albuterol",
-      "dose": "90mcg",
-      "route": "INH",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 5mg daily",
+      "sig": "Take 5mg daily by mouth for allergic rhinitis",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2022",
+      "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Peanut OIT (Palforzia) \u2014 evaluation in progress",
+      "sig": "Graded dose escalation under allergist supervision if family consents",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2024",
+      "refills": 0,
+      "status": "Under evaluation"
     }
   ],
   "allergies": [
@@ -771,7 +784,7 @@ window.EMR_DATA = {
       "bp": "85/52",
       "hr": "142",
       "rr": "32",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "91%",
       "pain": "7/10"
     }
@@ -785,92 +798,56 @@ window.EMR_DATA = {
       "cc": "8-year-old with facial swelling, vomiting, and wheezing after birthday party",
       "hpi": "Jayden Park presents with 8-year-old with facial swelling, vomiting, and wheezing after birthday party.",
       "exam": "See documentation.",
-      "assessment": "Peanut Allergy — Anaphylaxis",
+      "assessment": "Peanut Allergy \u2014 Anaphylaxis",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-131092",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Peanut Allergy Component Testing",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Peanut IgE \u2014 Ara h 2 (storage protein)",
+          "value": "22.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Peanut IgE \u2014 Ara h 1",
+          "value": "18.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Tryptase",
-              "value": "pending",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": ""
-            }
-          ]
+          "test": "Peanut IgE \u2014 Ara h 3",
+          "value": "12.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Peanut IgE \u2014 Ara h 8 (PR-10, cross-reactive)",
+          "value": "0.6",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Serum Tryptase (post-reaction peak)",
+          "value": "41.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
+        },
+        {
+          "test": "Total IgE",
+          "value": "1,240",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
         }
       ]
     }
@@ -891,7 +868,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Exposure",
-      "Ate cake at birthday party — unknown peanut ingredient"
+      "Ate cake at birthday party \u2014 unknown peanut ingredient"
     ],
     [
       "EpiPen",
@@ -936,17 +913,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Peanut allergy is the leading cause of fatal food anaphylaxis. Ara h 2 (2S albumin storage protein) is the most clinically relevant component — heat-stable, resistant to digestion, strongly predicts systemic reactions.",
-      "Early peanut introduction (LEAP trial 2015): peanut consumption starting at 4–11 months in high-risk infants (severe eczema or egg allergy) reduces peanut allergy by 80% at age 5. NIAID 2017 guidelines recommend early introduction.",
-      "Palforzia (AR101): FDA-approved peanut OIT for ages 4–17. Goal: desensitization to accidental exposure (maintenance 300 mg/day). NOT a cure — must dose daily. ~5% develop EoE on peanut OIT — screen at every visit."
+      "Peanut allergy is the leading cause of fatal food anaphylaxis. Ara h 2 (2S albumin storage protein) is the most clinically relevant component \u2014 heat-stable, resistant to digestion, strongly predicts systemic reactions.",
+      "Early peanut introduction (LEAP trial 2015): peanut consumption starting at 4\u201311 months in high-risk infants (severe eczema or egg allergy) reduces peanut allergy by 80% at age 5. NIAID 2017 guidelines recommend early introduction.",
+      "Palforzia (AR101): FDA-approved peanut OIT for ages 4\u201317. Goal: desensitization to accidental exposure (maintenance 300 mg/day). NOT a cure \u2014 must dose daily. ~5% develop EoE on peanut OIT \u2014 screen at every visit."
     ],
     "boardPearls": [
-      "Ara h 2 sIgE ≥0.35 kUA/L: >95% PPV for clinical peanut allergy — can avoid OFC at this threshold.",
-      "Ara h 8 (PR-10, birch cross-reactive): oral allergy syndrome only — no systemic risk, no EpiPen needed.",
-      "LEAP trial: early peanut at 4–11 months → 80% reduction in peanut allergy. NIAID 2017: recommend for high-risk infants.",
-      "Peanut is a legume — NOT a tree nut. Peanut allergy and tree nut allergy are independent (cross-reactivity via storage proteins, not botanical relationship).",
-      "Palforzia: 100 mg/day up-dosing → 300 mg/day maintenance. Hold for illness, fever, exercise, menses (lower reaction threshold).",
-      "Fatal food anaphylaxis risk factors: asthma (highest risk), prior severe reaction, delayed epinephrine, age 10–25, peanut or tree nut allergen."
+      "Ara h 2 sIgE \u22650.35 kUA/L: >95% PPV for clinical peanut allergy \u2014 can avoid OFC at this threshold.",
+      "Ara h 8 (PR-10, birch cross-reactive): oral allergy syndrome only \u2014 no systemic risk, no EpiPen needed.",
+      "LEAP trial: early peanut at 4\u201311 months \u2192 80% reduction in peanut allergy. NIAID 2017: recommend for high-risk infants.",
+      "Peanut is a legume \u2014 NOT a tree nut. Peanut allergy and tree nut allergy are independent (cross-reactivity via storage proteins, not botanical relationship).",
+      "Palforzia: 100 mg/day up-dosing \u2192 300 mg/day maintenance. Hold for illness, fever, exercise, menses (lower reaction threshold).",
+      "Fatal food anaphylaxis risk factors: asthma (highest risk), prior severe reaction, delayed epinephrine, age 10\u201325, peanut or tree nut allergen."
     ]
   },
   "guided": {
@@ -1008,13 +985,12 @@ window.EMR_DATA = {
       "Inspect conjunctiva and periorbital area": "Conjunctival injection with significant periorbital swelling"
     },
     "ddxTargets": [
-      "Anaphylaxis (correct diagnosis)",
-      "Severe allergic reaction without anaphylaxis",
-      "Acute asthma exacerbation",
-      "Angioedema from ACE inhibitor",
-      "Hereditary angioedema",
-      "Viral upper respiratory infection with wheeze",
-      "Food poisoning with dehydration"
+      "Peanut anaphylaxis \u2014 IgE-mediated, Ara h 2-positive (correct)",
+      "Tree nut anaphylaxis \u2014 tree nut IgE panel negative; peanut is a legume, not a tree nut",
+      "Ara h 8-only sensitization \u2014 PR-10 cross-reactivity (birch pollen-related); low risk of systemic reaction; mild oral allergy syndrome",
+      "Soy allergy \u2014 legume cross-reactivity possible; peanut was the direct trigger",
+      "Exercise-induced anaphylaxis \u2014 cofactor (exercise) required; this occurred at rest",
+      "Food protein-induced enterocolitis (FPIES) \u2014 non-IgE; vomiting predominates; no urticaria; tryptase normal"
     ],
     "biasFlags": {
       "anchoring": "Don't anchor on the known asthma history and miss the systemic allergic reaction - the wheeze could be from bronchospasm due to anaphylaxis",
@@ -1024,7 +1000,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possibilities including anaphylaxis. What specific historical features would help you distinguish between a severe allergic reaction and true anaphylaxis? What systems need to be involved?",
       "phase5": "Now that you've completed your assessment, let's think systematically about this presentation. You found facial swelling, urticaria, wheezing, vomiting, and hypotension. How do these findings help narrow your differential? What criteria define anaphylaxis?",
-      "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement: skin (urticaria, angioedema), respiratory (wheeze, dyspnea), GI (vomiting), and cardiovascular (hypotension, tachycardia). The key learning point is recognizing that anaphylaxis requires involvement of two or more organ systems. How did your thinking evolve from considering simple allergic reaction to recognizing anaphylaxis?"
+      "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement: skin (urticaria, angioedema), respiratory (wheeze, dyspnea), GI (vomiting), and cardiovascular (hypotension, tachycardia). The key learning point is recognizing that anaphylaxis requires involvement of two or more organ systems. How did your thinking evolve from considering simple allergic reaction to recognizing anaphylaxis?",
+      "final": "Diagnosis: peanut anaphylaxis, IgE-mediated, Ara h 2-positive. Key teaching points: (1) Ara h 2 (2S albumin storage protein) is the most clinically significant peanut allergen \u2014 Ara h 2 IgE >0.1 kUA/L has ~90% PPV for systemic reactions. Ara h 8 (PR-10 cross-reactive) is a marker of birch pollen sensitization \u2014 associated with oral allergy syndrome, rarely systemic. (2) Peanut is a legume; cross-reactivity with tree nuts is ~20-40% at ImmunoCAP level but clinically significant co-allergy is less common (~25%). Tree nut panel should be tested. (3) Palforzia (peanut OIT): FDA-approved for ages 4-17; reduces risk of severe anaphylaxis from accidental exposure from 30-40% to 2-4%; requires daily maintenance dosing. Not a cure \u2014 desensitization, not tolerance. (4) Social determinants: school safety plans, 504 accommodation, EpiPen in school nurse and classroom. (5) Avoid all peanut-containing foods AND cross-contamination \u2014 label reading, restaurant disclosure protocols."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Peanut Allergy, Pediatric (IgE-Mediated); Evaluation for Oral Immunotherapy"
   }
 };

@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "9205 E Roosevelt Rd, Milwaukee, WI 53205",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Sarah Chen",
         "phone": "(505) 555-5345",
@@ -58,7 +58,7 @@ window.EMR_DATA = {
       ],
       [
         "Medications",
-        "Takes metoprolol 50mg BID and lisinopril — beta-blocker masks tachycardia"
+        "Takes metoprolol 50mg BID and lisinopril \u2014 beta-blocker masks tachycardia"
       ],
       [
         "Living",
@@ -66,20 +66,20 @@ window.EMR_DATA = {
       ],
       [
         "Language",
-        "Primary Mandarin, limited English — daughter translates"
+        "Primary Mandarin, limited English \u2014 daughter translates"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Bee sting 30 min ago — lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
+        "chiefComplaint": "Bee sting 30 min ago \u2014 lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Anaphylaxis — beta-blocker blunted",
+          "description": "Anaphylaxis \u2014 beta-blocker blunted",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -100,7 +100,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "On metoprolol 50mg BID — masks tachycardic response",
+          "description": "On metoprolol 50mg BID \u2014 masks tachycardic response",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -112,7 +112,7 @@ window.EMR_DATA = {
           "name": "Epinephrine",
           "dose": "0.3mg",
           "route": "IM",
-          "frequency": "Given x1 — may need glucagon if refractory",
+          "frequency": "Given x1 \u2014 may need glucagon if refractory",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -151,7 +151,7 @@ window.EMR_DATA = {
           "bp": "92/54",
           "hr": "58",
           "rr": "22",
-          "temp": "36.6°C",
+          "temp": "36.6\u00b0C",
           "spo2": "91%",
           "pain": "7/10"
         }
@@ -174,7 +174,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -195,7 +195,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -277,8 +277,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Bee sting 30 min ago — lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
-          "hpi": "72M with HTN and COPD on metoprolol presents after bee sting to right forearm 30 min ago while gardening. Developed lightheadedness, diffuse flushing, and dyspnea. NOTABLY: HR only 58 despite hypotension (beta-blocker effect). No urticaria. Prior anaphylaxis to bee sting 5 years ago — EpiPen expired, lives alone, daughter lives 2 hours away. Limited English — daughter contacted by phone for translation.",
+          "cc": "Bee sting 30 min ago \u2014 lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
+          "hpi": "72M with HTN and COPD on metoprolol presents after bee sting to right forearm 30 min ago while gardening. Developed lightheadedness, diffuse flushing, and dyspnea. NOTABLY: HR only 58 despite hypotension (beta-blocker effect). No urticaria. Prior anaphylaxis to bee sting 5 years ago \u2014 EpiPen expired, lives alone, daughter lives 2 hours away. Limited English \u2014 daughter contacted by phone for translation.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -287,13 +287,13 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted to ICU for anaphylaxis monitoring — refractory hypotension required glucagon + epi drip",
+        "chiefComplaint": "Admitted to ICU for anaphylaxis monitoring \u2014 refractory hypotension required glucagon + epi drip",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Anaphylaxis (bee venom) — refractory to IM epi due to beta-blocker",
+          "description": "Anaphylaxis (bee venom) \u2014 refractory to IM epi due to beta-blocker",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -321,7 +321,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Social isolation — lives alone, limited English",
+          "description": "Social isolation \u2014 lives alone, limited English",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -372,7 +372,7 @@ window.EMR_DATA = {
           "bp": "98/62",
           "hr": "62",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "95%",
           "pain": "4/10"
         }
@@ -395,7 +395,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -416,7 +416,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -479,8 +479,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted to ICU for anaphylaxis monitoring — refractory hypotension required glucagon + epi drip",
-          "hpi": "72M admitted to ICU after refractory anaphylaxis. Required glucagon (beta-blocker reversal) in addition to epinephrine. Metoprolol held. Daughter arrived — serving as interpreter. Social work consulted for home safety assessment given he lives alone with limited English and had expired EpiPen.",
+          "cc": "Admitted to ICU for anaphylaxis monitoring \u2014 refractory hypotension required glucagon + epi drip",
+          "hpi": "72M admitted to ICU after refractory anaphylaxis. Required glucagon (beta-blocker reversal) in addition to epinephrine. Metoprolol held. Daughter arrived \u2014 serving as interpreter. Social work consulted for home safety assessment given he lives alone with limited English and had expired EpiPen.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -489,41 +489,41 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — venom anaphylaxis in elderly patient on beta-blocker, complex management",
+        "chiefComplaint": "A/I consult \u2014 venom anaphylaxis in elderly patient on beta-blocker, complex management",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Bee venom anaphylaxis — beta-blocker complicated",
+          "description": "Bee venom anaphylaxis \u2014 beta-blocker complicated",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Beta-blocker use — discuss with cardiology re: switch to CCB",
+          "description": "Beta-blocker use \u2014 discuss with cardiology re: switch to CCB",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "CKD stage 3a — affects med choices",
+          "description": "CKD stage 3a \u2014 affects med choices",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Limited English — need translated action plan",
+          "description": "Limited English \u2014 need translated action plan",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Social isolation — fall risk, no one to administer epi",
+          "description": "Social isolation \u2014 fall risk, no one to administer epi",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -556,7 +556,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "0/10"
         }
@@ -579,7 +579,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -600,7 +600,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -657,14 +657,14 @@ window.EMR_DATA = {
               "name": "ALLERGY TESTING",
               "results": [
                 {
-                  "test": "Venom IgE — Honeybee",
+                  "test": "Venom IgE \u2014 Honeybee",
                   "value": "22",
                   "unit": "kU/L",
                   "range": "<0.35",
                   "flag": "H"
                 },
                 {
-                  "test": "Venom IgE — Yellow jacket",
+                  "test": "Venom IgE \u2014 Yellow jacket",
                   "value": "1.2",
                   "unit": "kU/L",
                   "range": "<0.35",
@@ -689,8 +689,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — venom anaphylaxis in elderly patient on beta-blocker, complex management",
-          "hpi": "A/I consult note: 72M with bee venom anaphylaxis complicated by beta-blocker use masking tachycardia. Key issues: (1) metoprolol must be switched — coordinating with cardiology for CCB transition, (2) CKD 3a limits some options, (3) lives alone with limited English — needs Mandarin-language anaphylaxis action plan, (4) daughter trained on EpiPen use via video call, (5) VIT strongly recommended — will reduce future risk 95%.",
+          "cc": "A/I consult \u2014 venom anaphylaxis in elderly patient on beta-blocker, complex management",
+          "hpi": "A/I consult note: 72M with bee venom anaphylaxis complicated by beta-blocker use masking tachycardia. Key issues: (1) metoprolol must be switched \u2014 coordinating with cardiology for CCB transition, (2) CKD 3a limits some options, (3) lives alone with limited English \u2014 needs Mandarin-language anaphylaxis action plan, (4) daughter trained on EpiPen use via video call, (5) VIT strongly recommended \u2014 will reduce future risk 95%.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -699,7 +699,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Allergy follow-up — venom immunotherapy initiation, med optimization, home safety",
+        "chiefComplaint": "Allergy follow-up \u2014 venom immunotherapy initiation, med optimization, home safety",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
@@ -712,7 +712,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "VIT — starting build-up phase",
+          "description": "VIT \u2014 starting build-up phase",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -726,14 +726,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "CKD stage 3a — stable",
+          "description": "CKD stage 3a \u2014 stable",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Home safety plan in place — daughter checks daily by phone, Mandarin-language action plan posted",
+          "description": "Home safety plan in place \u2014 daughter checks daily by phone, Mandarin-language action plan posted",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -784,7 +784,7 @@ window.EMR_DATA = {
           "bp": "132/76",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "97%",
           "pain": "0/10"
         }
@@ -807,7 +807,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -828,7 +828,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -891,8 +891,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Allergy follow-up — venom immunotherapy initiation, med optimization, home safety",
-          "hpi": "72M returns for VIT initiation. Beta-blocker successfully transitioned to amlodipine. BP well-controlled. Daughter present for translation. Home safety plan: Mandarin-language anaphylaxis action plan posted on refrigerator, daughter calls daily, new non-expired EpiPens stored at room temp. VIT starting today — will observe 30 min post-injection.",
+          "cc": "Allergy follow-up \u2014 venom immunotherapy initiation, med optimization, home safety",
+          "hpi": "72M returns for VIT initiation. Beta-blocker successfully transitioned to amlodipine. BP well-controlled. Daughter present for translation. Home safety plan: Mandarin-language anaphylaxis action plan posted on refrigerator, daughter calls daily, new non-expired EpiPens stored at room temp. VIT starting today \u2014 will observe 30 min post-injection.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -914,81 +914,78 @@ window.EMR_DATA = {
     "address": "4961 Elm St, Memphis, TN 38122",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Sarah Chen",
       "phone": "(502) 555-7930",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Bee sting 30 min ago — lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
+    "chiefComplaint": "Bee sting 30 min ago \u2014 lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
     "diagnosis": "Anaphylaxis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Anaphylaxis — beta-blocker blunted",
+      "problem": "Anaphylaxis \u2014 bee venom, cardiovascular-predominant (Kounis syndrome pattern)",
+      "icd": "T63.441A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "No urticaria or angioedema; hypotension, flushing, syncope \u2014 beta-blocker masks tachycardia and blunts epinephrine response"
     },
     {
-      "id": "prob-2",
-      "description": "HTN",
+      "problem": "Hypertension on metoprolol succinate",
+      "icd": "I10",
+      "onset": "2015",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Beta-blockade: (1) masks tachycardia \u2014 HR may be normal or bradycardic in anaphylaxis; (2) causes refractory anaphylaxis \u2014 epinephrine less effective; requires glucagon if refractory"
     },
     {
-      "id": "prob-3",
-      "description": "COPD (mild)",
+      "problem": "Coronary artery disease",
+      "icd": "I25.10",
+      "onset": "2019",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "On metoprolol 50mg BID — masks tachycardic response",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Stent placed 2019; on aspirin and metoprolol; anaphylaxis may trigger vasospasm (Kounis syndrome)"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given x1 — may need glucagon if refractory",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Metoprolol succinate 100mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Park",
+      "start": "04/2016",
+      "refills": 5,
+      "status": "Active \u2014 CRITICAL: beta-blocker makes anaphylaxis refractory"
     },
     {
-      "id": "med-2",
-      "name": "Glucagon",
-      "dose": "1mg",
-      "route": "IV",
-      "frequency": "If epi-refractory (beta-blocker reversal)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Aspirin 81mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Park",
+      "start": "2019",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Atorvastatin 40mg nightly",
+      "sig": "Take 1 tablet by mouth nightly",
+      "prescriber": "Dr. Park",
+      "start": "2019",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "NS bolus",
-      "dose": "1L",
-      "route": "IV",
-      "frequency": "Rapid",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg IM x2 (NEW)",
+      "sig": "Inject at first sign of systemic reaction; call 911; may repeat in 5-15 minutes",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
+    },
+    {
+      "name": "Glucagon 1mg IM kit (NEW \u2014 for refractory anaphylaxis)",
+      "sig": "If epinephrine fails to improve BP/HR, administer glucagon 1mg IM; call 911",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -1006,7 +1003,7 @@ window.EMR_DATA = {
       "bp": "92/54",
       "hr": "58",
       "rr": "22",
-      "temp": "36.6°C",
+      "temp": "36.6\u00b0C",
       "spo2": "91%",
       "pain": "7/10"
     }
@@ -1017,8 +1014,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "Bee sting 30 min ago — lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
-      "hpi": "72M with HTN and COPD on metoprolol presents after bee sting to right forearm 30 min ago while gardening. Developed lightheadedness, diffuse flushing, and dyspnea. NOTABLY: HR only 58 despite hypotension (beta-blocker effect). No urticaria. Prior anaphylaxis to bee sting 5 years ago — EpiPen expired, lives alone, daughter lives 2 hours away. Limited English — daughter contacted by phone for translation.",
+      "cc": "Bee sting 30 min ago \u2014 lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",
+      "hpi": "72M with HTN and COPD on metoprolol presents after bee sting to right forearm 30 min ago while gardening. Developed lightheadedness, diffuse flushing, and dyspnea. NOTABLY: HR only 58 despite hypotension (beta-blocker effect). No urticaria. Prior anaphylaxis to bee sting 5 years ago \u2014 EpiPen expired, lives alone, daughter lives 2 hours away. Limited English \u2014 daughter contacted by phone for translation.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -1026,114 +1023,50 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-956423",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/14/2024",
+      "panel": "Anaphylaxis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Serum Tryptase (1h post-sting)",
+          "value": "44.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Baseline Tryptase (follow-up, 4 days later)",
+          "value": "18.6",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY STUDIES",
-          "results": [
-            {
-              "test": "Tryptase (acute)",
-              "value": "38",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "3.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Bee Venom IgE (ImmunoCAP)",
+          "value": "6.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Yellow Jacket Venom IgE",
+          "value": "1.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "ECG",
+          "value": "NSR, rate 62 \u2014 no ischemic changes, no delta wave",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.04",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         }
       ]
     }
@@ -1166,7 +1099,7 @@ window.EMR_DATA = {
     ],
     [
       "Medications",
-      "Takes metoprolol 50mg BID and lisinopril — beta-blocker masks tachycardia"
+      "Takes metoprolol 50mg BID and lisinopril \u2014 beta-blocker masks tachycardia"
     ],
     [
       "Living",
@@ -1174,7 +1107,7 @@ window.EMR_DATA = {
     ],
     [
       "Language",
-      "Primary Mandarin, limited English — daughter translates"
+      "Primary Mandarin, limited English \u2014 daughter translates"
     ]
   ],
   "references": [
@@ -1300,13 +1233,12 @@ window.EMR_DATA = {
       "Neurologic assessment including mental status": "Alert and oriented but appears anxious, no focal neurologic deficits"
     },
     "ddxTargets": [
-      "Anaphylaxis - beta-blocker blunted (correct diagnosis)",
-      "Vasovagal reaction to bee sting",
-      "Medication-induced hypotension",
-      "Acute myocardial infarction",
-      "Septic shock from secondary infection",
-      "Large local allergic reaction",
-      "Anxiety reaction to bee sting"
+      "Anaphylaxis \u2014 bee venom, cardiovascular-predominant, beta-blocker confounded (correct)",
+      "Vasovagal syncope \u2014 no allergen mechanism; no tryptase elevation; no flushing",
+      "Acute MI \u2014 troponin borderline; in context of anaphylaxis, may represent Kounis syndrome (mast-cell induced coronary vasospasm)",
+      "Carcinoid syndrome \u2014 flushing; 5-HIAA elevated; chronic course; no acute allergen exposure",
+      "Mastocytosis \u2014 baseline tryptase 18.6 requires workup; may be underlying predisposing condition",
+      "Heat stroke \u2014 environmental exposure; no allergen; altered mental status predominates"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on normal heart rate and absence of classic urticaria, missing anaphylaxis diagnosis due to beta-blocker masking typical tachycardic response",
@@ -1316,7 +1248,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This is an interesting case of a bee sting with some concerning vital signs. Before you talk to the patient, what are your thoughts about the significance of his blood pressure and heart rate? How might his medications affect the typical presentation of allergic reactions?",
       "phase5": "You've gathered good information about his history and physical findings. Let's think about this systematically - he has hypotension, flushing, dyspnea with wheeze, and a history of prior severe reaction to bee stings. What's particularly notable about his heart rate in this context, and how does his medication regimen factor into your diagnostic thinking?",
-      "finalDebrief": "This case highlights how beta-blockers can mask the classic tachycardic response in anaphylaxis, making the diagnosis more challenging. The key was recognizing that hypotension, bronchospasm, and flushing after known allergen exposure constitutes anaphylaxis even without urticaria or tachycardia. His prior severe reaction and current beta-blocker therapy were crucial historical elements. How did your differential diagnosis evolve as you gathered more information?"
+      "finalDebrief": "This case highlights how beta-blockers can mask the classic tachycardic response in anaphylaxis, making the diagnosis more challenging. The key was recognizing that hypotension, bronchospasm, and flushing after known allergen exposure constitutes anaphylaxis even without urticaria or tachycardia. His prior severe reaction and current beta-blocker therapy were crucial historical elements. How did your differential diagnosis evolve as you gathered more information?",
+      "final": "Diagnosis: bee venom anaphylaxis, cardiovascular-predominant, refractory to initial epinephrine due to beta-blockade. Key teaching points: (1) Anaphylaxis WITHOUT urticaria/angioedema occurs in 10-20% \u2014 cardiovascular collapse or bronchospasm alone qualifies. Beta-blockers mask tachycardia and cutaneous signs. (2) Beta-blocker refractory anaphylaxis: epinephrine requires beta-adrenergic receptor; if blocked \u2192 use glucagon 1-2mg IV/IM (bypasses beta receptor via glucagon receptor, increases HR and BP). (3) Baseline tryptase 18.6 \u2014 persistently elevated (>24h post-reaction) raises concern for underlying mastocytosis. Hereditary alpha-tryptasemia also possible. Full mastocytosis workup indicated. (4) Kounis syndrome: anaphylaxis-triggered coronary artery spasm or plaque rupture. Troponin elevation in this context should prompt cardiology input \u2014 treatment priority is epinephrine (not nitrates, which worsen vasodilation). (5) Venom immunotherapy is urgent in this patient \u2014 outdoor exposure + systemic anaphylaxis + VIT reduces re-sting risk from 60% to 2%. Beta-blocker use relative contraindication to VIT \u2014 discuss with cardiology."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Hymenoptera Venom (Bee Sting), Atypical Presentation: Cardiovascular-Predominant Without Cutaneous Features; Confounded by Beta-Blockade"
   }
 };

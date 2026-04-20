@@ -14,9 +14,9 @@ window.EMR_DATA = {
       "phone": "(704) 555-1539",
       "email": "maria.santosreyes@email.com",
       "address": "6625 Juniper Dr, Columbus, OH 43215",
-      "insurance": "Uninsured — Self-Pay",
+      "insurance": "Uninsured \u2014 Self-Pay",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Michael Santos-Reyes",
         "phone": "(404) 555-6152",
@@ -60,11 +60,11 @@ window.EMR_DATA = {
       ],
       [
         "Occupation",
-        "House cleaner — chemical exposures"
+        "House cleaner \u2014 chemical exposures"
       ],
       [
         "Insurance",
-        "Uninsured — works 2 jobs, no employer coverage"
+        "Uninsured \u2014 works 2 jobs, no employer coverage"
       ],
       [
         "Living",
@@ -72,7 +72,7 @@ window.EMR_DATA = {
       ],
       [
         "Language",
-        "Primary Spanish — functional English"
+        "Primary Spanish \u2014 functional English"
       ],
       [
         "Children",
@@ -80,18 +80,18 @@ window.EMR_DATA = {
       ],
       [
         "Access",
-        "No PCP — uses urgent care for all visits"
+        "No PCP \u2014 uses urgent care for all visits"
       ],
       [
         "Financial",
-        "Cannot afford EpiPen ($600+) — has been using expired one"
+        "Cannot afford EpiPen ($600+) \u2014 has been using expired one"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Latex glove exposure at work → progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
+        "chiefComplaint": "Latex glove exposure at work \u2192 progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
@@ -104,21 +104,21 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Asthma (moderate persistent — undertreated, no controller)",
+          "description": "Asthma (moderate persistent \u2014 undertreated, no controller)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Latex occupational exposure — house cleaner",
+          "description": "Latex occupational exposure \u2014 house cleaner",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Uninsured — cannot afford EpiPen or controller meds",
+          "description": "Uninsured \u2014 cannot afford EpiPen or controller meds",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -169,7 +169,7 @@ window.EMR_DATA = {
           "bp": "96/58",
           "hr": "118",
           "rr": "26",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "90%",
           "pain": "7/10"
         }
@@ -192,7 +192,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "12.1",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "H"
                 },
@@ -213,7 +213,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -288,8 +288,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Latex glove exposure at work → progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
-          "hpi": "32F house cleaner presenting with anaphylaxis after latex glove exposure at work. Reports progressive lip/face swelling, wheezing, and near-syncope developing over 20 min. Used expired EpiPen from purse with partial improvement. Known latex contact urticaria but never had systemic reaction before. Undertreated asthma — uses only albuterol PRN, no controller. Uninsured, works 2 jobs, cannot afford EpiPen replacement ($600+) or specialist visits. Spanish-speaking — functional English but prefers Spanish for medical discussions.",
+          "cc": "Latex glove exposure at work \u2192 progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
+          "hpi": "32F house cleaner presenting with anaphylaxis after latex glove exposure at work. Reports progressive lip/face swelling, wheezing, and near-syncope developing over 20 min. Used expired EpiPen from purse with partial improvement. Known latex contact urticaria but never had systemic reaction before. Undertreated asthma \u2014 uses only albuterol PRN, no controller. Uninsured, works 2 jobs, cannot afford EpiPen replacement ($600+) or specialist visits. Spanish-speaking \u2014 functional English but prefers Spanish for medical discussions.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -298,34 +298,34 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Brief observation after latex anaphylaxis — social work for medication assistance programs",
+        "chiefComplaint": "Brief observation after latex anaphylaxis \u2014 social work for medication assistance programs",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Latex anaphylaxis — occupational",
+          "description": "Latex anaphylaxis \u2014 occupational",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Asthma (moderate persistent, uncontrolled — no ICS)",
+          "description": "Asthma (moderate persistent, uncontrolled \u2014 no ICS)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Uninsured — medication access barriers",
+          "description": "Uninsured \u2014 medication access barriers",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Occupational exposure — needs job modification counseling",
+          "description": "Occupational exposure \u2014 needs job modification counseling",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -367,7 +367,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "86",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "97%",
           "pain": "2/10"
         }
@@ -390,7 +390,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -411,7 +411,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -474,8 +474,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Brief observation after latex anaphylaxis — social work for medication assistance programs",
-          "hpi": "32F stable after anaphylaxis. Social work consulted: applying for Mylan patient assistance program for EpiPen, connected to community health center for PCP (sliding scale), occupational health referral for non-latex glove workplace accommodation letter. Controller inhaler samples provided — 30-day bridge.",
+          "cc": "Brief observation after latex anaphylaxis \u2014 social work for medication assistance programs",
+          "hpi": "32F stable after anaphylaxis. Social work consulted: applying for Mylan patient assistance program for EpiPen, connected to community health center for PCP (sliding scale), occupational health referral for non-latex glove workplace accommodation letter. Controller inhaler samples provided \u2014 30-day bridge.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -484,20 +484,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — latex allergy confirmation, occupational modification, medication access",
+        "chiefComplaint": "A/I consult \u2014 latex allergy confirmation, occupational modification, medication access",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Latex allergy — IgE-mediated (occupational)",
+          "description": "Latex allergy \u2014 IgE-mediated (occupational)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Asthma — moderate persistent, now on ICS/LABA",
+          "description": "Asthma \u2014 moderate persistent, now on ICS/LABA",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -511,7 +511,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Financial barriers — EpiPen, specialist care",
+          "description": "Financial barriers \u2014 EpiPen, specialist care",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -553,7 +553,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -576,7 +576,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -597,7 +597,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -700,8 +700,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — latex allergy confirmation, occupational modification, medication access",
-          "hpi": "A/I consult: 32F with confirmed IgE-mediated latex allergy. Hev b 6.02 positive — cross-reactive with tropical fruits. Latex-fruit syndrome counseling provided in Spanish. Workplace accommodation letter written — employer must provide non-latex (nitrile) gloves. Connected to free community A/I clinic for follow-up. EpiPen through manufacturer assistance program (Mylan). Also addressing undertreated asthma — likely contributes to anaphylaxis severity.",
+          "cc": "A/I consult \u2014 latex allergy confirmation, occupational modification, medication access",
+          "hpi": "A/I consult: 32F with confirmed IgE-mediated latex allergy. Hev b 6.02 positive \u2014 cross-reactive with tropical fruits. Latex-fruit syndrome counseling provided in Spanish. Workplace accommodation letter written \u2014 employer must provide non-latex (nitrile) gloves. Connected to free community A/I clinic for follow-up. EpiPen through manufacturer assistance program (Mylan). Also addressing undertreated asthma \u2014 likely contributes to anaphylaxis severity.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -710,7 +710,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — latex avoidance, asthma control, medication access check",
+        "chiefComplaint": "Follow-up \u2014 latex avoidance, asthma control, medication access check",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
@@ -723,21 +723,21 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Asthma — improving on ICS/LABA",
+          "description": "Asthma \u2014 improving on ICS/LABA",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Employer providing nitrile gloves — no further occupational exposures",
+          "description": "Employer providing nitrile gloves \u2014 no further occupational exposures",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "EpiPen access — patient assistance program active",
+          "description": "EpiPen access \u2014 patient assistance program active",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -783,7 +783,7 @@ window.EMR_DATA = {
           "name": "Albuterol",
           "dose": "90mcg",
           "route": "MDI",
-          "frequency": "PRN (using 2x/week — controlled)",
+          "frequency": "PRN (using 2x/week \u2014 controlled)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -795,7 +795,7 @@ window.EMR_DATA = {
           "bp": "110/66",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -818,7 +818,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -839,7 +839,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -902,8 +902,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — latex avoidance, asthma control, medication access check",
-          "hpi": "32F returns 6 weeks post-anaphylaxis. Employer now providing nitrile gloves — no further exposures. Asthma much better on controller — albuterol use down to 2x/week. EpiPens current (assistance program). Avoiding banana and avocado per counseling. Established at community health center with PCP. Children also screened for latex allergy (negative). Spanish-language action plan reviewed and updated.",
+          "cc": "Follow-up \u2014 latex avoidance, asthma control, medication access check",
+          "hpi": "32F returns 6 weeks post-anaphylaxis. Employer now providing nitrile gloves \u2014 no further exposures. Asthma much better on controller \u2014 albuterol use down to 2x/week. EpiPens current (assistance program). Avoiding banana and avocado per counseling. Established at community health center with PCP. Children also screened for latex allergy (negative). Spanish-language action plan reviewed and updated.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -923,83 +923,64 @@ window.EMR_DATA = {
     "phone": "(212) 555-4394",
     "email": "maria.santosreyes@email.com",
     "address": "4039 Hollyhock Rd, San Antonio, TX 78207",
-    "insurance": "Uninsured — Self-Pay",
+    "insurance": "Uninsured \u2014 Self-Pay",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Michael Santos-Reyes",
       "phone": "(620) 555-3362",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Latex glove exposure at work → progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
+    "chiefComplaint": "Latex glove exposure at work \u2192 progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
     "diagnosis": "Anaphylaxis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Latex anaphylaxis",
+      "problem": "Latex anaphylaxis \u2014 Type I IgE-mediated",
+      "icd": "T45.4XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Multiple prior sensitizations from surgical glove exposure; latex IgE 12.4 kUA/L; banana/avocado cross-reactive"
     },
     {
-      "id": "prob-2",
-      "description": "Asthma (moderate persistent — undertreated, no controller)",
+      "problem": "Occupational latex sensitization \u2014 healthcare worker",
+      "icd": "Z77.010",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "2 years of latex glove exposure in OR; progressive sensitization over time; prior episodes of hand urticaria"
     },
     {
-      "id": "prob-3",
-      "description": "Latex occupational exposure — house cleaner",
+      "problem": "Latex-fruit syndrome",
+      "icd": "Z91.010",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Uninsured — cannot afford EpiPen or controller meds",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Cross-reactive with banana, avocado, kiwi, chestnut \u2014 Hev b 6.02 (hevein) is cross-reactive allergen"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given x1 in ED (used expired auto-injector at scene with partial effect)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg IM x2",
+      "sig": "Inject at first sign of throat tightness or breathing difficulty",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Albuterol",
-      "dose": "2.5mg",
-      "route": "NEB",
-      "frequency": "Continuous",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 10mg daily PRN",
+      "sig": "Take 1 tablet by mouth daily for mild allergic symptoms",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
-    },
-    {
-      "id": "med-4",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Medical alert bracelet \u2014 LATEX ALLERGY",
+      "sig": "Wear at all times; essential for surgical/procedure settings",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Ordered"
     }
   ],
   "allergies": [
@@ -1023,7 +1004,7 @@ window.EMR_DATA = {
       "bp": "96/58",
       "hr": "118",
       "rr": "26",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "90%",
       "pain": "7/10"
     }
@@ -1034,8 +1015,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "Latex glove exposure at work → progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
-      "hpi": "32F house cleaner presenting with anaphylaxis after latex glove exposure at work. Reports progressive lip/face swelling, wheezing, and near-syncope developing over 20 min. Used expired EpiPen from purse with partial improvement. Known latex contact urticaria but never had systemic reaction before. Undertreated asthma — uses only albuterol PRN, no controller. Uninsured, works 2 jobs, cannot afford EpiPen replacement ($600+) or specialist visits. Spanish-speaking — functional English but prefers Spanish for medical discussions.",
+      "cc": "Latex glove exposure at work \u2192 progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",
+      "hpi": "32F house cleaner presenting with anaphylaxis after latex glove exposure at work. Reports progressive lip/face swelling, wheezing, and near-syncope developing over 20 min. Used expired EpiPen from purse with partial improvement. Known latex contact urticaria but never had systemic reaction before. Undertreated asthma \u2014 uses only albuterol PRN, no controller. Uninsured, works 2 jobs, cannot afford EpiPen replacement ($600+) or specialist visits. Spanish-speaking \u2014 functional English but prefers Spanish for medical discussions.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -1043,107 +1024,57 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-904777",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/10/2024",
+      "panel": "Latex Allergy Evaluation",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "12.1",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "8",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Latex IgE (Hevea brasiliensis, ImmunoCAP)",
+          "value": "12.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Hev b 6.02 (hevein \u2014 cross-reactive component)",
+          "value": "8.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY STUDIES",
-          "results": [
-            {
-              "test": "Tryptase (acute)",
-              "value": "32",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Banana IgE",
+          "value": "3.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Avocado IgE",
+          "value": "2.9",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Kiwi IgE",
+          "value": "1.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Total IgE",
+          "value": "290",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "Serum Tryptase (2h post-reaction)",
+          "value": "22.8",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         }
       ]
     }
@@ -1172,11 +1103,11 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "House cleaner — chemical exposures"
+      "House cleaner \u2014 chemical exposures"
     ],
     [
       "Insurance",
-      "Uninsured — works 2 jobs, no employer coverage"
+      "Uninsured \u2014 works 2 jobs, no employer coverage"
     ],
     [
       "Living",
@@ -1184,7 +1115,7 @@ window.EMR_DATA = {
     ],
     [
       "Language",
-      "Primary Spanish — functional English"
+      "Primary Spanish \u2014 functional English"
     ],
     [
       "Children",
@@ -1192,11 +1123,11 @@ window.EMR_DATA = {
     ],
     [
       "Access",
-      "No PCP — uses urgent care for all visits"
+      "No PCP \u2014 uses urgent care for all visits"
     ],
     [
       "Financial",
-      "Cannot afford EpiPen ($600+) — has been using expired one"
+      "Cannot afford EpiPen ($600+) \u2014 has been using expired one"
     ]
   ],
   "references": [
@@ -1322,13 +1253,12 @@ window.EMR_DATA = {
       "Monitor oxygen saturation and vital signs": "SpO2 90% on room air, BP 96/58, HR 118, appears volume depleted."
     },
     "ddxTargets": [
-      "Anaphylaxis (correct diagnosis)",
-      "Severe asthma exacerbation",
-      "Angioedema (hereditary or ACE inhibitor-induced)",
-      "Vocal cord dysfunction",
-      "Foreign body aspiration",
-      "Panic attack with hyperventilation",
-      "Acute allergic reaction without systemic involvement"
+      "Anaphylaxis \u2014 IgE-mediated latex allergy, occupational exposure (correct)",
+      "Contact urticaria (non-IgE) \u2014 localized, immediate; not systemic; no IgE mechanism",
+      "Allergic contact dermatitis to rubber accelerators (Type IV) \u2014 delayed, eczematous; not anaphylaxis",
+      "Food allergy anaphylaxis \u2014 cross-reactive foods possible (banana); latex exposure was direct trigger here",
+      "Irritant contact dermatitis \u2014 glove friction, detergents; negative IgE; no systemic reaction",
+      "Exercise-induced anaphylaxis \u2014 no latex exposure; occurs with exercise"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'asthma exacerbation' given her asthma history and wheezing, missing the systemic anaphylactic features like hypotension and angioedema.",
@@ -1338,7 +1268,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider what key historical elements would help you differentiate between your differential diagnoses. What specific questions about the exposure, timeline, and progression of symptoms will be most important? How might her occupational and social history influence both her presentation and your management?",
       "phase5": "Now that you've gathered history and physical findings, let's think through this systematically. You have a patient with known latex allergy who had occupational exposure, followed by rapid onset of angioedema, wheezing, and hypotension. How do these findings fit together? What criteria are you using to evaluate for anaphylaxis versus other diagnoses?",
-      "finalDebrief": "This case illustrates classic anaphylaxis with both respiratory and cardiovascular involvement following known allergen exposure. Notice how the combination of angioedema, bronchospasm, and hypotension distinguished this from isolated asthma or local allergic reaction. The social determinants - being uninsured with expired medications and ongoing occupational exposure - are crucial for both understanding the presentation and planning appropriate follow-up care."
+      "finalDebrief": "This case illustrates classic anaphylaxis with both respiratory and cardiovascular involvement following known allergen exposure. Notice how the combination of angioedema, bronchospasm, and hypotension distinguished this from isolated asthma or local allergic reaction. The social determinants - being uninsured with expired medications and ongoing occupational exposure - are crucial for both understanding the presentation and planning appropriate follow-up care.",
+      "final": "Diagnosis: latex anaphylaxis, Type I IgE-mediated, occupational healthcare worker. Key teaching points: (1) Distinguish Type I (IgE, immediate, anaphylaxis) from Type IV (T-cell, delayed, eczema) latex reactions \u2014 crucially different management. Type I = avoid all latex, carry EpiPen. Type IV = avoid rubber accelerators, allergen-free gloves. (2) Latex-fruit syndrome: Hev b 6.02 (hevein) cross-reacts with chitinases in tropical fruits \u2014 banana (60%), avocado (40%), kiwi (35%), chestnut (25%). Risk of food-triggered reaction ongoing. (3) Latex avoidance must be COMPREHENSIVE: gloves, IV tubing ports, catheter balloons, anesthesia equipment. Hospital must be notified \u2014 latex-safe protocol required for ALL procedures. (4) Healthcare worker implications: occupational disability potential; employee health referral; workplace accommodation for latex-safe environment. (5) No immunotherapy available for latex \u2014 strict avoidance is the only management. Accidental exposures in the OR are the highest-risk scenario."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Latex Allergy (Type I IgE-Mediated), Occupational Exposure; Healthcare Worker"
   }
 };

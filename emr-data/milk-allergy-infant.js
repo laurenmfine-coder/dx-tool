@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "2173 Elm St, San Antonio, TX 78205",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Lisa Chang, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Jennifer Foster",
         "phone": "(504) 555-3939",
@@ -110,7 +110,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "162",
           "rr": "40",
-          "temp": "37.2°C",
+          "temp": "37.2\u00b0C",
           "spo2": "98%",
           "pain": "N/A"
         }
@@ -133,7 +133,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -147,7 +147,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -223,7 +223,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "6mo with bloody stools and dehydration on cow milk formula",
-          "hpi": "Liam Foster — 6mo with bloody stools and dehydration on cow milk formula",
+          "hpi": "Liam Foster \u2014 6mo with bloody stools and dehydration on cow milk formula",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -232,7 +232,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for rehydration and formula transition — cow milk protein allergy",
+        "chiefComplaint": "Admitted for rehydration and formula transition \u2014 cow milk protein allergy",
         "diagnosis": "Cow's Milk Protein Allergy"
       },
       "problems": [
@@ -285,7 +285,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "142",
           "rr": "34",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "N/A"
         }
@@ -308,7 +308,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -322,7 +322,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -397,8 +397,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for rehydration and formula transition — cow milk protein allergy",
-          "hpi": "Liam Foster — Admitted for rehydration and formula transition — cow milk protein allergy",
+          "cc": "Admitted for rehydration and formula transition \u2014 cow milk protein allergy",
+          "hpi": "Liam Foster \u2014 Admitted for rehydration and formula transition \u2014 cow milk protein allergy",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -408,7 +408,7 @@ window.EMR_DATA = {
     "consult": {
       "patient": {
         "chiefComplaint": "6-month-old with bloody stools, eczema, and poor weight gain after formula switch",
-        "diagnosis": "Cow's Milk Protein Allergy — Infant"
+        "diagnosis": "Cow's Milk Protein Allergy \u2014 Infant"
       },
       "problems": [
         {
@@ -451,7 +451,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "148",
           "rr": "36",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "N/A"
         }
@@ -474,7 +474,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -488,7 +488,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -566,14 +566,14 @@ window.EMR_DATA = {
           "cc": "6-month-old with bloody stools, eczema, and poor weight gain after formula switch",
           "hpi": "Liam Foster presents with 6-month-old with bloody stools, eczema, and poor weight gain after formula switch.",
           "exam": "See documentation.",
-          "assessment": "Cow's Milk Protein Allergy — Infant",
+          "assessment": "Cow's Milk Protein Allergy \u2014 Infant",
           "plan": "See orders."
         }
       ]
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — growth curve on extensively hydrolyzed formula, tolerance assessment",
+        "chiefComplaint": "Follow-up \u2014 growth curve on extensively hydrolyzed formula, tolerance assessment",
         "diagnosis": "Cow's Milk Protein Allergy"
       },
       "problems": [
@@ -617,7 +617,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "132",
           "rr": "30",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A"
         }
@@ -640,7 +640,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -654,7 +654,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -729,8 +729,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — growth curve on extensively hydrolyzed formula, tolerance assessment",
-          "hpi": "Liam Foster — Follow-up — growth curve on extensively hydrolyzed formula, tolerance assessment",
+          "cc": "Follow-up \u2014 growth curve on extensively hydrolyzed formula, tolerance assessment",
+          "hpi": "Liam Foster \u2014 Follow-up \u2014 growth curve on extensively hydrolyzed formula, tolerance assessment",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -752,47 +752,62 @@ window.EMR_DATA = {
     "address": "2169 E Roosevelt Rd, Baltimore, MD 21201",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Jennifer Foster",
       "phone": "(713) 555-9751",
       "relationship": "Parent"
     },
     "chiefComplaint": "6-month-old with bloody stools, eczema, and poor weight gain after formula switch",
-    "diagnosis": "Cow's Milk Protein Allergy — Infant"
+    "diagnosis": "Cow's Milk Protein Allergy \u2014 Infant"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Eczema (severe)",
+      "problem": "Food protein-induced allergic proctocolitis \u2014 cow's milk",
+      "icd": "K52.82",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "6-month-old breastfed infant; bloody stools began after maternal dairy intake; eosinophilic infiltration of rectal mucosa"
     },
     {
-      "id": "prob-2",
-      "description": "Failure to thrive",
+      "problem": "Eczema \u2014 mild",
+      "icd": "L20.89",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Mild diffuse eczema consistent with atopic phenotype; consider food allergy trigger"
     },
     {
-      "id": "prob-3",
-      "description": "Bloody stools since formula introduction",
+      "problem": "Poor weight gain \u2014 formula change precipitant",
+      "icd": "R62.51",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Weight at 10th percentile, dropped from 50th; improved on maternal dairy elimination"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Hydrocortisone 1% cream",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "BID to affected areas",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Maternal cow's milk elimination diet",
+      "sig": "Mother to eliminate all dairy products (milk, cheese, yogurt, butter, casein, whey); allow 2-4 weeks for infant symptom resolution",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Hydrolyzed formula (Nutramigen) \u2014 if maternal elimination fails",
+      "sig": "If bloody stools persist after 4 weeks maternal elimination, transition infant to extensively hydrolyzed formula",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Contingency"
+    },
+    {
+      "name": "Emollient (Vanicream) \u2014 twice daily to eczema",
+      "sig": "Apply to affected areas after bath twice daily",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -810,7 +825,7 @@ window.EMR_DATA = {
       "bp": "N/A",
       "hr": "148",
       "rr": "36",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "N/A"
     }
@@ -824,106 +839,63 @@ window.EMR_DATA = {
       "cc": "6-month-old with bloody stools, eczema, and poor weight gain after formula switch",
       "hpi": "Liam Foster presents with 6-month-old with bloody stools, eczema, and poor weight gain after formula switch.",
       "exam": "See documentation.",
-      "assessment": "Cow's Milk Protein Allergy — Infant",
+      "assessment": "Cow's Milk Protein Allergy \u2014 Infant",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-470731",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/12/2024",
+      "panel": "FPIAP Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "9.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "12",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Stool guaiac (occult blood)",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Stool white blood cells",
+          "value": "Present",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Milk Ig E",
-              "value": "3.8",
-              "unit": "kU/L",
-              "range": "<0.35",
-              "flag": "H"
-            },
-            {
-              "test": "Casein Ig E",
-              "value": "5.2",
-              "unit": "kU/L",
-              "range": "<0.35",
-              "flag": "H"
-            }
-          ]
+          "test": "CBC \u2014 Eosinophils",
+          "value": "0.8",
+          "unit": "K/\u03bcL",
+          "ref": "0.0-0.7",
+          "flag": "H"
+        },
+        {
+          "test": "Serum IgE (infant)",
+          "value": "8",
+          "unit": "IU/mL",
+          "ref": "<15 (infant)",
+          "flag": ""
+        },
+        {
+          "test": "Milk IgE (ImmunoCAP)",
+          "value": "<0.35",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": ""
+        },
+        {
+          "test": "Casein IgE",
+          "value": "<0.35",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": ""
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "10.2",
+          "unit": "g/dL",
+          "ref": "10.5-13.5",
+          "flag": "L"
         }
       ]
     }
@@ -987,17 +959,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Cow's milk protein allergy (CMPA) affects 2–3% of infants and is the most common food allergy in infancy. IgE-mediated CMPA presents within 30 min of exposure (urticaria, vomiting, anaphylaxis). Non-IgE CMPA presents with GI symptoms hours later (FPIES, proctocolitis).",
+      "Cow's milk protein allergy (CMPA) affects 2\u20133% of infants and is the most common food allergy in infancy. IgE-mediated CMPA presents within 30 min of exposure (urticaria, vomiting, anaphylaxis). Non-IgE CMPA presents with GI symptoms hours later (FPIES, proctocolitis).",
       "Baked milk tolerance: ~75% of milk-allergic children can tolerate extensively heated (baked) milk. Casein IgE-negative patients are most likely to tolerate baked milk. Introducing baked milk accelerates natural tolerance development.",
-      "Natural history: ~80% of milk-allergic children achieve tolerance by age 5–6. Casein-sensitized children (heat-stable protein) are less likely to outgrow and have more severe reactions."
+      "Natural history: ~80% of milk-allergic children achieve tolerance by age 5\u20136. Casein-sensitized children (heat-stable protein) are less likely to outgrow and have more severe reactions."
     ],
     "boardPearls": [
-      "Milk protein components: casein (Bos d 8) — heat-stable → persistent allergy. Whey (β-lactoglobulin Bos d 5, α-lactalbumin) — heat-labile → may tolerate baked milk.",
-      "Casein sIgE: positive → cannot tolerate baked milk. Negative, whey positive → baked milk ladder may be appropriate.",
+      "Milk protein components: casein (Bos d 8) \u2014 heat-stable \u2192 persistent allergy. Whey (\u03b2-lactoglobulin Bos d 5, \u03b1-lactalbumin) \u2014 heat-labile \u2192 may tolerate baked milk.",
+      "Casein sIgE: positive \u2192 cannot tolerate baked milk. Negative, whey positive \u2192 baked milk ladder may be appropriate.",
       "Formula options: extensively hydrolyzed casein (Nutramigen, Alimentum) for mild-moderate CMPA. Amino acid formula (Neocate, EleCare) for severe CMPA/FPIES.",
-      "Soy formula: 10–15% of milk-allergic infants are also soy-allergic (shared storage proteins). Not recommended for IgE-mediated milk allergy in infants <6 months.",
+      "Soy formula: 10\u201315% of milk-allergic infants are also soy-allergic (shared storage proteins). Not recommended for IgE-mediated milk allergy in infants <6 months.",
       "Breastfeeding: maternal milk elimination diet if breastfed infant has CMPA. Reassess after 2 weeks.",
-      "Outgrowth: 80% by age 5–6. OFC annually to assess resolution."
+      "Outgrowth: 80% by age 5\u20136. OFC annually to assess resolution."
     ]
   },
   "guided": {
@@ -1059,13 +1031,12 @@ window.EMR_DATA = {
       "Assessment of muscle mass and subcutaneous fat": "Mildly decreased subcutaneous fat and muscle mass consistent with mild failure to thrive."
     },
     "ddxTargets": [
-      "Cow's milk protein allergy (correct diagnosis)",
-      "Food protein-induced enterocolitis syndrome (FPIES)",
-      "Inflammatory bowel disease",
-      "Intussusception",
-      "Necrotizing enterocolitis",
-      "Lactose intolerance",
-      "Infectious gastroenteritis"
+      "Food protein-induced allergic proctocolitis \u2014 cow's milk, breastfed infant (correct)",
+      "IgE-mediated cow's milk allergy \u2014 IgE negative; FPIAP is non-IgE; no urticaria or anaphylaxis",
+      "Infectious gastroenteritis \u2014 stool culture negative; no fever; family members unaffected",
+      "Anal fissure \u2014 local rectal exam finding; no eosinophilia; no diffuse hematochezia",
+      "Meckel's diverticulum \u2014 painless rectal bleeding; onset acute; Tc-99m scan diagnostic",
+      "Necrotizing enterocolitis \u2014 premature infant; systemic illness; x-ray pneumatosis"
     ],
     "biasFlags": {
       "anchoring": "May anchor on the bloody stools and consider more serious conditions like IBD or intussusception without fully considering the feeding history and allergic presentation",
@@ -1075,7 +1046,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several concerning possibilities for bloody stools in an infant. As you interview the parents, pay particular attention to the temporal relationship between symptoms and any changes in diet. What questions will help you understand if this might be related to an immune response versus an infectious or anatomical cause?",
       "phase5": "Now that you have the history of symptoms beginning after formula introduction, along with the eczema and growth concerns, what pattern are you seeing? Consider how food protein allergies can present systemically in infants. What would be your next step in narrowing down between your differential diagnoses?",
-      "finalDebrief": "This case illustrates how cow's milk protein allergy can present with multiple system involvement - GI symptoms, skin manifestations, and growth issues. The key was recognizing the temporal relationship with formula introduction and the constellation of atopic findings. How did your thinking evolve from considering anatomical emergencies to recognizing this as an allergic phenomenon?"
+      "finalDebrief": "This case illustrates how cow's milk protein allergy can present with multiple system involvement - GI symptoms, skin manifestations, and growth issues. The key was recognizing the temporal relationship with formula introduction and the constellation of atopic findings. How did your thinking evolve from considering anatomical emergencies to recognizing this as an allergic phenomenon?",
+      "final": "Diagnosis: food protein-induced allergic proctocolitis (FPIAP), cow's milk protein, breastfed infant. Key teaching points: (1) FPIAP is non-IgE-mediated \u2014 IgE skin tests and blood tests are NEGATIVE. Mechanism is T-cell/eosinophilic. Diagnosis is clinical: bloody stools + eosinophilia + resolution with elimination. (2) Breastfed FPIAP: maternal dietary protein passes into breast milk in sufficient quantity to trigger rectal inflammation. Treatment is maternal elimination, NOT formula switch \u2014 breastfeeding should continue. (3) Resolution timeline: 48-72h after maternal elimination for symptoms to begin improving; up to 4 weeks for complete resolution. Milk proteins clear from breast milk within 48-72h. (4) Extensively hydrolyzed formula (Nutramigen, Alimentum) if maternal elimination fails \u2014 NOT standard formula. Amino acid formula (Elecare, Neocate) if extensively hydrolyzed fails. (5) Prognosis: FPIAP is the most benign FPIES-spectrum disorder \u2014 resolves by 12-18 months in most cases. Schedule supervised milk reintroduction at 12 months; no need for EpiPen as reactions are GI-limited."
     }
+  },
+  "meta": {
+    "diagnosis": "Food Protein-Induced Allergic Proctocolitis (FPIAP) \u2014 Cow's Milk Protein, Infant; Breastfed with Maternal Elimination"
   }
 };

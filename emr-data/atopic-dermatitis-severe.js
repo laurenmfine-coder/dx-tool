@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6453 Dogwood Ln, Memphis, TN 38122",
       "insurance": "Humana Gold Plus",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "Publix Pharmacy — Weston Rd",
+      "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
       "emergencyContact": {
         "name": "Michael Thompson",
         "phone": "(630) 555-6315",
@@ -72,7 +72,7 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "16yo with secondary skin infection on severe eczema — cellulitis",
+        "chiefComplaint": "16yo with secondary skin infection on severe eczema \u2014 cellulitis",
         "diagnosis": "Severe Atopic Dermatitis"
       },
       "problems": [
@@ -159,7 +159,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "92",
           "rr": "18",
-          "temp": "38.4°C",
+          "temp": "38.4\u00b0C",
           "spo2": "99%",
           "pain": "7/10"
         }
@@ -182,7 +182,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -196,7 +196,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -271,8 +271,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "16yo with secondary skin infection on severe eczema — cellulitis",
-          "hpi": "Zara Thompson — 16yo with secondary skin infection on severe eczema — cellulitis",
+          "cc": "16yo with secondary skin infection on severe eczema \u2014 cellulitis",
+          "hpi": "Zara Thompson \u2014 16yo with secondary skin infection on severe eczema \u2014 cellulitis",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -377,7 +377,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "86",
           "rr": "16",
-          "temp": "37.8°C",
+          "temp": "37.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -400,7 +400,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -414,7 +414,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -490,7 +490,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Admitted for IV antibiotics for extensive superinfected eczema",
-          "hpi": "Zara Thompson — Admitted for IV antibiotics for extensive superinfected eczema",
+          "hpi": "Zara Thompson \u2014 Admitted for IV antibiotics for extensive superinfected eczema",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -499,7 +499,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — severe AD failing topicals, evaluate for dupilumab",
+        "chiefComplaint": "A/I consult \u2014 severe AD failing topicals, evaluate for dupilumab",
         "diagnosis": "Severe Atopic Dermatitis"
       },
       "problems": [
@@ -577,7 +577,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "3/10"
         }
@@ -600,7 +600,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -614,7 +614,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -689,8 +689,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — severe AD failing topicals, evaluate for dupilumab",
-          "hpi": "Zara Thompson — A/I consult — severe AD failing topicals, evaluate for dupilumab",
+          "cc": "A/I consult \u2014 severe AD failing topicals, evaluate for dupilumab",
+          "hpi": "Zara Thompson \u2014 A/I consult \u2014 severe AD failing topicals, evaluate for dupilumab",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -700,7 +700,7 @@ window.EMR_DATA = {
     "clinic": {
       "patient": {
         "chiefComplaint": "Widespread eczema refractory to topical steroids, affecting sleep and school performance",
-        "diagnosis": "Severe Atopic Dermatitis — Dupilumab Candidate"
+        "diagnosis": "Severe Atopic Dermatitis \u2014 Dupilumab Candidate"
       },
       "problems": [
         {
@@ -777,7 +777,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -800,7 +800,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -814,7 +814,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -892,7 +892,7 @@ window.EMR_DATA = {
           "cc": "Widespread eczema refractory to topical steroids, affecting sleep and school performance",
           "hpi": "Zara Thompson presents with widespread eczema refractory to topical steroids, affecting sleep and school performance.",
           "exam": "See documentation.",
-          "assessment": "Severe Atopic Dermatitis — Dupilumab Candidate",
+          "assessment": "Severe Atopic Dermatitis \u2014 Dupilumab Candidate",
           "plan": "See orders."
         }
       ]
@@ -912,81 +912,78 @@ window.EMR_DATA = {
     "address": "2879 Poplar Ave, Milwaukee, WI 53206",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
     "emergencyContact": {
       "name": "Michael Thompson",
       "phone": "(502) 555-7779",
       "relationship": "Parent"
     },
     "chiefComplaint": "Widespread eczema refractory to topical steroids, affecting sleep and school performance",
-    "diagnosis": "Severe Atopic Dermatitis — Dupilumab Candidate"
+    "diagnosis": "Severe Atopic Dermatitis \u2014 Dupilumab Candidate"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Severe atopic dermatitis since infancy",
+      "problem": "Atopic dermatitis \u2014 severe, refractory",
+      "icd": "L20.9",
+      "onset": "2012",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "EASI 32 (severe); BSA involvement 40%; SCORAD 68; failed TCS, tacrolimus, crisaborole; dupilumab initiated"
     },
     {
-      "id": "prob-2",
-      "description": "Allergic rhinitis",
+      "problem": "Allergic rhinitis and asthma \u2014 comorbid atopic diseases",
+      "icd": "J30.1",
+      "onset": "2014",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Atopic march \u2014 AD \u2192 allergic rhinitis \u2192 asthma; dupilumab may address all three simultaneously"
     },
     {
-      "id": "prob-3",
-      "description": "Food allergies (peanut, egg)",
+      "problem": "Sleep disturbance and depression from chronic itch",
+      "icd": "G47.00",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Anxiety secondary to skin appearance",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "DLQI 22 (extremely impaired quality of life); PHQ-A score 14 (moderate depression); mental health referral placed"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Triamcinolone 0.1% ointment",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "BID to body",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Dupilumab (Dupixent) 300mg SC q2 weeks",
+      "sig": "Administer 300mg subcutaneously every 2 weeks; loading dose 600mg (2x300) at initiation",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active \u2014 initiated today"
     },
     {
-      "id": "med-2",
-      "name": "Tacrolimus 0.03% ointment",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "BID to face",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Triamcinolone acetonide 0.1% cream BID (flare rescue)",
+      "sig": "Apply thin layer to affected areas during flares; limit to 2 weeks per course on face/folds",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2019",
+      "refills": 3,
+      "status": "Active \u2014 as needed"
     },
     {
-      "id": "med-3",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Tacrolimus 0.1% ointment BID (face and folds)",
+      "sig": "Apply twice daily to face and skin folds \u2014 steroid-sparing",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2022",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Fluticasone nasal",
-      "dose": "50mcg",
-      "route": "Nasal",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 10mg nightly",
+      "sig": "Take 1 tablet by mouth at bedtime for itch and sleep",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2018",
+      "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Fluticasone nasal spray 2 sprays each nostril daily",
+      "sig": "2 sprays per nostril daily for allergic rhinitis",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2014",
+      "refills": 3,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -1010,7 +1007,7 @@ window.EMR_DATA = {
       "bp": "112/68",
       "hr": "78",
       "rr": "14",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -1024,106 +1021,70 @@ window.EMR_DATA = {
       "cc": "Widespread eczema refractory to topical steroids, affecting sleep and school performance",
       "hpi": "Zara Thompson presents with widespread eczema refractory to topical steroids, affecting sleep and school performance.",
       "exam": "See documentation.",
-      "assessment": "Severe Atopic Dermatitis — Dupilumab Candidate",
+      "assessment": "Severe Atopic Dermatitis \u2014 Dupilumab Candidate",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-172340",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/08/2024",
+      "panel": "Atopic Dermatitis Severity and Allergy Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "14",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Total IgE",
+          "value": "4,280",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "CBC \u2014 Eosinophils",
+          "value": "1.8",
+          "unit": "K/\u03bcL",
+          "ref": "0.0-0.5",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Ige",
-              "value": "4200",
-              "unit": "IU/mL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "Peanut Ig E",
-              "value": "85",
-              "unit": "kU/L",
-              "range": "<0.35",
-              "flag": "H"
-            }
-          ]
+          "test": "House Dust Mite IgE (Der p 1)",
+          "value": "12.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Cat dander IgE (Fel d 1)",
+          "value": "8.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Grass pollen IgE",
+          "value": "6.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Peanut IgE (Ara h 2)",
+          "value": "2.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "EASI score",
+          "value": "32",
+          "unit": "",
+          "ref": "<7 clear/almost clear",
+          "flag": "H"
+        },
+        {
+          "test": "SCORAD",
+          "value": "68",
+          "unit": "",
+          "ref": "<25 mild",
+          "flag": "H"
         }
       ]
     }
@@ -1181,17 +1142,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Severe AD (SCORAD >50 or IGA 3–4) failing topical therapy warrants systemic treatment. Dupilumab (anti-IL-4Rα) is first-line systemic biologic — approved for ages ≥6 months, excellent long-term safety profile.",
-      "The filaggrin-IL-4/IL-13 vicious cycle: FLG LOF mutations → leaky skin barrier → TSLP/IL-33 alarmins → Th2 priming → IL-4/IL-13 → directly suppress FLG transcription → worsens barrier further. Dupilumab breaks this cycle.",
-      "Dupilumab-associated conjunctivitis: 10–15% incidence in AD patients (higher than in asthma patients). Manage with artificial tears → topical steroids → cyclosporine eye drops. Do NOT discontinue dupilumab — refer to ophthalmology."
+      "Severe AD (SCORAD >50 or IGA 3\u20134) failing topical therapy warrants systemic treatment. Dupilumab (anti-IL-4R\u03b1) is first-line systemic biologic \u2014 approved for ages \u22656 months, excellent long-term safety profile.",
+      "The filaggrin-IL-4/IL-13 vicious cycle: FLG LOF mutations \u2192 leaky skin barrier \u2192 TSLP/IL-33 alarmins \u2192 Th2 priming \u2192 IL-4/IL-13 \u2192 directly suppress FLG transcription \u2192 worsens barrier further. Dupilumab breaks this cycle.",
+      "Dupilumab-associated conjunctivitis: 10\u201315% incidence in AD patients (higher than in asthma patients). Manage with artificial tears \u2192 topical steroids \u2192 cyclosporine eye drops. Do NOT discontinue dupilumab \u2014 refer to ophthalmology."
     ],
     "boardPearls": [
-      "AD severity: mild SCORAD <25, moderate 25–50, severe >50. IGA 0/1 = treatment success in trials.",
-      "Proactive TCS therapy: apply 2×/week to previously affected sites during remission → reduces flare frequency 50%.",
-      "Dupilumab: IL-4Rα blockade. Approved ≥6 months. Also approved: asthma, CRSwNP, EoE, PNP.",
-      "JAK inhibitors (abrocitinib, upadacitinib): FDA black box (serious infection, malignancy, MACE, VTE). Faster itch relief than dupilumab (24–48h via IL-31/JAK1 pathway).",
-      "Atopic march: severe early AD → food allergy → asthma → AR. FLG mutations accelerate march.",
-      "Bleach baths: 0.005% sodium hypochlorite (½ tsp/full tub) × 2–3/week → reduces S. aureus colonization → reduces AD flares. Evidence-based."
+      "AD severity: mild SCORAD <25, moderate 25\u201350, severe >50. IGA 0/1 = treatment success in trials.",
+      "Proactive TCS therapy: apply 2\u00d7/week to previously affected sites during remission \u2192 reduces flare frequency 50%.",
+      "Dupilumab: IL-4R\u03b1 blockade. Approved \u22656 months. Also approved: asthma, CRSwNP, EoE, PNP.",
+      "JAK inhibitors (abrocitinib, upadacitinib): FDA black box (serious infection, malignancy, MACE, VTE). Faster itch relief than dupilumab (24\u201348h via IL-31/JAK1 pathway).",
+      "Atopic march: severe early AD \u2192 food allergy \u2192 asthma \u2192 AR. FLG mutations accelerate march.",
+      "Bleach baths: 0.005% sodium hypochlorite (\u00bd tsp/full tub) \u00d7 2\u20133/week \u2192 reduces S. aureus colonization \u2192 reduces AD flares. Evidence-based."
     ]
   },
   "guided": {
@@ -1256,13 +1217,12 @@ window.EMR_DATA = {
       "Evaluate overall skin dryness and barrier function": "Generalized xerosis with impaired skin barrier function. Skin appears dull and feels rough to palpation."
     },
     "ddxTargets": [
-      "Severe atopic dermatitis with treatment resistance (correct diagnosis)",
-      "Contact dermatitis (allergic or irritant)",
-      "Seborrheic dermatitis",
-      "Cutaneous T-cell lymphoma (mycosis fungoides)",
-      "Immunodeficiency disorder",
-      "Psoriasis",
-      "Scabies"
+      "Severe atopic dermatitis \u2014 refractory, Th2-mediated; dupilumab indicated (correct)",
+      "Contact dermatitis \u2014 patch test distinguishes; distribution at contact sites; not flexural",
+      "Psoriasis \u2014 silvery plaques, extensor surfaces, nail changes; not flexural or pruritic-dominant",
+      "Seborrheic dermatitis \u2014 oily, scale-dominant; scalp, nasolabial folds; not widespread",
+      "Scabies \u2014 burrows, interdigital; household contacts affected; nocturnal itch disproportionate",
+      "Netherton syndrome \u2014 ichthyosis linearis circumflexa; SPINK5 mutation; bamboo hair"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'refractory eczema' and miss considering systemic causes, malignancy, or the need to evaluate treatment adherence and proper application technique",
@@ -1272,7 +1232,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, what key historical features would help you distinguish between these conditions? Consider the chronicity, distribution pattern, and treatment response. What red flags should you be particularly alert for in a case of 'treatment-resistant' eczema?",
       "phase5": "Now that you've completed your history and physical exam, how does the SCORAD severity score and treatment failure pattern influence your thinking? What are the implications of severe atopic dermatitis that's refractory to standard therapy, and what would be your next steps in management?",
-      "finalDebrief": "This case illustrates severe atopic dermatitis requiring systemic therapy consideration. Notice how the distribution, chronicity, family history, and associated atopic conditions supported the diagnosis, while the severity and treatment resistance indicated need for escalated care. What systemic options would you consider for this patient, and how would you address the psychosocial impacts?"
+      "finalDebrief": "This case illustrates severe atopic dermatitis requiring systemic therapy consideration. Notice how the distribution, chronicity, family history, and associated atopic conditions supported the diagnosis, while the severity and treatment resistance indicated need for escalated care. What systemic options would you consider for this patient, and how would you address the psychosocial impacts?",
+      "final": "Diagnosis: severe atopic dermatitis, Th2-polarized, refractory to topical therapy \u2014 dupilumab indicated. Key teaching points: (1) AD pathophysiology: IL-4 and IL-13 (from Th2 cells) drive skin barrier dysfunction (filaggrin downregulation) and IgE overproduction. Dupilumab (anti-IL-4R\u03b1) blocks both IL-4 and IL-13 \u2014 mechanism-targeted therapy. (2) Severity scoring: EASI \u226523 = severe; SCORAD \u226550 = severe; DLQI >20 = extremely impaired. Documentation of severity is required for dupilumab prior authorization. (3) Dupilumab is approved age 6 months+. Expected response: 50-70% achieve EASI 75 (75% improvement) by week 16. Conjunctivitis is the main side effect (20% \u2014 treat with ophthalmic cyclosporine). (4) Atopic march: AD \u2192 allergic rhinitis \u2192 asthma is the canonical trajectory. Dupilumab is also approved for asthma and nasal polyposis \u2014 may treat multiple comorbidities. (5) Mental health impact of chronic AD is profound and underrecognized \u2014 DLQI 22 and PHQ-A 14 require psychiatric/psychology referral, not just dermatology optimization."
     }
+  },
+  "meta": {
+    "diagnosis": "Severe Atopic Dermatitis, Adolescent \u2014 Refractory to Topical Therapy; Dupilumab Indicated"
   }
 };

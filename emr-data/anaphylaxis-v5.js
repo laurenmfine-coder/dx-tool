@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "9191 Peachtree Rd, Milwaukee, WI 53204",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Michael Hassan",
         "phone": "(513) 555-4043",
@@ -52,34 +52,34 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Living",
-        "Recent immigrant family from Syria — in US 2 years"
+        "Recent immigrant family from Syria \u2014 in US 2 years"
       ],
       [
         "Language",
-        "Parents speak Arabic only — patient speaks English learned at school"
+        "Parents speak Arabic only \u2014 patient speaks English learned at school"
       ],
       [
         "Diet",
-        "Middle Eastern diet heavy in sesame/tahini — major dietary disruption"
+        "Middle Eastern diet heavy in sesame/tahini \u2014 major dietary disruption"
       ],
       [
         "Religion",
-        "Muslim — halal dietary requirements intersect with allergy avoidance"
+        "Muslim \u2014 halal dietary requirements intersect with allergy avoidance"
       ],
       [
         "School",
-        "3rd grade — 504 plan in place"
+        "3rd grade \u2014 504 plan in place"
       ],
       [
         "Food security",
-        "Family uses food bank — limited control over ingredients"
+        "Family uses food bank \u2014 limited control over ingredients"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "8yo with known sesame allergy — accidental exposure from food bank hummus, progressive facial swelling and wheezing",
+        "chiefComplaint": "8yo with known sesame allergy \u2014 accidental exposure from food bank hummus, progressive facial swelling and wheezing",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
@@ -106,14 +106,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Food insecurity — food bank items not always labeled in Arabic",
+          "description": "Food insecurity \u2014 food bank items not always labeled in Arabic",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Language barrier — parents Arabic-only",
+          "description": "Language barrier \u2014 parents Arabic-only",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -164,7 +164,7 @@ window.EMR_DATA = {
           "bp": "88/52",
           "hr": "142",
           "rr": "32",
-          "temp": "37.2°C",
+          "temp": "37.2\u00b0C",
           "spo2": "91%",
           "pain": "N/A/10"
         }
@@ -187,7 +187,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "11.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "H"
                 },
@@ -208,7 +208,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -283,8 +283,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "8yo with known sesame allergy — accidental exposure from food bank hummus, progressive facial swelling and wheezing",
-          "hpi": "8F brought by parents after anaphylaxis from sesame exposure. Family received hummus from food bank — label was in English only, parents did not recognize \"tahini\" as sesame product. Patient ate hummus with pita, developed facial swelling and wheezing within 15 min. Father administered EpiPen Jr (properly). In ED, patient serves as interpreter for parents (8yo translating her own medical emergency). Arabic interpreter requested. Cultural note: sesame is ubiquitous in Middle Eastern cuisine — tahini, halvah, za'atar, baba ghanoush — this allergy has profoundly affected family's cultural food practices.",
+          "cc": "8yo with known sesame allergy \u2014 accidental exposure from food bank hummus, progressive facial swelling and wheezing",
+          "hpi": "8F brought by parents after anaphylaxis from sesame exposure. Family received hummus from food bank \u2014 label was in English only, parents did not recognize \"tahini\" as sesame product. Patient ate hummus with pita, developed facial swelling and wheezing within 15 min. Father administered EpiPen Jr (properly). In ED, patient serves as interpreter for parents (8yo translating her own medical emergency). Arabic interpreter requested. Cultural note: sesame is ubiquitous in Middle Eastern cuisine \u2014 tahini, halvah, za'atar, baba ghanoush \u2014 this allergy has profoundly affected family's cultural food practices.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -293,41 +293,41 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for observation — social work consult for food security and cultural dietary counseling",
+        "chiefComplaint": "Admitted for observation \u2014 social work consult for food security and cultural dietary counseling",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Sesame anaphylaxis — resolved",
+          "description": "Sesame anaphylaxis \u2014 resolved",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Food insecurity — food bank items inadequately labeled",
+          "description": "Food insecurity \u2014 food bank items inadequately labeled",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Language barrier — need Arabic resources",
+          "description": "Language barrier \u2014 need Arabic resources",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Cultural dietary impact — sesame is staple in Middle Eastern cuisine",
+          "description": "Cultural dietary impact \u2014 sesame is staple in Middle Eastern cuisine",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Egg allergy — limits protein sources further",
+          "description": "Egg allergy \u2014 limits protein sources further",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -369,7 +369,7 @@ window.EMR_DATA = {
           "bp": "98/62",
           "hr": "112",
           "rr": "22",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "N/A/10"
         }
@@ -392,7 +392,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -413,7 +413,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -476,8 +476,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for observation — social work consult for food security and cultural dietary counseling",
-          "hpi": "8F stable post-anaphylaxis. Social work consult: connecting family with Arabic-speaking food bank coordinator, providing Arabic-language food label reading guide with sesame synonyms (tahini, halvah, etc.), contacting school to update 504 plan. Nutritionist consult: working with family on sesame-free Middle Eastern recipes that maintain cultural food identity. Interpreter services: Arabic interpreter present for all discussions — patient should NOT serve as medical interpreter for parents.",
+          "cc": "Admitted for observation \u2014 social work consult for food security and cultural dietary counseling",
+          "hpi": "8F stable post-anaphylaxis. Social work consult: connecting family with Arabic-speaking food bank coordinator, providing Arabic-language food label reading guide with sesame synonyms (tahini, halvah, etc.), contacting school to update 504 plan. Nutritionist consult: working with family on sesame-free Middle Eastern recipes that maintain cultural food identity. Interpreter services: Arabic interpreter present for all discussions \u2014 patient should NOT serve as medical interpreter for parents.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -486,20 +486,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — sesame allergy management in context of cultural diet and food insecurity",
+        "chiefComplaint": "A/I consult \u2014 sesame allergy management in context of cultural diet and food insecurity",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Sesame allergy — IgE-mediated, FARE category",
+          "description": "Sesame allergy \u2014 IgE-mediated, FARE category",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Egg allergy — consider baked egg challenge",
+          "description": "Egg allergy \u2014 consider baked egg challenge",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -513,7 +513,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Arabic-only parents — need translated action plan and food label guide",
+          "description": "Arabic-only parents \u2014 need translated action plan and food label guide",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -546,7 +546,7 @@ window.EMR_DATA = {
           "bp": "102/64",
           "hr": "96",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -569,7 +569,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -590,7 +590,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -693,8 +693,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — sesame allergy management in context of cultural diet and food insecurity",
-          "hpi": "A/I consult: 8F with confirmed severe sesame allergy (Ses i 1 strongly positive). Egg: ovomucoid low — good candidate for baked egg challenge (would expand diet significantly). Sesame is now a top-9 allergen (FASTER Act 2021) — labeling required. However, food bank items may not comply. Arabic-language anaphylaxis action plan created. FARE resources shared in Arabic. Family connected with Arabic-speaking allergist in community for ongoing care. Sesame OIT not yet widely available but discussing clinical trials.",
+          "cc": "A/I consult \u2014 sesame allergy management in context of cultural diet and food insecurity",
+          "hpi": "A/I consult: 8F with confirmed severe sesame allergy (Ses i 1 strongly positive). Egg: ovomucoid low \u2014 good candidate for baked egg challenge (would expand diet significantly). Sesame is now a top-9 allergen (FASTER Act 2021) \u2014 labeling required. However, food bank items may not comply. Arabic-language anaphylaxis action plan created. FARE resources shared in Arabic. Family connected with Arabic-speaking allergist in community for ongoing care. Sesame OIT not yet widely available but discussing clinical trials.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -703,27 +703,27 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — baked egg challenge, food label education, cultural diet adaptation",
+        "chiefComplaint": "Follow-up \u2014 baked egg challenge, food label education, cultural diet adaptation",
         "diagnosis": "Anaphylaxis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Sesame allergy — stable, strict avoidance",
+          "description": "Sesame allergy \u2014 stable, strict avoidance",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Egg — passed baked egg challenge (can have baked goods with egg)",
+          "description": "Egg \u2014 passed baked egg challenge (can have baked goods with egg)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Food bank coordination improved — Arabic-speaking coordinator assigned",
+          "description": "Food bank coordination improved \u2014 Arabic-speaking coordinator assigned",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -770,7 +770,7 @@ window.EMR_DATA = {
           "bp": "100/62",
           "hr": "92",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -793,7 +793,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -814,7 +814,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -877,8 +877,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — baked egg challenge, food label education, cultural diet adaptation",
-          "hpi": "8F returns 8 weeks post-anaphylaxis. Successfully passed baked egg challenge today — can now eat baked goods containing egg (expands diet significantly). Family reports using sunflower seed butter as tahini substitute in traditional recipes. Arabic-speaking food bank coordinator reviewing items before family pickup. No accidental sesame exposures since hospitalization. School nurse confirmed 504 plan updated. Father learning English food allergy vocabulary. Next: annual sesame IgE monitoring, consider sesame OIT trial when available.",
+          "cc": "Follow-up \u2014 baked egg challenge, food label education, cultural diet adaptation",
+          "hpi": "8F returns 8 weeks post-anaphylaxis. Successfully passed baked egg challenge today \u2014 can now eat baked goods containing egg (expands diet significantly). Family reports using sunflower seed butter as tahini substitute in traditional recipes. Arabic-speaking food bank coordinator reviewing items before family pickup. No accidental sesame exposures since hospitalization. School nurse confirmed 504 plan updated. Father learning English food allergy vocabulary. Next: annual sesame IgE monitoring, consider sesame OIT trial when available.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -900,88 +900,62 @@ window.EMR_DATA = {
     "address": "5255 Elm St, Birmingham, AL 35201",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Michael Hassan",
       "phone": "(713) 555-3838",
       "relationship": "Parent"
     },
-    "chiefComplaint": "8yo with known sesame allergy — accidental exposure from food bank hummus, progressive facial swelling and wheezing",
+    "chiefComplaint": "8yo with known sesame allergy \u2014 accidental exposure from food bank hummus, progressive facial swelling and wheezing",
     "diagnosis": "Anaphylaxis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Sesame anaphylaxis",
+      "problem": "Sesame anaphylaxis \u2014 Grade 3",
+      "icd": "T78.1XXA",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "8yo with known sesame allergy; accidental exposure from unlabeled hummus (food bank product); FDA FALCPA amendment now requires sesame labeling"
     },
     {
-      "id": "prob-2",
-      "description": "Egg allergy (hives only)",
+      "problem": "Sesame allergy \u2014 IgE-mediated",
+      "icd": "Z91.018",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Diagnosed at age 7 after prior reaction; sesame-specific IgE 9.8 kUA/L"
     },
     {
-      "id": "prob-3",
-      "description": "Asthma (mild)",
+      "problem": "Eczema and allergic rhinitis",
+      "icd": "L20.9",
+      "onset": "2020",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Food insecurity — food bank items not always labeled in Arabic",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Language barrier — parents Arabic-only",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Atopic phenotype increases anaphylaxis severity and likelihood"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.15mg",
-      "route": "IM",
-      "frequency": "Given x1 (EpiPen Jr)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen Jr 0.15mg IM x2 (weight 27kg)",
+      "sig": "Inject into outer thigh at first sign of systemic reaction; call 911; may repeat in 5-15 min",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Albuterol",
-      "dose": "2.5mg",
-      "route": "NEB",
-      "frequency": "Q20min x3",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 5mg daily",
+      "sig": "Take 1 teaspoon (5mg) by mouth daily for allergic rhinitis and eczema control",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2022",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Diphenhydramine",
-      "dose": "12.5mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
-    },
-    {
-      "id": "med-4",
-      "name": "Dexamethasone",
-      "dose": "0.6mg/kg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Fluticasone nasal spray 1 spray each nostril daily",
+      "sig": "1 spray each nostril daily for allergic rhinitis",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2022",
+      "refills": 3,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -1005,7 +979,7 @@ window.EMR_DATA = {
       "bp": "88/52",
       "hr": "142",
       "rr": "32",
-      "temp": "37.2°C",
+      "temp": "37.2\u00b0C",
       "spo2": "91%",
       "pain": "N/A/10"
     }
@@ -1016,8 +990,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "8yo with known sesame allergy — accidental exposure from food bank hummus, progressive facial swelling and wheezing",
-      "hpi": "8F brought by parents after anaphylaxis from sesame exposure. Family received hummus from food bank — label was in English only, parents did not recognize \"tahini\" as sesame product. Patient ate hummus with pita, developed facial swelling and wheezing within 15 min. Father administered EpiPen Jr (properly). In ED, patient serves as interpreter for parents (8yo translating her own medical emergency). Arabic interpreter requested. Cultural note: sesame is ubiquitous in Middle Eastern cuisine — tahini, halvah, za'atar, baba ghanoush — this allergy has profoundly affected family's cultural food practices.",
+      "cc": "8yo with known sesame allergy \u2014 accidental exposure from food bank hummus, progressive facial swelling and wheezing",
+      "hpi": "8F brought by parents after anaphylaxis from sesame exposure. Family received hummus from food bank \u2014 label was in English only, parents did not recognize \"tahini\" as sesame product. Patient ate hummus with pita, developed facial swelling and wheezing within 15 min. Father administered EpiPen Jr (properly). In ED, patient serves as interpreter for parents (8yo translating her own medical emergency). Arabic interpreter requested. Cultural note: sesame is ubiquitous in Middle Eastern cuisine \u2014 tahini, halvah, za'atar, baba ghanoush \u2014 this allergy has profoundly affected family's cultural food practices.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -1025,107 +999,50 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-835655",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/20/2024",
+      "panel": "Post-Reaction Sesame Allergy Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "11.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "7",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Sesame IgE (ImmunoCAP)",
+          "value": "9.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Ses i 1 (major sesame allergen)",
+          "value": "7.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY STUDIES",
-          "results": [
-            {
-              "test": "Tryptase (acute)",
-              "value": "35",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Serum Tryptase (1.5h post-reaction)",
+          "value": "26.4",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
+        },
+        {
+          "test": "Total IgE",
+          "value": "520",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "CBC \u2014 Eosinophils",
+          "value": "0.9",
+          "unit": "K/\u03bcL",
+          "ref": "0.0-0.5",
+          "flag": "H"
+        },
+        {
+          "test": "Peanut IgE (Ara h 2)",
+          "value": "0.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         }
       ]
     }
@@ -1146,27 +1063,27 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Living",
-      "Recent immigrant family from Syria — in US 2 years"
+      "Recent immigrant family from Syria \u2014 in US 2 years"
     ],
     [
       "Language",
-      "Parents speak Arabic only — patient speaks English learned at school"
+      "Parents speak Arabic only \u2014 patient speaks English learned at school"
     ],
     [
       "Diet",
-      "Middle Eastern diet heavy in sesame/tahini — major dietary disruption"
+      "Middle Eastern diet heavy in sesame/tahini \u2014 major dietary disruption"
     ],
     [
       "Religion",
-      "Muslim — halal dietary requirements intersect with allergy avoidance"
+      "Muslim \u2014 halal dietary requirements intersect with allergy avoidance"
     ],
     [
       "School",
-      "3rd grade — 504 plan in place"
+      "3rd grade \u2014 504 plan in place"
     ],
     [
       "Food security",
-      "Family uses food bank — limited control over ingredients"
+      "Family uses food bank \u2014 limited control over ingredients"
     ]
   ],
   "references": [
@@ -1292,13 +1209,12 @@ window.EMR_DATA = {
       "Palpate abdomen for tenderness or organomegaly": "Soft, non-tender, no organomegaly, bowel sounds present"
     },
     "ddxTargets": [
-      "Anaphylaxis secondary to sesame exposure (correct diagnosis)",
-      "Severe asthma exacerbation",
-      "Angioedema (hereditary or acquired)",
-      "Septic shock",
-      "Cardiogenic shock",
-      "Acute allergic reaction without anaphylaxis",
-      "Upper airway obstruction"
+      "Anaphylaxis \u2014 IgE-mediated sesame allergy, FALCPA labeling gap contributed (correct)",
+      "Peanut anaphylaxis \u2014 peanut IgE low; sesame was exposure; sesame not a legume",
+      "Tree nut anaphylaxis \u2014 sesame is a seed, not a tree nut; different allergen",
+      "Viral urticaria \u2014 no allergen exposure; no tryptase elevation",
+      "FPIES to sesame \u2014 non-IgE; vomiting predominates; no urticaria; tryptase normal",
+      "Idiopathic anaphylaxis \u2014 must have excluded all food triggers; sesame confirmed here"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known asthma history and treating as isolated asthma exacerbation rather than recognizing multi-system anaphylactic reaction",
@@ -1308,7 +1224,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This 8-year-old has known allergies and presents with respiratory distress after food exposure. What key system-based questions will help you differentiate between an isolated allergic reaction versus anaphylaxis? Consider what makes anaphylaxis life-threatening.",
       "phase5": "You've identified facial swelling, wheezing, and hypotension in a child with known sesame allergy after exposure. How do these findings fit together, and what does the blood pressure tell you about the severity? What's your next immediate step?",
-      "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement. Notice how the combination of cutaneous (angioedema, urticaria), respiratory (wheezing), and cardiovascular (hypotension) symptoms after known allergen exposure clinched the diagnosis. The social determinants - language barriers and food insecurity - contributed to the exposure but shouldn't delay recognition of this medical emergency."
+      "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement. Notice how the combination of cutaneous (angioedema, urticaria), respiratory (wheezing), and cardiovascular (hypotension) symptoms after known allergen exposure clinched the diagnosis. The social determinants - language barriers and food insecurity - contributed to the exposure but shouldn't delay recognition of this medical emergency.",
+      "final": "Diagnosis: sesame anaphylaxis, IgE-mediated, FALCPA 2023 labeling gap contributed to accidental exposure. Key teaching points: (1) Sesame became the 9th major allergen under FALCPA effective January 1, 2023 \u2014 mandatory US labeling. However, food bank and pre-January 2023 products may not be labeled. Cross-contamination from shared production lines is common. (2) Ses i 1 is the major sesame allergen \u2014 high Ses i 1 IgE correlates with systemic reactivity risk (similar to Ara h 2 in peanut). (3) Sesame is found in unexpected places: hummus, tahini, bread sesame seeds, sesame oil, Asian condiments (goma sauce), certain cosmetics. (4) EpiPen dosing: \u226415kg \u2192 EpiPen Jr 0.15mg; 15-30kg \u2192 EpiPen Jr preferred but 0.3mg acceptable; >30kg \u2192 EpiPen 0.3mg. (5) Social/school accommodation: IEP/504 plan, trained school staff, epinephrine on site. Food bank donations warrant extra vigilance for pediatric patients with sesame allergy."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 Sesame Allergy (Sesamum indicum), Pediatric; FALCPA 2023 Sesame Labeling"
   }
 };

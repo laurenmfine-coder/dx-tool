@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "2341 Cedar Blvd, Richmond, VA 23226",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(630) 555-6772",
@@ -59,18 +59,18 @@ window.EMR_DATA = {
       ],
       [
         "Issue",
-        "60 years of accumulated false drug \"allergies\" — PCN, cephalosporin, now vanc — severely limits options"
+        "60 years of accumulated false drug \"allergies\" \u2014 PCN, cephalosporin, now vanc \u2014 severely limits options"
       ],
       [
         "Teaching",
-        "RMS is NOT allergy — manageable with slow infusion + premedication"
+        "RMS is NOT allergy \u2014 manageable with slow infusion + premedication"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "78yo with MRSA prosthetic joint infection — vancomycin RMS mislabeled as allergy, limiting treatment options",
+        "chiefComplaint": "78yo with MRSA prosthetic joint infection \u2014 vancomycin RMS mislabeled as allergy, limiting treatment options",
         "diagnosis": "Vancomycin Infusion Reaction"
       },
       "problems": [
@@ -83,28 +83,28 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "MRSA prosthetic joint infection — needs 6 weeks vancomycin",
+          "description": "MRSA prosthetic joint infection \u2014 needs 6 weeks vancomycin",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "PCN \"allergy\" from 1960s — likely outgrown",
+          "description": "PCN \"allergy\" from 1960s \u2014 likely outgrown",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Multiple false allergies → inferior antibiotic choices → patient harm",
+          "description": "Multiple false allergies \u2192 inferior antibiotic choices \u2192 patient harm",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "CKD 3 — vanco dosing adjustment needed",
+          "description": "CKD 3 \u2014 vanco dosing adjustment needed",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -116,7 +116,7 @@ window.EMR_DATA = {
           "name": "Vancomycin",
           "dose": "1g",
           "route": "IV",
-          "frequency": "Stopped after RMS (flushing/hypotension) — rate was too fast",
+          "frequency": "Stopped after RMS (flushing/hypotension) \u2014 rate was too fast",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -146,7 +146,7 @@ window.EMR_DATA = {
           "bp": "88/52",
           "hr": "108",
           "rr": "20",
-          "temp": "37.8°C",
+          "temp": "37.8\u00b0C",
           "spo2": "96%",
           "pain": "6/10"
         }
@@ -169,7 +169,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "14.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "H"
                 },
@@ -183,7 +183,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -272,8 +272,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "78yo with MRSA prosthetic joint infection — vancomycin RMS mislabeled as allergy, limiting treatment options",
-          "hpi": "78F nursing home resident with MRSA joint infection. Vancomycin started — developed upper body flushing and hypotension during first infusion (1h rate). ED labeled as \"vancomycin allergy.\" This is RMS (histamine release from rapid infusion), NOT true allergy. She already has PCN and cephalosporin \"allergies\" from decades ago. If vancomycin is also lost, her options are extremely limited. A/I consult STAT.",
+          "cc": "78yo with MRSA prosthetic joint infection \u2014 vancomycin RMS mislabeled as allergy, limiting treatment options",
+          "hpi": "78F nursing home resident with MRSA joint infection. Vancomycin started \u2014 developed upper body flushing and hypotension during first infusion (1h rate). ED labeled as \"vancomycin allergy.\" This is RMS (histamine release from rapid infusion), NOT true allergy. She already has PCN and cephalosporin \"allergies\" from decades ago. If vancomycin is also lost, her options are extremely limited. A/I consult STAT.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -282,34 +282,34 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted — A/I managing vancomycin protocol, drug allergy cleanup",
+        "chiefComplaint": "Admitted \u2014 A/I managing vancomycin protocol, drug allergy cleanup",
         "diagnosis": "Vancomycin Infusion Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "MRSA infection — needs vancomycin",
+          "description": "MRSA infection \u2014 needs vancomycin",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Vancomycin RMS — managed with slow infusion (2h) + premedication",
+          "description": "Vancomycin RMS \u2014 managed with slow infusion (2h) + premedication",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "PCN allergy 60 years old — evaluation after infection treated",
+          "description": "PCN allergy 60 years old \u2014 evaluation after infection treated",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "False allergy accumulation in elderly — patient safety issue",
+          "description": "False allergy accumulation in elderly \u2014 patient safety issue",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -342,7 +342,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "82",
           "rr": "16",
-          "temp": "37.4°C",
+          "temp": "37.4\u00b0C",
           "spo2": "97%",
           "pain": "4/10"
         }
@@ -365,7 +365,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -379,7 +379,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -442,8 +442,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted — A/I managing vancomycin protocol, drug allergy cleanup",
-          "hpi": "78F re-challenged with slow vancomycin infusion — tolerated perfectly. EMR updated: \"Vancomycin — RMS (NOT allergy) — tolerated with 2h infusion + premedication.\"",
+          "cc": "Admitted \u2014 A/I managing vancomycin protocol, drug allergy cleanup",
+          "hpi": "78F re-challenged with slow vancomycin infusion \u2014 tolerated perfectly. EMR updated: \"Vancomycin \u2014 RMS (NOT allergy) \u2014 tolerated with 2h infusion + premedication.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -452,34 +452,34 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I — RMS management, plan for PCN delabeling after infection",
+        "chiefComplaint": "A/I \u2014 RMS management, plan for PCN delabeling after infection",
         "diagnosis": "Vancomycin Infusion Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Vancomycin RMS — resolved, NOT allergy",
+          "description": "Vancomycin RMS \u2014 resolved, NOT allergy",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "PCN allergy 60 years — >80% lose sensitivity after 10 years, should test",
+          "description": "PCN allergy 60 years \u2014 >80% lose sensitivity after 10 years, should test",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Cephalosporin \"allergy\" — was never given one, just told to avoid",
+          "description": "Cephalosporin \"allergy\" \u2014 was never given one, just told to avoid",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "False allergies kill — inferior antibiotics, increased C. diff, longer hospitalizations",
+          "description": "False allergies kill \u2014 inferior antibiotics, increased C. diff, longer hospitalizations",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -491,7 +491,7 @@ window.EMR_DATA = {
           "name": "Vancomycin",
           "dose": "750mg",
           "route": "IV",
-          "frequency": "Q12H over 2h — tolerated",
+          "frequency": "Q12H over 2h \u2014 tolerated",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -503,7 +503,7 @@ window.EMR_DATA = {
           "bp": "122/74",
           "hr": "78",
           "rr": "14",
-          "temp": "37.2°C",
+          "temp": "37.2\u00b0C",
           "spo2": "98%",
           "pain": "3/10"
         }
@@ -526,7 +526,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -540,7 +540,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -603,8 +603,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I — RMS management, plan for PCN delabeling after infection",
-          "hpi": "A/I: 78F with 4 drug \"allergies\" accumulated over 60 years. Vancomycin RMS corrected in chart. PCN evaluation planned after infection treated — highly likely to be negative after 60 years. False allergies in elderly are a major patient safety issue — each one limits life-saving options.",
+          "cc": "A/I \u2014 RMS management, plan for PCN delabeling after infection",
+          "hpi": "A/I: 78F with 4 drug \"allergies\" accumulated over 60 years. Vancomycin RMS corrected in chart. PCN evaluation planned after infection treated \u2014 highly likely to be negative after 60 years. False allergies in elderly are a major patient safety issue \u2014 each one limits life-saving options.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -613,34 +613,34 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Post-infection — PCN allergy DELABELED after 60 years",
+        "chiefComplaint": "Post-infection \u2014 PCN allergy DELABELED after 60 years",
         "diagnosis": "Vancomycin Infusion Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "MRSA infection treated — 6 weeks vancomycin completed",
+          "description": "MRSA infection treated \u2014 6 weeks vancomycin completed",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Vancomycin — RMS corrected in chart",
+          "description": "Vancomycin \u2014 RMS corrected in chart",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "PCN allergy — DELABELED (negative skin test + oral challenge)",
+          "description": "PCN allergy \u2014 DELABELED (negative skin test + oral challenge)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Cephalosporin — DELABELED",
+          "description": "Cephalosporin \u2014 DELABELED",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -671,7 +671,7 @@ window.EMR_DATA = {
           "bp": "128/76",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "0/10"
         }
@@ -694,7 +694,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -708,7 +708,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -771,7 +771,7 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Post-infection — PCN allergy DELABELED after 60 years",
+          "cc": "Post-infection \u2014 PCN allergy DELABELED after 60 years",
           "hpi": "78F post-infection. PCN skin test negative. Oral amoxicillin tolerated. 60-year false allergy removed. Cephalosporin restriction also removed. This case illustrates why drug allergy delabeling in the elderly is critical.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -794,79 +794,62 @@ window.EMR_DATA = {
     "address": "647 Spruce St, Memphis, TN 38108",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(630) 555-5106",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "78yo with MRSA prosthetic joint infection — vancomycin RMS mislabeled as allergy, limiting treatment options",
+    "chiefComplaint": "78yo with MRSA prosthetic joint infection \u2014 vancomycin RMS mislabeled as allergy, limiting treatment options",
     "diagnosis": "Vancomycin Infusion Reaction"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Vancomycin RMS (NOT true allergy)",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "problem": "Vancomycin Red Man Syndrome \u2014 mislabeled as allergy in EMR",
+      "icd": "T36.8X5A",
+      "onset": "2018",
+      "status": "Resolved/Mislabeled",
+      "notes": "2018 reaction: flushing, erythema during vancomycin infusion; labeled 'PCN/Vanco allergy' without evaluation; NOT IgE-mediated"
     },
     {
-      "id": "prob-2",
-      "description": "MRSA prosthetic joint infection — needs 6 weeks vancomycin",
+      "problem": "MRSA prosthetic joint infection \u2014 right hip",
+      "icd": "A41.02",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "CoNS culture from joint aspirate; MRSA confirmed by PCR; vancomycin is first-line; mislabeled allergy limiting treatment"
     },
     {
-      "id": "prob-3",
-      "description": "PCN \"allergy\" from 1960s — likely outgrown",
+      "problem": "Right total hip arthroplasty \u2014 2019",
+      "icd": "Z96.641",
+      "onset": "2019",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Multiple false allergies → inferior antibiotic choices → patient harm",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "CKD 3 — vanco dosing adjustment needed",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Periprosthetic joint infection 5 years post-primary THA"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Vancomycin",
-      "dose": "1g",
-      "route": "IV",
-      "frequency": "Stopped after RMS (flushing/hypotension) — rate was too fast",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Vancomycin 1.5g IV q12h (resumed with premedication and slower infusion)",
+      "sig": "Administer over 2 hours (not 1 hour); premedicate with diphenhydramine 25mg IV 30 min prior; ALLERGY LABEL REMOVED",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 allergy delabeling complete"
     },
     {
-      "id": "med-2",
-      "name": "Diphenhydramine",
-      "dose": "25mg",
-      "route": "IV",
-      "frequency": "For RMS",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Diphenhydramine 25mg IV prior to each vancomycin infusion",
+      "sig": "Administer 30 min before each vancomycin dose for RMS prevention",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "NS bolus",
-      "dose": "500mL",
-      "route": "IV",
-      "frequency": "For hypotension",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Rifampin 600mg PO daily (biofilm adjunct)",
+      "sig": "Take 1 tablet by mouth daily with vancomycin for prosthetic joint infection biofilm penetration",
+      "prescriber": "ID Dr. Patel",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -890,7 +873,7 @@ window.EMR_DATA = {
       "bp": "88/52",
       "hr": "108",
       "rr": "20",
-      "temp": "37.8°C",
+      "temp": "37.8\u00b0C",
       "spo2": "96%",
       "pain": "6/10"
     }
@@ -901,8 +884,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "78yo with MRSA prosthetic joint infection — vancomycin RMS mislabeled as allergy, limiting treatment options",
-      "hpi": "78F nursing home resident with MRSA joint infection. Vancomycin started — developed upper body flushing and hypotension during first infusion (1h rate). ED labeled as \"vancomycin allergy.\" This is RMS (histamine release from rapid infusion), NOT true allergy. She already has PCN and cephalosporin \"allergies\" from decades ago. If vancomycin is also lost, her options are extremely limited. A/I consult STAT.",
+      "cc": "78yo with MRSA prosthetic joint infection \u2014 vancomycin RMS mislabeled as allergy, limiting treatment options",
+      "hpi": "78F nursing home resident with MRSA joint infection. Vancomycin started \u2014 developed upper body flushing and hypotension during first infusion (1h rate). ED labeled as \"vancomycin allergy.\" This is RMS (histamine release from rapid infusion), NOT true allergy. She already has PCN and cephalosporin \"allergies\" from decades ago. If vancomycin is also lost, her options are extremely limited. A/I consult STAT.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -910,119 +893,63 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-462373",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/15/2024",
+      "panel": "Periprosthetic Joint Infection and Vancomycin Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "14.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Joint fluid culture \u2014 MRSA",
+          "value": "Positive \u2014 MRSA, vancomycin MIC 1.0 \u03bcg/mL",
+          "unit": "",
+          "ref": "",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "ESR",
+          "value": "88",
+          "unit": "mm/h",
+          "ref": "<20",
+          "flag": "H"
         },
         {
-          "name": "INFECTION",
-          "results": [
-            {
-              "test": "ESR",
-              "value": "82",
-              "unit": "mm/hr",
-              "range": "0-20",
-              "flag": "H"
-            },
-            {
-              "test": "CRP",
-              "value": "12.4",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Blood culture",
-              "value": "MRSA",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "142",
+          "unit": "mg/L",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "Vancomycin trough (prior admission, 2018)",
+          "value": "18 mcg/mL (at time of reaction)",
+          "unit": "",
+          "ref": "15-20",
+          "flag": ""
+        },
+        {
+          "test": "Vancomycin-specific IgE",
+          "value": "Not detectable",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": ""
+        },
+        {
+          "test": "Serum Tryptase (during 2018 reaction, retrospective)",
+          "value": "Not drawn in 2018",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/14/2024",
+      "study": "Right Hip X-ray and MRI",
+      "indication": "Periprosthetic joint infection evaluation \u2014 pain, fever, elevated inflammatory markers",
+      "findings": "X-ray: lucency at implant-bone interface, consistent with loosening. MRI: periprosthetic soft tissue enhancement and fluid collection at implant interface. No pathologic fracture.",
+      "impression": "Imaging consistent with chronic periprosthetic joint infection. Surgical debridement and prolonged antibiotic therapy required. Vancomycin is first-line for MRSA PJI."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -1045,11 +972,11 @@ window.EMR_DATA = {
     ],
     [
       "Issue",
-      "60 years of accumulated false drug \"allergies\" — PCN, cephalosporin, now vanc — severely limits options"
+      "60 years of accumulated false drug \"allergies\" \u2014 PCN, cephalosporin, now vanc \u2014 severely limits options"
     ],
     [
       "Teaching",
-      "RMS is NOT allergy — manageable with slow infusion + premedication"
+      "RMS is NOT allergy \u2014 manageable with slow infusion + premedication"
     ]
   ],
   "references": [
@@ -1083,7 +1010,7 @@ window.EMR_DATA = {
         ">90% with PCN label NOT truly allergic",
         ">80% lose sensitivity after 10 years",
         "Morbilliform rash in children = usually viral exanthem",
-        "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+        "False PCN allergy \u2192 MRSA, C. diff, longer stays, higher mortality"
       ]
     },
     {
@@ -1097,7 +1024,7 @@ window.EMR_DATA = {
       "openAccess": true,
       "validates": [
         "RMS = histamine release, NOT IgE",
-        "Slow infusion ≥2h + premedication",
+        "Slow infusion \u22652h + premedication",
         "NOT a true allergy"
       ]
     }
@@ -1149,7 +1076,7 @@ window.EMR_DATA = {
       "Allergic reaction assessment"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 88/52, HR 108, Temp 37.8°C, SpO2 96% - hypotensive and tachycardic with low-grade fever",
+      "Vital signs assessment": "BP 88/52, HR 108, Temp 37.8\u00b0C, SpO2 96% - hypotensive and tachycardic with low-grade fever",
       "Skin examination for rash or flushing": "Mild residual erythema on upper chest and neck, no urticaria, no angioedema, skin warm and dry",
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak pulse volume consistent with hypotension",
       "Pulmonary examination": "Clear to auscultation bilaterally, no wheezing, no stridor, respiratory rate normal",
@@ -1161,13 +1088,12 @@ window.EMR_DATA = {
       "Allergic reaction assessment": "No bronchospasm, no angioedema, no urticaria - findings more consistent with red man syndrome"
     },
     "ddxTargets": [
-      "Vancomycin red man syndrome (correct diagnosis)",
-      "IgE-mediated vancomycin allergy",
-      "Anaphylaxis to vancomycin",
-      "Septic shock from MRSA infection",
-      "Drug-induced hypotension",
-      "Infusion reaction to IV fluids",
-      "Anxiety reaction to hospitalization"
+      "Vancomycin Red Man Syndrome \u2014 mislabeled as allergy; IgE-negative; rate-dependent reaction (correct)",
+      "True IgE-mediated vancomycin allergy \u2014 IgE undetectable; tryptase not elevated; no urticaria/angioedema",
+      "Vancomycin-induced immune thrombocytopenia \u2014 different reaction; platelet-mediated; later onset",
+      "DRESS syndrome from vancomycin \u2014 delayed (2-6 weeks); systemic eosinophilia; organ involvement",
+      "Stevens-Johnson Syndrome \u2014 mucosal involvement; full thickness epidermal necrosis; not flushing",
+      "True penicillin allergy limiting beta-lactam use \u2014 penicillin allergy mislabeled; separate issue; daptomycin as alternative"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'drug allergy' label from ED without considering that red man syndrome is not a true allergy and can be managed",
@@ -1177,7 +1103,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This elderly patient has a serious MRSA infection but now appears to have multiple antibiotic 'allergies' limiting treatment options. What's your approach to distinguishing true allergies from other drug reactions? How will you evaluate the validity of these allergy labels?",
       "phase5": "You've identified a reaction pattern that developed during vancomycin infusion but lacked typical allergic features like urticaria or bronchospasm. The timeline and response to intervention are key here. What does this reaction pattern suggest, and how might this change your treatment approach?",
-      "finalDebrief": "This case highlights how mislabeling red man syndrome as an allergy can severely limit treatment options for serious infections. RMS is infusion-rate related and manageable with slower administration and premedication, unlike true IgE-mediated allergy. How will this change your approach to evaluating 'drug allergies' in patients with serious infections requiring specific antibiotics?"
+      "finalDebrief": "This case highlights how mislabeling red man syndrome as an allergy can severely limit treatment options for serious infections. RMS is infusion-rate related and manageable with slower administration and premedication, unlike true IgE-mediated allergy. How will this change your approach to evaluating 'drug allergies' in patients with serious infections requiring specific antibiotics?",
+      "final": "Diagnosis: vancomycin Red Man Syndrome, mislabeled as allergy \u2014 label removed; vancomycin resumed with premedication. Key teaching points: (1) RMS is NOT an allergy \u2014 it's a direct mast cell degranulation (complement-mediated, non-IgE) triggered by rapid vancomycin infusion rate. Mechanism: vancomycin activates MRGPRX2 receptor on mast cells \u2192 histamine release without IgE sensitization. (2) Features of RMS: flushing/erythema of face, neck, upper trunk (not urticaria); hypotension; itching \u2014 occurs during infusion, especially if rate >10mg/min. No bronchospasm, no angioedema, no anaphylaxis. (3) Management: SLOW the infusion (over 2h, not 1h); premedicate with diphenhydramine. Future doses tolerated with these measures. This is NOT a contraindication to vancomycin. (4) Importance of delabeling: MRSA PJI has limited treatment options \u2014 daptomycin is alternative but inferior for pulmonary infections; telavancin/ceftaroline are adjuncts. Mislabeled vancomycin allergy forces suboptimal antibiotics. (5) Document RMS separately from true allergy in EMR \u2014 'vancomycin: Red Man Syndrome, NOT true allergy, managed with slow infusion + premedication.'"
     }
+  },
+  "meta": {
+    "diagnosis": "Vancomycin Red Man Syndrome (RMS) \u2014 Infusion Rate-Dependent Reaction; NOT an Allergy; Misclassified in EMR"
   }
 };
