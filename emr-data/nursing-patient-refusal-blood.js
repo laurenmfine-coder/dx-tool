@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: JW Patient Refusing Transfusion",
-      "icd": "Z00.00",
+      "problem": "Informed refusal of blood transfusion \u2014 Hgb 6.8",
+      "icd": "Z71.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Samuel Torres, 52M \u2014 post-op hip replacement. Jehovah's Witness with signed advance directive refusing all blood products. Capacity confirmed."
+    },
+    {
+      "problem": "Nursing ethical tension \u2014 patient safety vs autonomy",
+      "icd": "Z71.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Patient has capacity, signed AD. Informed refusal is legally and ethically binding. Nursing obligation: ensure informed, provide alternatives."
+    },
+    {
+      "problem": "Blood-sparing alternatives \u2014 nursing coordination role",
+      "icd": "D64.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "EPO, IV iron, tranexamic acid \u2014 blood-sparing measures acceptable to most JW patients. Nursing coordinates implementation."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Erythropoietin alpha 40,000 units SQ weekly",
+      "sig": "Stimulates RBC production. Onset 1-2 weeks. Blood-sparing in JW patients.",
+      "prescriber": "Hematology/Medicine",
+      "start": "2024",
+      "refills": 2,
       "status": "Active"
+    },
+    {
+      "name": "IV iron sucrose 200mg IV x3 doses",
+      "sig": "Rapid iron repletion to support EPO-driven erythropoiesis.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Tranexamic acid 1g IV \u2014 antifibrinolytic",
+      "sig": "Reduces ongoing blood loss. No blood products involved \u2014 acceptable to most JW patients.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "DO NOT transfuse \u2014 honor advance directive",
+      "sig": "Valid AD with capacity. Refusal is legally and ethically binding. Document and proceed with blood-sparing measures.",
+      "prescriber": "Nursing documentation",
+      "start": "HONOR",
+      "refills": 0,
+      "status": "Honored"
     }
   ],
   "allergies": [
@@ -97,7 +135,49 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Post-Op Anemia",
+      "results": [
+        {
+          "test": "Hemoglobin",
+          "value": "6.8",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
+        },
+        {
+          "test": "Reticulocyte count",
+          "value": "2.1",
+          "unit": "%",
+          "ref": "0.5-1.5%",
+          "flag": "H"
+        },
+        {
+          "test": "Ferritin",
+          "value": "18",
+          "unit": "ng/mL",
+          "ref": "30-300",
+          "flag": "L"
+        },
+        {
+          "test": "Advance directive",
+          "value": "Signed, capacity confirmed \u2014 no blood products",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "HR at rest",
+          "value": "104",
+          "unit": "bpm",
+          "ref": "60-100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +210,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "nursing-patient-refusal-blood",
-    "diagnosis": "See diagnosis \u2014 JW Patient Refusing Transfusion",
+    "diagnosis": "Jehovah's Witness \u2014 Informed Refusal of Transfusion, Blood-Sparing Protocol, Nursing Ethical Obligations",
     "acuity": 2,
     "presentation": "JW Patient Refusing Transfusion",
     "category": "other"
@@ -177,12 +257,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "JW Patient Refusing Transfusion \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "JW patient \u2014 informed refusal of blood, blood-sparing protocol (correct)",
+      "Override refusal \u2014 patient has capacity and signed AD; override is assault",
+      "Family can override \u2014 family cannot override a capacitated adult's AD",
+      "Court order \u2014 not appropriate for capacitated adult with documented refusal",
+      "Transfuse without consent \u2014 battery and legal liability",
+      "EPO insufficient \u2014 IV iron + TXA optimize speed; EPO + iron is standard of care"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +272,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: JW Patient Refusing Transfusion. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) What are your legal and professional obligations \u2014 and how do you advocate for this patient? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: JW patient, informed blood refusal. Key learning: (1) Informed refusal = informed consent: a capacitated adult with information about consequences has the absolute right to refuse life-saving treatment. Signed advance directives are legally binding. (2) Capacity assessment before accepting refusal: confirm patient understands the situation, risks, consequences, and alternatives. JW beliefs alone do not impair capacity. (3) Blood-sparing protocol: EPO + IV iron (augments erythropoiesis), TXA (antifibrinolytic), intraoperative cell salvage, minimizing phlebotomy. Most are acceptable to JW patients as no allogenic blood involved. (4) Documentation: document informed refusal discussion, AD reviewed, blood-sparing alternatives offered and accepted, and that the refusal is honored. (5) Pediatric JW patients: courts regularly override parental refusal of blood for minors. Adult JW with capacity and signed AD: binding."
     }
   }
 };

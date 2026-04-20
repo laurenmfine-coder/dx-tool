@@ -1,4 +1,4 @@
-/* emr-data/vt-syncope.js — EMR case data for Ventricular Tachycardia with Syncope */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Dennis Crawford",
@@ -15,99 +15,70 @@ window.EMR_DATA = {
     "address": "1209 N Western Ave, Phoenix, AZ 85013",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Rite Aid — Pines Blvd",
+    "pharmacy": "Rite Aid \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Gloria Carter",
       "phone": "(617) 555-6908",
       "relationship": "Adult Child"
     },
-    "chiefComplaint": "Passed out No specific pain location — felt palpitations in chest before passing out",
+    "chiefComplaint": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
     "diagnosis": "Ventricular Tachycardia with Syncope"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Myocardial infarction 3 years ago",
+      "problem": "Ventricular tachycardia \u2014 sustained, causing syncope",
+      "icd": "I47.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Harold Washington, 64M \u2014 prior MI 3 years ago, EF 30%. Witnessed syncope at home. EMS: sustained monomorphic VT 180 bpm."
     },
     {
-      "id": "prob-2",
-      "description": "Heart failure",
+      "problem": "HFrEF \u2014 EF 30%, prior anterior MI substrate for VT",
+      "icd": "I50.20",
+      "onset": "2021",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Scar from prior LAD territory MI provides re-entrant circuit for monomorphic VT. Substrate ablation or ICD needed."
     },
     {
-      "id": "prob-3",
-      "description": "Hypertension",
+      "problem": "ICD implantation \u2014 secondary prevention indication",
+      "icd": "Z45.018",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Hyperlipidemia",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Sustained VT causing syncope in structural heart disease = Class I ICD indication. EP consultation active."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Carvedilol",
-      "dose": "25mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "Amiodarone 150mg IV over 10 min, then 1mg/min infusion \u2014 acute VT",
+      "sig": "Acute VT cardioversion preferred if hemodynamically unstable. Amiodarone for stable or recurrent VT.",
+      "prescriber": "Cardiology/EP",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given \u2014 acute"
     },
     {
-      "id": "med-2",
-      "name": "Lisinopril",
-      "dose": "20mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Metoprolol succinate 25mg PO daily \u2014 beta-blocker",
+      "sig": "Continue beta-blocker \u2014 GDMT for HFrEF AND reduces VT burden. Increase dose as tolerated.",
+      "prescriber": "Cardiology",
+      "start": "2021",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Furosemide",
-      "dose": "40mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Amiodarone 200mg PO daily \u2014 bridge and adjunct to ICD",
+      "sig": "Oral amiodarone reduces VT burden and appropriate ICD shocks. Monitor thyroid, pulmonary, hepatic, and ocular annually.",
+      "prescriber": "EP",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active \u2014 post-ICD adjunct"
     },
     {
-      "id": "med-4",
-      "name": "Atorvastatin",
-      "dose": "80mg QHS",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
-    },
-    {
-      "id": "med-5",
-      "name": "Aspirin",
-      "dose": "81mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
-    },
-    {
-      "id": "med-6",
-      "name": "Clopidogrel",
-      "dose": "75mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "ICD implantation \u2014 EP procedure scheduled",
+      "sig": "Secondary prevention ICD \u2014 sustained VT causing syncope in structural heart disease. Single-chamber vs biventricular ICD (CRT-D) based on QRS duration.",
+      "prescriber": "EP",
+      "start": "2024",
+      "refills": 0,
+      "status": "Scheduled"
     }
   ],
   "allergies": [
@@ -125,7 +96,7 @@ window.EMR_DATA = {
       "bp": "108/72",
       "hr": "78",
       "rr": "16",
-      "temp": "36.9°C",
+      "temp": "36.9\u00b0C",
       "spo2": "96%",
       "pain": "/10",
       "bmi": "33",
@@ -138,206 +109,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Passed out No specific pain location — felt palpitations in chest before passing out",
-      "hpi": "Dennis Crawford is a 62-year-old male presenting with passed out no specific pain location — felt palpitations in chest before passing out. Past medical history includes Myocardial infarction 3 years ago, Heart failure, Hypertension, Hyperlipidemia. See chart for full details.",
+      "cc": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "hpi": "Dennis Crawford is a 62-year-old male presenting with passed out no specific pain location \u2014 felt palpitations in chest before passing out. Past medical history includes Myocardial infarction 3 years ago, Heart failure, Hypertension, Hyperlipidemia. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Ventricular Tachycardia with Syncope — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Ventricular Tachycardia with Syncope \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-497596",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "VT Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "267",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.06",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.3",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "L"
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "12",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "108",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Potassium",
+          "value": "3.3",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Troponin I",
-              "value": "0.03",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": ""
-            },
-            {
-              "test": "BNP",
-              "value": "680",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "Magnesium",
-              "value": "1.5",
-              "unit": "mg/dL",
-              "range": "1.7-2.2",
-              "flag": "H"
-            },
-            {
-              "test": "TSH",
-              "value": "2.4",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            }
-          ]
+          "test": "Magnesium",
+          "value": "1.6",
+          "unit": "mg/dL",
+          "ref": "1.7-2.2",
+          "flag": "L"
+        },
+        {
+          "test": "TSH",
+          "value": "2.2",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "QTc (ECG)",
+          "value": "448",
+          "unit": "ms",
+          "ref": "<450ms",
+          "flag": ""
+        },
+        {
+          "test": "EF (echo)",
+          "value": "30",
+          "unit": "%",
+          "ref": ">55%",
+          "flag": "L"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-263501",
-      "clinical": "Passed out No specific pain location — felt palpitations in chest before passing out",
-      "technique": "Standard protocol",
-      "findings": "Cardiomegaly. Mild bilateral pleural effusions. Cephalization of pulmonary vasculature. No focal consolidation.",
-      "impression": "Cardiomegaly with mild CHF changes",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "POCUS – Cardiac",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-605713",
-      "clinical": "Passed out No specific pain location — felt palpitations in chest before passing out",
-      "technique": "Standard protocol",
-      "findings": "Severely reduced LV systolic function. Dilated LV. Anterior wall akinesis. Mild pericardial effusion. No RV dilation.",
-      "impression": "Severe LV dysfunction consistent with known cardiomyopathy",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-981448",
-      "clinical": "Passed out No specific pain location — felt palpitations in chest before passing out",
-      "technique": "Standard 12-lead",
-      "findings": "Normal sinus rhythm at 78 bpm currently. Old Q waves in V1-V4 (prior anterior MI). Prolonged QTc at 510ms. Frequent PVCs (3 seen on rhythm strip). Non-sustained VT run captured: 8-beat wide complex tachycardia at 180 bpm",
-      "impression": "NSR with prior anterior MI changes, prolonged QTc, frequent PVCs with NSVT — HIGH RISK for sustained VT/cardiac arrest",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "Echocardiogram",
+      "indication": "VT, prior MI, assess EF and wall motion",
+      "findings": "EF 30%. Anterior wall motion abnormality. LV dilation. No pericardial effusion. Moderate MR.",
+      "impression": "Ischemic cardiomyopathy \u2014 substrate for re-entrant VT. ICD and EP evaluation indicated."
     }
   ],
   "immunizations": [
@@ -443,13 +278,12 @@ window.EMR_DATA = {
       "Abdominal examination": "Soft, non-tender, no hepatomegaly or ascites"
     },
     "ddxTargets": [
-      "Ventricular tachycardia (correct diagnosis)",
-      "Atrial fibrillation with rapid ventricular response",
-      "Supraventricular tachycardia",
-      "Myocardial infarction",
-      "Sudden cardiac death/ventricular fibrillation",
-      "Vasovagal syncope",
-      "Medication-induced arrhythmia"
+      "Sustained VT \u2014 ischemic cardiomyopathy substrate, ICD indicated (correct)",
+      "SVT with aberrancy \u2014 narrow QRS baseline, but VT vs SVT: if structural heart disease + wide complex tachycardia = VT until proven otherwise",
+      "Torsades de pointes \u2014 QTc mildly prolonged but monomorphic morphology; TdP is polymorphic with twisting axis",
+      "Brugada syndrome \u2014 different ECG pattern, no structural heart disease",
+      "AVNRT \u2014 young, no structural disease, responds to adenosine; not this presentation",
+      "Cardiogenic syncope from bradycardia \u2014 heart block pattern, not tachyarrhythmia"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on heart failure history and assuming this is simply worsening CHF rather than considering life-threatening arrhythmias",
@@ -459,7 +293,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possible causes of syncope. Given this patient's history of MI and current heart failure, which arrhythmic causes should be highest on your differential? What specific questions about the palpitations and witnessed events will help you distinguish between these?",
       "phase5": "Your exam shows a stable patient now, but the history describes a very concerning episode. How does the combination of structural heart disease, palpitations followed by syncope, and family history of sudden cardiac death narrow your differential? What's the most urgent diagnostic test needed?",
-      "finalDebrief": "This case illustrates how patients with structural heart disease are at high risk for ventricular arrhythmias. The key clinical clues were the rapid palpitations immediately preceding syncope in someone with prior MI. How did the normal current exam potentially create diagnostic challenges, and why is continuous cardiac monitoring essential even when the patient appears stable?"
+      "finalDebrief": "This case illustrates how patients with structural heart disease are at high risk for ventricular arrhythmias. The key clinical clues were the rapid palpitations immediately preceding syncope in someone with prior MI. How did the normal current exam potentially create diagnostic challenges, and why is continuous cardiac monitoring essential even when the patient appears stable?",
+      "final": "Diagnosis: sustained VT causing syncope, ischemic cardiomyopathy. Key learning: (1) Brugada rule for wide complex tachycardia: any wide complex tachycardia (WCT) in a patient with structural heart disease = VT until proven otherwise. Even if they appear hemodynamically stable. Treat as VT. SVT with aberrancy in structural heart disease is uncommon; VT is common. (2) ICD indications \u2014 secondary prevention: sustained VT/VF causing syncope or hemodynamic instability in patients who survive. Primary prevention: EF \u226435% on optimal GDMT x3 months despite no prior sustained VT (EF criteria met here \u2014 double indication). (3) Electrolytes and VT: hypokalemia and hypomagnesemia are highly arrhythmogenic. Every VT patient needs K+ and Mg2+ checked and repleted to K+ \u22654.0 and Mg2+ \u22652.0. (4) Amiodarone monitoring: annual TSH (hypo/hyperthyroidism), PFTs (pulmonary toxicity), LFTs (hepatotoxicity), slit-lamp eye exam (corneal microdeposits, optic neuropathy \u2014 rare). Half-life of 40-55 days \u2014 side effects can persist long after stopping. (5) VT ablation: catheter ablation of the reentrant VT circuit is an alternative or adjunct to amiodarone. Reduces appropriate ICD shocks in structural heart disease VT. EP evaluation for ablation candidacy alongside ICD implantation."
     }
+  },
+  "meta": {
+    "diagnosis": "Ventricular Tachycardia Causing Syncope \u2014 Structural Heart Disease, ICD Implantation Indicated",
+    "caseId": "vt-syncope"
   }
 };

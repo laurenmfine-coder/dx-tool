@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient with Borderline PD",
-      "icd": "Z00.00",
+      "problem": "BPD \u2014 splitting behaviors, demanding excessive attention",
+      "icd": "F60.3",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Angela Morrison, 35F \u2014 inpatient for self-harm. Praising some nurses, hostile to others. Demanding attention 15+ times per shift. AMA threats."
+    },
+    {
+      "problem": "Staff splitting \u2014 inconsistent team responses worsening behaviors",
+      "icd": "F60.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Nursing team divided. Inconsistency worsens BPD splitting. Unified care plan and team meeting needed."
+    },
+    {
+      "problem": "AMA threats \u2014 safety assessment and documentation",
+      "icd": "Z91.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Assess genuine vs relational use of threat. Document capacity, education on consequences, and discussion each time."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Consistent nursing assignment \u2014 therapeutic consistency",
+      "sig": "Limit number of nurses. Consistent assignment reduces splitting and builds therapeutic alliance over admission.",
+      "prescriber": "Charge Nurse/Nurse Manager",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 staffing"
+    },
+    {
+      "name": "Limit-setting \u2014 clear, consistent, non-punitive",
+      "sig": "'I can spend 15 minutes with you at 9am and 2pm.' Do not respond to escalation with extra attention \u2014 reinforces the behavior. Follow through consistently.",
+      "prescriber": "Nursing/Psychiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 care plan"
+    },
+    {
+      "name": "Team meeting and unified written care plan",
+      "sig": "All staff agree on limits, responses to behaviors, and language used. Inconsistency between nurses is the primary driver of splitting escalation.",
+      "prescriber": "Nursing/Psychiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 multidisciplinary"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Psychiatric Assessment",
+      "results": [
+        {
+          "test": "C-SSRS",
+          "value": "Moderate ideation \u2014 passive wish to die, no current plan",
+          "unit": "",
+          "ref": "None",
+          "flag": "H"
+        },
+        {
+          "test": "Safety",
+          "value": "No means access on unit. No immediate plan.",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Milieu behavior",
+          "value": "Demanding staff attention 15+ times per shift",
+          "unit": "",
+          "ref": "",
+          "flag": "H"
+        },
+        {
+          "test": "Medication adherence",
+          "value": "Refusing PRN hydroxyzine \u2014 testing staff",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "nursing-therapeutic-relationship",
-    "diagnosis": "See diagnosis \u2014 Patient with Borderline PD",
+    "diagnosis": "Borderline Personality Disorder \u2014 Nursing Therapeutic Relationship, Limit-Setting, Team Consistency",
     "acuity": 3,
     "presentation": "Patient with Borderline PD",
     "category": "psychiatric"
@@ -177,12 +242,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Patient with Borderline PD \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "BPD \u2014 splitting, limit-setting nursing intervention (correct)",
+      "Malingering \u2014 BPD behaviors are not consciously intentional in the same sense",
+      "Bipolar disorder with psychosis \u2014 different pattern; BPD is a stable personality structure",
+      "Anti-social personality disorder \u2014 exploitation/criminality vs abandonment fear; different",
+      "Extra attention for compliance \u2014 reinforces maladaptive behavior; consistent limits are therapeutic",
+      "Involuntary hold for AMA threats \u2014 assess each threat carefully; most require documentation, not hold"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +257,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Patient with Borderline PD. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) What therapeutic communication framework guides your approach to a patient with borderline PD who is splitting staff \u2014 and how do you maintain boundaries while meeting their legitimate safety needs? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: BPD nursing therapeutic relationship. Key learning: (1) Splitting in BPD: patients divide people into all-good or all-bad \u2014 not deliberate manipulation, but a core defense mechanism from unstable object representations. Understanding this prevents staff from taking it personally. (2) Limit-setting principles: clear, consistent, non-punitive, behavior-focused. Increased attention in response to escalation REINFORCES the behavior \u2014 the limit IS the therapeutic intervention. (3) Team consistency: if nurses respond differently, the patient splits the team. A unified written care plan with specific language is the most important intervention. Address explicitly at every handoff. (4) Therapeutic relationship in BPD: genuine empathy + clear structure. The structure provides the safety and predictability these patients lack internally. Making exceptions undermines the therapeutic relationship, not strengthens it. (5) AMA threats: document capacity assessment, education on consequences, and the discussion. Engage psychiatry when threats escalate or when there is acute safety concern."
     }
   }
 };

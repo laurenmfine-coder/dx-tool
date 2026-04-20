@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Sensory Avoiding",
-      "icd": "Z00.00",
+      "problem": "ASD sensory processing difficulties \u2014 tactile hypersensitivity, proprioceptive hyposensitivity",
+      "icd": "F84.0",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Noah Chen, 6M \u2014 ASD. Hypersensitive to tactile input, hyposensitive proprioceptively (seeks crashing, jumping). 3-4 meltdowns/week at school."
+    },
+    {
+      "problem": "School participation limitations \u2014 avoids crowded spaces, cafeteria",
+      "icd": "F84.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Sensory avoidance limits social participation and school engagement. IEP modifications needed."
+    },
+    {
+      "problem": "Meltdowns from sensory overload \u2014 school and home impact",
+      "icd": "F84.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Unexpected touch, crowded hallways, cafeteria noise trigger meltdowns. Proactive sensory diet reduces frequency."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Sensory diet \u2014 scheduled proprioceptive input 5-6x daily",
+      "sig": "Heavy work activities (wall push-ups, carrying books, weighted vest, jumping) maintain optimal arousal level. Proactive \u2014 prevents overload. Implemented by family and school.",
+      "prescriber": "OT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 home/school program"
+    },
+    {
+      "name": "Wilbarger brushing protocol \u2014 every 90 minutes",
+      "sig": "Surgical brush to skin (arms, back, legs) per OT-taught protocol, followed by joint compressions. Reduces tactile hypersensitivity. Must be taught correctly by OT \u2014 incorrect technique can increase arousal.",
+      "prescriber": "OT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 supervised"
+    },
+    {
+      "name": "School IEP modifications \u2014 sensory accommodations",
+      "sig": "Preferential seating away from high-traffic areas, noise-canceling headphones for cafeteria, advance warning for transitions, seam-free socks, tagless shirts.",
+      "prescriber": "OT (school + outpatient)",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IEP"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to ot. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Sensory OT Assessment",
+      "results": [
+        {
+          "test": "Sensory Profile \u2014 tactile",
+          "value": "Hypersensitivity +3SD",
+          "unit": "",
+          "ref": "Within typical range",
+          "flag": "H"
+        },
+        {
+          "test": "Sensory Profile \u2014 proprioception",
+          "value": "Hyposensitivity +2SD",
+          "unit": "",
+          "ref": "Within typical range",
+          "flag": "H"
+        },
+        {
+          "test": "Meltdown frequency",
+          "value": "3-4/week school; 1-2/week home",
+          "unit": "",
+          "ref": "0",
+          "flag": "H"
+        },
+        {
+          "test": "Vineland \u2014 daily living skills",
+          "value": "72 \u2014 borderline",
+          "unit": "",
+          "ref": "85-115 average",
+          "flag": "L"
+        },
+        {
+          "test": "SIPT postural-ocular",
+          "value": "1.8SD below mean",
+          "unit": "",
+          "ref": "\u00b11SD typical",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pediatric-sensory-ot",
-    "diagnosis": "See diagnosis \u2014 Sensory Avoiding",
+    "diagnosis": "ASD Sensory Processing \u2014 OT Sensory Diet, Wilbarger Brushing Protocol, School-Based Environmental Modifications",
     "acuity": 3,
     "presentation": "Sensory Avoiding",
     "category": "pediatric"
@@ -175,12 +247,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "7yo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "ASD sensory processing \u2014 sensory diet and desensitization (correct)",
+      "Sensory processing disorder without ASD \u2014 ASD is the primary diagnosis here",
+      "ADHD sensory symptoms \u2014 some overlap; ASD diagnosis is established",
+      "DCD \u2014 motor planning; sensory modulation is the primary issue",
+      "Anxiety driving avoidance \u2014 anxiety is secondary to sensory overload; treat the sensory first",
+      "No OT needed, ABA only \u2014 OT and ABA address different domains; both appropriate for ASD"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +262,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Sensory Avoiding. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Using the Dunn model \u2014 what quadrant fits this child, and how does it shape your school-based OT intervention? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: ASD sensory processing, OT intervention. Key learning: (1) Sensory processing in ASD: ~90% have differences. Hyper = over-responsive (avoids); hypo = under-responsive (seeks). Specific profile drives OT intervention. Hypersensitive tactile + hyposensitive proprioceptive is a common ASD combination. (2) Sensory diet: individualized schedule of sensory activities throughout the day to maintain optimal arousal. Proprioceptive 'heavy work' is organizing for most ASD children. Family and school implement. (3) Wilbarger brushing: deep pressure tactile stimulation every 90 minutes reduces tactile hypersensitivity. MUST be taught by trained OT \u2014 incorrect application increases arousal rather than decreasing it. (4) School OT collaboration: IEP contributions, environmental modifications, and coordination with school OT are core outpatient OT responsibilities for school-age ASD children. (5) Family-centered OT: parents are the primary implementers of the sensory diet. OT trains parents, provides home program, and coaches implementation \u2014 the intervention happens at home and school, not just in the clinic."
     }
   }
 };

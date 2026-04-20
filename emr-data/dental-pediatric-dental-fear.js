@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Uncooperative",
-      "icd": "Z00.00",
+      "problem": "Severe dental anxiety \u2014 uncooperative for examination",
+      "icd": "F40.298",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Emma Torres, 7F \u2014 screaming and crying at every dental visit since age 3. Unable to complete examination. Multiple caries unaddressed."
+    },
+    {
+      "problem": "Multiple untreated caries \u2014 consequence of dental avoidance",
+      "icd": "K02.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "4 cavities requiring treatment. Dental avoidance driving progressive disease. Treatment under sedation required."
+    },
+    {
+      "problem": "Behavior guidance approach \u2014 tell-show-do, desensitization, nitrous oxide",
+      "icd": "F40.298",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Stepwise approach: build trust first, nitrous oxide for desensitization, IV sedation if insufficient."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Nitrous oxide 30-50% with oxygen \u2014 anxiolysis",
+      "sig": "Inhaled anxiolytic \u2014 onset 2-3 min, recovery complete within 5 min of stopping. Patient remains conscious, maintains protective reflexes.",
+      "prescriber": "Dentistry (pediatric)",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 use at appointments"
+    },
+    {
+      "name": "Oral midazolam 0.5mg/kg (max 15mg) PO \u2014 moderate sedation",
+      "sig": "For procedures requiring deeper cooperation \u2014 given 20-30 min before procedure. Requires monitoring and recovery time.",
+      "prescriber": "Pediatric Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Consider for restorations"
+    },
+    {
+      "name": "Silver diamine fluoride (SDF) 38% \u2014 caries arrest without drilling",
+      "sig": "Applied to carious lesions \u2014 arrests caries progression without anesthesia or drilling. Stains lesion black (inform parents). Buys time until child is cooperative.",
+      "prescriber": "Pediatric Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 interim caries arrest"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Pediatric Dental Assessment",
+      "results": [
+        {
+          "test": "DMFT (primary dentition)",
+          "value": "4 \u2014 4 cavitated lesions",
+          "unit": "",
+          "ref": "0 = caries-free",
+          "flag": "H"
+        },
+        {
+          "test": "Frankl behavior scale",
+          "value": "1 \u2014 definitely negative (uncooperative)",
+          "unit": "",
+          "ref": "4 = definitely positive",
+          "flag": "L"
+        },
+        {
+          "test": "Caries risk assessment",
+          "value": "High",
+          "unit": "",
+          "ref": "Low",
+          "flag": "H"
+        },
+        {
+          "test": "Panoramic radiograph attempt",
+          "value": "Unable to complete \u2014 patient uncooperative",
+          "unit": "",
+          "ref": "Completed",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-pediatric-dental-fear",
-    "diagnosis": "See diagnosis \u2014 Uncooperative",
+    "diagnosis": "Pediatric Dental Fear and Anxiety \u2014 Behavior Guidance Escalation, Nitrous Oxide Sedation, Prevention of Dental Avoidance",
     "acuity": 3,
     "presentation": "Uncooperative",
     "category": "pediatric"
@@ -176,12 +241,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "8yo Uncooperative \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Dental fear and anxiety \u2014 Frankl 1, behavior guidance required (correct)",
+      "Autism spectrum disorder contributing to dental avoidance \u2014 screen; different management pathway",
+      "Prior traumatic dental experience \u2014 explore history; targeted desensitization",
+      "Pain-related avoidance \u2014 untreated caries causing pain driving avoidance",
+      "Parental anxiety transfer \u2014 parent modeling of dental fear; parent counseling needed",
+      "ADHD-related behavior \u2014 impulse control different from anxiety; different guidance approach"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +256,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Uncooperative. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) Behavior management hierarchy: tell-show-do, nitrous oxide, oral sedation, general anesthesia \u2014 when is each indicated, and what are the informed consent requirements for sedation? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: severe pediatric dental anxiety, behavior guidance escalation. Key learning: (1) Tell-Show-Do (TSD): foundational behavior guidance \u2014 tell the child what will happen (in age-appropriate language), show the instrument without using it, then do the procedure slowly. Builds trust and reduces fear of the unknown. First step for every child. (2) Nitrous oxide/oxygen in pediatric dentistry: minimal/moderate sedation. Maintains consciousness, rapid onset/offset, no IV required. Effective for mild-moderate anxiety. Requires continuous monitoring and appropriate scavenging equipment. Absolute contraindication: nasal congestion. (3) Silver diamine fluoride (SDF): 38% SDF arrests active caries without any drilling or anesthesia \u2014 applied with a microbrush. Ideal for uncooperative young children with active decay. Stains arrested caries permanently black \u2014 must counsel parents. Allows caries arrest until child is ready for conventional treatment. (4) Behavior guidance escalation: TSD \u2192 positive reinforcement \u2192 voice control \u2192 nitrous oxide \u2192 oral sedation \u2192 IV sedation/general anesthesia. Escalate based on procedure complexity and child's cooperation level. (5) Prevention of dental avoidance patterns: early positive dental experiences at age 1 (first dental visit recommendation). Parental anxiety about dentistry transfers directly to children \u2014 address parent anxiety as part of pediatric dental care."
     }
   }
 };

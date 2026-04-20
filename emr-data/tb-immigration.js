@@ -23,20 +23,66 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Productive Cough 6 Weeks",
-      "icd": "Z00.00",
+      "problem": "Active pulmonary TB \u2014 smear-positive, cavitary disease",
+      "icd": "A15.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Amara Diallo, 31F \u2014 immigrant from West Africa 4 months ago. 6-week productive cough, night sweats, 15 lb weight loss. AFB smear 3+."
+    },
+    {
+      "problem": "Airborne isolation \u2014 public health reporting mandatory",
+      "icd": "A15.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Negative pressure room required. N95 for all entering. State health department notified within 24h."
+    },
+    {
+      "problem": "Contact investigation \u2014 household and close contacts",
+      "icd": "Z03.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Public health will conduct contact tracing \u2014 household members, coworkers require IGRA testing."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Isoniazid 300mg PO daily (INH) \u2014 RIPE regimen",
+      "sig": "Take on empty stomach or with food if GI upset. Pyridoxine 50mg daily co-administered to prevent peripheral neuropathy.",
+      "prescriber": "ID/Pulmonology",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Rifampin 600mg PO daily (RIF)",
+      "sig": "Take on empty stomach. Turns urine/sweat/tears orange \u2014 warn patient. Significant drug interactions (CYP3A4 inducer).",
+      "prescriber": "ID",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Pyrazinamide 1500mg PO daily (PZA) \u2014 first 2 months",
+      "sig": "First 2 months only. Monitor uric acid and LFTs.",
+      "prescriber": "ID",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 2 months"
+    },
+    {
+      "name": "Ethambutol 1200mg PO daily (EMB) \u2014 first 2 months",
+      "sig": "Until susceptibility results. Monitor visual acuity and color vision monthly \u2014 optic neuritis risk.",
+      "prescriber": "ID",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 2 months"
+    },
+    {
+      "name": "Pyridoxine (B6) 50mg PO daily \u2014 INH neuropathy prevention",
+      "sig": "Always co-administer with isoniazid.",
+      "prescriber": "ID",
+      "start": "2024",
+      "refills": 2,
       "status": "Active"
     }
   ],
@@ -97,8 +143,58 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "TB Workup",
+      "results": [
+        {
+          "test": "AFB smear (sputum x3)",
+          "value": "3+ positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "IGRA (QuantiFERON-TB Gold)",
+          "value": "Positive \u2014 8.2 IU/mL",
+          "unit": "",
+          "ref": "<0.35 negative",
+          "flag": "H"
+        },
+        {
+          "test": "HIV antibody",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "ALT/AST",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Uric acid",
+          "value": "5.8",
+          "unit": "mg/dL",
+          "ref": "2.4-7.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "CXR PA/Lateral",
+      "indication": "Chronic cough, night sweats, weight loss",
+      "findings": "Right upper lobe cavitary lesion. Ipsilateral hilar adenopathy. Miliary pattern absent.",
+      "impression": "Classic active pulmonary TB pattern \u2014 upper lobe cavitation with hilar adenopathy. Smear result confirms."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +226,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "tb-immigration",
-    "diagnosis": "See diagnosis \u2014 Productive Cough 6 Weeks",
+    "diagnosis": "Active Pulmonary Tuberculosis \u2014 Recent Immigrant, Positive IGRA, Smear-Positive, RIPE Therapy Initiated",
     "acuity": 2,
     "presentation": "Productive Cough 6 Weeks",
     "category": "infectious"
@@ -177,12 +273,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Productive Cough 6 Weeks \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Active pulmonary TB \u2014 immigrant, cavitary disease, smear 3+ (correct)",
+      "Lung cancer with superinfection \u2014 cavitary mass; age and AFB smear argue against",
+      "Aspergillosis \u2014 immunocompromised, cavitary; HIV negative here",
+      "NTM (non-tuberculous mycobacteria) \u2014 culture will distinguish; treatment differs",
+      "Lung abscess \u2014 anaerobic, aspiration history; upper lobe cavitation atypical",
+      "Histoplasmosis \u2014 geographic exposure (Ohio/Mississippi valley); different endemic region"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +288,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Productive Cough 6 Weeks. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) What empiric antibiotic regimen do you start before cultures return \u2014 and what clinical criteria guide de-escalation? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: active pulmonary TB. Key learning: (1) RIPE regimen: Rifampin + Isoniazid + Pyrazinamide + Ethambutol for 2 months (intensive phase), then RIF + INH for 4 more months (continuation phase) = 6 months total for drug-sensitive TB. DOT (directly observed therapy) is standard \u2014 public health supervises each dose. (2) Airborne precautions: TB is spread via airborne droplet nuclei (<5 \u03bcm) \u2014 negative pressure room, N95 respirators (not surgical masks). Isolation continues until 3 consecutive negative AFB smears and clinical improvement. (3) Drug interactions with rifampin: rifampin is a potent CYP3A4 inducer \u2014 lowers levels of protease inhibitors (HIV), oral contraceptives, warfarin, methadone, many others. Review ALL medications. (4) INH hepatotoxicity: monitor LFTs monthly. Stop if ALT >3-5x ULN with symptoms or >5x ULN asymptomatic. Pyridoxine 50mg daily prevents peripheral neuropathy (INH inhibits B6 metabolism). (5) Reporting: TB is a mandatory reportable disease in all US states. State health department must be notified within 24h of suspected active TB. Contact investigation for household contacts and close contacts is the health department's responsibility."
     }
   }
 };

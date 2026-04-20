@@ -1,4 +1,4 @@
-/* emr-data/tension-ptx.js — EMR case data for Tension Pneumothorax */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan O'Brien",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "8709 Hickory Rd, Minneapolis, MN 55410",
     "insurance": "Medicaid",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "Walmart Pharmacy — Federal Hwy",
+    "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Charles Nelson",
       "phone": "(704) 555-8837",
@@ -26,14 +26,53 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "None significant",
+      "problem": "Tension pneumothorax \u2014 hemodynamic compromise",
+      "icd": "J93.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Ryan Torres, 24M \u2014 MVC, intubated in field. Sudden deterioration: SpO2 75%, BP 68/40, HR 138, tracheal deviation left."
+    },
+    {
+      "problem": "Traumatic pneumothorax \u2014 rib fractures, lung laceration",
+      "icd": "S27.0XXA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Bilateral rib fractures 4-7 on right. Tension physiology from check-valve mechanism."
+    },
+    {
+      "problem": "Hypotensive shock \u2014 obstructive etiology",
+      "icd": "R57.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "BP 68/40 from tension physiology \u2014 mediastinal shift compromising venous return. Immediate decompression lifesaving."
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Needle decompression \u2014 14g angiocath, 2nd ICS midclavicular line",
+      "sig": "IMMEDIATE \u2014 do not wait for CXR. Insert 14g angiocath 2nd intercostal space, midclavicular line. Rush of air confirms diagnosis.",
+      "prescriber": "Trauma/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "DONE \u2014 immediate"
+    },
+    {
+      "name": "Chest tube \u2014 28-32Fr, 4th/5th ICS anterior axillary line",
+      "sig": "Definitive treatment after needle decompression. Right side for right-sided tension PTX.",
+      "prescriber": "Trauma/Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 placed"
+    },
+    {
+      "name": "Normal saline 1L IV \u2014 resuscitation after decompression",
+      "sig": "IV fluid resuscitation after tension physiology relieved. BP should respond rapidly.",
+      "prescriber": "Trauma",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
       "allergen": "NKDA",
@@ -49,7 +88,7 @@ window.EMR_DATA = {
       "bp": "82/58",
       "hr": "132",
       "rr": "34",
-      "temp": "36.6°C",
+      "temp": "36.6\u00b0C",
       "spo2": "84%",
       "pain": "10/10",
       "bmi": "26",
@@ -65,220 +104,60 @@ window.EMR_DATA = {
       "cc": "Can't breathe Left chest and back, worse on the left side",
       "hpi": "Ryan O'Brien is a 28-year-old male presenting with can't breathe left chest and back, worse on the left side. Past medical history includes None significant. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Tension Pneumothorax — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Tension Pneumothorax \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-229236",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Trauma Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "15.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "43",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "ABG \u2014 SpO2",
+          "value": "75",
+          "unit": "%",
+          "ref": ">95",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "11",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "95",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.1",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "BP",
+          "value": "68/40",
+          "unit": "mmHg",
+          "ref": "Systolic >90",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "4.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.28",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            },
-            {
-              "test": "ABG pCO2",
-              "value": "52",
-              "unit": "mmHg",
-              "range": "35-45",
-              "flag": "H"
-            },
-            {
-              "test": "Type and Screen",
-              "value": "O positive, antibody negative",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            }
-          ]
+          "test": "HR",
+          "value": "138",
+          "unit": "bpm",
+          "ref": "60-100",
+          "flag": "H"
+        },
+        {
+          "test": "Hemoglobin (FAST)",
+          "value": "13.2",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": ""
+        },
+        {
+          "test": "Tracheal position",
+          "value": "Deviated left",
+          "unit": "",
+          "ref": "Midline",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-416455",
-      "clinical": "Can't breathe Left chest and back, worse on the left side",
-      "technique": "Standard protocol",
-      "findings": "Large left-sided pneumothorax with complete lung collapse. Mediastinal shift to the right. Flattening of the left hemidiaphragm. Multiple left rib fractures (ribs 4-7).",
-      "impression": "TENSION PNEUMOTHORAX — emergent needle decompression / chest tube required",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "POCUS – Lung",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-203817",
-      "clinical": "Can't breathe Left chest and back, worse on the left side",
-      "technique": "Standard protocol",
-      "findings": "Absent lung sliding on left. Barcode sign (stratosphere sign) on M-mode. No lung point identified. Right lung normal sliding present.",
-      "impression": "Left pneumothorax confirmed on bedside ultrasound",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "POCUS – FAST Exam",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-105804",
-      "clinical": "Can't breathe Left chest and back, worse on the left side",
-      "technique": "Standard protocol",
-      "findings": "No free fluid in Morrison pouch, splenorenal recess, or pelvis. No pericardial effusion.",
-      "impression": "Negative FAST — no hemoperitoneum",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-4",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-882834",
-      "clinical": "Can't breathe Left chest and back, worse on the left side",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 132 bpm. Low voltage in limb leads. Right axis deviation. No ST changes",
-      "impression": "Sinus tachycardia with low voltage — consistent with tension pneumothorax",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "CXR \u2014 POST decompression",
+      "indication": "Verify chest tube position",
+      "findings": "Right-sided chest tube in good position. Right lung re-expanding. Trachea midline. Bilateral rib fractures 4-7 right.",
+      "impression": "Tension pneumothorax resolved. Tube in good position. Continued re-expansion expected."
     }
   ],
   "immunizations": [
@@ -373,7 +252,7 @@ window.EMR_DATA = {
       "Abdominal examination"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 82/58, HR 132, RR 24, SpO2 84% on room air, afebrile at 36.6°C",
+      "Vital signs assessment": "BP 82/58, HR 132, RR 24, SpO2 84% on room air, afebrile at 36.6\u00b0C",
       "General appearance and respiratory effort": "Alert, anxious-appearing male in mild respiratory distress, sitting upright, speaking in short sentences",
       "Chest inspection and symmetry": "Decreased chest wall movement on the left side, chest appears slightly asymmetric",
       "Chest percussion": "Hyperresonant to percussion over the left chest, normal resonance on the right",
@@ -385,13 +264,12 @@ window.EMR_DATA = {
       "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds"
     },
     "ddxTargets": [
-      "Primary spontaneous pneumothorax (correct diagnosis)",
-      "Pulmonary embolism",
-      "Pleuritis/pleurisy",
-      "Tension pneumothorax",
-      "Myocardial infarction",
-      "Musculoskeletal chest pain",
-      "Panic attack/anxiety"
+      "Tension pneumothorax \u2014 tracheal deviation + shock + decreased breath sounds (correct)",
+      "Massive hemothorax \u2014 decreased breath sounds but dull percussion; trachea deviates away from side differently",
+      "Cardiac tamponade \u2014 Beck's triad (JVD + hypotension + muffled heart sounds); no tracheal deviation",
+      "Obstructive shock \u2014 PE causes obstructive shock but not tracheal deviation",
+      "Right mainstem intubation \u2014 SpO2 drop after intubation, but hemodynamics less severely affected",
+      "ARDS \u2014 bilateral, not unilateral; no tracheal deviation"
     ],
     "biasFlags": {
       "anchoring": "Young healthy male presenting with chest pain may anchor on anxiety/panic attack or musculoskeletal causes, missing the respiratory etiology",
@@ -401,7 +279,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. I notice you're thinking about both cardiac and pulmonary causes. Given this patient's age and presentation, what key historical elements would help you differentiate between these? What would you specifically want to know about the onset and character of his symptoms?",
       "phase5": "Excellent work on your history and physical. Your exam findings are quite revealing - you found diminished breath sounds and hyperresonance on the left. How do these findings, combined with his sudden onset and risk factors, help narrow your differential? What's the most likely diagnosis now?",
-      "finalDebrief": "This case demonstrates how primary spontaneous pneumothorax classically presents in young, tall, thin males who smoke. Notice how your differential appropriately evolved from the broad 'chest pain in a young male' to focus on the respiratory findings. The key teaching points are recognizing the classic demographics, the sudden onset pleuritic chest pain, and the physical exam findings of diminished breath sounds with hyperresonance."
+      "finalDebrief": "This case demonstrates how primary spontaneous pneumothorax classically presents in young, tall, thin males who smoke. Notice how your differential appropriately evolved from the broad 'chest pain in a young male' to focus on the respiratory findings. The key teaching points are recognizing the classic demographics, the sudden onset pleuritic chest pain, and the physical exam findings of diminished breath sounds with hyperresonance.",
+      "final": "Diagnosis: tension pneumothorax. Key learning: (1) Tension PTX is a CLINICAL diagnosis \u2014 do NOT wait for CXR. Classic triad: absent/decreased breath sounds unilaterally + tracheal deviation AWAY from affected side + hypotension. In intubated patients: rising peak airway pressures + sudden deterioration = tension PTX until proven otherwise. (2) Needle decompression: 14g angiocath, 2nd ICS, midclavicular line, just above the rib (avoid neurovascular bundle below rib). Rush of air = confirms diagnosis + partial treatment. Must follow with chest tube \u2014 needle is temporizing only. Alternatively: 4th/5th ICS, anterior axillary line (finger decompression in some protocols). (3) Chest tube placement: 4th/5th ICS, anterior axillary line for trauma. 2nd ICS midclavicular for elective pneumothorax (cosmetically better). Insert over top of rib. Confirm with CXR and water seal chamber. (4) Tension vs simple PTX: simple PTX = air in pleural space without mediastinal shift. Tension = check-valve mechanism \u2192 progressive air accumulation \u2192 mediastinal shift \u2192 kinking of SVC/IVC \u2192 obstructive shock \u2192 cardiac arrest. (5) Bilateral rib fractures \u22653 consecutive ribs = flail chest risk. This patient has 4 rib fractures \u2014 monitor for paradoxical breathing, respiratory fatigue, need for intubation (already intubated)."
     }
+  },
+  "meta": {
+    "diagnosis": "Tension Pneumothorax \u2014 Immediate Needle Decompression, Chest Tube to Follow",
+    "caseId": "tension-ptx"
   }
 };

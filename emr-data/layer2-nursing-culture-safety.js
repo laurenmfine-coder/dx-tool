@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient Reports Nurse Gave Wrong Medication",
-      "icd": "Z00.00",
+      "problem": "Cultural safety \u2014 belief-based refusal without interpreter",
+      "icd": "Z71.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Pao Vang, 65F \u2014 Hmong elder, declining wound care citing spirit disturbance. No interpreter used. Nursing intervention needed."
+    },
+    {
+      "problem": "Interpreter not used \u2014 informed refusal invalid",
+      "icd": "Z71.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "No professional interpreter = informed refusal cannot be documented. Must use interpreter before ANY clinical discussion."
+    },
+    {
+      "problem": "Cultural mediation \u2014 bridge traditional and biomedical beliefs",
+      "icd": "Z71.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Hmong patients may involve txiv neeb (shaman). Cultural liaison can bridge frameworks without invalidating either."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Professional medical interpreter \u2014 IMMEDIATE",
+      "sig": "In-person, phone, or video interpreter before any clinical discussion. Family members are NOT appropriate medical interpreters.",
+      "prescriber": "Nursing/Hospital policy",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
+    },
+    {
+      "name": "Cultural mediator / patient advocate referral",
+      "sig": "Cultural liaison bridges traditional Hmong healing (txiv neeb) and biomedical care. Explores what IS acceptable rather than simply enforcing protocol.",
+      "prescriber": "Nursing/Social Work",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 referral"
+    },
+    {
+      "name": "Wound care adapted \u2014 explore patient-acceptable options",
+      "sig": "With interpreter: explain procedure, consequences of refusal, explore alternatives. Can ceremony occur alongside care? Can family be present?",
+      "prescriber": "Nursing/MD",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 negotiation"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Cultural Safety Assessment",
+      "results": [
+        {
+          "test": "Primary language",
+          "value": "Hmong \u2014 White Mong dialect",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Decision-making capacity",
+          "value": "Intact when interpreter available",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Health literacy",
+          "value": "Limited formal education \u2014 verbal preferred",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Family preference",
+          "value": "Eldest son present \u2014 family involvement desired",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-nursing-culture-safety",
-    "diagnosis": "See diagnosis \u2014 Patient Reports Nurse Gave Wrong Medication",
+    "diagnosis": "Cultural Safety \u2014 Hmong Patient, Spirit Beliefs, Professional Interpreter Required Before Any Clinical Discussion",
     "acuity": 2,
     "presentation": "Patient Reports Nurse Gave Wrong Medication",
     "category": "pharmacologic"
@@ -177,12 +242,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Patient Reports Nurse Gave Wrong Medication \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Cultural safety \u2014 interpreter needed, spirit-based refusal (correct)",
+      "Patient lacks capacity \u2014 interpreter-assessed capacity is intact; different conclusion",
+      "Family can interpret \u2014 NOT appropriate for medical decisions; trained interpreter only",
+      "Force procedure \u2014 patient has capacity and right to refuse; ethics consultation pathway",
+      "Document refusal without interpreter \u2014 invalid documentation",
+      "Ignore cultural beliefs and proceed \u2014 violates cultural safety and patient rights"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +257,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Patient Reports Nurse Gave Wrong Medication. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) A patient tells you the night nurse gave them a white pill instead of their usual yellow metoprolol. The night nurse documents 'patient refused metoprolol, given education.' The patient insists they took the pill they were given. The patient's morning BP is 168/104. What do you investigate first \u2014 and what does the discordant BP suggest? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: cultural safety \u2014 Hmong patient. Key learning: (1) Professional interpreter is mandatory: family members filter information based on their own beliefs. Only trained medical interpreters are appropriate for consent/refusal discussions \u2014 this is a patient safety and legal requirement. (2) Hmong health beliefs: traditional healing involves txiv neeb and belief that spirits can be disturbed by certain procedures. Nursing bridges, not dismisses, these beliefs. (3) Informed refusal requires informed communication: if the patient doesn't understand the procedure (no interpreter), the refusal cannot be documented as informed. (4) Cultural safety vs competence: cultural competence = knowing facts about a culture. Cultural safety = creating an environment where patients feel safe to participate in their own care without judgment. (5) Ethics consultation: when cultural beliefs conflict with medical recommendations and patient has capacity \u2014 the appropriate pathway is ethics consultation, not override."
     }
   }
 };

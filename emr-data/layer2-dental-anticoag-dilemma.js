@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient on Warfarin for Mechanical Heart Valve",
-      "icd": "Z00.00",
+      "problem": "Dental extraction needed \u2014 patient on warfarin for AFib",
+      "icd": "I48.91",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Thomas Park, 72M \u2014 CHA2DS2-VASc 5, warfarin INR 2.4. Symptomatic #30 needing extraction. Anticoagulation management required."
+    },
+    {
+      "problem": "Bridging therapy decision \u2014 INR management for extraction",
+      "icd": "Z79.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Evidence: for simple extractions, continue warfarin WITHOUT bridging if INR \u22643.5. Local hemostasis measures are sufficient."
+    },
+    {
+      "problem": "Post-extraction hemostasis \u2014 oxidized cellulose and suture",
+      "icd": "Z79.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Surgicel (oxidized cellulose) + primary closure with resorbable suture + tranexamic acid mouthwash protocol."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Warfarin \u2014 CONTINUE at current dose (do NOT hold)",
+      "sig": "Evidence-based: simple dental extraction safe with INR up to 3.5 without holding warfarin. Stopping warfarin \u2192 thromboembolic risk (stroke in AFib). Local hemostasis is sufficient.",
+      "prescriber": "Dentistry/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "CONTINUE \u2014 do not hold"
+    },
+    {
+      "name": "Tranexamic acid 4.8% mouthwash \u2014 post-extraction",
+      "sig": "Antifibrinolytic rinse \u2014 swish for 2 min, spit, every 6h x2 days. Reduces post-extraction bleeding without systemic anticoagulation reversal.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 post-extraction"
+    },
+    {
+      "name": "Surgicel (oxidized cellulose) \u2014 pack socket",
+      "sig": "Hemostatic agent packed into extraction socket. Absorbed over 7-14 days.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 intraoperative"
+    },
+    {
+      "name": "Resorbable sutures \u2014 primary closure",
+      "sig": "Close extraction site primarily \u2014 reduces clot displacement risk.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 intraoperative"
     }
   ],
   "allergies": [
@@ -97,7 +135,42 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Pre-Extraction Assessment",
+      "results": [
+        {
+          "test": "INR (day of extraction)",
+          "value": "2.4",
+          "unit": "",
+          "ref": "2.0-3.0 therapeutic for AFib",
+          "flag": ""
+        },
+        {
+          "test": "CHA2DS2-VASc score",
+          "value": "5",
+          "unit": "",
+          "ref": "Score 0-1 = low risk",
+          "flag": "H"
+        },
+        {
+          "test": "HAS-BLED score",
+          "value": "2",
+          "unit": "",
+          "ref": "Score <3 = low bleeding risk",
+          "flag": ""
+        },
+        {
+          "test": "Platelet count",
+          "value": "188",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +203,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-dental-anticoag-dilemma",
-    "diagnosis": "See diagnosis \u2014 Patient on Warfarin for Mechanical Heart Valve",
+    "diagnosis": "Dental Extraction in Anticoagulated Patient \u2014 Warfarin Management, Bridging Therapy Decision, Local Hemostasis Protocol",
     "acuity": 1,
     "presentation": "Patient on Warfarin for Mechanical Heart Valve",
     "category": "other"
@@ -176,12 +249,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Patient on Warfarin for Mechanical Heart Valve \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Continue warfarin, use local hemostasis \u2014 evidence-based approach (correct)",
+      "Hold warfarin for extraction \u2014 increases thromboembolic stroke risk; not evidence-based for simple extraction",
+      "Heparin bridge \u2014 increases bleeding without reducing stroke risk; not recommended for dental procedures",
+      "Reverse warfarin with vitamin K \u2014 inappropriate for elective dental procedure in therapeutic range",
+      "Refuse treatment \u2014 inappropriate; procedure is safe with proper protocol",
+      "Refer to oral surgeon for all anticoagulated patients \u2014 simple extractions can be done in general practice with proper protocol"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Patient on Warfarin for Mechanical Heart Valve. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) A patient with a mechanical mitral valve replacement requires emergency extraction of an abscessed tooth. INR is 3.8. His cardiologist cannot be reached. He has trismus and cannot tolerate the abscess pain. What is your decision about the extraction \u2014 and what does the INR level and valve type tell you about the risk of holding anticoagulation even briefly? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: warfarin management for dental extraction. Key learning: (1) Current evidence consensus: for routine dental extractions (1-3 teeth), continue warfarin WITHOUT interruption if INR \u22643.5. Local hemostatic measures are sufficient. Interrupting warfarin to prevent dental bleeding causes MORE thromboembolic events (stroke) than it prevents bleeding complications. The risk-benefit calculation overwhelmingly favors continuation. (2) Local hemostasis protocol: oxidized cellulose (Surgicel) or gelatin sponge (Gelfoam) in socket + primary suture closure + pressure for 30-60 minutes + tranexamic acid mouthwash. This combination manages bleeding effectively at any therapeutic INR. (3) Bridging therapy: NEVER appropriate for routine dental procedures. Bridging with heparin increases bleeding complications without reducing thromboembolic risk. Reserved for major surgeries where anticoagulation must be interrupted. (4) DOAC patients: rivaroxaban, apixaban, dabigatran \u2014 timing around dental extraction: skip the morning dose on the day of extraction for standard procedures. Resume evening dose same day. No bridging needed. (5) Communication with prescribing physician: always inform the prescribing physician (cardiologist, PCP) of planned procedure. Confirm current INR day of procedure. Document the decision-making and INR value in the dental record."
     }
   }
 };

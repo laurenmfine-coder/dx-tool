@@ -1,8 +1,8 @@
-/* emr-data/testicular-torsion.js — EMR case data for Testicular Torsion */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Justin Mercer",
-    "patientHPI": "I woke up this morning with really severe pain down there on my left side — it came on suddenly and it's so bad I feel sick to my stomach. The pain is sharp and constant, and I can barely walk because any movement makes it worse.",
+    "patientHPI": "I woke up this morning with really severe pain down there on my left side \u2014 it came on suddenly and it's so bad I feel sick to my stomach. The pain is sharp and constant, and I can barely walk because any movement makes it worse.",
     "dob": "06/15/2010",
     "age": "16",
     "sex": "Male",
@@ -15,25 +15,64 @@ window.EMR_DATA = {
     "address": "6053 Poplar Ave, Chicago, IL 60612",
     "insurance": "Cigna",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "CVS Pharmacy — Broward Blvd",
+    "pharmacy": "CVS Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "Dorothy Mitchell",
       "phone": "(313) 555-7655",
       "relationship": "Partner"
     },
-    "chiefComplaint": "My... down there hurts really bad Left testicle — sudden onset",
+    "chiefComplaint": "My... down there hurts really bad Left testicle \u2014 sudden onset",
     "diagnosis": "Testicular Torsion"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "None — previously healthy teenager",
+      "problem": "Testicular torsion \u2014 right side, 4 hours since onset",
+      "icd": "N44.01",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Ethan Kim, 16M \u2014 sudden right testicular pain waking from sleep, nausea, vomiting. No cremasteric reflex. High-riding testis."
+    },
+    {
+      "problem": "Surgical emergency \u2014 testicular viability depends on time",
+      "icd": "N44.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Salvage rate: >90% if detorsion within 6h, ~50% at 12h, <10% at 24h. Do not delay surgery for imaging if clinical diagnosis is clear."
+    },
+    {
+      "problem": "Bell-clapper deformity \u2014 bilateral anatomic predisposition",
+      "icd": "N44.09",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Underlying anatomy predisposes both testes. Contralateral orchiopexy performed at same surgery."
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Manual detorsion \u2014 attempt in ED while awaiting OR",
+      "sig": "Rotate testis outward (lateral to medial, like opening a book) \u2014 relieves torsion in ~2/3 of cases. Does NOT replace surgery. Pain relief confirms success.",
+      "prescriber": "Urology/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Attempted \u2014 partial relief"
+    },
+    {
+      "name": "Morphine 0.1mg/kg IV \u2014 pain management",
+      "sig": "Adequate analgesia while preparing for OR. Does not mask peritoneal signs in testicular torsion.",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "NPO \u2014 surgical prep",
+      "sig": "Nothing by mouth \u2014 immediate surgical preparation. OR team activated.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
       "allergen": "NKDA",
@@ -49,7 +88,7 @@ window.EMR_DATA = {
       "bp": "138/86",
       "hr": "112",
       "rr": "20",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "10/10",
       "bmi": "28",
@@ -62,192 +101,56 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "My... down there hurts really bad Left testicle — sudden onset",
-      "hpi": "Justin Mercer is a 16-year-old male presenting with sudden severe scrotal pain — left side. Past medical history includes None — previously healthy teenager. See chart for full details.",
+      "cc": "My... down there hurts really bad Left testicle \u2014 sudden onset",
+      "hpi": "Justin Mercer is a 16-year-old male presenting with sudden severe scrotal pain \u2014 left side. Past medical history includes None \u2014 previously healthy teenager. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Testicular Torsion — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Testicular Torsion \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-719310",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Scrotal Pain Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "11.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.5",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "36",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "169",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Scrotal Doppler ultrasound",
+          "value": "Absent flow right testis",
+          "unit": "",
+          "ref": "Normal flow",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.9",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "106",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "23",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "8",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "100",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Urinalysis",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Urinalysis",
-              "value": "Normal — no WBC, no bacteria, no blood",
-              "unit": "",
-              "range": "Normal",
-              "flag": ""
-            },
-            {
-              "test": "β-hCG",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            }
-          ]
+          "test": "CBC",
+          "value": "WBC 11.2 \u2014 mild elevation",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "hCG/AFP (testicular tumor markers)",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-478638",
-      "clinical": "My... down there hurts really bad Left testicle — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "POCUS – FAST Exam",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-470698",
-      "clinical": "My... down there hurts really bad Left testicle — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "LEFT TESTICLE: ABSENT INTRATESTICULAR BLOOD FLOW on color Doppler. Testicle appears enlarged and hypoechoic (edematous). Reactive hydrocele present. Spermatic cord appears twisted with 'whirlpool sign.' RIGHT TESTICLE: normal size, normal blood flow on Doppler.",
-      "impression": "LEFT TESTICULAR TORSION — absent blood flow. UROLOGY TO OR IMMEDIATELY — do not delay for formal ultrasound.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-462124",
-      "clinical": "My... down there hurts really bad Left testicle — sudden onset",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 112 bpm. Normal intervals",
-      "impression": "Sinus tachycardia — pain response",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "Scrotal Doppler Ultrasound",
+      "indication": "Acute testicular pain \u2014 torsion vs epididymo-orchitis",
+      "findings": "Right testis: absent vascularity on color Doppler. Left testis: normal flow. Heterogeneous right testicular parenchyma \u2014 early ischemia.",
+      "impression": "Findings consistent with right testicular torsion. EMERGENT UROLOGY CONSULTATION REQUIRED."
     }
   ],
   "immunizations": [
@@ -354,13 +257,12 @@ window.EMR_DATA = {
       "Prehn's sign (elevation test)": "Elevation of left testicle does not relieve pain, may worsen it slightly"
     },
     "ddxTargets": [
-      "Testicular torsion (correct diagnosis)",
-      "Epididymitis",
-      "Torsion of testicular appendix",
-      "Incarcerated inguinal hernia",
-      "Trauma with testicular rupture",
-      "Acute hydrocele",
-      "Varicocele with acute thrombosis"
+      "Testicular torsion \u2014 absent Doppler flow, 4h onset, absent cremasteric reflex (correct)",
+      "Epididymo-orchitis \u2014 gradual onset, fever, pyuria, preserved/increased Doppler flow",
+      "Inguinal hernia \u2014 inguinal mass tracking into scrotum, reducible",
+      "Appendix testis torsion \u2014 blue dot sign, gradual onset, less severe pain, Doppler flow present",
+      "Trauma-related hematocele \u2014 history of trauma, different Doppler pattern",
+      "Testicular tumor \u2014 painless, progressive; not acute onset with absent Doppler"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on epididymitis due to testicular pain and nausea, missing the acute surgical emergency of torsion",
@@ -370,7 +272,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given Justin's age and acute presentation, what time-sensitive conditions should be at the top of your list? What specific historical details will help you distinguish between your top differentials?",
       "phase5": "Excellent history and physical examination. The combination of sudden onset, severe pain, nausea, absent cremasteric reflex, abnormal testicular lie, and negative Prehn's sign are classic findings. What does this constellation of findings suggest, and what is your next immediate step?",
-      "finalDebrief": "This case highlights the importance of recognizing testicular torsion as a urological emergency. The key differentiating features from epididymitis include sudden onset, younger age, absent cremasteric reflex, horizontal testicular lie, and negative Prehn's sign. Time to surgery is critical - ideally within 6 hours for testicular salvage. How did your thinking evolve from your initial differential?"
+      "finalDebrief": "This case highlights the importance of recognizing testicular torsion as a urological emergency. The key differentiating features from epididymitis include sudden onset, younger age, absent cremasteric reflex, horizontal testicular lie, and negative Prehn's sign. Time to surgery is critical - ideally within 6 hours for testicular salvage. How did your thinking evolve from your initial differential?",
+      "final": "Diagnosis: testicular torsion. Key learning: (1) The cremasteric reflex is the most important clinical finding: absent cremasteric reflex in acute scrotal pain = testicular torsion until proven otherwise. Sensitivity ~99%. The reflex is elicited by stroking the inner thigh \u2014 normal = ipsilateral testicular elevation. Absent = torsion. (2) Time is testicle: salvage rates drop precipitously with time. <6 hours = >90% salvage; 6-12 hours = 50-90%; 12-24 hours = ~50%; >24 hours = <10%. Do NOT delay surgery for ultrasound if clinical presentation is clear. Doppler ultrasound is used when diagnosis is uncertain. (3) Manual detorsion in ED: rotate the testis outward (medial to lateral \u2014 open-book technique). Pain relief = successful detorsion. Partial relief is common. Still requires surgery for orchiopexy. (4) Bell-clapper deformity: abnormal tunica vaginalis attaches high on spermatic cord, allowing testis to swing freely. BILATERAL predisposition \u2014 contralateral orchiopexy is always performed at the same surgery even if the other side is asymptomatic. (5) Age peaks: bimodal \u2014 neonates (extravaginal) and adolescents 12-18 years (intravaginal, Bell-clapper). Classic history: adolescent male with sudden testicular pain waking from sleep."
     }
+  },
+  "meta": {
+    "diagnosis": "Testicular Torsion \u2014 Acute Onset Scrotal Pain, Emergent Surgical Exploration, Time-Critical",
+    "caseId": "testicular-torsion"
   }
 };

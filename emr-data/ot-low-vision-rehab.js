@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Age-Related Macular Degeneration",
-      "icd": "Z00.00",
+      "problem": "Advanced AMD \u2014 VA 20/200 bilateral, central scotoma",
+      "icd": "H35.32",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Eleanor Walsh, 79F \u2014 bilateral AMD, central scotoma, peripheral vision preserved. OT low vision rehab referral."
+    },
+    {
+      "problem": "ADL impairment \u2014 reading, medication management, cooking",
+      "icd": "Z73.6",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Cannot read medication labels. Medication error and fall risk from low vision."
+    },
+    {
+      "problem": "Fall risk \u2014 low vision contributing",
+      "icd": "Z91.81",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Low vision significantly increases fall risk. Contrast enhancement and home safety modification needed."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Eccentric viewing training \u2014 preferred retinal locus development",
+      "sig": "Train patient to use peripheral PRL to replace damaged macula. Looking slightly off-center targets the PRL. Weeks to months of practice required \u2014 OT guides.",
+      "prescriber": "OT/Low Vision Specialist",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 training"
+    },
+    {
+      "name": "Magnification \u2014 stand magnifier, electronic CCTV",
+      "sig": "Power required: 20/200 \u00f7 20/20 = 10x. Prescription magnifier, stand magnifier, or CCTV/smartphone app. Prescribe based on VA and task demands.",
+      "prescriber": "OT/Optometrist",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 prescribed"
+    },
+    {
+      "name": "Environmental modification \u2014 high contrast, task lighting",
+      "sig": "100W equivalent LED task lighting at reading surface. Dark cutting board, high-contrast plate edges, large-print med labels. No glare sources.",
+      "prescriber": "OT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 home modification"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to ot. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Low Vision Assessment",
+      "results": [
+        {
+          "test": "BCVA right",
+          "value": "20/200",
+          "unit": "",
+          "ref": "20/20",
+          "flag": "H"
+        },
+        {
+          "test": "BCVA left",
+          "value": "20/200",
+          "unit": "",
+          "ref": "20/20",
+          "flag": "H"
+        },
+        {
+          "test": "Amsler grid",
+          "value": "Central scotoma bilateral \u2014 missing/distorted center",
+          "unit": "",
+          "ref": "No distortion",
+          "flag": "H"
+        },
+        {
+          "test": "Contrast sensitivity",
+          "value": "Severely reduced",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "Medication label reading",
+          "value": "Unable at 20/200",
+          "unit": "",
+          "ref": "Functional",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "ot-low-vision-rehab",
-    "diagnosis": "See diagnosis \u2014 Age-Related Macular Degeneration",
+    "diagnosis": "AMD Low Vision \u2014 OT Eccentric Viewing Training, Magnification Devices, Environmental Modification",
     "acuity": 3,
     "presentation": "Age-Related Macular Degeneration",
     "category": "ophthalmic"
@@ -175,12 +247,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Age-Related Macular Degeneration \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "AMD low vision \u2014 eccentric viewing, magnification, environmental OT (correct)",
+      "Cortical blindness \u2014 peripheral vision preserved; AMD is macular (central)",
+      "Glaucoma \u2014 peripheral field loss, not central; different OT approach",
+      "No OT role in low vision \u2014 INCORRECT; OT is primary for ADL rehabilitation in low vision",
+      "Cataracts \u2014 surgically correctable; AMD is not reversible",
+      "Depression causing functional impairment \u2014 vision loss is structural; depression is a real comorbidity"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +262,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Age-Related Macular Degeneration. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) What low vision adaptive strategies and devices address central scotoma for reading and ADL performance \u2014 and how do you set realistic goals given the progressive nature of AMD? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: AMD low vision, OT rehabilitation. Key learning: (1) Eccentric viewing: AMD destroys the macula but spares peripheral retina. OT trains use of a PRL (preferred retinal locus) in the peripheral retina as the new functional center. Requires weeks-months of systematic practice. (2) Magnification hierarchy: spectacles \u2192 handheld magnifier \u2192 stand magnifier \u2192 electronic (CCTV, smartphone apps). 10x magnification needed to simulate normal acuity at 20/200. (3) Contrast enhancement dramatically improves functional vision in AMD: high-contrast household items, dark cutting boards, bright task lighting (not glare). OT home assessment identifies specific modifications. (4) Medication management: pill organizers, large-print labels, pharmacy blister packs. Medication errors from low vision are a significant safety concern. (5) Lighting: bright task LED lighting (100W equivalent) at reading surface dramatically improves functional vision. Dimmer switches for glare control. Lighting assessment is a core OT low vision intervention."
     }
   }
 };

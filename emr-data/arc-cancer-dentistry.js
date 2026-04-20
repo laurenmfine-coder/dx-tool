@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient Starting Head and Neck Radiation",
-      "icd": "Z00.00",
+      "problem": "Head and neck cancer \u2014 pre-radiation dental clearance",
+      "icd": "C10.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Robert Chen, 58M \u2014 base of tongue SCC, radiation field includes mandible and maxilla. Dental clearance required before XRT starts."
+    },
+    {
+      "problem": "Osteoradionecrosis prevention \u2014 teeth in radiation field must be extracted",
+      "icd": "M87.189",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Teeth with poor prognosis in radiation field must be extracted \u226514-21 days before XRT to allow healing."
+    },
+    {
+      "problem": "Radiation caries risk \u2014 xerostomia post-XRT",
+      "icd": "K02.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Salivary gland damage from XRT causes severe xerostomia \u2192 rapid cervical caries. Fluoride protocol critical."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
+      "name": "Fluoride varnish 5% NaF \u2014 applied at every dental visit",
+      "sig": "High-concentration fluoride varnish every 3 months. Daily 1.1% NaF prescription gel at home.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active \u2014 pre/post XRT"
+    },
+    {
+      "name": "Pilocarpine 5mg PO TID (post-XRT) \u2014 sialogue",
+      "sig": "Muscarinic agonist \u2014 stimulates remaining salivary tissue. Start after XRT completion.",
+      "prescriber": "Oncology/Dentistry",
+      "start": "2024",
       "refills": 3,
+      "status": "Active \u2014 start post-XRT"
+    },
+    {
+      "name": "Chlorhexidine 0.12% oral rinse BID",
+      "sig": "Antimicrobial rinse \u2014 reduces cariogenic bacteria during radiation and post-XRT xerostomia period.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 2,
       "status": "Active"
+    },
+    {
+      "name": "Hyperbaric oxygen (HBO) \u2014 if post-XRT extraction needed",
+      "sig": "HBO before and after any post-XRT dental extraction in radiation field \u2014 reduces ORN risk. 20 dives pre-op, 10 post-op.",
+      "prescriber": "Oral Surgery/Oncology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Protocol \u2014 if needed post-XRT"
     }
   ],
   "allergies": [
@@ -97,7 +135,42 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Pre-XRT Dental Assessment",
+      "results": [
+        {
+          "test": "Panoramic radiograph",
+          "value": "Multiple periapical lesions \u2014 3 teeth in radiation field require extraction",
+          "unit": "",
+          "ref": "Teeth in XRT field assessed",
+          "flag": "H"
+        },
+        {
+          "test": "Full mouth periodontal charting",
+          "value": "Generalized moderate periodontitis",
+          "unit": "",
+          "ref": "Healthy periodontium",
+          "flag": "H"
+        },
+        {
+          "test": "Salivary flow rate (unstimulated)",
+          "value": "0.3",
+          "unit": "mL/min",
+          "ref": ">0.1 mL/min",
+          "flag": ""
+        },
+        {
+          "test": "Xerostomia baseline VAS",
+          "value": "2/10",
+          "unit": "",
+          "ref": "0/10 normal",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +203,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-cancer-dentistry",
-    "diagnosis": "See diagnosis \u2014 Patient Starting Head and Neck Radiation",
+    "diagnosis": "Head and Neck Cancer Patient \u2014 Dental Clearance Before Radiation, Extractions and Preventive Protocol",
     "acuity": 2,
     "presentation": "Patient Starting Head and Neck Radiation",
     "category": "oncologic"
@@ -176,12 +249,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Patient Starting Head and Neck Radiation \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Pre-XRT dental clearance \u2014 extractions required before radiation (correct)",
+      "Post-XRT extraction without HBO \u2014 ORN risk; HBO protocol required",
+      "Dental treatment during active XRT \u2014 generally avoided if possible; emergency only",
+      "Routine dental maintenance without oncology communication \u2014 unsafe in this context",
+      "Bisphosphonate-related ONJ \u2014 different etiology; XRT here is the mechanism",
+      "Mucositis management only \u2014 insufficient; structural dental disease must be addressed"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Patient Starting Head and Neck Radiation. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) Before radiation: what dental conditions require treatment, which cannot wait, and what oral complications will you counsel this patient about for the rest of their life? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: pre-radiation dental clearance for head and neck cancer. Key learning: (1) Osteoradionecrosis (ORN): radiation to jaw causes hypovascular, hypocellular, hypoxic tissue \u2014 impaired healing. Post-XRT extractions in the radiation field have 5-15% ORN risk without HBO vs ~1% with HBO protocol. Prevention is far better than treatment. (2) Pre-XRT timeline: extractions in radiation field must be completed \u226514-21 days before XRT starts \u2014 allows initial socket healing before vascularity is compromised. Restorations, scaling, and prophylaxis ideally completed before XRT begins. (3) Fluoride protocol post-XRT: xerostomia from salivary gland damage causes dramatically accelerated caries (cervical location, rapid progression). Prescription-strength fluoride (1.1% NaF gel daily in custom trays) is mandatory \u2014 OTC fluoride is insufficient. (4) Radiation caries is preventable: the combination of fluoride, chlorhexidine, salivary stimulants (pilocarpine, cevimeline), and oral hygiene education can dramatically reduce caries incidence. (5) Oncology-dentistry communication: dental team must receive XRT treatment plan (dose, field) to identify which teeth are in the radiation field. This communication gap is the most common reason for inadequate pre-XRT clearance."
     }
   }
 };

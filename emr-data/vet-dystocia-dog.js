@@ -24,21 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Active Labor >1h No Delivery",
-      "icd": "Z00.00",
+      "problem": "Primary uterine inertia \u2014 French Bulldog, 6h labor, no pups",
+      "icd": "O62.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Bella, 3yr French Bulldog \u2014 weak infrequent contractions, 6 hours, no delivery. Brachycephalic breed: highest dystocia incidence."
+    },
+    {
+      "problem": "Fetal viability \u2014 heart rates 160-175 bpm (normal)",
+      "icd": "O66.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "No fetal distress yet. Prolonged labor risks progressive hypoxia. Oxytocin trial vs immediate C-section decision required."
+    },
+    {
+      "problem": "Borderline low calcium \u2014 contributing to uterine inertia",
+      "icd": "O66.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Serum calcium 8.2 mg/dL (ref 8.8-11.0). Borderline low \u2014 IV calcium may enhance uterine contractility."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Oxytocin 0.5-2 IU IM \u2014 uterine stimulant",
+      "sig": "Small doses q30 min x2-3 trials if cervix dilated, no obstruction. Overuse = sustained contraction \u2192 fetal asphyxia. DO NOT use for obstructive dystocia.",
+      "prescriber": "Veterinarian",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 trial"
+    },
+    {
+      "name": "Calcium gluconate 10% 1mL/kg slow IV \u2014 if contractility poor",
+      "sig": "Slow IV over 10-20 min with cardiac monitoring. Enhances uterine contractility. Useful when serum calcium borderline low.",
+      "prescriber": "Veterinarian",
+      "start": "2024",
+      "refills": 0,
+      "status": "Consider"
+    },
+    {
+      "name": "Cesarean section \u2014 if oxytocin fails or fetal distress",
+      "sig": "Proceed immediately if: 2 oxytocin trials fail, fetal HR declining, >4h between pups, or owner elects surgery. BOAS anesthetic protocol.",
+      "prescriber": "Veterinarian",
+      "start": "2024",
+      "refills": 0,
+      "status": "Standby \u2014 surgical prep"
     }
   ],
   "allergies": [
@@ -86,7 +116,49 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Canine Dystocia Assessment",
+      "results": [
+        {
+          "test": "Radiograph \u2014 fetal count/position",
+          "value": "3 pups. 2 anterior, 1 posterior. No obstruction.",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Fetal Doppler HR",
+          "value": "160-175 bpm \u2014 viable",
+          "unit": "",
+          "ref": "180-220 normal whelping",
+          "flag": ""
+        },
+        {
+          "test": "Serum calcium",
+          "value": "8.2",
+          "unit": "mg/dL",
+          "ref": "8.8-11.0",
+          "flag": "L"
+        },
+        {
+          "test": "Blood glucose (dam)",
+          "value": "68",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": "L"
+        },
+        {
+          "test": "BCS",
+          "value": "5/9 \u2014 ideal",
+          "unit": "",
+          "ref": "5/9",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -119,7 +191,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-dystocia-dog",
-    "diagnosis": "See diagnosis \u2014 Active Labor >1h No Delivery",
+    "diagnosis": "Canine Dystocia \u2014 Primary Uterine Inertia in French Bulldog, Oxytocin Trial Then Cesarean Section",
     "acuity": 1,
     "presentation": "Active Labor >1h No Delivery",
     "category": "obstetric"
@@ -166,12 +238,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Dog \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Primary uterine inertia \u2014 oxytocin trial, C-section standby (correct)",
+      "Obstructive dystocia \u2014 radiograph/palpation confirm no obstruction; oxytocin appropriate",
+      "Secondary uterine inertia \u2014 no pups yet delivered; primary inertia is correct",
+      "Normal labor \u2014 6h without delivery and weak contractions is not normal",
+      "Fetal oversize \u2014 radiograph does not show disproportion",
+      "Hypocalcemia as sole cause \u2014 calcium borderline low; contributing factor, not sole cause"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +253,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Active Labor >1h No Delivery. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) Green/black discharge before first puppy = uteroplacental separation. Medical versus C-section decision algorithm \u2014 what is your oxytocin protocol threshold? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: canine dystocia \u2014 primary uterine inertia. IPE key learning: (1) Dystocia classification: primary inertia (won't contract) vs secondary inertia (exhaustion after partial delivery) vs obstructive (mechanical). Treatment differs: inertia \u2192 oxytocin; obstruction \u2192 surgical. (2) Oxytocin protocol: 0.5-2 IU IM, max 2-3 doses q30 min. Only if cervix dilated and no obstruction. Overdose = tetanic contraction \u2192 fetal asphyxia. (3) Brachycephalic breed risk: French Bulldogs and English Bulldogs have highest dystocia rates from pelvic conformation. Many practitioners plan elective C-section. BOAS anesthesia requires rapid intubation protocol. (4) One Health/IPE: dystocia management in dogs mirrors obstetric emergency protocols in humans \u2014 oxytocin use, fetal monitoring, surgical decision points. Understanding one deepens understanding of the other. (5) Zoonotic awareness: owners handling neonatal whelping fluids should practice handwashing. Pregnant owners counseled on potential risks."
     }
   }
 };

@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Spastic Diplegia Cerebral Palsy Age 8",
-      "icd": "Z00.00",
+      "problem": "Spastic diplegia CP \u2014 GMFCS Level II, scissor gait",
+      "icd": "G80.1",
+      "onset": "Birth",
+      "status": "Active",
+      "notes": "Marcus Johnson, 7M \u2014 premature 28 weeks, IVH. Ambulates with forearm crutches. GMFCS II."
+    },
+    {
+      "problem": "Hip subluxation risk \u2014 migration percentage 28%",
+      "icd": "M24.351",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "6-month re-imaging and orthopaedics follow-up required. >25% = increased monitoring."
+    },
+    {
+      "problem": "Ankle equinus \u2014 gastrocnemius spasticity, -5\u00b0 dorsiflexion",
+      "icd": "M21.371",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Botox to gastrocnemius q6 months. PT must begin within 2 weeks of injection for maximum benefit."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Botulinum toxin A \u2014 gastrocnemius, q6 months",
+      "sig": "PT must begin WITHIN 2 WEEKS of injection \u2014 the therapeutic window where muscle is relaxed and ROM gains are possible.",
+      "prescriber": "Developmental Peds/PM&R",
+      "start": "2022",
+      "refills": 0,
+      "status": "Active \u2014 q6 months"
+    },
+    {
+      "name": "Hinged AFO \u2014 5\u00b0 dorsiflexion stop",
+      "sig": "Allows dorsiflexion during stance, blocks plantarflexion. Provides push-off energy return. Worn during all ambulation.",
+      "prescriber": "PT/Orthotics",
+      "start": "2022",
+      "refills": 1,
+      "status": "Active \u2014 replace annually"
+    },
+    {
+      "name": "PT gait training \u2014 2x/week",
+      "sig": "Treadmill training, stair negotiation, obstacle courses. Repetitive stepping activates central pattern generators.",
+      "prescriber": "PT",
+      "start": "2021",
+      "refills": 0,
+      "status": "Active ongoing"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "CP Functional Assessment",
+      "results": [
+        {
+          "test": "GMFCS Level",
+          "value": "II",
+          "unit": "",
+          "ref": "I = walks without limitations",
+          "flag": ""
+        },
+        {
+          "test": "6MWT",
+          "value": "320",
+          "unit": "meters",
+          "ref": "450-600m age-matched",
+          "flag": "L"
+        },
+        {
+          "test": "Hip migration percentage right",
+          "value": "28",
+          "unit": "%",
+          "ref": "<25%",
+          "flag": "H"
+        },
+        {
+          "test": "Ankle dorsiflexion passive right",
+          "value": "-5",
+          "unit": "degrees",
+          "ref": "10-20\u00b0",
+          "flag": "L"
+        },
+        {
+          "test": "PEDI-CAT mobility",
+          "value": "45th percentile for CP",
+          "unit": "",
+          "ref": "Age-matched",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pt-pediatric-cp",
-    "diagnosis": "See diagnosis \u2014 Spastic Diplegia Cerebral Palsy Age 8",
+    "diagnosis": "Spastic Diplegia Cerebral Palsy \u2014 GMFCS Level II, Botulinum Toxin + PT, Hip Surveillance",
     "acuity": 3,
     "presentation": "Spastic Diplegia Cerebral Palsy Age 8",
     "category": "pediatric"
@@ -180,12 +252,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Spastic Diplegia Cerebral Palsy Age 8 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Spastic diplegia CP \u2014 GMFCS II, Botox + PT protocol (correct)",
+      "Spastic quadriplegia \u2014 all 4 limbs; diplegia predominantly lower extremity",
+      "Hereditary spastic paraplegia \u2014 genetic, progressive; CP is static after insult",
+      "Dystonic CP \u2014 movement disorder component; primarily spastic here",
+      "Myelomeningocele \u2014 sensory loss, bowel/bladder; CP has normal sensation",
+      "Muscular dystrophy \u2014 progressive weakness, not spastic; different course"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Spastic Diplegia Cerebral Palsy Age 8. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) Using GMFCS level III as your framework \u2014 what are realistic ambulatory goals for this child, and what is the evidence for intensive versus standard PT dosing in spastic diplegia? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: spastic diplegia CP, GMFCS Level II. Key learning: (1) Botox + PT timing: PT must begin within 2 weeks of Botox injection \u2014 the window of reduced spasticity enables ROM and motor control gains. Botox without PT wastes the injection. (2) GMFCS is relatively stable \u2014 predicts long-term ambulatory potential. Level II = walks with limitations on uneven surfaces and long distances. (3) Hip surveillance: spastic CP causes hip subluxation from muscle imbalance. Migration percentage >25% = increased monitoring; >40% = surgical consultation. Annual radiographs in children <8 years. (4) Treadmill training in CP: body-weight-supported treadmill training improves gait speed and endurance. Repetitive stepping activates spinal central pattern generators. (5) AFO selection: hinged AFOs preserve push-off energy return. Solid AFOs for more severe equinus. PT and orthotist collaborate."
     }
   }
 };

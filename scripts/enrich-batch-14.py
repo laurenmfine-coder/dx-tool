@@ -4,246 +4,197 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMR_DIR = os.path.join(ROOT, 'emr-data')
 
 ENRICHMENTS = {
-"hip-fracture-anticoag": {
-  "diagnosis": "Hip Fracture on Anticoagulation — Warfarin Reversal, Surgical Timing, Bridging Decision",
+"tb-immigration": {
+  "diagnosis": "Active Pulmonary Tuberculosis — Recent Immigrant, Positive IGRA, Smear-Positive, RIPE Therapy Initiated",
   "problems": [
-    {"problem":"Hip fracture — on warfarin for AFib, INR 3.2","icd":"S72.001A","onset":"2024","status":"Active","notes":"Gloria Chen, 79F — fell on right hip, INR 3.2. OR team wants INR <1.5 before ORIF."},
-    {"problem":"Warfarin reversal — 4-factor PCC vs vitamin K","icd":"Z79.01","onset":"2024","status":"Active","notes":"4-factor PCC reverses warfarin in minutes. Vitamin K acts over 12-24h. Urgent surgery needs PCC."},
-    {"problem":"AFib — CHA2DS2-VASc 5, anticoagulation restart timing","icd":"I48.19","onset":"2020","status":"Active","notes":"High stroke risk — restart anticoagulation 24-72h post-op depending on surgical bleeding risk."}
+    {"problem":"Active pulmonary TB — smear-positive, cavitary disease","icd":"A15.0","onset":"2024","status":"Active","notes":"Amara Diallo, 31F — immigrant from West Africa 4 months ago. 6-week productive cough, night sweats, 15 lb weight loss. AFB smear 3+."},
+    {"problem":"Airborne isolation — public health reporting mandatory","icd":"A15.0","onset":"2024","status":"Active","notes":"Negative pressure room required. N95 for all entering. State health department notified within 24h."},
+    {"problem":"Contact investigation — household and close contacts","icd":"Z03.89","onset":"2024","status":"Active","notes":"Public health will conduct contact tracing — household members, coworkers require IGRA testing."}
   ],
   "medications": [
-    {"name":"4-factor PCC (Kcentra) 25 units/kg IV — urgent warfarin reversal","sig":"Reverses INR to <1.5 within 30 min. Give with vitamin K 10mg IV to sustain reversal.","prescriber":"Hematology/Surgery","start":"2024","refills":0,"status":"Active"},
-    {"name":"Vitamin K 10mg IV slow infusion — sustained reversal","sig":"Given alongside PCC — prevents INR re-elevation when PCC wears off (6-8h). IV preferred for faster onset than PO.","prescriber":"Medicine","start":"2024","refills":0,"status":"Active"},
-    {"name":"Enoxaparin 40mg SQ daily — restart 24-72h post-op","sig":"Bridge back to warfarin after ORIF. Timing based on surgical hemostasis — discuss with surgeon.","prescriber":"Medicine/Hematology","start":"2024","refills":0,"status":"Hold — restart post-op"},
-    {"name":"Warfarin — resume 5mg daily at post-op day 1-2","sig":"Resume prior dose. INR check at 3 days. Goal INR 2-3 for AFib.","prescriber":"Medicine","start":"2020","refills":5,"status":"Hold — resume post-op"}
+    {"name":"Isoniazid 300mg PO daily (INH) — RIPE regimen","sig":"Take on empty stomach or with food if GI upset. Pyridoxine 50mg daily co-administered to prevent peripheral neuropathy.","prescriber":"ID/Pulmonology","start":"2024","refills":2,"status":"Active"},
+    {"name":"Rifampin 600mg PO daily (RIF)","sig":"Take on empty stomach. Turns urine/sweat/tears orange — warn patient. Significant drug interactions (CYP3A4 inducer).","prescriber":"ID","start":"2024","refills":2,"status":"Active"},
+    {"name":"Pyrazinamide 1500mg PO daily (PZA) — first 2 months","sig":"First 2 months only. Monitor uric acid and LFTs.","prescriber":"ID","start":"2024","refills":1,"status":"Active — 2 months"},
+    {"name":"Ethambutol 1200mg PO daily (EMB) — first 2 months","sig":"Until susceptibility results. Monitor visual acuity and color vision monthly — optic neuritis risk.","prescriber":"ID","start":"2024","refills":1,"status":"Active — 2 months"},
+    {"name":"Pyridoxine (B6) 50mg PO daily — INH neuropathy prevention","sig":"Always co-administer with isoniazid.","prescriber":"ID","start":"2024","refills":2,"status":"Active"}
   ],
-  "labs": [{"date":"11/2024","panel":"Pre-Op Reversal Panel","results":[
-    {"test":"INR","value":"3.2","unit":"","ref":"0.9-1.1","flag":"H"},
-    {"test":"PT","value":"34","unit":"seconds","ref":"11-13.5","flag":"H"},
-    {"test":"Hemoglobin","value":"10.2","unit":"g/dL","ref":"12-16","flag":"L"},
+  "labs": [{"date":"11/2024","panel":"TB Workup","results":[
+    {"test":"AFB smear (sputum x3)","value":"3+ positive","unit":"","ref":"Negative","flag":"H"},
+    {"test":"IGRA (QuantiFERON-TB Gold)","value":"Positive — 8.2 IU/mL","unit":"","ref":"<0.35 negative","flag":"H"},
+    {"test":"HIV antibody","value":"Negative","unit":"","ref":"Negative","flag":""},
+    {"test":"ALT/AST","value":"Normal","unit":"","ref":"Normal","flag":""},
+    {"test":"Uric acid","value":"5.8","unit":"mg/dL","ref":"2.4-7.0","flag":""}
+  ]}],
+  "imaging": [{"date":"11/2024","study":"CXR PA/Lateral","indication":"Chronic cough, night sweats, weight loss","findings":"Right upper lobe cavitary lesion. Ipsilateral hilar adenopathy. Miliary pattern absent.","impression":"Classic active pulmonary TB pattern — upper lobe cavitation with hilar adenopathy. Smear result confirms."}],
+  "ddxTargets": ["Active pulmonary TB — immigrant, cavitary disease, smear 3+ (correct)","Lung cancer with superinfection — cavitary mass; age and AFB smear argue against","Aspergillosis — immunocompromised, cavitary; HIV negative here","NTM (non-tuberculous mycobacteria) — culture will distinguish; treatment differs","Lung abscess — anaerobic, aspiration history; upper lobe cavitation atypical","Histoplasmosis — geographic exposure (Ohio/Mississippi valley); different endemic region"],
+  "coachFinal": "Diagnosis: active pulmonary TB. Key learning: (1) RIPE regimen: Rifampin + Isoniazid + Pyrazinamide + Ethambutol for 2 months (intensive phase), then RIF + INH for 4 more months (continuation phase) = 6 months total for drug-sensitive TB. DOT (directly observed therapy) is standard — public health supervises each dose. (2) Airborne precautions: TB is spread via airborne droplet nuclei (<5 μm) — negative pressure room, N95 respirators (not surgical masks). Isolation continues until 3 consecutive negative AFB smears and clinical improvement. (3) Drug interactions with rifampin: rifampin is a potent CYP3A4 inducer — lowers levels of protease inhibitors (HIV), oral contraceptives, warfarin, methadone, many others. Review ALL medications. (4) INH hepatotoxicity: monitor LFTs monthly. Stop if ALT >3-5x ULN with symptoms or >5x ULN asymptomatic. Pyridoxine 50mg daily prevents peripheral neuropathy (INH inhibits B6 metabolism). (5) Reporting: TB is a mandatory reportable disease in all US states. State health department must be notified within 24h of suspected active TB. Contact investigation for household contacts and close contacts is the health department's responsibility."
+},
+"tension-ptx": {
+  "diagnosis": "Tension Pneumothorax — Immediate Needle Decompression, Chest Tube to Follow",
+  "problems": [
+    {"problem":"Tension pneumothorax — hemodynamic compromise","icd":"J93.0","onset":"2024","status":"Active","notes":"Ryan Torres, 24M — MVC, intubated in field. Sudden deterioration: SpO2 75%, BP 68/40, HR 138, tracheal deviation left."},
+    {"problem":"Traumatic pneumothorax — rib fractures, lung laceration","icd":"S27.0XXA","onset":"2024","status":"Active","notes":"Bilateral rib fractures 4-7 on right. Tension physiology from check-valve mechanism."},
+    {"problem":"Hypotensive shock — obstructive etiology","icd":"R57.9","onset":"2024","status":"Active","notes":"BP 68/40 from tension physiology — mediastinal shift compromising venous return. Immediate decompression lifesaving."}
+  ],
+  "medications": [
+    {"name":"Needle decompression — 14g angiocath, 2nd ICS midclavicular line","sig":"IMMEDIATE — do not wait for CXR. Insert 14g angiocath 2nd intercostal space, midclavicular line. Rush of air confirms diagnosis.","prescriber":"Trauma/ED","start":"2024","refills":0,"status":"DONE — immediate"},
+    {"name":"Chest tube — 28-32Fr, 4th/5th ICS anterior axillary line","sig":"Definitive treatment after needle decompression. Right side for right-sided tension PTX.","prescriber":"Trauma/Surgery","start":"2024","refills":0,"status":"Active — placed"},
+    {"name":"Normal saline 1L IV — resuscitation after decompression","sig":"IV fluid resuscitation after tension physiology relieved. BP should respond rapidly.","prescriber":"Trauma","start":"2024","refills":0,"status":"Active"}
+  ],
+  "labs": [{"date":"11/2024","panel":"Trauma Panel","results":[
+    {"test":"ABG — SpO2","value":"75","unit":"%","ref":">95","flag":"L"},
+    {"test":"BP","value":"68/40","unit":"mmHg","ref":"Systolic >90","flag":"L"},
+    {"test":"HR","value":"138","unit":"bpm","ref":"60-100","flag":"H"},
+    {"test":"Hemoglobin (FAST)","value":"13.2","unit":"g/dL","ref":"13.5-17.5","flag":""},
+    {"test":"Tracheal position","value":"Deviated left","unit":"","ref":"Midline","flag":"H"}
+  ]}],
+  "imaging": [{"date":"11/2024","study":"CXR — POST decompression","indication":"Verify chest tube position","findings":"Right-sided chest tube in good position. Right lung re-expanding. Trachea midline. Bilateral rib fractures 4-7 right.","impression":"Tension pneumothorax resolved. Tube in good position. Continued re-expansion expected."}],
+  "ddxTargets": ["Tension pneumothorax — tracheal deviation + shock + decreased breath sounds (correct)","Massive hemothorax — decreased breath sounds but dull percussion; trachea deviates away from side differently","Cardiac tamponade — Beck's triad (JVD + hypotension + muffled heart sounds); no tracheal deviation","Obstructive shock — PE causes obstructive shock but not tracheal deviation","Right mainstem intubation — SpO2 drop after intubation, but hemodynamics less severely affected","ARDS — bilateral, not unilateral; no tracheal deviation"],
+  "coachFinal": "Diagnosis: tension pneumothorax. Key learning: (1) Tension PTX is a CLINICAL diagnosis — do NOT wait for CXR. Classic triad: absent/decreased breath sounds unilaterally + tracheal deviation AWAY from affected side + hypotension. In intubated patients: rising peak airway pressures + sudden deterioration = tension PTX until proven otherwise. (2) Needle decompression: 14g angiocath, 2nd ICS, midclavicular line, just above the rib (avoid neurovascular bundle below rib). Rush of air = confirms diagnosis + partial treatment. Must follow with chest tube — needle is temporizing only. Alternatively: 4th/5th ICS, anterior axillary line (finger decompression in some protocols). (3) Chest tube placement: 4th/5th ICS, anterior axillary line for trauma. 2nd ICS midclavicular for elective pneumothorax (cosmetically better). Insert over top of rib. Confirm with CXR and water seal chamber. (4) Tension vs simple PTX: simple PTX = air in pleural space without mediastinal shift. Tension = check-valve mechanism → progressive air accumulation → mediastinal shift → kinking of SVC/IVC → obstructive shock → cardiac arrest. (5) Bilateral rib fractures ≥3 consecutive ribs = flail chest risk. This patient has 4 rib fractures — monitor for paradoxical breathing, respiratory fatigue, need for intubation (already intubated)."
+},
+"testicular-torsion": {
+  "diagnosis": "Testicular Torsion — Acute Onset Scrotal Pain, Emergent Surgical Exploration, Time-Critical",
+  "problems": [
+    {"problem":"Testicular torsion — right side, 4 hours since onset","icd":"N44.01","onset":"2024","status":"Active","notes":"Ethan Kim, 16M — sudden right testicular pain waking from sleep, nausea, vomiting. No cremasteric reflex. High-riding testis."},
+    {"problem":"Surgical emergency — testicular viability depends on time","icd":"N44.01","onset":"2024","status":"Active","notes":"Salvage rate: >90% if detorsion within 6h, ~50% at 12h, <10% at 24h. Do not delay surgery for imaging if clinical diagnosis is clear."},
+    {"problem":"Bell-clapper deformity — bilateral anatomic predisposition","icd":"N44.09","onset":"2024","status":"Active","notes":"Underlying anatomy predisposes both testes. Contralateral orchiopexy performed at same surgery."}
+  ],
+  "medications": [
+    {"name":"Manual detorsion — attempt in ED while awaiting OR","sig":"Rotate testis outward (lateral to medial, like opening a book) — relieves torsion in ~2/3 of cases. Does NOT replace surgery. Pain relief confirms success.","prescriber":"Urology/ED","start":"2024","refills":0,"status":"Attempted — partial relief"},
+    {"name":"Morphine 0.1mg/kg IV — pain management","sig":"Adequate analgesia while preparing for OR. Does not mask peritoneal signs in testicular torsion.","prescriber":"ED","start":"2024","refills":0,"status":"Active"},
+    {"name":"NPO — surgical prep","sig":"Nothing by mouth — immediate surgical preparation. OR team activated.","prescriber":"Surgery","start":"2024","refills":0,"status":"Active"}
+  ],
+  "labs": [{"date":"11/2024","panel":"Scrotal Pain Workup","results":[
+    {"test":"Scrotal Doppler ultrasound","value":"Absent flow right testis","unit":"","ref":"Normal flow","flag":"H"},
+    {"test":"Urinalysis","value":"Normal","unit":"","ref":"Normal","flag":""},
+    {"test":"CBC","value":"WBC 11.2 — mild elevation","unit":"K/μL","ref":"4.5-11","flag":"H"},
+    {"test":"hCG/AFP (testicular tumor markers)","value":"Normal","unit":"","ref":"Normal","flag":""}
+  ]}],
+  "imaging": [{"date":"11/2024","study":"Scrotal Doppler Ultrasound","indication":"Acute testicular pain — torsion vs epididymo-orchitis","findings":"Right testis: absent vascularity on color Doppler. Left testis: normal flow. Heterogeneous right testicular parenchyma — early ischemia.","impression":"Findings consistent with right testicular torsion. EMERGENT UROLOGY CONSULTATION REQUIRED."}],
+  "ddxTargets": ["Testicular torsion — absent Doppler flow, 4h onset, absent cremasteric reflex (correct)","Epididymo-orchitis — gradual onset, fever, pyuria, preserved/increased Doppler flow","Inguinal hernia — inguinal mass tracking into scrotum, reducible","Appendix testis torsion — blue dot sign, gradual onset, less severe pain, Doppler flow present","Trauma-related hematocele — history of trauma, different Doppler pattern","Testicular tumor — painless, progressive; not acute onset with absent Doppler"],
+  "coachFinal": "Diagnosis: testicular torsion. Key learning: (1) The cremasteric reflex is the most important clinical finding: absent cremasteric reflex in acute scrotal pain = testicular torsion until proven otherwise. Sensitivity ~99%. The reflex is elicited by stroking the inner thigh — normal = ipsilateral testicular elevation. Absent = torsion. (2) Time is testicle: salvage rates drop precipitously with time. <6 hours = >90% salvage; 6-12 hours = 50-90%; 12-24 hours = ~50%; >24 hours = <10%. Do NOT delay surgery for ultrasound if clinical presentation is clear. Doppler ultrasound is used when diagnosis is uncertain. (3) Manual detorsion in ED: rotate the testis outward (medial to lateral — open-book technique). Pain relief = successful detorsion. Partial relief is common. Still requires surgery for orchiopexy. (4) Bell-clapper deformity: abnormal tunica vaginalis attaches high on spermatic cord, allowing testis to swing freely. BILATERAL predisposition — contralateral orchiopexy is always performed at the same surgery even if the other side is asymptomatic. (5) Age peaks: bimodal — neonates (extravaginal) and adolescents 12-18 years (intravaginal, Bell-clapper). Classic history: adolescent male with sudden testicular pain waking from sleep."
+},
+"thyroid-eye-disease-od": {
+  "diagnosis": "Thyroid Eye Disease — Graves' Ophthalmopathy, Proptosis and Diplopia, Orbital Decompression Candidacy",
+  "problems": [
+    {"problem":"Thyroid eye disease (TED) — moderate-severe, active phase","icd":"H06.21","onset":"2023","status":"Active","notes":"Diane Wu, 44F — known Graves' disease, euthyroid on methimazole. Progressive proptosis, diplopia, and periorbital edema x8 months. CAS 5/7."},
+    {"problem":"Compressive optic neuropathy — vision threatening","icd":"H47.019","onset":"2024","status":"Active","notes":"Color desaturation right eye, RAPD present. Urgent ophthalmology — optic nerve compression risk from orbital fat and EOM enlargement."},
+    {"problem":"Diplopia — inferior rectus restriction","icd":"H51.09","onset":"2023","status":"Active","notes":"Inferior and medial rectus enlargement on MRI orbit. Restricted upward gaze. Prism glasses as temporary measure."}
+  ],
+  "medications": [
+    {"name":"Teprotumumab (Tepezza) 10mg/kg IV q3 weeks x8 doses — biologic for TED","sig":"IGF-1R inhibitor — FDA approved for active TED. Reduces proptosis, diplopia, and CAS. Infusion every 3 weeks.","prescriber":"Endocrinology/Ophthalmology","start":"2024","refills":0,"status":"Active — infusion series"},
+    {"name":"Methylprednisolone 500mg IV weekly x6 weeks — pulsed steroid","sig":"IV pulse steroids for active, moderate-severe TED. Concurrent with teprotumumab consideration.","prescriber":"Ophthalmology","start":"2024","refills":0,"status":"Active — pulsed"},
+    {"name":"Selenium 200mcg PO daily — for mild/moderate TED supplementation","sig":"Antioxidant — reduces disease activity in mild-moderate TED (EUGOGO trial). Continue even with escalated therapy.","prescriber":"Endocrinology","start":"2023","refills":5,"status":"Active"},
+    {"name":"Methimazole 10mg PO BID — maintain euthyroidism","sig":"Critical: hyperthyroidism and hypothyroidism BOTH worsen TED. Target strict euthyroid state throughout treatment.","prescriber":"Endocrinology","start":"2022","refills":5,"status":"Active"}
+  ],
+  "labs": [{"date":"11/2024","panel":"TED Monitoring","results":[
+    {"test":"TSH","value":"1.2","unit":"mIU/L","ref":"0.4-4.0","flag":""},
+    {"test":"Free T4","value":"1.1","unit":"ng/dL","ref":"0.8-1.8","flag":""},
+    {"test":"TRAb (TSH receptor antibody)","value":"12.4","unit":"IU/L","ref":"<1.75","flag":"H"},
+    {"test":"CAS (clinical activity score)","value":"5/7","unit":"","ref":"<3 inactive","flag":"H"},
+    {"test":"Proptosis — Hertel exophthalmometer","value":"25mm right, 23mm left","unit":"","ref":"<18mm","flag":"H"}
+  ]}],
+  "imaging": [{"date":"11/2024","study":"MRI Orbits With Contrast","indication":"Proptosis, diplopia, optic neuropathy concern","findings":"Bilateral inferior and medial rectus enlargement (muscle belly, not tendon — distinguishes TED from orbital myositis). Crowded orbital apex. Fat prolapse. No discrete mass.","impression":"Thyroid eye disease — bilateral EOM enlargement at orbital apex. Optic nerve compression risk. Orbital decompression candidacy to be assessed."}],
+  "ddxTargets": ["Thyroid eye disease — Graves' ophthalmopathy, TRAb elevated (correct)","Orbital pseudotumor (idiopathic orbital inflammation) — pain, tendon involvement on MRI; TRAb negative","Orbital lymphoma — older, progressive, different MRI enhancement pattern","Cavernous sinus thrombosis — fever, headache, multiple cranial nerve palsies","IgG4-related orbital disease — TRAb negative, IgG4 elevated, responds to steroids","Orbital cellulitis — fever, skin erythema, acute onset"],
+  "coachFinal": "Diagnosis: thyroid eye disease (TED), moderate-severe. Key learning: (1) TED activity vs severity: CAS (Clinical Activity Score) measures ACTIVITY (inflammation — pain, redness, swelling, chemosis, lid edema); EUGOGO severity grades measure structural damage (proptosis, diplopia, corneal exposure, optic neuropathy). Active disease responds to immunotherapy; inactive disease may need surgery (decompression, strabismus, lid). (2) Teprotumumab: IGF-1R monoclonal antibody — FDA-approved 2020 for active TED. Dramatically reduces proptosis (mean 2-3mm) and diplopia. Side effects: hyperglycemia, hearing loss, muscle cramps, IBD exacerbation. (3) Thyroid control and TED: RAI (radioactive iodine) worsens TED — avoid in moderate-severe TED or pretreat with steroids. Hyperthyroidism AND hypothyroidism both worsen TED. Strict euthyroid state throughout is essential. (4) MRI orbit TED pattern: muscle BELLY enlargement (tendon spared) — inferior > medial > superior > lateral recti (mnemonic: I'M SLow). Orbital myositis = tendon and belly both enlarged. This distinction is diagnostic. (5) Optic neuropathy in TED: a true ophthalmologic emergency — apical crowding from enlarged muscles compresses optic nerve. Signs: color desaturation, RAPD, visual field defect. Treat with IV pulse steroids ± urgent orbital decompression."
+},
+"ttp": {
+  "diagnosis": "Thrombotic Thrombocytopenic Purpura — ADAMTS13 Deficiency, Plasma Exchange Emergency, PLASMIC Score High",
+  "problems": [
+    {"problem":"TTP — ADAMTS13 severely deficient","icd":"M31.19","onset":"2024","status":"Active","notes":"Grace Park, 38F — thrombocytopenia + microangiopathic hemolytic anemia + neurological symptoms (confusion). PLASMIC score 7."},
+    {"problem":"Microangiopathic hemolytic anemia — schistocytes on smear","icd":"D59.4","onset":"2024","status":"Active","notes":"Hgb 7.2, LDH 1840, schistocytes >2/hpf. Direct Coombs negative — confirms microangiopathic, not immune-mediated."},
+    {"problem":"Neurological involvement — confusion and headache","icd":"G93.89","onset":"2024","status":"Active","notes":"Confusion and headache from cerebral microvascular occlusion. Resolves with successful PEX."}
+  ],
+  "medications": [
+    {"name":"Plasma exchange (PEX) — 1-1.5 plasma volumes daily","sig":"EMERGENCY — start within hours of diagnosis. Use FFP as replacement fluid. Continue daily until platelet count >150K x2 days.","prescriber":"Hematology","start":"2024","refills":0,"status":"EMERGENT — active"},
+    {"name":"Prednisone 1mg/kg PO daily — immunosuppression","sig":"Adjunct immunosuppression — TTP is autoimmune (anti-ADAMTS13 antibody). Steroids reduce antibody production.","prescriber":"Hematology","start":"2024","refills":0,"status":"Active"},
+    {"name":"Caplacizumab (Cablivi) 11mg SQ daily — anti-VWF nanobody","sig":"Blocks VWF-platelet interaction — rapidly reduces microvascular thrombosis. Start with PEX, continue 30 days after last PEX.","prescriber":"Hematology","start":"2024","refills":0,"status":"Active — adjunct"},
+    {"name":"NO PLATELET TRANSFUSION — contraindicated in TTP","sig":"Platelet transfusion in TTP = 'pouring gasoline on fire' — provides substrate for further microvascular thrombosis. Contraindicated unless life-threatening hemorrhage.","prescriber":"Hematology — DO NOT GIVE","start":"AVOID","refills":0,"status":"CONTRAINDICATED"}
+  ],
+  "labs": [{"date":"11/2024","panel":"TTP Workup","results":[
+    {"test":"Platelets","value":"18","unit":"K/μL","ref":"150-400","flag":"L"},
+    {"test":"Hemoglobin","value":"7.2","unit":"g/dL","ref":"12-16","flag":"L"},
+    {"test":"LDH","value":"1840","unit":"U/L","ref":"135-225","flag":"H"},
+    {"test":"Schistocytes on smear","value":"3+ (>2/hpf)","unit":"","ref":"Absent","flag":"H"},
+    {"test":"Direct Coombs (DAT)","value":"Negative","unit":"","ref":"Negative","flag":""},
     {"test":"Creatinine","value":"1.2","unit":"mg/dL","ref":"0.7-1.3","flag":""},
-    {"test":"Platelets","value":"188","unit":"K/μL","ref":"150-400","flag":""}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"Hip X-ray Right","indication":"Fall, hip pain","findings":"Right femoral neck fracture — displaced, Garden type III.","impression":"Displaced femoral neck fracture. Requires ORIF or hemiarthroplasty. Warfarin reversal required pre-operatively."}],
-  "ddxTargets": ["Hip fracture on warfarin — PCC reversal required (correct)","Hip contusion — X-ray rules out","Pathologic fracture from metastasis — no prior malignancy history","Trochanteric bursitis — X-ray positive for fracture","Avascular necrosis — acute onset after fall; prior AVN possible but fracture is primary issue","Periprosthetic fracture — no prior hip prosthesis"],
-  "coachFinal": "Diagnosis: hip fracture requiring urgent warfarin reversal. Key learning: (1) INR reversal hierarchy for urgent surgery: 4-factor PCC (Kcentra) is preferred — reverses INR to ≤1.5 in ~30 minutes by replacing factors II, VII, IX, X. FFP requires large volumes (4+ units = 1L) and takes 1-2h. PCC is faster, smaller volume, lower infectious risk. ALWAYS give with vitamin K to sustain reversal after PCC wears off at ~6-8h. (2) Surgical timing for hip fracture: mortality increases with delay >48h, but operating with INR >1.5 increases bleeding and transfusion. PCC gets to OR faster than FFP — target INR <1.5 pre-op. (3) Post-op anticoagulation restart: AFib with CHA2DS2-VASc 5 has high stroke risk — restart anticoagulation as soon as surgically safe. Standard: 24h for high stroke risk patients with low bleeding risk, 48-72h if higher bleeding concern. Discuss with surgeon. (4) DOAC reversal: dabigatran → idarucizumab (Praxbind). Factor Xa inhibitors (apixaban, rivaroxaban) → andexanet alfa (Andexxa) or 4-factor PCC as alternative. (5) Bridging decision: AFib + warfarin: CHA2DS2-VASc ≥5 = high stroke risk, short interruption (hip fracture → restart within 24-72h) does NOT require bridging per current evidence — bridging increases bleeding without stroke benefit in most AFib patients."
-},
-"idiopathic-angioedema-v2": {
-  "diagnosis": "Idiopathic Histaminergic Angioedema — Recurrent, No Identifiable Trigger, Daily Antihistamine Suppression",
-  "problems": [
-    {"problem":"Idiopathic histaminergic angioedema — recurrent, no trigger found","icd":"T78.3XXA","onset":"2022","status":"Active","notes":"Rebecca Kim, 38F — monthly episodes of lip and periorbital swelling, with urticaria. Responds to antihistamines."},
-    {"problem":"Diagnostic workup negative — complement, C1-INH, allergen testing","icd":"T78.3XXA","onset":"2024","status":"Active","notes":"C4, C1-INH level/function, HAE gene panel, comprehensive allergen panel — all normal. Histaminergic mechanism confirmed by antihistamine response."},
-    {"problem":"Daily antihistamine therapy — suppressive regimen needed","icd":"T78.3XXA","onset":"2024","status":"Active","notes":"Episodic antihistamines not enough. Daily high-dose antihistamine regimen or omalizumab step-up needed."}
-  ],
-  "medications": [
-    {"name":"Cetirizine 20mg PO daily (double dose) — step-up","sig":"Double-dosing non-sedating antihistamine is safe and more effective for recurrent angioedema. Take daily, not PRN.","prescriber":"Allergy","start":"2024","refills":5,"status":"Active"},
-    {"name":"Ranitidine (or famotidine 40mg) PO daily — H2 adjunct","sig":"H2 antihistamine adds modest benefit to H1 in refractory urticaria/angioedema. Combine with H1.","prescriber":"Allergy","start":"2024","refills":5,"status":"Active"},
-    {"name":"Omalizumab 300mg SQ q4 weeks — if antihistamine fails","sig":"Anti-IgE — dramatically effective for chronic spontaneous urticaria/angioedema refractory to antihistamines. Step up if monthly antihistamines fail.","prescriber":"Allergy","start":"2024","refills":0,"status":"Step up if antihistamines fail"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Angioedema Workup","results":[
-    {"test":"C4 complement","value":"22","unit":"mg/dL","ref":"16-47","flag":""},
-    {"test":"C1 esterase inhibitor level","value":"26","unit":"mg/dL","ref":"21-39","flag":""},
-    {"test":"C1 esterase inhibitor function","value":"92","unit":"%","ref":">68%","flag":""},
-    {"test":"Tryptase (baseline)","value":"5.2","unit":"ng/mL","ref":"<11.4","flag":""},
-    {"test":"ANA","value":"Negative","unit":"","ref":"Negative","flag":""},
-    {"test":"Thyroid peroxidase antibody","value":"Negative","unit":"","ref":"Negative","flag":""}
+    {"test":"ADAMTS13 activity (send-out)","value":"<5% activity — severely deficient","unit":"","ref":">67%","flag":"L"}
   ]}],
   "imaging": [],
-  "ddxTargets": ["Idiopathic histaminergic angioedema — responds to antihistamines, normal complement (correct)","Hereditary angioedema — normal C4 and C1-INH excludes","ACE inhibitor angioedema — not on ACEi","Allergic angioedema — no consistent trigger identified after extensive workup","Acquired C1-INH deficiency — normal C4, C1q excludes","Mast cell activation syndrome — borderline — normal baseline tryptase argues against"],
-  "coachFinal": "Diagnosis: idiopathic histaminergic angioedema. Key learning: (1) Angioedema classification by mechanism: histaminergic (responds to antihistamines, has urticaria, mast cell/IgE-driven) vs bradykinin-mediated (does NOT respond to antihistamines, no urticaria, normal complement or low in HAE). This patient's antihistamine responsiveness and urticaria = histaminergic. (2) Workup when no trigger found: C4 (screens for HAE), C1-INH level and function (confirms or excludes HAE), C1q (acquired C1-INH deficiency), tryptase (mast cell/systemic mastocytosis), thyroid antibodies (autoimmune urticaria/angioedema association), ANA. If all normal: idiopathic. (3) Antihistamine step-up: up to 4x the licensed dose of second-generation H1 antihistamines is safe and guideline-recommended for refractory disease. Adding H2 antihistamine provides modest additional benefit. (4) Omalizumab (Xolair): anti-IgE monoclonal antibody — 300mg SQ monthly is FDA-approved for chronic spontaneous urticaria (and by extension recurrent idiopathic angioedema). Works in ~70% of antihistamine-refractory cases, often within 1-4 weeks. (5) Prognosis: idiopathic histaminergic angioedema often resolves spontaneously within 1-5 years; 50% remission at 5 years. Long-term antihistamine or omalizumab suppression is appropriate while active."
+  "ddxTargets": ["TTP — PLASMIC 7, ADAMTS13 <5%, microangiopathic hemolysis (correct)","HUS (hemolytic uremic syndrome) — prominent AKI, diarrhea prodrome (STEC), different ADAMTS13","DIC — PT/PTT prolonged, fibrinogen low; TTP has normal coagulation","Evans syndrome — immune-mediated: Coombs positive; TTP Coombs negative","HELLP syndrome — pregnancy-associated; patient not pregnant","Thrombocytopenia from sepsis — no schistocytes or MAHA pattern"],
+  "coachFinal": "Diagnosis: TTP. Key learning: (1) PLASMIC score (clinical TTP prediction before ADAMTS13 results): Platelet <30K, hemoLysis markers (LDH >2x ULN), no Active cancer, no Stem cell transplant, MCV <90, INR <1.5, Creatinine <2. Score 6-7 = high probability TTP → start PEX immediately without waiting for ADAMTS13 result. (2) TTP mechanism: ADAMTS13 (a VWF-cleaving protease) is severely deficient due to autoantibody → ultra-large VWF multimers accumulate → spontaneous platelet aggregation → microthrombi → MAHA + thrombocytopenia + end-organ ischemia. (3) PEX removes the anti-ADAMTS13 antibody and replenishes ADAMTS13. This is why PEX works — it is both therapeutic (removes antibody) and replacement (restores enzyme). Must use FFP as replacement — albumin does NOT work. (4) Platelet transfusion in TTP: absolutely contraindicated except for life-threatening hemorrhage — provides substrate for further microvascular thrombosis, worsening ischemia. Classic teaching: 'fuel to the fire.' (5) Caplacizumab: anti-VWF nanobody that prevents VWF-platelet interaction. Dramatically speeds platelet count recovery and reduces refractory/relapsing TTP. Started alongside PEX."
 },
-"idiopathic-angioedema": {
-  "diagnosis": "Angioedema — Diagnostic Workup to Distinguish Histaminergic vs Bradykinin-Mediated, Initial Evaluation",
+"venom-immunotherapy-reaction-v2": {
+  "diagnosis": "Venom Immunotherapy Systemic Reaction — Dose Modification, Pre-Medication Protocol, Treatment Continuation Decision",
   "problems": [
-    {"problem":"Recurrent angioedema — first allergy evaluation, etiology unknown","icd":"T78.3XXA","onset":"2023","status":"Active","notes":"James Walker, 45M — 4 episodes of periorbital and lip swelling over 8 months. No urticaria. No ACEi. Spontaneous."},
-    {"problem":"No urticaria — bradykinin mechanism more likely than histaminergic","icd":"T78.3XXA","onset":"2023","status":"Active","notes":"Absence of urticaria strongly suggests bradykinin-mediated etiology. HAE must be excluded even with normal C4 between attacks."},
-    {"problem":"Family history — mother had similar swelling episodes","icd":"D84.1","onset":"2023","status":"Active","notes":"Family history of angioedema raises HAE probability significantly. Type II HAE can have normal C1-INH level but abnormal function."}
+    {"problem":"Venom immunotherapy (VIT) systemic reaction — yellow jacket updosing","icd":"T63.461A","onset":"2024","status":"Active","notes":"Carlos Rivera, 45M — on yellow jacket VIT, updosing phase. 30 min post-injection: urticaria + throat tightness. Epinephrine given."},
+    {"problem":"VIT reaction management — dose reduction and pre-medication protocol","icd":"T63.461A","onset":"2024","status":"Active","notes":"Systemic reaction during VIT requires dose reduction, not discontinuation. Risk-benefit strongly favors continuing VIT."},
+    {"problem":"Mast cell disorder workup — elevated baseline tryptase found","icd":"D47.09","onset":"2024","status":"Active","notes":"Baseline tryptase 18 — above normal. Mastocytosis workup indicated. Associated with increased VIT reaction risk."}
   ],
   "medications": [
-    {"name":"Cetirizine 10mg PO daily trial — diagnostic/empiric","sig":"If antihistamines suppress attacks — histaminergic mechanism likely. If no response after 4 weeks on daily antihistamine — bradykinin mechanism more likely.","prescriber":"Allergy","start":"2024","refills":1,"status":"Active — diagnostic trial"},
-    {"name":"EpiPen 0.3mg x2 — precautionary for laryngeal edema risk","sig":"For any episode involving tongue or throat swelling — epinephrine for airway protection while awaiting definitive therapy.","prescriber":"Allergy","start":"2024","refills":1,"status":"Active — precautionary"}
+    {"name":"Epinephrine 0.3mg IM — administered at time of reaction","sig":"Systemic reaction to VIT = epinephrine first line. Given immediately.","prescriber":"Allergy","start":"2024","refills":0,"status":"Given"},
+    {"name":"VIT dose reduction — return to last tolerated dose","sig":"After systemic reaction: reduce to last tolerated dose, advance more slowly. Do NOT discontinue VIT — loss of protection.","prescriber":"Allergy","start":"2024","refills":0,"status":"Active — protocol modified"},
+    {"name":"Pre-medication protocol — antihistamine before injections","sig":"Cetirizine 10mg PO 1 hour before each VIT injection — reduces local and mild systemic reaction frequency.","prescriber":"Allergy","start":"2024","refills":5,"status":"Active — add pre-med"},
+    {"name":"Omalizumab (Xolair) 300mg SQ monthly — consider if reactions persist","sig":"Anti-IgE therapy — reduces VIT reaction rate in high-risk patients (elevated tryptase, mastocytosis). Consider if continued systemic reactions despite protocol modification.","prescriber":"Allergy","start":"2024","refills":0,"status":"Consider — pending mastocytosis workup"}
   ],
-  "labs": [{"date":"11/2024","panel":"Angioedema Diagnostic Panel","results":[
-    {"test":"C4 complement (between attacks)","value":"18","unit":"mg/dL","ref":"16-47","flag":""},
-    {"test":"C1 esterase inhibitor level","value":"22","unit":"mg/dL","ref":"21-39","flag":""},
-    {"test":"C1 esterase inhibitor function","value":"42","unit":"%","ref":">68%","flag":"L"},
-    {"test":"C1q","value":"Normal","unit":"","ref":"Normal","flag":""},
-    {"test":"HAE gene panel (SERPING1)","value":"Pending","unit":"","ref":"Normal","flag":""},
-    {"test":"Tryptase (baseline)","value":"6.1","unit":"ng/mL","ref":"<11.4","flag":""}
+  "labs": [{"date":"11/2024","panel":"VIT Reaction Assessment","results":[
+    {"test":"Tryptase (acute, 1h post-reaction)","value":"32","unit":"ng/mL","ref":"<11.4","flag":"H"},
+    {"test":"Baseline tryptase (24h post)","value":"18","unit":"ng/mL","ref":"<11.4","flag":"H"},
+    {"test":"Yellow jacket venom IgE","value":"6.4","unit":"kU/L","ref":"<0.35","flag":"H"},
+    {"test":"CBC","value":"Normal","unit":"","ref":"Normal","flag":""},
+    {"test":"Bone marrow biopsy — ordered (KIT D816V mutation screen)","value":"Pending","unit":"","ref":"","flag":""}
   ]}],
   "imaging": [],
-  "ddxTargets": ["HAE type II — normal C1-INH level, LOW function (correct)","Idiopathic histaminergic angioedema — no urticaria, antihistamine response unlikely to be full answer","ACE inhibitor angioedema — no ACEi use","Acquired C1-INH deficiency — C1q normal excludes; acquired = low C1q","Allergic angioedema — no trigger, no urticaria","Mast cell activation syndrome — tryptase normal baseline"],
-  "coachFinal": "Diagnosis: HAE type II — normal level, low function. Key learning: (1) HAE type II pitfall: C4 may be NORMAL between attacks in ~50% of HAE patients. C4 is more reliably low DURING attacks. Between attacks, the most sensitive screen is C1-INH FUNCTION — this patient's function is 42% (below the 68% cutoff) despite a normal level. Always check BOTH level AND function in suspected HAE. (2) HAE type II: normal or elevated C1-INH level + low function (dysfunctional protein). The quantitative assay looks normal; the functional assay reveals the defect. (3) Family history: ~75% of HAE is familial (autosomal dominant). A parent with angioedema episodes should dramatically raise the prior probability. (4) Antihistamine trial as diagnostic tool: histaminergic angioedema responds to antihistamines; bradykinin-mediated angioedema does NOT. A patient with recurrent angioedema + no response to 4 weeks of daily antihistamines strongly suggests bradykinin mechanism → repeat HAE workup, consider gene testing. (5) Acute management for unknown etiology: while workup is pending, EpiPen for throat involvement, avoid ACE inhibitors and estrogen-containing medications (OCP, HRT) — both can precipitate bradykinin angioedema. Refer allergy urgently for definitive diagnosis and on-demand therapy prescription."
+  "ddxTargets": ["VIT systemic reaction — mastocytosis background increasing risk (correct)","Anaphylaxis to stinging insect re-exposure — VIT injection is the controlled exposure","Vasovagal reaction to injection — no urticaria, pallor/bradycardia","Local reaction progressing to systemic — local reactions are common; systemic reaction defined by distant site involvement","Mast cell activation syndrome — elevated baseline tryptase; mastocytosis workup pending","Allergic reaction to VIT excipient — rare; venom is the antigen"],
+  "coachFinal": "Diagnosis: VIT systemic reaction with elevated baseline tryptase — mastocytosis workup indicated. Key learning: (1) VIT indication: systemic anaphylaxis to stinging insects (bee, yellow jacket, wasp, hornet, fire ant) in adults. VIT reduces future anaphylaxis risk from ~60% to ~5%. VIT is also indicated for children with systemic reactions beyond urticaria. (2) Elevated baseline tryptase in VIT patients: baseline tryptase ≥11.4 ng/mL suggests systemic mastocytosis or monoclonal MCAS. These patients have: higher VIT reaction rates, more severe reactions, may require lifelong VIT (vs 5-year standard course). KIT D816V mutation on bone marrow biopsy confirms systemic mastocytosis. (3) Systemic VIT reaction management: do NOT stop VIT — the protection it provides is critical. Reduce to last well-tolerated dose, advance more slowly, add antihistamine pre-medication. Consider omalizumab pre-treatment if reactions persist. (4) Omalizumab + VIT: in patients with mastocytosis or elevated tryptase experiencing VIT reactions, pre-treatment with omalizumab dramatically reduces VIT reaction rate — allows successful completion of immunotherapy. (5) Duration of VIT: standard course is 5 years for bee/yellow jacket. After 5 years, most patients have persistent protection. Patients with mastocytosis, severe prior anaphylaxis, or continued systemic reactions on VIT should continue indefinitely."
 },
-"intussusception": {
-  "diagnosis": "Intussusception — Ileocolic, Classic Triad Incomplete, Air Enema Reduction Successful",
+"venom-immunotherapy-reaction": {
+  "diagnosis": "Venom Anaphylaxis — Bee Sting, VIT Candidacy Assessment, Initial Evaluation and Workup",
   "problems": [
-    {"problem":"Intussusception — ileocolic, ultrasound confirmed","icd":"K56.1","onset":"2024","status":"Active","notes":"Oliver Park, 14M — episodic inconsolable crying, knees to chest, vomiting. 'Currant jelly' stool passed once. Target sign on US."},
-    {"problem":"Classic triad often incomplete — don't wait for all three","icd":"K56.1","onset":"2024","status":"Active","notes":"Triad: colicky pain + vomiting + currant jelly stool. Only 20-40% present with all three. High suspicion warranted."},
-    {"problem":"Air enema reduction — primary treatment if no perforation","icd":"K56.1","onset":"2024","status":"Active","notes":"Air enema under fluoroscopy: 75-90% success rate. Surgery for failed reduction or perforation."}
+    {"problem":"Bee venom anaphylaxis — first systemic reaction","icd":"T63.441A","onset":"2024","status":"Active","notes":"Jennifer Osei, 52F — bee sting in garden, anaphylaxis: urticaria + throat swelling + hypotension. Epinephrine by EMS."},
+    {"problem":"VIT candidacy — high-risk adult with systemic anaphylaxis","icd":"T63.441A","onset":"2024","status":"Active","notes":"Adult with systemic anaphylaxis = VIT indicated regardless of venom IgE level. Allergy referral within 1-2 weeks."},
+    {"problem":"EpiPen prescription — bridge until VIT established","icd":"T63.441A","onset":"2024","status":"Active","notes":"Two EpiPens prescribed. Carry at all times — especially outdoors. Wear medical alert bracelet."}
   ],
   "medications": [
-    {"name":"IV access + normal saline 20mL/kg bolus — resuscitation before reduction","sig":"Dehydrated from vomiting and pain. Volume resuscitation before procedural sedation for air enema.","prescriber":"Pediatric ED","start":"2024","refills":0,"status":"Active"},
-    {"name":"Morphine 0.1mg/kg IV PRN — pain management","sig":"Adequate analgesia before and during radiologic reduction. Child in significant distress.","prescriber":"Pediatric ED","start":"2024","refills":0,"status":"Active"},
-    {"name":"NPO — preparation for air enema or possible surgery","sig":"NPO in case reduction fails and surgery required. Standard pre-procedural precaution.","prescriber":"Surgery/Radiology","start":"2024","refills":0,"status":"Active"}
+    {"name":"EpiPen 0.3mg x2 — prescribe at discharge","sig":"Inject lateral thigh at first sign of systemic reaction. Call 911. Second dose at 5-10 min if no improvement.","prescriber":"ED/Allergy","start":"2024","refills":1,"status":"Active — bridge to VIT"},
+    {"name":"Loratadine 10mg PO daily — scheduled antihistamine","sig":"Daily antihistamine does NOT protect against anaphylaxis but reduces urticaria risk and minor reactions.","prescriber":"Allergy","start":"2024","refills":5,"status":"Active"},
+    {"name":"Allergy referral — urgent (1-2 weeks)","sig":"Venom skin testing + VIT initiation after complete recovery from acute reaction (typically 4-6 weeks post-sting).","prescriber":"ED","start":"2024","refills":0,"status":"Active — referral"}
   ],
-  "labs": [{"date":"11/2024","panel":"Intussusception Workup","results":[
-    {"test":"WBC","value":"14.2","unit":"K/μL","ref":"5-15 for age","flag":""},
-    {"test":"Sodium","value":"136","unit":"mEq/L","ref":"136-145","flag":""},
-    {"test":"Hemoglobin","value":"12.4","unit":"g/dL","ref":"11-15","flag":""},
-    {"test":"CRP","value":"22","unit":"mg/L","ref":"<10","flag":"H"},
-    {"test":"BMP","value":"Normal","unit":"","ref":"Normal","flag":""}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"Abdominal Ultrasound","indication":"Episodic pain, vomiting, bloody stool in infant","findings":"Target sign (concentric rings) in right lower quadrant — ileocolic intussusception confirmed. Outer diameter 3.8cm. No free fluid. No lymph nodes >2cm.","impression":"Ileocolic intussusception confirmed on ultrasound. No perforation signs. Air enema reduction appropriate."}],
-  "ddxTargets": ["Intussusception — target sign on US, episodic colicky pain (correct)","Volvulus — malrotation-associated; bile-stained vomiting, different age peak, X-ray findings","Appendicitis — older children typically; RLQ pain with peritoneal signs, different US findings","Meckel's diverticulum — painless rectal bleeding; intussusception can be the lead point","Incarcerated inguinal hernia — inguinal bulge on exam; check groin in any infant with pain/vomiting","Hirschsprung disease — chronic constipation, older age, not episodic acute pain"],
-  "coachFinal": "Diagnosis: ileocolic intussusception. Key learning: (1) Classic presentation: 6 months–3 years (peak 9-12 months), episodic colicky pain (child intermittently draws up legs, screams, then appears well between episodes), vomiting, and currant jelly stool (blood + mucus = late sign of mucosal ischemia). ONLY 20-40% have the full triad — do not wait. (2) Ultrasound is the diagnostic modality of choice: target sign (concentric rings) on transverse view, pseudokidney sign on longitudinal view. Sensitivity ~98-100% in experienced hands. No radiation. (3) Air enema: performed by radiology under fluoroscopy or ultrasound guidance. Air insufflated into rectum → pushes intussusceptum retrograde. Success rate 75-90%. Complications: perforation (~1%). Contraindications: peritonitis, free air, hemodynamic instability. (4) Lead points: most pediatric intussusceptions are idiopathic (enlarged Peyer's patches following viral illness). In children >5 years or adults, consider lead point: Meckel's diverticulum, lymphoma, polyp, duplication cyst. (5) Recurrence: ~10% recurrence after enema reduction, typically within 24-48h. Most recurrences are also reducible by enema. Three or more recurrences → surgical evaluation for lead point."
-},
-"ludwigs-angina": {
-  "diagnosis": "Ludwig's Angina — Bilateral Submandibular Space Infection, Airway Emergency, Dental Source",
-  "problems": [
-    {"problem":"Ludwig's angina — bilateral deep space neck infection","icd":"K12.2","onset":"2024","status":"Active","notes":"Antonio Rivera, 48M — jaw swelling, trismus, fever 39.1°C for 3 days. Bilateral submandibular induration. Submandibular space gas on CT."},
-    {"problem":"Airway compromise — imminent risk, anesthesia standby","icd":"J38.4","onset":"2024","status":"Active","notes":"Stridor developing. Muffled 'hot potato' voice. Anesthesia and ENT at bedside — awake fiberoptic intubation prepared."},
-    {"problem":"Diabetic immunocompromise — accelerated infection spread","icd":"E11.9","onset":"2018","status":"Active","notes":"T2DM poorly controlled, A1c 10.8% — hyperglycemia impairs neutrophil function, accelerates deep space infection spread."}
-  ],
-  "medications": [
-    {"name":"Ampicillin-sulbactam 3g IV q6h — polymicrobial coverage","sig":"First-line coverage for mixed oral flora — Streptococcus, Staphylococcus, anaerobes. IV mandatory.","prescriber":"ENT/Medicine","start":"2024","refills":0,"status":"Active"},
-    {"name":"Metronidazole 500mg IV q8h — anaerobic augmentation","sig":"Deep space neck infections are polymicrobial with high anaerobic burden (Fusobacterium, Bacteroides).","prescriber":"ENT","start":"2024","refills":0,"status":"Active"},
-    {"name":"Dexamethasone 10mg IV q6h — airway edema reduction","sig":"Corticosteroid reduces cellulitis edema — buys time while antibiotics work. NOT a substitute for airway management.","prescriber":"ENT/Anesthesia","start":"2024","refills":0,"status":"Active"},
-    {"name":"Awake fiberoptic intubation — airway secured","sig":"Standard of care for Ludwig's with stridor — do NOT use direct laryngoscopy (rapid swelling can obscure view). Awake FOI before complete loss.","prescriber":"Anesthesia","start":"2024","refills":0,"status":"Active"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Ludwig's Angina Panel","results":[
-    {"test":"WBC","value":"28.4","unit":"K/μL","ref":"4.5-11","flag":"H"},
-    {"test":"Glucose","value":"318","unit":"mg/dL","ref":"70-100","flag":"H"},
-    {"test":"HbA1c","value":"10.8","unit":"%","ref":"<7.0","flag":"H"},
-    {"test":"Creatinine","value":"1.4","unit":"mg/dL","ref":"0.7-1.3","flag":"H"},
-    {"test":"CRP","value":"246","unit":"mg/L","ref":"<10","flag":"H"},
-    {"test":"Blood cultures","value":"Streptococcus anginosus growing","unit":"","ref":"No growth","flag":"H"}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"CT Neck With Contrast","indication":"Jaw swelling, trismus, fever — Ludwig's angina?","findings":"Bilateral submandibular and submental space involvement. Gas in right sublingual space. Airway: 4mm at base of tongue — significantly narrowed. No drainable abscess — phlegmon. Right mandibular second molar periapical lucency — source tooth.","impression":"Ludwig's angina with bilateral deep space involvement and airway narrowing. Airway urgency — anesthesia immediately. Source tooth identified."}],
-  "ddxTargets": ["Ludwig's angina — bilateral deep space, airway narrowing, dental source (correct)","Peritonsillar abscess — unilateral, uvular deviation; does not cause submandibular induration bilaterally","Parapharyngeal abscess — unilateral, less submandibular involvement","Masticator space abscess — unilateral, trismus prominent, different space","Angioedema — no infection source, no gas on CT, responds to antihistamines/epinephrine","Epiglottitis — supraglottic involvement on CT, different presentation"],
-  "coachFinal": "Diagnosis: Ludwig's angina — airway emergency. Key learning: (1) Ludwig's angina = bilateral infection of submandibular, sublingual, AND submental spaces simultaneously. True surgical and airway emergency — mortality historically 50%, now <5% with early airway management and antibiotics. (2) Airway management is paramount: 'cool and calculate second, airway FIRST.' Signs of impending closure: muffled voice, drooling, stridor, inability to swallow, neck extension posturing. Awake fiberoptic intubation is gold standard — allows patient to maintain airway patency until tube secured. Crash intubation in Ludwig's can be fatal. (3) Gas on CT: indicates gas-producing organisms (polymicrobial anaerobic infection). Radiologic evidence of gas = surgical emergency — even without discrete abscess, gas suggests necrotizing fasciitis risk. (4) Diabetes as amplifier: hyperglycemia impairs neutrophil chemotaxis and killing — deep space infections spread faster and respond more slowly to antibiotics. Aggressive glucose control accelerates response. (5) Surgical drainage: if CT shows discrete abscess (not just phlegmon), ENT performs intraoral or transcervical I&D. Mandibular source tooth extracted after medical stabilization (not during acute crisis when airway is at risk)."
-},
-"maria-santos": {
-  "diagnosis": "Hypertensive Emergency with Target Organ Damage — Hypertensive Encephalopathy, IV Antihypertensive Titration",
-  "problems": [
-    {"problem":"Hypertensive emergency — BP 218/128, confusion","icd":"I16.1","onset":"2024","status":"Active","notes":"Maria Santos, 54F — BP 218/128, confusion, visual blurring, headache. End-organ damage present: encephalopathy + retinal changes."},
-    {"problem":"Hypertensive encephalopathy — confusion and visual symptoms","icd":"I67.4","onset":"2024","status":"Active","notes":"Posterior reversible encephalopathy syndrome (PRES) on MRI — T2 hyperintensities in posterior parietal-occipital regions."},
-    {"problem":"Medication non-adherence — ran out of lisinopril 2 weeks ago","icd":"I10","onset":"2015","status":"Active","notes":"Known hypertensive, off antihypertensives for 2 weeks. Rebound hypertension from clonidine also possible if that was the agent."}
-  ],
-  "medications": [
-    {"name":"Nicardipine 5mg/h IV infusion — titrate to target BP","sig":"Calcium channel blocker infusion — titratable. Target: reduce MAP by 25% in first hour, not more. Then gradual reduction over 24-48h.","prescriber":"Medicine/ICU","start":"2024","refills":0,"status":"Active — titrating"},
-    {"name":"Labetalol 20mg IV bolus q10min PRN — alternative/adjunct","sig":"Alpha and beta blocker — bolus dosing for more rapid correction if nicardipine insufficient. Avoid if bronchospasm or acute decompensated HF.","prescriber":"Medicine","start":"2024","refills":0,"status":"Active PRN"},
-    {"name":"Lisinopril 10mg PO — restart home medication after IV stabilization","sig":"Resume oral antihypertensive once stable and tolerating PO. Transition to oral after ICU phase.","prescriber":"Medicine","start":"2015","refills":5,"status":"Restart after IV stabilization"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Hypertensive Emergency Panel","results":[
-    {"test":"BMP — Creatinine","value":"2.1","unit":"mg/dL","ref":"0.7-1.3","flag":"H"},
-    {"test":"BMP — BUN","value":"34","unit":"mg/dL","ref":"7-20","flag":"H"},
-    {"test":"UA — protein","value":"3+","unit":"","ref":"Negative","flag":"H"},
-    {"test":"UA — RBC casts","value":"Present","unit":"","ref":"Absent","flag":"H"},
-    {"test":"LDH","value":"480","unit":"U/L","ref":"135-225","flag":"H"},
-    {"test":"Troponin I","value":"0.06","unit":"ng/mL","ref":"<0.04","flag":"H"}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"MRI Brain FLAIR","indication":"Confusion, visual changes, severe hypertension","findings":"Bilateral posterior parietal-occipital T2/FLAIR hyperintensities — cortical and subcortical. No restricted diffusion (not ischemic infarct). No hemorrhage.","impression":"Posterior reversible encephalopathy syndrome (PRES) — hypertensive. Reversible with BP control."}],
-  "ddxTargets": ["Hypertensive emergency with PRES — target organ damage (correct)","Hypertensive urgency — urgency has no target organ damage; this has encephalopathy + AKI","Ischemic stroke — MRI no DWI restriction; PRES is posterior and diffusion-negative","Eclampsia — not pregnant; but consider in reproductive-age women with PRES + HTN","Posterior circulation TIA — PRES is reversible and bilateral; TIA lesions are DWI bright","Hypertensive nephropathy — contributing but subacute; acute hypertensive nephrosclerosis here"],
-  "coachFinal": "Diagnosis: hypertensive emergency — PRES. Key learning: (1) Hypertensive emergency definition: severely elevated BP + acute target organ damage. Organs: brain (encephalopathy, PRES, stroke), heart (ACS, acute HF), kidney (acute hypertensive nephropathy — hematuria, proteinuria, AKI), aorta (dissection), retina (flame hemorrhages, papilledema). Hypertensive urgency = severe BP WITHOUT target organ damage. (2) BP reduction rate: reduce MAP by 25% in the FIRST HOUR only. More rapid reduction risks watershed ischemia — the brain has auto-regulated to a higher set point. Over 24-48h, reduce further toward 160/100. Complete normalization occurs over days to weeks, not hours. (3) PRES: posterior reversible encephalopathy syndrome — bilateral posterior cortical/subcortical edema from failure of cerebrovascular autoregulation. T2/FLAIR bright, no DWI restriction (not infarct). Reversible with BP control. Causes: hypertension, eclampsia, immunosuppressants (calcineurin inhibitors), TTP. (4) IV agents: nicardipine (smooth, titratable) and labetalol (IV bolus or infusion) are first-line. Clevidipine (ultrashort CCB) for cardiac surgery/ICU. Sodium nitroprusside for most refractory (cyanide toxicity risk with prolonged use). AVOID oral antihypertensives acutely — uncontrolled drop. (5) Cause: non-adherence is the most common trigger for hypertensive emergency. Medication access barriers, cost, side effects — always explore."
-},
-"mastocytosis-v2": {
-  "diagnosis": "Systemic Mastocytosis — Urticaria Pigmentosa, Elevated Baseline Tryptase, Bone Marrow Biopsy Required",
-  "problems": [
-    {"problem":"Systemic mastocytosis — suspected, workup initiated","icd":"C96.21","onset":"2024","status":"Active","notes":"Elena Vargas, 42F — brown-yellow skin lesions (Darier sign positive), recurrent flushing, anaphylaxis x2. Baseline tryptase 42 ng/mL."},
-    {"problem":"Elevated baseline tryptase — 42 ng/mL, >20 is red flag","icd":"C96.21","onset":"2024","status":"Active","notes":"Baseline tryptase >20 ng/mL warrants bone marrow biopsy — differentiates cutaneous from systemic mastocytosis."},
-    {"problem":"Recurrent anaphylaxis — Hymenoptera venom and exercise triggers","icd":"T78.2XXA","onset":"2023","status":"Active","notes":"Two anaphylaxis episodes — one after bee sting, one exercise-triggered. Mastocytosis amplifies anaphylaxis severity."}
-  ],
-  "medications": [
-    {"name":"Cetirizine 10mg BID + famotidine 40mg BID — H1/H2 mast cell mediator suppression","sig":"Dual antihistamine — H1 and H2 blockade reduces histamine-mediated symptoms (flushing, pruritus, GI cramps).","prescriber":"Allergy/Hematology","start":"2024","refills":5,"status":"Active"},
-    {"name":"Cromolyn sodium 200mg PO QID — mast cell stabilizer","sig":"Oral mast cell stabilizer — reduces GI mast cell mediator release (diarrhea, cramping). Take 15-30 min before meals.","prescriber":"Allergy","start":"2024","refills":3,"status":"Active"},
-    {"name":"EpiPen 0.3mg x2 — mandatory for mastocytosis with anaphylaxis history","sig":"Mastocytosis increases anaphylaxis severity — any systemic reaction is potentially life-threatening. EpiPen mandatory at all times.","prescriber":"Allergy","start":"2024","refills":1,"status":"Active"},
-    {"name":"Venom immunotherapy (VIT) — bee venom","sig":"VIT is strongly recommended in mastocytosis with Hymenoptera-triggered anaphylaxis — reduces fatal anaphylaxis risk. Lifetime VIT often recommended.","prescriber":"Allergy","start":"2024","refills":0,"status":"Active — starting"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Mastocytosis Workup","results":[
-    {"test":"Baseline serum tryptase","value":"42","unit":"ng/mL","ref":"<11.4","flag":"H"},
-    {"test":"24h urine histamine metabolites","value":"Elevated","unit":"","ref":"Normal","flag":"H"},
-    {"test":"KIT D816V mutation (peripheral blood)","value":"Detected","unit":"","ref":"Not detected","flag":"H"},
-    {"test":"CBC — WBC","value":"Normal","unit":"","ref":"Normal","flag":""},
-    {"test":"ALP","value":"142","unit":"U/L","ref":"44-147","flag":""},
-    {"test":"Bone marrow biopsy","value":"Pending — scheduled","unit":"","ref":"","flag":""}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"Bone Scan","indication":"Systemic mastocytosis workup — bone involvement","findings":"No lytic lesions. Mildly increased uptake diffusely — mild osteoporosis pattern.","impression":"No destructive bone lesions. Osteoporosis pattern consistent with mastocytosis-associated bone disease."}],
-  "ddxTargets": ["Systemic mastocytosis — elevated tryptase, Darier sign, KIT D816V (correct)","Cutaneous mastocytosis only — bone marrow biopsy will differentiate; tryptase >20 suggests systemic","Carcinoid tumor — flushing, diarrhea, but tryptase not elevated; urine 5-HIAA distinguishes","Pheochromocytoma — episodic hypertension, sweating, headache triad; different lab pattern","Mast cell activation syndrome (MCAS) — normal or mildly elevated tryptase; no skin lesions; KIT neg","Hereditary alpha-tryptasemia — elevated tryptase from extra TPSAB1 copies; no mast cell infiltration"],
-  "coachFinal": "Diagnosis: systemic mastocytosis — workup in progress. Key learning: (1) Mastocytosis diagnosis: skin biopsy of urticaria pigmentosa lesions shows mast cell infiltration. Darier sign (stroking a lesion → urticaria/whealing from mechanical mast cell degranulation) is pathognomonic. Systemic mastocytosis requires bone marrow biopsy — criteria include dense mast cell aggregates (>15 cells/aggregate) on biopsy AND KIT D816V mutation + other minor criteria. (2) Baseline tryptase significance: tryptase >20 ng/mL (outside of an acute allergic reaction) indicates increased mast cell burden. This is the key flag for systemic mastocytosis. During acute anaphylaxis, tryptase rises acutely — baseline (drawn 24h+ after reaction) reflects constitutive mast cell load. (3) Mastocytosis + anaphylaxis: mastocytosis patients have dramatically amplified anaphylaxis — even minor triggers cause severe systemic reactions. Hymenoptera venom is the most dangerous trigger. Venom immunotherapy is recommended lifelong in systemic mastocytosis with venom-triggered anaphylaxis. (4) KIT D816V mutation: present in >90% of systemic mastocytosis — targetable with avapritinib (Blueprint Medicines — FDA approved for ISM with symptom management). (5) Osteoporosis: mast cells produce heparin and histamine which activate osteoclasts → bone loss. DEXA scan at diagnosis. Bisphosphonates if osteoporosis confirmed."
-},
-"meningitis-v1": {
-  "diagnosis": "Bacterial Meningitis — Streptococcus pneumoniae, Empiric Antibiotics Before LP, Dexamethasone Adjunct",
-  "problems": [
-    {"problem":"Bacterial meningitis — clinical diagnosis, treatment before LP","icd":"G00.1","onset":"2024","status":"Active","notes":"Samuel Park, 22M — fever 39.8°C, severe headache, neck stiffness, photophobia. Kernig and Brudzinski signs positive."},
-    {"problem":"LP delay — CT head ordered before LP","icd":"G00.1","onset":"2024","status":"Active","notes":"Focal neuro exam → CT first to exclude herniation. Do NOT delay antibiotics for CT — treat empirically first."},
-    {"problem":"Dexamethasone — adjunct reduces hearing loss and mortality in pneumococcal meningitis","icd":"G00.1","onset":"2024","status":"Active","notes":"Give dexamethasone 15-20 min BEFORE first antibiotic dose to reduce inflammatory cascade at time of bacterial lysis."}
-  ],
-  "medications": [
-    {"name":"Ceftriaxone 2g IV q12h — empiric S. pneumoniae / N. meningitidis","sig":"Empiric treatment — DO NOT wait for LP or CT results. Give immediately after blood cultures drawn.","prescriber":"ED/Medicine","start":"2024","refills":0,"status":"Active"},
-    {"name":"Vancomycin 25-30mg/kg IV q8-12h — add for resistant pneumococcus","sig":"Empiric coverage for penicillin-resistant S. pneumoniae until sensitivities available. Target AUC 400-600.","prescriber":"Medicine/ID","start":"2024","refills":0,"status":"Active"},
-    {"name":"Dexamethasone 0.15mg/kg IV q6h x4 days — BEFORE antibiotics","sig":"Give 15-20 min before ceftriaxone. Reduces TNF-α surge from bacterial lysis → less hearing loss and mortality in pneumococcal meningitis.","prescriber":"Medicine","start":"2024","refills":0,"status":"Active"},
-    {"name":"Ampicillin 2g IV q4h — add if Listeria suspected (age >50 or immunocompromised)","sig":"This 22-year-old does not require Listeria coverage. Add for immunocompromised, elderly, or neonates.","prescriber":"Medicine","start":"NOT given","refills":0,"status":"Not given — age 22, immunocompetent"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Meningitis Workup","results":[
-    {"test":"CSF — WBC","value":"4200","unit":"cells/μL","ref":"<5","flag":"H"},
-    {"test":"CSF — protein","value":"280","unit":"mg/dL","ref":"15-45","flag":"H"},
-    {"test":"CSF — glucose","value":"22","unit":"mg/dL","ref":"50-80","flag":"L"},
-    {"test":"CSF — Gram stain","value":"Gram-positive diplococci — S. pneumoniae morphology","unit":"","ref":"No organisms","flag":"H"},
-    {"test":"Blood cultures x2","value":"Pending — drawn before antibiotics","unit":"","ref":"No growth","flag":""},
-    {"test":"Serum glucose","value":"108","unit":"mg/dL","ref":"70-100","flag":"H"}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"CT Head Non-Contrast","indication":"Focal neuro exam before LP — herniation risk assessment","findings":"No mass lesion. No midline shift. No cerebral edema. Cisterns patent.","impression":"No contraindication to lumbar puncture. Proceed with LP."}],
-  "ddxTargets": ["Bacterial meningitis — S. pneumoniae, classic CSF profile (correct)","Viral meningitis — lymphocytic pleocytosis, normal glucose, lower protein; clinical overlap early","Subarachnoid hemorrhage — thunderclap headache, xanthochromia on LP, no fever typically","Herpes simplex encephalitis — temporal lobe involvement, seizures, CSF PCR HSV positive","Cryptococcal meningitis — immunocompromised, indolent course, India ink positive","Brain abscess — focal neuro signs, ring-enhancing lesion on CT, do NOT LP if mass present"],
-  "coachFinal": "Diagnosis: bacterial meningitis — S. pneumoniae. Key learning: (1) Never delay antibiotics for imaging or LP in suspected bacterial meningitis. The rule: draw blood cultures → give dexamethasone + antibiotics → then CT → then LP. Each hour of antibiotic delay increases mortality. A 30-minute delay to get a CT is acceptable only if there are focal neuro signs (papilledema, focal deficit, new seizure, immunocompromise, GCS <10). (2) CSF profile: bacterial = PMN pleocytosis (hundreds to thousands), low glucose (<40 or CSF:serum ratio <0.4), elevated protein (>100-200), positive Gram stain in ~60-80%. Viral = lymphocytic, normal glucose, mildly elevated protein, negative Gram stain. (3) Dexamethasone timing: benefit is specifically from reducing the inflammatory response triggered by antibiotic-induced bacterial lysis. Must be given BEFORE or WITH the first antibiotic dose — no benefit if given after. Reduces hearing loss and mortality specifically in S. pneumoniae meningitis. (4) Empiric antibiotic selection by age: neonates = ampicillin + gentamicin or cefotaxime. Infants–50yo = ceftriaxone + vancomycin. >50yo or immunocompromised = ceftriaxone + vancomycin + ampicillin (Listeria coverage). (5) Meningococcal meningitis (N. meningitidis): petechial or purpuric rash is pathognomonic — activate contact precautions immediately, notify public health for close contact prophylaxis (rifampin, ciprofloxacin, or ceftriaxone single dose)."
-},
-"mesenteric-ischemia": {
-  "diagnosis": "Acute Mesenteric Ischemia — AFib Embolus, Mesenteric CTA, Emergency Surgical/IR Intervention",
-  "problems": [
-    {"problem":"Acute mesenteric ischemia — embolic, AFib source","icd":"K55.059","onset":"2024","status":"Active","notes":"Henrietta Osei, 72F — sudden severe periumbilical pain 'out of proportion to exam', AFib on ECG, not anticoagulated. Mesenteric CTA: SMA embolus."},
-    {"problem":"AFib without anticoagulation — thromboembolic source confirmed","icd":"I48.19","onset":"2020","status":"Active","notes":"CHA2DS2-VASc 5 — should have been anticoagulated. SMA embolism is a direct complication of untreated AFib."},
-    {"problem":"Time-critical — bowel viability window 6-8 hours from ischemia onset","icd":"K55.059","onset":"2024","status":"Active","notes":"Symptoms for 4 hours. Peritoneal signs not yet present. Intervention within 2 hours can salvage bowel."}
-  ],
-  "medications": [
-    {"name":"Heparin UFH 80 units/kg IV bolus — immediate anticoagulation","sig":"Prevents clot propagation. Do NOT wait for IR suite to start heparin. Begin in ED.","prescriber":"Vascular Surgery/Medicine","start":"2024","refills":0,"status":"Active"},
-    {"name":"IV access x2 large bore — resuscitation","sig":"Mesenteric ischemia patients develop rapid third-spacing and sepsis from bowel necrosis. Aggressive IV access.","prescriber":"Surgery","start":"2024","refills":0,"status":"Active"},
-    {"name":"Broad-spectrum antibiotics — cefepime + metronidazole","sig":"Prophylactic coverage for bacterial translocation during ischemic bowel reperfusion. Give before any intervention.","prescriber":"Surgery","start":"2024","refills":0,"status":"Active"},
-    {"name":"Papaverine — intra-arterial vasodilator (IR)","sig":"Infused directly into SMA via IR catheter — relieves mesenteric vasospasm during and after thrombus removal.","prescriber":"Interventional Radiology","start":"2024","refills":0,"status":"Active — IR suite"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Mesenteric Ischemia Panel","results":[
-    {"test":"Lactate","value":"5.8","unit":"mmol/L","ref":"<2.0","flag":"H"},
-    {"test":"WBC","value":"21.4","unit":"K/μL","ref":"4.5-11","flag":"H"},
-    {"test":"Lipase","value":"Normal","unit":"","ref":"Normal","flag":""},
-    {"test":"D-dimer","value":">10","unit":"mg/L","ref":"<0.5","flag":"H"},
-    {"test":"Creatinine","value":"1.4","unit":"mg/dL","ref":"0.7-1.3","flag":"H"},
-    {"test":"ABG — pH","value":"7.26","unit":"","ref":"7.35-7.45","flag":"L"}
-  ]}],
-  "imaging": [{"date":"11/2024","study":"CT Angiography — Abdomen/Pelvis With IV Contrast","indication":"Severe abdominal pain out of proportion to exam, AFib","findings":"Filling defect in proximal SMA — embolus. Bowel wall thickening and pneumatosis intestinalis beginning in mid-jejunum. No free air.","impression":"Acute SMA embolism with early bowel ischemia — no perforation yet. Emergent intervention required within 2 hours to prevent irreversible infarction."}],
-  "ddxTargets": ["Acute mesenteric ischemia — SMA embolus, AFib source (correct)","Aortic dissection — tearing back pain, BP differential; mesenteric involvement possible but CT clarifies","Bowel obstruction — different CT finding; no embolus","Acute pancreatitis — lipase normal, pain epigastric not periumbilical, no vascular occlusion","Ischemic colitis — colonic distribution, less dramatic, no SMA embolus","Peptic ulcer perforation — free air on CT, different history"],
-  "coachFinal": "Diagnosis: acute mesenteric ischemia — SMA embolus. Key learning: (1) Classic presentation: 'pain out of proportion to exam' — severe colicky periumbilical pain, but abdomen soft and non-tender early. This is because ischemia initially affects the visceral peritoneum (referred pain, non-localizing) before transmural necrosis produces peritoneal signs. When peritoneal signs appear → bowel infarction has occurred. Intervene BEFORE peritoneal signs. (2) Etiology types: embolic (~50%, from AFib or cardiac thrombus), thrombotic (~25%, atherosclerotic SMA plaque), non-occlusive (~25%, low-flow state — sepsis, shock, vasopressors), mesenteric venous thrombosis (hypercoagulable states). (3) Time is bowel: viable window is approximately 6-8 hours from occlusion to irreversible infarction. Mesenteric CTA is the diagnostic modality — fast and diagnostic. Treat immediately after CT, not after labs or consulting rounds. (4) Management: heparin immediately, then IR for catheter-directed thrombolysis or surgical embolectomy. Laparotomy for bowel assessment — non-viable bowel resected. Second-look laparotomy at 24-48h to reassess marginal bowel. (5) AFib and mesenteric ischemia: prevent, not just treat. This patient was not anticoagulated with a CHA2DS2-VASc of 5 — direct consequence. Every AFib patient with score ≥2 (male) or ≥3 (female) should be anticoagulated unless absolute contraindication."
-},
-"milk-allergy-infant-v2": {
-  "diagnosis": "Cow's Milk Protein Allergy — Non-IgE-Mediated Proctocolitis, Breastfed Infant, Maternal Elimination Diet",
-  "problems": [
-    {"problem":"Cow's milk protein allergy — non-IgE proctocolitis, breastfed","icd":"K52.29","onset":"2024","status":"Active","notes":"Amara Johnson, 6W — bloody mucoid stools x10 days. Exclusively breastfed. Otherwise thriving (weight 75th %ile)."},
-    {"problem":"Rectal bleeding — eosinophilic proctocolitis from maternal dairy antigens","icd":"K92.1","onset":"2024","status":"Active","notes":"Cow's milk protein antigens pass through breast milk → eosinophilic infiltration of infant rectum/colon → mucosal bleeding."},
-    {"problem":"Thriving infant — CMPA proctocolitis does NOT cause weight loss","icd":"K52.29","onset":"2024","status":"Active","notes":"Key distinction: proctocolitis = bloody stool but well, growing infant. FPIES = vomiting, poor growth. Enteropathy = diarrhea, poor growth."}
-  ],
-  "medications": [
-    {"name":"Maternal dairy elimination — all cow's milk products","sig":"Strict elimination of all dairy (milk, cheese, yogurt, butter, casein, whey in ingredient lists). Improvement in 2-4 weeks.","prescriber":"Allergy/Pediatrics","start":"2024","refills":0,"status":"Active"},
-    {"name":"Maternal calcium 1000mg + vitamin D 600 IU daily — supplementation","sig":"Replace calcium lost from dairy elimination.","prescriber":"Pediatrics/OB","start":"2024","refills":2,"status":"Active"},
-    {"name":"Continue breastfeeding — preferred over formula switch","sig":"Breastfeeding continues during maternal elimination — significant immunologic benefits. Only switch to amino acid formula if maternal elimination fails after 4 weeks strict adherence.","prescriber":"Pediatrics","start":"2024","refills":0,"status":"Active"}
-  ],
-  "labs": [{"date":"11/2024","panel":"Infant CMPA Workup","results":[
-    {"test":"Stool occult blood","value":"Positive","unit":"","ref":"Negative","flag":"H"},
-    {"test":"Stool eosinophils","value":"Present — abundant","unit":"","ref":"Absent","flag":"H"},
-    {"test":"Cow's milk IgE (infant)","value":"Negative","unit":"","ref":"Negative","flag":""},
-    {"test":"Total IgE (infant)","value":"2","unit":"IU/mL","ref":"<10","flag":""},
-    {"test":"Weight","value":"75th percentile — well above average","unit":"","ref":"Following curve","flag":""}
+  "labs": [{"date":"11/2024","panel":"Venom Allergy Workup","results":[
+    {"test":"Tryptase (1h post-anaphylaxis)","value":"28","unit":"ng/mL","ref":"<11.4","flag":"H"},
+    {"test":"Baseline tryptase (24h post)","value":"5.2","unit":"ng/mL","ref":"<11.4","flag":""},
+    {"test":"Honeybee venom IgE (RAST)","value":"4.8","unit":"kU/L","ref":"<0.35","flag":"H"},
+    {"test":"CBC","value":"Normal","unit":"","ref":"Normal","flag":""},
+    {"test":"BP on discharge","value":"122/76","unit":"mmHg","ref":"Normal","flag":""}
   ]}],
   "imaging": [],
-  "ddxTargets": ["Cow's milk proctocolitis — breastfed, maternal dairy antigen, thriving infant (correct)","Infectious colitis — stool cultures negative; dairy timing is key","Necrotizing enterocolitis — preterm infant; this is term, exclusively breastfed","Anal fissure — localized bright blood without systemic inflammation or eosinophils","Intussusception — episodic pain, currant jelly; this is chronic mucoid blood","Meckel's diverticulum — painless, significant blood loss; not mucoid"],
-  "coachFinal": "Diagnosis: cow's milk protein allergy proctocolitis — breastfed infant. Key learning: (1) CMPA proctocolitis presentation: healthy, thriving, exclusively breastfed infant with bloody or mucoid bloody stools — typically appears around 2-8 weeks of age. Weight gain normal. No vomiting. No irritability with feeds. This distinguishes proctocolitis from FPIES (vomiting, lethargy) and protein-losing enteropathy (poor weight gain, diarrhea). (2) Non-IgE-mediated mechanism: IgE testing (RAST, skin prick) is NEGATIVE — this is a T-cell/eosinophil-mediated reaction, not IgE. Do not use negative IgE testing to rule out CMPA proctocolitis. (3) Maternal elimination is first-line: strict dairy elimination by mother allows breastfeeding to continue. Improvement within 2-4 weeks. If no improvement after 4 weeks of strict elimination, also eliminate soy (10-15% of cow's milk CMPA also react to soy). (4) Resolution: most CMPA proctocolitis resolves by 12-18 months. Reintroduction under guidance at that time. (5) Formula-fed alternative: if maternal elimination fails or mother cannot eliminate dairy, switch to extensively hydrolyzed formula (Alimentum, Nutramigen) — ~90% tolerated. Amino acid formula (Neocate) for the ~10% who react to extensively hydrolyzed. Do NOT use soy formula in CMPA (cross-reactive in ~40% of non-IgE CMPA)."
+  "ddxTargets": ["Bee venom anaphylaxis — systemic reaction, epinephrine required (correct)","Yellow jacket anaphylaxis — double sting venom sensitivity; skin testing will differentiate","Vasovagal reaction — pallor + bradycardia without urticaria/angioedema","Panic attack — no urticaria, objective findings absent","MAST cell activation syndrome — baseline tryptase normal here","Drug reaction — no new medications; sting timing is diagnostic"],
+  "coachFinal": "Diagnosis: bee venom anaphylaxis, VIT candidate. Key learning: (1) VIT indication in adults: any systemic reaction beyond urticaria (i.e., includes cardiovascular, respiratory, or GI involvement). Adults with urticaria-only reactions have only ~10-15% recurrence risk and VIT is not routinely indicated. Children with urticaria-only reactions also generally do not require VIT (lower recurrence risk). (2) Venom skin testing timing: wait 4-6 weeks after the sting before performing skin testing — refractory period makes testing unreliable immediately after anaphylaxis. (3) Which venoms to test: honeybee, yellow jacket, yellow-faced hornet, white-faced hornet, wasp — all five Hymenoptera venoms tested because patients often cannot identify which insect stung them, and cross-reactivity exists (yellow jacket/hornet/wasp cross-react; honeybee does not). (4) VIT efficacy: reduces future anaphylaxis risk from ~60% down to ~3-5%. Five-year standard course for most patients — protection persists for many years after stopping. (5) Baseline tryptase 5.2 (normal) in this patient — reassuring. Elevated baseline tryptase (>11.4) suggests mastocytosis and warrants workup and possibly lifelong VIT."
+},
+"vt-syncope": {
+  "diagnosis": "Ventricular Tachycardia Causing Syncope — Structural Heart Disease, ICD Implantation Indicated",
+  "problems": [
+    {"problem":"Ventricular tachycardia — sustained, causing syncope","icd":"I47.2","onset":"2024","status":"Active","notes":"Harold Washington, 64M — prior MI 3 years ago, EF 30%. Witnessed syncope at home. EMS: sustained monomorphic VT 180 bpm."},
+    {"problem":"HFrEF — EF 30%, prior anterior MI substrate for VT","icd":"I50.20","onset":"2021","status":"Active","notes":"Scar from prior LAD territory MI provides re-entrant circuit for monomorphic VT. Substrate ablation or ICD needed."},
+    {"problem":"ICD implantation — secondary prevention indication","icd":"Z45.018","onset":"2024","status":"Active","notes":"Sustained VT causing syncope in structural heart disease = Class I ICD indication. EP consultation active."}
+  ],
+  "medications": [
+    {"name":"Amiodarone 150mg IV over 10 min, then 1mg/min infusion — acute VT","sig":"Acute VT cardioversion preferred if hemodynamically unstable. Amiodarone for stable or recurrent VT.","prescriber":"Cardiology/EP","start":"2024","refills":0,"status":"Given — acute"},
+    {"name":"Metoprolol succinate 25mg PO daily — beta-blocker","sig":"Continue beta-blocker — GDMT for HFrEF AND reduces VT burden. Increase dose as tolerated.","prescriber":"Cardiology","start":"2021","refills":5,"status":"Active"},
+    {"name":"Amiodarone 200mg PO daily — bridge and adjunct to ICD","sig":"Oral amiodarone reduces VT burden and appropriate ICD shocks. Monitor thyroid, pulmonary, hepatic, and ocular annually.","prescriber":"EP","start":"2024","refills":5,"status":"Active — post-ICD adjunct"},
+    {"name":"ICD implantation — EP procedure scheduled","sig":"Secondary prevention ICD — sustained VT causing syncope in structural heart disease. Single-chamber vs biventricular ICD (CRT-D) based on QRS duration.","prescriber":"EP","start":"2024","refills":0,"status":"Scheduled"}
+  ],
+  "labs": [{"date":"11/2024","panel":"VT Workup","results":[
+    {"test":"Troponin I","value":"0.06","unit":"ng/mL","ref":"<0.04","flag":"H"},
+    {"test":"Potassium","value":"3.3","unit":"mEq/L","ref":"3.5-5.0","flag":"L"},
+    {"test":"Magnesium","value":"1.6","unit":"mg/dL","ref":"1.7-2.2","flag":"L"},
+    {"test":"TSH","value":"2.2","unit":"mIU/L","ref":"0.4-4.0","flag":""},
+    {"test":"QTc (ECG)","value":"448","unit":"ms","ref":"<450ms","flag":""},
+    {"test":"EF (echo)","value":"30","unit":"%","ref":">55%","flag":"L"}
+  ]}],
+  "imaging": [{"date":"11/2024","study":"Echocardiogram","indication":"VT, prior MI, assess EF and wall motion","findings":"EF 30%. Anterior wall motion abnormality. LV dilation. No pericardial effusion. Moderate MR.","impression":"Ischemic cardiomyopathy — substrate for re-entrant VT. ICD and EP evaluation indicated."}],
+  "ddxTargets": ["Sustained VT — ischemic cardiomyopathy substrate, ICD indicated (correct)","SVT with aberrancy — narrow QRS baseline, but VT vs SVT: if structural heart disease + wide complex tachycardia = VT until proven otherwise","Torsades de pointes — QTc mildly prolonged but monomorphic morphology; TdP is polymorphic with twisting axis","Brugada syndrome — different ECG pattern, no structural heart disease","AVNRT — young, no structural disease, responds to adenosine; not this presentation","Cardiogenic syncope from bradycardia — heart block pattern, not tachyarrhythmia"],
+  "coachFinal": "Diagnosis: sustained VT causing syncope, ischemic cardiomyopathy. Key learning: (1) Brugada rule for wide complex tachycardia: any wide complex tachycardia (WCT) in a patient with structural heart disease = VT until proven otherwise. Even if they appear hemodynamically stable. Treat as VT. SVT with aberrancy in structural heart disease is uncommon; VT is common. (2) ICD indications — secondary prevention: sustained VT/VF causing syncope or hemodynamic instability in patients who survive. Primary prevention: EF ≤35% on optimal GDMT x3 months despite no prior sustained VT (EF criteria met here — double indication). (3) Electrolytes and VT: hypokalemia and hypomagnesemia are highly arrhythmogenic. Every VT patient needs K+ and Mg2+ checked and repleted to K+ ≥4.0 and Mg2+ ≥2.0. (4) Amiodarone monitoring: annual TSH (hypo/hyperthyroidism), PFTs (pulmonary toxicity), LFTs (hepatotoxicity), slit-lamp eye exam (corneal microdeposits, optic neuropathy — rare). Half-life of 40-55 days — side effects can persist long after stopping. (5) VT ablation: catheter ablation of the reentrant VT circuit is an alternative or adjunct to amiodarone. Reduces appropriate ICD shocks in structural heart disease VT. EP evaluation for ablation candidacy alongside ICD implantation."
 }
 }
 

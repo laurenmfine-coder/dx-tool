@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Bipolar I Discharge from Inpatient Unit",
-      "icd": "Z00.00",
+      "problem": "Inpatient psychiatric discharge \u2014 OT community readiness assessment",
+      "icd": "F32.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Diana Park, 45F \u2014 MDD with psychotic features, inpatient x12 days. PHQ-9 improved 24\u219212. OT assessing discharge readiness for independent living."
+    },
+    {
+      "problem": "Medication management \u2014 requires cueing, not yet independent",
+      "icd": "Z73.6",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Pill organizer initiated. Patient does not consistently self-initiate \u2014 cueing required. Safety concern for independent living."
+    },
+    {
+      "problem": "Unstructured time \u2014 relapse risk for depression",
+      "icd": "Z60.4",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Social isolation and unstructured time are relapse risk factors. Partial hospitalization program referral for structured step-down."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Weekly pill organizer \u2014 medication management system",
+      "sig": "Pre-filled weekly organizer. Phone alarm reminders. Simplify regimen. Pharmacy blister packaging if adherence remains poor.",
+      "prescriber": "OT/Pharmacy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 discharge education"
+    },
+    {
+      "name": "Partial hospitalization program (PHP) \u2014 step-down care",
+      "sig": "6h/day structured programming. Bridges inpatient to outpatient. Provides peer support, relapse prevention, and structured activity. OT recommends based on ADL function and support system.",
+      "prescriber": "OT/Psychiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 referral"
+    },
+    {
+      "name": "Crisis plan \u2014 988 Lifeline, wallet card, warning signs",
+      "sig": "Written crisis plan: personal warning signs, coping strategies, support contacts, 988. Laminated wallet card. Rehearse with OT before discharge \u2014 not just review.",
+      "prescriber": "OT/Psychiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 discharge"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to ot. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Discharge Readiness Assessment",
+      "results": [
+        {
+          "test": "Medication management",
+          "value": "Requires cueing \u2014 does not self-initiate consistently",
+          "unit": "",
+          "ref": "Independent",
+          "flag": "H"
+        },
+        {
+          "test": "Meal preparation",
+          "value": "Independent for simple meals",
+          "unit": "",
+          "ref": "Independent",
+          "flag": ""
+        },
+        {
+          "test": "PHQ-9",
+          "value": "12 \u2014 moderate (improved from 24)",
+          "unit": "",
+          "ref": "0-4 minimal",
+          "flag": "H"
+        },
+        {
+          "test": "Safety \u2014 suicidal ideation",
+          "value": "No active ideation \u2014 passive wish resolved",
+          "unit": "",
+          "ref": "None",
+          "flag": ""
+        },
+        {
+          "test": "Social support",
+          "value": "One friend, one sister \u2014 willing to check in daily",
+          "unit": "",
+          "ref": "Support present",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "psychiatric-discharge-ot",
-    "diagnosis": "See diagnosis \u2014 Bipolar I Discharge from Inpatient Unit",
+    "diagnosis": "Psychiatric Discharge OT \u2014 ADL Readiness Assessment, Medication Management, Step-Down Care Planning",
     "acuity": 3,
     "presentation": "Bipolar I Discharge from Inpatient Unit",
     "category": "psychiatric"
@@ -175,12 +247,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Bipolar I Discharge from Inpatient Unit \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Psychiatric discharge OT \u2014 community readiness, PHP referral, crisis plan (correct)",
+      "Discharge without OT assessment \u2014 unacceptable; OT discharge assessment is standard",
+      "Home health OT only \u2014 PHP provides more appropriate step-down for this patient",
+      "All ADLs independent \u2014 medication management requires cueing; safety concern",
+      "No structured program needed \u2014 unstructured time is a relapse risk; PHP is protective",
+      "Discharge to group home \u2014 independent living with support is appropriate; not group home level"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +262,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Bipolar I Discharge from Inpatient Unit. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) What occupational profile components are critical for this discharge \u2014 and what community barriers will you address in transition planning? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: psychiatric discharge OT planning. Key learning: (1) OT discharge assessment covers: IADL performance (medication management, meal prep, money management, community navigation), cognitive function, social participation capacity, available community resources, and safety in independent living. Symptom improvement alone is insufficient. (2) Medication management is the most common post-discharge failure point: pill organizers, phone reminders, simplified regimens, pharmacy blister packs reduce non-adherence. (3) Step-down care: inpatient \u2192 PHP (6h/day) \u2192 IOP (3h/day) \u2192 outpatient. Abrupt transition from inpatient to weekly outpatient is a high-risk discharge pattern. OT recommends appropriate level based on functional assessment. (4) Structured activity as relapse prevention: unstructured time is a significant depression relapse risk \u2014 rumination, reduced activation, social withdrawal. Scheduled activities and programs are evidence-based protective factors. OT prescribes occupation as a therapeutic intervention. (5) Crisis planning: identify warning signs, coping strategies, support contacts, 988. Rehearse before discharge \u2014 not just hand over the paper."
     }
   }
 };

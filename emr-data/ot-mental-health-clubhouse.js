@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Schizophrenia",
-      "icd": "Z00.00",
-      "onset": "2024",
+      "problem": "Schizophrenia \u2014 stable, socially isolated, unemployed 2 years",
+      "icd": "F20.9",
+      "onset": "2016",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Derrick Williams, 32M \u2014 schizophrenia well-controlled. COPM 2.5/10 performance. No social roles or meaningful occupation."
+    },
+    {
+      "problem": "Occupational role loss \u2014 work and social participation absent",
+      "icd": "Z73.6",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Days spent watching TV. Clubhouse model for structured occupation and peer support. IPS model for vocational rehabilitation."
+    },
+    {
+      "problem": "Cognitive deficits \u2014 attention, processing speed, working memory",
+      "icd": "F20.9",
+      "onset": "2016",
+      "status": "Active",
+      "notes": "MoCA 22/30. Trail Making B 145s. Cognitive deficits from schizophrenia \u2014 not medication side effects. Cognitive remediation indicated."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Clubhouse model participation \u2014 Fountain House approach",
+      "sig": "Work-ordered day in clubhouse (caf\u00e9, reception, work units). Actual work, not make-work. Provides structure, valued roles, and peer community.",
+      "prescriber": "OT/Psychiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 enrollment"
+    },
+    {
+      "name": "IPS (Individual Placement and Support) \u2014 supported employment",
+      "sig": "Zero exclusion, rapid job placement with ongoing support. OT identifies job match based on interests and cognitive capacity. Place then train model.",
+      "prescriber": "OT/VR counselor",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 vocational"
+    },
+    {
+      "name": "Cognitive remediation therapy \u2014 CogPack 3x/week",
+      "sig": "Computerized training targeting attention, memory, processing speed. Combined with vocational rehab significantly improves employment outcomes.",
+      "prescriber": "OT/Psychiatry",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to ot. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Occupational Performance Assessment",
+      "results": [
+        {
+          "test": "COPM \u2014 performance",
+          "value": "2.5/10",
+          "unit": "",
+          "ref": "7+ = functional",
+          "flag": "L"
+        },
+        {
+          "test": "COPM \u2014 satisfaction",
+          "value": "2/10",
+          "unit": "",
+          "ref": "7+",
+          "flag": "L"
+        },
+        {
+          "test": "Trail Making Test B",
+          "value": "145",
+          "unit": "seconds",
+          "ref": "<90 seconds",
+          "flag": "H"
+        },
+        {
+          "test": "MoCA",
+          "value": "22/30",
+          "unit": "",
+          "ref": "\u226526",
+          "flag": "L"
+        },
+        {
+          "test": "Last employment",
+          "value": "2019 \u2014 warehouse",
+          "unit": "",
+          "ref": "Currently employed",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "ot-mental-health-clubhouse",
-    "diagnosis": "See diagnosis \u2014 Schizophrenia",
+    "diagnosis": "Schizophrenia \u2014 OT Clubhouse Model, IPS Supported Employment, Cognitive Remediation",
     "acuity": 3,
     "presentation": "Schizophrenia",
     "category": "psychiatric"
@@ -175,12 +247,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Schizophrenia \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Schizophrenia \u2014 clubhouse + IPS vocational rehab (correct)",
+      "Day program arts and crafts only \u2014 insufficient; IPS and clubhouse are evidence-based recovery interventions",
+      "Defer vocational rehab until fully stable \u2014 IPS: zero exclusion criteria; employment improves function",
+      "Cognitive deficits prevent employment \u2014 IPS evidence shows employment improves cognition; not an exclusion criterion",
+      "Group therapy replaces OT \u2014 occupational participation is distinct from psychotherapy",
+      "Hospitalization for social isolation \u2014 community OT is appropriate; not a crisis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +262,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Schizophrenia. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) What is the occupational therapy role in psychosocial rehabilitation for schizophrenia \u2014 and what does the evidence say about supported employment versus sheltered workshop models? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: schizophrenia, OT community reintegration. Key learning: (1) IPS (place then train): zero exclusion criteria, rapid placement into competitive employment with ongoing job support. Consistently outperforms traditional vocational rehab for serious mental illness. (2) Clubhouse model: peer-run community with real work units. Provides structure, social connection, and valued roles \u2014 not make-work. Fountain House is the original model. (3) Cognitive remediation: computerized exercises targeting attention, working memory, and processing speed. When combined with vocational rehab, significantly improves employment outcomes vs either alone. (4) Recovery-oriented OT: 'recovery' = building a meaningful life despite symptoms \u2014 not symptom elimination. OT targets occupational participation even with incomplete symptom control. (5) COPM: Canadian Occupational Performance Measure \u2014 client-identifies priority occupational goals, self-rates performance and satisfaction. Drives goal-setting and tracks progress."
     }
   }
 };

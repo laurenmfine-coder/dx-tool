@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Robert Diaz",
-      "icd": "Z00.00",
+      "problem": "DPN \u2014 loss of protective sensation, bilateral feet",
+      "icd": "E11.40",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Eduardo Reyes, 56M \u2014 10g monofilament: unable to feel bilateral feet. PT referral for balance training and fall prevention."
+    },
+    {
+      "problem": "Fall risk \u2014 TUG 15s, Berg Balance Scale 42/56",
+      "icd": "Z91.81",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Romberg positive. Tandem gait impaired. Proprioceptive deficit from DPN drives fall risk."
+    },
+    {
+      "problem": "Foot at risk \u2014 callus, absent ankle reflexes",
+      "icd": "E11.621",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Cannot feel plantar pressure. Any friction \u2192 ulceration without sensation warning."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Proprioceptive training \u2014 firm to foam progression",
+      "sig": "Single-leg balance: firm \u2192 foam \u2192 eyes closed. Sensory substitution \u2014 visual and vestibular compensation for lost proprioception. 3x/week.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Therapeutic footwear \u2014 extra-depth shoes",
+      "sig": "Custom insoles redistribute plantar pressure. Medicare therapeutic footwear benefit for qualifying diabetic patients.",
+      "prescriber": "PT/Podiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Daily foot inspection protocol",
+      "sig": "Mirror inspection of plantar surface daily. Check for redness, blisters, abrasions. Cannot rely on pain signal.",
+      "prescriber": "PT/Podiatry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 education"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "PT Functional Assessment",
+      "results": [
+        {
+          "test": "TUG",
+          "value": "15",
+          "unit": "seconds",
+          "ref": "<12 normal; >13.5 high fall risk",
+          "flag": "H"
+        },
+        {
+          "test": "10g monofilament",
+          "value": "Unable to feel \u2014 bilateral",
+          "unit": "",
+          "ref": "Protective sensation present",
+          "flag": "H"
+        },
+        {
+          "test": "Berg Balance Scale",
+          "value": "42/56",
+          "unit": "",
+          "ref": "<45 = increased fall risk",
+          "flag": "L"
+        },
+        {
+          "test": "Ankle dorsiflexion ROM",
+          "value": "8\u00b0",
+          "unit": "",
+          "ref": "10-20\u00b0",
+          "flag": "L"
+        },
+        {
+          "test": "Ankle reflex",
+          "value": "Absent bilaterally",
+          "unit": "",
+          "ref": "Present",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-diabetes-pt",
-    "diagnosis": "See diagnosis \u2014 Robert Diaz",
+    "diagnosis": "Type 2 Diabetes \u2014 PT: Peripheral Neuropathy Balance Training, LOPS Management, Fall Prevention",
     "acuity": 3,
     "presentation": "Robert Diaz",
     "category": "endocrine"
@@ -180,12 +252,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Robert Diaz \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "DPN \u2014 balance impairment, proprioceptive deficit, PT fall prevention (correct)",
+      "Vestibular dysfunction \u2014 Dix-Hallpike negative; neuropathy pattern on exam",
+      "Cerebellar ataxia \u2014 no intention tremor or dysmetria; stocking-glove distribution",
+      "Spinal stenosis \u2014 neurogenic claudication; different distribution and provocation",
+      "B12 deficiency neuropathy \u2014 check B12 (metformin depletes); may coexist with DPN",
+      "Peripheral vascular disease \u2014 absent pulses would suggest; ABI normal here"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Robert Diaz. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) Robert wants to start exercising but is afraid of hypoglycemia. He has peripheral neuropathy with reduced plantar sensation bilaterally. His physician has cleared him for exercise. Design his exercise prescription \u2014 addressing type, intensity, timing relative to meals/insulin, foot protection, and hypoglycemia recognition with neuropathy masking symptoms. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: DPN-related fall risk, PT management. Key learning: (1) Sensory substitution strategy: DPN eliminates joint position sense \u2192 PT trains patients to rely on visual and vestibular inputs. Exercises progress firm \u2192 foam \u2192 eyes closed \u2192 narrow base. (2) TUG test: >13.5 seconds = high fall risk. This patient at 15 seconds requires urgent PT. (3) Foot inspection: patients with LOPS cannot feel ulcers developing \u2014 daily mirror inspection is a core PT education intervention. Any finding triggers podiatry contact. (4) Therapeutic footwear: extra-depth shoes with custom insoles redistribute plantar pressure and prevent callus/ulceration. PT/podiatry collaboration for footwear prescription. (5) Ankle dorsiflexion: reduced ROM from DPN and equinus increases plantar pressure and fall risk. Heel cord stretching is a component of the PT program."
     }
   }
 };

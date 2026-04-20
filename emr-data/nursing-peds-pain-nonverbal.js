@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Post-Tonsillectomy",
-      "icd": "Z00.00",
+      "problem": "Post-op pain \u2014 nonverbal 4-year-old, FLACC 7",
+      "icd": "R52",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Lily Chen, 4F \u2014 post-appendectomy. Grimacing, guarding, crying. FLACC 7 (moderate-severe). Last analgesic 5 hours ago."
+    },
+    {
+      "problem": "Inadequate pain control \u2014 reactive rather than proactive",
+      "icd": "R52",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Pain allowed to peak before treatment. Scheduled ATC analgesics prevent pain peaks better than reactive PRN dosing."
+    },
+    {
+      "problem": "Parent education \u2014 behavioral pain cues",
+      "icd": "Z71.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Parents believe crying is fear not pain. Nursing education on FLACC indicators and behavioral pain recognition."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Acetaminophen 15mg/kg PO/PR q6h \u2014 scheduled ATC",
+      "sig": "Around-the-clock \u2014 proactive pain management prevents peaks. Do NOT wait for FLACC to escalate before treating.",
+      "prescriber": "Pediatric Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 scheduled"
+    },
+    {
+      "name": "Ibuprofen 10mg/kg PO q6-8h \u2014 alternate with acetaminophen",
+      "sig": "Multimodal \u2014 alternating with acetaminophen provides synergistic analgesia and reduces opioid requirements. Age >6 months, no bleeding risk.",
+      "prescriber": "Pediatric Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 multimodal"
+    },
+    {
+      "name": "Morphine 0.05-0.1mg/kg IV PRN \u2014 breakthrough FLACC \u22657",
+      "sig": "Opioid for breakthrough pain unresponsive to oral analgesics. Reassess pain 30 min after administration.",
+      "prescriber": "Pediatric Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Pediatric Pain Assessment",
+      "results": [
+        {
+          "test": "FLACC score",
+          "value": "7/10",
+          "unit": "",
+          "ref": "0-2 relaxed; 7-10 severe",
+          "flag": "H"
+        },
+        {
+          "test": "HR",
+          "value": "138",
+          "unit": "bpm",
+          "ref": "80-130 age 4",
+          "flag": "H"
+        },
+        {
+          "test": "RR",
+          "value": "28",
+          "unit": "breaths/min",
+          "ref": "22-34 age 4",
+          "flag": ""
+        },
+        {
+          "test": "SpO2",
+          "value": "98",
+          "unit": "%",
+          "ref": "\u226595%",
+          "flag": ""
+        },
+        {
+          "test": "Last analgesic",
+          "value": "5 hours ago",
+          "unit": "",
+          "ref": "Q6h scheduled",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "nursing-peds-pain-nonverbal",
-    "diagnosis": "See diagnosis \u2014 Post-Tonsillectomy",
+    "diagnosis": "Pediatric Pain \u2014 Nonverbal Child, FLACC Score 7, Inadequate Analgesia, Multimodal Protocol",
     "acuity": 3,
     "presentation": "Post-Tonsillectomy",
     "category": "pediatric"
@@ -177,12 +249,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "3yo Post-Tonsillectomy \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-op pain \u2014 FLACC 7, inadequate analgesia (correct)",
+      "Fear/anxiety only \u2014 FLACC 7 and tachycardia support pain, not anxiety alone",
+      "Wait for child to verbalize \u2014 nonverbal children cannot self-report; FLACC is the validated tool",
+      "Surgical complication \u2014 FLACC helps distinguish; post-op day 1 pain is expected",
+      "Opioid for all pediatric pain \u2014 multimodal (acetaminophen + ibuprofen) is first line; opioids for breakthrough only",
+      "Delay assessment \u2014 active pain requires immediate assessment and intervention"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Post-Tonsillectomy. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) How do you assess and document pain using a behavioral scale \u2014 and what is your pharmacological decision? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: inadequate pediatric pain \u2014 FLACC 7. Key learning: (1) FLACC scale: Face (0-2), Legs (0-2), Activity (0-2), Cry (0-2), Consolability (0-2). Total 0-10. Score 7 = severe \u2014 immediate intervention required. Validated for ages 2 months\u20137 years. (2) Proactive vs reactive: scheduled ATC analgesics (acetaminophen \u00b1 ibuprofen) prevent pain peaks. Not waiting for FLACC to escalate is the standard of care in pediatric post-op pain. (3) Multimodal analgesia: alternating acetaminophen + ibuprofen provides synergistic analgesia and reduces opioid requirements \u2014 standard pediatric post-op practice. (4) Tachycardia as pain indicator: HR 138 above expected range for age \u2192 pain activates sympathetic response. HR normalization with analgesic confirms pain was the cause. (5) Parent education: teach behavioral pain cues (grimacing, guarding, furrowed brow) vs fear (crying that stops with distraction). Parents are key partners in pediatric pain assessment."
     }
   }
 };

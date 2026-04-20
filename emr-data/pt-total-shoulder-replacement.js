@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Total Shoulder Arthroplasty Week 4",
-      "icd": "Z00.00",
+      "problem": "Reverse TSA post-op \u2014 week 8, massive rotator cuff arthropathy",
+      "icd": "Z96.611",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Patricia Moore, 72F \u2014 reverse TSA for irreparable rotator cuff tear + glenohumeral arthritis. Deltoid is now the primary shoulder elevator."
+    },
+    {
+      "problem": "Deltoid as primary motor \u2014 unique to reverse TSA",
+      "icd": "Z96.611",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Unlike anatomic TSA, reverse TSA mechanics depend entirely on deltoid function. Deltoid strengthening is the primary PT goal."
+    },
+    {
+      "problem": "Posterior dislocation precautions \u2014 permanent",
+      "icd": "Z96.611",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Combined ER + extension dislocates reverse TSA posteriorly. Reaching behind back is the highest-risk position \u2014 permanent precaution."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Deltoid strengthening \u2014 isometric \u2192 isotonic progression",
+      "sig": "Isometric deltoid \u2192 resisted side raises \u2192 light overhead lifting. Deltoid is THE power source \u2014 must be trained aggressively in Phase III.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 Phase III"
+    },
+    {
+      "name": "Active forward flexion \u2014 begin at week 6",
+      "sig": "Active shoulder elevation. Target 150-170\u00b0 at 6 months. External rotation limited to 30\u00b0 initially.",
+      "prescriber": "PT/Surgeon",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Dislocation precautions \u2014 ongoing education",
+      "sig": "NO reaching behind back (combined ER + extension). NO reaching across body to opposite shoulder. Permanent precautions \u2014 not time-limited.",
+      "prescriber": "PT/Surgeon",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 permanent"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Reverse TSA Week 8",
+      "results": [
+        {
+          "test": "Active forward flexion",
+          "value": "115",
+          "unit": "degrees",
+          "ref": "150-170\u00b0 target",
+          "flag": "L"
+        },
+        {
+          "test": "Active ER (arm at side)",
+          "value": "28",
+          "unit": "degrees",
+          "ref": "30-45\u00b0 target",
+          "flag": ""
+        },
+        {
+          "test": "Deltoid MMT",
+          "value": "4/5",
+          "unit": "",
+          "ref": "5/5",
+          "flag": ""
+        },
+        {
+          "test": "QuickDASH",
+          "value": "42/100",
+          "unit": "",
+          "ref": "<20 functional goal",
+          "flag": "H"
+        },
+        {
+          "test": "VAS pain",
+          "value": "2/10",
+          "unit": "",
+          "ref": "0-2 acceptable at 8 weeks",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pt-total-shoulder-replacement",
-    "diagnosis": "See diagnosis \u2014 Total Shoulder Arthroplasty Week 4",
+    "diagnosis": "Reverse Total Shoulder Arthroplasty \u2014 Week 8, Deltoid Strengthening, Dislocation Precautions",
     "acuity": 3,
     "presentation": "Total Shoulder Arthroplasty Week 4",
     "category": "orthopedic"
@@ -180,12 +252,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Total Shoulder Arthroplasty Week 4 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Reverse TSA \u2014 deltoid strengthening, posterior dislocation precautions (correct)",
+      "Anatomic TSA protocol \u2014 reverse TSA has no intact rotator cuff; deltoid focus is fundamentally different",
+      "Standard rotator cuff post-op protocol \u2014 does not apply; no cuff to protect",
+      "Dislocation \u2014 precautions being observed; no acute dislocation",
+      "Surgical infection \u2014 no fever, erythema, or wound changes",
+      "Aggressive ROM at week 8 \u2014 posterior dislocation risk; precautions must be respected"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Total Shoulder Arthroplasty Week 4. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) How do reverse TSA precautions differ from anatomic TSA \u2014 and what is the evidence for early passive motion versus immobilization in the first 6 weeks? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: reverse TSA post-op PT. Key learning: (1) Reverse TSA vs anatomic TSA: anatomic preserves the rotator cuff. Reverse TSA \u2014 used when cuff is irreparable \u2014 reverses ball-and-socket: metal ball on glenoid, cup on humerus. The deltoid replaces all rotator cuff function. PT protocol is completely different. (2) Deltoid rehabilitation: is THE power source after reverse TSA. Isometric \u2192 progressive resistance. Without deltoid strength, the reverse TSA fails functionally. (3) Posterior dislocation: combined ER + extension (reaching behind back) = most common dislocation mechanism. Permanent precaution: no reaching behind back, no tucking in shirt, no reaching to back seat. (4) Rehab phases: Phase I (0-6w) passive/pendulums; Phase II (6-12w) active-assisted; Phase III (12+w) strengthening, ADL training. (5) QuickDASH target: <20 (functional) by 6 months with rehab compliance."
     }
   }
 };

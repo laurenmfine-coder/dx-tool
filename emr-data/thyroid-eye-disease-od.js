@@ -23,20 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Proptosis",
-      "icd": "Z00.00",
+      "problem": "Thyroid eye disease (TED) \u2014 moderate-severe, active phase",
+      "icd": "H06.21",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Diane Wu, 44F \u2014 known Graves' disease, euthyroid on methimazole. Progressive proptosis, diplopia, and periorbital edema x8 months. CAS 5/7."
+    },
+    {
+      "problem": "Compressive optic neuropathy \u2014 vision threatening",
+      "icd": "H47.019",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Color desaturation right eye, RAPD present. Urgent ophthalmology \u2014 optic nerve compression risk from orbital fat and EOM enlargement."
+    },
+    {
+      "problem": "Diplopia \u2014 inferior rectus restriction",
+      "icd": "H51.09",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Inferior and medial rectus enlargement on MRI orbit. Restricted upward gaze. Prism glasses as temporary measure."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Teprotumumab (Tepezza) 10mg/kg IV q3 weeks x8 doses \u2014 biologic for TED",
+      "sig": "IGF-1R inhibitor \u2014 FDA approved for active TED. Reduces proptosis, diplopia, and CAS. Infusion every 3 weeks.",
+      "prescriber": "Endocrinology/Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 infusion series"
+    },
+    {
+      "name": "Methylprednisolone 500mg IV weekly x6 weeks \u2014 pulsed steroid",
+      "sig": "IV pulse steroids for active, moderate-severe TED. Concurrent with teprotumumab consideration.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 pulsed"
+    },
+    {
+      "name": "Selenium 200mcg PO daily \u2014 for mild/moderate TED supplementation",
+      "sig": "Antioxidant \u2014 reduces disease activity in mild-moderate TED (EUGOGO trial). Continue even with escalated therapy.",
+      "prescriber": "Endocrinology",
+      "start": "2023",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Methimazole 10mg PO BID \u2014 maintain euthyroidism",
+      "sig": "Critical: hyperthyroidism and hypothyroidism BOTH worsen TED. Target strict euthyroid state throughout treatment.",
+      "prescriber": "Endocrinology",
+      "start": "2022",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,8 +135,58 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "TED Monitoring",
+      "results": [
+        {
+          "test": "TSH",
+          "value": "1.2",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "Free T4",
+          "value": "1.1",
+          "unit": "ng/dL",
+          "ref": "0.8-1.8",
+          "flag": ""
+        },
+        {
+          "test": "TRAb (TSH receptor antibody)",
+          "value": "12.4",
+          "unit": "IU/L",
+          "ref": "<1.75",
+          "flag": "H"
+        },
+        {
+          "test": "CAS (clinical activity score)",
+          "value": "5/7",
+          "unit": "",
+          "ref": "<3 inactive",
+          "flag": "H"
+        },
+        {
+          "test": "Proptosis \u2014 Hertel exophthalmometer",
+          "value": "25mm right, 23mm left",
+          "unit": "",
+          "ref": "<18mm",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "MRI Orbits With Contrast",
+      "indication": "Proptosis, diplopia, optic neuropathy concern",
+      "findings": "Bilateral inferior and medial rectus enlargement (muscle belly, not tendon \u2014 distinguishes TED from orbital myositis). Crowded orbital apex. Fat prolapse. No discrete mass.",
+      "impression": "Thyroid eye disease \u2014 bilateral EOM enlargement at orbital apex. Optic nerve compression risk. Orbital decompression candidacy to be assessed."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +218,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "thyroid-eye-disease-od",
-    "diagnosis": "See diagnosis \u2014 Proptosis",
+    "diagnosis": "Thyroid Eye Disease \u2014 Graves' Ophthalmopathy, Proptosis and Diplopia, Orbital Decompression Candidacy",
     "acuity": 3,
     "presentation": "Proptosis",
     "category": "ophthalmic"
@@ -177,12 +265,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Proptosis \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Thyroid eye disease \u2014 Graves' ophthalmopathy, TRAb elevated (correct)",
+      "Orbital pseudotumor (idiopathic orbital inflammation) \u2014 pain, tendon involvement on MRI; TRAb negative",
+      "Orbital lymphoma \u2014 older, progressive, different MRI enhancement pattern",
+      "Cavernous sinus thrombosis \u2014 fever, headache, multiple cranial nerve palsies",
+      "IgG4-related orbital disease \u2014 TRAb negative, IgG4 elevated, responds to steroids",
+      "Orbital cellulitis \u2014 fever, skin erythema, acute onset"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +280,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Proptosis. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) Is this vision-threatening? What is the time-to-treatment window \u2014 and what is your ophthalmology referral urgency? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: thyroid eye disease (TED), moderate-severe. Key learning: (1) TED activity vs severity: CAS (Clinical Activity Score) measures ACTIVITY (inflammation \u2014 pain, redness, swelling, chemosis, lid edema); EUGOGO severity grades measure structural damage (proptosis, diplopia, corneal exposure, optic neuropathy). Active disease responds to immunotherapy; inactive disease may need surgery (decompression, strabismus, lid). (2) Teprotumumab: IGF-1R monoclonal antibody \u2014 FDA-approved 2020 for active TED. Dramatically reduces proptosis (mean 2-3mm) and diplopia. Side effects: hyperglycemia, hearing loss, muscle cramps, IBD exacerbation. (3) Thyroid control and TED: RAI (radioactive iodine) worsens TED \u2014 avoid in moderate-severe TED or pretreat with steroids. Hyperthyroidism AND hypothyroidism both worsen TED. Strict euthyroid state throughout is essential. (4) MRI orbit TED pattern: muscle BELLY enlargement (tendon spared) \u2014 inferior > medial > superior > lateral recti (mnemonic: I'M SLow). Orbital myositis = tendon and belly both enlarged. This distinction is diagnostic. (5) Optic neuropathy in TED: a true ophthalmologic emergency \u2014 apical crowding from enlarged muscles compresses optic nerve. Signs: color desaturation, RAPD, visual field defect. Treat with IV pulse steroids \u00b1 urgent orbital decompression."
     }
   }
 };

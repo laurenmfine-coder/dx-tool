@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Left Jaw Pressure",
-      "icd": "Z00.00",
+      "problem": "Referred cardiac pain to mandible \u2014 unstable angina",
+      "icd": "I20.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Frank Davis, 61M \u2014 jaw pain and 'toothache' for 2 days, worse with exertion. No dental cause found on exam. Diaphoretic."
+    },
+    {
+      "problem": "Unstable angina \u2014 HEART score 7, troponin pending",
+      "icd": "I20.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Exertional jaw pain + diaphoresis + cardiac risk factors (T2DM, HTN, smoker) = ACS until proven otherwise. Referred to ED."
+    },
+    {
+      "problem": "Dental exam \u2014 normal, no odontogenic cause",
+      "icd": "Z01.20",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Full mouth exam and periapical radiographs \u2014 no periapical pathology, no caries, no cracked teeth, negative percussion/palpation. Pain is non-odontogenic."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "IMMEDIATE ED REFERRAL \u2014 do not treat dentally",
+      "sig": "Do not administer local anesthetic or perform any dental procedure. Call 911 or direct to ED immediately.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "REFER TO ED"
+    },
+    {
+      "name": "Aspirin 324mg PO \u2014 give before ED transfer if available",
+      "sig": "Non-enteric coated aspirin \u2014 chew and swallow. Anti-platelet loading if ACS suspected.",
+      "prescriber": "Dentistry/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given \u2014 pre-transfer"
     }
   ],
   "allergies": [
@@ -97,7 +119,49 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "In-office Dental Assessment",
+      "results": [
+        {
+          "test": "Percussion test all teeth",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Pulp vitality test",
+          "value": "Normal response all teeth",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Periapical radiographs",
+          "value": "No periapical pathology",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Soft tissue exam",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "BP (taken in office)",
+          "value": "168/98",
+          "unit": "mmHg",
+          "ref": "<130/80",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +194,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-referred-cardiac-pain",
-    "diagnosis": "See diagnosis \u2014 Left Jaw Pressure",
+    "diagnosis": "Cardiac Pain Referred to Jaw \u2014 Unstable Angina Presenting as Toothache, Dental Cause Excluded",
     "acuity": 2,
     "presentation": "Left Jaw Pressure",
     "category": "other"
@@ -176,12 +240,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Left Jaw Pressure \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Referred cardiac pain to jaw \u2014 ACS with atypical presentation (correct)",
+      "Pulpitis \u2014 percussion sensitive, thermal sensitivity, identifiable tooth; all negative here",
+      "Periapical abscess \u2014 swelling, percussion sensitivity, radiographic lesion; absent",
+      "Cracked tooth syndrome \u2014 bite test positive; negative here",
+      "Trigeminal neuralgia \u2014 electric shock quality, trigger zone; different character",
+      "Temporomandibular joint pain \u2014 jaw joint tenderness, clicking, limited opening"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +255,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Left Jaw Pressure. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) What is your differential \u2014 and what do you do right now before scheduling any dental treatment? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: referred cardiac pain to mandible \u2014 ACS. Key learning: (1) Cardiac-dental referral pattern: the mandible receives its sensory innervation from the inferior alveolar nerve (V3 branch of trigeminal). Ischemic myocardial pain can refer via convergent pathways to the mandible, presenting as toothache, jaw tightness, or dental pain. Diabetics, elderly, and women are most likely to present with atypical cardiac symptoms. (2) Red flags for non-odontogenic jaw pain: pain reproduces with exertion (not with chewing alone), diaphoresis, pain that does not localize to a single tooth, normal dental exam, systemic symptoms (nausea, dyspnea). Any one of these in a patient with cardiac risk factors = cardiac workup before any dental treatment. (3) Dental provider role: perform thorough dental exam to exclude odontogenic cause. If dental exam is normal AND systemic symptoms are present \u2192 DO NOT provide dental treatment. Refer immediately to ED or call 911. Do not administer local anesthetic (epinephrine in LA can precipitate arrhythmia in active ACS). (4) Give aspirin before transfer: 325mg non-enteric coated aspirin chewed is appropriate dental office management before ED transfer if ACS is suspected \u2014 evidence-based bridge. (5) Documentation: document the exam findings, exclusion of dental cause, systemic findings (BP, diaphoresis), the referral decision, and that the patient was directed to the ED."
     }
   }
 };

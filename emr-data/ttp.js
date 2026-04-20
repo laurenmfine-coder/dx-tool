@@ -1,4 +1,4 @@
-/* emr-data/ttp.js — Auto-generated EMR case data for TTP */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Amanda Lewis",
@@ -15,33 +15,70 @@ window.EMR_DATA = {
     "address": "2514 Dogwood Ln, Denver, CO 80212",
     "insurance": "Cigna PPO",
     "pcp": "Dr. David Kim, MD",
-    "pharmacy": "Rite Aid — Palm Ave",
+    "pharmacy": "Rite Aid \u2014 Palm Ave",
     "emergencyContact": {
       "name": "Nathan Lewis",
       "phone": "(414) 555-4262",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",
+    "chiefComplaint": "Confusion, petechiae, fever, dark urine \u2014 found to have severe thrombocytopenia",
     "diagnosis": "TTP"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Previously healthy",
+      "problem": "TTP \u2014 ADAMTS13 severely deficient",
+      "icd": "M31.19",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Grace Park, 38F \u2014 thrombocytopenia + microangiopathic hemolytic anemia + neurological symptoms (confusion). PLASMIC score 7."
+    },
+    {
+      "problem": "Microangiopathic hemolytic anemia \u2014 schistocytes on smear",
+      "icd": "D59.4",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Hgb 7.2, LDH 1840, schistocytes >2/hpf. Direct Coombs negative \u2014 confirms microangiopathic, not immune-mediated."
+    },
+    {
+      "problem": "Neurological involvement \u2014 confusion and headache",
+      "icd": "G93.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Confusion and headache from cerebral microvascular occlusion. Resolves with successful PEX."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Combined OCP",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Plasma exchange (PEX) \u2014 1-1.5 plasma volumes daily",
+      "sig": "EMERGENCY \u2014 start within hours of diagnosis. Use FFP as replacement fluid. Continue daily until platelet count >150K x2 days.",
+      "prescriber": "Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 active"
+    },
+    {
+      "name": "Prednisone 1mg/kg PO daily \u2014 immunosuppression",
+      "sig": "Adjunct immunosuppression \u2014 TTP is autoimmune (anti-ADAMTS13 antibody). Steroids reduce antibody production.",
+      "prescriber": "Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Caplacizumab (Cablivi) 11mg SQ daily \u2014 anti-VWF nanobody",
+      "sig": "Blocks VWF-platelet interaction \u2014 rapidly reduces microvascular thrombosis. Start with PEX, continue 30 days after last PEX.",
+      "prescriber": "Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 adjunct"
+    },
+    {
+      "name": "NO PLATELET TRANSFUSION \u2014 contraindicated in TTP",
+      "sig": "Platelet transfusion in TTP = 'pouring gasoline on fire' \u2014 provides substrate for further microvascular thrombosis. Contraindicated unless life-threatening hemorrhage.",
+      "prescriber": "Hematology \u2014 DO NOT GIVE",
+      "start": "AVOID",
+      "refills": 0,
+      "status": "CONTRAINDICATED"
     }
   ],
   "allergies": [
@@ -59,7 +96,7 @@ window.EMR_DATA = {
       "bp": "128/82",
       "hr": "108",
       "rr": "20",
-      "temp": "38.6°C",
+      "temp": "38.6\u00b0C",
       "spo2": "98%",
       "pain": "4/10",
       "bmi": "21",
@@ -72,181 +109,71 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",
-      "hpi": "Amanda Lewis is a 33-year-old female presenting with confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia. Past medical history includes Previously healthy. See chart for full details.",
+      "cc": "Confusion, petechiae, fever, dark urine \u2014 found to have severe thrombocytopenia",
+      "hpi": "Amanda Lewis is a 33-year-old female presenting with confusion, petechiae, fever, dark urine \u2014 found to have severe thrombocytopenia. Past medical history includes Previously healthy. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "TTP — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "TTP \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-213658",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "TTP Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "7.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "12",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            },
-            {
-              "test": "Reticulocyte Count",
-              "value": "8.2",
-              "unit": "%",
-              "range": "0.5-2.5",
-              "flag": "H"
-            },
-            {
-              "test": "Schistocytes",
-              "value": "4+",
-              "unit": "per HPF",
-              "range": "<1",
-              "flag": "H"
-            }
-          ]
+          "test": "Platelets",
+          "value": "18",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "7.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Total Bili",
-              "value": "4.2",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Ldh",
-              "value": "1450",
-              "unit": "U/L",
-              "range": "120-246",
-              "flag": "H"
-            },
-            {
-              "test": "Haptoglobin",
-              "value": "<10",
-              "unit": "mg/dL",
-              "range": "30-200",
-              "flag": "L"
-            }
-          ]
+          "test": "LDH",
+          "value": "1840",
+          "unit": "U/L",
+          "ref": "135-225",
+          "flag": "H"
+        },
+        {
+          "test": "Schistocytes on smear",
+          "value": "3+ (>2/hpf)",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
+        },
+        {
+          "test": "Direct Coombs (DAT)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
+        },
+        {
+          "test": "ADAMTS13 activity (send-out)",
+          "value": "<5% activity \u2014 severely deficient",
+          "unit": "",
+          "ref": ">67%",
+          "flag": "L"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-396445",
-      "clinical": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial abnormality.",
-      "impression": "Normal.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -335,17 +262,16 @@ window.EMR_DATA = {
       "Fundoscopic examination": "Retinal hemorrhages present bilaterally.",
       "Assessment for jaundice": "Mild scleral icterus present.",
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, rubs, or gallops.",
-      "Temperature assessment": "Febrile at 38.6°C",
+      "Temperature assessment": "Febrile at 38.6\u00b0C",
       "Assessment for neck stiffness": "No nuchal rigidity or meningeal signs."
     },
     "ddxTargets": [
-      "Thrombotic thrombocytopenic purpura (TTP) (correct diagnosis)",
-      "Immune thrombocytopenic purpura (ITP)",
-      "Hemolytic uremic syndrome (HUS)",
-      "Acute leukemia",
-      "Disseminated intravascular coagulation (DIC)",
-      "Drug-induced thrombocytopenia",
-      "Viral syndrome with thrombocytopenia"
+      "TTP \u2014 PLASMIC 7, ADAMTS13 <5%, microangiopathic hemolysis (correct)",
+      "HUS (hemolytic uremic syndrome) \u2014 prominent AKI, diarrhea prodrome (STEC), different ADAMTS13",
+      "DIC \u2014 PT/PTT prolonged, fibrinogen low; TTP has normal coagulation",
+      "Evans syndrome \u2014 immune-mediated: Coombs positive; TTP Coombs negative",
+      "HELLP syndrome \u2014 pregnancy-associated; patient not pregnant",
+      "Thrombocytopenia from sepsis \u2014 no schistocytes or MAHA pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on recent viral illness and attributing symptoms to post-viral syndrome, missing the urgency of TTP",
@@ -355,7 +281,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. I notice you're considering several causes of thrombocytopenia. What key historical features would help you distinguish between these possibilities? Think about what combinations of symptoms might point toward specific diagnoses.",
       "phase5": "Excellent work gathering the history and physical. You've identified thrombocytopenia with bleeding, altered mental status, fever, and evidence of hemolysis. What syndrome classically presents with this constellation of findings? How does this change your diagnostic priorities?",
-      "finalDebrief": "This case illustrates the classic pentad of TTP: thrombocytopenia, microangiopathic hemolytic anemia, neurologic symptoms, fever, and renal involvement. Notice how the initial presentation could easily be mistaken for ITP or a post-viral syndrome. What key features helped distinguish TTP as the most likely diagnosis?"
+      "finalDebrief": "This case illustrates the classic pentad of TTP: thrombocytopenia, microangiopathic hemolytic anemia, neurologic symptoms, fever, and renal involvement. Notice how the initial presentation could easily be mistaken for ITP or a post-viral syndrome. What key features helped distinguish TTP as the most likely diagnosis?",
+      "final": "Diagnosis: TTP. Key learning: (1) PLASMIC score (clinical TTP prediction before ADAMTS13 results): Platelet <30K, hemoLysis markers (LDH >2x ULN), no Active cancer, no Stem cell transplant, MCV <90, INR <1.5, Creatinine <2. Score 6-7 = high probability TTP \u2192 start PEX immediately without waiting for ADAMTS13 result. (2) TTP mechanism: ADAMTS13 (a VWF-cleaving protease) is severely deficient due to autoantibody \u2192 ultra-large VWF multimers accumulate \u2192 spontaneous platelet aggregation \u2192 microthrombi \u2192 MAHA + thrombocytopenia + end-organ ischemia. (3) PEX removes the anti-ADAMTS13 antibody and replenishes ADAMTS13. This is why PEX works \u2014 it is both therapeutic (removes antibody) and replacement (restores enzyme). Must use FFP as replacement \u2014 albumin does NOT work. (4) Platelet transfusion in TTP: absolutely contraindicated except for life-threatening hemorrhage \u2014 provides substrate for further microvascular thrombosis, worsening ischemia. Classic teaching: 'fuel to the fire.' (5) Caplacizumab: anti-VWF nanobody that prevents VWF-platelet interaction. Dramatically speeds platelet count recovery and reduces refractory/relapsing TTP. Started alongside PEX."
     }
+  },
+  "meta": {
+    "diagnosis": "Thrombotic Thrombocytopenic Purpura \u2014 ADAMTS13 Deficiency, Plasma Exchange Emergency, PLASMIC Score High",
+    "caseId": "ttp"
   }
 };

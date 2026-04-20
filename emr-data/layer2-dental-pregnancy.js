@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Second Trimester Pregnant Patient",
-      "icd": "Z00.00",
+      "problem": "Dental care during pregnancy \u2014 22 weeks gestation, second trimester",
+      "icd": "Z34.22",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Sofia Reyes, 28F \u2014 22 weeks pregnant. Painful upper right molar, swollen gingiva. Dental avoidance during pregnancy is a myth \u2014 treatment is safe and necessary."
+    },
+    {
+      "problem": "Pregnancy gingivitis \u2014 exaggerated gingival response to plaque",
+      "icd": "K05.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Progesterone increases gingival vascularity and plaque response. Generalized erythema and edema \u2014 pregnancy-associated gingivitis."
+    },
+    {
+      "problem": "Periodontal disease in pregnancy \u2014 preterm birth link",
+      "icd": "K05.31",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Moderate periodontitis \u2014 treating periodontal disease during pregnancy may reduce preterm birth risk (evidence emerging but not definitive)."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Lidocaine 2% with 1:100,000 epinephrine \u2014 safe in pregnancy",
+      "sig": "Local anesthetic of choice in pregnancy. Category B. Standard doses safe. Epinephrine in LA is safe \u2014 does not reach fetus at dental doses.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Safe \u2014 use as needed"
+    },
+    {
+      "name": "Amoxicillin 500mg TID \u2014 if antibiotic needed for dental infection",
+      "sig": "Category B antibiotic \u2014 safe in pregnancy. Avoid tetracyclines (tooth staining), fluoroquinolones, metronidazole in first trimester.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 if infection"
+    },
+    {
+      "name": "Acetaminophen 500-1000mg q6h PRN \u2014 dental pain",
+      "sig": "Category B \u2014 safe in pregnancy for dental pain. Avoid NSAIDs after 20 weeks (premature closure of ductus arteriosus).",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "X-rays \u2014 minimized but safe when necessary",
+      "sig": "Dental radiographs with thyroid collar and lead apron have negligible fetal radiation exposure \u2014 safe when clinically indicated. Do not withhold necessary radiographs from pregnant patients.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 0,
+      "status": "Use when clinically indicated"
     }
   ],
   "allergies": [
@@ -97,7 +135,42 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Pregnancy Dental Assessment",
+      "results": [
+        {
+          "test": "Periodontal probing depths",
+          "value": "4-6mm \u2014 generalized moderate periodontitis",
+          "unit": "",
+          "ref": "<3mm healthy",
+          "flag": "H"
+        },
+        {
+          "test": "Plaque score",
+          "value": "68%",
+          "unit": "",
+          "ref": "<20%",
+          "flag": "H"
+        },
+        {
+          "test": "Gestational age",
+          "value": "22 weeks (second trimester)",
+          "unit": "",
+          "ref": "Second trimester = optimal for dental treatment",
+          "flag": ""
+        },
+        {
+          "test": "OB clearance",
+          "value": "Obtained \u2014 cleared for dental treatment",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +203,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-dental-pregnancy",
-    "diagnosis": "See diagnosis \u2014 Second Trimester Pregnant Patient",
+    "diagnosis": "Dental Treatment During Pregnancy \u2014 Second Trimester Safety, Periodontal Disease and Preterm Birth Risk",
     "acuity": 2,
     "presentation": "Second Trimester Pregnant Patient",
     "category": "obstetric"
@@ -176,12 +249,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Second Trimester Pregnant Patient \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Pregnancy gingivitis + moderate periodontitis \u2014 safe to treat in second trimester (correct)",
+      "Defer all dental treatment until postpartum \u2014 a myth; dental disease in pregnancy is a risk to mother and fetus",
+      "First trimester emergency only \u2014 dental treatment deferred in first trimester when possible but not an absolute contraindication",
+      "Pyogenic granuloma (pregnancy tumor) \u2014 localized vascular gingival overgrowth, usually single site; here generalized gingivitis",
+      "Gingival overgrowth from systemic disease \u2014 medications, leukemia; pregnancy gingivitis is the diagnosis in this context",
+      "Acute necrotizing periodontal disease \u2014 pain, necrosis, fetid odor; pregnancy gingivitis is less severe"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Second Trimester Pregnant Patient. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) A 22-week pregnant patient has a dental abscess with facial swelling. She refuses dental X-rays because 'radiation is bad for the baby.' She asks if you can just give antibiotics. What do you tell her about X-ray safety in pregnancy \u2014 and why is antibiotics-only management potentially dangerous? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: dental treatment safety in second trimester pregnancy. Key learning: (1) Dental treatment in pregnancy is SAFE and recommended. The second trimester (weeks 14-27) is the optimal window \u2014 organogenesis is complete, patient is comfortable, supine positioning still feasible. First trimester: avoid elective treatment if possible (organogenesis). Third trimester: supine hypotension risk (left lateral tilt), patient discomfort \u2014 emergency treatment only in late third trimester. (2) Local anesthesia in pregnancy: lidocaine with 1:100,000 epinephrine is Category B \u2014 safe. Epinephrine in dental doses does not reach the fetus in significant concentrations. Withholding adequate LA causes pain and stress hormones \u2014 more harmful than the LA itself. (3) Medications to avoid: tetracyclines (tooth/bone staining), fluoroquinolones, high-dose aspirin, NSAIDs after 20 weeks. Safe: amoxicillin, cephalexin, clindamycin, acetaminophen. (4) Dental X-rays in pregnancy: safe when clinically indicated with lead apron and thyroid collar. Fetal radiation exposure from dental radiographs is negligible. Withholding necessary radiographs can delay diagnosis \u2014 more harmful than the imaging. (5) Periodontal disease and preterm birth: strong association between untreated periodontitis and preterm/low birthweight infants (inflammatory mediators, bacteremia). Treating periodontitis during pregnancy is beneficial. Dental cleaning and periodontal treatment are safe throughout pregnancy."
     }
   }
 };

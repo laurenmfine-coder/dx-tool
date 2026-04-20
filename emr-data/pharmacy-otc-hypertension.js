@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: OTC Cold Medicine Request",
-      "icd": "Z00.00",
+      "problem": "Pseudoephedrine OTC purchase \u2014 hypertension contraindication",
+      "icd": "I10",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Maria Santos, 55F \u2014 hypertension on amlodipine + lisinopril. Purchasing pseudoephedrine (Sudafed) for cold symptoms. Pharmacist intervention needed."
+    },
+    {
+      "problem": "NSAID use \u2014 ibuprofen purchased for pain",
+      "icd": "I10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Ibuprofen purchased alongside pseudoephedrine. NSAIDs blunt antihypertensive effect of ACEi and diuretics \u2014 can significantly raise BP."
+    },
+    {
+      "problem": "Pharmacist medication therapy management \u2014 OTC interaction interception",
+      "icd": "Z79.899",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Pharmacist role: intercept potentially harmful OTC purchases, counsel on safe alternatives, document interaction."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "COUNSEL against pseudoephedrine \u2014 hypertension contraindication",
+      "sig": "Pseudoephedrine is a sympathomimetic \u2014 raises BP significantly in hypertensive patients. Contraindicated. Recommend intranasal saline or intranasal ipratropium as safe alternative.",
+      "prescriber": "Pharmacist \u2014 OTC counseling",
+      "start": "AVOID",
+      "refills": 0,
+      "status": "AVOID \u2014 counsel"
+    },
+    {
+      "name": "Intranasal saline spray \u2014 safe decongestant alternative",
+      "sig": "Isotonic or hypertonic saline nasal spray \u2014 mechanically clears congestion without systemic BP effect.",
+      "prescriber": "Pharmacist",
+      "start": "2024",
+      "refills": 0,
+      "status": "Safe alternative"
+    },
+    {
+      "name": "COUNSEL against OTC ibuprofen \u2014 reduce to short course or switch to acetaminophen",
+      "sig": "NSAIDs blunt ACEi/ARB and diuretic effects. For occasional use (1-2 days): acceptable. For ongoing pain: acetaminophen preferred in hypertension. Naproxen may have slightly lower BP effect than ibuprofen.",
+      "prescriber": "Pharmacist",
+      "start": "Acetaminophen preferred",
+      "refills": 0,
+      "status": "Switch to acetaminophen"
+    },
+    {
+      "name": "Intranasal ipratropium 0.03% \u2014 reduce rhinorrhea",
+      "sig": "Anticholinergic nasal spray \u2014 reduces rhinorrhea without systemic vasopressor effect. Safe in hypertension.",
+      "prescriber": "Pharmacist",
+      "start": "2024",
+      "refills": 1,
+      "status": "Safe alternative"
     }
   ],
   "allergies": [
@@ -97,7 +135,35 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Pharmacy OTC Counseling",
+      "results": [
+        {
+          "test": "Current BP (checked at pharmacy kiosk)",
+          "value": "148/92",
+          "unit": "mmHg",
+          "ref": "<130/80 on treatment",
+          "flag": "H"
+        },
+        {
+          "test": "Current medications confirmed",
+          "value": "Amlodipine 10mg, Lisinopril 20mg",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "OTC purchases flagged",
+          "value": "Pseudoephedrine 120mg + Ibuprofen 400mg",
+          "unit": "",
+          "ref": "Both problematic in hypertension",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +196,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pharmacy-otc-hypertension",
-    "diagnosis": "See diagnosis \u2014 OTC Cold Medicine Request",
+    "diagnosis": "OTC Medication Interaction With Hypertension \u2014 NSAIDs and Decongestants, Patient Counseling, Safe Alternatives",
     "acuity": 3,
     "presentation": "OTC Cold Medicine Request",
     "category": "pharmacologic"
@@ -173,12 +239,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "OTC Cold Medicine Request \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "OTC medication-hypertension interaction \u2014 pharmacist intervention (correct)",
+      "Uncontrolled hypertension from non-adherence \u2014 BP elevated but OTC interaction is the immediate issue",
+      "Second antihypertensive needed \u2014 BP not at goal, but OTC medications are the acute issue to address",
+      "No intervention needed \u2014 OTC medications are widely available \u2014 INCORRECT; patient safety intervention required",
+      "Refer to PCP for all OTC questions \u2014 appropriate for complex cases, but pharmacist can and should counsel here",
+      "Pseudoephedrine safe with close BP monitoring \u2014 INCORRECT; contraindicated in significant hypertension"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +254,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: OTC Cold Medicine Request. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) Walk through the ingredient-by-ingredient safety analysis \u2014 and counsel him on his safest options. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: OTC medication safety in hypertension \u2014 pharmacy intervention. Key learning: (1) Sympathomimetics and hypertension: pseudoephedrine, phenylephrine (nasal spray and oral), and oxymetazoline (nasal spray \u2014 minimal systemic absorption) are decongestants. Pseudoephedrine and phenylephrine raise systolic BP by 5-10+ mmHg via alpha-1 receptor stimulation. Contraindicated in significant hypertension, especially uncontrolled. Safe nasal alternatives: isotonic saline irrigation, ipratropium nasal spray. (2) NSAIDs and antihypertensives: NSAIDs inhibit prostaglandin synthesis \u2192 sodium and water retention \u2192 blunt antihypertensive effect of ACEi, ARBs, and diuretics. Mean systolic BP rise of 3-5 mmHg with regular NSAID use. Most pronounced with indomethacin; naproxen and aspirin (low-dose) may be slightly better tolerated. Acetaminophen is the safe analgesic for hypertensive patients. (3) Pharmacy-based BP monitoring: BP measurement at the pharmacy kiosk identified uncontrolled hypertension \u2014 an opportunity to refer to PCP for medication adjustment AND prevent worsening with OTC purchase. (4) OTC counseling is a pharmacist core competency: pharmacists are the most accessible healthcare providers. Proactive counseling at point of sale prevents adverse drug events. The pharmacist-patient interaction at OTC purchase is a clinical intervention, not a transaction. (5) Documentation: pharmacist should document OTC counseling interventions in the pharmacy management system \u2014 creates a record and supports continuity of care."
     }
   }
 };

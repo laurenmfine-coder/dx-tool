@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Recurrent Ankle Sprains",
-      "icd": "Z00.00",
-      "onset": "2024",
+      "problem": "Chronic lateral ankle instability \u2014 4th sprain in 3 years",
+      "icd": "M25.371",
+      "onset": "2021",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Jasmine Williams, 24F \u2014 soccer player. ATFL and CFL laxity on stress testing. CAIT score 16. Single-leg balance 12 seconds."
+    },
+    {
+      "problem": "Proprioceptive deficit \u2014 damaged mechanoreceptors in ATFL",
+      "icd": "M25.371",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Repeated sprains damage mechanoreceptors \u2014 functional instability overlaps with mechanical laxity."
+    },
+    {
+      "problem": "Peroneal weakness \u2014 primary dynamic stabilizer deficiency",
+      "icd": "M62.151",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Peroneus longus/brevis strength 3+/5 \u2014 impaired active restraint against inversion."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Neuromuscular training \u2014 BESS protocol, 3x/week",
+      "sig": "Firm \u2192 foam \u2192 eyes closed \u2192 perturbation. Proprioceptive retraining compensates for mechanoreceptor damage. 6-week minimum program.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Peroneal strengthening \u2014 eversion resistance progression",
+      "sig": "Theraband eversion \u2192 single-leg heel raises \u2192 lateral step-ups \u2192 unstable surface. Target 5/5 symmetric strength.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Lace-up ankle brace \u2014 sport activity",
+      "sig": "Reduces re-sprain risk 50-60% during return to sport. Adjunct to rehab, not a substitute.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 sport"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Ankle Instability Assessment",
+      "results": [
+        {
+          "test": "CAIT score",
+          "value": "16/30",
+          "unit": "",
+          "ref": "\u226524 stable",
+          "flag": "L"
+        },
+        {
+          "test": "Anterior drawer test",
+          "value": "Positive \u2014 8mm translation",
+          "unit": "",
+          "ref": "<5mm",
+          "flag": "H"
+        },
+        {
+          "test": "Single-leg balance (eyes open)",
+          "value": "12",
+          "unit": "seconds",
+          "ref": ">30 seconds",
+          "flag": "L"
+        },
+        {
+          "test": "Peroneal eversion strength",
+          "value": "3+/5 right",
+          "unit": "",
+          "ref": "5/5",
+          "flag": "L"
+        },
+        {
+          "test": "Talar tilt test",
+          "value": "Positive \u2014 >5\u00b0 side-to-side",
+          "unit": "",
+          "ref": "<5\u00b0",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pt-chronic-ankle-instability",
-    "diagnosis": "See diagnosis \u2014 Recurrent Ankle Sprains",
+    "diagnosis": "Chronic Lateral Ankle Instability \u2014 ATFL/CFL Laxity, Neuromuscular Rehabilitation, Peroneal Strengthening",
     "acuity": 3,
     "presentation": "Recurrent Ankle Sprains",
     "category": "musculoskeletal"
@@ -180,12 +252,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Recurrent Ankle Sprains \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Chronic lateral ankle instability \u2014 neuromuscular rehab (correct)",
+      "Peroneal tendon tear \u2014 US/MRI if suspected; mechanical instability is primary diagnosis",
+      "Osteochondral lesion of talus \u2014 persistent joint line pain, imaging; different presentation",
+      "Acute lateral ankle sprain \u2014 this is recurrent/chronic, not acute",
+      "Subtalar instability \u2014 CFL involvement; assess subtalar mobility",
+      "Sinus tarsi syndrome \u2014 lateral hindfoot pain; different anatomical location"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Recurrent Ankle Sprains. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What is the evidence for proprioceptive training versus bracing for chronic ankle instability \u2014 and what functional criteria determine return to cutting sports? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: chronic lateral ankle instability. Key learning: (1) CAI has two components: mechanical instability (ATFL/CFL laxity) and functional instability (proprioceptive deficit from damaged mechanoreceptors). Both must be addressed. (2) Peroneal muscles are the primary dynamic restraints to inversion \u2014 strengthening them is essential. Progress from bilateral to unilateral to unstable surface. (3) CAIT score: <24 = instability. Return to sport criteria: CAIT \u226524 + single-leg balance >30s + symmetric peroneal strength + sport-specific testing. (4) Neuromuscular training reduces re-sprain rate 40-50% \u2014 superior to bracing alone. (5) Surgery (Brostrom-Gould repair) reserved for true mechanical instability unresponsive to 6 months of rehab."
     }
   }
 };

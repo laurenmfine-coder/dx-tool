@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Vestibular Neuritis Week 3",
-      "icd": "Z00.00",
+      "problem": "BPPV \u2014 posterior canal, right side",
+      "icd": "H81.10",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Dorothy Nelson, 68F \u2014 brief vertigo with position change (rolling over, looking up). Dix-Hallpike right: upbeat torsional nystagmus, 5-10s latency, fatigues."
+    },
+    {
+      "problem": "Fall risk \u2014 two near-falls from sudden vertigo",
+      "icd": "Z91.81",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "TUG 14 seconds. Balance impaired from vestibular disruption."
+    },
+    {
+      "problem": "Avoidance behavior \u2014 worsens vestibular deconditioning",
+      "icd": "F41.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Avoiding head movements prolongs BPPV and causes vestibular deconditioning. Habituation exercises required."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Epley maneuver \u2014 right posterior canal",
+      "sig": "4-position canalith repositioning. 85% success rate in one session. Teach patient to self-perform at home. Follow-up in 1 week if vertigo persists.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 treatment"
+    },
+    {
+      "name": "Brandt-Daroff exercises \u2014 home program",
+      "sig": "3 sets of 5 reps, 3x/day until no vertigo for 2 consecutive days. Promotes habituation if particles don't fully resolve with Epley.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 home program"
+    },
+    {
+      "name": "Balance training \u2014 concurrent with BPPV treatment",
+      "sig": "Progressive balance training addressing secondary vestibular compensation and fall risk.",
+      "prescriber": "PT",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Vestibular Assessment",
+      "results": [
+        {
+          "test": "Dix-Hallpike right",
+          "value": "Positive \u2014 upbeat torsional nystagmus, 5-10s latency, fatigues",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Dix-Hallpike left",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Roll test (supine)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative \u2014 no horizontal nystagmus",
+          "flag": ""
+        },
+        {
+          "test": "TUG",
+          "value": "14",
+          "unit": "seconds",
+          "ref": "<12 normal",
+          "flag": "H"
+        },
+        {
+          "test": "Dynamic Visual Acuity",
+          "value": "3 line loss",
+          "unit": "",
+          "ref": "<2 line loss",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pt-vestibular-rehab",
-    "diagnosis": "See diagnosis \u2014 Vestibular Neuritis Week 3",
+    "diagnosis": "BPPV Posterior Canal Right \u2014 Epley Maneuver, Home Program, Fall Risk Reduction",
     "acuity": 3,
     "presentation": "Vestibular Neuritis Week 3",
     "category": "neurologic"
@@ -180,12 +252,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Vestibular Neuritis Week 3 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "BPPV posterior canal right \u2014 Epley maneuver (correct)",
+      "Horizontal canal BPPV \u2014 roll test positive with horizontal nystagmus; negative here",
+      "Vestibular neuritis \u2014 constant vertigo, not positional; adaptation exercises not Epley",
+      "M\u00e9ni\u00e8re disease \u2014 vertigo + tinnitus + hearing loss + aural fullness",
+      "Central vertigo \u2014 no fatiguing, no latency, vertical nystagmus, other central signs",
+      "Orthostatic hypotension \u2014 BP drop on standing; not head-position dependent"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Vestibular Neuritis Week 3. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What is the evidence for vestibular rehabilitation exercises over spontaneous recovery \u2014 and which specific exercises address gaze stabilization versus habituation in this patient? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: right posterior canal BPPV. Key learning: (1) Dix-Hallpike: upbeat torsional nystagmus + 5-10s latency + duration <60s + fatigues with repeat = posterior canal BPPV. The nystagmus fast phase beats toward the affected (dependent) ear. (2) Epley mechanics: free-floating otoconia in posterior canal \u2192 shift with position change \u2192 false signal of rotation \u2192 vertigo. Epley guides particles back into utricle via 4-position gravity sequence. (3) 85% success in one session. If persistent after 3 attempts, reconsider diagnosis. Teach self-Epley for recurrences. (4) BPPV recurrence: ~50% at 1 year. Patient education on recognition and self-treatment is key. (5) BPPV vs vestibular neuritis: BPPV = positional, brief, fatigable. Vestibular neuritis = acute constant vertigo, spontaneous nystagmus, gait ataxia \u2014 treated with adaptation exercises (Cawthorne-Cooksey), NOT Epley."
     }
   }
 };

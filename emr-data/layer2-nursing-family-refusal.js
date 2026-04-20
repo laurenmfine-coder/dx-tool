@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Family Refusing Recommended Treatment",
-      "icd": "Z00.00",
+      "problem": "Surrogate refusing NG tube against patient's documented prior wishes",
+      "icd": "Z71.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Helen Foster, 84F \u2014 severe dementia. Son refusing NG tube. PCP notes document patient's wish: 'no tubes if I can't care for myself.'"
+    },
+    {
+      "problem": "Substituted judgment standard \u2014 prior wishes override surrogate preference",
+      "icd": "Z71.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Surrogate must act on patient's known wishes (substituted judgment), not personal preference. Prior statement is legally and ethically significant."
+    },
+    {
+      "problem": "Nursing advocacy \u2014 document conflict, escalate, request ethics consultation",
+      "icd": "Z71.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Nurses are ethically obligated to advocate for documented patient wishes, even when that means challenging the surrogate."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Social work consultation \u2014 family conflict, goals of care",
+      "sig": "Social work mediates family conflict, clarifies what patient would have wanted based on values and prior conversations.",
+      "prescriber": "Nursing/MD",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 urgent"
+    },
+    {
+      "name": "Palliative care \u2014 goals of care and comfort alternatives",
+      "sig": "Palliative care explores comfort feeding (assisted oral feeding) as an alternative aligned with patient's prior wishes.",
+      "prescriber": "MD/Nursing",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Ethics committee consultation \u2014 surrogate vs documented wishes",
+      "sig": "Nursing can initiate ethics consultation independently. Ethics committees advise on the ethical and legal framework \u2014 do not make decisions.",
+      "prescriber": "Nursing/MD",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 refer"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Nursing Advocacy Assessment",
+      "results": [
+        {
+          "test": "PCP documentation 2021",
+          "value": "'Patient stated: no tubes or machines if I can't care for myself'",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Formal advance directive",
+          "value": "None on file",
+          "unit": "",
+          "ref": "AD present",
+          "flag": "L"
+        },
+        {
+          "test": "Surrogate",
+          "value": "Son \u2014 legal healthcare surrogate (verbal)",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Current status",
+          "value": "Unable to take PO safely \u2014 aspiration risk",
+          "unit": "",
+          "ref": "",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-nursing-family-refusal",
-    "diagnosis": "See diagnosis \u2014 Family Refusing Recommended Treatment",
+    "diagnosis": "Family Refusal of Treatment \u2014 Surrogate Conflicts With Documented Patient Wishes, Nursing Advocacy and Ethics Consultation",
     "acuity": 2,
     "presentation": "Family Refusing Recommended Treatment",
     "category": "other"
@@ -177,12 +242,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Family Refusing Recommended Treatment \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Surrogate refusal \u2014 nursing advocacy for documented prior wishes (correct)",
+      "Surrogate has absolute authority \u2014 must act on patient's known wishes, not personal preferences",
+      "Ignore prior documented wishes \u2014 prior statements legally and ethically significant",
+      "Proceed with NG tube over family objection \u2014 requires ethics/legal process first",
+      "Document and do nothing \u2014 nursing must actively advocate",
+      "Discharge \u2014 abandonment; ethics consultation is the appropriate pathway"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +257,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Family Refusing Recommended Treatment. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Your 88yo patient with severe dementia has aspiration pneumonia. The palliative care team recommended comfort care. The patient's son, who holds healthcare proxy, insists on full aggressive treatment including intubation if needed. The patient has no advance directive. What is the ethical framework \u2014 and what is your nursing role versus the physician's role in this conversation? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: surrogate refusal conflict, nursing advocacy. Key learning: (1) Substituted judgment: surrogate must decide what the patient WOULD have chosen based on known values and prior wishes \u2014 not what the surrogate wants. Prior documented statement ('no tubes') is the strongest guide. (2) Nursing advocacy: ANA Code of Ethics obligates nurses to advocate for patient's rights and prior wishes \u2014 not defer automatically to surrogates who conflict with documented patient wishes. (3) Ethics consultation: nursing can and should initiate independently when surrogate conflicts with prior documented wishes. (4) Alternatives to NG tube: comfort feeding, hospice care, oral care and comfort measures. Palliative care helps families understand these can be compassionate choices aligned with patient wishes. (5) Documentation: document all family conversations, the patient's prior expressed wishes, consultations ordered, and nursing assessment of the conflict."
     }
   }
 };

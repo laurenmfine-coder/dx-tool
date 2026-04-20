@@ -1,4 +1,4 @@
-/* emr-data/venom-immunotherapy-reaction.js — Multi-Setting Allergy Case: VIT Systemic Reaction */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "4576 Foxglove Dr, Pittsburgh, PA 15207",
       "insurance": "Humana Gold Plus",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Michael Brennan",
         "phone": "(502) 555-6848",
@@ -73,7 +73,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "On venom immunotherapy (VIT) — build-up phase",
+          "description": "On venom immunotherapy (VIT) \u2014 build-up phase",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -124,7 +124,7 @@ window.EMR_DATA = {
           "bp": "92/58",
           "hr": "118",
           "rr": "24",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "93%",
           "pain": "6/10"
         }
@@ -147,7 +147,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -161,7 +161,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -211,7 +211,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Brought to ED from allergist office after VIT systemic reaction not responding to epi",
-          "hpi": "Catherine Brennan — Brought to ED from allergist office after VIT systemic reaction not responding to epi",
+          "hpi": "Catherine Brennan \u2014 Brought to ED from allergist office after VIT systemic reaction not responding to epi",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -220,7 +220,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted after VIT-related anaphylaxis — observation and VIT protocol modification",
+        "chiefComplaint": "Admitted after VIT-related anaphylaxis \u2014 observation and VIT protocol modification",
         "diagnosis": "VIT Systemic Reaction"
       },
       "problems": [
@@ -233,7 +233,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "On venom immunotherapy (VIT) — build-up phase",
+          "description": "On venom immunotherapy (VIT) \u2014 build-up phase",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -266,7 +266,7 @@ window.EMR_DATA = {
           "bp": "112/72",
           "hr": "84",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "2/10"
         }
@@ -289,7 +289,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -303,7 +303,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -352,8 +352,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted after VIT-related anaphylaxis — observation and VIT protocol modification",
-          "hpi": "Catherine Brennan — Admitted after VIT-related anaphylaxis — observation and VIT protocol modification",
+          "cc": "Admitted after VIT-related anaphylaxis \u2014 observation and VIT protocol modification",
+          "hpi": "Catherine Brennan \u2014 Admitted after VIT-related anaphylaxis \u2014 observation and VIT protocol modification",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -362,7 +362,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I re-evaluation — modify VIT protocol after systemic reaction",
+        "chiefComplaint": "A/I re-evaluation \u2014 modify VIT protocol after systemic reaction",
         "diagnosis": "VIT Systemic Reaction"
       },
       "problems": [
@@ -375,7 +375,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "On venom immunotherapy (VIT) — build-up phase",
+          "description": "On venom immunotherapy (VIT) \u2014 build-up phase",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -408,7 +408,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -431,7 +431,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -445,7 +445,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -494,8 +494,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I re-evaluation — modify VIT protocol after systemic reaction",
-          "hpi": "Catherine Brennan — A/I re-evaluation — modify VIT protocol after systemic reaction",
+          "cc": "A/I re-evaluation \u2014 modify VIT protocol after systemic reaction",
+          "hpi": "Catherine Brennan \u2014 A/I re-evaluation \u2014 modify VIT protocol after systemic reaction",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -505,7 +505,7 @@ window.EMR_DATA = {
     "clinic": {
       "patient": {
         "chiefComplaint": "Generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection",
-        "diagnosis": "Venom Immunotherapy — Systemic Reaction"
+        "diagnosis": "Venom Immunotherapy \u2014 Systemic Reaction"
       },
       "problems": [
         {
@@ -517,7 +517,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "On venom immunotherapy (VIT) — build-up phase",
+          "description": "On venom immunotherapy (VIT) \u2014 build-up phase",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -550,7 +550,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "96",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "4/10"
         }
@@ -573,7 +573,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -587,7 +587,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -639,7 +639,7 @@ window.EMR_DATA = {
           "cc": "Generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection",
           "hpi": "Catherine Brennan presents with generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection.",
           "exam": "See documentation.",
-          "assessment": "Venom Immunotherapy — Systemic Reaction",
+          "assessment": "Venom Immunotherapy \u2014 Systemic Reaction",
           "plan": "See orders."
         }
       ]
@@ -659,49 +659,62 @@ window.EMR_DATA = {
     "address": "7305 Hollyhock Rd, New Orleans, LA 70114",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Michael Brennan",
       "phone": "(702) 555-6438",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection",
-    "diagnosis": "Venom Immunotherapy — Systemic Reaction"
+    "diagnosis": "Venom Immunotherapy \u2014 Systemic Reaction"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "History of yellow jacket anaphylaxis",
+      "problem": "Bee venom anaphylaxis \u2014 first systemic reaction",
+      "icd": "T63.441A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Jennifer Osei, 52F \u2014 bee sting in garden, anaphylaxis: urticaria + throat swelling + hypotension. Epinephrine by EMS."
     },
     {
-      "id": "prob-2",
-      "description": "On venom immunotherapy (VIT) — build-up phase",
+      "problem": "VIT candidacy \u2014 high-risk adult with systemic anaphylaxis",
+      "icd": "T63.441A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Adult with systemic anaphylaxis = VIT indicated regardless of venom IgE level. Allergy referral within 1-2 weeks."
+    },
+    {
+      "problem": "EpiPen prescription \u2014 bridge until VIT established",
+      "icd": "T63.441A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Two EpiPens prescribed. Carry at all times \u2014 especially outdoors. Wear medical alert bracelet."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Yellow jacket VIT",
-      "dose": "Build-up phase (current: 20mcg)",
-      "route": "SC",
-      "frequency": "Weekly",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg x2 \u2014 prescribe at discharge",
+      "sig": "Inject lateral thigh at first sign of systemic reaction. Call 911. Second dose at 5-10 min if no improvement.",
+      "prescriber": "ED/Allergy",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 bridge to VIT"
     },
     {
-      "id": "med-2",
-      "name": "EpiPen",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Loratadine 10mg PO daily \u2014 scheduled antihistamine",
+      "sig": "Daily antihistamine does NOT protect against anaphylaxis but reduces urticaria risk and minor reactions.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Allergy referral \u2014 urgent (1-2 weeks)",
+      "sig": "Venom skin testing + VIT initiation after complete recovery from acute reaction (typically 4-6 weeks post-sting).",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 referral"
     }
   ],
   "allergies": [
@@ -719,7 +732,7 @@ window.EMR_DATA = {
       "bp": "108/68",
       "hr": "96",
       "rr": "18",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "98%",
       "pain": "4/10"
     }
@@ -733,80 +746,49 @@ window.EMR_DATA = {
       "cc": "Generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection",
       "hpi": "Catherine Brennan presents with generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection.",
       "exam": "See documentation.",
-      "assessment": "Venom Immunotherapy — Systemic Reaction",
+      "assessment": "Venom Immunotherapy \u2014 Systemic Reaction",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-114667",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Venom Allergy Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Tryptase (1h post-anaphylaxis)",
+          "value": "28",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Baseline tryptase (24h post)",
+          "value": "5.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
+        },
+        {
+          "test": "Honeybee venom IgE (RAST)",
+          "value": "4.8",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "CBC",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "BP on discharge",
+          "value": "122/76",
+          "unit": "mmHg",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
@@ -851,7 +833,7 @@ window.EMR_DATA = {
         "SCIT protocols",
         "Cluster/rush protocols",
         "ACE inhibitors increase VIT reactions",
-        "VIT ≥5 years"
+        "VIT \u22655 years"
       ]
     },
     {
@@ -873,17 +855,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Systemic reactions occur in ~0.5–2% of VIT injections, most commonly during build-up phase. Management: epinephrine IM immediately, observe 30+ min, reduce subsequent dose 50% and build back up.",
+      "Systemic reactions occur in ~0.5\u20132% of VIT injections, most commonly during build-up phase. Management: epinephrine IM immediately, observe 30+ min, reduce subsequent dose 50% and build back up.",
       "Pre-medication with antihistamines (diphenhydramine or fexofenadine) before VIT injections reduces local and systemic reaction rates. Omalizumab pre-treatment enables VIT in high-risk patients (e.g., mastocytosis, prior severe VIT reaction).",
-      "Rush VIT protocols compress the build-up phase to days/weeks vs months for conventional — useful for patients needing rapid protection (outdoor workers, beekeepers). Higher systemic reaction rate with rush protocols."
+      "Rush VIT protocols compress the build-up phase to days/weeks vs months for conventional \u2014 useful for patients needing rapid protection (outdoor workers, beekeepers). Higher systemic reaction rate with rush protocols."
     ],
     "boardPearls": [
-      "VIT systemic reaction management: epinephrine IM → reduce next dose 50% → titrate back up at slower pace.",
-      "VIT efficacy: 95–97% protection against future systemic anaphylaxis. Most effective allergy immunotherapy available.",
-      "VIT duration: standard 3–5 years. Lifelong: prior anaphylaxis during VIT, prior very severe anaphylaxis, mastocytosis, elevated baseline tryptase.",
+      "VIT systemic reaction management: epinephrine IM \u2192 reduce next dose 50% \u2192 titrate back up at slower pace.",
+      "VIT efficacy: 95\u201397% protection against future systemic anaphylaxis. Most effective allergy immunotherapy available.",
+      "VIT duration: standard 3\u20135 years. Lifelong: prior anaphylaxis during VIT, prior very severe anaphylaxis, mastocytosis, elevated baseline tryptase.",
       "Baseline tryptase >11.4: predicts higher risk for VIT reactions AND future sting anaphylaxis. Mastocytosis workup warranted.",
       "Omalizumab + VIT: enables safer VIT in mastocytosis and high-risk patients. Reduces VIT systemic reaction rate.",
-      "Rush VIT: build-up in 1–3 days (vs months conventional). Higher systemic reaction rate. Epinephrine immediately available required.",
+      "Rush VIT: build-up in 1\u20133 days (vs months conventional). Higher systemic reaction rate. Epinephrine immediately available required.",
       "VIT in pregnancy: CONTINUE maintenance VIT (do not start new VIT during pregnancy). Epinephrine auto-injector essential throughout pregnancy."
     ]
   },
@@ -946,13 +928,12 @@ window.EMR_DATA = {
       "Monitor respiratory effort": "Normal respiratory rate and effort, speaking in full sentences"
     },
     "ddxTargets": [
-      "Systemic allergic reaction to VIT (mild/moderate) (correct diagnosis)",
-      "Anxiety reaction to VIT procedure",
-      "Idiopathic urticaria coincidental to VIT",
-      "Anaphylaxis (must-not-miss)",
-      "Biphasic anaphylactic reaction (must-not-miss)",
-      "Serum sickness-like reaction",
-      "Medication reaction to adjuvants"
+      "Bee venom anaphylaxis \u2014 systemic reaction, epinephrine required (correct)",
+      "Yellow jacket anaphylaxis \u2014 double sting venom sensitivity; skin testing will differentiate",
+      "Vasovagal reaction \u2014 pallor + bradycardia without urticaria/angioedema",
+      "Panic attack \u2014 no urticaria, objective findings absent",
+      "MAST cell activation syndrome \u2014 baseline tryptase normal here",
+      "Drug reaction \u2014 no new medications; sting timing is diagnostic"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'just anxiety' given patient's known history and mild presentation, missing the true systemic allergic component",
@@ -962,7 +943,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider the spectrum of allergic reactions to immunotherapy. What key features would help you distinguish between different severity levels? What timeline factors are important in VIT reactions?",
       "phase5": "Now that you've gathered your history and exam, think about the clinical criteria for grading allergic reactions. What specific findings support your leading diagnosis? How does this presentation guide your immediate management and future VIT protocol decisions?",
-      "finalDebrief": "Let's trace through your diagnostic reasoning. How did the combination of timing, symptoms, and exam findings lead you to the correct diagnosis? What key decision points will determine how to proceed with this patient's immunotherapy protocol? Consider the balance between continuing potentially life-saving treatment while minimizing reaction risk."
+      "finalDebrief": "Let's trace through your diagnostic reasoning. How did the combination of timing, symptoms, and exam findings lead you to the correct diagnosis? What key decision points will determine how to proceed with this patient's immunotherapy protocol? Consider the balance between continuing potentially life-saving treatment while minimizing reaction risk.",
+      "final": "Diagnosis: bee venom anaphylaxis, VIT candidate. Key learning: (1) VIT indication in adults: any systemic reaction beyond urticaria (i.e., includes cardiovascular, respiratory, or GI involvement). Adults with urticaria-only reactions have only ~10-15% recurrence risk and VIT is not routinely indicated. Children with urticaria-only reactions also generally do not require VIT (lower recurrence risk). (2) Venom skin testing timing: wait 4-6 weeks after the sting before performing skin testing \u2014 refractory period makes testing unreliable immediately after anaphylaxis. (3) Which venoms to test: honeybee, yellow jacket, yellow-faced hornet, white-faced hornet, wasp \u2014 all five Hymenoptera venoms tested because patients often cannot identify which insect stung them, and cross-reactivity exists (yellow jacket/hornet/wasp cross-react; honeybee does not). (4) VIT efficacy: reduces future anaphylaxis risk from ~60% down to ~3-5%. Five-year standard course for most patients \u2014 protection persists for many years after stopping. (5) Baseline tryptase 5.2 (normal) in this patient \u2014 reassuring. Elevated baseline tryptase (>11.4) suggests mastocytosis and warrants workup and possibly lifelong VIT."
     }
+  },
+  "meta": {
+    "diagnosis": "Venom Anaphylaxis \u2014 Bee Sting, VIT Candidacy Assessment, Initial Evaluation and Workup",
+    "caseId": "venom-immunotherapy-reaction"
   }
 };

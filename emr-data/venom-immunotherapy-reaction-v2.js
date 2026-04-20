@@ -1,4 +1,4 @@
-/* emr-data/venom-immunotherapy-reaction-v2.js — Variation: VIT Systemic Reaction */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "5602 Walnut Dr, Milwaukee, WI 53204",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(415) 555-8206",
@@ -45,46 +45,46 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "On honeybee VIT for 18 months — had systemic reaction to maintenance dose injection"
+        "On honeybee VIT for 18 months \u2014 had systemic reaction to maintenance dose injection"
       ],
       [
         "Comorbidity",
-        "ACE inhibitor for HTN — increases VIT reaction risk (bradykinin pathway)"
+        "ACE inhibitor for HTN \u2014 increases VIT reaction risk (bradykinin pathway)"
       ],
       [
         "Hobby",
-        "Beekeeper — occupational AND hobby exposure"
+        "Beekeeper \u2014 occupational AND hobby exposure"
       ],
       [
         "Issue",
-        "ACE inhibitor must be switched before continuing VIT — drugs amplify VIT reactions"
+        "ACE inhibitor must be switched before continuing VIT \u2014 drugs amplify VIT reactions"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "58yo on VIT who had systemic reaction 20 min after maintenance injection — on ACE inhibitor which increases reaction risk",
+        "chiefComplaint": "58yo on VIT who had systemic reaction 20 min after maintenance injection \u2014 on ACE inhibitor which increases reaction risk",
         "diagnosis": "VIT Systemic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "VIT systemic reaction — during maintenance phase",
+          "description": "VIT systemic reaction \u2014 during maintenance phase",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "ACE inhibitor use — increases risk of VIT reactions (bradykinin amplification)",
+          "description": "ACE inhibitor use \u2014 increases risk of VIT reactions (bradykinin amplification)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Honeybee allergy — beekeeper (occupational + hobby exposure)",
+          "description": "Honeybee allergy \u2014 beekeeper (occupational + hobby exposure)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -133,7 +133,7 @@ window.EMR_DATA = {
           "bp": "96/62",
           "hr": "108",
           "rr": "20",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "95%",
           "pain": "5/10"
         }
@@ -156,7 +156,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -170,7 +170,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -233,8 +233,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "58yo on VIT who had systemic reaction 20 min after maintenance injection — on ACE inhibitor which increases reaction risk",
-          "hpi": "58F on honeybee VIT maintenance (100mcg) for 18 months. Today: 20 min after injection developed generalized urticaria, throat tightness, and hypotension. Epi given in allergist office. She is also on lisinopril for HTN — ACE inhibitors increase VIT reaction risk by amplifying bradykinin. The allergy literature is clear: ACE inhibitors should be discontinued before starting or continuing VIT. This was a preventable amplification of the reaction.",
+          "cc": "58yo on VIT who had systemic reaction 20 min after maintenance injection \u2014 on ACE inhibitor which increases reaction risk",
+          "hpi": "58F on honeybee VIT maintenance (100mcg) for 18 months. Today: 20 min after injection developed generalized urticaria, throat tightness, and hypotension. Epi given in allergist office. She is also on lisinopril for HTN \u2014 ACE inhibitors increase VIT reaction risk by amplifying bradykinin. The allergy literature is clear: ACE inhibitors should be discontinued before starting or continuing VIT. This was a preventable amplification of the reaction.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -243,7 +243,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "N/A — managed outpatient",
+        "chiefComplaint": "N/A \u2014 managed outpatient",
         "diagnosis": "VIT Systemic Reaction"
       },
       "problems": [
@@ -263,7 +263,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -286,7 +286,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -300,7 +300,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -363,7 +363,7 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "N/A — managed outpatient",
+          "cc": "N/A \u2014 managed outpatient",
           "hpi": "Outpatient management.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -373,20 +373,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — VIT reaction management, ACE inhibitor switch, premedication protocol",
+        "chiefComplaint": "A/I consult \u2014 VIT reaction management, ACE inhibitor switch, premedication protocol",
         "diagnosis": "VIT Systemic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "VIT systemic reaction — ACE inhibitor amplified",
+          "description": "VIT systemic reaction \u2014 ACE inhibitor amplified",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "ACE inhibitor must be stopped — switch to ARB or CCB before resuming VIT",
+          "description": "ACE inhibitor must be stopped \u2014 switch to ARB or CCB before resuming VIT",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -400,14 +400,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Dose adjustment — reduce VIT dose then re-escalate",
+          "description": "Dose adjustment \u2014 reduce VIT dose then re-escalate",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Beekeeper — VIT must continue (occupational necessity)",
+          "description": "Beekeeper \u2014 VIT must continue (occupational necessity)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -458,7 +458,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -481,7 +481,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -495,7 +495,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -558,8 +558,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — VIT reaction management, ACE inhibitor switch, premedication protocol",
-          "hpi": "A/I: 58F with VIT reaction. Root cause: concurrent ACE inhibitor use. ACE inhibitors block kininase II (same as ACE) which degrades bradykinin — during VIT reactions, elevated bradykinin can't be cleared, worsening hypotension and angioedema. Switched to amlodipine. Will resume VIT at reduced dose (50mcg) with premedication, re-escalate to maintenance over 4 visits. Must continue VIT — she is a beekeeper, daily exposure, cannot stop.",
+          "cc": "A/I consult \u2014 VIT reaction management, ACE inhibitor switch, premedication protocol",
+          "hpi": "A/I: 58F with VIT reaction. Root cause: concurrent ACE inhibitor use. ACE inhibitors block kininase II (same as ACE) which degrades bradykinin \u2014 during VIT reactions, elevated bradykinin can't be cleared, worsening hypotension and angioedema. Switched to amlodipine. Will resume VIT at reduced dose (50mcg) with premedication, re-escalate to maintenance over 4 visits. Must continue VIT \u2014 she is a beekeeper, daily exposure, cannot stop.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -568,20 +568,20 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "VIT follow-up — re-escalated to maintenance, ACE inhibitor stopped, no further reactions",
+        "chiefComplaint": "VIT follow-up \u2014 re-escalated to maintenance, ACE inhibitor stopped, no further reactions",
         "diagnosis": "VIT Systemic Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "VIT — re-escalated to 100mcg maintenance without reactions",
+          "description": "VIT \u2014 re-escalated to 100mcg maintenance without reactions",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "ACE inhibitor switched to amlodipine — no further VIT reactions",
+          "description": "ACE inhibitor switched to amlodipine \u2014 no further VIT reactions",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -646,7 +646,7 @@ window.EMR_DATA = {
           "bp": "132/78",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -669,7 +669,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -683,7 +683,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -746,8 +746,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "VIT follow-up — re-escalated to maintenance, ACE inhibitor stopped, no further reactions",
-          "hpi": "58F re-escalated to VIT maintenance without reactions since ACE inhibitor discontinued. BP well-controlled on amlodipine. Beekeeping safely. This case illustrates: always check medication list before starting VIT — ACE inhibitors are a known risk factor for VIT reactions.",
+          "cc": "VIT follow-up \u2014 re-escalated to maintenance, ACE inhibitor stopped, no further reactions",
+          "hpi": "58F re-escalated to VIT maintenance without reactions since ACE inhibitor discontinued. BP well-controlled on amlodipine. Beekeeping safely. This case illustrates: always check medication list before starting VIT \u2014 ACE inhibitors are a known risk factor for VIT reactions.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -769,72 +769,70 @@ window.EMR_DATA = {
     "address": "3888 Willow Way, Indianapolis, IN 46202",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(414) 555-5451",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "58yo on VIT who had systemic reaction 20 min after maintenance injection — on ACE inhibitor which increases reaction risk",
+    "chiefComplaint": "58yo on VIT who had systemic reaction 20 min after maintenance injection \u2014 on ACE inhibitor which increases reaction risk",
     "diagnosis": "VIT Systemic Reaction"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "VIT systemic reaction — during maintenance phase",
+      "problem": "Venom immunotherapy (VIT) systemic reaction \u2014 yellow jacket updosing",
+      "icd": "T63.461A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Carlos Rivera, 45M \u2014 on yellow jacket VIT, updosing phase. 30 min post-injection: urticaria + throat tightness. Epinephrine given."
     },
     {
-      "id": "prob-2",
-      "description": "ACE inhibitor use — increases risk of VIT reactions (bradykinin amplification)",
+      "problem": "VIT reaction management \u2014 dose reduction and pre-medication protocol",
+      "icd": "T63.461A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Systemic reaction during VIT requires dose reduction, not discontinuation. Risk-benefit strongly favors continuing VIT."
     },
     {
-      "id": "prob-3",
-      "description": "Honeybee allergy — beekeeper (occupational + hobby exposure)",
+      "problem": "Mast cell disorder workup \u2014 elevated baseline tryptase found",
+      "icd": "D47.09",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "ACE inhibitor must be discontinued before VIT can safely continue",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Baseline tryptase 18 \u2014 above normal. Mastocytosis workup indicated. Associated with increased VIT reaction risk."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given in allergy office",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Epinephrine 0.3mg IM \u2014 administered at time of reaction",
+      "sig": "Systemic reaction to VIT = epinephrine first line. Given immediately.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Given",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "VIT dose reduction \u2014 return to last tolerated dose",
+      "sig": "After systemic reaction: reduce to last tolerated dose, advance more slowly. Do NOT discontinue VIT \u2014 loss of protection.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 protocol modified"
     },
     {
-      "id": "med-3",
-      "name": "Observation",
-      "dose": "4h",
-      "route": "",
-      "frequency": "In allergy office then sent to ED",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Pre-medication protocol \u2014 antihistamine before injections",
+      "sig": "Cetirizine 10mg PO 1 hour before each VIT injection \u2014 reduces local and mild systemic reaction frequency.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active \u2014 add pre-med"
+    },
+    {
+      "name": "Omalizumab (Xolair) 300mg SQ monthly \u2014 consider if reactions persist",
+      "sig": "Anti-IgE therapy \u2014 reduces VIT reaction rate in high-risk patients (elevated tryptase, mastocytosis). Consider if continued systemic reactions despite protocol modification.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Consider \u2014 pending mastocytosis workup"
     }
   ],
   "allergies": [
@@ -852,7 +850,7 @@ window.EMR_DATA = {
       "bp": "96/62",
       "hr": "108",
       "rr": "20",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "95%",
       "pain": "5/10"
     }
@@ -863,8 +861,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "58yo on VIT who had systemic reaction 20 min after maintenance injection — on ACE inhibitor which increases reaction risk",
-      "hpi": "58F on honeybee VIT maintenance (100mcg) for 18 months. Today: 20 min after injection developed generalized urticaria, throat tightness, and hypotension. Epi given in allergist office. She is also on lisinopril for HTN — ACE inhibitors increase VIT reaction risk by amplifying bradykinin. The allergy literature is clear: ACE inhibitors should be discontinued before starting or continuing VIT. This was a preventable amplification of the reaction.",
+      "cc": "58yo on VIT who had systemic reaction 20 min after maintenance injection \u2014 on ACE inhibitor which increases reaction risk",
+      "hpi": "58F on honeybee VIT maintenance (100mcg) for 18 months. Today: 20 min after injection developed generalized urticaria, throat tightness, and hypotension. Epi given in allergist office. She is also on lisinopril for HTN \u2014 ACE inhibitors increase VIT reaction risk by amplifying bradykinin. The allergy literature is clear: ACE inhibitors should be discontinued before starting or continuing VIT. This was a preventable amplification of the reaction.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -872,88 +870,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-231941",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "VIT Reaction Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Tryptase (acute, 1h post-reaction)",
+          "value": "32",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Baseline tryptase (24h post)",
+          "value": "18",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
+        },
+        {
+          "test": "Yellow jacket venom IgE",
+          "value": "6.4",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "CBC",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Bone marrow biopsy \u2014 ordered (KIT D816V mutation screen)",
+          "value": "Pending",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         }
       ]
     }
@@ -973,19 +926,19 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "On honeybee VIT for 18 months — had systemic reaction to maintenance dose injection"
+      "On honeybee VIT for 18 months \u2014 had systemic reaction to maintenance dose injection"
     ],
     [
       "Comorbidity",
-      "ACE inhibitor for HTN — increases VIT reaction risk (bradykinin pathway)"
+      "ACE inhibitor for HTN \u2014 increases VIT reaction risk (bradykinin pathway)"
     ],
     [
       "Hobby",
-      "Beekeeper — occupational AND hobby exposure"
+      "Beekeeper \u2014 occupational AND hobby exposure"
     ],
     [
       "Issue",
-      "ACE inhibitor must be switched before continuing VIT — drugs amplify VIT reactions"
+      "ACE inhibitor must be switched before continuing VIT \u2014 drugs amplify VIT reactions"
     ]
   ],
   "references": [
@@ -1002,7 +955,7 @@ window.EMR_DATA = {
         "SCIT protocols",
         "Cluster/rush protocols",
         "ACE inhibitors increase VIT reactions",
-        "VIT ≥5 years"
+        "VIT \u22655 years"
       ]
     },
     {
@@ -1069,7 +1022,7 @@ window.EMR_DATA = {
       "Lymph node examination"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 96/62, HR 108, Temp 36.8°C, SpO2 95% - hypotensive and tachycardic",
+      "Vital signs assessment": "BP 96/62, HR 108, Temp 36.8\u00b0C, SpO2 95% - hypotensive and tachycardic",
       "Skin examination for urticaria": "Diffuse urticarial rash across trunk and extremities, some lesions fading after epinephrine treatment",
       "Head and neck examination": "Mild periorbital edema, no stridor, throat appears normal now post-epinephrine",
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak pulses consistent with hypotension",
@@ -1081,13 +1034,12 @@ window.EMR_DATA = {
       "Lymph node examination": "No lymphadenopathy palpated"
     },
     "ddxTargets": [
-      "VIT systemic reaction exacerbated by ACE inhibitor (correct diagnosis)",
-      "Anaphylaxis to VIT",
-      "Vasovagal reaction to injection",
-      "Septic shock from contaminated injection",
-      "Cardiogenic shock",
-      "Acute allergic reaction to excipients",
-      "Anxiety/panic attack"
+      "VIT systemic reaction \u2014 mastocytosis background increasing risk (correct)",
+      "Anaphylaxis to stinging insect re-exposure \u2014 VIT injection is the controlled exposure",
+      "Vasovagal reaction to injection \u2014 no urticaria, pallor/bradycardia",
+      "Local reaction progressing to systemic \u2014 local reactions are common; systemic reaction defined by distant site involvement",
+      "Mast cell activation syndrome \u2014 elevated baseline tryptase; mastocytosis workup pending",
+      "Allergic reaction to VIT excipient \u2014 rare; venom is the antigen"
     ],
     "biasFlags": {
       "anchoring": "May anchor on typical VIT reaction and miss the ACE inhibitor contribution, or focus solely on allergy without considering drug interactions",
@@ -1097,7 +1049,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient has been tolerating VIT maintenance doses for 18 months. What factors might predispose someone to suddenly develop a more severe reaction to a previously tolerated treatment?",
       "phase5": "You've identified a systemic reaction in a patient on VIT maintenance. Her vital signs show hypotension and she required epinephrine. What medication interactions should you specifically ask about that might amplify allergic reactions?",
-      "finalDebrief": "This case illustrates how ACE inhibitors can amplify VIT reactions through bradykinin pathway interference. The patient's established tolerance broke down due to this drug interaction. How does this change your approach to patients starting VIT who are on cardiovascular medications?"
+      "finalDebrief": "This case illustrates how ACE inhibitors can amplify VIT reactions through bradykinin pathway interference. The patient's established tolerance broke down due to this drug interaction. How does this change your approach to patients starting VIT who are on cardiovascular medications?",
+      "final": "Diagnosis: VIT systemic reaction with elevated baseline tryptase \u2014 mastocytosis workup indicated. Key learning: (1) VIT indication: systemic anaphylaxis to stinging insects (bee, yellow jacket, wasp, hornet, fire ant) in adults. VIT reduces future anaphylaxis risk from ~60% to ~5%. VIT is also indicated for children with systemic reactions beyond urticaria. (2) Elevated baseline tryptase in VIT patients: baseline tryptase \u226511.4 ng/mL suggests systemic mastocytosis or monoclonal MCAS. These patients have: higher VIT reaction rates, more severe reactions, may require lifelong VIT (vs 5-year standard course). KIT D816V mutation on bone marrow biopsy confirms systemic mastocytosis. (3) Systemic VIT reaction management: do NOT stop VIT \u2014 the protection it provides is critical. Reduce to last well-tolerated dose, advance more slowly, add antihistamine pre-medication. Consider omalizumab pre-treatment if reactions persist. (4) Omalizumab + VIT: in patients with mastocytosis or elevated tryptase experiencing VIT reactions, pre-treatment with omalizumab dramatically reduces VIT reaction rate \u2014 allows successful completion of immunotherapy. (5) Duration of VIT: standard course is 5 years for bee/yellow jacket. After 5 years, most patients have persistent protection. Patients with mastocytosis, severe prior anaphylaxis, or continued systemic reactions on VIT should continue indefinitely."
     }
+  },
+  "meta": {
+    "diagnosis": "Venom Immunotherapy Systemic Reaction \u2014 Dose Modification, Pre-Medication Protocol, Treatment Continuation Decision",
+    "caseId": "venom-immunotherapy-reaction-v2"
   }
 };

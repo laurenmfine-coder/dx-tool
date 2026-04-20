@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: HIV-Positive Patient",
-      "icd": "Z00.00",
+      "problem": "Oral candidiasis \u2014 HIV-associated, CD4 220",
+      "icd": "B37.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Marcus Brown, 38M \u2014 HIV on ART, CD4 220. White plaques on tongue (thrush) and angular cheilitis."
+    },
+    {
+      "problem": "Linear gingival erythema \u2014 HIV-associated periodontal disease",
+      "icd": "K05.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Red band along free gingival margin \u2014 disproportionate to plaque level. HIV-associated LGE."
+    },
+    {
+      "problem": "Dental treatment planning \u2014 CD4-guided modifications",
+      "icd": "B20",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "CD4 >200 = treat like immunocompetent with standard infection precautions. CD4 <200 = consult with HIV provider, consider antibiotic prophylaxis for invasive procedures."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Fluconazole 100-200mg PO daily x7-14 days \u2014 oral candidiasis",
+      "sig": "Systemic azole \u2014 more effective than nystatin for moderate-severe candidiasis. Interaction: many azoles inhibit CYP3A4 \u2014 check HIV medication interactions.",
+      "prescriber": "Dentistry/ID",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Chlorhexidine 0.12% oral rinse BID \u2014 LGE and periodontal disease",
+      "sig": "Antimicrobial rinse \u2014 adjunct to scaling for HIV-associated periodontal disease. 1-min rinse before scaling procedures.",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Nystatin oral suspension 400,000 units swish/swallow QID \u2014 angular cheilitis",
+      "sig": "Topical treatment for angular cheilitis component \u2014 nystatin ointment to lip corners BID",
+      "prescriber": "Dentistry",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 corners of mouth"
+    },
+    {
+      "name": "Antiretroviral therapy \u2014 continue, verify adherence",
+      "sig": "Optimal ART adherence improves CD4 and reduces oral manifestations. Confirm patient is taking medications as prescribed.",
+      "prescriber": "ID (HIV provider)",
+      "start": "2022",
+      "refills": 5,
+      "status": "Continue \u2014 not modified by dental"
     }
   ],
   "allergies": [
@@ -97,7 +135,42 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "HIV Status for Dental Planning",
+      "results": [
+        {
+          "test": "CD4 count",
+          "value": "220",
+          "unit": "cells/\u03bcL",
+          "ref": ">500 normal",
+          "flag": "L"
+        },
+        {
+          "test": "HIV viral load",
+          "value": "850",
+          "unit": "copies/mL",
+          "ref": "<20 undetectable",
+          "flag": "H"
+        },
+        {
+          "test": "CBC \u2014 absolute neutrophil count",
+          "value": "1800",
+          "unit": "cells/\u03bcL",
+          "ref": ">1500 \u2014 adequate for dental surgery",
+          "flag": ""
+        },
+        {
+          "test": "Platelet count",
+          "value": "142",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +203,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-dental-hiv-oral",
-    "diagnosis": "See diagnosis \u2014 HIV-Positive Patient",
+    "diagnosis": "HIV-Positive Patient \u2014 Oral Manifestations, CD4-Guided Treatment Modifications, Universal Precautions",
     "acuity": 2,
     "presentation": "HIV-Positive Patient",
     "category": "infectious"
@@ -176,12 +249,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "HIV-Positive Patient \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "HIV-associated oral candidiasis and LGE \u2014 CD4 220 (correct)",
+      "Hairy leukoplakia \u2014 EBV-associated, lateral tongue, white corrugated, cannot be wiped off; this is removable candida",
+      "Oral SCC in HIV \u2014 increased risk; any non-healing lesion requires biopsy",
+      "Necrotizing ulcerative gingivitis \u2014 more severe, fetid odor, necrotic papillae; LGE is milder",
+      "Drug-induced gingival overgrowth \u2014 calcium channel blockers, phenytoin; different morphology",
+      "Acute leukemia \u2014 thrombocytopenia + gingival changes; CBC shows malignant cells"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: HIV-Positive Patient. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) An HIV-positive patient with CD4 of 82 presents to your dental clinic. You find white plaques on the lateral tongue and buccal mucosa that cannot be wiped off. He mentions his physician recently started him on fluconazole for 'a fungal infection.' What do you think these plaques represent \u2014 and does the ongoing fluconazole treatment change your assessment? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: HIV-associated oral candidiasis + LGE. Key learning: (1) CD4 thresholds for dental treatment: CD4 >500 = treat routinely. CD4 200-500 = standard treatment, reinforce oral hygiene, monitor closely. CD4 <200 = consult HIV provider before elective invasive procedures; consider antibiotic prophylaxis for surgery; avoid elective treatment when viral load is high and CD4 is actively declining. (2) Universal precautions: ALL patients should be treated with the same infection control standards \u2014 HIV status does not change the standard of care for PPE, sterilization, or instrument handling. It is unethical to refuse treatment based on HIV status. (3) HIV oral manifestations: oral candidiasis (most common), hairy leukoplakia (EBV, lateral tongue), linear gingival erythema, necrotizing periodontal disease, KS (Kaposi sarcoma \u2014 purple lesions), lymphoma. Oral candidiasis or hairy leukoplakia may be the first sign of HIV \u2014 the dental provider may be the first to identify HIV. (4) Drug interactions: azole antifungals + many HIV PIs (ritonavir, lopinavir) \u2014 significant CYP3A4 interactions. Check HIV medication list before prescribing antifungals. (5) Dry mouth in HIV: many ART medications cause xerostomia, which increases caries risk. Fluoride supplementation and salivary management are important in HIV-positive dental patients."
     }
   }
 };
