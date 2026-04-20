@@ -23,20 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Progressive Shortness of Breath",
-      "icd": "Z00.00",
+      "problem": "EVALI \u2014 vaping-associated lung injury",
+      "icd": "J68.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Jordan Hayes, 21M \u2014 vaping THC cartridges daily x8 months. Progressive dyspnea, fever, GI symptoms. SpO2 88% on RA."
+    },
+    {
+      "problem": "Acute hypoxic respiratory failure \u2014 bilateral infiltrates",
+      "icd": "J96.00",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "SpO2 88% on room air. CXR bilateral infiltrates. High-flow O2 initiated. EVALI pattern on CT."
+    },
+    {
+      "problem": "Vitamin E acetate \u2014 likely causative agent in THC cartridge",
+      "icd": "J68.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "CDC identified vitamin E acetate (used as thickener in THC vaping oil) as primary causative agent in EVALI outbreak."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Methylprednisolone 125mg IV q6h \u2014 systemic steroid",
+      "sig": "EVALI responds to systemic steroids \u2014 reduces organizing pneumonia and inflammatory component. Taper over 2-4 weeks after discharge.",
+      "prescriber": "Pulmonology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Ceftriaxone 1g IV daily + azithromycin 500mg daily \u2014 empiric antibiotics",
+      "sig": "Empiric coverage \u2014 infection cannot be clinically excluded from EVALI. Antibiotics continued pending culture results.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 empiric"
+    },
+    {
+      "name": "High-flow nasal cannula (HFNC) 40L/min, FiO2 0.6",
+      "sig": "Non-invasive respiratory support. Target SpO2 \u226592%. Avoid intubation if possible.",
+      "prescriber": "Pulmonology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Cessation counseling \u2014 all vaping products",
+      "sig": "Strict avoidance of all vaping products mandatory. Nicotine replacement options discussed.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,8 +135,65 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "EVALI Workup",
+      "results": [
+        {
+          "test": "WBC",
+          "value": "18.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "94",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
+        },
+        {
+          "test": "LDH",
+          "value": "620",
+          "unit": "U/L",
+          "ref": "135-225",
+          "flag": "H"
+        },
+        {
+          "test": "Respiratory viral panel",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Sputum culture",
+          "value": "No growth \u2014 pending",
+          "unit": "",
+          "ref": "No pathogens",
+          "flag": ""
+        },
+        {
+          "test": "BAL \u2014 macrophages with lipid-laden vacuoles",
+          "value": "Lipid-laden macrophages present",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "CT Chest \u2014 HRCT",
+      "indication": "Progressive dyspnea, vaping history",
+      "findings": "Bilateral ground-glass opacities, predominantly subpleural. Scattered consolidation lower lobes. No pleural effusion. No cavitation.",
+      "impression": "EVALI pattern \u2014 bilateral subpleural ground-glass and consolidation consistent with organizing pneumonia. Clinical correlation with vaping history confirms EVALI."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +225,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "evali-vaping",
-    "diagnosis": "See diagnosis \u2014 Progressive Shortness of Breath",
+    "diagnosis": "E-Cigarette or Vaping Product Use-Associated Lung Injury (EVALI) \u2014 Vitamin E Acetate, Systemic Steroids Required",
     "acuity": 2,
     "presentation": "Progressive Shortness of Breath",
     "category": "pulmonary"
@@ -177,12 +272,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Progressive Shortness of Breath \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "EVALI \u2014 THC vaping, bilateral GGO, steroid-responsive (correct)",
+      "COVID-19 pneumonia \u2014 negative respiratory panel; EVALI pattern similar",
+      "Bacterial pneumonia \u2014 culture negative, no lobar consolidation, EVALI pattern on CT",
+      "Lipoid pneumonia \u2014 lipid-laden macrophages on BAL support EVALI mechanism",
+      "Hypersensitivity pneumonitis \u2014 exposure history, similar CT; vaping history key",
+      "ARDS from another cause \u2014 EVALI is a cause of ARDS; history determines etiology"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +287,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Progressive Shortness of Breath. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) Walk through your complete management: initial stabilization, key diagnostic step, definitive therapy, and disposition decision. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: EVALI. Key learning: (1) EVALI diagnostic criteria (CDC): use of e-cigarette or vaping products in 90 days before symptom onset + pulmonary infiltrate on imaging + no plausible alternative diagnosis (infection excluded). Bronchoalveolar lavage with lipid-laden macrophages is supportive but not required. (2) Vitamin E acetate: added to illicit THC vaping cartridges as a thickening agent. Inhaled \u2192 directly toxic to alveolar epithelium \u2192 organizing pneumonia pattern. Legal nicotine vaping products less clearly associated \u2014 THC products are the primary EVALI risk. (3) Symptom triad: respiratory (dyspnea, cough, chest pain) + constitutional (fever, fatigue, weight loss) + GI (nausea, vomiting, diarrhea). GI symptoms in the context of respiratory illness should trigger vaping history. (4) Steroids: EVALI responds to systemic corticosteroids \u2014 methylprednisolone IV then prednisone oral taper. Most patients improve significantly within 24-48 hours of steroid initiation. (5) Cessation: strict, complete cessation of ALL vaping products is required \u2014 both THC and nicotine vaping. Counsel on risks of resumption and offer NRT alternatives."
     }
   }
 };

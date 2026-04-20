@@ -1,4 +1,4 @@
-/* emr-data/fpies-chronic.js — Multi-Setting Allergy Case: FPIES — Chronic */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "3395 Iris Blvd, Birmingham, AL 35209",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Sarah Reyes",
         "phone": "(415) 555-9645",
@@ -49,7 +49,7 @@ window.EMR_DATA = {
       ],
       [
         "Key",
-        "IgE-negative, skin prick test to milk negative — this is non-IgE mediated"
+        "IgE-negative, skin prick test to milk negative \u2014 this is non-IgE mediated"
       ]
     ]
   },
@@ -57,7 +57,7 @@ window.EMR_DATA = {
     "ed": {
       "patient": {
         "chiefComplaint": "7mo brought to ED with profuse watery diarrhea, lethargy, and dehydration",
-        "diagnosis": "FPIES — Chronic"
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
@@ -93,7 +93,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "172",
           "rr": "44",
-          "temp": "36.4°C",
+          "temp": "36.4\u00b0C",
           "spo2": "97%",
           "pain": "N/A"
         }
@@ -116,7 +116,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -130,7 +130,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -213,7 +213,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "7mo brought to ED with profuse watery diarrhea, lethargy, and dehydration",
-          "hpi": "Ethan Reyes — 7mo brought to ED with profuse watery diarrhea, lethargy, and dehydration",
+          "hpi": "Ethan Reyes \u2014 7mo brought to ED with profuse watery diarrhea, lethargy, and dehydration",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -222,8 +222,8 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for FTT workup and formula transition — chronic FPIES suspected",
-        "diagnosis": "FPIES — Chronic"
+        "chiefComplaint": "Admitted for FTT workup and formula transition \u2014 chronic FPIES suspected",
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
@@ -259,7 +259,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "142",
           "rr": "34",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A"
         }
@@ -282,7 +282,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -296,7 +296,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -378,8 +378,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for FTT workup and formula transition — chronic FPIES suspected",
-          "hpi": "Ethan Reyes — Admitted for FTT workup and formula transition — chronic FPIES suspected",
+          "cc": "Admitted for FTT workup and formula transition \u2014 chronic FPIES suspected",
+          "hpi": "Ethan Reyes \u2014 Admitted for FTT workup and formula transition \u2014 chronic FPIES suspected",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -389,7 +389,7 @@ window.EMR_DATA = {
     "consult": {
       "patient": {
         "chiefComplaint": "7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula",
-        "diagnosis": "FPIES — Chronic Form"
+        "diagnosis": "FPIES \u2014 Chronic Form"
       },
       "problems": [
         {
@@ -415,7 +415,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "138",
           "rr": "34",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "N/A"
         }
@@ -438,7 +438,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -452,7 +452,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -537,15 +537,15 @@ window.EMR_DATA = {
           "cc": "7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula",
           "hpi": "Ethan Reyes presents with 7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula.",
           "exam": "See documentation.",
-          "assessment": "FPIES — Chronic Form",
+          "assessment": "FPIES \u2014 Chronic Form",
           "plan": "See orders."
         }
       ]
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Chronic FPIES follow-up — growth on amino acid formula, plan for food reintroduction",
-        "diagnosis": "FPIES — Chronic"
+        "chiefComplaint": "Chronic FPIES follow-up \u2014 growth on amino acid formula, plan for food reintroduction",
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
@@ -571,7 +571,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "128",
           "rr": "28",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A"
         }
@@ -594,7 +594,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -608,7 +608,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -690,8 +690,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Chronic FPIES follow-up — growth on amino acid formula, plan for food reintroduction",
-          "hpi": "Ethan Reyes — Chronic FPIES follow-up — growth on amino acid formula, plan for food reintroduction",
+          "cc": "Chronic FPIES follow-up \u2014 growth on amino acid formula, plan for food reintroduction",
+          "hpi": "Ethan Reyes \u2014 Chronic FPIES follow-up \u2014 growth on amino acid formula, plan for food reintroduction",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -713,32 +713,56 @@ window.EMR_DATA = {
     "address": "8579 Dogwood Ln, Kansas City, MO 64108",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Sarah Reyes",
       "phone": "(412) 555-9835",
       "relationship": "Parent"
     },
     "chiefComplaint": "7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula",
-    "diagnosis": "FPIES — Chronic Form"
+    "diagnosis": "FPIES \u2014 Chronic Form"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Failure to thrive",
+      "problem": "Chronic FPIES \u2014 breastfed infant, maternal diet trigger",
+      "icd": "K52.29",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Sophia Chen, 3M \u2014 exclusively breastfed. Chronic vomiting, bloody stools, weight faltering. Cow's milk in maternal diet suspected."
     },
     {
-      "id": "prob-2",
-      "description": "Chronic diarrhea since formula introduction",
+      "problem": "Rectal bleeding \u2014 eosinophilic proctocolitis contributing",
+      "icd": "K52.29",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Bloody mucousy stools in breastfed infant \u2014 eosinophilic proctocolitis overlaps with FPIES spectrum. Maternal elimination is first step."
+    },
+    {
+      "problem": "Maternal diet \u2014 cow's milk protein passes in breast milk",
+      "icd": "K52.29",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Cow's milk protein antigens pass through breast milk \u2192 infant gut sensitization. Maternal elimination resolves infant symptoms."
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Maternal dairy elimination \u2014 complete cow's milk avoidance",
+      "sig": "Mother eliminates ALL dairy products (milk, cheese, yogurt, butter, casein, whey in processed foods) for 2-4 weeks. Supplement with calcium 1000mg + vitamin D 600 IU daily.",
+      "prescriber": "Allergy/Pediatric GI",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Calcium + vitamin D supplementation \u2014 maternal during elimination",
+      "sig": "Dairy elimination depletes calcium. Supplement mother, not infant.",
+      "prescriber": "OB/Pediatrics",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
       "allergen": "Cow's milk (suspected FPIES)",
@@ -754,7 +778,7 @@ window.EMR_DATA = {
       "bp": "N/A",
       "hr": "138",
       "rr": "34",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "N/A"
     }
@@ -768,113 +792,49 @@ window.EMR_DATA = {
       "cc": "7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula",
       "hpi": "Ethan Reyes presents with 7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula.",
       "exam": "See documentation.",
-      "assessment": "FPIES — Chronic Form",
+      "assessment": "FPIES \u2014 Chronic Form",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-408138",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Breastfed FPIES Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "9.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "8",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Fecal blood (Hemoccult)",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Albumin",
-              "value": "2.8",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": "L"
-            }
-          ]
+          "test": "Stool eosinophils",
+          "value": "Present \u2014 sheets",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Total Ig E",
-              "value": "12",
-              "unit": "IU/mL",
-              "range": "<50",
-              "flag": ""
-            },
-            {
-              "test": "Stool Occult Blood",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            }
-          ]
+          "test": "Total IgE (infant)",
+          "value": "2",
+          "unit": "IU/mL",
+          "ref": "<10",
+          "flag": ""
+        },
+        {
+          "test": "Cow's milk IgE (infant)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Growth \u2014 weight",
+          "value": "3rd percentile \u2014 crossing from 25th",
+          "unit": "",
+          "ref": "Following curve",
+          "flag": "L"
         }
       ]
     }
@@ -898,7 +858,7 @@ window.EMR_DATA = {
     ],
     [
       "Key",
-      "IgE-negative, skin prick test to milk negative — this is non-IgE mediated"
+      "IgE-negative, skin prick test to milk negative \u2014 this is non-IgE mediated"
     ]
   ],
   "references": [
@@ -922,16 +882,16 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Chronic FPIES (daily exposure to trigger food) presents differently from acute FPIES: intermittent vomiting, diarrhea, poor weight gain, irritability — mimicking GERD, formula intolerance, or failure to thrive. No single dramatic episode.",
-      "In breastfed infants, chronic FPIES can be triggered by maternal dietary proteins passing through breast milk — most commonly cow's milk proteins. Maternal elimination diet is diagnostic and therapeutic.",
+      "Chronic FPIES (daily exposure to trigger food) presents differently from acute FPIES: intermittent vomiting, diarrhea, poor weight gain, irritability \u2014 mimicking GERD, formula intolerance, or failure to thrive. No single dramatic episode.",
+      "In breastfed infants, chronic FPIES can be triggered by maternal dietary proteins passing through breast milk \u2014 most commonly cow's milk proteins. Maternal elimination diet is diagnostic and therapeutic.",
       "Diagnosis of chronic FPIES is confirmed by: resolution of symptoms with trigger elimination + symptom recurrence on supervised food challenge."
     ],
     "boardPearls": [
-      "Chronic FPIES: daily exposure → gradual symptoms (vomiting, diarrhea, FTT). Contrast with acute FPIES: episodic exposure → dramatic acute vomiting.",
-      "Breastfed infant with chronic FPIES: maternal cow's milk elimination diet → assess symptom resolution over 2 weeks.",
-      "Formula options for milk/soy FPIES: amino acid-based formula (Neocate, EleCare) — extensively hydrolyzed formulas may still trigger in some FPIES infants.",
+      "Chronic FPIES: daily exposure \u2192 gradual symptoms (vomiting, diarrhea, FTT). Contrast with acute FPIES: episodic exposure \u2192 dramatic acute vomiting.",
+      "Breastfed infant with chronic FPIES: maternal cow's milk elimination diet \u2192 assess symptom resolution over 2 weeks.",
+      "Formula options for milk/soy FPIES: amino acid-based formula (Neocate, EleCare) \u2014 extensively hydrolyzed formulas may still trigger in some FPIES infants.",
       "Chronic FPIES misdiagnosis: GERD (similar GI symptoms), pyloric stenosis (projectile vomiting), FTT workup.",
-      "Resolution monitoring: trial food reintroduction at 12–18 months in allergist office after symptom-free period."
+      "Resolution monitoring: trial food reintroduction at 12\u201318 months in allergist office after symptom-free period."
     ]
   },
   "guided": {
@@ -993,13 +953,12 @@ window.EMR_DATA = {
       "Assessment of muscle tone and subcutaneous fat": "Normal tone but decreased muscle mass and subcutaneous fat consistent with failure to thrive"
     },
     "ddxTargets": [
-      "Food Protein-Induced Enterocolitis Syndrome (FPIES) (correct diagnosis)",
-      "Cow's milk protein allergy (IgE-mediated)",
-      "Lactose intolerance",
-      "Gastroenteritis with prolonged course",
-      "Malabsorption syndrome",
-      "Gastroesophageal reflux disease",
-      "Inflammatory bowel disease"
+      "Chronic FPIES/eosinophilic proctocolitis \u2014 breastfed, maternal dairy (correct)",
+      "Infectious enterocolitis \u2014 stool culture negative; no fever",
+      "Necrotizing enterocolitis \u2014 preterm infant; this is term infant, exclusive breastfeeding",
+      "Intussusception \u2014 episodic pain, currant jelly; different age and presentation",
+      "Meckel's diverticulum \u2014 painless rectal bleeding, older children",
+      "Anal fissure \u2014 localized bright blood, no systemic features"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on typical IgE-mediated milk allergy when negative allergy tests might falsely reassure, missing non-IgE mediated FPIES",
@@ -1009,7 +968,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Consider the timing of symptom onset in relation to formula introduction. What types of immune-mediated reactions to food proteins exist beyond the typical IgE-mediated responses? How might negative standard allergy tests affect your diagnostic thinking?",
       "phase5": "The growth pattern and symptom timeline are key here. With negative IgE testing but clear temporal relationship to cow's milk formula, what non-IgE mediated food reactions should you consider? How does the delayed presentation fit with different pathophysiologic mechanisms?",
-      "finalDebrief": "FPIES represents a non-IgE mediated food protein reaction that typically presents with delayed GI symptoms including vomiting, diarrhea, and failure to thrive. The negative skin tests and IgE levels are characteristic because this involves T-cell mediated immunity rather than IgE antibodies. Recognition is important because standard allergy testing will be negative, and management involves strict avoidance of the trigger protein with gradual reintroduction trials under medical supervision."
+      "finalDebrief": "FPIES represents a non-IgE mediated food protein reaction that typically presents with delayed GI symptoms including vomiting, diarrhea, and failure to thrive. The negative skin tests and IgE levels are characteristic because this involves T-cell mediated immunity rather than IgE antibodies. Recognition is important because standard allergy testing will be negative, and management involves strict avoidance of the trigger protein with gradual reintroduction trials under medical supervision.",
+      "final": "Diagnosis: chronic FPIES/eosinophilic proctocolitis \u2014 breastfed infant, maternal dairy trigger. Key learning: (1) Breastfed infant FPIES/proctocolitis: exclusively breastfed infants can develop gut eosinophilic disease from maternal dietary antigens passing through breast milk. Most common triggers: cow's milk, then egg, soy. The infant has no direct dietary exposure \u2014 elimination is maternal. (2) Maternal elimination trial: eliminate all dairy (check ingredient labels for casein, whey, lactalbumin). Strict elimination for 2-4 weeks. If symptoms resolve \u2014 maternal dairy is the trigger. Rechallenging the mother (reintroducing dairy) causes symptom recurrence in the infant, confirming diagnosis. (3) Calcium supplementation for mother: maternal dairy elimination + no supplementation = maternal calcium deficiency risk. Supplement with 1000mg calcium + 600 IU vitamin D daily. (4) Continuation of breastfeeding: maternal elimination allows breastfeeding to continue \u2014 preferred over formula switch when possible. Breastfeeding has significant immunologic benefits. (5) Timeline: symptoms typically improve within 2-4 weeks of maternal elimination. If no improvement by 4 weeks with strict adherence, reconsider diagnosis or check for soy cross-reactivity (often need to eliminate soy as well)."
     }
+  },
+  "meta": {
+    "diagnosis": "FPIES \u2014 Chronic Presentation in Breastfed Infant, Maternal Dietary Elimination, Resolution Confirms Diagnosis",
+    "caseId": "fpies-chronic"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/fpies-chronic-v2.js — Variation: FPIES — Chronic */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "3314 Hollyhock Rd, Memphis, TN 38107",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(212) 555-5272",
@@ -49,38 +49,38 @@ window.EMR_DATA = {
       ],
       [
         "Misdiagnosis",
-        "Initially told it was \"colic\" and \"reflux\" — treated with acid suppressants for 2 months"
+        "Initially told it was \"colic\" and \"reflux\" \u2014 treated with acid suppressants for 2 months"
       ],
       [
         "Key",
-        "Chronic FPIES is more subtle than acute — insidious FTT, chronic diarrhea, not dramatic vomiting episodes"
+        "Chronic FPIES is more subtle than acute \u2014 insidious FTT, chronic diarrhea, not dramatic vomiting episodes"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "4-month-old with chronic vomiting, bloody diarrhea, FTT — on cow milk formula, told it was reflux",
-        "diagnosis": "FPIES — Chronic"
+        "chiefComplaint": "4-month-old with chronic vomiting, bloody diarrhea, FTT \u2014 on cow milk formula, told it was reflux",
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Chronic FPIES — cow milk protein in formula",
+          "description": "Chronic FPIES \u2014 cow milk protein in formula",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Failure to thrive — fell from 50th to 3rd percentile in 2 months",
+          "description": "Failure to thrive \u2014 fell from 50th to 3rd percentile in 2 months",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Chronic bloody diarrhea — not \"reflux\"",
+          "description": "Chronic bloody diarrhea \u2014 not \"reflux\"",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -94,7 +94,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Needs hypoallergenic formula — extensively hydrolyzed or amino acid-based",
+          "description": "Needs hypoallergenic formula \u2014 extensively hydrolyzed or amino acid-based",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -136,7 +136,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "152",
           "rr": "36",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -159,7 +159,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "12.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -173,7 +173,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "520",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": "H"
                 },
@@ -269,8 +269,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "4-month-old with chronic vomiting, bloody diarrhea, FTT — on cow milk formula, told it was reflux",
-          "hpi": "4-month-old male on cow milk formula with 2 months of chronic vomiting (not projectile — more persistent, post-feed), bloody mucoid diarrhea, and progressive weight loss. Was 50th percentile at 2 months, now 3rd percentile. PCP diagnosed \"reflux\" and started PPI — no improvement. THIS IS CHRONIC FPIES — not reflux. Chronic FPIES presents insidiously with FTT, chronic diarrhea, and hypoalbuminemia (protein-losing enteropathy). More subtle than acute FPIES (which is dramatic profuse vomiting). Switch to amino acid formula — improvement expected within 48-72 hours.",
+          "cc": "4-month-old with chronic vomiting, bloody diarrhea, FTT \u2014 on cow milk formula, told it was reflux",
+          "hpi": "4-month-old male on cow milk formula with 2 months of chronic vomiting (not projectile \u2014 more persistent, post-feed), bloody mucoid diarrhea, and progressive weight loss. Was 50th percentile at 2 months, now 3rd percentile. PCP diagnosed \"reflux\" and started PPI \u2014 no improvement. THIS IS CHRONIC FPIES \u2014 not reflux. Chronic FPIES presents insidiously with FTT, chronic diarrhea, and hypoalbuminemia (protein-losing enteropathy). More subtle than acute FPIES (which is dramatic profuse vomiting). Switch to amino acid formula \u2014 improvement expected within 48-72 hours.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -280,19 +280,19 @@ window.EMR_DATA = {
     "inpatient": {
       "patient": {
         "chiefComplaint": "Admitted for FTT evaluation and formula transition",
-        "diagnosis": "FPIES — Chronic"
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Chronic FPIES — cow milk",
+          "description": "Chronic FPIES \u2014 cow milk",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "FTT — 3rd percentile, hypoalbuminemic",
+          "description": "FTT \u2014 3rd percentile, hypoalbuminemic",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -353,7 +353,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "138",
           "rr": "30",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -376,7 +376,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -390,7 +390,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -454,7 +454,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Admitted for FTT evaluation and formula transition",
-          "hpi": "4-month-old admitted for FTT and formula transition. Switched to EleCare amino acid formula — within 48 hours: vomiting resolved, stools normalizing. This rapid response confirms chronic FPIES. Albumin will take weeks to normalize. WIC letter written for specialty formula coverage ($400+/month without WIC). Nutritionist: feeding plan with caloric supplementation to catch up growth.",
+          "hpi": "4-month-old admitted for FTT and formula transition. Switched to EleCare amino acid formula \u2014 within 48 hours: vomiting resolved, stools normalizing. This rapid response confirms chronic FPIES. Albumin will take weeks to normalize. WIC letter written for specialty formula coverage ($400+/month without WIC). Nutritionist: feeding plan with caloric supplementation to catch up growth.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -463,20 +463,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — chronic FPIES diagnosis, food introduction plan, soy consideration",
-        "diagnosis": "FPIES — Chronic"
+        "chiefComplaint": "A/I consult \u2014 chronic FPIES diagnosis, food introduction plan, soy consideration",
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Chronic FPIES to cow milk — confirmed by response to elimination",
+          "description": "Chronic FPIES to cow milk \u2014 confirmed by response to elimination",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Soy — 30-50% of milk FPIES patients also react to soy (test carefully)",
+          "description": "Soy \u2014 30-50% of milk FPIES patients also react to soy (test carefully)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -523,7 +523,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "128",
           "rr": "28",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -546,7 +546,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -560,7 +560,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -623,8 +623,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — chronic FPIES diagnosis, food introduction plan, soy consideration",
-          "hpi": "A/I: 4-month-old with chronic milk FPIES. Plan: amino acid formula until 12 months, then supervised milk OFC. Soy introduction in clinic at 6 months (30-50% cross-reactivity). Rice and oat introduction at home but with FPIES awareness — start at 5-6 months with small amounts. Parents given FPIES emergency plan and ondansetron prescription for any acute reactions during food introductions.",
+          "cc": "A/I consult \u2014 chronic FPIES diagnosis, food introduction plan, soy consideration",
+          "hpi": "A/I: 4-month-old with chronic milk FPIES. Plan: amino acid formula until 12 months, then supervised milk OFC. Soy introduction in clinic at 6 months (30-50% cross-reactivity). Rice and oat introduction at home but with FPIES awareness \u2014 start at 5-6 months with small amounts. Parents given FPIES emergency plan and ondansetron prescription for any acute reactions during food introductions.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -633,41 +633,41 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "FPIES follow-up — 3 months on amino acid formula, growth catch-up, food introductions",
-        "diagnosis": "FPIES — Chronic"
+        "chiefComplaint": "FPIES follow-up \u2014 3 months on amino acid formula, growth catch-up, food introductions",
+        "diagnosis": "FPIES \u2014 Chronic"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Chronic FPIES cow milk — completely resolved on amino acid formula",
+          "description": "Chronic FPIES cow milk \u2014 completely resolved on amino acid formula",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Growth — caught up from 3rd to 20th percentile in 3 months",
+          "description": "Growth \u2014 caught up from 3rd to 20th percentile in 3 months",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Soy — introduced in clinic, TOLERATED (no FPIES reaction)",
+          "description": "Soy \u2014 introduced in clinic, TOLERATED (no FPIES reaction)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Rice, oat — introduced at home without reaction",
+          "description": "Rice, oat \u2014 introduced at home without reaction",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Iron — normalizing",
+          "description": "Iron \u2014 normalizing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -707,7 +707,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "124",
           "rr": "26",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -730,7 +730,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -744,7 +744,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -807,8 +807,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "FPIES follow-up — 3 months on amino acid formula, growth catch-up, food introductions",
-          "hpi": "4-month-old now 7 months. Dramatic catch-up growth on amino acid formula — 3rd→20th percentile. Soy tolerated (introduced in clinic). Rice and oat tolerated at home. Parents confident with food introductions. Milk OFC planned for 12-18 months. If passes: transition to regular cow milk formula/whole milk. If fails: continue amino acid formula, retry at 2 years (90% outgrow milk FPIES by 3-5 years).",
+          "cc": "FPIES follow-up \u2014 3 months on amino acid formula, growth catch-up, food introductions",
+          "hpi": "4-month-old now 7 months. Dramatic catch-up growth on amino acid formula \u2014 3rd\u219220th percentile. Soy tolerated (introduced in clinic). Rice and oat tolerated at home. Parents confident with food introductions. Milk OFC planned for 12-18 months. If passes: transition to regular cow milk formula/whole milk. If fails: continue amino acid formula, retry at 2 years (90% outgrow milk FPIES by 3-5 years).",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -830,79 +830,54 @@ window.EMR_DATA = {
     "address": "8281 Clover St, Louisville, KY 40211",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(502) 555-3497",
       "relationship": "Parent"
     },
-    "chiefComplaint": "4-month-old with chronic vomiting, bloody diarrhea, FTT — on cow milk formula, told it was reflux",
-    "diagnosis": "FPIES — Chronic"
+    "chiefComplaint": "4-month-old with chronic vomiting, bloody diarrhea, FTT \u2014 on cow milk formula, told it was reflux",
+    "diagnosis": "FPIES \u2014 Chronic"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Chronic FPIES — cow milk protein in formula",
+      "problem": "Chronic FPIES \u2014 cow's milk protein, daily low-level exposure",
+      "icd": "K52.29",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Mia Johnson, 4M \u2014 on cow's milk formula since 6 weeks. Intermittent vomiting, loose stools, poor weight gain since then."
     },
     {
-      "id": "prob-2",
-      "description": "Failure to thrive — fell from 50th to 3rd percentile in 2 months",
+      "problem": "Weight faltering \u2014 cow's milk FPIES causing chronic nutritional compromise",
+      "icd": "R62.51",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Weight crossing percentile lines \u2014 from 40th to 10th. Insufficient caloric absorption due to chronic gut inflammation."
     },
     {
-      "id": "prob-3",
-      "description": "Chronic bloody diarrhea — not \"reflux\"",
+      "problem": "FPIES vs cow's milk protein allergy (CMPA) \u2014 clinical distinction",
+      "icd": "K52.29",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "2 months on PPIs/acid suppressants with no improvement",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Needs hypoallergenic formula — extensively hydrolyzed or amino acid-based",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Chronic FPIES overlaps clinically with non-IgE CMPA. Both treated with milk protein elimination."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Formula change",
-      "dose": "Amino acid formula (EleCare/PurAmino)",
-      "route": "PO",
-      "frequency": "Immediate",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Amino acid formula (Neocate or EleCare) \u2014 complete protein elimination",
+      "sig": "Transition from cow's milk formula to amino acid-based formula immediately. Eliminates all cow's milk protein.",
+      "prescriber": "Pediatric GI/Allergy",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "IV Fluids",
-      "dose": "D5NS",
-      "route": "IV",
-      "frequency": "Maintenance (dehydrated)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
-    },
-    {
-      "id": "med-3",
-      "name": "PPI discontinued",
-      "dose": "",
-      "route": "",
-      "frequency": "Was treating non-existent reflux",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Probiotics \u2014 gut microbiome support",
+      "sig": "Lactobacillus reuteri drops \u2014 gut flora support during formula transition. Evidence modest but low risk.",
+      "prescriber": "Pediatric GI",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -920,7 +895,7 @@ window.EMR_DATA = {
       "bp": "N/A",
       "hr": "152",
       "rr": "36",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "N/A/10"
     }
@@ -931,8 +906,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "4-month-old with chronic vomiting, bloody diarrhea, FTT — on cow milk formula, told it was reflux",
-      "hpi": "4-month-old male on cow milk formula with 2 months of chronic vomiting (not projectile — more persistent, post-feed), bloody mucoid diarrhea, and progressive weight loss. Was 50th percentile at 2 months, now 3rd percentile. PCP diagnosed \"reflux\" and started PPI — no improvement. THIS IS CHRONIC FPIES — not reflux. Chronic FPIES presents insidiously with FTT, chronic diarrhea, and hypoalbuminemia (protein-losing enteropathy). More subtle than acute FPIES (which is dramatic profuse vomiting). Switch to amino acid formula — improvement expected within 48-72 hours.",
+      "cc": "4-month-old with chronic vomiting, bloody diarrhea, FTT \u2014 on cow milk formula, told it was reflux",
+      "hpi": "4-month-old male on cow milk formula with 2 months of chronic vomiting (not projectile \u2014 more persistent, post-feed), bloody mucoid diarrhea, and progressive weight loss. Was 50th percentile at 2 months, now 3rd percentile. PCP diagnosed \"reflux\" and started PPI \u2014 no improvement. THIS IS CHRONIC FPIES \u2014 not reflux. Chronic FPIES presents insidiously with FTT, chronic diarrhea, and hypoalbuminemia (protein-losing enteropathy). More subtle than acute FPIES (which is dramatic profuse vomiting). Switch to amino acid formula \u2014 improvement expected within 48-72 hours.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -940,121 +915,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-176012",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Chronic FPIES Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "12.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "520",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "H"
-            },
-            {
-              "test": "Eosinophils",
-              "value": "8",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Cow's milk IgE (skin prick + RAST)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "148",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Total IgE",
+          "value": "4",
+          "unit": "IU/mL",
+          "ref": "<10 for age",
+          "flag": ""
         },
         {
-          "name": "NUTRITION",
-          "results": [
-            {
-              "test": "Albumin",
-              "value": "2.4",
-              "unit": "g/dL",
-              "range": "3.5-5.0",
-              "flag": "L"
-            },
-            {
-              "test": "Iron",
-              "value": "22",
-              "unit": "mcg/dL",
-              "range": "50-120",
-              "flag": "L"
-            },
-            {
-              "test": "Stool calprotectin",
-              "value": "480",
-              "unit": "mcg/g",
-              "range": "<50",
-              "flag": "H"
-            },
-            {
-              "test": "Stool reducing substances",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            }
-          ]
+          "test": "Stool calprotectin",
+          "value": "820",
+          "unit": "mcg/g",
+          "ref": "<50 elevated",
+          "flag": "H"
+        },
+        {
+          "test": "Stool eosinophils",
+          "value": "Present",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
+        },
+        {
+          "test": "Weight gain since birth",
+          "value": "Suboptimal \u2014 10th percentile at 4 months",
+          "unit": "",
+          "ref": "Following curve",
+          "flag": ""
         }
       ]
     }
@@ -1078,11 +975,11 @@ window.EMR_DATA = {
     ],
     [
       "Misdiagnosis",
-      "Initially told it was \"colic\" and \"reflux\" — treated with acid suppressants for 2 months"
+      "Initially told it was \"colic\" and \"reflux\" \u2014 treated with acid suppressants for 2 months"
     ],
     [
       "Key",
-      "Chronic FPIES is more subtle than acute — insidious FTT, chronic diarrhea, not dramatic vomiting episodes"
+      "Chronic FPIES is more subtle than acute \u2014 insidious FTT, chronic diarrhea, not dramatic vomiting episodes"
     ]
   ],
   "references": [
@@ -1163,13 +1060,12 @@ window.EMR_DATA = {
       "Lymph node examination": "No significant lymphadenopathy"
     },
     "ddxTargets": [
-      "Food Protein-Induced Enterocolitis Syndrome (FPIES) (correct diagnosis)",
-      "Cow milk protein allergy (IgE-mediated)",
-      "Inflammatory bowel disease",
-      "Intussusception (must-not-miss diagnosis 1)",
-      "Malrotation with intermittent volvulus (must-not-miss diagnosis 2)",
-      "Gastroesophageal reflux disease (common mimic 1)",
-      "Viral gastroenteritis (common mimic 2)"
+      "Chronic FPIES \u2014 cow's milk, poor weight gain, no IgE (correct)",
+      "IgE-mediated cow's milk allergy \u2014 negative skin prick and RAST excludes",
+      "Cow's milk protein allergy (non-IgE CMPA) \u2014 overlapping entity, treated identically",
+      "Gastroesophageal reflux disease \u2014 vomiting, but weight loss and stool eosinophils suggest FPIES",
+      "Pyloric stenosis \u2014 projectile vomiting, palpable olive mass, age-appropriate",
+      "Hirschsprung disease \u2014 constipation predominant, not diarrhea"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on initial 'reflux' diagnosis and continuing acid suppression despite lack of improvement and presence of bloody stools",
@@ -1179,7 +1075,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at this 4-month-old with chronic vomiting and bloody diarrhea, what key historical details would help you distinguish between your differential diagnoses? Think about the timeline, feeding history, and what's been tried therapeutically.",
       "phase5": "You've gathered good information about the temporal relationship with formula introduction and lack of response to acid suppression. Given the combination of failure to thrive, bloody diarrhea, and cow milk formula exposure, what specific type of food protein reaction should you be considering?",
-      "finalDebrief": "This case highlights how FPIES can be subtle and chronic, unlike the acute dramatic presentations we often hear about. The key clues were the temporal relationship with cow milk formula, chronic bloody diarrhea, failure to thrive, and lack of response to reflux treatment. How might you counsel families about the difference between chronic FPIES and typical food allergies?"
+      "finalDebrief": "This case highlights how FPIES can be subtle and chronic, unlike the acute dramatic presentations we often hear about. The key clues were the temporal relationship with cow milk formula, chronic bloody diarrhea, failure to thrive, and lack of response to reflux treatment. How might you counsel families about the difference between chronic FPIES and typical food allergies?",
+      "final": "Diagnosis: chronic FPIES \u2014 cow's milk. Key learning: (1) Acute vs chronic FPIES: acute = episodic dramatic vomiting 1-4h after trigger, appears severely ill temporarily, then recovers completely. Chronic = low-level daily exposure \u2192 intermittent vomiting, loose stools, weight faltering, chronic gut inflammation. Chronic form is more common in younger infants on formula. (2) Diagnosis of chronic FPIES: clinical picture + IgE testing NEGATIVE + symptoms resolve after elimination diet + return after re-exposure or OFC. No biopsy required for diagnosis. (3) Elimination trial: symptoms should improve within 2 weeks of switching to amino acid formula. Weight gain resumes. This is both diagnostic AND therapeutic. (4) Stool biomarkers: elevated calprotectin and stool eosinophils suggest gut mucosal inflammation \u2014 supportive of FPIES or CMPA, not diagnostic alone. (5) Follow-up: once symptoms resolve on amino acid formula, supervised food challenge at age 12-18 months confirms whether FPIES has resolved. Most cases resolve by age 3-5. Reintroduce under allergy supervision \u2014 acute FPIES reaction can occur on first solid food reintroduction."
     }
+  },
+  "meta": {
+    "diagnosis": "FPIES \u2014 Chronic Form, Cow's Milk Protein, Weight Faltering, Amino Acid Formula Transition",
+    "caseId": "fpies-chronic-v2"
   }
 };

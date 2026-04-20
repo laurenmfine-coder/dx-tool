@@ -1,4 +1,4 @@
-/* emr-data/food-allergy-oit-reaction.js — Multi-Setting Allergy Case: Food Allergy OIT Reaction */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "1240 Oak Ave, Memphis, TN 38116",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "David Nguyen",
         "phone": "(503) 555-6751",
@@ -53,7 +53,7 @@ window.EMR_DATA = {
       ],
       [
         "Cofactors",
-        "Has viral URI symptoms — may lower threshold"
+        "Has viral URI symptoms \u2014 may lower threshold"
       ]
     ]
   },
@@ -66,7 +66,7 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "Peanut allergy — on OIT protocol",
+          "description": "Peanut allergy \u2014 on OIT protocol",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -124,7 +124,7 @@ window.EMR_DATA = {
           "bp": "100/62",
           "hr": "108",
           "rr": "22",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "96%",
           "pain": "6/10"
         }
@@ -147,7 +147,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -161,7 +161,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -230,7 +230,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "12yo brought to ED after OIT reaction at allergist office with persistent symptoms",
-          "hpi": "Olivia Nguyen — 12yo brought to ED after OIT reaction at allergist office with persistent symptoms",
+          "hpi": "Olivia Nguyen \u2014 12yo brought to ED after OIT reaction at allergist office with persistent symptoms",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -245,7 +245,7 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "Peanut allergy — on OIT protocol",
+          "description": "Peanut allergy \u2014 on OIT protocol",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -294,7 +294,7 @@ window.EMR_DATA = {
           "bp": "106/66",
           "hr": "92",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "3/10"
         }
@@ -317,7 +317,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -331,7 +331,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -400,7 +400,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Admitted after severe OIT reaction for monitoring",
-          "hpi": "Olivia Nguyen — Admitted after severe OIT reaction for monitoring",
+          "hpi": "Olivia Nguyen \u2014 Admitted after severe OIT reaction for monitoring",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -409,13 +409,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I follow-up of OIT adverse event — modify protocol or discontinue?",
+        "chiefComplaint": "A/I follow-up of OIT adverse event \u2014 modify protocol or discontinue?",
         "diagnosis": "Food Allergy OIT Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Peanut allergy — on OIT protocol",
+          "description": "Peanut allergy \u2014 on OIT protocol",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -464,7 +464,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -487,7 +487,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -501,7 +501,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -569,8 +569,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I follow-up of OIT adverse event — modify protocol or discontinue?",
-          "hpi": "Olivia Nguyen — A/I follow-up of OIT adverse event — modify protocol or discontinue?",
+          "cc": "A/I follow-up of OIT adverse event \u2014 modify protocol or discontinue?",
+          "hpi": "Olivia Nguyen \u2014 A/I follow-up of OIT adverse event \u2014 modify protocol or discontinue?",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -580,12 +580,12 @@ window.EMR_DATA = {
     "clinic": {
       "patient": {
         "chiefComplaint": "Abdominal pain, hives during peanut oral immunotherapy updose visit",
-        "diagnosis": "Food Allergy — OIT Adverse Reaction"
+        "diagnosis": "Food Allergy \u2014 OIT Adverse Reaction"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Peanut allergy — on OIT protocol",
+          "description": "Peanut allergy \u2014 on OIT protocol",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -634,7 +634,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "98",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -657,7 +657,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -671,7 +671,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -742,7 +742,7 @@ window.EMR_DATA = {
           "cc": "Abdominal pain, hives during peanut oral immunotherapy updose visit",
           "hpi": "Olivia Nguyen presents with abdominal pain, hives during peanut oral immunotherapy updose visit.",
           "exam": "See documentation.",
-          "assessment": "Food Allergy — OIT Adverse Reaction",
+          "assessment": "Food Allergy \u2014 OIT Adverse Reaction",
           "plan": "See orders."
         }
       ]
@@ -762,58 +762,62 @@ window.EMR_DATA = {
     "address": "3624 N Kedzie Blvd, New Orleans, LA 70114",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "David Nguyen",
       "phone": "(317) 555-7566",
       "relationship": "Parent"
     },
     "chiefComplaint": "Abdominal pain, hives during peanut oral immunotherapy updose visit",
-    "diagnosis": "Food Allergy — OIT Adverse Reaction"
+    "diagnosis": "Food Allergy \u2014 OIT Adverse Reaction"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Peanut allergy — on OIT protocol",
+      "problem": "Milk OIT maintenance phase reaction \u2014 illness cofactor",
+      "icd": "T78.1XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Lucas Kim, 8M \u2014 milk OIT maintenance 1200mg daily x4 months. URI 3 days ago. Today: urticaria + wheeze after dose."
     },
     {
-      "id": "prob-2",
-      "description": "Eczema (well-controlled)",
+      "problem": "Asthma \u2014 OIT contraindication during uncontrolled asthma",
+      "icd": "J45.909",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Mild persistent asthma, well-controlled on ICS. Active respiratory illness lowers OIT tolerance \u2014 dose held."
+    },
+    {
+      "problem": "Illness as OIT cofactor \u2014 dose held appropriately",
+      "icd": "Z79.899",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Holding OIT dose during illness is the standard protocol. Resume when fully recovered."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Peanut OIT",
-      "dose": "100mg",
-      "route": "PO",
-      "frequency": "Daily (updosing today to 200mg)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Epinephrine 0.3mg IM \u2014 given in office for systemic symptoms",
+      "sig": "Wheeze + urticaria = multisystem reaction = anaphylaxis criteria. Epinephrine given.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Milk OIT \u2014 HOLD during illness, resume at lower dose (600mg) when recovered",
+      "sig": "Hold OIT dose during any febrile illness. Resume at 50% of maintenance dose x3-5 days, then return to full dose.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active \u2014 on hold"
     },
     {
-      "id": "med-3",
-      "name": "EpiPen Jr",
-      "dose": "0.15mg",
-      "route": "IM",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Albuterol MDI 2 puffs q4h PRN \u2014 URI wheezing",
+      "sig": "Short-acting bronchodilator for acute wheeze. Step up ICS temporarily during URI.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -831,7 +835,7 @@ window.EMR_DATA = {
       "bp": "108/68",
       "hr": "98",
       "rr": "18",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -845,99 +849,42 @@ window.EMR_DATA = {
       "cc": "Abdominal pain, hives during peanut oral immunotherapy updose visit",
       "hpi": "Olivia Nguyen presents with abdominal pain, hives during peanut oral immunotherapy updose visit.",
       "exam": "See documentation.",
-      "assessment": "Food Allergy — OIT Adverse Reaction",
+      "assessment": "Food Allergy \u2014 OIT Adverse Reaction",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-777789",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "OIT Reaction Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Milk-specific IgE (casein)",
+          "value": "4.2",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Milk IgG4 (tolerance biomarker)",
+          "value": "24",
+          "unit": "mgA/L",
+          "ref": "elevated = desensitization",
+          "flag": ""
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Peanut Ig E",
-              "value": "42",
-              "unit": "kU/L",
-              "range": "<0.35",
-              "flag": "H"
-            },
-            {
-              "test": "Ara H2",
-              "value": "28",
-              "unit": "kU/L",
-              "range": "<0.35",
-              "flag": "H"
-            }
-          ]
+          "test": "Total IgE",
+          "value": "280",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "Tryptase post-reaction",
+          "value": "14.8",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         }
       ]
     }
@@ -965,7 +912,7 @@ window.EMR_DATA = {
     ],
     [
       "Cofactors",
-      "Has viral URI symptoms — may lower threshold"
+      "Has viral URI symptoms \u2014 may lower threshold"
     ]
   ],
   "references": [
@@ -1002,16 +949,16 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "OIT reactions most commonly occur during up-dosing or with cofactors (exercise, illness, fever, menses, alcohol, NSAIDs). Cofactors lower the threshold for mast cell activation — patients must hold OIT dose during any cofactor state.",
+      "OIT reactions most commonly occur during up-dosing or with cofactors (exercise, illness, fever, menses, alcohol, NSAIDs). Cofactors lower the threshold for mast cell activation \u2014 patients must hold OIT dose during any cofactor state.",
       "EoE is a recognized complication of OIT in ~5% of patients. Screen with symptom questionnaire at every OIT visit (dysphagia, odynophagia, chest pain, food impaction). Low threshold to refer for endoscopy.",
-      "OIT emergency protocol: mild reaction (isolated oral pruritus) — continue current dose, antihistamine. Moderate (urticaria, GI) — hold up-dose, stay at current level. Severe (anaphylaxis) — epinephrine, hold OIT, reassess with allergist before resuming."
+      "OIT emergency protocol: mild reaction (isolated oral pruritus) \u2014 continue current dose, antihistamine. Moderate (urticaria, GI) \u2014 hold up-dose, stay at current level. Severe (anaphylaxis) \u2014 epinephrine, hold OIT, reassess with allergist before resuming."
     ],
     "boardPearls": [
       "OIT mechanism: mast cell anergy + basophil desensitization + Treg induction + IgG4 production (blocking antibody) + IgE/IgG4 ratio decrease.",
       "Desensitization vs sustained unresponsiveness (SU): desensitization = tolerance maintained only while dosing daily. SU = tolerance persists weeks after stopping. ~70% achieve desensitization; ~30% achieve SU.",
-      "OIT cofactor protocol: hold dose if fever >38°C, active illness, exercise within 2h, menses Day 1–2, alcohol.",
+      "OIT cofactor protocol: hold dose if fever >38\u00b0C, active illness, exercise within 2h, menses Day 1\u20132, alcohol.",
       "EoE complication of OIT: ~5% incidence. Symptom-based screening at each visit. Discontinue or reduce OIT dose if EoE confirmed.",
-      "Palforzia (peanut): ages 4–17. Xolair (omalizumab) pre-treatment: reduces OIT reactions, allows faster up-dosing in high-risk patients (MultiPALS trial)."
+      "Palforzia (peanut): ages 4\u201317. Xolair (omalizumab) pre-treatment: reduces OIT reactions, allows faster up-dosing in high-risk patients (MultiPALS trial)."
     ]
   },
   "guided": {
@@ -1073,13 +1020,12 @@ window.EMR_DATA = {
       "Assess capillary refill and peripheral perfusion": "Capillary refill <2 seconds, warm extremities, good perfusion"
     },
     "ddxTargets": [
-      "Allergic reaction to OIT updose (correct diagnosis)",
-      "Food protein-induced enterocolitis syndrome",
-      "Viral gastroenteritis with coincidental urticaria",
-      "Anaphylaxis",
-      "Systemic mastocytosis",
-      "Acute gastritis",
-      "Cholinergic urticaria"
+      "OIT maintenance reaction \u2014 illness cofactor (correct)",
+      "Accidental milk exposure \u2014 on controlled OIT, dose is the exposure source",
+      "Asthma exacerbation from URI \u2014 wheezing present but urticaria requires allergic explanation",
+      "Anaphylaxis from another food source \u2014 most likely OIT dose in this context",
+      "Viral-induced wheeze \u2014 URI + asthma, but urticaria argues for allergic component",
+      "Eczema flare \u2014 no eczema history; urticaria and wheeze are the primary findings"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'routine OIT visit' and miss that viral illness lowered reaction threshold, or anchor on abdominal pain and miss systemic allergic reaction",
@@ -1089,7 +1035,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This 12-year-old is having symptoms during an OIT updose visit. Before you interview her, think about the key factors that can influence OIT reactions. What cofactors might lower her reaction threshold? What's your approach to assessing reaction severity?",
       "phase5": "You've identified urticaria with GI symptoms during OIT updose. How does her concurrent viral illness factor into this reaction? What are your next steps for management, and what signs would make you concerned about progression?",
-      "finalDebrief": "This case highlights how cofactors like viral illness can significantly lower the threshold for OIT reactions. The combination of systemic urticaria and GI symptoms represents a moderate allergic reaction requiring treatment and protocol adjustment. How did recognizing the viral cofactor change your management approach?"
+      "finalDebrief": "This case highlights how cofactors like viral illness can significantly lower the threshold for OIT reactions. The combination of systemic urticaria and GI symptoms represents a moderate allergic reaction requiring treatment and protocol adjustment. How did recognizing the viral cofactor change your management approach?",
+      "final": "Diagnosis: OIT maintenance reaction \u2014 illness cofactor. Key learning: (1) Illness is the most important maintenance-phase OIT cofactor. ANY febrile illness, GI illness, or significant URI lowers the allergic threshold during OIT dosing. Standard protocol: SKIP the OIT dose during illness. Resume at 50% dose when fully recovered x3-5 days, then return to maintenance dose. (2) Asthma and OIT: uncontrolled or acutely worsening asthma is a CONTRAINDICATION for OIT dosing \u2014 wheeze from any cause dramatically increases reaction risk. This patient's OIT was appropriately held. Peak flow or asthma symptom assessment should be performed before every OIT dose in asthmatic patients. (3) Maintenance phase reactions are less common than updosing reactions but can still occur \u2014 every OIT patient needs their EpiPen with every dose for the foreseeable future. (4) IgG4 as OIT biomarker: rising food-specific IgG4 during OIT indicates desensitization is occurring. Does not predict tolerance (ability to eat the food without ongoing dosing). (5) OIT goal clarification: OIT desensitizes the patient \u2014 protects against accidental exposure but typically requires ongoing daily dosing. Sustained unresponsiveness (tolerance after stopping OIT) occurs in ~25-50% but is not guaranteed. Discuss realistic goals with families before initiating OIT."
     }
+  },
+  "meta": {
+    "diagnosis": "Food Allergy OIT \u2014 Maintenance Phase Reaction, Illness Cofactor, Dose Hold and Reassessment",
+    "caseId": "food-allergy-oit-reaction"
   }
 };

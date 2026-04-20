@@ -1,4 +1,4 @@
-/* emr-data/erythema-multiforme-major.js — Multi-Setting Allergy Case: Erythema Multiforme Major */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "5873 Hickory Rd, Minneapolis, MN 55409",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+      "pharmacy": "Walmart Pharmacy \u2014 Sunrise Blvd",
       "emergencyContact": {
         "name": "Reginald Brennan",
         "phone": "(720) 555-2698",
@@ -105,7 +105,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "88",
           "rr": "16",
-          "temp": "37.8°C",
+          "temp": "37.8\u00b0C",
           "spo2": "99%",
           "pain": "6/10",
           "bmi": "34",
@@ -130,7 +130,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -151,7 +151,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -250,14 +250,14 @@ window.EMR_DATA = {
           "cc": "Target lesions on hands, forearms with oral mucosal erosions",
           "hpi": "Talia Brennan is a 19-year-old female presenting with target lesions on hands, forearms with oral mucosal erosions. Past medical history includes Recurrent herpes labialis, Recent cold sore 10 days ago. See chart for full details.",
           "exam": "See physical examination documentation.",
-          "assessment": "Erythema Multiforme Major — clinical presentation and workup consistent with diagnosis.",
+          "assessment": "Erythema Multiforme Major \u2014 clinical presentation and workup consistent with diagnosis.",
           "plan": "See orders and management plan."
         }
       ]
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for EM Major with oral mucosal involvement — unable to eat",
+        "chiefComplaint": "Admitted for EM Major with oral mucosal involvement \u2014 unable to eat",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
@@ -312,7 +312,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "88",
           "rr": "16",
-          "temp": "37.6°C",
+          "temp": "37.6\u00b0C",
           "spo2": "98%",
           "pain": "7/10"
         }
@@ -335,7 +335,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -356,7 +356,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -452,8 +452,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for EM Major with oral mucosal involvement — unable to eat",
-          "hpi": "Talia Brennan — Admitted for EM Major with oral mucosal involvement — unable to eat",
+          "cc": "Admitted for EM Major with oral mucosal involvement \u2014 unable to eat",
+          "hpi": "Talia Brennan \u2014 Admitted for EM Major with oral mucosal involvement \u2014 unable to eat",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -462,7 +462,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — differentiate EM Major from SJS, identify trigger (HSV vs drug)",
+        "chiefComplaint": "A/I consult \u2014 differentiate EM Major from SJS, identify trigger (HSV vs drug)",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
@@ -499,7 +499,7 @@ window.EMR_DATA = {
           "bp": "114/70",
           "hr": "82",
           "rr": "14",
-          "temp": "37.2°C",
+          "temp": "37.2\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -522,7 +522,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -543,7 +543,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -639,8 +639,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — differentiate EM Major from SJS, identify trigger (HSV vs drug)",
-          "hpi": "Talia Brennan — A/I consult — differentiate EM Major from SJS, identify trigger (HSV vs drug)",
+          "cc": "A/I consult \u2014 differentiate EM Major from SJS, identify trigger (HSV vs drug)",
+          "hpi": "Talia Brennan \u2014 A/I consult \u2014 differentiate EM Major from SJS, identify trigger (HSV vs drug)",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -649,7 +649,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "EM follow-up — recurrence prevention, HSV prophylaxis if HSV-triggered",
+        "chiefComplaint": "EM follow-up \u2014 recurrence prevention, HSV prophylaxis if HSV-triggered",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
@@ -686,7 +686,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -709,7 +709,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -730,7 +730,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "245",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -826,8 +826,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "EM follow-up — recurrence prevention, HSV prophylaxis if HSV-triggered",
-          "hpi": "Talia Brennan — EM follow-up — recurrence prevention, HSV prophylaxis if HSV-triggered",
+          "cc": "EM follow-up \u2014 recurrence prevention, HSV prophylaxis if HSV-triggered",
+          "hpi": "Talia Brennan \u2014 EM follow-up \u2014 recurrence prevention, HSV prophylaxis if HSV-triggered",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -849,7 +849,7 @@ window.EMR_DATA = {
     "address": "3087 Pine Ave, Minneapolis, MN 55401",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Reginald Brennan",
       "phone": "(317) 555-1726",
@@ -860,29 +860,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Recurrent herpes labialis",
+      "problem": "Erythema multiforme \u2014 first episode, etiology unclear",
+      "icd": "L51.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Priya Nair, 22F \u2014 target lesions on palms and extensor surfaces + oral erosions. Fever 38.2\u00b0C."
     },
     {
-      "id": "prob-2",
-      "description": "Recent cold sore 10 days ago",
+      "problem": "Concurrent exposures \u2014 HSV-1 outbreak 2 weeks ago AND sulfa antibiotic recently started",
+      "icd": "L51.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Two potential triggers: HSV (most common) and sulfamethoxazole (can cause EM or SJS). Workup needed."
+    },
+    {
+      "problem": "Oral mucosal erosions \u2014 eating and hydration impaired",
+      "icd": "K12.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Painful oral erosions \u2014 oral hydration possible but limited. IV fluids if intake inadequate."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Valacyclovir",
-      "dose": "500mg",
-      "route": "PO",
-      "frequency": "PRN for outbreaks",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "STOP sulfamethoxazole-trimethoprim \u2014 suspect drug trigger",
+      "sig": "If drug is causative: discontinuation is the primary intervention. Monitor for progression.",
+      "prescriber": "Medicine/Dermatology",
+      "start": "HOLD",
+      "refills": 0,
+      "status": "HOLD \u2014 suspect trigger"
+    },
+    {
+      "name": "Acyclovir 400mg TID x7 days \u2014 treat active HSV",
+      "sig": "Active HSV PCR positive \u2014 treat the active outbreak. Does not reverse EM already established, but stops ongoing antigenic stimulus.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Prednisolone mouthwash \u2014 oral mucosal symptom relief",
+      "sig": "Swish and spit TID \u2014 topical mucosal inflammation management",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -900,7 +922,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "88",
       "rr": "16",
-      "temp": "37.8°C",
+      "temp": "37.8\u00b0C",
       "spo2": "99%",
       "pain": "6/10",
       "bmi": "34",
@@ -916,134 +938,49 @@ window.EMR_DATA = {
       "cc": "Target lesions on hands, forearms with oral mucosal erosions",
       "hpi": "Talia Brennan is a 19-year-old female presenting with a rash on her hands and forearms with mouth sores. Past medical history includes Recurrent herpes labialis, Recent cold sore 10 days ago. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Erythema Multiforme Major — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Erythema Multiforme Major \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-369532",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "EM Etiology Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "HSV-1 PCR \u2014 lip lesion swab",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Mycoplasma IgM",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Esr",
-              "value": "32",
-              "unit": "mm/hr",
-              "range": "0-20",
-              "flag": "H"
-            },
-            {
-              "test": "Hsv",
-              "value": "Positive",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            }
-          ]
+          "test": "CBC",
+          "value": "Normal \u2014 mild lymphocytosis",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "CMP",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "ANA/Anti-dsDNA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         }
       ]
     }
@@ -1101,17 +1038,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "EM major is caused by infections (HSV #1 in adults, Mycoplasma pneumoniae #1 in children), NOT drugs. This distinguishes it from SJS/TEN which is drug-caused. Classic target lesions (3 zones: pale dusky center, dark edematous ring, red periphery) are the hallmark — present in acral distribution (palms, soles, dorsal hands, face).",
+      "EM major is caused by infections (HSV #1 in adults, Mycoplasma pneumoniae #1 in children), NOT drugs. This distinguishes it from SJS/TEN which is drug-caused. Classic target lesions (3 zones: pale dusky center, dark edematous ring, red periphery) are the hallmark \u2014 present in acral distribution (palms, soles, dorsal hands, face).",
       "EM major vs SJS: EM has typical 3-zone target lesions + acral distribution + usually 1 mucosal site + self-limiting. SJS has ill-defined atypical targets/purpuric macules + extensive trunk distribution + all mucosal sites + drug-caused + Nikolsky positive.",
-      "Recurrent EM (from HSV): daily suppressive acyclovir/valacyclovir reduces recurrence by 50–75%. This is a common clinical scenario — patient with recurrent EM should be on HSV suppression."
+      "Recurrent EM (from HSV): daily suppressive acyclovir/valacyclovir reduces recurrence by 50\u201375%. This is a common clinical scenario \u2014 patient with recurrent EM should be on HSV suppression."
     ],
     "boardPearls": [
-      "EM cause: infections (HSV #1 adults, Mycoplasma #1 children). NOT drugs (drugs → SJS/TEN).",
-      "Classic target lesion: 3 zones — pale/dusky center + dark edematous inner ring + red outer ring. Acral distribution (palms, soles, dorsal hands, face).",
+      "EM cause: infections (HSV #1 adults, Mycoplasma #1 children). NOT drugs (drugs \u2192 SJS/TEN).",
+      "Classic target lesion: 3 zones \u2014 pale/dusky center + dark edematous inner ring + red outer ring. Acral distribution (palms, soles, dorsal hands, face).",
       "EM major vs SJS: EM = infection, 3-zone targets, acral, limited mucosal (1 site, usually oral), Nikolsky NEGATIVE, self-limiting. SJS = drug, ill-defined targets, trunk-dominant, all mucosal sites, Nikolsky POSITIVE.",
       "Nikolsky sign: NEGATIVE in EM major. Positive in TEN, pemphigus vulgaris, SSSS.",
-      "Natural history: EM major resolves in 2–6 weeks. Recurs with each HSV episode.",
-      "Recurrent EM treatment: suppress HSV — valacyclovir 500 mg BID daily (or acyclovir 400 mg BID) × 6–12 months.",
+      "Natural history: EM major resolves in 2\u20136 weeks. Recurs with each HSV episode.",
+      "Recurrent EM treatment: suppress HSV \u2014 valacyclovir 500 mg BID daily (or acyclovir 400 mg BID) \u00d7 6\u201312 months.",
       "EM minor: same lesions, NO/minimal mucosal involvement. Also HSV-triggered."
     ]
   },
@@ -1169,18 +1106,17 @@ window.EMR_DATA = {
       "Inspect other skin surfaces for lesions": "No lesions on trunk, legs, or other areas. Face clear except for oral involvement.",
       "Assess for Nikolsky sign": "Negative - no skin slippage with lateral pressure.",
       "Examine fingernails and nail folds": "Normal nail plates, no periungual lesions or nail fold involvement.",
-      "Check vital signs including temperature": "Temperature 37.8°C, other vitals stable as noted.",
+      "Check vital signs including temperature": "Temperature 37.8\u00b0C, other vitals stable as noted.",
       "Assess hydration status": "Mildly dehydrated, mucous membranes slightly dry, likely due to poor oral intake.",
       "Examine genital area if indicated": "Deferred as patient denies genital symptoms and no clinical indication."
     },
     "ddxTargets": [
-      "Eczema herpeticum (correct diagnosis)",
-      "Erythema multiforme minor",
-      "Hand-foot-and-mouth disease",
-      "Stevens-Johnson syndrome",
-      "Disseminated herpes simplex",
-      "Contact dermatitis with secondary infection",
-      "Impetigo"
+      "EM \u2014 HSV as primary trigger (sulfa may be coincidental) (correct)",
+      "SJS from sulfa \u2014 BSA <10%, true target lesions present; SJS has flat atypical targets + more detachment",
+      "Urticarial vasculitis \u2014 no target lesions; wheals >24h, burn not itch",
+      "Fixed drug eruption \u2014 localized, same location each exposure, no target lesions",
+      "Viral exanthem \u2014 no target lesions, no mucosal involvement",
+      "Systemic lupus \u2014 ANA negative, no systemic features"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on HSV history and immediately assuming primary herpes without considering secondary complications like eczema herpeticum",
@@ -1190,7 +1126,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider: What's significant about the timing between her cold sore and this new rash? How might her history of recurrent HSV play a role in this current presentation?",
       "phase5": "Now that you've examined the patient, think about the pattern of her lesions. What's unusual about having 'target-like' lesions on the hands in someone with recent HSV? How does this change your differential?",
-      "finalDebrief": "This case demonstrates eczema herpeticum - HSV superinfection of compromised skin. Notice how the history of recent cold sore manipulation, the target lesion morphology, and the distribution pattern all pointed away from simple contact dermatitis toward this more serious HSV complication requiring systemic antiviral therapy."
+      "finalDebrief": "This case demonstrates eczema herpeticum - HSV superinfection of compromised skin. Notice how the history of recent cold sore manipulation, the target lesion morphology, and the distribution pattern all pointed away from simple contact dermatitis toward this more serious HSV complication requiring systemic antiviral therapy.",
+      "final": "Diagnosis: EM \u2014 HSV primary trigger (sulfa coincidental). Key learning: (1) When multiple potential triggers are present: HSV serology/PCR is positive \u2192 HSV is the most likely trigger. Drugs rarely cause classic EM with 3-zone target lesions \u2014 they cause SJS/TEN. However, when uncertain, stopping the drug is low-risk and appropriate. (2) EM target lesion vs SJS atypical target: EM target = 3 concentric zones (center + pale middle ring + outer red). SJS atypical target = 2 zones only (dusky center + surrounding erythema) \u2014 these are 'flat' with no true 3-zone structure. This distinction is clinically important and determines management path. (3) BSA assessment: in EM major with oral mucosal involvement, always assess for skin detachment and BSA involved. If >10% or epidermal detachment developing \u2192 this is transitioning toward SJS-TEN, not EM, and requires different management (burn unit, IVIG, etc.). (4) First-episode EM: work up HSV (PCR preferred), Mycoplasma IgM (especially in pediatric or younger patients), drug exposure history within 3 weeks. (5) Prognosis of EM: generally self-limited over 2-4 weeks. Mucosal erosions heal without scarring typically. Recurrent EM (>3 episodes/year) warrants suppressive antiviral therapy."
     }
+  },
+  "meta": {
+    "diagnosis": "Erythema Multiforme \u2014 First Episode, HSV and Drug Exposure Both Present, Systematic Workup",
+    "caseId": "erythema-multiforme-major"
   }
 };

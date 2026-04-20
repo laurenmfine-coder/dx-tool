@@ -23,20 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Post-Dental Extraction Day 5",
-      "icd": "Z00.00",
+      "problem": "Sepsis \u2014 oral/dental source, Ludwig's angina risk",
+      "icd": "A41.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Tom\u00e1s Guerrero, 44M \u2014 febrile, swollen right jaw, trismus, elevated WBC. Blood cultures pending. CT neck ordered."
+    },
+    {
+      "problem": "Periapical abscess \u2014 mandibular molar, spreading cellulitis",
+      "icd": "K04.7",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Unable to open mouth >1cm. Medial pterygoid space involved. Ludwig's angina must be excluded urgently."
+    },
+    {
+      "problem": "Airway at risk \u2014 sublingual/submandibular space involvement",
+      "icd": "J38.4",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "CT neck: bilateral submandibular involvement beginning. Anesthesia and ENT on standby."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Ampicillin-sulbactam 3g IV q6h \u2014 empiric oral flora",
+      "sig": "Covers Streptococcus, anaerobes, oral gram-negatives. Backbone of Ludwig's angina treatment.",
+      "prescriber": "ENT/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Metronidazole 500mg IV q8h \u2014 add anaerobic coverage",
+      "sig": "Adjunct for deep space neck infection \u2014 polymicrobial including Fusobacterium, Bacteroides",
+      "prescriber": "ENT/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 10mg IV q6h \u2014 reduce airway edema",
+      "sig": "Steroids reduce cellulitis and airway edema in Ludwig's angina \u2014 given WITH antibiotics, not alone",
+      "prescriber": "ENT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Serial airway assessments \u2014 anesthesia standby",
+      "sig": "If stridor, drooling, inability to swallow, posturing \u2192 intubate EARLY. Awake fiberoptic preferred before complete closure.",
+      "prescriber": "Anesthesia/ENT",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,8 +135,65 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Sepsis/Neck Infection Panel",
+      "results": [
+        {
+          "test": "WBC",
+          "value": "24.6",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "184",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.3",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "2.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures x2",
+          "value": "Pending",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Glucose",
+          "value": "224",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "CT Neck With Contrast",
+      "indication": "Jaw swelling, trismus, fever \u2014 deep space infection?",
+      "findings": "Bilateral submandibular and submental space involvement. Early sublingual space gas. No drainable abscess identified \u2014 phlegmon. Airway midline but narrowed at base of tongue.",
+      "impression": "Ludwig's angina \u2014 bilateral deep space neck infection. Airway compromise risk HIGH. No discrete abscess for I&D \u2014 IV antibiotics + airway monitoring."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +225,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "cross-oral-sepsis",
-    "diagnosis": "See diagnosis \u2014 Post-Dental Extraction Day 5",
+    "diagnosis": "Oral Source of Sepsis \u2014 Periapical Abscess with Bacteremia, Dental Extraction Needed After Medical Stabilization",
     "acuity": 1,
     "presentation": "Post-Dental Extraction Day 5",
     "category": "infectious"
@@ -177,12 +272,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "38yo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Ludwig's angina \u2014 dental source sepsis, bilateral deep space neck infection (correct)",
+      "Peritonsillar abscess \u2014 unilateral, uvular deviation, different age group",
+      "Parapharyngeal space abscess \u2014 different CT location, usually unilateral",
+      "Submandibular lymphadenitis \u2014 does not cause gas or bilateral space involvement",
+      "Angioedema \u2014 no skin erythema/heat, no dental source, different history",
+      "Epiglottitis \u2014 epiglottis normal on CT; different presentation"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +287,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Post-Dental Extraction Day 5. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) He has been on amoxicillin since the extraction. His face is mildly swollen. Lactate 3.8. He has not voided in 6 hours. The dental team is in the building and available. What is your first priority \u2014 and at what point, if ever, does the dental source become the management focus? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: Ludwig's angina \u2014 deep space neck infection from dental source. Key learning: (1) Ludwig's angina is a bilateral submandibular/sublingual/submental space infection \u2014 a true surgical emergency. Most common source: mandibular second or third molar periapical abscess. Organisms: mixed oral flora (Streptococcus, Staphylococcus, anaerobes). (2) Airway is the first priority \u2014 can progress from open airway to complete closure in hours. Warning signs: stridor, drooling, muffled voice, anterior neck edema, inability to swallow. Awake fiberoptic intubation before airway closes is far safer than crash intubation. (3) Gas on CT: pathognomonic for deep space infection with gas-producing organisms (polymicrobial, anaerobic). Urgent surgical and ENT evaluation. (4) I&D: if no discrete abscess on CT (phlegmon), antibiotics alone may suffice. If abscess present \u2192 surgical drainage. Dental extraction of source tooth after medical stabilization. (5) Interdisciplinary key learning: dental providers should recognize that a painful, swollen tooth presenting with fever, trismus, and dysphagia requires ED referral, not just antibiotic prescription and discharge."
     }
   }
 };

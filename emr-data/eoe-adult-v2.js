@@ -1,4 +1,4 @@
-/* emr-data/eoe-adult-v2.js — Multi-Setting Allergy Case Variation: Eosinophilic Esophagitis */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "1657 Larkspur Ln, Louisville, KY 40208",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "Publix Pharmacy — Weston Rd",
+      "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
       "emergencyContact": {
         "name": "Sarah Green",
         "phone": "(414) 555-7779",
@@ -58,7 +58,7 @@ window.EMR_DATA = {
       ],
       [
         "Diet",
-        "Reports long history of eating slowly, drinking lots of water with meals — thought this was normal"
+        "Reports long history of eating slowly, drinking lots of water with meals \u2014 thought this was normal"
       ],
       [
         "Coping",
@@ -66,14 +66,14 @@ window.EMR_DATA = {
       ],
       [
         "Presentation bias",
-        "Diagnosed with GERD 3 years ago — PPI not helping, no one considered EoE"
+        "Diagnosed with GERD 3 years ago \u2014 PPI not helping, no one considered EoE"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "29yo with 6-hour food impaction — steak bolus lodged in distal esophagus",
+        "chiefComplaint": "29yo with 6-hour food impaction \u2014 steak bolus lodged in distal esophagus",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
@@ -86,14 +86,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Suspected EoE — long history of dysphagia, \"slow eater,\" food avoidance",
+          "description": "Suspected EoE \u2014 long history of dysphagia, \"slow eater,\" food avoidance",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "GERD — treated with PPI x3 years without improvement",
+          "description": "GERD \u2014 treated with PPI x3 years without improvement",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -121,7 +121,7 @@ window.EMR_DATA = {
           "name": "Omeprazole",
           "dose": "40mg",
           "route": "PO",
-          "frequency": "BID (home med — not working)",
+          "frequency": "BID (home med \u2014 not working)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -133,7 +133,7 @@ window.EMR_DATA = {
           "bp": "132/78",
           "hr": "88",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -156,7 +156,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -177,7 +177,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -240,8 +240,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "29yo with 6-hour food impaction — steak bolus lodged in distal esophagus",
-          "hpi": "29M presenting with 6-hour food impaction after eating steak at team dinner. Reports he has always been a \"slow eater\" and avoids bread and steak because they \"get stuck.\" Has been cutting food into very small pieces since college. Diagnosed with GERD 3 years ago — on omeprazole BID with minimal improvement. Never had EGD. On review, has had 2 prior food impaction episodes that resolved spontaneously. Reports significant social embarrassment — avoids team dinners and dates because of eating difficulties. This is a classic missed EoE diagnosis — adaptive eating behaviors masked the severity for years.",
+          "cc": "29yo with 6-hour food impaction \u2014 steak bolus lodged in distal esophagus",
+          "hpi": "29M presenting with 6-hour food impaction after eating steak at team dinner. Reports he has always been a \"slow eater\" and avoids bread and steak because they \"get stuck.\" Has been cutting food into very small pieces since college. Diagnosed with GERD 3 years ago \u2014 on omeprazole BID with minimal improvement. Never had EGD. On review, has had 2 prior food impaction episodes that resolved spontaneously. Reports significant social embarrassment \u2014 avoids team dinners and dates because of eating difficulties. This is a classic missed EoE diagnosis \u2014 adaptive eating behaviors masked the severity for years.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -250,27 +250,27 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted after endoscopic disimpaction — EGD shows ringed esophagus with stricture, biopsies pending",
+        "chiefComplaint": "Admitted after endoscopic disimpaction \u2014 EGD shows ringed esophagus with stricture, biopsies pending",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Esophageal food impaction — disimpacted endoscopically",
+          "description": "Esophageal food impaction \u2014 disimpacted endoscopically",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "EoE — ringed esophagus with proximal stricture on EGD",
+          "description": "EoE \u2014 ringed esophagus with proximal stricture on EGD",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "GERD — likely EoE misdiagnosed as GERD for 3 years",
+          "description": "GERD \u2014 likely EoE misdiagnosed as GERD for 3 years",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -284,7 +284,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Social impact — food avoidance, dating avoidance",
+          "description": "Social impact \u2014 food avoidance, dating avoidance",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -296,7 +296,7 @@ window.EMR_DATA = {
           "name": "Fluticasone swallowed",
           "dose": "880mcg",
           "route": "Swallowed",
-          "frequency": "BID (do not inhale — swallow the puff)",
+          "frequency": "BID (do not inhale \u2014 swallow the puff)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -305,7 +305,7 @@ window.EMR_DATA = {
           "name": "Omeprazole",
           "dose": "40mg",
           "route": "PO",
-          "frequency": "BID (continue — may have concurrent GERD)",
+          "frequency": "BID (continue \u2014 may have concurrent GERD)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -326,7 +326,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "2/10"
         }
@@ -349,7 +349,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -370,7 +370,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -427,21 +427,21 @@ window.EMR_DATA = {
               "name": "PATHOLOGY",
               "results": [
                 {
-                  "test": "Esophageal biopsy — proximal",
+                  "test": "Esophageal biopsy \u2014 proximal",
                   "value": "68 eos/HPF",
                   "unit": "",
                   "range": "<15 eos/HPF",
                   "flag": "H"
                 },
                 {
-                  "test": "Esophageal biopsy — mid",
+                  "test": "Esophageal biopsy \u2014 mid",
                   "value": "45 eos/HPF",
                   "unit": "",
                   "range": "<15 eos/HPF",
                   "flag": "H"
                 },
                 {
-                  "test": "Esophageal biopsy — distal",
+                  "test": "Esophageal biopsy \u2014 distal",
                   "value": "52 eos/HPF",
                   "unit": "",
                   "range": "<15 eos/HPF",
@@ -449,7 +449,7 @@ window.EMR_DATA = {
                 },
                 {
                   "test": "Gastric biopsy",
-                  "value": "Normal — 0 eos/HPF",
+                  "value": "Normal \u2014 0 eos/HPF",
                   "unit": "",
                   "range": "",
                   "flag": ""
@@ -466,8 +466,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted after endoscopic disimpaction — EGD shows ringed esophagus with stricture, biopsies pending",
-          "hpi": "29M after endoscopic disimpaction. EGD findings: classic EoE — concentric rings (\"trachealization\"), linear furrows, white exudates, and 8mm proximal stricture (dilated to 15mm). Biopsies: 45-68 eos/HPF in all esophageal levels (diagnostic). Gastric biopsies normal (rules out eosinophilic gastroenteritis). Started swallowed fluticasone. Patient emotional after diagnosis — \"so this is why I've always eaten like this? I thought something was wrong with me.\" Counseled extensively.",
+          "cc": "Admitted after endoscopic disimpaction \u2014 EGD shows ringed esophagus with stricture, biopsies pending",
+          "hpi": "29M after endoscopic disimpaction. EGD findings: classic EoE \u2014 concentric rings (\"trachealization\"), linear furrows, white exudates, and 8mm proximal stricture (dilated to 15mm). Biopsies: 45-68 eos/HPF in all esophageal levels (diagnostic). Gastric biopsies normal (rules out eosinophilic gastroenteritis). Started swallowed fluticasone. Patient emotional after diagnosis \u2014 \"so this is why I've always eaten like this? I thought something was wrong with me.\" Counseled extensively.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -476,27 +476,27 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — newly diagnosed EoE, food allergy testing, long-term management plan",
+        "chiefComplaint": "A/I consult \u2014 newly diagnosed EoE, food allergy testing, long-term management plan",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "EoE — newly diagnosed (68 eos/HPF), stricture dilated",
+          "description": "EoE \u2014 newly diagnosed (68 eos/HPF), stricture dilated",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Food triggers — need testing",
+          "description": "Food triggers \u2014 need testing",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "3-year GERD misdiagnosis — discuss diagnostic delay",
+          "description": "3-year GERD misdiagnosis \u2014 discuss diagnostic delay",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -536,7 +536,7 @@ window.EMR_DATA = {
           "bp": "124/76",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -559,7 +559,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -580,7 +580,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -683,8 +683,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — newly diagnosed EoE, food allergy testing, long-term management plan",
-          "hpi": "A/I consult: 29M with newly diagnosed EoE after years of adaptive eating behaviors. Food allergy testing: milk and wheat strongly positive — these are the 2 most common EoE triggers. Recommend 2-food elimination diet (remove milk and wheat) + swallowed fluticasone as dual therapy. Repeat EGD in 8 weeks to assess response. If milk/wheat elimination + fluticasone achieves histologic remission, can trial reintroduction one at a time. If refractory, consider dupilumab. Also discussed: this is not his fault, the diagnostic delay is common (average 5-7 years for EoE diagnosis), and his eating adaptations were actually a smart coping mechanism.",
+          "cc": "A/I consult \u2014 newly diagnosed EoE, food allergy testing, long-term management plan",
+          "hpi": "A/I consult: 29M with newly diagnosed EoE after years of adaptive eating behaviors. Food allergy testing: milk and wheat strongly positive \u2014 these are the 2 most common EoE triggers. Recommend 2-food elimination diet (remove milk and wheat) + swallowed fluticasone as dual therapy. Repeat EGD in 8 weeks to assess response. If milk/wheat elimination + fluticasone achieves histologic remission, can trial reintroduction one at a time. If refractory, consider dupilumab. Also discussed: this is not his fault, the diagnostic delay is common (average 5-7 years for EoE diagnosis), and his eating adaptations were actually a smart coping mechanism.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -693,41 +693,41 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "EoE follow-up — repeat EGD results after 8 weeks of treatment",
+        "chiefComplaint": "EoE follow-up \u2014 repeat EGD results after 8 weeks of treatment",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "EoE — in histologic remission (68→4 eos/HPF on milk/wheat elimination + fluticasone)",
+          "description": "EoE \u2014 in histologic remission (68\u21924 eos/HPF on milk/wheat elimination + fluticasone)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Milk elimination — confirmed trigger on reintroduction (eos went back up)",
+          "description": "Milk elimination \u2014 confirmed trigger on reintroduction (eos went back up)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Wheat — tolerated on reintroduction (not a trigger for this patient)",
+          "description": "Wheat \u2014 tolerated on reintroduction (not a trigger for this patient)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Esophageal stricture — improved, no further dilation needed",
+          "description": "Esophageal stricture \u2014 improved, no further dilation needed",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Quality of life dramatically improved — eating at restaurants, dating again",
+          "description": "Quality of life dramatically improved \u2014 eating at restaurants, dating again",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -769,7 +769,7 @@ window.EMR_DATA = {
           "bp": "126/76",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -792,7 +792,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -813,7 +813,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -876,8 +876,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "EoE follow-up — repeat EGD results after 8 weeks of treatment",
-          "hpi": "29M EoE follow-up. Repeat EGD: dramatic improvement — 68→4 eos/HPF on combination therapy. Systematic reintroduction: wheat tolerated (reintroduced successfully, EGD normal), milk confirmed trigger (EGD showed 42 eos/HPF after 6-week milk reintroduction, resolved again after re-elimination). Now on fluticasone daily (maintenance) + strict milk avoidance. Reports eating steak for the first time in years without impaction. Went on a dinner date last week — \"first time I didn't have to explain why I eat weird.\" Stricture improved, no further dilation needed. Calcium/vitamin D supplementation for milk-free diet. Annual EGD for surveillance.",
+          "cc": "EoE follow-up \u2014 repeat EGD results after 8 weeks of treatment",
+          "hpi": "29M EoE follow-up. Repeat EGD: dramatic improvement \u2014 68\u21924 eos/HPF on combination therapy. Systematic reintroduction: wheat tolerated (reintroduced successfully, EGD normal), milk confirmed trigger (EGD showed 42 eos/HPF after 6-week milk reintroduction, resolved again after re-elimination). Now on fluticasone daily (maintenance) + strict milk avoidance. Reports eating steak for the first time in years without impaction. Went on a dinner date last week \u2014 \"first time I didn't have to explain why I eat weird.\" Stricture improved, no further dilation needed. Calcium/vitamin D supplementation for milk-free diet. Annual EGD for surveillance.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -899,63 +899,62 @@ window.EMR_DATA = {
     "address": "2601 S Halsted St, Memphis, TN 38104",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
     "emergencyContact": {
       "name": "Sarah Green",
       "phone": "(505) 555-7815",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "29yo with 6-hour food impaction — steak bolus lodged in distal esophagus",
+    "chiefComplaint": "29yo with 6-hour food impaction \u2014 steak bolus lodged in distal esophagus",
     "diagnosis": "Eosinophilic Esophagitis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Esophageal food impaction (steak)",
+      "problem": "Eosinophilic esophagitis \u2014 EGD-confirmed",
+      "icd": "K20.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Derek Walsh, 34M \u2014 recurrent dysphagia to solids x2 years, food impaction last week. Biopsy: >15 eos/hpf."
     },
     {
-      "id": "prob-2",
-      "description": "Suspected EoE — long history of dysphagia, \"slow eater,\" food avoidance",
+      "problem": "Esophageal stricture \u2014 fibrostenotic EoE complication",
+      "icd": "K22.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "EGD: rings, furrows, white exudate. Mild stricture. Dilation performed at same session."
     },
     {
-      "id": "prob-3",
-      "description": "GERD — treated with PPI x3 years without improvement",
+      "problem": "Atopic comorbidities \u2014 asthma, allergic rhinitis",
+      "icd": "J45.909",
+      "onset": "2015",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Possible esophageal stricture",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "EoE is an atopic disease \u2014 70-80% have concurrent atopic conditions. Allergy referral for food trigger testing."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Glucagon",
-      "dose": "1mg",
-      "route": "IV",
-      "frequency": "Given x1 (unsuccessful)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Fluticasone 880mcg swallowed (not inhaled) BID \u2014 topical esophageal steroid",
+      "sig": "Swallow the MDI puff \u2014 do NOT inhale. Topical steroid for esophageal eosinophilic inflammation. Do not eat/drink x30 min.",
+      "prescriber": "GI/Allergy",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Omeprazole",
-      "dose": "40mg",
-      "route": "PO",
-      "frequency": "BID (home med — not working)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Omeprazole 40mg PO BID \u2014 PPI trial x8-12 weeks",
+      "sig": "PPI-responsive esophageal eosinophilia (PREE) must be excluded. If biopsy normalizes on PPI alone \u2014 PPI-REE, not EoE (though increasingly considered a spectrum).",
+      "prescriber": "GI",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active \u2014 diagnostic trial"
+    },
+    {
+      "name": "Six-food elimination diet \u2014 concurrent dietary trial",
+      "sig": "Eliminate: milk, wheat, egg, soy, tree nuts, seafood. Reintroduce one at a time with EGD between each \u2014 identify specific trigger. Milk and wheat are most common triggers.",
+      "prescriber": "GI/Dietitian",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 dietary"
     }
   ],
   "allergies": [
@@ -973,7 +972,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": "88",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -984,8 +983,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "29yo with 6-hour food impaction — steak bolus lodged in distal esophagus",
-      "hpi": "29M presenting with 6-hour food impaction after eating steak at team dinner. Reports he has always been a \"slow eater\" and avoids bread and steak because they \"get stuck.\" Has been cutting food into very small pieces since college. Diagnosed with GERD 3 years ago — on omeprazole BID with minimal improvement. Never had EGD. On review, has had 2 prior food impaction episodes that resolved spontaneously. Reports significant social embarrassment — avoids team dinners and dates because of eating difficulties. This is a classic missed EoE diagnosis — adaptive eating behaviors masked the severity for years.",
+      "cc": "29yo with 6-hour food impaction \u2014 steak bolus lodged in distal esophagus",
+      "hpi": "29M presenting with 6-hour food impaction after eating steak at team dinner. Reports he has always been a \"slow eater\" and avoids bread and steak because they \"get stuck.\" Has been cutting food into very small pieces since college. Diagnosed with GERD 3 years ago \u2014 on omeprazole BID with minimal improvement. Never had EGD. On review, has had 2 prior food impaction episodes that resolved spontaneously. Reports significant social embarrassment \u2014 avoids team dinners and dates because of eating difficulties. This is a classic missed EoE diagnosis \u2014 adaptive eating behaviors masked the severity for years.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -993,100 +992,56 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-203417",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "EoE Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Esophageal biopsy \u2014 eosinophils/hpf",
+          "value": "42",
+          "unit": "eos/hpf",
+          "ref": "<15 eos/hpf",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Peripheral blood eosinophils",
+          "value": "0.7",
+          "unit": "K/\u03bcL",
+          "ref": "<0.5",
+          "flag": "H"
+        },
+        {
+          "test": "Total IgE",
+          "value": "340",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "Wheat-specific IgE",
+          "value": "4.2",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Milk-specific IgE",
+          "value": "2.1",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "Upper Endoscopy (EGD)",
+      "indication": "Dysphagia, food impaction",
+      "findings": "Esophageal rings (trachealization), longitudinal furrows, white exudate. Mid-esophageal stricture. Biopsies taken proximal, mid, and distal.",
+      "impression": "EoE endoscopic appearance \u2014 rings, furrows, exudate. Mild stricture dilated to 16mm. Histology: 42 eos/hpf confirming EoE."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -1114,7 +1069,7 @@ window.EMR_DATA = {
     ],
     [
       "Diet",
-      "Reports long history of eating slowly, drinking lots of water with meals — thought this was normal"
+      "Reports long history of eating slowly, drinking lots of water with meals \u2014 thought this was normal"
     ],
     [
       "Coping",
@@ -1122,7 +1077,7 @@ window.EMR_DATA = {
     ],
     [
       "Presentation bias",
-      "Diagnosed with GERD 3 years ago — PPI not helping, no one considered EoE"
+      "Diagnosed with GERD 3 years ago \u2014 PPI not helping, no one considered EoE"
     ]
   ],
   "references": [
@@ -1136,7 +1091,7 @@ window.EMR_DATA = {
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
       "openAccess": true,
       "validates": [
-        "≥15 eos/HPF diagnostic threshold",
+        "\u226515 eos/HPF diagnostic threshold",
         "1-food (milk) elimination first-line",
         "Swallowed budesonide/fluticasone",
         "Repeat EGD 8-12 weeks"
@@ -1200,13 +1155,12 @@ window.EMR_DATA = {
       "Check for halitosis or regurgitated food odor": "Mild halitosis present, no obvious food odor"
     },
     "ddxTargets": [
-      "Eosinophilic esophagitis with food impaction (correct diagnosis)",
-      "Esophageal stricture with food impaction",
-      "Achalasia",
-      "Esophageal perforation",
-      "Foreign body aspiration with airway obstruction",
-      "Gastroesophageal reflux disease with esophagitis",
-      "Esophageal carcinoma"
+      "EoE \u2014 recurrent dysphagia, food impaction, >15 eos/hpf on biopsy (correct)",
+      "GERD \u2014 can cause esophageal eosinophilia but <15 eos/hpf; no rings/furrows",
+      "Achalasia \u2014 failure of LES relaxation; manometry distinguishes; different dysphagia pattern",
+      "Esophageal candidiasis \u2014 white plaques but in immunocompromised; biopsy confirms",
+      "Pill esophagitis \u2014 localized, history of medication use",
+      "Hypereosinophilic syndrome \u2014 systemic eosinophilia involving multiple organs"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on simple food impaction without considering underlying esophageal pathology, especially given the long history of dysphagia and adaptive eating behaviors",
@@ -1216,7 +1170,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, let's think about this case systematically. You have a young male with acute food impaction, but notice his history of being a 'slow eater' and avoiding certain foods. What underlying esophageal pathology might predispose someone to recurrent food impaction? Consider both structural and functional causes.",
       "phase5": "Now that you've gathered more history and examined the patient, you've learned about his chronic adaptive eating behaviors and family history of atopic disease. His PPI-refractory symptoms and specific food triggers are telling. How does this change your differential diagnosis from simple food impaction to something more systemic?",
-      "finalDebrief": "This case illustrates how acute presentations can reveal chronic underlying pathology. Marcus's EoE was hiding in plain sight - the food avoidance, slow eating, and family atopy history were classic. Many patients adapt so well to their symptoms that the underlying disease goes undiagnosed for years. What red flags should make you think beyond simple GERD in young patients with dysphagia?"
+      "finalDebrief": "This case illustrates how acute presentations can reveal chronic underlying pathology. Marcus's EoE was hiding in plain sight - the food avoidance, slow eating, and family atopy history were classic. Many patients adapt so well to their symptoms that the underlying disease goes undiagnosed for years. What red flags should make you think beyond simple GERD in young patients with dysphagia?",
+      "final": "Diagnosis: EoE, adult. Key learning: (1) EoE diagnostic criteria: symptoms of esophageal dysfunction + \u226515 eosinophils/hpf on proximal AND distal esophageal biopsy + exclusion of secondary causes. Biopsies must be taken from multiple levels \u2014 patchy disease can be missed with single-site biopsy. (2) Classic endoscopic features (EREFS score): Edema (loss of vascular pattern), Rings (fixed rings = fibrostenotic), Exudate (white specks), Furrows (longitudinal), Stricture. EoE can have a normal-appearing esophagus endoscopically (~10%) \u2014 biopsies are essential regardless of appearance. (3) Swallowed vs inhaled steroid: fluticasone must be swallowed (puffed into mouth, swallowed without inhaling) \u2014 the goal is topical esophageal mucosal contact. Budesonide slurry (oral viscous budesonide) is an alternative with better mucosal contact. Do not eat or drink for 30 minutes after dosing. (4) Dietary therapy: six-food elimination (milk, wheat, egg, soy, tree nuts, seafood) achieves histologic remission in ~70%. Milk and wheat are triggers in ~60-70% \u2014 targeted elimination after food testing is an alternative to empiric six-food. Lifelong dietary management vs medication are both valid approaches. (5) Dilation: for strictures causing significant symptoms \u2014 treats the mechanical complication but does not treat the underlying inflammation. Inflammation management prevents recurrent stricture."
     }
+  },
+  "meta": {
+    "diagnosis": "Eosinophilic Esophagitis \u2014 Adult, Food Impaction Presenting Event, Dietary Elimination and PPI Trial",
+    "caseId": "eoe-adult-v2"
   }
 };

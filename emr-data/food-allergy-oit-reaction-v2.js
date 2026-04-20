@@ -1,4 +1,4 @@
-/* emr-data/food-allergy-oit-reaction-v2.js — Variation: Food Allergy — OIT Management */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "3737 Magnolia Blvd, Minneapolis, MN 55407",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Martinez-Lee",
         "phone": "(804) 555-8052",
@@ -52,7 +52,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "OIT status",
-        "6 months into peanut OIT — up-dosing phase"
+        "6 months into peanut OIT \u2014 up-dosing phase"
       ],
       [
         "Trigger",
@@ -60,31 +60,31 @@ window.EMR_DATA = {
       ],
       [
         "Exercise",
-        "Competitive swimmer — exercise-induced anaphylaxis risk during OIT"
+        "Competitive swimmer \u2014 exercise-induced anaphylaxis risk during OIT"
       ],
       [
         "Social",
-        "Peer at school recently hospitalized for anaphylaxis after OIT reaction — parents worried about continuing"
+        "Peer at school recently hospitalized for anaphylaxis after OIT reaction \u2014 parents worried about continuing"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "14yo on peanut OIT who exercised within 2h of dose — developed throat tightness, hives, abdominal pain",
-        "diagnosis": "Food Allergy — OIT Management"
+        "chiefComplaint": "14yo on peanut OIT who exercised within 2h of dose \u2014 developed throat tightness, hives, abdominal pain",
+        "diagnosis": "Food Allergy \u2014 OIT Management"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "OIT reaction — exercise-induced amplification",
+          "description": "OIT reaction \u2014 exercise-induced amplification",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Peanut OIT — 6 months into up-dosing (200mg peanut protein)",
+          "description": "Peanut OIT \u2014 6 months into up-dosing (200mg peanut protein)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -98,7 +98,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "OIT protocol violation — must avoid exercise 2h before and after dose",
+          "description": "OIT protocol violation \u2014 must avoid exercise 2h before and after dose",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -140,7 +140,7 @@ window.EMR_DATA = {
           "bp": "98/62",
           "hr": "112",
           "rr": "22",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "95%",
           "pain": "5/10"
         }
@@ -163,7 +163,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -177,7 +177,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -240,8 +240,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "14yo on peanut OIT who exercised within 2h of dose — developed throat tightness, hives, abdominal pain",
-          "hpi": "14F competitive swimmer on peanut OIT (200mg dose). Took afternoon OIT dose, then went to swim practice 90 min later (should wait minimum 2h — no exercise before or after). During warm-up laps: throat tightness, diffuse hives, abdominal cramping. Coach called 911. Epi given at pool. KEY: Exercise amplifies OIT absorption and increases reaction risk. This was a protocol violation, not OIT failure. Parents very anxious — friend's child was recently hospitalized after OIT reaction and they're questioning whether to continue.",
+          "cc": "14yo on peanut OIT who exercised within 2h of dose \u2014 developed throat tightness, hives, abdominal pain",
+          "hpi": "14F competitive swimmer on peanut OIT (200mg dose). Took afternoon OIT dose, then went to swim practice 90 min later (should wait minimum 2h \u2014 no exercise before or after). During warm-up laps: throat tightness, diffuse hives, abdominal cramping. Coach called 911. Epi given at pool. KEY: Exercise amplifies OIT absorption and increases reaction risk. This was a protocol violation, not OIT failure. Parents very anxious \u2014 friend's child was recently hospitalized after OIT reaction and they're questioning whether to continue.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -251,12 +251,12 @@ window.EMR_DATA = {
     "inpatient": {
       "patient": {
         "chiefComplaint": "Brief observation after OIT reaction",
-        "diagnosis": "Food Allergy — OIT Management"
+        "diagnosis": "Food Allergy \u2014 OIT Management"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "OIT reaction — resolved",
+          "description": "OIT reaction \u2014 resolved",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -280,7 +280,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -303,7 +303,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -317,7 +317,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -381,7 +381,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Brief observation after OIT reaction",
-          "hpi": "Observation only — discharged after 4h monitoring.",
+          "hpi": "Observation only \u2014 discharged after 4h monitoring.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -390,20 +390,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — OIT reaction management, modify protocol for competitive athlete, address parental anxiety",
-        "diagnosis": "Food Allergy — OIT Management"
+        "chiefComplaint": "A/I consult \u2014 OIT reaction management, modify protocol for competitive athlete, address parental anxiety",
+        "diagnosis": "Food Allergy \u2014 OIT Management"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "OIT exercise-induced reaction — protocol violation (exercise within 2h)",
+          "description": "OIT exercise-induced reaction \u2014 protocol violation (exercise within 2h)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Competitive swimmer — needs modified OIT timing protocol around training",
+          "description": "Competitive swimmer \u2014 needs modified OIT timing protocol around training",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -417,7 +417,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "At 200mg — past the highest-risk up-dosing phase",
+          "description": "At 200mg \u2014 past the highest-risk up-dosing phase",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -434,7 +434,7 @@ window.EMR_DATA = {
         {
           "id": "med-1",
           "name": "Peanut OIT",
-          "dose": "200mg (held — will restart at same dose after 1 week)",
+          "dose": "200mg (held \u2014 will restart at same dose after 1 week)",
           "route": "PO",
           "frequency": "Daily with food, morning (away from swim practice)",
           "status": "Active",
@@ -466,7 +466,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -489,7 +489,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -503,7 +503,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -566,8 +566,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — OIT reaction management, modify protocol for competitive athlete, address parental anxiety",
-          "hpi": "A/I consult: 14F competitive swimmer on peanut OIT. This reaction was exercise-induced amplification, not OIT failure. Modified protocol: (1) OIT dose in MORNING with breakfast (swim practice is afternoon — ensures >6h gap), (2) Cetirizine 30 min before each dose, (3) No exercise 2h before or 2h after OIT dose, (4) Weekend doses on non-practice days when possible. Parent counseling: at 200mg she is past the highest-risk phase of up-dosing, the goal (300mg = ~1 peanut) provides meaningful protection against accidental exposure, and discontinuing now would lose 6 months of progress. Risk with continuing is manageable with protocol adherence. Parents agreed to continue with morning dosing schedule.",
+          "cc": "A/I consult \u2014 OIT reaction management, modify protocol for competitive athlete, address parental anxiety",
+          "hpi": "A/I consult: 14F competitive swimmer on peanut OIT. This reaction was exercise-induced amplification, not OIT failure. Modified protocol: (1) OIT dose in MORNING with breakfast (swim practice is afternoon \u2014 ensures >6h gap), (2) Cetirizine 30 min before each dose, (3) No exercise 2h before or 2h after OIT dose, (4) Weekend doses on non-practice days when possible. Parent counseling: at 200mg she is past the highest-risk phase of up-dosing, the goal (300mg = ~1 peanut) provides meaningful protection against accidental exposure, and discontinuing now would lose 6 months of progress. Risk with continuing is manageable with protocol adherence. Parents agreed to continue with morning dosing schedule.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -576,13 +576,13 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "OIT follow-up — reached maintenance dose, no further reactions with morning dosing",
-        "diagnosis": "Food Allergy — OIT Management"
+        "chiefComplaint": "OIT follow-up \u2014 reached maintenance dose, no further reactions with morning dosing",
+        "diagnosis": "Food Allergy \u2014 OIT Management"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Peanut OIT — reached maintenance dose (300mg = ~1 peanut)",
+          "description": "Peanut OIT \u2014 reached maintenance dose (300mg = ~1 peanut)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -596,14 +596,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Protective threshold achieved — accidental exposures less likely to cause anaphylaxis",
+          "description": "Protective threshold achieved \u2014 accidental exposures less likely to cause anaphylaxis",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Still carries EpiPen — OIT protects against accidental exposure, not unlimited intake",
+          "description": "Still carries EpiPen \u2014 OIT protects against accidental exposure, not unlimited intake",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -652,7 +652,7 @@ window.EMR_DATA = {
           "bp": "108/66",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -675,7 +675,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -689,7 +689,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -752,8 +752,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "OIT follow-up — reached maintenance dose, no further reactions with morning dosing",
-          "hpi": "14F reached OIT maintenance dose of 300mg peanut protein (~1 peanut equivalent). No reactions since switching to morning dosing. Swim times actually improved — less anxiety during practice. Important counseling reinforced: OIT provides PROTECTION against accidental exposure, not a cure. Still must avoid peanut/tree nut intentionally. Still must carry EpiPen. But the safety margin is dramatically improved — unlikely to react to trace cross-contamination. Parents relieved and grateful they continued. Annual follow-up for sIgE monitoring.",
+          "cc": "OIT follow-up \u2014 reached maintenance dose, no further reactions with morning dosing",
+          "hpi": "14F reached OIT maintenance dose of 300mg peanut protein (~1 peanut equivalent). No reactions since switching to morning dosing. Swim times actually improved \u2014 less anxiety during practice. Important counseling reinforced: OIT provides PROTECTION against accidental exposure, not a cure. Still must avoid peanut/tree nut intentionally. Still must carry EpiPen. But the safety margin is dramatically improved \u2014 unlikely to react to trace cross-contamination. Parents relieved and grateful they continued. Annual follow-up for sIgE monitoring.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -775,72 +775,62 @@ window.EMR_DATA = {
     "address": "6508 N Western Ave, Milwaukee, WI 53207",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Martinez-Lee",
       "phone": "(314) 555-5239",
       "relationship": "Parent"
     },
-    "chiefComplaint": "14yo on peanut OIT who exercised within 2h of dose — developed throat tightness, hives, abdominal pain",
-    "diagnosis": "Food Allergy — OIT Management"
+    "chiefComplaint": "14yo on peanut OIT who exercised within 2h of dose \u2014 developed throat tightness, hives, abdominal pain",
+    "diagnosis": "Food Allergy \u2014 OIT Management"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "OIT reaction — exercise-induced amplification",
+      "problem": "Peanut oral immunotherapy (OIT) reaction \u2014 updosing event",
+      "icd": "T78.1XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Emma Rodriguez, 14F \u2014 on Palforzia OIT. Developed urticaria + abdominal pain + vomiting 30 min after updose to 80mg."
     },
     {
-      "id": "prob-2",
-      "description": "Peanut OIT — 6 months into up-dosing (200mg peanut protein)",
+      "problem": "OIT protocol modification \u2014 dose reduction after reaction",
+      "icd": "Z79.899",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Updosing held after systemic reaction. Return to last tolerated dose after reassessment. Risk factor review needed."
     },
     {
-      "id": "prob-3",
-      "description": "Exercised within restricted window (swam laps 90 min after dose)",
+      "problem": "Uncontrolled exercise before OIT dose \u2014 cofactor identified",
+      "icd": "T78.1XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "OIT protocol violation — must avoid exercise 2h before and after dose",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Patient had PE class before coming to office. Exercise is the most common OIT cofactor for dose reactions."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given x1",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Epinephrine 0.3mg IM \u2014 administered for systemic reaction",
+      "sig": "Systemic reaction (urticaria + GI + vomiting) = anaphylaxis criteria met. Epinephrine given in office.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Given",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Palforzia OIT \u2014 dose reduced to prior tolerated dose (40mg)",
+      "sig": "After systemic reaction: hold updosing, return to last well-tolerated dose after 1-2 weeks on reduced dose.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active \u2014 dose reduced"
     },
     {
-      "id": "med-3",
-      "name": "Albuterol",
-      "dose": "2 puffs",
-      "route": "INH",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg x2 \u2014 prescribe/reinforce for home use",
+      "sig": "Two EpiPens at all times during OIT \u2014 home reactions can occur during maintenance dosing.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -864,7 +854,7 @@ window.EMR_DATA = {
       "bp": "98/62",
       "hr": "112",
       "rr": "22",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "95%",
       "pain": "5/10"
     }
@@ -875,8 +865,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "14yo on peanut OIT who exercised within 2h of dose — developed throat tightness, hives, abdominal pain",
-      "hpi": "14F competitive swimmer on peanut OIT (200mg dose). Took afternoon OIT dose, then went to swim practice 90 min later (should wait minimum 2h — no exercise before or after). During warm-up laps: throat tightness, diffuse hives, abdominal cramping. Coach called 911. Epi given at pool. KEY: Exercise amplifies OIT absorption and increases reaction risk. This was a protocol violation, not OIT failure. Parents very anxious — friend's child was recently hospitalized after OIT reaction and they're questioning whether to continue.",
+      "cc": "14yo on peanut OIT who exercised within 2h of dose \u2014 developed throat tightness, hives, abdominal pain",
+      "hpi": "14F competitive swimmer on peanut OIT (200mg dose). Took afternoon OIT dose, then went to swim practice 90 min later (should wait minimum 2h \u2014 no exercise before or after). During warm-up laps: throat tightness, diffuse hives, abdominal cramping. Coach called 911. Epi given at pool. KEY: Exercise amplifies OIT absorption and increases reaction risk. This was a protocol violation, not OIT failure. Parents very anxious \u2014 friend's child was recently hospitalized after OIT reaction and they're questioning whether to continue.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -884,88 +874,36 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-615302",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "OIT Reaction Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "6",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Peanut-specific IgE",
+          "value": "12.4",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Ara h 2 IgE",
+          "value": "8.6",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Tryptase (drawn 1h post-reaction)",
+          "value": "18.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
+        },
+        {
+          "test": "Tryptase baseline (24h post)",
+          "value": "4.0",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
         }
       ]
     }
@@ -986,7 +924,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "OIT status",
-      "6 months into peanut OIT — up-dosing phase"
+      "6 months into peanut OIT \u2014 up-dosing phase"
     ],
     [
       "Trigger",
@@ -994,11 +932,11 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Competitive swimmer — exercise-induced anaphylaxis risk during OIT"
+      "Competitive swimmer \u2014 exercise-induced anaphylaxis risk during OIT"
     ],
     [
       "Social",
-      "Peer at school recently hospitalized for anaphylaxis after OIT reaction — parents worried about continuing"
+      "Peer at school recently hospitalized for anaphylaxis after OIT reaction \u2014 parents worried about continuing"
     ]
   ],
   "references": [
@@ -1092,13 +1030,12 @@ window.EMR_DATA = {
       "Check pulse quality and rhythm": "Regular tachycardia, pulses strong and equal bilaterally"
     },
     "ddxTargets": [
-      "Exercise-enhanced food allergic reaction (OIT-related anaphylaxis) (correct diagnosis)",
-      "Food-dependent exercise-induced anaphylaxis",
-      "OIT dose reaction without exercise component",
-      "Anaphylaxis - idiopathic or from unknown trigger",
-      "Systemic mastocytosis with trigger",
-      "Exercise-induced asthma with urticaria",
-      "Anxiety reaction with psychosomatic symptoms"
+      "OIT updosing reaction \u2014 exercise cofactor, systemic symptoms (correct)",
+      "Anaphylaxis from accidental peanut exposure \u2014 OIT context makes updose the trigger",
+      "Panic attack \u2014 tachycardia and anxiety, but urticaria and GI symptoms are organic",
+      "Vasovagal reaction \u2014 no urticaria, pallor/bradycardia pattern",
+      "Mast cell activation syndrome \u2014 baseline tryptase normal at 24h",
+      "Idiopathic anaphylaxis \u2014 OIT dose is the identifiable trigger"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'just an OIT reaction' and missing the exercise amplification component that makes this more serious",
@@ -1108,7 +1045,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient is on oral immunotherapy for peanut allergy. What questions will help you understand the relationship between her OIT dosing, exercise timing, and current symptoms? Consider the pathophysiology of how exercise affects allergen absorption and reaction severity.",
       "phase5": "You've identified a patient with urticaria, throat symptoms, and GI symptoms after OIT dosing. What's significant about the timing of her exercise relative to her dose? How does this change your assessment of severity and management approach?",
-      "finalDebrief": "This case highlights exercise-enhanced allergic reactions during OIT. Exercise within 2 hours of dosing increases absorption and can trigger more severe reactions. How did recognizing this specific trigger help differentiate from simple OIT reactions? What does this mean for her treatment plan and patient education?"
+      "finalDebrief": "This case highlights exercise-enhanced allergic reactions during OIT. Exercise within 2 hours of dosing increases absorption and can trigger more severe reactions. How did recognizing this specific trigger help differentiate from simple OIT reactions? What does this mean for her treatment plan and patient education?",
+      "final": "Diagnosis: OIT dose reaction \u2014 exercise cofactor. Key learning: (1) OIT cofactors \u2014 conditions that lower the reaction threshold during OIT dosing: exercise (most common \u2014 do not exercise 2 hours before or after OIT dose), illness/fever, menstruation, poor sleep, NSAID use, empty stomach (or unusual eating timing), emotional stress. These MUST be reviewed at every OIT visit and patients must know to call before dosing if cofactors present. (2) Protocol after systemic reaction: do NOT updose after a systemic reaction. Return to last tolerated dose. Reassess with allergist before any further updosing. Adjust protocol based on frequency and severity of reactions. (3) Palforzia (Aimmune AR101): FDA-approved peanut OIT for ages 4-17. Reduces risk of accidental severe reaction from 3 peanuts (threshold) to ~67 peanut equivalents or more for most patients. Does NOT allow intentional unrestricted peanut eating \u2014 it is DESENSITIZATION, not tolerance. (4) OIT vs omalizumab: omalizumab (Xolair) is increasingly used as an adjunct to OIT or as monotherapy (FDA-approved 2024 for ages 1+ for peanut, milk, egg, wheat, cashew, walnut, hazelnut) \u2014 reduces reaction severity and may allow faster updosing. (5) Patient education: epinephrine must always be accessible during OIT \u2014 reactions during maintenance dosing are less common than during updosing but occur and can be severe."
     }
+  },
+  "meta": {
+    "diagnosis": "Peanut OIT Adverse Reaction \u2014 Systemic Symptoms During Updosing, Protocol Hold, Epinephrine Administration",
+    "caseId": "food-allergy-oit-reaction-v2"
   }
 };

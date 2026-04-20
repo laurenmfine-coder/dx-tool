@@ -1,4 +1,4 @@
-/* emr-data/dka-v1.js — Auto-generated EMR case data for Diabetic Ketoacidosis */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Alejandro Gutierrez",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "6341 Peachtree Rd, Minneapolis, MN 55410",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Cynthia Gutierrez",
       "phone": "(713) 555-6327",
@@ -26,54 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Type 1 Diabetes",
+      "problem": "DKA \u2014 new-onset T1DM, severe (pH 7.18)",
+      "icd": "E10.10",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Alex Kim, 19M \u2014 polyuria/polydipsia x3 weeks, vomiting x2 days. Glucose 524, pH 7.18, AG 28."
     },
     {
-      "id": "prob-2",
-      "description": "Depression",
+      "problem": "Severe dehydration \u2014 6-8L deficit estimated",
+      "icd": "E86.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "HR 128, BP 98/62. Dry mucous membranes. Initial resuscitation with NS, then switch to 0.45% NaCl."
     },
     {
-      "id": "prob-3",
-      "description": "Non-adherence to insulin",
+      "problem": "Hypokalemia risk \u2014 insulin and fluids will worsen K+",
+      "icd": "E87.6",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "K+ 3.4 on arrival \u2014 must replace to \u22653.5 BEFORE starting insulin. Ongoing replacement required."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Insulin Glargine",
-      "dose": "22 units",
-      "route": "SC",
-      "frequency": "Nightly",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Normal saline 1L IV bolus, then 500mL/h x2h \u2014 resuscitation",
+      "sig": "Restore intravascular volume first. Switch to 0.45% NaCl + 20mEq KCl at 250mL/h after hemodynamic stabilization.",
+      "prescriber": "Medicine/Endocrinology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Insulin Lispro",
-      "dose": "Sliding scale",
-      "route": "SC",
-      "frequency": "AC",
-      "status": "Active",
-      "prescriber": "Dr. James Wu, MD"
+      "name": "Potassium chloride 40mEq IV \u2014 before insulin",
+      "sig": "MUST replace K+ to \u22653.5 before starting insulin. Insulin drives K+ into cells \u2014 severe hypokalemia causes fatal arrhythmia.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Sertraline",
-      "dose": "100mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Regular insulin 0.1 units/kg/h IV infusion \u2014 after K+ \u22653.5",
+      "sig": "Do NOT bolus unless pH <6.9. Continuous infusion. Target glucose drop 50-75 mg/dL/h.",
+      "prescriber": "Endocrinology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 after K+ replacement"
+    },
+    {
+      "name": "Dextrose 5% in 0.45% NaCl \u2014 add when glucose <250",
+      "sig": "Switch IVF to D5 0.45NS when glucose drops below 250 \u2014 keeps insulin running while preventing hypoglycemia. The goal is anion gap closure, not glucose normalization.",
+      "prescriber": "Endocrinology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 conditional"
     }
   ],
   "allergies": [
@@ -91,7 +96,7 @@ window.EMR_DATA = {
       "bp": "98/62",
       "hr": "128",
       "rr": "32",
-      "temp": "36.4°C",
+      "temp": "36.4\u00b0C",
       "spo2": "99%",
       "pain": "6/10",
       "bmi": "29",
@@ -107,164 +112,68 @@ window.EMR_DATA = {
       "cc": "Found confused and vomiting by family",
       "hpi": "Alejandro Gutierrez is a 28-year-old male presenting with found confused and vomiting by family. Past medical history includes Type 1 Diabetes, Depression, Non-adherence to insulin. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Diabetic Ketoacidosis — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Diabetic Ketoacidosis \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-315101",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "DKA Panel \u2014 Initial",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Glucose",
+          "value": "524",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "5.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "8",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": "L"
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "542",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "Anion Gap",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "8-12",
-              "flag": "H"
-            }
-          ]
+          "test": "pH (venous)",
+          "value": "7.18",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Beta Hydroxybutyrate",
-              "value": "6.8",
-              "unit": "mmol/L",
-              "range": "<0.6",
-              "flag": "H"
-            },
-            {
-              "test": "Ph",
-              "value": "7.12",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "L"
-            }
-          ]
+          "test": "Bicarbonate",
+          "value": "8",
+          "unit": "mEq/L",
+          "ref": "22-26",
+          "flag": "L"
+        },
+        {
+          "test": "Anion gap",
+          "value": "28",
+          "unit": "mEq/L",
+          "ref": "8-12",
+          "flag": "H"
+        },
+        {
+          "test": "Potassium",
+          "value": "3.4",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "L"
+        },
+        {
+          "test": "Beta-hydroxybutyrate",
+          "value": "8.4",
+          "unit": "mmol/L",
+          "ref": "<0.6",
+          "flag": "H"
+        },
+        {
+          "test": "HbA1c",
+          "value": "12.8",
+          "unit": "%",
+          "ref": "<5.7",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-619080",
-      "clinical": "Found confused and vomiting by family",
-      "technique": "Standard protocol",
-      "findings": "Clear lungs. Normal heart size.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -300,7 +209,7 @@ window.EMR_DATA = {
     ],
     [
       "Insulin",
-      "Admits to not taking insulin for 4 days — ran out and couldn't afford refill"
+      "Admits to not taking insulin for 4 days \u2014 ran out and couldn't afford refill"
     ],
     [
       "Occupation",
@@ -355,7 +264,7 @@ window.EMR_DATA = {
     ],
     "examFindings": {
       "General appearance and mental status": "Alert but mildly lethargic, appears dehydrated and ill-appearing, responds appropriately but with slight delay",
-      "Vital signs assessment": "BP 98/62 (orthostatic), HR 128 regular, Temp 36.4°C, SpO2 99%, RR 24 with deep respirations",
+      "Vital signs assessment": "BP 98/62 (orthostatic), HR 128 regular, Temp 36.4\u00b0C, SpO2 99%, RR 24 with deep respirations",
       "HEENT examination": "Dry mucous membranes, sunken eyes, poor skin turgor, fruity odor on breath",
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak peripheral pulses, capillary refill 3 seconds",
       "Pulmonary examination": "Deep, labored respirations (Kussmaul pattern), lungs clear to auscultation bilaterally",
@@ -366,13 +275,12 @@ window.EMR_DATA = {
       "Kussmaul respirations assessment": "Deep, rapid respirations consistent with metabolic acidosis compensation"
     },
     "ddxTargets": [
-      "Diabetic Ketoacidosis (correct diagnosis)",
-      "Hyperosmolar Hyperglycemic State",
-      "Severe Hypoglycemia",
-      "Sepsis with DKA",
-      "Acute Myocardial Infarction",
-      "Gastroenteritis with dehydration",
-      "Alcohol Ketoacidosis"
+      "DKA \u2014 new-onset T1DM (correct)",
+      "HHS (hyperosmolar hyperglycemic state) \u2014 T2DM, older, no ketosis, glucose often >600",
+      "Alcoholic ketoacidosis \u2014 history, glucose often normal or low, alcohol odor",
+      "Starvation ketosis \u2014 mild, glucose normal/low, no acidosis",
+      "SGLT-2 inhibitor euglycemic DKA \u2014 glucose often <250 despite DKA; not applicable here (new T1DM)",
+      "Lactic acidosis \u2014 lactate elevated; DKA anion gap from ketones not lactate"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on gastroenteritis due to prominent vomiting and dehydration, missing the underlying metabolic crisis",
@@ -382,7 +290,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at this 28-year-old with diabetes presenting with confusion and vomiting, what key historical elements would help you differentiate between the various causes of altered mental status in a diabetic patient? Think about what his medication non-adherence might lead to.",
       "phase5": "You've identified classic signs of severe dehydration and Kussmaul respirations in a non-adherent diabetic. How do these physical findings help narrow your differential? What's the pathophysiology behind the breathing pattern you observed?",
-      "finalDebrief": "This case demonstrates how social determinants of health directly impact medical outcomes. The combination of insulin non-adherence, classic symptoms of polyuria and polydipsia, Kussmaul respirations, and altered mental status pointed clearly to DKA. How might you address both the acute medical crisis and the underlying access issues that led to this presentation?"
+      "finalDebrief": "This case demonstrates how social determinants of health directly impact medical outcomes. The combination of insulin non-adherence, classic symptoms of polyuria and polydipsia, Kussmaul respirations, and altered mental status pointed clearly to DKA. How might you address both the acute medical crisis and the underlying access issues that led to this presentation?",
+      "final": "Diagnosis: DKA, new-onset T1DM. Key learning: (1) DKA triad: glucose >250 + pH <7.30 + positive ketones. Severity: mild pH 7.25-7.30, moderate 7.00-7.25, severe <7.00. This patient: pH 7.18 = moderate-severe. (2) Potassium rule: NEVER start insulin until K+ \u22653.5. Insulin drives potassium into cells \u2192 serum K+ drops \u2192 fatal arrhythmia. Replace K+ to \u22653.5 before ANY insulin. Even in DKA with a normal or high K+ on admission, total body K+ is depleted \u2014 aggressive replacement ongoing. (3) Glucose vs anion gap: the treatment goal is ANION GAP CLOSURE, not glucose normalization. When glucose drops below 250, ADD dextrose to IVF and continue insulin \u2014 this keeps the insulin running to close the gap without causing hypoglycemia. (4) Cerebral edema: risk is higher in pediatric/young patients with DKA. Warning signs: headache, altered mental status, bradycardia during treatment. Prevent by avoiding overly rapid fluid correction or sodium drop. Mannitol 0.5-1g/kg IV if suspected. (5) Subcutaneous insulin transition: once AG closed + patient tolerating PO \u2192 overlap SC long-acting insulin with IV insulin by 1-2 hours before stopping drip (prevents rebound ketosis). Start basal-bolus regimen with endocrinology guidance."
     }
+  },
+  "meta": {
+    "diagnosis": "Diabetic Ketoacidosis \u2014 New-Onset T1DM, Insulin Drip, Anion Gap Closure, Transition to Subcutaneous Protocol",
+    "caseId": "dka-v1"
   }
 };

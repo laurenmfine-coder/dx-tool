@@ -1,4 +1,4 @@
-/* emr-data/erythema-multiforme-major-v2.js — Variation: Erythema Multiforme Major */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "5475 W Haddon Ave, Baltimore, MD 21206",
       "insurance": "Parents' plan",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(619) 555-9281",
@@ -45,7 +45,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "Recurrent EM from recurrent HSV — 3rd episode in 12 months"
+        "Recurrent EM from recurrent HSV \u2014 3rd episode in 12 months"
       ],
       [
         "Trigger",
@@ -53,24 +53,24 @@ window.EMR_DATA = {
       ],
       [
         "Issue",
-        "Not on HSV suppression — EM could be prevented with daily valacyclovir"
+        "Not on HSV suppression \u2014 EM could be prevented with daily valacyclovir"
       ],
       [
         "School",
-        "College junior — missing exams during flares"
+        "College junior \u2014 missing exams during flares"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "20yo with targetoid rash and oral erosions — 3rd episode in 12 months, always preceded by cold sore",
+        "chiefComplaint": "20yo with targetoid rash and oral erosions \u2014 3rd episode in 12 months, always preceded by cold sore",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "EM major — recurrent, HSV-triggered",
+          "description": "EM major \u2014 recurrent, HSV-triggered",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -84,7 +84,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Oral mucosal erosions — unable to eat",
+          "description": "Oral mucosal erosions \u2014 unable to eat",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -140,7 +140,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "82",
           "rr": "16",
-          "temp": "37.8°C",
+          "temp": "37.8\u00b0C",
           "spo2": "99%",
           "pain": "6/10"
         }
@@ -163,7 +163,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -177,7 +177,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -242,7 +242,7 @@ window.EMR_DATA = {
                 },
                 {
                   "test": "HSV PCR (lip lesion)",
-                  "value": "Positive — HSV-1",
+                  "value": "Positive \u2014 HSV-1",
                   "unit": "",
                   "range": "",
                   "flag": "H"
@@ -259,8 +259,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "20yo with targetoid rash and oral erosions — 3rd episode in 12 months, always preceded by cold sore",
-          "hpi": "20M college student with 3rd episode of targetoid rash + oral erosions in 12 months. Each episode preceded by cold sore 7-10 days prior. Classic presentation: target lesions on extremities, oral mucosal erosions, mild conjunctival injection. HSV-triggered EM major. KEY: This is NOT SJS/TEN — EM and SJS are different diseases. EM: targetoid with mucosal involvement, usually HSV-triggered, self-limited. SJS: widespread detachment, usually drug-triggered, potentially fatal. He should have been started on HSV suppression after the 2nd episode — daily valacyclovir would prevent both HSV outbreaks and subsequent EM.",
+          "cc": "20yo with targetoid rash and oral erosions \u2014 3rd episode in 12 months, always preceded by cold sore",
+          "hpi": "20M college student with 3rd episode of targetoid rash + oral erosions in 12 months. Each episode preceded by cold sore 7-10 days prior. Classic presentation: target lesions on extremities, oral mucosal erosions, mild conjunctival injection. HSV-triggered EM major. KEY: This is NOT SJS/TEN \u2014 EM and SJS are different diseases. EM: targetoid with mucosal involvement, usually HSV-triggered, self-limited. SJS: widespread detachment, usually drug-triggered, potentially fatal. He should have been started on HSV suppression after the 2nd episode \u2014 daily valacyclovir would prevent both HSV outbreaks and subsequent EM.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -269,13 +269,13 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Brief admission for severe oral erosions — unable to eat",
+        "chiefComplaint": "Brief admission for severe oral erosions \u2014 unable to eat",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "EM major — oral erosions, dehydration",
+          "description": "EM major \u2014 oral erosions, dehydration",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -308,7 +308,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "82",
           "rr": "16",
-          "temp": "37.4°C",
+          "temp": "37.4\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -331,7 +331,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -345,7 +345,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -408,7 +408,7 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Brief admission for severe oral erosions — unable to eat",
+          "cc": "Brief admission for severe oral erosions \u2014 unable to eat",
           "hpi": "Admitted for IV fluids due to inability to eat from oral erosions. Improving on valacyclovir.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -418,20 +418,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — recurrent HSV-triggered EM, prophylaxis strategy",
+        "chiefComplaint": "A/I consult \u2014 recurrent HSV-triggered EM, prophylaxis strategy",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Recurrent EM major — HSV-1 triggered",
+          "description": "Recurrent EM major \u2014 HSV-1 triggered",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "3 episodes/year — meets threshold for HSV suppression",
+          "description": "3 episodes/year \u2014 meets threshold for HSV suppression",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -445,7 +445,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "EM vs SJS distinction — important for this patient's records and future care",
+          "description": "EM vs SJS distinction \u2014 important for this patient's records and future care",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -469,7 +469,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -492,7 +492,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -506,7 +506,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -569,8 +569,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — recurrent HSV-triggered EM, prophylaxis strategy",
-          "hpi": "A/I: 20M with HSV-triggered recurrent EM. Started daily valacyclovir 500mg — suppresses HSV reactivation, which prevents the EM cascade. Will continue 12 months minimum, then trial off. If EM recurs off suppression: lifelong valacyclovir. Also educated patient and PCP on EM vs SJS distinction — his chart should NOT say \"SJS\" as treatment and prognosis are completely different.",
+          "cc": "A/I consult \u2014 recurrent HSV-triggered EM, prophylaxis strategy",
+          "hpi": "A/I: 20M with HSV-triggered recurrent EM. Started daily valacyclovir 500mg \u2014 suppresses HSV reactivation, which prevents the EM cascade. Will continue 12 months minimum, then trial off. If EM recurs off suppression: lifelong valacyclovir. Also educated patient and PCP on EM vs SJS distinction \u2014 his chart should NOT say \"SJS\" as treatment and prognosis are completely different.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -579,34 +579,34 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "EM follow-up — 6 months on valacyclovir prophylaxis, zero episodes",
+        "chiefComplaint": "EM follow-up \u2014 6 months on valacyclovir prophylaxis, zero episodes",
         "diagnosis": "Erythema Multiforme Major"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Recurrent EM — ZERO episodes in 6 months on HSV suppression (previously 3/year)",
+          "description": "Recurrent EM \u2014 ZERO episodes in 6 months on HSV suppression (previously 3/year)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Valacyclovir prophylaxis — well tolerated",
+          "description": "Valacyclovir prophylaxis \u2014 well tolerated",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "No HSV cold sores either — both problems solved",
+          "description": "No HSV cold sores either \u2014 both problems solved",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "College — no missed exams this semester",
+          "description": "College \u2014 no missed exams this semester",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -630,7 +630,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -653,7 +653,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -667,7 +667,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -730,8 +730,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "EM follow-up — 6 months on valacyclovir prophylaxis, zero episodes",
-          "hpi": "20M 6 months on daily valacyclovir. Zero EM episodes. Zero cold sores. Back to normal college life. Will trial off valacyclovir at 12 months — if EM returns, resume indefinitely.",
+          "cc": "EM follow-up \u2014 6 months on valacyclovir prophylaxis, zero episodes",
+          "hpi": "20M 6 months on daily valacyclovir. Zero EM episodes. Zero cold sores. Back to normal college life. Will trial off valacyclovir at 12 months \u2014 if EM returns, resume indefinitely.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -753,79 +753,62 @@ window.EMR_DATA = {
     "address": "9654 N Western Ave, Minneapolis, MN 55401",
     "insurance": "Parents' plan",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(317) 555-3695",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "20yo with targetoid rash and oral erosions — 3rd episode in 12 months, always preceded by cold sore",
+    "chiefComplaint": "20yo with targetoid rash and oral erosions \u2014 3rd episode in 12 months, always preceded by cold sore",
     "diagnosis": "Erythema Multiforme Major"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "EM major — recurrent, HSV-triggered",
+      "problem": "Erythema multiforme major \u2014 HSV-induced",
+      "icd": "L51.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Tyler Brooks, 26M \u2014 recurrent EM following HSV-1 oral outbreaks. Target lesions + oral mucosal erosions."
     },
     {
-      "id": "prob-2",
-      "description": "3rd episode in 12 months",
+      "problem": "Oral mucosal erosions \u2014 pain with eating and swallowing",
+      "icd": "K12.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Hemorrhagic lip crusting, painful oral erosions. Distinct from SJS \u2014 <10% BSA involvement."
     },
     {
-      "id": "prob-3",
-      "description": "Oral mucosal erosions — unable to eat",
+      "problem": "Recurrent HSV-triggered EM \u2014 suppressive therapy needed",
+      "icd": "B00.9",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "HSV suppression NOT started despite recurrent pattern",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Missing college exams during flares",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Third episode in 2 years. Each episode follows HSV outbreak by 1-3 weeks. Acyclovir suppression prevents recurrence."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Valacyclovir",
-      "dose": "1g",
-      "route": "PO",
-      "frequency": "BID x5 days (treating active HSV)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Acyclovir 400mg PO BID \u2014 chronic suppressive therapy",
+      "sig": "Long-term HSV suppression prevents EM recurrence. Continue indefinitely or reassess at 1 year.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 11,
+      "status": "Active \u2014 suppressive"
     },
     {
-      "id": "med-2",
-      "name": "Prednisone",
-      "dose": "40mg",
-      "route": "PO",
-      "frequency": "Daily x5 days taper",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Dexamethasone 0.1% oral rinse \u2014 mucosal inflammation",
+      "sig": "Swish and spit TID \u2014 topical steroid for oral erosions. Do not swallow.",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Magic mouthwash",
-      "dose": "",
-      "route": "PO swish/spit",
-      "frequency": "QID for oral pain",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Magic mouthwash (equal parts diphenhydramine/lidocaine/Maalox)",
+      "sig": "Swish and spit q3-4h PRN \u2014 numbs oral mucosa for pain with eating",
+      "prescriber": "Dermatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "PRN"
     }
   ],
   "allergies": [
@@ -843,7 +826,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "82",
       "rr": "16",
-      "temp": "37.8°C",
+      "temp": "37.8\u00b0C",
       "spo2": "99%",
       "pain": "6/10"
     }
@@ -854,8 +837,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "20yo with targetoid rash and oral erosions — 3rd episode in 12 months, always preceded by cold sore",
-      "hpi": "20M college student with 3rd episode of ringed rash + oral erosions in 12 months. Each episode preceded by cold sore 7-10 days prior. Presentation: round rings on extremities with central dusky color, oral mucosal erosions, mild conjunctival injection. HSV-triggered. KEY: This is NOT SJS/TEN — distinction matters for management.",
+      "cc": "20yo with targetoid rash and oral erosions \u2014 3rd episode in 12 months, always preceded by cold sore",
+      "hpi": "20M college student with 3rd episode of ringed rash + oral erosions in 12 months. Each episode preceded by cold sore 7-10 days prior. Presentation: round rings on extremities with central dusky color, oral mucosal erosions, mild conjunctival injection. HSV-triggered. KEY: This is NOT SJS/TEN \u2014 distinction matters for management.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -863,107 +846,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-266495",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "EM Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "HSV-1 IgG",
+          "value": "Positive (>5.0 index)",
+          "unit": "",
+          "ref": "<0.9 negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "HSV-1 PCR \u2014 active lesion swab",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "HSV/EM",
-          "results": [
-            {
-              "test": "HSV-1 IgG",
-              "value": "Positive",
-              "unit": "",
-              "range": "",
-              "flag": ""
-            },
-            {
-              "test": "HSV PCR (lip lesion)",
-              "value": "Positive — HSV-1",
-              "unit": "",
-              "range": "",
-              "flag": "H"
-            }
-          ]
+          "test": "Mycoplasma pneumoniae IgM",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "ANA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "CBC",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
@@ -983,7 +902,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "Recurrent EM from recurrent HSV — 3rd episode in 12 months"
+      "Recurrent EM from recurrent HSV \u2014 3rd episode in 12 months"
     ],
     [
       "Trigger",
@@ -991,11 +910,11 @@ window.EMR_DATA = {
     ],
     [
       "Issue",
-      "Not on HSV suppression — EM could be prevented with daily valacyclovir"
+      "Not on HSV suppression \u2014 EM could be prevented with daily valacyclovir"
     ],
     [
       "School",
-      "College junior — missing exams during flares"
+      "College junior \u2014 missing exams during flares"
     ]
   ],
   "references": [
@@ -1065,7 +984,7 @@ window.EMR_DATA = {
       "Inspect skin lesions on extremities": "Multiple targetoid lesions on bilateral hands, forearms, and feet. Classic three-zone targets with central dusky area, inner pale ring, and outer erythematous ring. Lesions measure 1-3 cm in diameter.",
       "Examine oral mucosa and lips": "Extensive erosions and ulcerations on lips, buccal mucosa, and tongue. Hemorrhagic crusting on lips. No vesicles present, suggesting evolved lesions.",
       "Assess lymph nodes": "Mild submandibular lymphadenopathy bilaterally, nodes mobile and non-tender.",
-      "Check vital signs and general appearance": "Low-grade fever 37.8°C, appears mildly dehydrated and uncomfortable. BP 118/72, HR 82, SpO2 99%.",
+      "Check vital signs and general appearance": "Low-grade fever 37.8\u00b0C, appears mildly dehydrated and uncomfortable. BP 118/72, HR 82, SpO2 99%.",
       "Examine conjunctiva and eyes": "Conjunctiva clear, no injection or lesions. Extraocular movements intact.",
       "Inspect palms and soles": "Few targetoid lesions present on palms and soles, consistent with EM major distribution.",
       "Assess for Nikolsky sign": "Negative - no skin sloughing with lateral pressure.",
@@ -1074,13 +993,12 @@ window.EMR_DATA = {
       "Assess hydration status": "Mild dehydration evidenced by decreased oral intake, dry oral mucosa where not ulcerated."
     },
     "ddxTargets": [
-      "Erythema multiforme major, HSV-associated (correct diagnosis)",
-      "Stevens-Johnson syndrome",
-      "Bullous pemphigoid",
-      "Toxic epidermal necrolysis",
-      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
-      "Urticaria multiforme",
-      "Viral exanthem with stomatitis"
+      "EM major \u2014 HSV-triggered, target lesions + oral mucosa (correct)",
+      "Stevens-Johnson syndrome \u2014 EM major has <10% BSA and target lesions; SJS has flat atypical targets and >10% epidermal detachment",
+      "Bullous pemphigoid \u2014 older adults, tense blisters, no target lesions, different immunofluorescence",
+      "Drug-induced EM \u2014 no new medications; HSV PCR positive",
+      "Pemphigus vulgaris \u2014 flaccid blisters, Nikolsky sign positive, acantholysis on biopsy",
+      "Behcet disease \u2014 oral ulcers, genital ulcers, uveitis triad; different clinical context"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'recurrent rash' and missing the HSV trigger pattern, or focusing only on the current episode without recognizing the need for suppressive therapy.",
@@ -1090,7 +1008,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified a recurrent targetoid rash with oral involvement. What specific historical details would help you differentiate between erythema multiforme, Stevens-Johnson syndrome, and other causes of target lesions? Consider the temporal relationship between different symptoms.",
       "phase5": "Now that you've examined the patient and noted the classic targetoid lesions with oral mucosal involvement, how does the recurrent nature and HSV association refine your differential diagnosis? What's the key management consideration for preventing future episodes?",
-      "finalDebrief": "This case highlights HSV-associated recurrent erythema multiforme major. The key teaching points are: 1) Classic targetoid morphology with three zones, 2) Recurrent pattern triggered by HSV outbreaks, 3) Need for HSV suppressive therapy to prevent future episodes, and 4) Distinction from Stevens-Johnson syndrome based on extent and morphology. How did your thinking evolve from initial presentation to final diagnosis?"
+      "finalDebrief": "This case highlights HSV-associated recurrent erythema multiforme major. The key teaching points are: 1) Classic targetoid morphology with three zones, 2) Recurrent pattern triggered by HSV outbreaks, 3) Need for HSV suppressive therapy to prevent future episodes, and 4) Distinction from Stevens-Johnson syndrome based on extent and morphology. How did your thinking evolve from initial presentation to final diagnosis?",
+      "final": "Diagnosis: EM major \u2014 HSV triggered. Key learning: (1) EM classification: EM minor (target lesions, no mucosal or single mucosal site, <10% BSA) vs EM major (target lesions + \u22652 mucosal sites, <10% BSA). EM major \u2260 SJS \u2014 they are different entities. SJS = >10% BSA epidermal detachment, flat atypical targets, drug-triggered. (2) Cause: HSV is responsible for >50% of EM cases. Mycoplasma pneumoniae is the second most common \u2014 especially in children. Drugs rarely cause classic EM (they cause SJS/TEN). (3) Target lesion: three concentric zones \u2014 central dusky/blister zone, surrounding paler edematous ring, outer erythematous ring. Pathognomonic when present. (4) Recurrent HSV-EM: once the pattern is established (HSV outbreak \u2192 EM 1-3 weeks later), acyclovir or valacyclovir suppression virtually eliminates recurrence. Duration: typically 6-12 months minimum, then reassess. (5) SJS vs EM major: both have mucosal involvement, but SJS = drug-triggered, flat atypical lesions (no 3-zone target), >10% BSA, higher morbidity. Never treat EM with the same urgency and protocols as SJS unless detachment is present."
     }
+  },
+  "meta": {
+    "diagnosis": "Erythema Multiforme Major \u2014 HSV-Triggered, Mucosal Involvement, Antiviral Suppression Required",
+    "caseId": "erythema-multiforme-major-v2"
   }
 };

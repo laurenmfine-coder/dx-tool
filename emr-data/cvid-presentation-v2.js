@@ -1,4 +1,4 @@
-/* emr-data/cvid-presentation-v2.js — Variation: CVID */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6170 W Haddon Ave, Kansas City, MO 64112",
       "insurance": "Parents' plan (aging out at 26)",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(513) 555-2622",
@@ -54,11 +54,11 @@ window.EMR_DATA = {
       ],
       [
         "Insurance",
-        "Aging off parents' plan — panicking about IVIG coverage ($30-60K/yr)"
+        "Aging off parents' plan \u2014 panicking about IVIG coverage ($30-60K/yr)"
       ],
       [
         "GI",
-        "Chronic diarrhea — nodular lymphoid hyperplasia on colonoscopy"
+        "Chronic diarrhea \u2014 nodular lymphoid hyperplasia on colonoscopy"
       ],
       [
         "Prior",
@@ -69,20 +69,20 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "26yo with 4th pneumonia in 2 years — bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
+        "chiefComplaint": "26yo with 4th pneumonia in 2 years \u2014 bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
         "diagnosis": "CVID"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Bilateral CAP — failing levofloxacin",
+          "description": "Bilateral CAP \u2014 failing levofloxacin",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "CVID — IgG 142, IgA <7, IgM 22 (critically low)",
+          "description": "CVID \u2014 IgG 142, IgA <7, IgM 22 (critically low)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -96,7 +96,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Chronic diarrhea — CVID enteropathy",
+          "description": "Chronic diarrhea \u2014 CVID enteropathy",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -110,7 +110,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-6",
-          "description": "Insurance crisis — aging off parents' plan",
+          "description": "Insurance crisis \u2014 aging off parents' plan",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -143,7 +143,7 @@ window.EMR_DATA = {
           "bp": "108/68",
           "hr": "98",
           "rr": "22",
-          "temp": "38.6°C",
+          "temp": "38.6\u00b0C",
           "spo2": "92%",
           "pain": "4/10"
         }
@@ -166,7 +166,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "3.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "L"
                 },
@@ -180,7 +180,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -269,8 +269,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "26yo with 4th pneumonia in 2 years — bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
-          "hpi": "26M with 4th pneumonia in 2 years. Immunoglobulins finally drawn — critically low. CVID diagnosed. Has been immunodeficient his entire adult life. Brother has IgA deficiency (same spectrum). Insurance crisis — aging off parents' plan in 2 months, IVIG costs $30-60K/year.",
+          "cc": "26yo with 4th pneumonia in 2 years \u2014 bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
+          "hpi": "26M with 4th pneumonia in 2 years. Immunoglobulins finally drawn \u2014 critically low. CVID diagnosed. Has been immunodeficient his entire adult life. Brother has IgA deficiency (same spectrum). Insurance crisis \u2014 aging off parents' plan in 2 months, IVIG costs $30-60K/year.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -279,7 +279,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted — starting IVIG, insurance navigation, bronchiectasis management",
+        "chiefComplaint": "Admitted \u2014 starting IVIG, insurance navigation, bronchiectasis management",
         "diagnosis": "CVID"
       },
       "problems": [
@@ -292,28 +292,28 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "First IVIG — loading dose",
+          "description": "First IVIG \u2014 loading dose",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Bronchiectasis — right middle lobe",
+          "description": "Bronchiectasis \u2014 right middle lobe",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "IgA absent — must use IgA-depleted IVIG",
+          "description": "IgA absent \u2014 must use IgA-depleted IVIG",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Insurance — ACA enrollment + manufacturer assistance",
+          "description": "Insurance \u2014 ACA enrollment + manufacturer assistance",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -346,7 +346,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "86",
           "rr": "18",
-          "temp": "37.4°C",
+          "temp": "37.4\u00b0C",
           "spo2": "96%",
           "pain": "2/10"
         }
@@ -369,7 +369,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -383,7 +383,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -446,8 +446,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted — starting IVIG, insurance navigation, bronchiectasis management",
-          "hpi": "26M first IVIG given — tolerated. CT: early bronchiectasis. IgA absent — must use IgA-depleted product. Social work: ACA enrollment + manufacturer co-pay assistance. Brother needs annual IgG monitoring.",
+          "cc": "Admitted \u2014 starting IVIG, insurance navigation, bronchiectasis management",
+          "hpi": "26M first IVIG given \u2014 tolerated. CT: early bronchiectasis. IgA absent \u2014 must use IgA-depleted product. Social work: ACA enrollment + manufacturer co-pay assistance. Brother needs annual IgG monitoring.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -456,20 +456,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — CVID management, SCIG transition, family screening",
+        "chiefComplaint": "A/I consult \u2014 CVID management, SCIG transition, family screening",
         "diagnosis": "CVID"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CVID confirmed — low Ig levels, non-protective vaccine titers",
+          "description": "CVID confirmed \u2014 low Ig levels, non-protective vaccine titers",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "IgA absent — IgA-depleted products required",
+          "description": "IgA absent \u2014 IgA-depleted products required",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -483,14 +483,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Brother (IgA deficiency) — 10-15% progress to CVID, monitor annually",
+          "description": "Brother (IgA deficiency) \u2014 10-15% progress to CVID, monitor annually",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Insurance secured — ACA + manufacturer assistance",
+          "description": "Insurance secured \u2014 ACA + manufacturer assistance",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -523,7 +523,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "78",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "97%",
           "pain": "0/10"
         }
@@ -546,7 +546,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -560,7 +560,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -623,8 +623,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — CVID management, SCIG transition, family screening",
-          "hpi": "A/I: CVID confirmed. Transitioning IVIG→SCIG for home convenience. SCIG: self-administered weekly, stable IgG levels, no IV access. Brother monitoring annually. Patient: \"I didn't realize how sick I was until I started feeling normal.\"",
+          "cc": "A/I consult \u2014 CVID management, SCIG transition, family screening",
+          "hpi": "A/I: CVID confirmed. Transitioning IVIG\u2192SCIG for home convenience. SCIG: self-administered weekly, stable IgG levels, no IV access. Brother monitoring annually. Patient: \"I didn't realize how sick I was until I started feeling normal.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -633,20 +633,20 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "CVID follow-up — 3 months on SCIG, zero infections, back to full life",
+        "chiefComplaint": "CVID follow-up \u2014 3 months on SCIG, zero infections, back to full life",
         "diagnosis": "CVID"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CVID — on SCIG, trough IgG 620 (target >500)",
+          "description": "CVID \u2014 on SCIG, trough IgG 620 (target >500)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Zero infections in 3 months — first infection-free period in years",
+          "description": "Zero infections in 3 months \u2014 first infection-free period in years",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -667,7 +667,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Insurance secured — $0 out of pocket",
+          "description": "Insurance secured \u2014 $0 out of pocket",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -707,7 +707,7 @@ window.EMR_DATA = {
           "bp": "120/72",
           "hr": "74",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "0/10"
         }
@@ -730,7 +730,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -744,7 +744,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -807,7 +807,7 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "CVID follow-up — 3 months on SCIG, zero infections, back to full life",
+          "cc": "CVID follow-up \u2014 3 months on SCIG, zero infections, back to full life",
           "hpi": "26M 3 months on SCIG. Zero infections. Energy dramatically better. Diarrhea improving. Back in school. \"I thought everyone felt this tired.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -830,77 +830,62 @@ window.EMR_DATA = {
     "address": "1727 Foxglove Dr, San Antonio, TX 78207",
     "insurance": "Parents' plan (aging out at 26)",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(415) 555-1536",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "26yo with 4th pneumonia in 2 years — bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
+    "chiefComplaint": "26yo with 4th pneumonia in 2 years \u2014 bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
     "diagnosis": "CVID"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Bilateral CAP — failing levofloxacin",
+      "problem": "Common variable immunodeficiency (CVID) \u2014 confirmed diagnosis",
+      "icd": "D83.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Sarah Park, 29F \u2014 4 bacterial pneumonias in 2 years, 3 sinusitis episodes. IgG 180 mg/dL (normal >700)."
     },
     {
-      "id": "prob-2",
-      "description": "CVID — IgG 142, IgA <7, IgM 22 (critically low)",
+      "problem": "Bronchiectasis \u2014 sequela of recurrent infections",
+      "icd": "J47.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "CT chest: bilateral lower lobe bronchiectasis. Pulmonary function monitoring required annually."
     },
     {
-      "id": "prob-3",
-      "description": "9 sinopulmonary infections in 3 years",
+      "problem": "IVIG therapy initiation \u2014 immunoglobulin replacement",
+      "icd": "D83.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Chronic diarrhea — CVID enteropathy",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Early bronchiectasis found on CT",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-6",
-      "description": "Insurance crisis — aging off parents' plan",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "IVIG 0.4-0.6g/kg q3-4 weeks. Target trough IgG >500-700 mg/dL. Infusion reaction monitoring."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Ceftriaxone",
-      "dose": "2g",
-      "route": "IV",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "IVIG 0.5g/kg IV q4 weeks \u2014 immunoglobulin replacement",
+      "sig": "Infuse slowly initially \u2014 monitor for infusion reactions. Trough IgG goal >600 mg/dL.",
+      "prescriber": "Allergy/Immunology",
+      "start": "2024",
+      "refills": 11,
+      "status": "Active \u2014 new"
     },
     {
-      "id": "med-2",
-      "name": "Azithromycin",
-      "dose": "500mg",
-      "route": "IV",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Azithromycin 500mg PO 3x/week \u2014 prophylactic antibiotic",
+      "sig": "Prophylactic antibiotic \u2014 reduces breakthrough bacterial infections during IVIG titration",
+      "prescriber": "Allergy/Immunology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Albuterol MDI PRN \u2014 bronchospasm with bronchiectasis",
+      "sig": "Rescue bronchodilator for bronchospasm symptoms",
+      "prescriber": "Pulmonology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -918,7 +903,7 @@ window.EMR_DATA = {
       "bp": "108/68",
       "hr": "98",
       "rr": "22",
-      "temp": "38.6°C",
+      "temp": "38.6\u00b0C",
       "spo2": "92%",
       "pain": "4/10"
     }
@@ -929,8 +914,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "26yo with 4th pneumonia in 2 years — bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
-      "hpi": "26M with 4th pneumonia in 2 years. Immunoglobulins finally drawn — critically low. CVID diagnosed. Has been immunodeficient his entire adult life. Brother has IgA deficiency (same spectrum). Insurance crisis — aging off parents' plan in 2 months, IVIG costs $30-60K/year.",
+      "cc": "26yo with 4th pneumonia in 2 years \u2014 bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",
+      "hpi": "26M with 4th pneumonia in 2 years. Immunoglobulins finally drawn \u2014 critically low. CVID diagnosed. Has been immunodeficient his entire adult life. Brother has IgA deficiency (same spectrum). Insurance crisis \u2014 aging off parents' plan in 2 months, IVIG costs $30-60K/year.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -938,119 +923,63 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-898308",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "10/2024",
+      "panel": "Immunodeficiency Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "3.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "IgG",
+          "value": "180",
+          "unit": "mg/dL",
+          "ref": "700-1600",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "IgA",
+          "value": "8",
+          "unit": "mg/dL",
+          "ref": "70-400",
+          "flag": "L"
         },
         {
-          "name": "IMMUNOLOGY",
-          "results": [
-            {
-              "test": "IgG",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "700-1600",
-              "flag": "L"
-            },
-            {
-              "test": "IgA",
-              "value": "<7",
-              "unit": "mg/dL",
-              "range": "70-400",
-              "flag": "L"
-            },
-            {
-              "test": "IgM",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "40-230",
-              "flag": "L"
-            }
-          ]
+          "test": "IgM",
+          "value": "22",
+          "unit": "mg/dL",
+          "ref": "40-230",
+          "flag": "L"
+        },
+        {
+          "test": "Vaccine response \u2014 tetanus IgG (post-booster)",
+          "value": "Non-protective (<0.1 IU/mL)",
+          "unit": "",
+          "ref": ">0.1 IU/mL protective",
+          "flag": "L"
+        },
+        {
+          "test": "Vaccine response \u2014 pneumococcal IgG (post-Pneumovax)",
+          "value": "Non-protective",
+          "unit": "",
+          "ref": ">1.3 mcg/mL x7 serotypes",
+          "flag": "L"
+        },
+        {
+          "test": "B-cell count",
+          "value": "Normal (220/\u03bcL)",
+          "unit": "",
+          "ref": "100-500",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "10/2024",
+      "study": "CT Chest High-Resolution",
+      "indication": "Recurrent pneumonias \u2014 bronchiectasis evaluation",
+      "findings": "Bilateral lower lobe bronchiectasis, mild. No active consolidation. No lymphadenopathy.",
+      "impression": "Bronchiectasis from recurrent infections. No active pneumonia. Consistent with CVID sequela."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -1074,11 +1003,11 @@ window.EMR_DATA = {
     ],
     [
       "Insurance",
-      "Aging off parents' plan — panicking about IVIG coverage ($30-60K/yr)"
+      "Aging off parents' plan \u2014 panicking about IVIG coverage ($30-60K/yr)"
     ],
     [
       "GI",
-      "Chronic diarrhea — nodular lymphoid hyperplasia on colonoscopy"
+      "Chronic diarrhea \u2014 nodular lymphoid hyperplasia on colonoscopy"
     ],
     [
       "Prior",
@@ -1097,7 +1026,7 @@ window.EMR_DATA = {
       "openAccess": true,
       "validates": [
         "CVID criteria: low IgG + low IgA/IgM + poor vaccine responses",
-        "IgA deficiency → CVID spectrum",
+        "IgA deficiency \u2192 CVID spectrum",
         "IVIG/SCIG replacement",
         "IgA-depleted products",
         "Trough IgG >500"
@@ -1146,7 +1075,7 @@ window.EMR_DATA = {
       "severity": "The breathing difficulty is probably a 7 out of 10 right now - I get winded just walking to the bathroom. The cough keeps me up at night.",
       "aggravating": "Lying flat makes the breathing worse, and any exertion like climbing stairs makes me really short of breath. Cold air seems to trigger more coughing.",
       "relieving": "Sitting up helps a little with breathing. The antibiotics usually help eventually, but this time they're not working like they used to.",
-      "associated": "I've had fever up to 101°F, chills, and I'm exhausted all the time. Plus I've had this chronic diarrhea for about 2 years that never really goes away.",
+      "associated": "I've had fever up to 101\u00b0F, chills, and I'm exhausted all the time. Plus I've had this chronic diarrhea for about 2 years that never really goes away.",
       "denies": "No chest pain at rest, no blood in my sputum, no leg swelling. No nausea or vomiting with this episode.",
       "history": "This is my 4th pneumonia in 2 years. I've also had 6 sinus infections, 3 ear infections, and I'm basically on antibiotics more than I'm off them. They finally checked my immune system and found my antibody levels are critically low.",
       "medications": "Ceftriaxone; Azithromycin",
@@ -1166,7 +1095,7 @@ window.EMR_DATA = {
       "HEENT examination"
     ],
     "examFindings": {
-      "General appearance and vital signs assessment": "Ill-appearing young man in mild respiratory distress, using accessory muscles. BP 108/68, HR 98, Temp 38.6°C, SpO2 92% on room air.",
+      "General appearance and vital signs assessment": "Ill-appearing young man in mild respiratory distress, using accessory muscles. BP 108/68, HR 98, Temp 38.6\u00b0C, SpO2 92% on room air.",
       "Pulmonary inspection and percussion": "Bilateral chest expansion decreased, dullness to percussion over bilateral lower lobes",
       "Pulmonary auscultation": "Bilateral crackles and rhonchi, diminished breath sounds at bilateral bases, scattered expiratory wheeze",
       "Cardiac auscultation": "Regular rate and rhythm, no murmurs, gallops, or rubs",
@@ -1177,13 +1106,12 @@ window.EMR_DATA = {
       "HEENT examination": "Mild sinus tenderness, tympanic membranes clear, no tonsillar enlargement or exudate"
     },
     "ddxTargets": [
-      "Common Variable Immunodeficiency with recurrent pneumonia (correct diagnosis)",
-      "Recurrent community-acquired pneumonia with underlying immunodeficiency",
-      "Hypogammaglobulinemia with secondary bronchiectasis",
-      "Atypical pneumonia with treatment failure",
-      "Primary immunodeficiency syndrome",
-      "Chronic granulomatous disease",
-      "Cystic fibrosis with recurrent pulmonary infections"
+      "CVID \u2014 pan-hypogammaglobulinemia + vaccine non-response (correct)",
+      "X-linked agammaglobulinemia \u2014 males only, onset in infancy, nearly absent B cells",
+      "IgA deficiency alone \u2014 IgG and IgM normal in isolated IgA deficiency",
+      "Secondary hypogammaglobulinemia \u2014 medications (rituximab), lymphoma; no such history",
+      "Good's syndrome \u2014 thymoma + hypogammaglobulinemia; no thymoma here",
+      "Transient hypogammaglobulinemia of infancy \u2014 age at diagnosis (29 years) excludes"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'just another pneumonia' without recognizing the pattern of recurrent infections suggesting underlying immunodeficiency",
@@ -1193,7 +1121,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "A 26-year-old with recurrent pneumonia is concerning. What pattern of illness would make you think about underlying immunodeficiency? What questions would help you identify if this is more than just bad luck with infections?",
       "phase5": "Now that you've heard about 9 sinopulmonary infections in 3 years, chronic diarrhea, and a brother with IgA deficiency, how does this change your thinking? What's the unifying diagnosis that explains this entire constellation of findings?",
-      "finalDebrief": "This case illustrates how CVID often goes undiagnosed for years, with patients told they 'just catch colds easily.' The key was recognizing the pattern: recurrent sinopulmonary infections, chronic diarrhea, family history of immunodeficiency, and critically low immunoglobulins. How might earlier recognition have prevented complications like bronchiectasis?"
+      "finalDebrief": "This case illustrates how CVID often goes undiagnosed for years, with patients told they 'just catch colds easily.' The key was recognizing the pattern: recurrent sinopulmonary infections, chronic diarrhea, family history of immunodeficiency, and critically low immunoglobulins. How might earlier recognition have prevented complications like bronchiectasis?",
+      "final": "Diagnosis: CVID. Key learning: (1) CVID diagnostic criteria: IgG <2SD below mean for age + low IgA and/or IgM + poor vaccine response (non-protective antibody titers to T-dependent and T-independent antigens) + exclusion of secondary causes + age >2 years. B-cell count is typically normal (unlike XLA). (2) Classic presentation: young adult with recurrent bacterial sinopulmonary infections (pneumococcus, H. influenzae) \u2014 average 6-7 year diagnostic delay from first symptom. Bronchiectasis is a preventable sequela with early IVIG. (3) IVIG mechanism: replaces missing IgG \u2014 provides passive immunity. Does NOT restore endogenous antibody production. Trough IgG >500-700 mg/dL reduces infection frequency. Some patients need SCIG (subcutaneous \u2014 weekly self-injection) instead. (4) Non-infectious CVID complications: autoimmune disease (ITP, hemolytic anemia), granulomatous disease (lung, liver, spleen), GI inflammation (IBD-like), lymphoma risk increased. These occur in ~25-50% of CVID patients and may not be infection-related. (5) Live vaccines: ABSOLUTELY contraindicated in CVID \u2014 MMR, varicella, yellow fever can cause disseminated infection. Inactivated vaccines safe but may not produce protective responses."
     }
+  },
+  "meta": {
+    "diagnosis": "Common Variable Immunodeficiency \u2014 Recurrent Sinopulmonary Infections, Low IgG/IgA/IgM, IVIG Initiation",
+    "caseId": "cvid-presentation-v2"
   }
 };

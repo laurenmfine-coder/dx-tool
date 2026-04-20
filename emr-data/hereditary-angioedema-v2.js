@@ -1,4 +1,4 @@
-/* emr-data/hereditary-angioedema-v2.js — Variation: Hereditary Angioedema */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "5444 Peachtree Rd, San Antonio, TX 78203",
       "insurance": "Medicaid",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Brooks",
         "phone": "(720) 555-5920",
@@ -50,11 +50,11 @@ window.EMR_DATA = {
       ],
       [
         "OCP",
-        "Started 2 months ago — exacerbating HAE"
+        "Started 2 months ago \u2014 exacerbating HAE"
       ],
       [
         "Diagnosis delay",
-        "5 ER visits in 2 years — treated as allergic each time, epi/steroids never worked"
+        "5 ER visits in 2 years \u2014 treated as allergic each time, epi/steroids never worked"
       ],
       [
         "Mental health",
@@ -65,13 +65,13 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "19yo with severe abdominal pain and facial swelling — 5th ER visit, epi/steroids never help, no one has checked C4",
+        "chiefComplaint": "19yo with severe abdominal pain and facial swelling \u2014 5th ER visit, epi/steroids never help, no one has checked C4",
         "diagnosis": "Hereditary Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Recurrent angioedema WITHOUT urticaria — not responding to epi/antihistamines/steroids",
+          "description": "Recurrent angioedema WITHOUT urticaria \u2014 not responding to epi/antihistamines/steroids",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -85,14 +85,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "OCPs started 2 months ago — worsening frequency",
+          "description": "OCPs started 2 months ago \u2014 worsening frequency",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Grandmother died from airway swelling — undiagnosed HAE",
+          "description": "Grandmother died from airway swelling \u2014 undiagnosed HAE",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -111,7 +111,7 @@ window.EMR_DATA = {
           "name": "Epinephrine",
           "dose": "0.3mg",
           "route": "IM",
-          "frequency": "Given — NO response (wrong diagnosis)",
+          "frequency": "Given \u2014 NO response (wrong diagnosis)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -141,7 +141,7 @@ window.EMR_DATA = {
           "bp": "108/62",
           "hr": "108",
           "rr": "20",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "9/10"
         }
@@ -164,7 +164,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "11.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "H"
                 },
@@ -178,7 +178,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -274,8 +274,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "19yo with severe abdominal pain and facial swelling — 5th ER visit, epi/steroids never help, no one has checked C4",
-          "hpi": "19F college freshman with 5th ER visit in 2 years for recurrent angioedema. Epi/antihistamines/steroids given at every visit — NEVER helped. No hives EVER. Started OCPs 2 months ago → attacks now weekly. Grandmother died at 42 from \"throat swelling.\" C4 drawn for first time — critically low (4). C1-INH low. This is HAE type 1. She has been mismanaged for 2 years because no one recognized the pattern: angioedema without urticaria + no response to allergic treatments = bradykinin-mediated = check C4.",
+          "cc": "19yo with severe abdominal pain and facial swelling \u2014 5th ER visit, epi/steroids never help, no one has checked C4",
+          "hpi": "19F college freshman with 5th ER visit in 2 years for recurrent angioedema. Epi/antihistamines/steroids given at every visit \u2014 NEVER helped. No hives EVER. Started OCPs 2 months ago \u2192 attacks now weekly. Grandmother died at 42 from \"throat swelling.\" C4 drawn for first time \u2014 critically low (4). C1-INH low. This is HAE type 1. She has been mismanaged for 2 years because no one recognized the pattern: angioedema without urticaria + no response to allergic treatments = bradykinin-mediated = check C4.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -284,20 +284,20 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted — starting C1-INH replacement, discontinuing OCPs immediately",
+        "chiefComplaint": "Admitted \u2014 starting C1-INH replacement, discontinuing OCPs immediately",
         "diagnosis": "Hereditary Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "HAE type 1 — newly diagnosed",
+          "description": "HAE type 1 \u2014 newly diagnosed",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Abdominal attack — resolving on C1-INH concentrate",
+          "description": "Abdominal attack \u2014 resolving on C1-INH concentrate",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -311,7 +311,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Mother likely undiagnosed — needs testing",
+          "description": "Mother likely undiagnosed \u2014 needs testing",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -351,7 +351,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "86",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "3/10"
         }
@@ -374,7 +374,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -388,7 +388,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -451,8 +451,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted — starting C1-INH replacement, discontinuing OCPs immediately",
-          "hpi": "19F after C1-INH infusion — dramatic improvement in 4 hours. This contrast with zero response to epi/steroids at prior visits is diagnostic in itself. OCP stopped immediately. Mother contacted — reports her own lifelong episodes treated as \"allergies.\" Mother testing ordered.",
+          "cc": "Admitted \u2014 starting C1-INH replacement, discontinuing OCPs immediately",
+          "hpi": "19F after C1-INH infusion \u2014 dramatic improvement in 4 hours. This contrast with zero response to epi/steroids at prior visits is diagnostic in itself. OCP stopped immediately. Mother contacted \u2014 reports her own lifelong episodes treated as \"allergies.\" Mother testing ordered.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -461,7 +461,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — HAE management, self-treatment training, college accommodations",
+        "chiefComplaint": "A/I consult \u2014 HAE management, self-treatment training, college accommodations",
         "diagnosis": "Hereditary Angioedema"
       },
       "problems": [
@@ -481,14 +481,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Prophylaxis with lanadelumab — reduces attacks 87%",
+          "description": "Prophylaxis with lanadelumab \u2014 reduces attacks 87%",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "College accommodations — single room with fridge for meds",
+          "description": "College accommodations \u2014 single room with fridge for meds",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -502,7 +502,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-6",
-          "description": "Medical alert bracelet — do NOT treat with epi/antihistamines/steroids",
+          "description": "Medical alert bracelet \u2014 do NOT treat with epi/antihistamines/steroids",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -535,7 +535,7 @@ window.EMR_DATA = {
           "bp": "110/68",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -558,7 +558,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -572,7 +572,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -661,8 +661,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — HAE management, self-treatment training, college accommodations",
-          "hpi": "A/I: 19F newly diagnosed HAE. Started lanadelumab prophylaxis. Trained on icatibant self-injection. College accommodations letter written. Roommate trained. Mother positive for HAE. Medical alert bracelet: \"HAE — Do NOT treat with epinephrine/antihistamines/steroids — requires C1-INH or icatibant.\"",
+          "cc": "A/I consult \u2014 HAE management, self-treatment training, college accommodations",
+          "hpi": "A/I: 19F newly diagnosed HAE. Started lanadelumab prophylaxis. Trained on icatibant self-injection. College accommodations letter written. Roommate trained. Mother positive for HAE. Medical alert bracelet: \"HAE \u2014 Do NOT treat with epinephrine/antihistamines/steroids \u2014 requires C1-INH or icatibant.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -671,34 +671,34 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "HAE follow-up — 3 months on lanadelumab, zero attacks, mother diagnosed",
+        "chiefComplaint": "HAE follow-up \u2014 3 months on lanadelumab, zero attacks, mother diagnosed",
         "diagnosis": "Hereditary Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "HAE — 0 attacks in 3 months on lanadelumab",
+          "description": "HAE \u2014 0 attacks in 3 months on lanadelumab",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Mother confirmed HAE — started on prophylaxis",
+          "description": "Mother confirmed HAE \u2014 started on prophylaxis",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "IUD placed — no estrogen trigger",
+          "description": "IUD placed \u2014 no estrogen trigger",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "College — attending all classes, single room with med fridge",
+          "description": "College \u2014 attending all classes, single room with med fridge",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -738,7 +738,7 @@ window.EMR_DATA = {
           "bp": "108/66",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -761,7 +761,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -775,7 +775,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -838,8 +838,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "HAE follow-up — 3 months on lanadelumab, zero attacks, mother diagnosed",
-          "hpi": "19F zero attacks in 3 months. Mother diagnosed and treated. Patient says: \"I wish someone had figured this out 3 years ago — my grandmother might still be alive.\" Genetic counselor referral placed.",
+          "cc": "HAE follow-up \u2014 3 months on lanadelumab, zero attacks, mother diagnosed",
+          "hpi": "19F zero attacks in 3 months. Mother diagnosed and treated. Patient says: \"I wish someone had figured this out 3 years ago \u2014 my grandmother might still be alive.\" Genetic counselor referral placed.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -861,79 +861,70 @@ window.EMR_DATA = {
     "address": "3243 Hollyhock Rd, Columbus, OH 43215",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Brooks",
       "phone": "(704) 555-7691",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "19yo with severe abdominal pain and facial swelling — 5th ER visit, epi/steroids never help, no one has checked C4",
+    "chiefComplaint": "19yo with severe abdominal pain and facial swelling \u2014 5th ER visit, epi/steroids never help, no one has checked C4",
     "diagnosis": "Hereditary Angioedema"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Recurrent angioedema WITHOUT urticaria — not responding to epi/antihistamines/steroids",
+      "problem": "Hereditary angioedema type I \u2014 acute abdominal attack",
+      "icd": "D84.1",
+      "onset": "2018",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Isabel Torres, 34F \u2014 known HAE type I. Severe abdominal pain, vomiting, colicky. No urticaria. C4 low."
     },
     {
-      "id": "prob-2",
-      "description": "Severe abdominal pain (bowel wall angioedema)",
+      "problem": "Misdiagnosis risk \u2014 acute abdomen mimicking surgical emergency",
+      "icd": "D84.1",
+      "onset": "2018",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "HAE abdominal attacks cause bowel wall edema mimicking appendicitis, ovarian torsion, obstruction. C4 draws the line."
     },
     {
-      "id": "prob-3",
-      "description": "OCPs started 2 months ago — worsening frequency",
+      "problem": "HAE trigger \u2014 emotional stress event 24h prior",
+      "icd": "D84.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Grandmother died from airway swelling — undiagnosed HAE",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "5 ER visits, never diagnosed",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Emotional stress triggers bradykinin release. Other triggers: trauma, estrogen, ACE inhibitors."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given — NO response (wrong diagnosis)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "C1 esterase inhibitor concentrate (Berinert) 20 units/kg IV \u2014 acute attack",
+      "sig": "First-line acute treatment for HAE attacks. Works within 30-90 minutes. Replaces deficient C1-INH.",
+      "prescriber": "Allergy/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Morphine",
-      "dose": "4mg",
-      "route": "IV",
-      "frequency": "For abdominal pain",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Icatibant 30mg SQ (bradykinin B2 antagonist) \u2014 alternative if C1-INH not available",
+      "sig": "Bradykinin receptor antagonist \u2014 alternative acute treatment. Equal efficacy to C1-INH concentrate. Self-injectable.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Alternative"
     },
     {
-      "id": "med-3",
-      "name": "IV Fluids",
-      "dose": "NS 1L",
-      "route": "IV",
-      "frequency": "Bolus",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Tranexamic acid \u2014 avoid in HAE (not effective, not mechanism-targeted)",
+      "sig": "Antifibrinolytic \u2014 NOT indicated for HAE acute attack. Historical use predates specific therapies.",
+      "prescriber": "Allergy \u2014 DO NOT USE",
+      "start": "Avoid",
+      "refills": 0,
+      "status": "AVOID"
+    },
+    {
+      "name": "Lanadelumab (Takhzyro) 300mg SQ q2-4 weeks \u2014 prophylaxis",
+      "sig": "Plasma kallikrein inhibitor \u2014 long-term prophylaxis. Dramatically reduces attack frequency. First-line for frequent HAE attackers.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active \u2014 prophylaxis"
     }
   ],
   "allergies": [
@@ -951,7 +942,7 @@ window.EMR_DATA = {
       "bp": "108/62",
       "hr": "108",
       "rr": "20",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "9/10"
     }
@@ -962,8 +953,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "19yo with severe abdominal pain and facial swelling — 5th ER visit, epi/steroids never help, no one has checked C4",
-      "hpi": "19F college freshman with 5th ER visit in 2 years for recurrent angioedema. Epi/antihistamines/steroids given at every visit — NEVER helped. No hives EVER. Started OCPs 2 months ago → attacks now weekly. Grandmother died at 42 from \"throat swelling.\" C4 drawn for first time — critically low (4). C1-INH low. This is HAE type 1. She has been mismanaged for 2 years because no one recognized the pattern: angioedema without urticaria + no response to allergic treatments = bradykinin-mediated = check C4.",
+      "cc": "19yo with severe abdominal pain and facial swelling \u2014 5th ER visit, epi/steroids never help, no one has checked C4",
+      "hpi": "19F college freshman with 5th ER visit in 2 years for recurrent angioedema. Epi/antihistamines/steroids given at every visit \u2014 NEVER helped. No hives EVER. Started OCPs 2 months ago \u2192 attacks now weekly. Grandmother died at 42 from \"throat swelling.\" C4 drawn for first time \u2014 critically low (4). C1-INH low. This is HAE type 1. She has been mismanaged for 2 years because no one recognized the pattern: angioedema without urticaria + no response to allergic treatments = bradykinin-mediated = check C4.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -971,126 +962,56 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-890598",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "HAE Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "11.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "C4 complement (acute)",
+          "value": "3",
+          "unit": "mg/dL",
+          "ref": "16-47",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "C1 esterase inhibitor level",
+          "value": "8",
+          "unit": "mg/dL",
+          "ref": "21-39",
+          "flag": "L"
         },
         {
-          "name": "DIAGNOSTIC BREAKTHROUGH",
-          "results": [
-            {
-              "test": "C4",
-              "value": "4",
-              "unit": "mg/dL",
-              "range": "16-47",
-              "flag": "L"
-            },
-            {
-              "test": "C1-INH level",
-              "value": "8",
-              "unit": "mg/dL",
-              "range": "21-39",
-              "flag": "L"
-            },
-            {
-              "test": "C1-INH functional",
-              "value": "18",
-              "unit": "%",
-              "range": "68-132",
-              "flag": "L"
-            },
-            {
-              "test": "Tryptase",
-              "value": "5.2",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": ""
-            }
-          ]
+          "test": "C1 esterase inhibitor function",
+          "value": "28",
+          "unit": "%",
+          "ref": ">68%",
+          "flag": "L"
+        },
+        {
+          "test": "C1q",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "C3",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "CT Abdomen/Pelvis With Contrast",
+      "indication": "Severe abdominal pain, vomiting \u2014 rule out surgical emergency",
+      "findings": "Diffuse bowel wall edema, ascites. No appendicitis, no obstruction, no perforation. Edema pattern consistent with hereditary angioedema abdominal attack.",
+      "impression": "HAE abdominal attack \u2014 bowel wall edema and ascites. No surgical pathology identified."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -1110,11 +1031,11 @@ window.EMR_DATA = {
     ],
     [
       "OCP",
-      "Started 2 months ago — exacerbating HAE"
+      "Started 2 months ago \u2014 exacerbating HAE"
     ],
     [
       "Diagnosis delay",
-      "5 ER visits in 2 years — treated as allergic each time, epi/steroids never worked"
+      "5 ER visits in 2 years \u2014 treated as allergic each time, epi/steroids never worked"
     ],
     [
       "Mental health",
@@ -1124,7 +1045,7 @@ window.EMR_DATA = {
   "references": [
     {
       "id": "WAO-HAE-2022",
-      "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+      "title": "International WAO/EAACI guideline for management of hereditary angioedema \u2014 2021 revision",
       "authors": "Maurer M, Magerl M, Betschel S, et al.",
       "journal": "Allergy",
       "year": 2022,
@@ -1199,13 +1120,12 @@ window.EMR_DATA = {
       "Assess airway patency and voice quality": "Voice slightly hoarse, airway patent, no respiratory distress"
     },
     "ddxTargets": [
-      "Hereditary Angioedema (HAE) (correct diagnosis)",
-      "Acquired angioedema",
-      "ACE inhibitor-induced angioedema",
-      "Anaphylaxis",
-      "Superior vena cava syndrome",
-      "Allergic angioedema",
-      "Idiopathic angioedema"
+      "HAE type I abdominal attack \u2014 C4 low, C1-INH low (correct)",
+      "Appendicitis \u2014 CT rules out; no urticaria in HAE",
+      "Ovarian torsion \u2014 CT negative; no adnexal pathology",
+      "ACE inhibitor angioedema \u2014 no ACEi; complement abnormal in HAE, normal in ACEi angioedema",
+      "Allergic angioedema \u2014 HAE has NO urticaria; allergic has urticaria + elevated tryptase",
+      "Acquired C1-INH deficiency \u2014 C1q LOW in acquired; C1q normal in hereditary HAE"
     ],
     "biasFlags": {
       "anchoring": "Previous ER visits treated as allergic reactions may anchor thinking toward allergic causes despite lack of response to treatment",
@@ -1215,7 +1135,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, think about why someone might have recurrent angioedema that doesn't respond to standard allergic treatments. What key historical features would help you distinguish between different causes of angioedema?",
       "phase5": "Now that you've gathered the history and physical findings, consider the pattern you're seeing: recurrent angioedema without urticaria, no response to epinephrine or steroids, family history of similar episodes, and worsening with OCPs. What specific laboratory test would help confirm your leading diagnosis?",
-      "finalDebrief": "This case highlights how rare diseases like HAE can be misdiagnosed when we anchor on more common conditions. The key clues were the lack of urticaria, no response to standard treatments, strong family history, and exacerbation with estrogen. What complement levels should be checked to confirm HAE, and how would you counsel this patient about trigger avoidance?"
+      "finalDebrief": "This case highlights how rare diseases like HAE can be misdiagnosed when we anchor on more common conditions. The key clues were the lack of urticaria, no response to standard treatments, strong family history, and exacerbation with estrogen. What complement levels should be checked to confirm HAE, and how would you counsel this patient about trigger avoidance?",
+      "final": "Diagnosis: HAE type I abdominal attack. Key learning: (1) HAE types: Type I = low C1-INH level AND function (~85% of HAE). Type II = normal C1-INH level, low function (~15%). Type III = normal C1-INH, estrogen-dependent, usually females. C4 is LOW in all three types during and between attacks \u2014 C4 is the best screening test. (2) C4 vs C1q: HAE = low C4, low C1-INH, NORMAL C1q. Acquired C1-INH deficiency = low C4, low C1-INH, LOW C1q (C1q consumed in acquired disease by autoantibodies or lymphoma). This distinction separates hereditary from acquired. (3) Abdominal attacks: occur in ~50% of HAE patients. Mimics appendicitis, cholecystitis, bowel obstruction. No urticaria \u2014 differentiates from allergic angioedema. CT: bowel wall edema and ascites. Unnecessary surgeries are common in undiagnosed HAE. (4) Acute attack medications that DON'T work: epinephrine (temporary at best), antihistamines, steroids \u2014 ALL are ineffective in HAE. Only bradykinin-targeted therapy works: C1-INH concentrate, icatibant, ecallantide. (5) Prophylaxis hierarchy: lanadelumab (q2-4 weeks SQ) or berotralstat (oral daily) are first-line long-term prophylaxis. C1-INH concentrate (Cinryze) is alternative. Androgens (danazol) are effective but have significant side effects."
     }
+  },
+  "meta": {
+    "diagnosis": "Hereditary Angioedema Type I \u2014 C1-INH Deficiency, Acute Abdominal Attack, C1 Esterase Inhibitor Concentrate",
+    "caseId": "hereditary-angioedema-v2"
   }
 };
