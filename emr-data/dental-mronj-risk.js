@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient Starting Denosumab for Osteoporosis",
-      "icd": "Z00.00",
+      "problem": "MRONJ risk assessment \u2014 starting denosumab for osteoporosis",
+      "icd": "M87.180",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Patient starting denosumab (Prolia) \u2014 pre-medication dental clearance required before first dose"
+    },
+    {
+      "problem": "Osteoporosis \u2014 T-score -2.9, FRAX 10-year risk 28%",
+      "icd": "M81.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Denosumab indicated per endocrinology \u2014 first injection planned in 6 weeks"
+    },
+    {
+      "problem": "Periodontitis \u2014 existing moderate, active",
+      "icd": "K05.311",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Active periodontal disease increases MRONJ risk \u2014 treatment before starting denosumab is essential"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Denosumab (Prolia) 60mg SQ q6 months \u2014 PENDING DENTAL CLEARANCE",
+      "sig": "NOT yet started \u2014 awaiting dental clearance",
+      "prescriber": "Endocrinology",
+      "start": "Pending",
+      "refills": 0,
+      "status": "Pending dental clearance"
+    },
+    {
+      "name": "Calcium 1200mg daily + Vitamin D3 2000 IU daily",
+      "sig": "Take daily with food",
+      "prescriber": "Endocrinology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,8 +119,51 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/01/2024",
+      "panel": "Osteoporosis Workup",
+      "results": [
+        {
+          "test": "Vitamin D 25-OH",
+          "value": "22",
+          "unit": "ng/mL",
+          "ref": "30-80",
+          "flag": "L"
+        },
+        {
+          "test": "Calcium",
+          "value": "9.4",
+          "unit": "mg/dL",
+          "ref": "8.5-10.5",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "0.9",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "CTX (C-telopeptide)",
+          "value": "0.32",
+          "unit": "ng/mL",
+          "ref": "0.1-0.57",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Full Mouth Periapical Series + Panoramic Radiograph",
+      "indication": "Pre-denosumab dental clearance \u2014 evaluate for active infection, extraction needs",
+      "findings": "Upper left molar: failing root canal with periapical lucency \u2014 extraction indicated. Lower right: moderate generalized bone loss from periodontitis 20-30%. No frank abscesses elsewhere. Multiple restorable teeth.",
+      "impression": "Two treatment priorities before denosumab: (1) Extract failing upper left molar, (2) Complete scaling and root planing for active periodontitis. Allow 3-4 weeks healing before denosumab initiation."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-mronj-risk",
-    "diagnosis": "See diagnosis \u2014 Patient Starting Denosumab for Osteoporosis",
+    "diagnosis": "Medication-Related Osteonecrosis of the Jaw \u2014 Prevention Protocol Before Denosumab Initiation",
     "acuity": 3,
     "presentation": "Patient Starting Denosumab for Osteoporosis",
     "category": "other"
@@ -176,12 +241,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Patient Starting Denosumab for Osteoporosis \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Pre-denosumab dental clearance \u2014 extract failing tooth, treat periodontitis (correct)",
+      "Defer dental treatment and start denosumab now \u2014 INCORRECT, MRONJ risk",
+      "Tooth extraction is safe during denosumab \u2014 INCORRECT for invasive procedures",
+      "Bisphosphonate holiday before extraction \u2014 denosumab has no 'holiday' benefit (not stored in bone)",
+      "No intervention needed if no symptoms \u2014 subclinical periapical disease still increases risk",
+      "MRONJ is only a risk for IV bisphosphonates \u2014 incorrect, denosumab carries similar risk"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +256,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Patient Starting Denosumab for Osteoporosis. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) What dental work should be done before her first injection \u2014 and how does denosumab risk differ from oral bisphosphonates? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: MRONJ prevention \u2014 dental clearance before antiresorptive therapy. Key dentistry learning: (1) MRONJ definition: exposed bone in maxillofacial region lasting >8 weeks in a patient on antiresorptive or antiangiogenic therapy without history of head/neck radiation. Cannot heal because osteoclast suppression prevents bone remodeling. (2) Risk hierarchy: IV bisphosphonates (zoledronic acid) > SQ denosumab > oral bisphosphonates. Denosumab is not stored in bone (unlike bisphosphonates) but risk IS present and comparable to oral bisphosphonates. (3) Prevention protocol: complete all invasive dental procedures (extractions, implants, periodontal surgery) BEFORE starting antiresorptive therapy. Minimum 3-4 weeks healing. Once on therapy, avoid invasive procedures unless essential. (4) Denosumab specific: no 'drug holiday' concept (unlike bisphosphonates where holiday may theoretically reduce risk) \u2014 denosumab fully reverses when stopped (6-month half-life), but this also means bone rebound fracture risk if stopped. (5) If invasive procedure required DURING denosumab: consult with prescribing physician, consider delaying next dose by 4-6 weeks if possible, use conservative surgical technique, close soft tissue primarily, antibiotics perioperatively, close follow-up."
     }
   }
 };

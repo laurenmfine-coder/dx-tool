@@ -23,31 +23,31 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Acute dentoalveolar abscess \u2014 tooth #30",
+      "problem": "Acute dentoalveolar abscess \u2014 mandibular molar",
       "icd": "K04.7",
       "onset": "2024",
       "status": "Active",
-      "notes": "Buccal swelling, fever 38.1\u00b0C, fluctuant, draining sinus tract"
+      "notes": "Fever 38.2\u00b0C, buccal swelling, draining sinus tract \u2014 antibiotics indicated"
     },
     {
-      "problem": "Penicillin allergy \u2014 hives",
+      "problem": "Penicillin allergy \u2014 hives as child",
       "icd": "Z88.0",
-      "onset": "2019",
+      "onset": "1992",
       "status": "Active",
-      "notes": "Urticarial reaction to amoxicillin \u2014 true allergy, avoid penicillins and cephalosporins (10% cross-reactivity)"
+      "notes": "Self-reported childhood reaction \u2014 hives only, no anaphylaxis. Cross-reactivity with cephalosporins LOW."
     },
     {
-      "problem": "Tooth #30 \u2014 periapical abscess, necrotic pulp",
-      "icd": "K04.5",
+      "problem": "Need for definitive treatment \u2014 tooth #30 necrotic pulp",
+      "icd": "K04.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "Deep caries visible on X-ray, periapical radiolucency"
+      "notes": "Antibiotics are ADJUNCT only \u2014 definitive treatment is RCT or extraction"
     }
   ],
   "medications": [
     {
-      "name": "Clindamycin 300mg PO QID x7 days",
-      "sig": "Take by mouth 4 times daily for 7 days \u2014 first-line PCN-allergy alternative for dental abscess",
+      "name": "Clindamycin 300mg PO TID x7 days",
+      "sig": "Take 1 capsule 3 times daily \u2014 first-line alternative for dental infections with penicillin allergy",
       "prescriber": "Dr. Voss DDS",
       "start": "11/2024",
       "refills": 0,
@@ -55,19 +55,19 @@ window.EMR_DATA = {
     },
     {
       "name": "Ibuprofen 600mg PO TID with food",
-      "sig": "Take with food 3 times daily for pain and anti-inflammatory",
+      "sig": "Take 1 tablet 3 times daily with food for pain/inflammation",
       "prescriber": "Dr. Voss DDS",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Incision and drainage of buccal swelling (performed today)",
-      "sig": "I&D performed \u2014 warm saline irrigation, 1cm incision, drain placed",
+      "name": "Chlorhexidine 0.12% rinse BID",
+      "sig": "Rinse 30 seconds twice daily \u2014 adjunct antimicrobial",
       "prescriber": "Dr. Voss DDS",
       "start": "11/2024",
       "refills": 0,
-      "status": "Completed"
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -132,9 +132,9 @@ window.EMR_DATA = {
     {
       "date": "11/18/2024",
       "study": "Periapical X-ray \u2014 Tooth #30",
-      "indication": "Swelling, fever, suspected dental abscess",
-      "findings": "Deep carious lesion tooth #30 extending to pulp chamber. Periapical radiolucency 8mm diameter. Furcation involvement beginning. Bone loss 35% on mesial.",
-      "impression": "Dentoalveolar abscess tooth #30 with periapical pathology. Endodontic treatment or extraction required. Antibiotics for systemic signs (fever) \u2014 not for localized abscess without systemic involvement."
+      "indication": "Swelling, fever, draining sinus tract",
+      "findings": "Large periapical radiolucency tooth #30 \u2014 1.2cm diameter. Furcation involvement. Widened PDL space. No cortical plate perforation visible on 2D imaging.",
+      "impression": "Periapical abscess tooth #30 with furcation involvement. Definitive treatment required. CT of jaw would better characterize cortical involvement if Ludwig's angina concern."
     }
   ],
   "immunizations": [
@@ -168,7 +168,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-antibiotic-allergy",
-    "diagnosis": "Dental Abscess \u2014 PCN Allergy Requiring Alternative: Clindamycin vs Azithromycin Decision",
+    "diagnosis": "Dental Abscess Requiring Antibiotic Therapy \u2014 Penicillin Allergy, Correct Alternative Selection",
     "acuity": 3,
     "presentation": "Draining Buccal Abscess",
     "category": "infectious"
@@ -215,11 +215,11 @@ window.EMR_DATA = {
     },
     "ddxTargets": [
       "Dental abscess \u2014 clindamycin for PCN allergy (correct)",
-      "Amoxicillin-clavulanate \u2014 contraindicated with PCN allergy (hives)",
-      "Azithromycin \u2014 weaker evidence for dental infections, not preferred",
-      "Metronidazole monotherapy \u2014 inadequate gram-positive coverage for dental flora",
-      "Cephalexin \u2014 10% cross-reactivity with PCN allergy, avoid for urticarial reaction",
-      "No antibiotics \u2014 localized abscess without systemic signs does NOT need antibiotics"
+      "Amoxicillin \u2014 CONTRAINDICATED, patient allergic",
+      "Azithromycin \u2014 not recommended for dental infections (inadequate anaerobic coverage)",
+      "Metronidazole alone \u2014 inadequate for mixed aerobic/anaerobic dental flora",
+      "Cephalexin \u2014 low cross-reactivity with PCN (~1%), acceptable if allergy not anaphylactic",
+      "Fluoroquinolone \u2014 inappropriate for routine dental infection, reserve for resistant organisms"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -229,7 +229,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Draining Buccal Abscess. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Diagnosis: dental abscess, PCN allergy requiring clindamycin. Key dentistry learning: (1) Antibiotic decision-making: antibiotics for dental infections are indicated ONLY when: fever (systemic), trismus, rapid spread, immunocompromised host, or lymphadenopathy. Localized abscess without systemic signs = I&D + definitive treatment (RCT or extraction) WITHOUT antibiotics. This patient has fever \u2192 antibiotics indicated. (2) PCN allergy \u2014 antibiotic selection: amoxicillin (PCN class) \u2192 contraindicated. Cephalosporins have ~10% cross-reactivity with PCN \u2014 avoid for urticarial reactions (IgE-mediated). First alternative: clindamycin 300mg QID covers streptococci and oral anaerobes. Second: metronidazole + azithromycin combination if clindamycin intolerant. (3) C. diff risk counseling: clindamycin has the highest C. diff risk of dental antibiotics. Counsel patient: 'If you develop severe diarrhea or stomach cramps during or after this antibiotic, call us immediately.' (4) Definitive treatment is mandatory: antibiotics alone never cure dental infection. I&D drains acute swelling. Root canal or extraction within 2 weeks is required or the infection will recur. (5) Duration: 7 days for dental infection with systemic signs. Do NOT extend to 10-14 days without reassessment \u2014 antibiotic stewardship."
+      "final": "Diagnosis: dental abscess \u2014 antibiotic selection with penicillin allergy. Key dentistry learning: (1) Antibiotics in dentistry: adjunct ONLY \u2014 not a substitute for definitive care (drainage, RCT, extraction). Antibiotics without source control = temporary suppression with high recurrence. Definitive treatment must be scheduled or performed. (2) PCN allergy cross-reactivity: true allergy to penicillin \u2192 risk of cross-reactivity with cephalosporins is ~1-2% (R2 side chain similarity). Hives as a child with no anaphylaxis = LOW-risk allergy. Cephalexin or cefadroxil is technically acceptable but many dentists avoid and use clindamycin instead for simplicity. (3) Clindamycin for dental infections: excellent oral flora coverage (gram-positive aerobes + oral anaerobes). First-line alternative. Counsel on C. diff risk \u2014 take probiotics, report diarrhea. (4) Metronidazole: anaerobic coverage only \u2014 useful as ADD-ON to clindamycin for severe infections, not monotherapy. (5) Azithromycin has poor activity against Prevotella and Fusobacterium (major dental pathogens) \u2014 NOT recommended for dental infections despite being commonly prescribed."
     }
   }
 };

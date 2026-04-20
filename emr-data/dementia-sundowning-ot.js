@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Moderate Alzheimers Disease",
-      "icd": "Z00.00",
+      "problem": "Alzheimer's disease \u2014 moderate severity",
+      "icd": "G30.9",
+      "onset": "2020",
+      "status": "Active",
+      "notes": "MMSE 14/30 \u2014 moderate. Sundowning 4-8pm daily: agitation, pacing, attempts to leave"
+    },
+    {
+      "problem": "Sundowning syndrome \u2014 circadian rhythm disruption",
+      "icd": "F05",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Worsened after move from family home to memory care \u2014 environmental unfamiliarity"
+    },
+    {
+      "problem": "Caregiver burden \u2014 daughter at burnout threshold",
+      "icd": "Z63.4",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Daughter is primary caregiver, exhausted \u2014 caregiver training and respite planning required"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Donepezil 10mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Neurology",
+      "start": "2021",
+      "refills": 5,
       "status": "Active"
+    },
+    {
+      "name": "Melatonin 3mg QHS",
+      "sig": "Take 30 minutes before bedtime \u2014 circadian rhythm support",
+      "prescriber": "Neurology",
+      "start": "2023",
+      "refills": 6,
+      "status": "Active"
+    },
+    {
+      "name": "Quetiapine 12.5mg QHS PRN (low-dose, for severe agitation only)",
+      "sig": "PRN \u2014 use non-pharmacological approaches first",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active PRN \u2014 last resort"
     }
   ],
   "allergies": [
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dementia-sundowning-ot",
-    "diagnosis": "See diagnosis \u2014 Moderate Alzheimers Disease",
+    "diagnosis": "Moderate Alzheimer's Disease \u2014 Severe Sundowning, OT Environmental Modification and Caregiver Training",
     "acuity": 3,
     "presentation": "Moderate Alzheimers Disease",
     "category": "neurologic"
@@ -175,12 +205,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Moderate Alzheimers Disease \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Moderate AD \u2014 sundowning, OT environmental and caregiver intervention (correct)",
+      "Delirium superimposed on dementia \u2014 sundowning is chronic/predictable pattern, not fluctuating",
+      "Pain as sundowning trigger \u2014 should be assessed and treated",
+      "UTI precipitating behavioral change \u2014 check UA if acute change",
+      "Medication side effect \u2014 quetiapine can worsen cognition in AD",
+      "Undertreated depression \u2014 overlap but sundowning is time-specific"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +220,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Moderate Alzheimers Disease. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Before pharmacotherapy: what DICE assessment reveals \u2014 and which occupation-based non-pharmacological intervention has the strongest evidence? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: moderate AD with sundowning \u2014 OT primary intervention. Key OT learning: (1) Sundowning mechanism: degeneration of suprachiasmatic nucleus (circadian pacemaker) in AD \u2192 loss of internal circadian signals. Environmental cues (light, activity, meals, social engagement) become the primary zeitgebers \u2014 OT modifies these. (2) OT environmental strategies: increase MORNING light exposure (outdoor walk or light box 10,000 lux, 30 min AM), structured meaningful activity 3-5pm (sundowning window \u2014 keep hands busy), reduce environmental stimulation at 4pm (dim lights, turn off TV), consistent evening routine at same time daily. (3) Activity-based intervention: individualized meaningful activities (prior interests \u2014 gardening, music, cooking, folding laundry). Engagement in purposeful activity reduces agitation 60% better than PRN medication. (4) Caregiver training is the multiplier: daughter needs to understand: (a) sundowning is neurological, not 'difficult behavior,' (b) do not argue or redirect with logic \u2014 use validation therapy, distraction, redirect to activity, (c) respite care is not abandonment \u2014 it is self-preservation. OT connects daughter with adult day programs. (5) Documentation for memory care staff: OT writes individual care plan: 'Engage in folding activity at 3:30pm, outdoor light walk if weather permits, dimmed lights by 5pm, no TV during 4-7pm.'"
     }
   }
 };

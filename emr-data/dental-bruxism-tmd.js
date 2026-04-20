@@ -23,43 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Temporomandibular disorder \u2014 myofascial type",
-      "icd": "M26.62",
+      "problem": "Myofascial temporomandibular disorder \u2014 masticatory muscle pain",
+      "icd": "M79.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "Morning jaw pain, limited opening 32mm (normal >40mm), bilateral temporalis tenderness"
+      "notes": "Bilateral masseter/temporalis tenderness, limited opening 32mm, no joint sounds"
     },
     {
-      "problem": "Sleep bruxism \u2014 confirmed by partner report",
-      "icd": "G47.63",
+      "problem": "Bruxism \u2014 sleep bruxism, parafunctional habit",
+      "icd": "F45.8",
       "onset": "2023",
       "status": "Active",
-      "notes": "Tooth attrition consistent with bruxism on examination. Partner reports grinding sounds."
+      "notes": "Partner reports grinding, morning jaw pain, worn occlusal surfaces \u2014 bruxism confirmed"
     },
     {
-      "problem": "Stress \u2014 major precipitant",
-      "icd": "F43.10",
-      "onset": "2024",
+      "problem": "Anxiety disorder \u2014 bruxism trigger",
+      "icd": "F41.1",
+      "onset": "2022",
       "status": "Active",
-      "notes": "Started new high-pressure job 6 months ago \u2014 bruxism onset correlates exactly"
+      "notes": "Stressful job, anxiety \u2014 bruxism worsened with increased work demands"
     }
   ],
   "medications": [
     {
-      "name": "Ibuprofen 400mg TID x2 weeks with food",
-      "sig": "Short course for acute myofascial pain \u2014 not long-term",
+      "name": "Cyclobenzaprine 5mg QHS x2 weeks (muscle relaxant)",
+      "sig": "Take at bedtime for 2 weeks \u2014 adjunct to occlusal appliance",
       "prescriber": "Dr. Voss DDS",
       "start": "11/2024",
       "refills": 0,
       "status": "Active \u2014 short course"
     },
     {
-      "name": "Cyclobenzaprine 5mg QHS PRN \u2014 muscle relaxant",
-      "sig": "At bedtime as needed \u2014 reduces nocturnal muscle activity",
+      "name": "Ibuprofen 400mg TID with food x1 week",
+      "sig": "Take 3 times daily with food \u2014 anti-inflammatory for myofascial pain",
       "prescriber": "Dr. Voss DDS",
       "start": "11/2024",
-      "refills": 1,
-      "status": "Active PRN"
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -123,10 +123,10 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "11/18/2024",
-      "study": "TMJ Panoramic Radiograph + CBCT if refractory",
-      "indication": "Limited opening, jaw pain \u2014 evaluate joint",
-      "findings": "Panoramic: condylar heads symmetric, no erosion or flattening. Normal joint spaces bilaterally. No articular eminence abnormality. No calcification in joint space.",
-      "impression": "Normal bony TMJ anatomy. Myofascial TMD without degenerative joint changes. Reassuring \u2014 conservative management appropriate."
+      "study": "Panoramic Radiograph + CBCT TMJ Bilateral",
+      "indication": "TMD evaluation \u2014 rule out intracapsular pathology",
+      "findings": "Panoramic: Condylar morphology bilaterally symmetric. No significant degenerative change. Articular eminence normal. Joint space preserved bilaterally. No cortical irregularity. CBCT TMJ: Normal condylar position in fossa bilaterally. No erosion, flattening, or osteophytes. No disc displacement visible on CBCT (MRI would be needed for disc assessment).",
+      "impression": "Imaging does not suggest intracapsular structural pathology. Clinical diagnosis of myofascial TMD supported. No evidence of condylar degeneration or articular pathology."
     }
   ],
   "immunizations": [
@@ -160,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-bruxism-tmd",
-    "diagnosis": "Myofascial TMD with Secondary Sleep Bruxism \u2014 Conservative Management First-Line",
+    "diagnosis": "Myofascial TMD + Bruxism \u2014 Masticatory Muscle Pain, Not Intracapsular Pathology",
     "acuity": 3,
     "presentation": "Bruxism",
     "category": "other"
@@ -206,12 +206,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Myofascial TMD \u2014 bruxism-related (correct)",
-      "Articular TMD \u2014 disc displacement (no click/pop elicited, normal panoramic)",
-      "Trigeminal neuralgia \u2014 continuous dull ache, not electric shock",
-      "Referred pain from dental cause \u2014 no dental pathology identified",
-      "Temporal arteritis \u2014 no temporal artery tenderness, wrong age group",
-      "Mandibular fracture \u2014 no trauma history, symmetric examination"
+      "Myofascial TMD + bruxism \u2014 muscle-based pain (correct)",
+      "Intracapsular TMD \u2014 disc displacement (no click, no imaging evidence)",
+      "TMJ osteoarthritis \u2014 imaging normal",
+      "Trigeminal neuralgia \u2014 muscle tenderness, not lancinating nerve pain",
+      "Masseteric hypertrophy \u2014 present but secondary to bruxism",
+      "Eagle syndrome \u2014 styloid elongation, different presentation"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -221,7 +221,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Bruxism. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Diagnosis: myofascial TMD with sleep bruxism. Key dentistry learning: (1) DC/TMD classification: Axis I = physical diagnosis (myofascial pain, disc displacement, degenerative joint disease). Axis II = psychosocial factors. This patient = myofascial type with clear Axis II stress trigger. (2) Conservative management sequence (evidence-based): (a) Patient education \u2014 self-limiting condition, 80% improve without surgery. (b) Soft diet, heat/ice application, jaw rest (avoid hard foods, yawning widely, gum). (c) Physical therapy \u2014 jaw stretching, postural correction. (d) Stabilization splint (flat plane occlusal appliance) for bruxism \u2014 reduces parafunctional loading. (e) Pharmacotherapy adjunct \u2014 NSAIDs short term, cyclobenzaprine PRN. (3) Splint fabrication: maxillary stabilization splint prescribed today \u2014 worn at night. Reduces EMG activity 30-50% in bruxers. Does NOT cure bruxism but reduces damage and pain. (4) Stress management: cognitive behavioral therapy for bruxism has best evidence. Biofeedback. (5) When to escalate: limited opening not improving after 6 weeks conservative treatment \u2192 MRI (disc displacement), arthrocentesis, oral surgery referral. Do NOT rush to surgery \u2014 conservative management success rate is high."
+      "final": "Diagnosis: myofascial TMD with bruxism. Key dentistry learning: (1) TMD classification (DC/TMD): Myofascial pain (muscle-based, most common \u2014 70%) vs. Intracapsular disorders (disc displacement, arthralgia, arthrosis). Myofascial: bilateral tenderness on palpation, no clicking, opening limited by muscle spasm. Intracapsular: clicking/popping (disc displacement with reduction), crepitus (arthrosis), limited unilateral opening. (2) Occlusal appliance: stabilization splint (Michigan/flat plane) is first-line for bruxism. Covers all maxillary teeth. Mechanism: reduces muscle activity during sleep, redistributes forces, protects tooth surfaces. DO NOT make anterior-only or repositioning appliances as first-line (risk of permanent occlusal change). (3) Diagnosis of exclusion: before labeling TMD, rule out: dental pathology (referred pain from pulpitis, cracked tooth), parotid gland pathology, cervical spine, OM sinusitis, trigeminal neuralgia. (4) Imaging: routine X-rays are often normal in myofascial TMD. CBCT shows bony anatomy. MRI is gold standard for disc position (not done routinely \u2014 reserve for treatment-resistant cases). (5) Counseling: behavioral modification is first-line. Stress management, jaw relaxation exercises (resting tongue position on palate), avoid hard foods and jaw loading activities during acute phase."
     }
   }
 };

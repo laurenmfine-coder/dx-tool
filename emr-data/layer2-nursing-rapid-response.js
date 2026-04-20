@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Surgical Floor",
-      "icd": "Z00.00",
+      "problem": "Acute respiratory deterioration \u2014 post-op day 2 colectomy",
+      "icd": "J96.00",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "RR 28, SpO2 88% on 4L, HR 118 \u2014 Rapid Response activated by nurse"
+    },
+    {
+      "problem": "Pulmonary embolism \u2014 suspected",
+      "icd": "I26.99",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Post-op, immobile, tachycardia + hypoxia \u2014 Wells score 5 (high probability)"
+    },
+    {
+      "problem": "Handoff omission \u2014 DVT prophylaxis missed day 1",
+      "icd": "Y83.8",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Review shows enoxaparin not given post-op day 1 \u2014 documentation gap"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Oxygen 10L non-rebreather mask STAT",
+      "sig": "Immediate \u2014 maintain SpO2 >92%",
+      "prescriber": "RRT",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Heparin 80 units/kg IV bolus (pending CT-PE result)",
+      "sig": "Anticoagulation for high-probability PE \u2014 give if CT confirms or if hemodynamically unstable",
+      "prescriber": "RRT/Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Pending CT result"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily \u2014 RESTART (was missed day 1)",
+      "sig": "DVT prophylaxis \u2014 document missed dose, restart immediately",
+      "prescriber": "Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 missed dose documented"
     }
   ],
   "allergies": [
@@ -97,8 +127,65 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Rapid Response Workup",
+      "results": [
+        {
+          "test": "D-dimer",
+          "value": "4,800",
+          "unit": "ng/mL",
+          "ref": "<500",
+          "flag": "H"
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.18",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "BNP",
+          "value": "388",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "ABG \u2014 pO2",
+          "value": "62",
+          "unit": "mmHg",
+          "ref": "75-100",
+          "flag": "L"
+        },
+        {
+          "test": "ABG \u2014 pCO2",
+          "value": "32",
+          "unit": "mmHg",
+          "ref": "35-45",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/20/2024",
+      "study": "CT Pulmonary Angiography (ordered STAT)",
+      "indication": "High-probability PE \u2014 tachycardia, hypoxia, elevated D-dimer post-op",
+      "findings": "PENDING \u2014 patient en route to CT scanner",
+      "impression": "CT-PE ordered STAT. If patient deteriorates hemodynamically (SBP <90) before imaging, treat empirically for massive PE \u2014 consider thrombolytics vs embolectomy."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +217,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-nursing-rapid-response",
-    "diagnosis": "See diagnosis \u2014 Surgical Floor",
+    "diagnosis": "Surgical Floor Deterioration \u2014 Rapid Response Activation, Pending Diagnosis of Pulmonary Embolism",
     "acuity": 2,
     "presentation": "Surgical Floor",
     "category": "infectious"
@@ -177,12 +264,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Surgical Floor \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Pulmonary embolism \u2014 post-op, missed DVT prophylaxis (correct)",
+      "Pneumonia \u2014 no consolidation but cannot exclude",
+      "Pulmonary edema \u2014 heart failure less likely, troponin may indicate RV strain from PE",
+      "Atelectasis \u2014 cannot explain this degree of hypoxia",
+      "Pneumothorax \u2014 no breath sounds asymmetry noted",
+      "ARDS from surgical insult \u2014 less acute onset typically"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +279,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Surgical Floor. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) The rapid response team arrives. The RN says 'I don't know what's wrong, he just looks different from this morning.' Vitals: HR 124, BP 102/68, RR 24, O2 93%. Two hours ago vitals were normal. What does 'looks wrong' tell you that the numbers do not \u2014 and what do you do first? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: probable PE \u2014 rapid response correctly activated by nurse. Key nursing learning: (1) The nurse's decision to call Rapid Response saved this patient. Trust clinical gestalt: 'looking wrong' + worsening vitals + not improving = escalate. Do not wait for formal scoring to trigger when instinct says something is wrong. (2) SBAR at Rapid Response: Situation: 'I'm calling from 5 North, patient James, post-op day 2 colectomy, SpO2 88% on 4L, RR 28, HR 118 \u2014 he was 96% on 2L two hours ago.' Background: 'Post-op day 2, immobile, getting 4L oxygen, vitals declining over 2 hours.' Assessment: 'I'm concerned about PE \u2014 missed his enoxaparin yesterday.' Recommendation: 'I need you at bedside now, and I think we need CT-PE and anticoagulation.' (3) Missed medication documentation: document the omission factually in the nursing note and incident report. Do NOT cover it up. Transparency enables system learning. The nurse who discovers the omission is not the one who made it \u2014 document what you found. (4) DVT prophylaxis checklist: nursing owns this. Post-op patients on a surgical floor should have prophylaxis documented on every shift. If order missing \u2192 call physician, get order, document call. (5) Hemodynamic instability = massive PE: if BP drops before CT, treat empirically. Thrombolysis threshold: SBP <90 for >15 min or shock. This is a life-threatening emergency requiring rapid ICU escalation."
     }
   }
 };

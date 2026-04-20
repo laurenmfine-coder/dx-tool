@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Gerald Park",
-      "icd": "Z00.00",
+      "problem": "Urosepsis \u2014 recovering ICU day 3",
+      "icd": "A41.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Gerald Park, off vasopressors 6h. Lactate normalized. CAM-ICU positive \u2014 delirium ongoing."
+    },
+    {
+      "problem": "ICU delirium \u2014 CAM-ICU positive",
+      "icd": "F05",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Hyperactive delirium \u2014 pulling at lines, attempted to get out of bed. ABCDEF bundle initiated."
+    },
+    {
+      "problem": "Sepsis-associated AKI \u2014 resolving",
+      "icd": "N17.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Creatinine peaked at 2.8, now 1.8 and trending down with fluids and source control"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Norepinephrine infusion \u2014 weaning (now at 0.02 mcg/kg/min)",
+      "sig": "Titrate off \u2014 target MAP >65 without vasopressor",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 weaning"
+    },
+    {
+      "name": "Piperacillin-tazobactam 3.375g IV q8h",
+      "sig": "Completing 14-day course",
+      "prescriber": "ID",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Dexmedetomidine 0.4 mcg/kg/hr \u2014 ICU sedation",
+      "sig": "Alpha-2 agonist \u2014 preferred for ICU sedation, preserves arousability, reduces delirium",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Haloperidol 0.5mg IV PRN agitation (delirium)",
+      "sig": "PRN severe agitation \u2014 not for routine delirium",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN \u2014 ABCDEF bundle first"
     }
   ],
   "allergies": [
@@ -97,7 +135,56 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Sepsis Recovery Day 3",
+      "results": [
+        {
+          "test": "Lactate",
+          "value": "1.4",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": ""
+        },
+        {
+          "test": "WBC",
+          "value": "12.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.8",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Procalcitonin",
+          "value": "2.1",
+          "unit": "ng/mL",
+          "ref": "<0.5",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures x2 (day 0)",
+          "value": "E. coli \u2014 pan-sensitive",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
+        },
+        {
+          "test": "MAP",
+          "value": "72",
+          "unit": "mmHg",
+          "ref": ">65",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +217,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-sepsis-nursing",
-    "diagnosis": "See diagnosis \u2014 Gerald Park",
+    "diagnosis": "Urosepsis ICU Day 3 \u2014 Nursing: Vasopressor Weaning, Sepsis Bundle Completion, CAM-ICU Monitoring",
     "acuity": 2,
     "presentation": "Gerald Park",
     "category": "infectious"
@@ -177,12 +264,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Gerald Park \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Recovering urosepsis \u2014 vasopressor weaning, delirium management (correct)",
+      "Sepsis recurrence \u2014 procalcitonin trending down, source controlled",
+      "New infection \u2014 no new fever spike, WBC trending down",
+      "Vasopressor dependence \u2014 weaning successfully",
+      "Hepatic failure from sepsis \u2014 LFTs not provided but not suspected",
+      "Renal failure permanent \u2014 creatinine improving, likely transient AKI"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +279,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Gerald Park. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Gerald was calm this morning. You return after lunch and he is agitated, trying to climb out of bed, and does not recognize you. CAM-ICU is positive. His temperature is 38.4 and BP has dropped from 118/72 to 96/60 since your last check. You need to escalate immediately. Build your complete SBAR \u2014 and identify whether this is delirium, sepsis recurrence, or both. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: recovering urosepsis, ICU delirium. Key nursing learning: (1) Vasopressor weaning safety: wean norepinephrine when MAP >65 for 2+ hours at low dose. Reduce by 10-20% increments every 15-30 min. Nursing reassesses MAP q15min during wean. Hold wean if MAP drops <65. Document time off vasopressor and time to clinical deterioration if occurs. (2) ABCDEF bundle for ICU delirium: A=Assess/manage pain, B=Breathing trials (spontaneous awakening + breathing), C=Choice of sedation (dexmedetomidine over propofol for delirium reduction), D=Delirium monitoring (CAM-ICU q8h), E=Early mobility, F=Family engagement. Nursing drives ALL of these. (3) CAM-ICU documentation: chart as positive or negative, not just 'confused.' Positive CAM-ICU = initiate ABCDEF bundle, minimize PRN sedatives, promote day/night cycling, early mobility. (4) Antipsychotics for ICU delirium: MIND-USA trial showed haloperidol and ziprasidone did NOT reduce delirium duration vs placebo. Use only for patient/staff safety (agitation with line-pulling) at lowest effective dose. Not routine treatment. (5) Family engagement: families can help reorient ('I'm your son, it's Tuesday, you're in the hospital'). Familiar voices reduce agitation. Bring personal items from home \u2014 photos, familiar music."
     }
   }
 };

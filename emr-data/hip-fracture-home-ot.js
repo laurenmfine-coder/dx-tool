@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Hip Fracture Day 5 Post-ORIF",
-      "icd": "Z00.00",
+      "problem": "Post-ORIF hip \u2014 OT day 5, home discharge tomorrow",
+      "icd": "S72.001A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Margaret Chen, 78F \u2014 lives alone. OT focus: home safety, ADL independence with hip precautions."
+    },
+    {
+      "problem": "Hip precautions \u2014 posterior approach ORIF",
+      "icd": "Z96.641",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "No flexion >90\u00b0, no adduction, no internal rotation \u2014 all ADLs must be modified"
+    },
+    {
+      "problem": "Single-story home \u2014 favorable but hazards present",
+      "icd": "Z59.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Phone assessment: no grab bars in bathroom, area rugs, low toilet \u2014 all modifiable"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Oxycodone 5mg PO q6h PRN",
+      "sig": "PRN pain \u2014 reduce to acetaminophen as tolerated",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily x28 days",
+      "sig": "DVT prophylaxis \u2014 continue at home",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 1,
       "status": "Active"
     }
   ],
@@ -130,7 +152,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "hip-fracture-home-ot",
-    "diagnosis": "See diagnosis \u2014 Hip Fracture Day 5 Post-ORIF",
+    "diagnosis": "Post-ORIF Hip \u2014 OT Home Safety Assessment and ADL Retraining for Solo-Living Elderly Patient",
     "acuity": 3,
     "presentation": "Hip Fracture Day 5 Post-ORIF",
     "category": "geriatric"
@@ -175,12 +197,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Hip Fracture Day 5 Post-ORIF \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-ORIF hip \u2014 OT home safety and ADL retraining (correct)",
+      "SNF placement \u2014 premature without home safety assessment",
+      "ADL independence restored \u2014 not yet, hip precautions limit self-care",
+      "Hip precautions not needed for ORIF \u2014 posterior approach requires precautions for 6-12 weeks",
+      "Caregiver sufficient for home safety \u2014 lives alone, no caregiver",
+      "Rehab hospital needed \u2014 single-story home with modifications is achievable"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +212,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Hip Fracture Day 5 Post-ORIF. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) What home safety assessment domains are non-negotiable before discharge \u2014 and what single adaptive equipment item most reduces re-fracture risk? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-ORIF hip \u2014 OT home discharge planning for solo-living patient. Key OT learning: (1) Hip precaution ADL retraining is the entire OT focus for this patient: dressing (long-handled shoehorn, sock aid, reacher \u2014 no bending below hip), toilet (raised toilet seat or 3-in-1 commode \u2014 prevents >90\u00b0 hip flexion), shower (tub bench or roll-in shower \u2014 cannot step over tub wall), bed transfer (slide to edge, foot on floor, push up \u2014 no trunk bending). (2) Home safety priority items for solo-living: grab bars (toilet and shower), raised toilet seat, remove area rugs, adequate lighting in night path to bathroom, reaching aids within reach of bed. OT provides written equipment list with specific measurements. (3) Caregiver training vs. solo: this patient lives alone \u2014 OT MUST ensure she can perform ALL ADLs independently or with available devices BEFORE discharge. A patient who cannot toilet independently at 2am without a caregiver cannot go home alone. (4) DME orders: OT writes orders for: raised toilet seat, 3-in-1 commode, shower chair, grab bars, long-handled reacher, dressing stick, sock aid. Insurance coverage varies \u2014 OT documents functional necessity. (5) Follow-up OT in home: home health OT evaluation in the home environment within 3 days of discharge \u2014 validates that the actual bathroom and bedroom layout is safe."
     }
   }
 };

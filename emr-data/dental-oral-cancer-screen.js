@@ -23,21 +23,35 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: 1.5cm White Patch Lateral Tongue",
-      "icd": "Z00.00",
+      "problem": "Suspicious oral lesion \u2014 lateral tongue, 1.5cm",
+      "icd": "K13.70",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "White patch with erythematous halo, non-scrapable, 8-week history \u2014 biopsy urgently required"
+    },
+    {
+      "problem": "Tobacco use \u2014 35 pack-year history",
+      "icd": "F17.210",
+      "onset": "1988",
+      "status": "Active",
+      "notes": "Major risk factor for oral SCC"
+    },
+    {
+      "problem": "Alcohol use disorder \u2014 heavy daily use",
+      "icd": "F10.20",
+      "onset": "2015",
+      "status": "Active",
+      "notes": "Synergistic risk factor with tobacco for oral cancer"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "No current oral medications relevant to this visit",
+      "sig": "N/A",
+      "prescriber": "N/A",
+      "start": "N/A",
+      "refills": 0,
+      "status": "N/A"
     }
   ],
   "allergies": [
@@ -98,7 +112,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Incisional Biopsy \u2014 Lateral Tongue Lesion (performed today)",
+      "indication": "1.5cm non-scrapable white patch with erythematous margins, 8-week history, tobacco/ETOH user",
+      "findings": "Biopsy performed under local anesthesia. 5mm punch biopsy of most erythematous border area. Sent for histopathology. Results expected 5-7 business days. Patient given written instructions for biopsy site care.",
+      "impression": "Biopsy performed. High clinical suspicion for dysplasia or squamous cell carcinoma based on lesion characteristics. Referral to oral surgery/ENT placed pending pathology results."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +152,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-oral-cancer-screen",
-    "diagnosis": "See diagnosis \u2014 1.5cm White Patch Lateral Tongue",
+    "diagnosis": "Squamous Cell Carcinoma, Lateral Tongue \u2014 Suspicious Lesion Requiring Biopsy",
     "acuity": 2,
     "presentation": "1.5cm White Patch Lateral Tongue",
     "category": "other"
@@ -176,12 +198,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "1.5cm White Patch Lateral Tongue \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Oral squamous cell carcinoma \u2014 lateral tongue (correct, biopsy pending confirmation)",
+      "Leukoplakia \u2014 benign but SCC risk up to 17%, biopsy mandatory",
+      "Traumatic keratosis \u2014 must have identifiable trauma source, cannot assume",
+      "Candidiasis \u2014 scrapable white plaques, this lesion is non-scrapable",
+      "Lichen planus \u2014 bilateral symmetric pattern, reticular white lines",
+      "Fibroma \u2014 smooth surface, not irregular red-white mixed lesion"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +213,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: 1.5cm White Patch Lateral Tongue. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) Risk stratify this lesion \u2014 is this biopsy today, referral this week, or watch and see? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: suspicious lateral tongue lesion \u2014 biopsy confirms or rules out SCC. Key dentistry learning points: (1) The VELscope or toluidine blue adjunct tools do NOT replace biopsy \u2014 they aid identification but clinical decision is biopsy for any persistent suspicious lesion >2-3 weeks. (2) High-risk sites for oral cancer: lateral/ventral tongue, floor of mouth, soft palate. Lip vermilion (UV exposure, different etiology). (3) Biopsy site selection: biopsy the most erythematous (erythroplakic) area of the lesion \u2014 highest malignant transformation rate. Avoid necrotic or ulcerated center. (4) Tobacco + alcohol synergy: risk of oral SCC = 15x vs neither alone. Combined use accounts for ~75% of oral cancers. (5) 5-year survival: stage I oral SCC (localized) = 83%. Stage IV (metastatic) = 38%. Early detection by dentists is the primary preventive intervention \u2014 annual oral cancer screen for all patients, not just high-risk."
     }
   }
 };
