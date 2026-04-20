@@ -23,19 +23,41 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: James Okoye",
-      "icd": "Z00.00",
+      "problem": "Left MCA stroke \u2014 right hemiplegia, possible right neglect",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "James Okoye. Bumping into doorframes on right. May have contralateral neglect \u2014 needs formal assessment."
+    },
+    {
+      "problem": "Upper extremity hemiplegia \u2014 Brunnstrom Stage II right UE",
+      "icd": "G83.20",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Right UE flaccid with emerging spasticity \u2014 feeding currently not independent"
+    },
+    {
+      "problem": "Dysphagia \u2014 modified texture diet",
+      "icd": "R13.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Pureed diet + nectar-thick liquids per SLP \u2014 OT addresses positioning and adaptive utensils"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
+      "name": "Aspirin 81mg daily",
+      "sig": "Daily \u2014 antiplatelet",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Baclofen 5mg TID",
+      "sig": "Antispastic \u2014 starting for UE spasticity",
+      "prescriber": "Neurology",
+      "start": "11/2024",
       "refills": 3,
       "status": "Active"
     }
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/05/2024",
+      "study": "MRI Brain",
+      "indication": "Acute stroke",
+      "findings": "Left MCA infarct, frontal and anterior parietal.",
+      "impression": "Left MCA stroke \u2014 contralateral (right) UMN signs and possible neglect from non-dominant hemisphere involvement if right-handed."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-stroke-ot",
-    "diagnosis": "See diagnosis \u2014 James Okoye",
+    "diagnosis": "Left MCA Stroke Day 5 \u2014 OT: Unilateral Neglect Assessment, Feeding Independence, ADL Neuroplasticity",
     "acuity": 3,
     "presentation": "James Okoye",
     "category": "neurologic"
@@ -175,12 +205,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "James Okoye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Left MCA stroke \u2014 unilateral neglect assessment, ADL neuroplasticity (correct)",
+      "Hemianopia only \u2014 visual field cut is different from neglect",
+      "Right MCA stroke \u2014 left MCA causes right-sided deficits (correctly identified)",
+      "No neglect \u2014 bumping into right doorframes requires formal assessment",
+      "OT not needed for motor deficits \u2014 OT addresses ADL function and occupation",
+      "PT is the ADL specialist \u2014 OT specifically manages ADL, PT manages mobility/gait"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +220,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: James Okoye. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) James is a retired engineer who coached youth baseball. He has expressive aphasia but understands everything. His wife asks what he can do. Build his occupational profile \u2014 and explain how expressive aphasia changes your assessment approach without excluding him from goal-setting. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: left MCA stroke \u2014 OT right unilateral neglect and ADL training. Key OT learning: (1) Unilateral neglect vs hemianopia: hemianopia = visual field loss (intact awareness, just can't see on one side). Neglect = failure to attend to contralesional space even when vision is intact (patient can see right side but doesn't orient to it). Formally assess with: line bisection test, star cancellation test, copying tasks. If neglect present: modify environment (approach from aware side), cue to scan right, anchor activities on right side. (2) Left MCA involvement and neglect: LEFT MCA stroke affects the RIGHT hemisphere body (hemiplegia right side). Neglect is classically associated with RIGHT MCA stroke causing left neglect \u2014 however, any large MCA stroke can cause contralateral inattention. The doorframe bumping pattern warrants formal assessment. (3) Feeding as priority ADL: OT addresses adaptive utensils (weighted spoon if tremor/weakness, plate guard, dycem mat), one-handed cutting technique, positioning. Feeding independence has high patient value and is feasible even with Stage II UE with left hand. (4) Neuroplasticity: even with right UE at Brunnstrom Stage II, task-specific practice with weight-bearing through the affected arm (arm in extended position during sitting activities) promotes cortical reorganization. Don't ignore the affected arm. (5) Communication with aphasia: use closed questions, picture boards, thumbs up/down. Establish a reliable 'yes/no' communication system at the start of every OT session."
     }
   }
 };

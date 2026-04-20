@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Gerald Park",
-      "icd": "Z00.00",
+      "problem": "Post-intensive care syndrome \u2014 OT focus",
+      "icd": "G93.3",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Gerald Park. ICU day 12. CAM-positive yesterday, resolving. Bilateral weakness. Impaired ADL."
+    },
+    {
+      "problem": "ICU-acquired cognitive impairment \u2014 delirium resolving",
+      "icd": "F05",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "CAM positive 4 of 5 days \u2014 attention, memory, and processing speed affected post-ICU"
+    },
+    {
+      "problem": "ADL dependence \u2014 moderate to maximum assist",
+      "icd": "Z74.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Self-feeding with setup, dressing max assist, grooming moderate assist"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Haloperidol 0.5mg QHS (delirium management \u2014 weaning)",
+      "sig": "At bedtime \u2014 low-dose for sleep-wake cycle normalization. Discontinue when delirium resolved.",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 weaning"
+    },
+    {
+      "name": "Thiamine 100mg IV daily",
+      "sig": "Daily \u2014 repletion for ICU malnutrition",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,7 +119,42 @@ window.EMR_DATA = {
       "plan": "Referral to ot. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Post-Sepsis OT Assessment",
+      "results": [
+        {
+          "test": "Albumin",
+          "value": "2.1",
+          "unit": "g/dL",
+          "ref": "3.5-5.0",
+          "flag": "L"
+        },
+        {
+          "test": "CAM score",
+          "value": "Negative today \u2014 improving",
+          "unit": "",
+          "ref": "Negative normal",
+          "flag": ""
+        },
+        {
+          "test": "MoCA (at bedside)",
+          "value": "18/30",
+          "unit": "",
+          "ref": ">26 normal",
+          "flag": "L"
+        },
+        {
+          "test": "Handgrip strength right",
+          "value": "12",
+          "unit": "kg",
+          "ref": ">26 normal male",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +187,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-sepsis-ot",
-    "diagnosis": "See diagnosis \u2014 Gerald Park",
+    "diagnosis": "Post-Sepsis Day 4 \u2014 OT: PICS (Post-Intensive Care Syndrome) ADL, Cognitive Rehabilitation, Delirium Recovery",
     "acuity": 3,
     "presentation": "Gerald Park",
     "category": "infectious"
@@ -175,12 +232,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Gerald Park \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "PICS \u2014 OT cognitive and ADL rehabilitation post-sepsis (correct)",
+      "Dementia \u2014 new cognitive impairment in ICU context is PICS/delirium until proven otherwise",
+      "Depression causing functional impairment \u2014 depression is part of PICS, but cognitive impairment is primary",
+      "Discharge to home \u2014 not feasible without OT assessment of function",
+      "Delirium still active \u2014 CAM negative today, OT can engage",
+      "No OT role in ICU step-down \u2014 PICS is an OT priority diagnosis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +247,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Gerald Park. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Gerald is delirious and the nursing staff have requested wrist restraints for safety after he pulled his central line. His family is distressed. Using the HELP protocol and DICE approach: what non-pharmacological OT interventions do you implement to manage agitation and prevent restraint use \u2014 and how do you involve his family as part of the intervention? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: PICS \u2014 OT post-ICU rehabilitation. Key OT learning: (1) PICS triad: physical (weakness, fatigue), cognitive (memory, attention, processing), and psychiatric (depression, anxiety, PTSD). All three affect occupational performance. OT addresses cognitive and ADL deficits specifically. (2) Cognitive rehabilitation after delirium: start with simple, familiar ADL tasks (face washing, combing hair) \u2014 these restore orientation to self and environment AND provide cognitive stimulation. Avoid abstract cognitive exercises in acute PICS \u2014 real-world occupational tasks are more therapeutic. (3) MoCA 18/30: attention and memory domains affected. OT strategies: external memory aids (whiteboard in room), routine consistency, chunked instructions (one step at a time), verbal + written + visual cues. (4) Self-feeding as first goal: OT provides adaptive utensils, correct positioning (upright 90\u00b0), verbal cueing. Self-feeding even partial independence has enormous psychological impact for ICU survivors. (5) Family as occupational therapists: family presence during OT sessions teaches re-engagement techniques. 'When you visit, bring familiar objects from home \u2014 photos, favorite music. Familiar sensory input helps anchor the patient to their pre-ICU identity.' PICS affects families too \u2014 family education is part of OT scope."
     }
   }
 };

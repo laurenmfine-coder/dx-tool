@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Margaret Chen",
-      "icd": "Z00.00",
+      "problem": "Post-ORIF hip fracture \u2014 OT Day 3, discharge tomorrow",
+      "icd": "S72.001A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Margaret Chen, 78F. Lives alone in single-story home. Daughter available for 2 weeks post-discharge."
+    },
+    {
+      "problem": "Hip precautions \u2014 restricting ADL independence",
+      "icd": "Z74.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "No hip flexion >90\u00b0, no internal rotation, no crossing legs \u2014 impacts toileting, dressing, bathing"
+    },
+    {
+      "problem": "Fear of falling \u2014 limiting engagement in therapy",
+      "icd": "R41.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Prior fall history \u2014 heightened fall fear now post-surgery"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Acetaminophen 650mg q6h scheduled",
+      "sig": "Opioid-sparing \u2014 give before OT session",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Oxycodone 5mg PRN (give 30-45 min before session)",
+      "sig": "PRN for OT participation",
+      "prescriber": "Ortho",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -130,7 +152,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hip-fracture-ot",
-    "diagnosis": "See diagnosis \u2014 Margaret Chen",
+    "diagnosis": "Post-ORIF Hip Day 3 \u2014 OT: Home Safety, ADL Retraining, Caregiver Training for Discharge",
     "acuity": 3,
     "presentation": "Margaret Chen",
     "category": "geriatric"
@@ -175,12 +197,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Margaret Chen \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-ORIF hip \u2014 OT discharge planning, home modification, caregiver training (correct)",
+      "Clear for independent home discharge \u2014 cannot discharge patient who lives alone without adaptive equipment and trained caregiver",
+      "SNF placement \u2014 premature without OT assessment; daughter available as caregiver",
+      "PT responsibility only \u2014 OT manages ADL and home safety, PT manages mobility",
+      "Hip precautions unnecessary \u2014 surgeon's precautions must be followed by OT",
+      "Occupational profile deferred \u2014 profile is the foundation of OT intervention planning"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +212,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Margaret Chen. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Margaret is being discharged tomorrow to her 2-story home. She lives alone. Her daughter lives 40 minutes away. She has hip precautions. Before discharge: what are your non-negotiable home safety assessment domains \u2014 and what is the single adaptive equipment item that most reduces her re-fracture risk in the first 72 hours home? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-ORIF hip \u2014 OT discharge preparation. Key OT learning: (1) Three non-negotiable OT outputs before discharge: (a) Adaptive equipment prescribed and trialed: raised toilet seat + grab bars (hip precautions make standard toilet dangerous), reacher/grabber (no bending past 90\u00b0), long-handled sponge for bathing, sock aid for dressing. (b) ADL task training with adapted techniques: demonstrate donning/doffing socks and shoes with sock aid and long-handled shoehorn while maintaining hip precautions. (c) Caregiver training \u2014 daughter must demonstrate safe assist technique for: toilet transfer, shower/bath entry, bed mobility, and recognizing hip precaution violations. (2) Home safety checklist: bathroom grab bars, non-slip bath mat, clear pathways (rugs removed), bed height appropriate (knee at hip level), chair with armrests for rising. (3) Fear of falling: validate fear, explain that the surgery has fixed the structural problem, grade activity exposure. Fear of falling \u2192 avoidance \u2192 deconditioning \u2192 MORE fall risk. (4) Equipment follow-through: OT writes DME prescription (raised toilet seat, walker, grab bars for home installation). Without this documentation, insurance won't cover equipment. (5) OT communicates to discharge team: 'Patient requires raised toilet seat and grab bars before discharge, and daughter trained. Patient is ready for home with these in place and 2 weeks of caregiver support.'"
     }
   }
 };

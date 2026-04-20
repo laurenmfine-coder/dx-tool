@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Dorothy Williams",
-      "icd": "Z00.00",
+      "problem": "HFrEF \u2014 EF 28%, NYHA Class III, ADL limitation",
+      "icd": "I50.20",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Dorothy Williams. Cannot complete self-care without dyspnea. OT for energy conservation and adaptive strategies."
+    },
+    {
+      "problem": "Dyspnea with minimal exertion \u2014 ADL barrier",
+      "icd": "R06.00",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Dyspnea on brushing teeth, dressing \u2014 2 METs activities. 6MWT 188 meters."
+    },
+    {
+      "problem": "Depression \u2014 HF-related, affecting OT participation",
+      "icd": "F32.0",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "PHQ-9 11 \u2014 helplessness narrative around inability to do previous activities"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
+      "name": "Carvedilol 6.25mg BID",
+      "sig": "Take twice daily",
+      "prescriber": "Cardiology",
+      "start": "2021",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Sacubitril-valsartan 24/26mg BID",
+      "sig": "Take twice daily \u2014 do not take with ACEi",
+      "prescriber": "Cardiology",
+      "start": "2024",
       "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Furosemide 80mg daily",
+      "sig": "Take 1 tablet daily \u2014 monitor daily weights",
+      "prescriber": "Cardiology",
+      "start": "2021",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -97,7 +127,35 @@ window.EMR_DATA = {
       "plan": "Referral to ot. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Pre-Discharge",
+      "results": [
+        {
+          "test": "BNP",
+          "value": "612",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "Na",
+          "value": "133",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "6MWT distance",
+          "value": "188",
+          "unit": "meters",
+          "ref": "400-600 normal",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +188,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hf-ot",
-    "diagnosis": "See diagnosis \u2014 Dorothy Williams",
+    "diagnosis": "HFrEF EF 28% \u2014 OT: Energy Conservation, Activity Modification, Dyspnea Management in ADL",
     "acuity": 3,
     "presentation": "Dorothy Williams",
     "category": "cardiovascular"
@@ -175,12 +233,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Dorothy Williams \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "HFrEF \u2014 OT energy conservation and ADL adaptation (correct)",
+      "PT handles dyspnea management \u2014 OT specifically addresses ADL occupation and energy conservation",
+      "No OT role in heart failure \u2014 INCORRECT, OT is evidence-based in cardiac rehab",
+      "Full independence possible immediately \u2014 graded activity with cardiac precautions required",
+      "Restrict all activity \u2014 deconditioning worsens HF outcomes, graded activity improves them",
+      "Depression is separate from OT \u2014 depression affecting occupational performance is within OT scope"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +248,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Dorothy Williams. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Dorothy tells you she stops twice during her shower because of breathlessness, and stopped cooking because standing at the stove exhausts her. She lives alone and values her independence. Using an energy conservation framework, what are your top three occupational performance interventions \u2014 and what adaptive equipment changes her functional capacity most immediately? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: HFrEF \u2014 OT energy conservation and ADL. Key OT learning: (1) Energy conservation techniques \u2014 the core OT intervention in HF: Pacing (rest before, during, and after ADL tasks), Prioritizing (identify 3 most valued activities for the day), Positioning (sit to shower/dress rather than stand), Planning (prepare everything before starting task to avoid repeated trips). The 4 P's. (2) METs and ADL: showering = 2-3 METs, dressing = 2 METs, sexual activity = 3-4 METs. For NYHA III patients, OT grades activity around the 2-3 MET threshold. Teach the patient to recognize dyspnea early (Borg scale) and rest before it becomes severe. (3) Adaptive equipment for bathing: shower chair, handheld showerhead, long-handled brush \u2014 reduce energy expenditure 30-40% compared to standing shower. (4) Depression and occupation: loss of valued roles (gardening, cooking for family, driving) drives depression in HF patients. OT addresses loss of occupational identity: 'Tell me what you did before that you can't do now \u2014 let's problem-solve which ones are possible with modifications.' (5) OT communicates to cardiologist: '6MWT 188 meters and dyspnea at 2 METs. Patient cannot complete basic self-care independently at current functional status. Energy conservation training provided, adaptive equipment prescribed. Consider cardiac rehab when clinically stable.'"
     }
   }
 };

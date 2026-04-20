@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Kevin Torres",
-      "icd": "Z00.00",
-      "onset": "2024",
+      "problem": "Chronic LBP \u2014 construction worker off work 14 months, OT referral",
+      "icd": "M54.5",
+      "onset": "2022",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Kevin Torres. Construction impossible currently. OT for work hardening and occupational role re-engagement."
+    },
+    {
+      "problem": "Occupational role loss \u2014 construction no longer feasible",
+      "icd": "Z56.9",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "14 months off work. Identity tied to being a provider. Meaning and purpose severely compromised."
+    },
+    {
+      "problem": "Pain catastrophizing \u2014 Tampa Scale 48",
+      "icd": "F40.298",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Catastrophizing is preventing engagement in meaningful occupation, not just exercise"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Oxycodone \u2014 tapering per pain management",
+      "sig": "Wean schedule ongoing",
+      "prescriber": "Pain Mgmt",
+      "start": "2022",
+      "refills": 1,
+      "status": "Active \u2014 tapering"
+    },
+    {
+      "name": "Duloxetine 60mg daily",
+      "sig": "Take daily",
+      "prescriber": "PCP",
+      "start": "2024",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "06/15/2024",
+      "study": "MRI Lumbar Spine",
+      "indication": "Chronic LBP",
+      "findings": "L4-L5 Grade 1 anterolisthesis, moderate disc desiccation. L5-S1 disc bulge, no root compression.",
+      "impression": "Mild degenerative changes \u2014 non-correlating with disability level."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-pain-ot",
-    "diagnosis": "See diagnosis \u2014 Kevin Torres",
+    "diagnosis": "Chronic LBP \u2014 OT Role: Return to Meaningful Occupation, Pain Self-Management, Work Hardening",
     "acuity": 3,
     "presentation": "Kevin Torres",
     "category": "musculoskeletal"
@@ -175,12 +205,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Kevin Torres \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Chronic LBP \u2014 OT occupational role restoration and work hardening (correct)",
+      "PT handles all LBP \u2014 PT addresses movement/strength; OT addresses occupational performance",
+      "OT role limited to ADL \u2014 OT addresses ALL occupations including work and leisure",
+      "Construction return impossible \u2014 OT work hardening assesses actual capacity",
+      "Pain must reach 0 before return to work \u2014 not evidence-based, functional capacity is the goal",
+      "Disability permanent \u2014 OT functional capacity evaluation determines realistic prognosis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +220,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Kevin Torres. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Kevin has not worked for 9 months. He used to coach his son's soccer team and now barely leaves the house. His occupational profile reveals that work and coaching were his entire identity. What occupational performance deficits matter most to him \u2014 and how do you use graded activity and meaningful occupation to address the disability cycle without directly confronting his pain beliefs? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: chronic LBP \u2014 OT occupational identity and work hardening. Key OT learning: (1) OT scope in chronic pain: beyond ADL, OT addresses WORK (vocational rehabilitation, work hardening, FCE), LEISURE (re-engagement with meaningful activities pain doesn't preclude), and REST/SLEEP (sleep hygiene, pain interrupting sleep). This patient's occupational deprivation is the central issue. (2) Work hardening vs work conditioning: work conditioning = physical reconditioning (strength, endurance). Work hardening = simulation of specific job tasks. For a construction worker: lifting, carrying, overhead work, kneeling. Start at 30% capacity, progress over 8-12 weeks. (3) Functional Capacity Evaluation (FCE): standardized assessment of material handling capacity (lifting, pushing, pulling), positional tolerance, and reliability of effort. Results guide: return to original work, modified duty, or vocational retraining. (4) Occupational identity restoration: 'Who are you when you're not able to work?' Kevin's identity as provider is central. OT explores: what aspects of construction did he value (skill, physicality, problem-solving)? Can those be met in modified or alternative roles? (5) OT communicates to team: 'Kevin's functional capacity on FCE: lift 30 lbs floor-to-waist, carry 20 lbs 50 feet. Cannot sustain overhead work >5 min. Recommend modified duty (no lifting >30 lbs, no prolonged overhead) or vocational retraining assessment.'"
     }
   }
 };

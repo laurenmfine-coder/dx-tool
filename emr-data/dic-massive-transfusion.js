@@ -1,4 +1,4 @@
-/* emr-data/dic-massive-transfusion.js — EMR case data for Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Esperanza Ruiz",
@@ -15,40 +15,70 @@ window.EMR_DATA = {
     "address": "5720 Ash St, Phoenix, AZ 85012",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Walmart Pharmacy — Federal Hwy",
+    "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Richard Walker",
       "phone": "(504) 555-6110",
       "relationship": "Partner"
     },
-    "chiefComplaint": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+    "chiefComplaint": "Surgical team: 'Patient is oozing from everywhere \u2014 wound, IV sites, NG tube. Blood isn't clotting.' Diffuse \u2014 bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
     "diagnosis": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Delayed splenic rupture",
+      "problem": "DIC \u2014 obstetric hemorrhage trigger",
+      "icd": "D65",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Postpartum 2h, bleeding 2.5L. Fibrinogen <100, PT/PTT prolonged. Classic obstetric DIC."
     },
     {
-      "id": "prob-2",
-      "description": "Otherwise healthy 38-year-old",
+      "problem": "Massive postpartum hemorrhage \u2014 2500mL blood loss",
+      "icd": "O72.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Uterine atony after prolonged labor. MTP activated."
+    },
+    {
+      "problem": "Hypofibrinogenemia \u2014 fibrinogen 62 mg/dL",
+      "icd": "D68.4",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Fibrinogen most rapidly depleted in obstetric DIC \u2014 early cryoprecipitate critical"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "None routine",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Massive Transfusion Protocol (MTP) activated \u2014 1:1:1 ratio",
+      "sig": "pRBC:FFP:Platelets in 1:1:1 ratio. Give first 6-pack before labs.",
+      "prescriber": "OB/Anesthesia",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Cryoprecipitate 10 units \u2014 fibrinogen replacement",
+      "sig": "Each unit of cryo raises fibrinogen ~5 mg/dL. 10 units raises ~50 mg/dL. Give for fibrinogen <150 in DIC.",
+      "prescriber": "OB/Hematology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Tranexamic acid 1g IV over 10 min \u2014 antifibrinolytic",
+      "sig": "Reduces fibrinolysis. WOMAN trial: reduces PPH mortality if given within 3 hours of delivery.",
+      "prescriber": "OB",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Oxytocin 30 units in 500mL NS at 125 mL/hr \u2014 uterotonic",
+      "sig": "IV infusion for uterine atony \u2014 promote uterine contraction to stop bleeding source",
+      "prescriber": "OB",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -66,7 +96,7 @@ window.EMR_DATA = {
       "bp": "72/48",
       "hr": "138",
       "rr": "28",
-      "temp": "35.3°C",
+      "temp": "35.3\u00b0C",
       "spo2": "91%",
       "pain": "2500/10",
       "bmi": "22",
@@ -79,236 +109,71 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
-      "hpi": "Esperanza Ruiz is a 60-year-old female presenting with surgical team: 'patient is oozing from everywhere — wound, iv sites, ng tube. blood isn't clotting.' diffuse — bleeding from surgical wound, peripheral iv insertion sites, nasogastric tube, foley catheter (hematuria). Past medical history includes Delayed splenic rupture, Otherwise healthy 38-year-old. See chart for full details.",
+      "cc": "Surgical team: 'Patient is oozing from everywhere \u2014 wound, IV sites, NG tube. Blood isn't clotting.' Diffuse \u2014 bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+      "hpi": "Esperanza Ruiz is a 60-year-old female presenting with surgical team: 'patient is oozing from everywhere \u2014 wound, iv sites, ng tube. blood isn't clotting.' diffuse \u2014 bleeding from surgical wound, peripheral iv insertion sites, nasogastric tube, foley catheter (hematuria). Past medical history includes Delayed splenic rupture, Otherwise healthy 38-year-old. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-296007",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "DIC Panel \u2014 STAT",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "10.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "5.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "42",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "28",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "Fibrinogen",
+          "value": "62",
+          "unit": "mg/dL",
+          "ref": "200-400 (target >150 in DIC)",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "20",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "77",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "PT",
+          "value": "22",
+          "unit": "sec",
+          "ref": "11-13.5",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "PT/INR",
-              "value": "2.8",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "PTT",
-              "value": "68",
-              "unit": "sec",
-              "range": "25-35",
-              "flag": "H"
-            },
-            {
-              "test": "Fibrinogen",
-              "value": "62",
-              "unit": "mg/dL",
-              "range": "200-400",
-              "flag": "H"
-            },
-            {
-              "test": "D-dimer",
-              "value": ">20",
-              "unit": "mcg/mL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Peripheral Smear",
-              "value": "Schistocytes present (fewer than in TTP). Decreased platelets on smear.",
-              "unit": "",
-              "range": "Normal",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "9.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.12",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            },
-            {
-              "test": "Ionized Calcium",
-              "value": "0.82",
-              "unit": "mmol/L",
-              "range": "1.12-1.32",
-              "flag": "H"
-            }
-          ]
+          "test": "PTT",
+          "value": "68",
+          "unit": "sec",
+          "ref": "25-35",
+          "flag": "H"
+        },
+        {
+          "test": "D-dimer",
+          "value": ">20",
+          "unit": "\u03bcg/mL FEU",
+          "ref": "<0.5",
+          "flag": "H"
+        },
+        {
+          "test": "Platelets",
+          "value": "58",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "6.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "Schistocytes on smear",
+          "value": "Present",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-153647",
-      "clinical": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "POCUS – FAST Exam",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-215395",
-      "clinical": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
-      "technique": "Standard protocol",
-      "findings": "Small amount of free fluid in Morrison pouch and pelvis (post-surgical). IVC flat (collapsing completely — severe hypovolemia). No pericardial effusion.",
-      "impression": "Hypovolemic — aggressive resuscitation needed. Post-operative fluid expected but monitor for expanding hemoperitoneum.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-192951",
-      "clinical": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 138 bpm. Low voltage (hypovolemia). No ST elevation",
-      "impression": "Sinus tachycardia — hemorrhagic shock",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -414,13 +279,12 @@ window.EMR_DATA = {
       "Assess for signs of volume depletion": "Hypotensive, tachycardic, poor skin turgor, dry mucous membranes"
     },
     "ddxTargets": [
-      "Disseminated Intravascular Coagulation (DIC) (correct diagnosis)",
-      "Dilutional coagulopathy from massive transfusion",
-      "Medication-induced coagulopathy",
-      "Acute leukemia with thrombocytopenia",
-      "Thrombotic thrombocytopenic purpura (TTP)",
-      "Surgical bleeding with inadequate hemostasis",
-      "Platelet dysfunction disorder"
+      "Obstetric DIC from postpartum hemorrhage (correct)",
+      "TTP \u2014 fibrinogen preserved, schistocytes different pattern",
+      "Primary fibrinolysis \u2014 D-dimer elevated in both, but platelet consumption distinguishes DIC",
+      "Hemophilia \u2014 no prior bleeding history, obstetric context",
+      "HELLP syndrome evolving to DIC \u2014 different timing/context",
+      "Warfarin effect \u2014 not on anticoagulation"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'surgical bleeding' and missing the systemic coagulopathy affecting multiple sites simultaneously",
@@ -430,7 +294,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient has concerning diffuse bleeding after surgery. What systemic conditions could cause bleeding from multiple unrelated sites simultaneously? Think about what might be triggered by major trauma and surgical stress.",
       "phase5": "You've identified diffuse bleeding from multiple sites with signs of shock. What laboratory studies would help distinguish between different coagulopathies? Consider what processes consume clotting factors and platelets.",
-      "finalDebrief": "This case illustrates DIC triggered by splenic trauma and surgery. The key was recognizing the pattern of diffuse bleeding from multiple sites, not just surgical bleeding. How did the combination of consumed clotting factors, thrombocytopenia, and paradoxical fibrinolysis create this clinical picture?"
+      "finalDebrief": "This case illustrates DIC triggered by splenic trauma and surgery. The key was recognizing the pattern of diffuse bleeding from multiple sites, not just surgical bleeding. How did the combination of consumed clotting factors, thrombocytopenia, and paradoxical fibrinolysis create this clinical picture?",
+      "final": "Diagnosis: obstetric DIC. Key nursing learning: (1) Massive transfusion protocol \u2014 nursing role: immediately call blood bank and activate MTP (pre-set orders for 1:1:1 ratio). Obtain large-bore IV access (2x 16-gauge minimum or IO/central). Warm blood products (hypothermia worsens coagulopathy). Document each product given and time. Reassess after each 6-pack with labs. (2) Fibrinogen is the most critical lab in obstetric DIC: fibrinogen <100 = severe DIC, massive hemorrhage risk. Standard FFP contains only ~2g/dL fibrinogen. Cryoprecipitate is concentrated fibrinogen + Factor VIII + vWF \u2014 10 units raises fibrinogen ~50 mg/dL. In obstetric DIC, give cryo early, not as afterthought. (3) The lethal triad: hypothermia + acidosis + coagulopathy \u2014 each worsens the others. Nursing actively warms patient (forced air warming blanket, warm fluids), monitors pH, tracks coagulation labs. (4) WOMAN trial: TXA 1g IV within 3 hours of delivery reduced PPH death by 19%. Nursing ensures this is given promptly. After 3 hours, benefit disappears. (5) Uterine atony signs: soft/boggy uterus, fundal massage not firming. Nursing palpates fundus every 15 min post-delivery. 'Boggy uterus + increasing pad saturation = call OB now.'"
     }
+  },
+  "meta": {
+    "diagnosis": "Disseminated Intravascular Coagulation \u2014 Postpartum Hemorrhage, Massive Transfusion Protocol",
+    "caseId": "dic-massive-transfusion"
   }
 };

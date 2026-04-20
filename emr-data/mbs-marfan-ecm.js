@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Marfan Syndrome",
-      "icd": "Z00.00",
+      "problem": "Marfan syndrome \u2014 FBN1 mutation confirmed",
+      "icd": "Q87.40",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Aortic root dilation 4.8cm, lens dislocation, skeletal features \u2014 Ghent criteria met"
+    },
+    {
+      "problem": "Aortic root aneurysm \u2014 at surgical threshold",
+      "icd": "I71.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "4.8cm: elective repair recommended when >5.0cm, or >4.5cm with family history of dissection"
+    },
+    {
+      "problem": "Ectopia lentis \u2014 bilateral",
+      "icd": "H27.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Superotemporal lens dislocation bilateral \u2014 fibrillin-1 in zonular fibers supports lens"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Losartan 50mg daily \u2014 TGF-\u03b2 pathway inhibition",
+      "sig": "ARB blocks angiotensin II \u2192 reduces TGF-\u03b2 signaling \u2192 slows aortic root dilation. PEDIATRIC HEART NETWORK TRIAL.",
+      "prescriber": "Cardiology/Genetics",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Atenolol 25mg daily \u2014 reduce aortic wall stress",
+      "sig": "Beta-blocker reduces HR and dP/dt \u2014 reduces mechanical stress on aortic root",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,8 +119,51 @@ window.EMR_DATA = {
       "plan": "Referral to mbs. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Marfan Genetic and Cardiac Panel",
+      "results": [
+        {
+          "test": "FBN1 gene sequencing",
+          "value": "Pathogenic variant c.1234G>T \u2014 confirmed Marfan syndrome",
+          "unit": "",
+          "ref": "No pathogenic variant",
+          "flag": "H"
+        },
+        {
+          "test": "TGF-\u03b21 serum level",
+          "value": "Elevated 22 ng/mL",
+          "unit": "",
+          "ref": "<20 ng/mL",
+          "flag": "H"
+        },
+        {
+          "test": "Aortic root diameter (echo)",
+          "value": "4.8",
+          "unit": "cm",
+          "ref": "<4.0 normal adult",
+          "flag": "H"
+        },
+        {
+          "test": "ECG",
+          "value": "Normal sinus rhythm. LV normal size.",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Echocardiogram + CT Aorta",
+      "indication": "Marfan syndrome \u2014 cardiovascular surveillance",
+      "findings": "Echo: Aortic root 4.8cm (Z-score +3.8). Mild aortic regurgitation. Normal LV function EF 62%. CT aorta: aortic root 4.8cm. Ascending aorta 3.6cm. No dissection. No arch or descending aneurysm.",
+      "impression": "Marfan syndrome \u2014 aortic root aneurysm 4.8cm. Approaching surgical threshold. Losartan + beta-blocker recommended. Cardiothoracic surgery consultation placed."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "mbs-marfan-ecm",
-    "diagnosis": "See diagnosis \u2014 Marfan Syndrome",
+    "diagnosis": "Marfan Syndrome \u2014 FBN1 Mutation, Fibrillin-1 ECM Scaffolding Defect, TGF-\u03b2 Dysregulation",
     "acuity": 3,
     "presentation": "Marfan Syndrome",
     "category": "other"
@@ -168,12 +233,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Marfan Syndrome \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Marfan syndrome \u2014 FBN1, fibrillin ECM defect, TGF-\u03b2 dysregulation (correct)",
+      "Loeys-Dietz syndrome \u2014 TGF-\u03b2 receptor mutations, different gene but overlapping phenotype",
+      "Homocystinuria \u2014 lens dislocation inferiorly (not superiorly), thrombosis risk",
+      "EDS vascular type \u2014 different collagen gene (COL3A1), no lens dislocation",
+      "Bicuspid aortic valve with aneurysm \u2014 no skeletal features",
+      "Familial thoracic aortic aneurysm \u2014 ACTA2, MYH11 genes, different connective tissue features"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -183,7 +248,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: Marfan Syndrome. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for mbs. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) mbs assessment revealed the key discriminating features. (3) Why does one fibrillin gene mutation cause findings in three organ systems \u2014 what does ECM structure-function explain? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: Marfan syndrome, FBN1. Key MBS learning: (1) Fibrillin-1 structure: FBN1 encodes fibrillin-1, a 350 kDa glycoprotein that forms microfibrils in the extracellular matrix. Microfibrils are structural scaffolding for elastic fibers in aorta, lens zonules, bone periosteum. FBN1 mutation \u2192 defective microfibrils \u2192 aortic wall elastic weakness (aneurysm) + lens zonule fragility (ectopia lentis) + skeletal overgrowth. (2) TGF-\u03b2 pathway: fibrillin-1 normally sequesters latent TGF-\u03b2 in the ECM. Defective fibrillin-1 \u2192 TGF-\u03b2 released unregulated \u2192 increases MMP expression \u2192 ECM breakdown \u2192 aortic wall degeneration. This is the second-mechanism beyond just structural weakness. (3) Why losartan: ARB blocks angiotensin II AT1 receptor \u2192 reduces TGF-\u03b2 signaling (both direct and via downstream pathways). Pediatric Heart Network trial showed ARB \u2248 atenolol in slowing aortic dilation. Some data suggests combination is better. (4) Ectopia lentis direction: Marfan = superotemporal lens dislocation (fibrillin-1 in ALL zonules, but superior zonules are most loaded by gravity + weakest). Homocystinuria = inferotemporal (methionine accumulation damages all zonules differently). (5) Surgical timing: aortic root >5.0cm in typical Marfan, or >4.5cm with: rapid growth >3mm/year, family history of dissection, planned pregnancy, or severe AR. This patient at 4.8cm \u2192 surveillance q6 months, surgical consultation placed."
     }
   }
 };

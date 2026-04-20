@@ -1,4 +1,4 @@
-/* emr-data/septic-shock-urosepsis.js — EMR case data for Septic Shock Secondary to Urosepsis */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Edna Fitzgerald",
@@ -15,88 +15,70 @@ window.EMR_DATA = {
     "address": "3213 Birch Ln, Denver, CO 80205",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "CVS Pharmacy — University Dr",
+    "pharmacy": "CVS Pharmacy \u2014 University Dr",
     "emergencyContact": {
       "name": "Linda Williams",
       "phone": "(212) 555-4470",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain — flanks",
+    "chiefComplaint": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain \u2014 flanks",
     "diagnosis": "Septic Shock Secondary to Urosepsis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Type 2 Diabetes",
+      "problem": "Septic shock \u2014 urosepsis in T2DM patient",
+      "icd": "A41.51",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "BP 82/54, HR 128, lactate 4.2, T 39.1\u00b0C, source: urinary \u2014 Foley with cloudy urine"
     },
     {
-      "id": "prob-2",
-      "description": "Recurrent UTIs",
+      "problem": "Type 2 diabetes \u2014 immunocompromised state",
+      "icd": "E11.9",
+      "onset": "2016",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "A1c 9.8% \u2014 diabetics 2x more likely to develop severe sepsis from UTI"
     },
     {
-      "id": "prob-3",
-      "description": "Benign prostatic hyperplasia — wait, female. Let me fix: Urinary incontinence",
+      "problem": "Acute kidney injury \u2014 from sepsis and diabetes",
+      "icd": "N17.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Hypertension",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Chronic kidney disease stage 3",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Creatinine 2.8 (baseline 1.0). Urine output <0.5 mL/kg/hr x4h \u2014 oliguria"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Metformin",
-      "dose": "1000mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michael Torres, DO"
+      "name": "NS 30mL/kg (2100mL for 70kg) IV over 3h \u2014 SSCB bundle",
+      "sig": "30mL/kg crystalloid within first 3 hours \u2014 Surviving Sepsis Campaign",
+      "prescriber": "ED/ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Glipizide",
-      "dose": "5mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Piperacillin-tazobactam 3.375g IV q6h \u2014 empiric broad-spectrum",
+      "sig": "IV every 6 hours. Blood cultures x2 BEFORE first dose. Do not delay antibiotics beyond 1 hour.",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Lisinopril",
-      "dose": "20mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "Norepinephrine 0.05 mcg/kg/min via central line (titrate to MAP >65)",
+      "sig": "Vasopressor \u2014 start if MAP <65 after 30mL/kg fluid",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Nitrofurantoin",
-      "dose": "100mg BID (completed 5-day course 2 weeks ago for UTI)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Insulin infusion \u2014 glucose target 140-180",
+      "sig": "Hyperglycemia worsens sepsis outcomes",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -114,7 +96,7 @@ window.EMR_DATA = {
       "bp": "78/48 (MAP 58)",
       "hr": "118",
       "rr": "24",
-      "temp": "39.9°C",
+      "temp": "39.9\u00b0C",
       "spo2": "94%",
       "pain": "/10",
       "bmi": "27",
@@ -127,215 +109,71 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain — flanks",
-      "hpi": "Edna Fitzgerald is a 79-year-old female presenting with daughter called ems: 'found her confused and shaking' low belly and back pain — flanks. Past medical history includes Type 2 Diabetes, Recurrent UTIs, Benign prostatic hyperplasia — wait, female. Let me fix: Urinary incontinence, Hypertension, Chronic kidney disease stage 3. See chart for full details.",
+      "cc": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain \u2014 flanks",
+      "hpi": "Edna Fitzgerald is a 79-year-old female presenting with daughter called ems: 'found her confused and shaking' low belly and back pain \u2014 flanks. Past medical history includes Type 2 Diabetes, Recurrent UTIs, Benign prostatic hyperplasia \u2014 wait, female. Let me fix: Urinary incontinence, Hypertension, Chronic kidney disease stage 3. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Septic Shock Secondary to Urosepsis — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Septic Shock Secondary to Urosepsis \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-535409",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Sepsis Hour-1 Bundle Labs",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "22.6",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "36",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "98",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "Lactate",
+          "value": "4.2",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "137",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "105",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "248",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "10.1",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Blood cultures x2",
+          "value": "Gram-negative rods on preliminary Gram stain",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "5.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Procalcitonin",
-              "value": "18.4",
-              "unit": "ng/mL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Urinalysis",
-              "value": "Positive: WBC >100, nitrite+, leukocyte esterase 3+, bacteria many, RBC 10-25",
-              "unit": "",
-              "range": "Normal",
-              "flag": "H"
-            },
-            {
-              "test": "Blood Cultures",
-              "value": "Pending — DRAW BEFORE ANTIBIOTICS",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            },
-            {
-              "test": "Urine Culture",
-              "value": "Pending",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            }
-          ]
+          "test": "Procalcitonin",
+          "value": "28.4",
+          "unit": "ng/mL",
+          "ref": "<0.25",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "2.8",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "24.6",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Urine WBC",
+          "value": ">50",
+          "unit": "HPF",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "Glucose",
+          "value": "388",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-719324",
-      "clinical": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain — flanks",
-      "technique": "Standard protocol",
-      "findings": "Clear lungs. No infiltrate. No pleural effusion.",
-      "impression": "No pulmonary source of infection",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Renal Ultrasound",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-170914",
-      "clinical": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain — flanks",
-      "technique": "Standard protocol",
-      "findings": "Right kidney: moderate hydronephrosis. 8mm stone at right ureterovesical junction. Perinephric stranding. Left kidney: normal. Bladder: thickened wall, debris.",
-      "impression": "RIGHT OBSTRUCTIVE UROPATHY with hydronephrosis and UVJ stone — obstructed infected system requires emergent urology consultation for decompression",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-904528",
-      "clinical": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain — flanks",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 118 bpm. No ST changes. Normal intervals",
-      "impression": "Sinus tachycardia — sepsis",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -434,19 +272,18 @@ window.EMR_DATA = {
       "Mental status examination": "Disoriented to time, slow to respond, appears confused and lethargic",
       "Heart rate and rhythm assessment": "Tachycardic at 118 bpm, regular rhythm",
       "Blood pressure measurement": "Hypotensive at 78/48 mmHg",
-      "Temperature assessment": "Febrile at 39.9°C (103.8°F)",
+      "Temperature assessment": "Febrile at 39.9\u00b0C (103.8\u00b0F)",
       "Skin assessment for warmth and perfusion": "Skin is warm and flushed, poor skin turgor suggesting dehydration",
       "Mucous membrane examination": "Dry mucous membranes, delayed capillary refill",
       "Capillary refill time": "Prolonged at 4 seconds"
     },
     "ddxTargets": [
-      "Pyelonephritis with sepsis (correct diagnosis)",
-      "Complicated urinary tract infection",
-      "Urosepsis with acute kidney injury",
-      "Septic shock from any source",
-      "Meningitis",
-      "Nephrolithiasis with infection",
-      "Acute cystitis"
+      "Septic shock \u2014 urosepsis, Hour-1 bundle nursing priority (correct)",
+      "SIRS without infection \u2014 procalcitonin 28.4 and cultures growing gram-negative rods confirm infection",
+      "Hypovolemic shock only \u2014 fluid-refractory hypotension with lactate 4.2 = septic shock, not simple hypovolemia",
+      "UTI without sepsis \u2014 hemodynamic compromise defines septic shock",
+      "DKA causing hypotension \u2014 glucose 388 but acidosis pattern is sepsis, not DKA",
+      "Cardiogenic shock \u2014 no cardiac history, fluid-responsive initially"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'UTI' and missing the severity - this is pyelonephritis with sepsis requiring immediate intervention",
@@ -456,7 +293,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You're thinking about this 79-year-old woman with confusion, flank pain, and fever. Given her vital signs showing hypotension and tachycardia, what are you most concerned about? How might her history of recurrent UTIs and current presentation guide your questioning?",
       "phase5": "Now that you've examined Edna and found bilateral CVA tenderness with signs of sepsis, how has your differential diagnosis evolved? What's the most likely diagnosis, and what immediate interventions does this patient need?",
-      "finalDebrief": "This case demonstrates how a 'simple UTI' in an elderly patient can progress to life-threatening pyelonephritis with sepsis. The key teaching points are recognizing sepsis in elderly patients who may present with altered mental status, understanding that hypotension and tachycardia indicate systemic involvement requiring immediate treatment, and remembering that recurrent UTIs can predispose to more serious ascending infections."
+      "finalDebrief": "This case demonstrates how a 'simple UTI' in an elderly patient can progress to life-threatening pyelonephritis with sepsis. The key teaching points are recognizing sepsis in elderly patients who may present with altered mental status, understanding that hypotension and tachycardia indicate systemic involvement requiring immediate treatment, and remembering that recurrent UTIs can predispose to more serious ascending infections.",
+      "final": "Diagnosis: septic shock, urosepsis. Key nursing learning: (1) Surviving Sepsis Hour-1 Bundle (nursing executes): (a) Measure lactate \u2014 if >2, repeat at 2h to confirm clearance. Lactate 4.2 = severely compromised perfusion. (b) Blood cultures x2 BEFORE antibiotics \u2014 obtain from two sites within 5 min, then start antibiotics. DO NOT delay antibiotics to get cultures if difficult. (c) Broad-spectrum antibiotics within 1 hour. (d) 30mL/kg crystalloid within 3h. (e) Vasopressors for MAP <65 despite fluid. (2) Nursing triggers for sepsis escalation: new altered mental status + tachycardia + tachypnea in a floor patient = activate rapid response. 'I'm concerned about sepsis' is a valid clinical statement even without official criteria being met. (3) Vasopressor management: norepinephrine is first-line. Administer via central line (peripheral NE for short-term only \u2014 extravasation risk). Titrate to MAP \u226565, check every 15 min. Call prescriber for MAP <65 on current dose. (4) Glucose management in sepsis: target 140-180. Both hypoglycemia (<70) and severe hyperglycemia (>180) worsen outcomes. Check glucose q1h on insulin infusion. (5) Fluid reassessment: after each 500mL bolus, check MAP, HR, UO, lung sounds. Fluid overload in sepsis is harmful \u2014 stop fluids if pulmonary edema develops."
     }
+  },
+  "meta": {
+    "diagnosis": "Septic Shock \u2014 Urosepsis, Early Goal-Directed Nursing Surveillance, Hour-1 Bundle",
+    "caseId": "septic-shock-urosepsis"
   }
 };

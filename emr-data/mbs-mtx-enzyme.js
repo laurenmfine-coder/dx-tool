@@ -23,20 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Methotrexate Toxicity",
-      "icd": "Z00.00",
+      "problem": "Methotrexate toxicity \u2014 oral ulcers, pancytopenia",
+      "icd": "T45.1X5A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Weekly low-dose MTX for RA. Took daily instead of weekly \u2014 7x dose error."
+    },
+    {
+      "problem": "Pancytopenia \u2014 folate-dependent cell death",
+      "icd": "D61.818",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "WBC 1.8, Hgb 7.8, Plt 28 \u2014 all marrow lineages affected"
+    },
+    {
+      "problem": "Mucositis \u2014 oral and GI",
+      "icd": "K12.31",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Cannot eat or drink \u2014 folate-deficient mucosa breaks down first"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "HOLD methotrexate immediately",
+      "sig": "Stop all MTX \u2014 causative agent",
+      "prescriber": "Medicine/Rheum",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HELD"
+    },
+    {
+      "name": "Leucovorin (folinic acid) 10-25mg IV q6h \u2014 rescue therapy",
+      "sig": "Bypasses DHFR blockade by providing pre-reduced folate. Give within 24-48h of toxicity recognition.",
+      "prescriber": "Medicine/Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Granulocyte colony-stimulating factor (G-CSF/Filgrastim) 5mcg/kg SQ daily",
+      "sig": "Accelerate neutrophil recovery",
+      "prescriber": "Hematology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Nystatin swish-and-swallow 5mL QID",
+      "sig": "Antifungal for mucositis",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 1,
       "status": "Active"
     }
   ],
@@ -97,7 +135,63 @@ window.EMR_DATA = {
       "plan": "Referral to mbs. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "MTX Toxicity Panel",
+      "results": [
+        {
+          "test": "WBC",
+          "value": "1.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "L"
+        },
+        {
+          "test": "ANC",
+          "value": "420",
+          "unit": "cells/\u03bcL",
+          "ref": ">1500",
+          "flag": "L"
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "7.8",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "Platelets",
+          "value": "28",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
+        },
+        {
+          "test": "Methotrexate level",
+          "value": "0.8",
+          "unit": "\u03bcmol/L",
+          "ref": "<0.05 after 72h standard dosing",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Homocysteine",
+          "value": "42",
+          "unit": "\u03bcmol/L",
+          "ref": "<15",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +224,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "mbs-mtx-enzyme",
-    "diagnosis": "See diagnosis \u2014 Methotrexate Toxicity",
+    "diagnosis": "Methotrexate Toxicity \u2014 Dihydrofolate Reductase Inhibition, Rescue with Leucovorin",
     "acuity": 3,
     "presentation": "Methotrexate Toxicity",
     "category": "other"
@@ -168,12 +262,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Methotrexate Toxicity \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "MTX toxicity \u2014 DHFR inhibition, leucovorin rescue (correct)",
+      "Aplastic anemia \u2014 no prior exposure, MTX timing confirms etiology",
+      "Leukemia \u2014 acute onset post-MTX error, not de novo leukemia",
+      "Sepsis-induced pancytopenia \u2014 MTX level elevated, drug toxicity primary",
+      "Autoimmune hemolysis \u2014 pancytopenia with drug context",
+      "B12/folate deficiency \u2014 MTX mechanism is DHFR inhibition, not nutritional deficiency"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -183,7 +277,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: Methotrexate Toxicity. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for mbs. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) mbs assessment revealed the key discriminating features. (3) Why does MTX cause these specific toxicities \u2014 and what does competitive inhibition predict about dose-response? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: MTX toxicity, DHFR inhibition. Key MBS learning: (1) DHFR pathway: folic acid \u2192 DHFR reduces to dihydrofolate \u2192 DHFR reduces again to tetrahydrofolate (THF). THF is the cofactor for thymidylate synthase (DNA synthesis) and other one-carbon transfer reactions. MTX competitively inhibits DHFR \u2192 blocks THF production \u2192 no nucleotide synthesis \u2192 rapidly dividing cells die first (mucosa, marrow, tumor). (2) Leucovorin (folinic acid) mechanism: leucovorin = pre-reduced 5-formyltetrahydrofolate. It enters the folate cycle DOWNSTREAM of DHFR \u2192 bypasses the block \u2192 cells can resume THF-dependent reactions. This is why leucovorin rescues normal cells from MTX toxicity. (3) MTX polyglutamation: inside cells, MTX is converted to polyglutamate forms by folypolyglutamate synthase \u2192 retained intracellularly \u2192 prolonged DHFR inhibition even after plasma levels fall. This is why toxicity persists even when the MTX level appears to be declining. (4) Selective toxicity concept: why does MTX kill cancer cells more than normal cells? Cancer cells overexpress DHFR (to overcome inhibition) but also have higher polyglutamation capacity \u2192 accumulate MTX polyglutamates \u2192 more sensitive. Also: rapidly dividing cells are more dependent on de novo nucleotide synthesis. (5) Drug interaction: NSAIDs and PCN reduce renal MTX clearance \u2192 elevation of MTX levels \u2192 increased toxicity risk. This patient's renal function declining (Cr 1.4) may also slow clearance. Avoid NSAIDs in MTX patients."
     }
   }
 };

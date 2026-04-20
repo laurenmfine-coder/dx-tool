@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: PKU Newborn Screen Positive",
-      "icd": "Z00.00",
+      "problem": "Classic PKU \u2014 PAH deficiency confirmed",
+      "icd": "E70.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Newborn screen positive. Phenylalanine 24 mg/dL (normal <2). Metabolic team engaged."
+    },
+    {
+      "problem": "Neurotoxicity risk \u2014 brain development window",
+      "icd": "E70.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "High Phe disrupts large neutral amino acid transport \u2014 myelin synthesis impaired if untreated"
+    },
+    {
+      "problem": "Dietary phenylalanine restriction \u2014 initiated",
+      "icd": "Z71.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "PKU formula started. Natural protein severely restricted. Tyrosine supplementation required."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Phe-free amino acid formula (Phenex-1) \u2014 initiated",
+      "sig": "Replace all natural protein intake with formula \u2014 sole source of amino acids except Phe",
+      "prescriber": "Metabolic dietitian",
+      "start": "11/2024",
+      "refills": 2,
       "status": "Active"
+    },
+    {
+      "name": "Tyrosine supplementation \u2014 from formula",
+      "sig": "Tyrosine is conditionally essential in PKU \u2014 PAH deficiency blocks tyrosine synthesis from Phe",
+      "prescriber": "Metabolic dietitian",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Sapropterin (BH4) 10mg/kg/day \u2014 for BH4-responsive PKU (testing required)",
+      "sig": "Cofactor for PAH \u2014 some mutations respond. BH4 loading test required first.",
+      "prescriber": "Metabolic genetics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Pending BH4 loading test"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to mbs. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "PKU Newborn Screen Confirmation",
+      "results": [
+        {
+          "test": "Plasma phenylalanine",
+          "value": "24",
+          "unit": "mg/dL",
+          "ref": "<2 normal; >6 treatment threshold",
+          "flag": "H"
+        },
+        {
+          "test": "Plasma tyrosine",
+          "value": "0.6",
+          "unit": "mg/dL",
+          "ref": "1.3-4.5",
+          "flag": "L"
+        },
+        {
+          "test": "Phe:Tyr ratio",
+          "value": "40:1",
+          "unit": "",
+          "ref": "<3:1 normal",
+          "flag": "H"
+        },
+        {
+          "test": "BH4 (tetrahydrobiopterin) level",
+          "value": "Normal \u2014 not a cofactor deficiency",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "PAH gene sequencing",
+          "value": "Homozygous c.1222C>T (p.R408W) \u2014 classic PKU",
+          "unit": "",
+          "ref": "No pathogenic variant",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "mbs-pku-pathway",
-    "diagnosis": "See diagnosis \u2014 PKU Newborn Screen Positive",
+    "diagnosis": "Phenylketonuria (PKU) \u2014 PAH Deficiency, Phenylalanine Accumulation, Neurotoxicity Mechanism",
     "acuity": 3,
     "presentation": "PKU Newborn Screen Positive",
     "category": "other"
@@ -168,12 +240,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "PKU Newborn Screen Positive \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Classic PKU \u2014 PAH deficiency (correct)",
+      "BH4 deficiency (DHPR or GTPCH deficiency) \u2014 rare, different enzyme, BH4 test normal",
+      "Hyperphenylalaninemia mild \u2014 Phe 24 is severe (>2 is elevated, >6 requires treatment)",
+      "Tyrosinemia \u2014 elevated tyrosine (here tyrosine is LOW, not elevated)",
+      "MSUD (maple syrup urine disease) \u2014 branched-chain amino acids elevated, different enzyme",
+      "Transient neonatal hyperphenylalaninemia \u2014 self-limited, but Phe 24 requires treatment"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -183,7 +255,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: PKU Newborn Screen Positive. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for mbs. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) mbs assessment revealed the key discriminating features. (3) Why does PAH deficiency cause intellectual disability \u2014 and why is dietary restriction the treatment rather than enzyme replacement? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: classic PKU, PAH deficiency. Key MBS learning: (1) PAH enzyme: phenylalanine hydroxylase (PAH) converts phenylalanine \u2192 tyrosine. Requires tetrahydrobiopterin (BH4) as cofactor. Classic PKU = PAH gene mutation \u2192 enzyme absent/deficient \u2192 Phe accumulates. (2) Why Phe causes brain damage: Phe and tyrosine/tryptophan are LNAA (large neutral amino acids) that share the same transporter across the blood-brain barrier (LAT1). High plasma Phe competitively inhibits transport of other LNAA (tryptophan \u2192 serotonin, tyrosine \u2192 dopamine). Result: low dopamine, serotonin, and myelin (which requires LNAA). Untreated PKU = intellectual disability, seizures, white matter loss. (3) Tyrosine is conditionally essential in PKU: normally made from Phe by PAH. PAH absent \u2192 tyrosine cannot be synthesized \u2192 becomes essential nutrient. Must supplement. (4) Sapropterin (BH4/Kuvan): some PAH mutations respond to excess BH4 \u2014 the mutation allows some residual enzyme activity that is BH4-dependent. BH4 loading test: give 20mg/kg, measure Phe at 0, 4, 8, 24h. >30% Phe reduction = BH4-responsive \u2192 can use sapropterin instead of or in addition to diet. Only works for about 30-50% of PKU patients. (5) Treatment goal: maintain plasma Phe 2-6 mg/dL throughout childhood (brain development) \u2014 lifelong dietary management. Maternal PKU: high Phe in pregnancy causes fetal brain damage even if fetus is heterozygous."
     }
   }
 };
