@@ -85,7 +85,23 @@
       var defaultCase = defaults[setting] || 'stemi-v1';
       window.location.replace('/virtual-emr.html?case=' + defaultCase + '&setting=' + setting);
     } else {
-      window.location.replace('/browse.html?mode=practice');
+      // No case and no setting — check if first-time visitor
+      // First-timers get the conversion-optimized welcome page
+      // Returning users (have seen welcome or have completed cases) go to browse
+      var hasSeen = false;
+      try {
+        hasSeen = !!(
+          localStorage.getItem('rdx-seen-welcome') ||
+          localStorage.getItem('rdx-completed-cases') ||
+          localStorage.getItem('reasondx-user') ||
+          localStorage.getItem('rdx_user')
+        );
+      } catch(e) {}
+      if (hasSeen) {
+        window.location.replace('/browse.html?mode=practice');
+      } else {
+        window.location.replace('/welcome.html');
+      }
     }
   }
 })();
@@ -2164,6 +2180,8 @@ function loadCaseData(cb) {
       document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center;max-width:420px;padding:32px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;margin-bottom:8px">Case Data Empty</h2><p style="color:#666;font-size:13px;margin-bottom:16px">Case file loaded but contained no patient data: <strong>' + CASE_ID + '</strong></p><div style="display:flex;gap:10px;justify-content:center"><a href="javascript:history.back()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">\u2190 Go Back</a><a href="virtual-emr.html" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div></div>';
       return;
     }
+    // Fire case_started GA4 event
+    try { if(window.gtag) gtag('event','case_started',{case_id:CASE_ID,case_category:(d.meta&&d.meta.category)||'unknown',case_acuity:(d.meta&&d.meta.acuity)||0,setting:URL_SETTING||'default'}); } catch(e) {}
     // -- Multi-encounter support --
     // If case has encounters keyed by setting, merge selected encounter over base
     if (d.encounters && S.clinicalSetting && d.encounters[S.clinicalSetting]) {
@@ -4259,6 +4277,8 @@ function submitDoc(){
   }
   S.submissions=[...S.submissions.filter(s=>s.week!==S.encounterWeek),sub];
   S.submitted=true;
+  // Fire case_completed GA4 event
+  try { if(window.gtag) gtag('event','case_completed',{case_id:CASE_ID,case_category:(window.EMR_DATA&&window.EMR_DATA.meta&&window.EMR_DATA.meta.category)||'unknown',setting:URL_SETTING||'default'}); } catch(e) {}
   document.dispatchEvent(new CustomEvent('rdx-submission-complete',{detail:{wordCount:(function(){try{return Object.values(S.noteFields).reduce(function(s,v){return s+(v?v.split(/\s+/).filter(Boolean).length:0);},0);}catch(e){return null;}}())}}));
   dbSet("subs-"+S.currentUser.username,S.submissions);
   // Cloud sync
