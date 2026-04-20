@@ -5,7 +5,7 @@
 (function() {
     // Prevent double initialization
     if (window.DxAuth) {
-        console.log('DxAuth already initialized');
+        if (window.RDX_DEBUG) { console.log('DxAuth already initialized'); }
         return;
     }
 
@@ -82,7 +82,7 @@
     }
 
     function onAuthStateChange(event, session) {
-        console.log('Auth state changed:', event);
+        if (window.RDX_DEBUG) { console.log('Auth state changed:', event); }
         updateAuthUI();
         
         if (event === 'SIGNED_OUT') {
@@ -441,5 +441,5 @@
         loadUserProfile
     };
 
-    console.log('DxAuth initialized successfully');
+    if (window.RDX_DEBUG) { console.log('DxAuth initialized successfully'); }
 })();
