@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Bilateral Disc Swelling Found on Fundoscopy",
-      "icd": "Z00.00",
+      "problem": "Papilledema bilateral \u2014 elevated ICP",
+      "icd": "H47.10",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Opening pressure 32 cmH2O on LP"
+    },
+    {
+      "problem": "Idiopathic intracranial hypertension",
+      "icd": "G93.2",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "BMI 38, female, reproductive age \u2014 classic demographic"
+    },
+    {
+      "problem": "Obesity",
+      "icd": "E66.9",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "BMI 38"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Acetazolamide 500mg BID (starting today)",
+      "sig": "Take 1 tablet by mouth twice daily \u2014 new prescription",
+      "prescriber": "Dr. Neurology",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Oral contraceptive pill",
+      "sig": "Take 1 tablet daily",
+      "prescriber": "Dr. OB",
+      "start": "2022",
+      "refills": 11,
       "status": "Active"
     }
   ],
@@ -97,8 +119,58 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "CSF Analysis",
+      "results": [
+        {
+          "test": "Opening pressure",
+          "value": "32",
+          "unit": "cmH2O",
+          "ref": "<20",
+          "flag": "H"
+        },
+        {
+          "test": "CSF appearance",
+          "value": "Clear, colorless",
+          "unit": "",
+          "ref": "Clear",
+          "flag": ""
+        },
+        {
+          "test": "CSF WBC",
+          "value": "2",
+          "unit": "cells/\u03bcL",
+          "ref": "0-5",
+          "flag": ""
+        },
+        {
+          "test": "CSF protein",
+          "value": "28",
+          "unit": "mg/dL",
+          "ref": "15-45",
+          "flag": ""
+        },
+        {
+          "test": "CSF glucose",
+          "value": "62",
+          "unit": "mg/dL",
+          "ref": "50-80",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/15/2024",
+      "study": "MRI Brain/Orbits with gadolinium",
+      "indication": "Bilateral disc swelling, headaches",
+      "findings": "Bilateral optic nerve sheath distension. Flattening of posterior globes bilaterally. Empty sella. No mass lesion, no venous sinus thrombosis, no hydrocephalus. Tonsillar position normal.",
+      "impression": "Imaging features consistent with raised intracranial pressure. No secondary cause identified. Findings support idiopathic intracranial hypertension."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "papilledema-od",
-    "diagnosis": "See diagnosis \u2014 Bilateral Disc Swelling Found on Fundoscopy",
+    "diagnosis": "Papilledema from Idiopathic Intracranial Hypertension (IIH)",
     "acuity": 2,
     "presentation": "Bilateral Disc Swelling Found on Fundoscopy",
     "category": "ophthalmic"
@@ -178,12 +250,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Bilateral Disc Swelling Found on Fundoscopy \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Idiopathic intracranial hypertension \u2014 papilledema (correct)",
+      "Malignant hypertension",
+      "Cerebral venous sinus thrombosis",
+      "Intracranial mass with mass effect",
+      "Cryptococcal meningitis",
+      "Medication-induced (tetracyclines, vitamin A, steroid withdrawal)"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +265,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Bilateral Disc Swelling Found on Fundoscopy. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Bilateral disc swelling in a 28-year-old woman with BMI 38 and headaches. What is your immediate concern \u2014 and what LP opening pressure threshold changes management? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: idiopathic intracranial hypertension causing papilledema. Key OD learning points: (1) Bilateral disc swelling in a young obese woman with headaches = IIH until proven otherwise. Unilateral disc swelling has a much broader differential including AION, mass, malignant hypertension. (2) LP opening pressure threshold for treatment: >25 cmH2O is borderline; >30 cmH2O with symptoms warrants treatment. (3) The OD's job: document visual fields (Humphrey 24-2) and OCT RNFL at every visit \u2014 visual field loss is the feared outcome, not the headache. (4) Treatment: weight loss (most effective long-term), acetazolamide, optic nerve sheath fenestration if failing medical therapy and vision declining. (5) This patient is on OCPs \u2014 while not the primary cause, all potential contributing medications should be reviewed."
     }
   }
 };

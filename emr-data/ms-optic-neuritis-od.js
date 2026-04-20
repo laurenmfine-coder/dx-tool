@@ -23,21 +23,28 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Painful Eye",
-      "icd": "Z00.00",
+      "problem": "Optic neuritis, right eye",
+      "icd": "H46.01",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Acute presentation, 5 days"
+    },
+    {
+      "problem": "Possible multiple sclerosis \u2014 high-risk features",
+      "icd": "G35",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "MRI brain ordered \u2014 await results"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "No current ocular medications",
+      "sig": "N/A",
+      "prescriber": "N/A",
+      "start": "N/A",
+      "refills": 0,
+      "status": "N/A"
     }
   ],
   "allergies": [
@@ -98,7 +105,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "MRI Brain with and without gadolinium (ordered)",
+      "indication": "Acute optic neuritis \u2014 evaluate for demyelinating lesions",
+      "findings": "PENDING \u2014 ordered today",
+      "impression": "Pending. Patient advised results within 24-48 hours. Neurology referral placed."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +145,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "ms-optic-neuritis-od",
-    "diagnosis": "See diagnosis \u2014 Painful Eye",
+    "diagnosis": "Acute Demyelinating Optic Neuritis, Right Eye \u2014 High Risk for Multiple Sclerosis",
     "acuity": 2,
     "presentation": "Painful Eye",
     "category": "ophthalmic"
@@ -178,12 +193,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Painful Eye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Acute demyelinating optic neuritis (correct)",
+      "Ischemic optic neuropathy (AION)",
+      "Leber hereditary optic neuropathy",
+      "Compressive optic neuropathy from orbital mass",
+      "Neuromyelitis optica (NMO/AQP4+)",
+      "Infectious optic neuritis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +208,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Painful Eye. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Painful eye with vision loss on eye movement in a 28-year-old. How do you distinguish optic neuritis from other acute vision loss causes \u2014 and what systemic referral does a first episode mandate? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: acute demyelinating optic neuritis, right eye, high MS risk. Key OD learning points: (1) Classic triad: painful vision loss + pain on eye movement + RAPD. (2) VEP shows prolonged P100 latency \u2014 confirms optic nerve demyelination. (3) MRI brain: >2 T2 white matter lesions = high MS risk; McDonald criteria 2017 may establish MS diagnosis on first attack. (4) Treat with IV methylprednisolone 1g/day x3 days \u2014 accelerates recovery but does NOT improve final visual outcome. (5) NMO/MOG antibodies must be checked \u2014 NMOSD is treated differently and IV steroids are insufficient."
     }
   }
 };

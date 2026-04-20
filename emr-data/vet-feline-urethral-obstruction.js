@@ -24,21 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Straining, No Urine",
-      "icd": "Z00.00",
+      "problem": "Urethral obstruction \u2014 complete",
+      "icd": "N13.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "48 hours straining, no urine \u2014 K+ 7.4 on point-of-care"
+    },
+    {
+      "problem": "Urethral plug \u2014 matrix-crystalline",
+      "icd": "N21.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Most common cause in young male cats"
+    },
+    {
+      "problem": "Post-obstructive diuresis anticipated",
+      "icd": "N39.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "IV fluid management required post-unblocking"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "0.9% NaCl IV 10mL/kg/hr initial rate (NO lactated Ringer's \u2014 hyperkalemia)",
+      "sig": "IV infusion \u2014 avoid LRS until K+ normalized. Use 0.9% NaCl.",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Buprenorphine 0.01mg/kg IV q6h",
+      "sig": "IV injection every 6 hours \u2014 pain management",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Prazosin 0.25mg PO q12h (post-unblocking)",
+      "sig": "Give orally twice daily \u2014 reduce urethral spasm to prevent re-obstruction",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active post-procedure"
     }
   ],
   "allergies": [
@@ -86,8 +116,65 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Blocked Cat \u2014 Emergency Profile",
+      "results": [
+        {
+          "test": "Potassium (iSTAT point-of-care)",
+          "value": "7.4",
+          "unit": "mEq/L",
+          "ref": "3.5-5.5",
+          "flag": "H"
+        },
+        {
+          "test": "BUN",
+          "value": "142",
+          "unit": "mg/dL",
+          "ref": "14-36",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "8.8",
+          "unit": "mg/dL",
+          "ref": "0.6-2.4",
+          "flag": "H"
+        },
+        {
+          "test": "Phosphorus",
+          "value": "9.8",
+          "unit": "mg/dL",
+          "ref": "3.1-7.5",
+          "flag": "H"
+        },
+        {
+          "test": "pH (venous)",
+          "value": "7.14",
+          "unit": "",
+          "ref": "7.32-7.42",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "188",
+          "unit": "mg/dL",
+          "ref": "70-120",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Lateral Abdominal Radiograph",
+      "indication": "Urethral obstruction \u2014 evaluate bladder, rule out uroliths",
+      "findings": "Markedly enlarged, turgid urinary bladder extending from pelvis to mid-abdomen. No radiopaque uroliths identified in urethra or bladder. No free peritoneal fluid.",
+      "impression": "Severely distended urinary bladder consistent with complete urethral obstruction. No radiopaque uroliths \u2014 obstruction likely mucous/matrix plug or functional spasm."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -119,7 +206,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-feline-urethral-obstruction",
-    "diagnosis": "See diagnosis \u2014 Straining, No Urine",
+    "diagnosis": "Urethral Obstruction \u2014 Male Domestic Shorthair Cat, Hyperkalemic Cardiovascular Compromise",
     "acuity": 1,
     "presentation": "Straining, No Urine",
     "category": "renal"
@@ -166,12 +253,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Cat \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Urethral obstruction \u2014 matrix plug (correct)",
+      "Urethral urolith (calcium oxalate)",
+      "Functional urethral obstruction \u2014 spasm",
+      "Detrusor atony without obstruction",
+      "Bladder rupture with uroabdomen",
+      "Retrograde prolapses in male cats"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +268,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Straining, No Urine. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) Blocked male cat, K+ 7.4 on point-of-care. Walk through your stabilization, unblocking technique, and post-obstruction monitoring. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: urethral obstruction, male DSH, K+ 7.4 \u2014 cardiovascular risk. Key veterinary learning points: (1) K+ 7.4 is a cardiovascular emergency in cats: bradycardia + ECG changes (tall peaked T waves, wide QRS, absent P waves = 'sinoventricular rhythm') can cause ventricular fibrillation. IV fluids FIRST before attempting unblocking \u2014 dilute the K+. Use 0.9% NaCl \u2014 avoid LRS (contains 4 mEq/L K+). (2) Unblocking technique: sedation (butorphanol \u00b1 ketamine), perineal retropulsion with catheter and saline flush, hydrophilic catheter placement and balloon tie-in urinary catheter for 24-48 hours. (3) Post-obstructive diuresis: expect 3-5x maintenance urine output for 12-24 hours post-unblocking \u2014 replace fluids to prevent dehydration. Check K+ every 6 hours. (4) Prazosin post-unblocking: alpha-1 blocker reduces urethral smooth muscle spasm \u2014 evidence shows reduces re-obstruction rate from ~25% to ~8%. (5) Recurrence prevention: wet food diet (dilutes urine), environmental enrichment (reduces stress-induced idiopathic cystitis), weight management. Perineal urethrostomy for cats with 3+ obstructions."
     }
   }
 };

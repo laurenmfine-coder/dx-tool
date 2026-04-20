@@ -23,21 +23,36 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Postpartum Day 1",
-      "icd": "Z00.00",
+      "problem": "Postpartum preeclampsia with severe features",
+      "icd": "O14.15",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "BP 158/102, headache, RUQ pain, oliguria \u2014 postpartum day 1"
+    },
+    {
+      "problem": "Recent vaginal delivery \u2014 39 weeks",
+      "icd": "Z37.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Uncomplicated delivery, normotensive throughout labor"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Magnesium sulfate 4g IV loading dose THEN 2g/hr infusion",
+      "sig": "Loading dose 4g IV over 20 minutes, then continuous infusion 2g/hr",
+      "prescriber": "OB team",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 seizure prophylaxis"
+    },
+    {
+      "name": "Labetalol 20mg IV q20min PRN",
+      "sig": "IV push for BP >160/110 \u2014 give 20mg, may repeat x2",
+      "prescriber": "OB team",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -97,7 +112,56 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Preeclampsia Labs STAT",
+      "results": [
+        {
+          "test": "Platelet count",
+          "value": "98",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
+        },
+        {
+          "test": "LDH",
+          "value": "892",
+          "unit": "U/L",
+          "ref": "122-222",
+          "flag": "H"
+        },
+        {
+          "test": "AST",
+          "value": "124",
+          "unit": "U/L",
+          "ref": "10-40",
+          "flag": "H"
+        },
+        {
+          "test": "ALT",
+          "value": "98",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": "H"
+        },
+        {
+          "test": "Urine protein",
+          "value": "3+",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.5-1.1",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +194,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "nursing-postpartum-emergency",
-    "diagnosis": "See diagnosis \u2014 Postpartum Day 1",
+    "diagnosis": "Postpartum Preeclampsia with Severe Features \u2014 Day 1 Post-Delivery",
     "acuity": 1,
     "presentation": "Postpartum Day 1",
     "category": "obstetric"
@@ -177,12 +241,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Postpartum Day 1 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Postpartum preeclampsia with severe features (correct)",
+      "Migraine \u2014 known history, dismissed too quickly",
+      "HELLP syndrome \u2014 platelets and LFTs elevated",
+      "Postpartum cardiomyopathy",
+      "Hypertensive urgency \u2014 non-pregnancy related",
+      "Eclampsia \u2014 seizures not yet occurred but risk present"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +256,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Postpartum Day 1. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Build your SBAR \u2014 and identify whether this requires physician presence NOW or can wait for a routine call. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: postpartum preeclampsia with severe features. Key nursing learning points: (1) Preeclampsia does NOT end with delivery \u2014 25-40% of eclampsia cases occur postpartum, most within 48 hours. BP must be monitored closely postpartum even after uncomplicated normotensive delivery. (2) Severe features: BP \u2265160/110 (yes), headache unresponsive to medication (yes), RUQ/epigastric pain (yes), oliguria (yes). Any ONE severe feature requires magnesium seizure prophylaxis. (3) Migraine history does NOT change the clinical picture here \u2014 the constellation of BP + headache + RUQ pain + oliguria in a postpartum patient is preeclampsia until proven otherwise. Anchoring on 'she gets migraines' is a classic nursing error. (4) Magnesium toxicity signs the RN monitors: loss of patellar reflex (first sign), respiratory depression, then cardiac arrest. Antidote: calcium gluconate 1g IV. (5) SBAR to OB: 'I need you at bedside immediately \u2014 BP 158/102 with headache and RUQ pain, platelets 98K and LDH 892, magnesium running, patient is at risk for eclampsia.'"
     }
   }
 };

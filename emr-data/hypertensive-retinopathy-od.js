@@ -23,21 +23,36 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Elevated Blood Pressure Found at Eye Exam",
-      "icd": "Z00.00",
+      "problem": "Hypertension \u2014 poorly controlled",
+      "icd": "I10",
+      "onset": "2014",
+      "status": "Active",
+      "notes": "BP 178/108 found on today's exam, off medications x3 weeks"
+    },
+    {
+      "problem": "Hypertensive retinopathy",
+      "icd": "H35.031",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Newly identified, Grade III"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Amlodipine 5mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Torres",
+      "start": "01/2015",
+      "refills": 0,
+      "status": "Active \u2014 patient reports not filling for 3 weeks"
+    },
+    {
+      "name": "Hydrochlorothiazide 25mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Torres",
+      "start": "06/2018",
+      "refills": 0,
+      "status": "Active \u2014 not filling"
     }
   ],
   "allergies": [
@@ -98,7 +113,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Fundus Photography \u2014 Bilateral",
+      "indication": "Elevated BP found at eye exam, headaches",
+      "findings": "OD and OS: Moderate arteriovenous nicking at 3 crossings bilaterally. Significant arteriolar narrowing with copper-wiring appearance. Flame hemorrhages at disc margin bilaterally. Hard exudates forming partial macular star pattern OD. Disc margins sharp bilaterally. Cotton-wool spots x2 OD superior.",
+      "impression": "Hypertensive retinopathy Grade III bilaterally. Flame hemorrhages and hard exudate macular star indicate end-organ damage. Urgent blood pressure management required. No papilledema (Grade IV)."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +153,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "hypertensive-retinopathy-od",
-    "diagnosis": "See diagnosis \u2014 Elevated Blood Pressure Found at Eye Exam",
+    "diagnosis": "Hypertensive Retinopathy, Grade III (Keith-Wagener-Barker) \u2014 Bilateral",
     "acuity": 3,
     "presentation": "Elevated Blood Pressure Found at Eye Exam",
     "category": "ophthalmic"
@@ -178,12 +201,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Elevated Blood Pressure Found at Eye Exam \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Grade III hypertensive retinopathy (correct)",
+      "Grade II hypertensive retinopathy (mild AV nicking only)",
+      "Grade IV \u2014 malignant hypertension with papilledema",
+      "Diabetic retinopathy \u2014 similar hemorrhage pattern",
+      "Branch retinal vein occlusion",
+      "Radiation retinopathy"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +216,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Elevated Blood Pressure Found at Eye Exam. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Grade the hypertensive retinopathy on the Keith-Wagener-Barker scale. At which grade does this become a same-day referral to medicine? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: Grade III hypertensive retinopathy (Keith-Wagener-Barker). Key OD learning points: (1) KWB grading: I=arteriolar narrowing; II=AV nicking; III=hemorrhages, exudates, cotton-wool spots; IV=papilledema. Grade III = same-day medical referral. (2) Flame hemorrhages = nerve fiber layer hemorrhages from elevated pressure. Hard exudate macular star = lipid deposits from leaking capillaries. (3) This patient is off medications \u2014 the OD has found hypertensive crisis. BP 178/108 requires same-day medicine evaluation. (4) If papilledema were present (Grade IV), this is hypertensive emergency \u2014 call 911."
     }
   }
 };

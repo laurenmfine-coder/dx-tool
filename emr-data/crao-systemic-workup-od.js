@@ -23,20 +23,34 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Sudden Painless Monocular Vision Loss",
-      "icd": "Z00.00",
+      "problem": "Central retinal artery occlusion, left eye",
+      "icd": "H34.11",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Acute, 2 hours ago \u2014 within potential treatment window"
+    },
+    {
+      "problem": "Atrial fibrillation \u2014 new diagnosis",
+      "icd": "I48.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Detected on ECG today, likely embolic source"
+    },
+    {
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "On amlodipine"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Amlodipine 10mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Kim",
+      "start": "01/2020",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,8 +111,65 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Urgent Cardiovascular and Stroke Labs",
+      "results": [
+        {
+          "test": "INR/PT",
+          "value": "1.1",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "CBC \u2014 WBC",
+          "value": "8.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": ""
+        },
+        {
+          "test": "Lipid panel \u2014 LDL",
+          "value": "152",
+          "unit": "mg/dL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "HbA1c",
+          "value": "5.8",
+          "unit": "%",
+          "ref": "<5.7",
+          "flag": ""
+        },
+        {
+          "test": "ESR",
+          "value": "18",
+          "unit": "mm/hr",
+          "ref": "0-20",
+          "flag": ""
+        },
+        {
+          "test": "CRP",
+          "value": "0.4",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "OCT Macula + Fundus Photography \u2014 Left Eye",
+      "indication": "Sudden painless vision loss, cherry red spot",
+      "findings": "Left eye: Diffuse inner retinal whitening (opacification) consistent with ischemia. Cherry red spot at fovea \u2014 intact choroidal circulation visible through thin foveal tissue. Boxcar segmentation of blood column in retinal arterioles. Foveal reflex absent. Right eye: Normal.",
+      "impression": "Findings diagnostic of central retinal artery occlusion left eye. Acute presentation \u2014 refer immediately for systemic stroke evaluation and potential thrombolysis consideration."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +201,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "crao-systemic-workup-od",
-    "diagnosis": "See diagnosis \u2014 Sudden Painless Monocular Vision Loss",
+    "diagnosis": "Central Retinal Artery Occlusion (CRAO) \u2014 Cardioembolic, Urgent Stroke Workup Required",
     "acuity": 1,
     "presentation": "Sudden Painless Monocular Vision Loss",
     "category": "ophthalmic"
@@ -178,12 +249,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Sudden Painless Monocular Vision Loss \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Central retinal artery occlusion \u2014 cardioembolic (correct)",
+      "Branch retinal artery occlusion",
+      "Anterior ischemic optic neuropathy (AION)",
+      "Giant cell arteritis \u2014 CRAO",
+      "Central retinal vein occlusion",
+      "Acute angle closure glaucoma"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Sudden Painless Monocular Vision Loss. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Confirmed CRAO. Beyond ocular management \u2014 what is the systemic workup for embolic source and why is this patient at high 90-day stroke risk? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: acute CRAO, likely cardioembolic from newly detected atrial fibrillation. Key OD learning points: (1) CRAO is a 'stroke of the eye' \u2014 treat as a stroke. The 90-day stroke risk after CRAO is 10-15%, highest in first 2 weeks. IMMEDIATE referral to emergency room for stroke protocol. (2) Treatment window: IV tPA within 4.5 hours (central vision may be salvageable). Ocular massage, AC paracentesis, and IOP-lowering can improve perfusion acutely. (3) Embolic workup: ECG (found AFib today), carotid ultrasound, echo, lipid panel, ANA if younger patient. (4) AFib is the embolic source \u2014 this patient needs anticoagulation urgently. (5) Giant cell arteritis must be excluded in any CRAO in a patient >50 with ESR/CRP (this patient's ESR 18, CRP 0.4 \u2014 GCA less likely, but temporal artery biopsy may still be warranted if any jaw claudication or headache)."
     }
   }
 };

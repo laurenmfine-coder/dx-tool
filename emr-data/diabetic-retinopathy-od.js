@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Diabetic Patient",
-      "icd": "Z00.00",
+      "problem": "Type 2 Diabetes Mellitus",
+      "icd": "E11.9",
+      "onset": "2016",
+      "status": "Active",
+      "notes": "A1c 9.2% \u2014 suboptimal control"
+    },
+    {
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2018",
+      "status": "Active",
+      "notes": "On lisinopril"
+    },
+    {
+      "problem": "Diabetic retinopathy",
+      "icd": "E11.311",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Newly diagnosed on today's exam"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Metformin 1000mg BID",
+      "sig": "Take 1 tablet by mouth twice daily with meals",
+      "prescriber": "Dr. Kim",
+      "start": "01/2017",
+      "refills": 6,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Kim",
+      "start": "03/2019",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Glipizide 5mg daily",
+      "sig": "Take 1 tablet by mouth daily 30 minutes before breakfast",
+      "prescriber": "Dr. Kim",
+      "start": "06/2021",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -97,8 +127,58 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "10/15/2024",
+      "panel": "HbA1c and Metabolic",
+      "results": [
+        {
+          "test": "HbA1c",
+          "value": "9.2",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "Fasting Glucose",
+          "value": "218",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "eGFR",
+          "value": "72",
+          "unit": "mL/min/1.73m\u00b2",
+          "ref": ">60",
+          "flag": ""
+        },
+        {
+          "test": "LDL",
+          "value": "128",
+          "unit": "mg/dL",
+          "ref": "<100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/10/2024",
+      "study": "Fundus Photography with OCT \u2014 Bilateral",
+      "indication": "Diabetic retinopathy screening, A1c 9.2%",
+      "findings": "OD: Multiple dot-blot hemorrhages in all quadrants, scattered microaneurysms, two cotton-wool spots inferior arcade. No neovascularization. Macular OCT: central subfield thickness 298 \u03bcm, no diabetic macular edema. OS: Microaneurysms scattered mid-periphery, rare hard exudates temporal macula. Macular OCT: CST 284 \u03bcm, no DME.",
+      "impression": "Moderate NPDR bilateral. No proliferative disease. No clinically significant DME. Annual dilated exam recommended \u2014 consider referral to retina if progression."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +210,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "diabetic-retinopathy-od",
-    "diagnosis": "See diagnosis \u2014 Diabetic Patient",
+    "diagnosis": "Non-Proliferative Diabetic Retinopathy (NPDR), Moderate \u2014 Bilateral",
     "acuity": 3,
     "presentation": "Diabetic Patient",
     "category": "ophthalmic"
@@ -178,12 +258,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Diabetic Patient \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Moderate non-proliferative diabetic retinopathy (correct)",
+      "Mild NPDR \u2014 insufficient hemorrhage count",
+      "Proliferative diabetic retinopathy",
+      "Diabetic macular edema",
+      "Hypertensive retinopathy \u2014 look-alike",
+      "Branch retinal vein occlusion"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +273,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Diabetic Patient. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Classify the DR stage on this fundus exam. What systemic control targets do you quote the patient \u2014 and at what DR stage does referral to retina become urgent? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: moderate NPDR bilateral. Key OD learning points: (1) Classify by ETDRS severity \u2014 moderate NPDR means 20+ hemorrhages per quadrant OR venous beading in 1+ quadrant OR IRMA. (2) Systemic targets that slow progression: A1c <7%, BP <130/80, LDL <100. (3) Referral timing: moderate NPDR \u2192 annual; severe NPDR \u2192 retina within 3-4 months; any PDR or DME \u2192 urgent retina. (4) The cotton-wool spots represent nerve fiber layer infarcts from capillary non-perfusion \u2014 a progression marker. (5) Today's visit requires a co-management letter to the endocrinologist: A1c 9.2% is driving this."
     }
   }
 };

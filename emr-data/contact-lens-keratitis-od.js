@@ -23,21 +23,36 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Contact Lens Wearer",
-      "icd": "Z00.00",
+      "problem": "Bacterial keratitis, right eye \u2014 contact lens associated",
+      "icd": "H16.031",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Paracentral infiltrate, epithelial defect \u2014 Pseudomonas most likely"
+    },
+    {
+      "problem": "Extended contact lens wear \u2014 overnight",
+      "icd": "Z96.1",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Patient admits to sleeping in lenses routinely"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Ciprofloxacin 0.3% drops q1h right eye (day 1-3)",
+      "sig": "Instill 1 drop right eye every 1 hour while awake, first 48 hours",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 new"
+    },
+    {
+      "name": "Tobramycin 0.3% drops alternating with ciprofloxacin q30min (first 6 hours)",
+      "sig": "Alternate with ciprofloxacin every 30 minutes for first 6 hours only",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 loading dose only"
     }
   ],
   "allergies": [
@@ -97,7 +112,28 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Corneal Cultures",
+      "results": [
+        {
+          "test": "Corneal scraping culture",
+          "value": "Gram-negative rods seen on smear",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
+        },
+        {
+          "test": "Culture \u2014 preliminary",
+          "value": "Pending 24-48h \u2014 likely Pseudomonas aeruginosa",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +166,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "contact-lens-keratitis-od",
-    "diagnosis": "See diagnosis \u2014 Contact Lens Wearer",
+    "diagnosis": "Pseudomonas Aeruginosa Bacterial Keratitis \u2014 Contact Lens-Associated",
     "acuity": 2,
     "presentation": "Contact Lens Wearer",
     "category": "ophthalmic"
@@ -178,12 +214,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Contact Lens Wearer \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Pseudomonas bacterial keratitis \u2014 contact lens (correct)",
+      "Acanthamoeba keratitis \u2014 contact lens (misses shower/tap water history)",
+      "Sterile marginal infiltrate \u2014 smaller, peripheral, no epithelial defect",
+      "Herpes simplex keratitis \u2014 dendritic pattern",
+      "Staphylococcal keratitis \u2014 central, slower progression",
+      "Fungal keratitis \u2014 trauma history, feathery borders"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +229,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Contact Lens Wearer. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Bacterial keratitis vs sterile infiltrate \u2014 what clinical features determine whether you culture first or start fortified antibiotics empirically? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: bacterial keratitis (likely Pseudomonas) from overnight contact lens wear. Key OD learning points: (1) Pseudomonas vs Acanthamoeba distinction is critical \u2014 both are contact lens-associated but Acanthamoeba requires very different treatment (PHMB/brolene, NOT fluoroquinolones). Ask specifically about: shower/swimming in contacts, tap water exposure, hot tub use. (2) Culture BEFORE antibiotics \u2014 corneal scraping for gram stain, culture, and sensitivity. In practice, start treatment empirically then adjust based on cultures. (3) Fortified antibiotics for severe cases: tobramycin 14mg/mL alternating with cefazolin 50mg/mL. For moderate cases, fluoroquinolone monotherapy (ciprofloxacin) is first-line. (4) Pseudomonas: rapid, aggressive tissue destruction ('melting'). Follow daily in first 48 hours. Signs of worsening = refer to cornea specialist immediately. (5) Contact lens counseling: discard all current lenses and case, never sleep in lenses, replace case monthly, use fresh solution."
     }
   }
 };

@@ -23,20 +23,27 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Post-ACL Reconstruction",
-      "icd": "Z00.00",
+      "problem": "Status post right ACL reconstruction with patellar tendon autograft",
+      "icd": "M23.611",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "8 months post-op, return-to-sport evaluation"
+    },
+    {
+      "problem": "Quadriceps weakness \u2014 right limb",
+      "icd": "M62.81",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "LSI 78% on isokinetic testing \u2014 criterion <90% not met"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Ibuprofen 400mg PRN post-exercise",
+      "sig": "Take 1 tablet as needed after PT sessions if soreness",
+      "prescriber": "Dr. Ortho",
+      "start": "08/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -98,7 +105,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "03/15/2024",
+      "study": "MRI Right Knee \u2014 Pre-Op",
+      "indication": "ACL tear after soccer injury",
+      "findings": "Complete tear ACL at femoral attachment. Medial tibial and lateral femoral bone bruising consistent with pivot-shift mechanism. Intact PCL, MCL, LCL. No meniscal tear.",
+      "impression": "Complete ACL tear. Surgical candidate confirmed."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +145,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "acl-return-to-sport-pt",
-    "diagnosis": "See diagnosis \u2014 Post-ACL Reconstruction",
+    "diagnosis": "ACL Reconstruction Rehabilitation \u2014 Return-to-Sport Evaluation (LSI 78%, Not Yet Cleared)",
     "acuity": 3,
     "presentation": "Post-ACL Reconstruction",
     "category": "musculoskeletal"
@@ -180,12 +195,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "8mo Post-ACL Reconstruction \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "ACL reconstruction rehab \u2014 not yet return-to-sport ready (correct)",
+      "Return-to-sport cleared \u2014 LSI criteria met",
+      "Re-rupture of ACL graft",
+      "Contralateral ACL injury risk",
+      "Patellofemoral pain syndrome \u2014 concomitant issue",
+      "Graft laxity \u2014 early failure"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +210,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Post-ACL Reconstruction. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What limb symmetry index clears this patient for return to sport \u2014 and which test is most predictive of re-injury risk? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-ACL reconstruction, return-to-sport evaluation \u2014 NOT yet cleared. LSI 78%, below 90% threshold. Key PT learning points: (1) Return-to-sport criteria: quad LSI \u226590% on isokinetic testing, hop test LSI \u226590% (single leg, triple hop, crossover hop), and psychological readiness (ACL-RSI \u226565). This patient fails on LSI. (2) Re-injury risk: an LSI of 78% carries 4x higher re-injury risk vs 90%+. The PT's role is to communicate this clearly \u2014 premature return is the leading cause of graft failure. (3) Testing battery: isokinetic testing at 60\u00b0/s and 180\u00b0/s, 4-hop test series, Y-balance test, 5-10-5 agility. (4) Time is not the criterion: 8 months is a guideline, not a clearance. Athletes can be 12 months post-op and still fail criteria. (5) The coach/athlete/parent pressure to return is real \u2014 the PT must hold the line on objective criteria."
     }
   }
 };

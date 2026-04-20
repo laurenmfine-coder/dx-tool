@@ -23,21 +23,44 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Trismus 15mm",
-      "icd": "Z00.00",
+      "problem": "Ludwig's angina \u2014 bilateral floor of mouth and submandibular space infection",
+      "icd": "K12.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Airway emergency \u2014 bilateral elevation of floor of mouth, tongue displacement"
+    },
+    {
+      "problem": "Source: mandibular molar infection, tooth #18",
+      "icd": "K04.7",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Necrotic tooth #18, periapical abscess as source"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Ampicillin-sulbactam 3g IV q6h (STAT)",
+      "sig": "IV infusion every 6 hours \u2014 started in ED",
+      "prescriber": "ED/Surgery",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Metronidazole 500mg IV q8h",
+      "sig": "IV infusion every 8 hours \u2014 anaerobic coverage",
+      "prescriber": "ED/Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 8mg IV x1 (airway edema)",
+      "sig": "IV push once \u2014 reduce airway edema while preparing for intubation",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 given once"
     }
   ],
   "allergies": [
@@ -97,8 +120,58 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Infection and Metabolic",
+      "results": [
+        {
+          "test": "WBC",
+          "value": "22.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Bands",
+          "value": "31",
+          "unit": "%",
+          "ref": "0-10",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "28.4",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "2.1",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "Glucose",
+          "value": "194",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "CT Neck with Contrast",
+      "indication": "Bilateral floor of mouth swelling, trismus, fever \u2014 evaluate extent of infection and airway",
+      "findings": "Bilateral submandibular and sublingual space phlegmon with gas formation. Bilateral sublingual spaces elevated compressing floor of mouth and displacing tongue superiorly and posteriorly. Airway narrowing at oropharyngeal level \u2014 estimated 40% narrowing. No discrete drainable abscess on current imaging (phlegmon phase). No descending mediastinitis on current cuts \u2014 chest CT pending.",
+      "impression": "Ludwig's angina with imminent airway compromise. Immediate surgical and anesthesia consultation required. Airway management before any surgical drainage."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +203,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-ludwigs-angina",
-    "diagnosis": "See diagnosis \u2014 Trismus 15mm",
+    "diagnosis": "Ludwig's Angina \u2014 Descending Neck Infection, Airway Emergency",
     "acuity": 1,
     "presentation": "Trismus 15mm",
     "category": "infectious"
@@ -176,12 +249,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Trismus 15mm \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Ludwig's angina \u2014 bilateral submandibular space infection (correct)",
+      "Unilateral submandibular abscess (not bilateral)",
+      "Peritonsillar abscess \u2014 different location",
+      "Epiglottitis \u2014 different anatomy",
+      "Angioedema \u2014 no infection, rapid onset",
+      "Sublingual hematoma"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +264,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Trismus 15mm. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) What is your diagnosis and your exact next action in the next 5 minutes? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: Ludwig's angina \u2014 airway emergency. Key dentistry learning points: (1) Ludwig's definition: BILATERAL submandibular + sublingual + submental space involvement. NOT an abscess (usually no fluctuance on CT initially \u2014 phlegmon phase). (2) Immediate actions in first 5 minutes: airway assessment (can they still open mouth? stridor? accessory muscle use?), call anesthesia NOW for awake fiberoptic intubation if indicated, IV access and antibiotics, call oral surgery/ENT. (3) Airway first \u2014 BEFORE anything else: trismus 15mm means conventional laryngoscopy is impossible. Awake fiberoptic or surgical airway (tracheotomy) may be required. (4) Antibiotic coverage: polymicrobial (gram-positive cocci + oral anaerobes) \u2014 ampicillin-sulbactam OR penicillin + metronidazole. Add clindamycin if penicillin allergy. (5) Dental prevention: Ludwig's typically originates from lower molar periapical abscess (tooth #17-18 most common). Early endodontic treatment or extraction of necrotic teeth prevents this catastrophic spread."
     }
   }
 };

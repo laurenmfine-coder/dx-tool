@@ -23,20 +23,35 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Open Angle Glaucoma",
-      "icd": "Z00.00",
-      "onset": "2024",
+      "problem": "Primary open-angle glaucoma, bilateral",
+      "icd": "H40.1131",
+      "onset": "2019",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Progressing despite IOP at target \u2014 OCT RNFL progression, new arcuate defect right eye"
+    },
+    {
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2016",
+      "status": "Active",
+      "notes": "On lisinopril \u2014 recent hypotensive episodes at night"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Latanoprost 0.005% drops QHS bilateral",
+      "sig": "Instill 1 drop each eye at bedtime",
+      "prescriber": "Dr. Chen",
+      "start": "2019",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 20mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Kim",
+      "start": "2017",
+      "refills": 8,
       "status": "Active"
     }
   ],
@@ -98,7 +113,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "OCT RNFL and Ganglion Cell Complex + Humphrey Visual Field 24-2",
+      "indication": "Glaucoma monitoring, IOP 21 on latanoprost \u2014 check for progression",
+      "findings": "OCT RNFL: Right eye inferior sector thickness decreased from 82\u03bcm (2022) to 68\u03bcm (2024) \u2014 rate of progression -7\u03bcm/year. Left eye: stable. GCC: right eye inferior GCC loss corresponding to RNFL thinning. Humphrey VF 24-2: right eye new inferior arcuate scotoma (MD -4.2 dB, PSD 3.8 dB). Left eye: stable MD -1.1 dB. Cup-to-disc ratio OD 0.75, OS 0.70.",
+      "impression": "Structural and functional progression right eye despite IOP 21 (target IOP). Reassess target IOP \u2014 consider new target of <15 mmHg. SLT or add-on agent warranted. Consider 24-hour IOP monitoring and nocturnal blood pressure assessment."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +153,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "glaucoma-progression-od",
-    "diagnosis": "See diagnosis \u2014 Open Angle Glaucoma",
+    "diagnosis": "Primary Open-Angle Glaucoma \u2014 Progression Despite Target IOP (Structural-Functional Progression)",
     "acuity": 3,
     "presentation": "Open Angle Glaucoma",
     "category": "ophthalmic"
@@ -178,12 +201,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Open Angle Glaucoma \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "POAG with structural-functional progression at target IOP (correct)",
+      "Normal tension glaucoma \u2014 nocturnal hypotension driving progression",
+      "Steroid-induced glaucoma",
+      "Pseudoexfoliation glaucoma",
+      "Secondary open-angle \u2014 pigment dispersion",
+      "Progressive NAION mimicking glaucoma"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +216,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Open Angle Glaucoma. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Progression despite IOP in target range \u2014 what is next: OCT RNFL trend, target IOP reassessment, or referral for SLT? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: POAG with progression despite target IOP. Key OD learning points: (1) Target IOP failure: structural change (OCT RNFL decline -7\u03bcm/year) + functional change (new arcuate scotoma) despite IOP at target. New target must be set lower. (2) SLT as next step: Laser Trabeculoplasty Consensus Trial shows SLT is as effective as medical therapy as initial or add-on treatment. (3) Nocturnal hypotension: this patient is on lisinopril and may have nocturnal BP dips \u2192 reduced ocular perfusion pressure during sleep \u2192 glaucoma progression independent of IOP. 24-hour BP Holter is warranted. (4) Rate of progression matters: -7\u03bcm/year is significant. Project lifespan remaining vision \u2014 at this rate, functional loss within 5-8 years in right eye. (5) The OD's documentation must include: MD trend, RNFL trend analysis graph (GPA), and explicit discussion of target IOP reassessment."
     }
   }
 };

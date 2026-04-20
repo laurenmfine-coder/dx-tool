@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Bilateral Dry Eyes and Dry Mouth and Joint Pain",
-      "icd": "Z00.00",
+      "problem": "Sj\u00f6gren syndrome \u2014 primary",
+      "icd": "M35.00",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Anti-SSA/Ro positive, rheumatology referral placed"
+    },
+    {
+      "problem": "Aqueous-deficient dry eye disease \u2014 severe",
+      "icd": "H04.123",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Schirmer test 3mm bilateral"
+    },
+    {
+      "problem": "Arthralgias \u2014 bilateral small joints",
+      "icd": "M25.50",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Symmetric, hands and wrists"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Cyclosporine 0.09% ophthalmic emulsion (Restasis or generic) BID",
+      "sig": "Instill 1 drop each eye twice daily",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active \u2014 new"
+    },
+    {
+      "name": "Artificial tears preservative-free q2-4h",
+      "sig": "Instill 1-2 drops each eye every 2-4 hours as needed",
+      "prescriber": "Dr. Chen",
+      "start": "2022",
+      "refills": 12,
       "status": "Active"
     }
   ],
@@ -97,7 +119,56 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Sj\u00f6gren Antibody Panel",
+      "results": [
+        {
+          "test": "Anti-SSA (Ro)",
+          "value": "Positive 240",
+          "unit": "units",
+          "ref": "<20",
+          "flag": "H"
+        },
+        {
+          "test": "Anti-SSB (La)",
+          "value": "Positive 68",
+          "unit": "units",
+          "ref": "<20",
+          "flag": "H"
+        },
+        {
+          "test": "ANA",
+          "value": "Positive 1:320",
+          "unit": "titer",
+          "ref": "<1:80",
+          "flag": "H"
+        },
+        {
+          "test": "RF",
+          "value": "Positive 48",
+          "unit": "IU/mL",
+          "ref": "<14",
+          "flag": "H"
+        },
+        {
+          "test": "CBC \u2014 WBC",
+          "value": "3.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "L"
+        },
+        {
+          "test": "ESR",
+          "value": "48",
+          "unit": "mm/hr",
+          "ref": "0-20",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +201,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dry-eye-sjogrens-od",
-    "diagnosis": "See diagnosis \u2014 Bilateral Dry Eyes and Dry Mouth and Joint Pain",
+    "diagnosis": "Sj\u00f6gren Syndrome \u2014 Primary, with Severe Aqueous-Deficient Dry Eye Disease",
     "acuity": 3,
     "presentation": "Bilateral Dry Eyes and Dry Mouth and Joint Pain",
     "category": "ophthalmic"
@@ -178,12 +249,13 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Bilateral Dry Eyes and Dry Mouth and Joint Pain \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Primary Sj\u00f6gren syndrome with aqueous-deficient DED (correct)",
+      "Rheumatoid arthritis \u2014 associated dry eye",
+      "Age-related aqueous deficiency",
+      "LASIK-related dry eye \u2014 neuropathic",
+      "Rosacea ocular \u2014 meibomian gland dysfunction",
+      "Lymphoma \u2014 rare orbital",
+      "Medication-induced dry eye"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +265,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Bilateral Dry Eyes and Dry Mouth and Joint Pain. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Sjogren syndrome until proven otherwise \u2014 what ocular finding pattern confirms this, and what systemic referral and antibody testing do you initiate? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: primary Sj\u00f6gren syndrome with severe aqueous-deficient dry eye. Key OD learning points: (1) The SICCA criteria for Sj\u00f6gren: anti-SSA/Ro positivity + Schirmer <5mm bilateral OR rose bengal staining pattern. This patient meets both. (2) Sj\u00f6gren is systemic \u2014 beyond dry eyes and dry mouth: arthralgias (present), lymphoma risk (5-44x elevated), peripheral neuropathy, interstitial nephritis. Rheumatology referral is non-optional. (3) Treatment ladder: preservative-free tears \u2192 cyclosporine (anti-inflammatory) \u2192 lifitegrast \u2192 punctal plugs \u2192 serum tears \u2192 scleral lenses. (4) Lymphoma surveillance: swollen salivary glands + lymphadenopathy + leukopenia = red flag. This patient's WBC 3.8 (leukopenia) warrants lymphoma monitoring. (5) Anti-SSA/Ro positivity in pregnancy \u2192 risk of neonatal lupus/congenital heart block \u2014 counsel on this if childbearing age."
     }
   }
 };

@@ -24,20 +24,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Ingested Sugar-Free Gum",
-      "icd": "Z00.00",
+      "problem": "Xylitol toxicosis \u2014 hypoglycemia phase",
+      "icd": "T65.891A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "30 minutes post-ingestion, glucose 34 mg/dL \u2014 at hypoglycemia threshold"
+    },
+    {
+      "problem": "Acute hepatic necrosis risk \u2014 48-72 hour window",
+      "icd": "K72.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "High-dose xylitol (>0.1g/kg) carries hepatotoxicity risk \u2014 monitor LFTs at 24 and 48h"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Dextrose 50% IV 0.5mL/kg bolus slowly",
+      "sig": "Dilute to 25% and give slowly IV over 5 minutes \u2014 repeat as needed for glucose <60",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dextrose 2.5% in LRS continuous infusion (maintain glucose >80)",
+      "sig": "IV infusion at maintenance rate with dextrose supplementation",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "SAMe (S-Adenosylmethionine) 20mg/kg PO daily",
+      "sig": "Give orally once daily \u2014 hepatoprotective agent",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -86,7 +109,42 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Xylitol Toxicity Panel",
+      "results": [
+        {
+          "test": "Blood glucose (point-of-care)",
+          "value": "34",
+          "unit": "mg/dL",
+          "ref": "70-138",
+          "flag": "L"
+        },
+        {
+          "test": "ALT",
+          "value": "62",
+          "unit": "U/L",
+          "ref": "10-125",
+          "flag": ""
+        },
+        {
+          "test": "ALP",
+          "value": "48",
+          "unit": "U/L",
+          "ref": "23-212",
+          "flag": ""
+        },
+        {
+          "test": "Bilirubin total",
+          "value": "0.3",
+          "unit": "mg/dL",
+          "ref": "0-0.4",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -119,7 +177,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-xylitol-toxicity",
-    "diagnosis": "See diagnosis \u2014 Ingested Sugar-Free Gum",
+    "diagnosis": "Xylitol Toxicosis \u2014 Dual-Mechanism: Hypoglycemia (Current) + Hepatotoxicity Risk (48-72 hours)",
     "acuity": 1,
     "presentation": "Ingested Sugar-Free Gum",
     "category": "toxicologic"
@@ -166,12 +224,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Dog \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Xylitol toxicosis \u2014 hypoglycemia + hepatotoxicity risk (correct)",
+      "Insulinoma \u2014 endogenous insulin excess",
+      "Other toxin \u2014 ethylene glycol",
+      "Severe hypoglycemia from starvation",
+      "Sepsis-induced hypoglycemia",
+      "Addisonian hypoglycemia"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +239,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Ingested Sugar-Free Gum. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) Xylitol causes two separate lethal syndromes in dogs at different doses. Describe both mechanisms, dose thresholds, and your management timeline. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: xylitol toxicosis, hypoglycemia phase, hepatotoxicity anticipated. Key veterinary learning points: (1) DUAL mechanism \u2014 this is the critical teaching point: LOW DOSE xylitol (<0.1g/kg): causes profound insulin release (xylitol stimulates pancreatic beta cells in dogs but NOT humans or cats) \u2192 severe hypoglycemia in 30-60 min. HIGH DOSE xylitol (>0.1g/kg): hepatocellular necrosis at 24-72 hours \u2014 mechanism unknown, may involve zinc chelation or direct mitochondrial toxicity. Determine dose. (2) Dose calculation: sugarless gum contains 0.2-0.3g xylitol per piece. Mints: 0.5g each. 'Sugar-free' baked goods: highly variable. This dog ate ~2/3 of a pack of 30-piece gum \u2248 6g = 0.2g/kg \u2192 BOTH mechanisms at risk. (3) Management: correct hypoglycemia first (IV dextrose), then continuous glucose monitoring every 4 hours for 12 hours. Initiate hepatoprotectants (SAMe, milk thistle) even if liver values normal now. (4) Monitor ALT at 24 and 48 hours \u2014 rise indicates hepatic injury phase. Severe cases require N-acetylcysteine, hospital observation. (5) Xylitol is NOT toxic to cats \u2014 but NEVER tell a cat owner their pet is safe with xylitol to avoid confusion."
     }
   }
 };

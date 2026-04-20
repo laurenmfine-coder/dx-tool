@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: New Warfarin Rx",
-      "icd": "Z00.00",
+      "problem": "Atrial fibrillation \u2014 on warfarin",
+      "icd": "I48.0",
+      "onset": "2020",
+      "status": "Active",
+      "notes": "INR therapeutic 2.0-3.0 target on warfarin 5mg daily"
+    },
+    {
+      "problem": "Ventricular arrhythmia \u2014 on amiodarone",
+      "icd": "I49.3",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Amiodarone 200mg daily \u2014 known CYP2C9 and CYP3A4 inhibitor"
+    },
+    {
+      "problem": "Community-acquired pneumonia \u2014 requiring clarithromycin",
+      "icd": "J18.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "New prescription today \u2014 strong CYP3A4 inhibitor"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Warfarin 5mg daily",
+      "sig": "Take 1 tablet by mouth daily \u2014 INR monitoring required",
+      "prescriber": "Dr. Cardiology",
+      "start": "03/2020",
+      "refills": 11,
       "status": "Active"
+    },
+    {
+      "name": "Amiodarone 200mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Cardiology",
+      "start": "08/2023",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Clarithromycin 500mg BID x7 days (NEW \u2014 DO NOT FILL YET)",
+      "sig": "Take 1 tablet twice daily for 7 days",
+      "prescriber": "Dr. Urgent Care",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HOLD \u2014 interaction review required"
     }
   ],
   "allergies": [
@@ -97,7 +127,28 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/15/2024",
+      "panel": "INR Monitoring",
+      "results": [
+        {
+          "test": "INR",
+          "value": "2.4",
+          "unit": "",
+          "ref": "2.0-3.0",
+          "flag": ""
+        },
+        {
+          "test": "PT",
+          "value": "28.2",
+          "unit": "sec",
+          "ref": "11-13.5",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +181,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pharmacy-warfarin-cyp",
-    "diagnosis": "See diagnosis \u2014 New Warfarin Rx",
+    "diagnosis": "Clinically Significant Drug-Drug Interaction: Warfarin + Amiodarone + Clarithromycin (Triple CYP2C9/3A4 Inhibition)",
     "acuity": 2,
     "presentation": "New Warfarin Rx",
     "category": "pharmacologic"
@@ -173,12 +224,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "New Warfarin Rx \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Dangerous CYP interaction: warfarin + amiodarone + clarithromycin (correct)",
+      "Safe to dispense with dose adjustment",
+      "Alternative antibiotic needed (azithromycin is safer)",
+      "INR monitoring only is sufficient",
+      "Discontinue amiodarone during antibiotic course",
+      "No interaction \u2014 proceed with prescription"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +239,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: New Warfarin Rx. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) Reason through the two CYP mechanisms and their combined effect on warfarin \u2014 what is your recommendation before you fill this? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: triple drug interaction \u2014 warfarin toxicity risk from amiodarone + clarithromycin. Key pharmacy learning points: (1) Mechanism breakdown: Amiodarone is a potent CYP2C9 AND CYP3A4 inhibitor \u2014 it increases warfarin (S-warfarin via 2C9) AUC by 30-50% alone. Clarithromycin is a strong CYP3A4 inhibitor affecting R-warfarin. Together: expected INR increase of 50-100% from baseline. Current INR 2.4 \u2192 expected rise to 4.0-5.0+ = bleeding risk. (2) Recommendation: DO NOT dispense clarithromycin. Call prescriber. Suggest azithromycin (not a CYP3A4 inhibitor) as alternative. If clarithromycin is essential, warfarin dose must be reduced 25-50% AND INR rechecked in 3-4 days. (3) Time course: amiodarone has an extremely long half-life (40-55 days) \u2014 its CYP inhibition persists even after stopping. This interaction risk is ongoing for weeks to months. (4) Clinical documentation: flag the interaction, call the prescriber, document the conversation. The pharmacist's intervention prevents a potential intracranial hemorrhage. (5) This is precisely the scenario where the pharmacist's clinical training prevents harm that no other provider would catch."
     }
   }
 };

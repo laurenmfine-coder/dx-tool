@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Post-Stroke Day 14",
-      "icd": "Z00.00",
+      "problem": "Left MCA ischemic stroke \u2014 acute",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Day 14, right hemiplegia, acute inpatient rehab"
+    },
+    {
+      "problem": "Right hemiplegia \u2014 upper and lower extremity",
+      "icd": "G81.90",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "UE 2/5, LE 3/5 strength, Brunnstrom Stage II UE"
+    },
+    {
+      "problem": "Dysphagia \u2014 moderate",
+      "icd": "R13.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "SLP evaluation completed, pureed diet + nectar-thick liquids"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 81mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 80mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -98,7 +128,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/05/2024",
+      "study": "MRI Brain DWI/FLAIR",
+      "indication": "Acute ischemic stroke evaluation",
+      "findings": "Diffusion restriction in left MCA territory \u2014 frontal lobe, anterior parietal lobe, and corona radiata. FLAIR: evolving ischemic change same distribution. No hemorrhagic transformation. No midline shift.",
+      "impression": "Left MCA territory ischemic infarct, age-acute. No hemorrhagic transformation."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +168,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "stroke-pt-goals",
-    "diagnosis": "See diagnosis \u2014 Post-Stroke Day 14",
+    "diagnosis": "Acute Ischemic Stroke Rehabilitation \u2014 Brunnstrom Stage II, Early Neuroplasticity Window",
     "acuity": 3,
     "presentation": "Post-Stroke Day 14",
     "category": "neurologic"
@@ -180,12 +218,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Post-Stroke Day 14 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Left MCA stroke rehabilitation \u2014 Brunnstrom Stage II (correct)",
+      "Hemorrhagic stroke rehabilitation",
+      "Subdural hematoma \u2014 chronic, subacute presentation",
+      "Todd's paralysis \u2014 post-ictal, expected to resolve",
+      "MS relapse with hemiplegia",
+      "Brain tumor with focal deficits"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +233,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Post-Stroke Day 14. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What Brunnstrom stage is this patient \u2014 and how does the neuroplasticity window change your intensity decisions this week? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: left MCA stroke, early rehabilitation phase, Brunnstrom Stage II. Key PT learning points: (1) Brunnstrom staging: Stage I=flaccidity; Stage II=spasticity developing, mass flexion synergy; Stage III=voluntary movement only in synergy; Stage IV=movement outside synergy; Stage V=individual joint movements; Stage VI=near normal. Stage II prognosis: moderate \u2014 most Stage II patients progress to at least Stage III-IV with intensive PT. (2) Neuroplasticity window: most recovery occurs first 3-6 months post-stroke. Week 2 is still within the critical early window \u2014 high-intensity, task-specific training NOW has disproportionate benefit. (3) CIMT (constraint-induced movement therapy): most evidence-based for upper extremity when any wrist/finger extension present. (4) Intensity matters: EXCITE trial showed 2 weeks of CIMT superior to standard PT for UE function. Daily practice, massed practice, shaping. (5) The key question from family 'will he walk again?' \u2014 prognosis at Stage II LE: 60-70% community ambulators at 6 months with intensive PT."
     }
   }
 };

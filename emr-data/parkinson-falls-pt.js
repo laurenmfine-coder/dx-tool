@@ -23,19 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Parkinson Disease",
-      "icd": "Z00.00",
-      "onset": "2024",
+      "problem": "Parkinson disease \u2014 Stage III Hoehn & Yahr",
+      "icd": "G20",
+      "onset": "2018",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Third fall this month, festination, freezing at doorways"
+    },
+    {
+      "problem": "Orthostatic hypotension",
+      "icd": "I95.1",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "BP drop >20 systolic on standing \u2014 contributes to falls"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
+      "name": "Carbidopa-levodopa 25-100mg TID",
+      "sig": "Take 1 tablet by mouth three times daily \u2014 30 min before meals",
+      "prescriber": "Dr. Neurology",
+      "start": "2018",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Pramipexole 0.5mg TID",
+      "sig": "Take 1 tablet by mouth three times daily",
+      "prescriber": "Dr. Neurology",
+      "start": "2020",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Midodrine 5mg TID",
+      "sig": "Take 1 tablet three times daily, not after 6pm",
+      "prescriber": "Dr. Neurology",
+      "start": "2023",
       "refills": 3,
       "status": "Active"
     }
@@ -130,7 +153,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "parkinson-falls-pt",
-    "diagnosis": "See diagnosis \u2014 Parkinson Disease",
+    "diagnosis": "Parkinson Disease with Postural Instability and Gait Disorder (PIGD) \u2014 High Fall Risk",
     "acuity": 3,
     "presentation": "Parkinson Disease",
     "category": "neurologic"
@@ -180,12 +203,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Parkinson Disease \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Parkinson disease with PIGD \u2014 fall risk (correct)",
+      "Progressive supranuclear palsy \u2014 early parkinsonism",
+      "Multiple system atrophy \u2014 autonomic dominant",
+      "Medication-induced parkinsonism",
+      "Normal pressure hydrocephalus \u2014 gait disorder",
+      "Vascular parkinsonism \u2014 step-wise pattern"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +218,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Parkinson Disease. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What balance assessment scores fall risk \u2014 and which evidence-based PT intervention has the strongest RCT support for PD motor function? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: PD with PIGD, Hoehn & Yahr Stage III, high fall risk. Key PT learning points: (1) Evidence-based PT for PD: LSVT BIG (amplitude-focused motor training) has strongest RCT support for motor function. Tango dancing also has strong evidence. Standard PT is less effective than cueing strategies. (2) Balance assessment: Berg Balance Scale <45 = high fall risk; MiniBESTest is more sensitive for PD. (3) Freezing of gait (FOG) strategies: auditory cues (metronome), visual cues (laser pointer, floor lines), attentional strategies, counting steps, turning technique. (4) Orthostatic hypotension: PT exercises supine/sitting first, check BP standing, compression garments, avoid hot environments, tilt-table training if severe. (5) Dual-task training is essential in PD \u2014 the loss of automaticity means patients must consciously control gait, but cannot simultaneously talk. This is why freezing occurs at doorways (cognitive demand increases)."
     }
   }
 };

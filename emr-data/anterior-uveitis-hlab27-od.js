@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Recurrent Anterior Uveitis",
-      "icd": "Z00.00",
+      "problem": "Recurrent anterior uveitis, bilateral",
+      "icd": "H20.012",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Third episode in 3 years, HLA-B27 positive"
+    },
+    {
+      "problem": "Ankylosing spondylitis \u2014 probable",
+      "icd": "M45.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Rheumatology referral placed today"
+    },
+    {
+      "problem": "Morning stiffness \u2014 back pain",
+      "icd": "M54.5",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Worse in morning, improves with activity"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Prednisolone acetate 1% drops q1h right eye",
+      "sig": "Instill 1 drop right eye every 1 hour while awake",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
+    },
+    {
+      "name": "Homatropine 2% drops BID right eye",
+      "sig": "Instill 1 drop right eye twice daily",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Ibuprofen 400mg TID PRN",
+      "sig": "Take for back pain as needed",
+      "prescriber": "Self",
+      "start": "2022",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,7 +127,56 @@ window.EMR_DATA = {
       "plan": "Referral to optometry. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Uveitis Workup",
+      "results": [
+        {
+          "test": "HLA-B27",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "ANA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "ANCA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "ACE",
+          "value": "18",
+          "unit": "U/L",
+          "ref": "8-52",
+          "flag": ""
+        },
+        {
+          "test": "ESR",
+          "value": "42",
+          "unit": "mm/hr",
+          "ref": "0-20",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "1.8",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +209,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "anterior-uveitis-hlab27-od",
-    "diagnosis": "See diagnosis \u2014 Recurrent Anterior Uveitis",
+    "diagnosis": "Recurrent Anterior Uveitis, HLA-B27 Positive \u2014 Associated with Ankylosing Spondylitis",
     "acuity": 3,
     "presentation": "Recurrent Anterior Uveitis",
     "category": "ophthalmic"
@@ -178,12 +257,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "Recurrent Anterior Uveitis \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "HLA-B27 associated anterior uveitis \u2014 ankylosing spondylitis (correct)",
+      "Idiopathic anterior uveitis",
+      "Sarcoid uveitis",
+      "Reactive arthritis (Reiter syndrome)",
+      "IBD-associated uveitis",
+      "Herpes simplex anterior uveitis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +272,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Recurrent Anterior Uveitis. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Recurrent anterior uveitis with morning back stiffness. What HLA association do you test \u2014 and what systemic disease should you be screening this patient for? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: recurrent HLA-B27 anterior uveitis associated with ankylosing spondylitis. Key OD learning points: (1) HLA-B27 uveitis classic: unilateral, acute onset, fibrinous/intense inflammation, recurrent (alternating eyes). (2) HLA-B27 associations to screen: ankylosing spondylitis (back pain + SI joint tenderness + morning stiffness > 3 months = refer rheum for XR sacroiliac joints), reactive arthritis, psoriatic arthritis, IBD. (3) Treatment: aggressive topical steroids (prednisolone q1h) + cycloplegic. Chronic cases may need systemic immunomodulatory therapy through rheumatology. (4) The OD's systemic referral today \u2014 rheumatology \u2014 is the most important management step. Untreated AS leads to spinal ankylosis ('bamboo spine'). (5) Complications of chronic uveitis: posterior synechiae, cataract, secondary glaucoma, CME."
     }
   }
 };

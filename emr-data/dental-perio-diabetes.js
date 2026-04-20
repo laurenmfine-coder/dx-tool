@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Generalized 5-7mm Pocketing",
-      "icd": "Z00.00",
+      "problem": "Generalized Stage III Grade C periodontitis",
+      "icd": "K05.311",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "5-7mm pocketing generalized, bone loss 30-50%"
+    },
+    {
+      "problem": "Type 2 diabetes mellitus \u2014 poorly controlled",
+      "icd": "E11.9",
+      "onset": "2018",
+      "status": "Active",
+      "notes": "A1c 10.2% \u2014 periodontal inflammation drives insulin resistance"
+    },
+    {
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "On lisinopril, BP 148/92 today"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Metformin 500mg BID",
+      "sig": "Take 1 tablet by mouth twice daily",
+      "prescriber": "Dr. Castillo",
+      "start": "2019",
+      "refills": 6,
+      "status": "Active"
+    },
+    {
+      "name": "Glipizide 5mg daily",
+      "sig": "Take 1 tablet daily",
+      "prescriber": "Dr. Castillo",
+      "start": "2021",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take 1 tablet daily",
+      "prescriber": "Dr. Castillo",
+      "start": "2019",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,8 +127,44 @@ window.EMR_DATA = {
       "plan": "Referral to dentistry. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "10/20/2024",
+      "panel": "Diabetes Control",
+      "results": [
+        {
+          "test": "HbA1c",
+          "value": "10.2",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "Fasting glucose",
+          "value": "248",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "LDL",
+          "value": "142",
+          "unit": "mg/dL",
+          "ref": "<100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Full Mouth Periapical and Bitewing Radiographs",
+      "indication": "Periodontal evaluation, generalized pocketing",
+      "findings": "Generalized horizontal bone loss averaging 30-35% at posterior teeth. Vertical bone loss 4-6mm at molars #2, #3, #14, #15, #18, #19. Furcation involvement Class II at upper molars bilaterally. Crestal bone loss at anterior teeth 2-3mm. No periapical pathology.",
+      "impression": "Generalized moderate-severe periodontitis with furcation involvement. Correlates with clinical probing depths 5-7mm. Treatment planning: full mouth scaling and root planing, periodontal reassessment at 6-8 weeks."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +196,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-perio-diabetes",
-    "diagnosis": "See diagnosis \u2014 Generalized 5-7mm Pocketing",
+    "diagnosis": "Generalized Stage III Grade C Periodontitis \u2014 Bidirectional Relationship with Uncontrolled T2DM",
     "acuity": 3,
     "presentation": "Generalized 5-7mm Pocketing",
     "category": "other"
@@ -176,12 +242,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Generalized 5-7mm Pocketing \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Stage III Grade C generalized periodontitis \u2014 diabetes bidirectional (correct)",
+      "Stage II periodontitis \u2014 insufficient severity for this bone loss",
+      "Localized aggressive periodontitis",
+      "ANUG/ANUP \u2014 necrotizing",
+      "Gingival enlargement from medications (lisinopril/calcium channel blockers)",
+      "Leukemia \u2014 gingival infiltrate"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +257,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Generalized 5-7mm Pocketing. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) Explain the bidirectional relationship to the patient \u2014 and how does his glycemic control change your treatment plan? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: Stage III Grade C periodontitis with uncontrolled T2DM \u2014 bidirectional relationship. Key dentistry learning points: (1) Bidirectional relationship: periodontal inflammation worsens insulin resistance (pro-inflammatory cytokines IL-6, TNF-\u03b1 impair insulin signaling). Treating periodontitis reduces A1c by approximately 0.4% \u2014 similar to adding a second oral antidiabetic agent. (2) Staging (AAP 2017): Stage I-IV based on severity (probing depths, bone loss, tooth loss); Grading A/B/C based on rate of progression and risk factors. Grade C = rapid progression, evidence of glycemic risk factor. (3) Treatment modification for uncontrolled DM: prophylactic antibiotics NOT routinely needed, but infection risk is higher. Healing is impaired \u2014 the patient should be counseled that outcomes are better if A1c is improved. (4) Communication with endocrinologist: 'Your patient has Stage III periodontitis which is contributing to their difficulty achieving glycemic control. Following periodontal treatment, we expect a reduction in A1c.' (5) Monitoring schedule: diabetic patients require quarterly periodontal maintenance (3-month intervals) rather than standard 6-month recall."
     }
   }
 };

@@ -24,21 +24,60 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Unvaccinated Puppy",
-      "icd": "Z00.00",
+      "problem": "Parvoviral enteritis \u2014 severe",
+      "icd": "B97.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Unvaccinated 12-week-old mixed breed \u2014 bloody diarrhea, vomiting, septic shock"
+    },
+    {
+      "problem": "Septic shock \u2014 intestinal bacterial translocation",
+      "icd": "A41.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "HR 168, BP 78/52, temperature 97.8\u00b0F (hypothermic) \u2014 negative prognostic indicator"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Lactated Ringer's 90mL/kg IV over 1 hour (shock dose)",
+      "sig": "IV bolus \u2014 reassess q15 minutes for BP and perfusion",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Ampicillin 22mg/kg IV q8h",
+      "sig": "IV injection every 8 hours \u2014 gram-positive and anaerobic coverage",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Enrofloxacin 5mg/kg IV q24h",
+      "sig": "IV injection once daily \u2014 gram-negative coverage",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Maropitant (Cerenia) 1mg/kg SQ q24h",
+      "sig": "Subcutaneous injection once daily \u2014 antiemetic",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Oseltamivir 2mg/kg PO BID \u2014 parvovirus adjunct (controversial, used in some protocols)",
+      "sig": "Give orally twice daily \u2014 some evidence for reducing viral shedding",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 off-label"
     }
   ],
   "allergies": [
@@ -86,7 +125,63 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Parvo Workup",
+      "results": [
+        {
+          "test": "SNAP Parvovirus Antigen Test",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "0.8",
+          "unit": "K/\u03bcL",
+          "ref": "6-17",
+          "flag": "L"
+        },
+        {
+          "test": "Neutrophils (absolute)",
+          "value": "0.2",
+          "unit": "K/\u03bcL",
+          "ref": "3-11.5",
+          "flag": "L"
+        },
+        {
+          "test": "PCV",
+          "value": "28",
+          "unit": "%",
+          "ref": "37-55",
+          "flag": "L"
+        },
+        {
+          "test": "Total protein",
+          "value": "4.1",
+          "unit": "g/dL",
+          "ref": "5.5-7.5",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "44",
+          "unit": "mg/dL",
+          "ref": "70-138",
+          "flag": "L"
+        },
+        {
+          "test": "Albumin",
+          "value": "1.8",
+          "unit": "g/dL",
+          "ref": "2.5-3.5",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -119,7 +214,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-parvovirus",
-    "diagnosis": "See diagnosis \u2014 Unvaccinated Puppy",
+    "diagnosis": "Canine Parvoviral Enteritis \u2014 Septic Shock, Unvaccinated Puppy",
     "acuity": 1,
     "presentation": "Unvaccinated Puppy",
     "category": "infectious"
@@ -166,12 +261,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Puppy \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Canine parvoviral enteritis (correct)",
+      "Hemorrhagic gastroenteritis \u2014 PCV >60% (not as low as this)",
+      "Bacterial enteritis \u2014 Salmonella, Campylobacter",
+      "Intestinal intussusception \u2014 parvovirus complication",
+      "Canine distemper \u2014 multi-systemic",
+      "Toxin ingestion \u2014 garbage toxicosis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +276,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Unvaccinated Puppy. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) Parvoviral enteritis: what is the pathophysiology from intestinal crypt destruction to septic shock \u2014 and what is your barrier nursing protocol? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: severe parvoviral enteritis with septic shock. Key veterinary learning points: (1) Pathophysiology: CPV-2 attacks rapidly dividing cells \u2014 intestinal crypt epithelium (GI barrier destruction \u2192 bacterial translocation \u2192 septic shock) AND bone marrow (leukopenia, especially neutropenia). The leukopenia + bloody diarrhea + unvaccinated puppy = parvo until proven otherwise. (2) Positive prognostic indicators: persistent fever (not hypothermia), early WBC recovery (monocytosis precedes neutrophilia), glucose >80. Negative: hypothermia, WBC <0.8K, severe hypoalbuminemia, septic shock. (3) Barrier nursing is essential: parvo sheds massively in feces, extremely environmentally stable (months in soil). Strict isolation, contact precautions, dedicated PPE, 1:30 bleach disinfection. (4) SNAP test sensitivity: ~81% \u2014 false negatives possible early in disease or post-vaccination. Clinical diagnosis takes precedence. (5) Prevention is everything: DAP vaccine series 6-8 weeks \u2192 12 weeks \u2192 16 weeks provides excellent protection. Maternal antibody interference is the reason for the 3-dose series."
     }
   }
 };

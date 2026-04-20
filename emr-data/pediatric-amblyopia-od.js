@@ -23,21 +23,28 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: BCVA 20/60 Right Eye",
-      "icd": "Z00.00",
+      "problem": "Anisometropic amblyopia, right eye",
+      "icd": "H53.001",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "BCVA 20/60 right eye, 20/20 left eye \u2014 significant anisometropia"
+    },
+    {
+      "problem": "Hyperopia, high right eye",
+      "icd": "H52.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "+4.75 DS OD vs +1.00 DS OS"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Spectacle correction \u2014 full cycloplegic refraction",
+      "sig": "Wear glasses full-time starting immediately",
+      "prescriber": "Dr. Chen",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 new prescription"
     }
   ],
   "allergies": [
@@ -130,7 +137,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pediatric-amblyopia-od",
-    "diagnosis": "See diagnosis \u2014 BCVA 20/60 Right Eye",
+    "diagnosis": "Anisometropic Amblyopia, Right Eye \u2014 Moderate Severity",
     "acuity": 3,
     "presentation": "BCVA 20/60 Right Eye",
     "category": "ophthalmic"
@@ -178,12 +185,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "6yo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Anisometropic amblyopia from high hyperopia right eye (correct)",
+      "Strabismic amblyopia \u2014 right esotropia",
+      "Deprivation amblyopia \u2014 congenital cataract",
+      "Organic vision loss \u2014 optic nerve hypoplasia",
+      "Normal visual variation \u2014 bilateral",
+      "Refractive amblyopia \u2014 bilateral high refractive error"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +200,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: BCVA 20/60 Right Eye. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) What is the critical period for amblyopia treatment \u2014 and what is the evidence-based sequence of spectacle correction versus patching? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: anisometropic amblyopia OD from uncorrected high hyperopia. Key OD learning points: (1) Critical period for amblyopia treatment: birth to ~7 years (sensitive period), with diminishing plasticity. Age 6: good prognosis with treatment. (2) Evidence-based sequence: (a) Full spectacle correction FIRST \u2014 wait 12-18 weeks; many children gain 1-3 lines with glasses alone ('spectacle correction trial'). (b) Add patching/atropine penalization ONLY if glasses are insufficient. (3) Patching prescription: PEDIG data supports 2 hours/day near-vision patching as effective as 6 hours for moderate amblyopia. (4) Anisometropia threshold for amblyopia risk: \u22651.00 D myopia, \u22651.50 D hyperopia, \u22651.00 D astigmatism. This child has 3.75 D difference. (5) The parent's key question: 'Will my child have normal vision?' Answer: excellent prognosis if treated promptly \u2014 compliance with glasses and patching is the rate-limiting factor."
     }
   }
 };

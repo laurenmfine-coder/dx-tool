@@ -23,21 +23,28 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Central Scotoma and Metamorphopsia",
-      "icd": "Z00.00",
+      "problem": "Full-thickness macular hole, right eye \u2014 Stage 3",
+      "icd": "H35.341",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Vitreoretinal surgery referral urgent \u2014 within 2-4 weeks for best prognosis"
+    },
+    {
+      "problem": "Age-related macular degeneration \u2014 fellow eye risk",
+      "icd": "H35.30",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "No AMD changes OS currently, but fellow eye risk present"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "No current ocular medications",
+      "sig": "N/A",
+      "prescriber": "N/A",
+      "start": "N/A",
+      "refills": 0,
+      "status": "N/A"
     }
   ],
   "allergies": [
@@ -98,7 +105,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "OCT Macula \u2014 Bilateral",
+      "indication": "Central scotoma and metamorphopsia, right eye",
+      "findings": "Right eye: Full-thickness macular hole at foveal center, 312 \u03bcm minimum hole diameter, 481 \u03bcm base diameter. Intraretinal cysts at hole margins. No operculum visible (Stage 3). Subretinal fluid surrounding hole margins. Left eye: Normal foveal contour, no hole or lamellar changes.",
+      "impression": "Stage 3 full-thickness macular hole right eye (minimum diameter 312 \u03bcm, no Weiss ring visible confirming complete PVD has not occurred). Recommend vitreoretinal surgery consultation within 2-4 weeks. Prognosis: closure rate 90-95% with vitrectomy, ILM peeling, and gas tamponade."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +145,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "macular-hole-staging-od",
-    "diagnosis": "See diagnosis \u2014 Central Scotoma and Metamorphopsia",
+    "diagnosis": "Full-Thickness Macular Hole, Right Eye \u2014 Stage 3 (OCT Classification)",
     "acuity": 2,
     "presentation": "Central Scotoma and Metamorphopsia",
     "category": "ophthalmic"
@@ -178,12 +193,12 @@ window.EMR_DATA = {
       "Visual Fields": "Assessed by confrontation and automated perimetry"
     },
     "ddxTargets": [
-      "67yo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Stage 3 full-thickness macular hole (correct)",
+      "Stage 2 macular hole \u2014 smaller, without cysts",
+      "Lamellar macular hole \u2014 partial thickness, better prognosis",
+      "Macular pseudohole \u2014 epiretinal membrane, not a true hole",
+      "Age-related macular degeneration with geographic atrophy",
+      "Vitreomacular traction syndrome"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -193,7 +208,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a optometry case with chief complaint: Central Scotoma and Metamorphopsia. What are the most important questions for a optometry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a optometry perspective, what is the most critical finding that narrows this differential? What is the optometry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the optometry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for optometry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) optometry assessment revealed the key discriminating features. (3) Stage 3 full-thickness macular hole \u2014 what is the natural history, surgical success rate to counsel, and fellow eye risk? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: Stage 3 full-thickness macular hole, right eye. Key OD learning points: (1) OCT staging: Stage 1 = vitreomacular traction; Stage 2 = small FTMH <250\u03bcm; Stage 3 = FTMH >250\u03bcm without posterior vitreous detachment; Stage 4 = FTMH with complete PVD (Weiss ring visible). (2) Natural history: Stage 3 macular holes rarely close spontaneously. Surgery is indicated. (3) Surgical success rate: 90-95% anatomic closure with PPV + ILM peeling + gas tamponade (C3F8 or SF6). Visual recovery: most patients gain 2+ lines; best results with smaller holes and shorter symptom duration. (4) Fellow eye risk: 10-15% lifetime risk of macular hole in the left eye. Educate on Amsler grid self-monitoring. (5) Post-op counseling: patient must maintain face-down position for 5-7 days \u2014 critical for gas bubble to tamponade the hole. Plan this before referring."
     }
   }
 };

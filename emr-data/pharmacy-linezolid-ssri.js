@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Physician Asks: Linezolid Safe with Sertraline?",
-      "icd": "Z00.00",
+      "problem": "VRE bacteremia \u2014 requiring linezolid",
+      "icd": "A49.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "MRSA coverage insufficient \u2014 VRE isolated from blood culture"
+    },
+    {
+      "problem": "Major depressive disorder \u2014 on sertraline",
+      "icd": "F32.1",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Sertraline 150mg daily \u2014 SSRI, serotonergic agent"
+    },
+    {
+      "problem": "Serotonin syndrome risk \u2014 if combination given",
+      "icd": "T43.221A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Linezolid is a reversible MAO inhibitor \u2014 combination is potentially fatal"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Sertraline 150mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Psychiatry",
+      "start": "2021",
+      "refills": 5,
       "status": "Active"
+    },
+    {
+      "name": "Linezolid 600mg IV BID (PROPOSED \u2014 HOLD)",
+      "sig": "IV infusion every 12 hours \u2014 HOLD pending pharmacy review",
+      "prescriber": "ID team",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HOLD \u2014 serotonin syndrome risk"
     }
   ],
   "allergies": [
@@ -97,7 +119,35 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Blood Culture \u2014 VRE",
+      "results": [
+        {
+          "test": "Blood culture x2",
+          "value": "Enterococcus faecium \u2014 Vancomycin-resistant (VRE)",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
+        },
+        {
+          "test": "Linezolid susceptibility",
+          "value": "Susceptible (MIC 1)",
+          "unit": "",
+          "ref": "\u22642",
+          "flag": ""
+        },
+        {
+          "test": "Daptomycin susceptibility",
+          "value": "Susceptible (MIC 1)",
+          "unit": "",
+          "ref": "\u22644",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +180,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pharmacy-linezolid-ssri",
-    "diagnosis": "See diagnosis \u2014 Physician Asks: Linezolid Safe with Sertraline?",
+    "diagnosis": "Contraindicated Drug Combination: Linezolid + Sertraline \u2014 Serotonin Syndrome Risk",
     "acuity": 2,
     "presentation": "Physician Asks: Linezolid Safe with Sertraline?",
     "category": "pharmacologic"
@@ -173,12 +223,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Physician Asks: Linezolid Safe with Sertraline? \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Linezolid contraindicated with sertraline \u2014 use daptomycin instead (correct)",
+      "Linezolid safe with careful monitoring",
+      "Sertraline must be discontinued and replaced",
+      "Wait 14 days (MAOi washout) before starting linezolid",
+      "Reduce sertraline dose to allow linezolid",
+      "Linezolid + sertraline with serotonin syndrome rescue plan"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +238,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: Physician Asks: Linezolid Safe with Sertraline?. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) Reason through why this combination is potentially fatal \u2014 and what alternatives you suggest for VRE coverage. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: contraindicated combination \u2014 linezolid + sertraline = high serotonin syndrome risk. Key pharmacy learning points: (1) Mechanism: linezolid is a weak, reversible MAO-A inhibitor. SSRIs increase synaptic serotonin. MAO-A + SSRI = dramatic serotonin accumulation \u2192 Hunter criteria for serotonin syndrome: agitation, myoclonus, hyperreflexia, clonus, diaphoresis, tremor \u2192 can progress to hyperthermia, rhabdomyolysis, DIC, death. (2) Recommendation: use DAPTOMYCIN instead of linezolid for VRE bacteremia. Daptomycin 6mg/kg IV daily \u2014 no serotonergic interaction. Check susceptibility (already susceptible in this case). (3) If linezolid is truly the only option: discontinue sertraline and wait 2 weeks (5 half-lives). But 2-week washout is not practical in bacteremia. Daptomycin is the correct answer. (4) Other VRE options: tigecycline, oritavancin, telavancin \u2014 but daptomycin is first-line for bacteremia. (5) The pharmacist calling the ID team with this recommendation is preventing a potentially fatal drug interaction."
     }
   }
 };
