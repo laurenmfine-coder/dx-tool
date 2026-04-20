@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Margaret Chen",
-      "icd": "Z00.00",
+      "problem": "Post-ORIF hip \u2014 VTE prophylaxis management",
+      "icd": "S72.001A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Margaret Chen, 78F. Enoxaparin for VTE prophylaxis \u2014 dose needs adjustment for renal function."
+    },
+    {
+      "problem": "CKD Stage 3 \u2014 enoxaparin dose adjustment required",
+      "icd": "N18.3",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "CrCl 42 mL/min \u2014 standard enoxaparin 40mg may accumulate. Consider dose reduction or fondaparinux alternative."
+    },
+    {
+      "problem": "NSAID contraindication \u2014 renal function + post-op",
+      "icd": "N18.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Ketorolac ordered by orthopedics \u2014 pharmacy intervention needed: CKD + elderly + post-op = contraindicated"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Enoxaparin 30mg SQ daily (reduced dose for CrCl 42)",
+      "sig": "Reduced dose \u2014 standard 40mg has accumulation risk at CrCl <30, cautious reduction at CrCl 30-50",
+      "prescriber": "Pharmacy recommendation \u2014 orthopedics approved",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Acetaminophen 650mg q6h scheduled \u2014 NSAID alternative",
+      "sig": "Scheduled acetaminophen as first-line analgesic \u2014 no renal toxicity",
+      "prescriber": "Pharmacy/Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Ketorolac \u2014 PHARMACY INTERVENTION \u2014 DO NOT DISPENSE",
+      "sig": "Contraindicated: elderly, CKD, post-operative setting. Pharmacy intervention placed.",
+      "prescriber": "N/A \u2014 intervention",
+      "start": "N/A",
+      "refills": 0,
+      "status": "HELD \u2014 pharmacy intervention"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Day 3 Post-Op Labs",
+      "results": [
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "CrCl (Cockcroft-Gault)",
+          "value": "42",
+          "unit": "mL/min",
+          "ref": "",
+          "flag": "L"
+        },
+        {
+          "test": "Potassium",
+          "value": "4.6",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "9.8",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "Platelet count",
+          "value": "188",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hip-fracture-pharmacy",
-    "diagnosis": "See diagnosis \u2014 Margaret Chen",
+    "diagnosis": "Post-ORIF Hip Day 3 \u2014 Pharmacy: VTE Prophylaxis Duration, Renal Dose Adjustment, NSAID Contraindication",
     "acuity": 3,
     "presentation": "Margaret Chen",
     "category": "orthopedic"
@@ -173,12 +245,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Margaret Chen \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Enoxaparin dose reduction + NSAID contraindication identified (correct)",
+      "Standard enoxaparin 40mg without renal adjustment \u2014 risk of accumulation at CrCl 42",
+      "Ketorolac safe in this patient \u2014 INCORRECT: CKD + elderly + post-op = triple contraindication",
+      "Switch to unfractionated heparin \u2014 option but requires monitoring, not preferred first choice",
+      "Stop anticoagulation \u2014 VTE risk post-hip surgery is too high to stop",
+      "Aspirin alone for VTE prophylaxis \u2014 insufficient for high-risk orthopedic patient"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +260,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: Margaret Chen. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) The surgical team asks you to reconcile VTE prophylaxis. Margaret has AFib requiring therapeutic anticoagulation AND needs post-surgical VTE prophylaxis. Her CrCl is 38 mL/min. She is also on meloxicam, oxycodone, and acetaminophen. Build the safest analgesic and anticoagulation regimen \u2014 and identify the two drug interactions requiring immediate intervention. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-op pharmacy optimization \u2014 renal dosing and NSAID intervention. Key pharmacy learning: (1) Enoxaparin renal dosing: standard prophylaxis 40mg SQ daily. At CrCl <30 mL/min: reduce to 20mg daily (anti-Xa monitoring). At CrCl 30-50: package insert says 'use with caution' \u2014 clinical practice varies. For a 78yo with CrCl 42, reducing to 30mg daily or monitoring anti-Xa levels is reasonable. Enoxaparin accumulation \u2192 bleeding risk including spinal hematoma if neuraxial block used. (2) NSAID contraindication \u2014 triple threat: (a) CKD (prostaglandin-dependent renal perfusion impaired), (b) elderly (reduced GFR reserve, risk of AKI), (c) post-operative (prostaglandin inhibition impairs platelet function + increases GI bleeding risk + potential anastomotic risk). NSAIDs are contraindicated. Ketorolac in this patient = potential AKI. (3) Pharmacy intervention process: flag the order, call the orthopedic team, suggest acetaminophen scheduled 650mg q6h as equivalent analgesia. Document the intervention. (4) VTE duration: after hip fracture ORIF, evidence supports 28-35 days total anticoagulation (ACCP guidelines). Discharge on enoxaparin or transition to rivaroxaban (better oral bioavailability, once daily). Discuss with team before discharge. (5) Rivaroxaban as alternative: 10mg once daily x28-35 days \u2014 proven in RECORD1 trial for hip arthroplasty. No dose reduction needed until CrCl <30. Good option for outpatient VTE prophylaxis in this patient."
     }
   }
 };

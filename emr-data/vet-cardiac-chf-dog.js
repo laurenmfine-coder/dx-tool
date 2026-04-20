@@ -24,21 +24,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Coughing at Night",
-      "icd": "Z00.00",
+      "problem": "Myxomatous mitral valve disease \u2014 Stage B2",
+      "icd": "I34.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Cavalier King Charles Spaniel. Grade IV/VI MR murmur, cardiac enlargement on radiograph. Pimobendan now indicated (EPIC trial)."
+    },
+    {
+      "problem": "Left atrial enlargement \u2014 LA:Ao ratio 1.7",
+      "icd": "I51.7",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "LA:Ao >1.6 is ACVIM B2 criterion \u2014 marks risk of decompensation"
+    },
+    {
+      "problem": "Vertebral heart score \u2014 VHS 10.8",
+      "icd": "I51.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "VHS >10.5 in Cavalier = cardiac enlargement criterion for B2 staging"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
+      "name": "Pimobendan 0.25mg/kg PO BID (2.5mg BID for 10kg dog)",
+      "sig": "Give orally twice daily, 1 hour before feeding \u2014 positive inotrope and vasodilator. EPIC trial proven.",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "11/2024",
       "refills": 3,
-      "status": "Active"
+      "status": "Active \u2014 new"
+    },
+    {
+      "name": "No furosemide yet \u2014 Stage B2, not decompensated",
+      "sig": "Furosemide only when Stage C (clinical CHF signs present)",
+      "prescriber": "Dr. Rodriguez DVM",
+      "start": "N/A",
+      "refills": 0,
+      "status": "Not indicated"
     }
   ],
   "allergies": [
@@ -86,8 +108,51 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Cardiac Workup \u2014 Canine",
+      "results": [
+        {
+          "test": "ProBNP (canine)",
+          "value": "1,240",
+          "unit": "pmol/L",
+          "ref": "<900",
+          "flag": "H"
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.14",
+          "unit": "ng/mL",
+          "ref": "<0.20",
+          "flag": ""
+        },
+        {
+          "test": "Electrolytes \u2014 K+",
+          "value": "4.2",
+          "unit": "mEq/L",
+          "ref": "3.5-5.5",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "0.8",
+          "unit": "mg/dL",
+          "ref": "0.5-1.5",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Thoracic Radiographs (3-view) + Echocardiogram",
+      "indication": "Grade IV/VI murmur, coughing at night",
+      "findings": "Radiographs: VHS 10.8 (>10.5 abnormal in Cavalier). Mild left atrial enlargement. Pulmonary vasculature within normal limits \u2014 no pulmonary edema. Echo: mitral valve prolapse with significant MR. LA:Ao ratio 1.7 (>1.6 = enlarged). Normal LV systolic function, FS 42%. Mild LA dilation.",
+      "impression": "MMVD Stage B2 \u2014 ACVIM criteria met (LA:Ao >1.6 and/or VHS >10.5). Pimobendan indicated per EPIC trial. No evidence of decompensated CHF. Recheck in 6 months or sooner if symptoms develop."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -119,7 +184,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-cardiac-chf-dog",
-    "diagnosis": "See diagnosis \u2014 Coughing at Night",
+    "diagnosis": "Myxomatous Mitral Valve Disease Stage B2 \u2014 ACVIM Consensus, Pimobendan Indicated",
     "acuity": 2,
     "presentation": "Coughing at Night",
     "category": "cardiovascular"
@@ -166,12 +231,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Dog \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "MMVD Stage B2 \u2014 pimobendan indicated (correct per EPIC trial)",
+      "MMVD Stage B1 \u2014 no enlargement criteria, pimobendan not yet indicated",
+      "MMVD Stage C \u2014 decompensated (no pulmonary edema, not yet)",
+      "Dilated cardiomyopathy \u2014 Cavalier CKCS has MMVD, not DCM",
+      "Pericardial effusion \u2014 different echo findings",
+      "Arrhythmia causing cough \u2014 cough is nighttime from left atrial pressure, not arrhythmia"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +246,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Coughing at Night. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) MMVD staging: at what Buchanan stage do you start pimobendan \u2014 and how does the canine RAAS response to CHF differ from humans? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: MMVD Stage B2, pimobendan indicated. Key vet learning: (1) ACVIM MMVD staging: A = at-risk breed, no murmur. B1 = murmur, no cardiac enlargement. B2 = murmur + enlargement (LA:Ao >1.6 or VHS >10.5 in Cavalier). C = decompensated CHF (pulmonary edema). D = refractory CHF. (2) EPIC trial (2016): pimobendan in Stage B2 Cavaliers delayed onset of CHF by 15 months compared to placebo. This is the landmark trial that changed practice \u2014 pimobendan is now standard of care in B2, NOT just decompensated disease. (3) Why pimobendan before CHF: positive inotrope (improves cardiac contractility via PDE3 inhibition + Ca++ sensitization) and vasodilator (reduces preload/afterload). In B2, improves cardiac remodeling and delays decompensation. (4) How to explain to owner: 'Your dog has heart disease that is enlarging the heart but not yet causing heart failure symptoms. This medication, proven in research trials, slows the progression and delays the point where the heart starts to fail.' (5) Monitoring: recheck every 6 months in B2. Transition to Stage C criteria: cough at rest, exercise intolerance, pulmonary edema on x-ray \u2192 add furosemide + enalapril + continue pimobendan."
     }
   }
 };

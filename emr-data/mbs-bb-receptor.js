@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Beta-Blocker Overdose",
-      "icd": "Z00.00",
+      "problem": "Beta-blocker overdose \u2014 atenolol ingestion",
+      "icd": "T44.7X1A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "HR 32, BP 78/48, glucose 42 \u2014 competitive beta-adrenergic blockade"
+    },
+    {
+      "problem": "Cardiogenic shock \u2014 loss of beta-1 inotropic support",
+      "icd": "R57.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Beta-1 blockade \u2192 reduced HR, reduced contractility \u2192 cardiogenic shock"
+    },
+    {
+      "problem": "Hypoglycemia \u2014 glucagon secretion beta-2-mediated",
+      "icd": "E16.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Beta-2 blockade inhibits glucagon release and glycogenolysis \u2192 hypoglycemia"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "High-dose insulin euglycemia therapy (HIET) \u2014 1 unit/kg bolus then 0.5 unit/kg/hr CRI",
+      "sig": "Insulin at suprapharmacologic doses increases cardiac glucose uptake \u2014 high-dose insulin improves cardiac output in beta-blocker OD",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 HIET protocol"
+    },
+    {
+      "name": "D50W 50mL IV with insulin + dextrose infusion to maintain glucose 100-200",
+      "sig": "Prevent hypoglycemia from HIET \u2014 pair insulin with dextrose infusion",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Glucagon 5mg IV (historical \u2014 limited evidence)",
+      "sig": "Overcomes beta-blockade via non-beta cAMP pathway \u2014 limited evidence for true benefit",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 adjunct"
+    },
+    {
+      "name": "Calcium chloride 1g IV (if co-ingestion with CCB suspected)",
+      "sig": "If concurrent calcium channel blocker overdose \u2014 calcium overrides CCB",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Conditional"
     }
   ],
   "allergies": [
@@ -97,7 +135,49 @@ window.EMR_DATA = {
       "plan": "Referral to mbs. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Beta-Blocker OD Panel",
+      "results": [
+        {
+          "test": "Blood glucose",
+          "value": "42",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "L"
+        },
+        {
+          "test": "HR (monitor)",
+          "value": "32",
+          "unit": "bpm",
+          "ref": "60-100",
+          "flag": "L"
+        },
+        {
+          "test": "Lactate",
+          "value": "4.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "Potassium",
+          "value": "5.2",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "H"
+        },
+        {
+          "test": "EKG",
+          "value": "Sinus bradycardia, PR prolongation 280ms, QRS 110ms",
+          "unit": "",
+          "ref": "",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +210,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "mbs-bb-receptor",
-    "diagnosis": "See diagnosis \u2014 Beta-Blocker Overdose",
+    "diagnosis": "Beta-Blocker Overdose \u2014 Competitive Antagonism at Beta-Adrenergic Receptors, High-Dose Insulin Therapy",
     "acuity": 2,
     "presentation": "Beta-Blocker Overdose",
     "category": "toxicologic"
@@ -168,12 +248,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Beta-Blocker Overdose \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Beta-blocker overdose \u2014 HIET treatment (correct)",
+      "Calcium channel blocker overdose \u2014 similar presentation, calcium is first-line (check co-ingestion)",
+      "Digoxin toxicity \u2014 bradycardia + hyperkalemia but different ECG pattern",
+      "Complete heart block \u2014 medication-induced vs structural",
+      "Hypothyroidism \u2014 bradycardia but different timeline",
+      "Vagally mediated bradycardia \u2014 acute toxidrome excludes this"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -183,7 +263,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: Beta-Blocker Overdose. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for mbs. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) mbs assessment revealed the key discriminating features. (3) Using the beta-1 signaling cascade, explain why overdose caused bradycardia AND hypoglycemia \u2014 and why glucagon bypasses the block. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: beta-blocker overdose. Key MBS learning: (1) Beta-1 receptor pharmacology: normally, catecholamines bind beta-1 \u2192 adenylyl cyclase activation \u2192 cAMP \u2192 PKA activation \u2192 phosphorylation of L-type Ca++ channels and RyR2 \u2192 increased contractility (positive inotrope) and HR (positive chronotrope). Beta-blocker competitive antagonism \u2192 none of this signaling \u2192 bradycardia + hypotension. (2) Beta-2 blockade metabolic effects: normally beta-2 stimulates glucagon secretion and glycogenolysis. Blockade \u2192 hypoglycemia + blunted catecholamine response. Glucose 42 = beta-2-mediated metabolic effect. (3) High-dose insulin euglycemia therapy (HIET): suprapharmacologic insulin doses (10-20x normal) dramatically increase cardiac glucose uptake \u2192 cardiomyocytes switch from fatty acid to glucose metabolism \u2192 improved contractility without adrenergic signaling. This is why insulin outperforms glucagon in beta-blocker/CCB OD. (4) Glucagon mechanism: activates Gs-coupled glucagon receptor \u2192 bypass beta receptor \u2192 still elevates cAMP \u2192 some inotropic/chronotropic effect. Evidence modest in clinical practice. (5) ECG in beta-blocker OD: sinus bradycardia + PR prolongation (AV node beta-1 dependent) + possible QRS widening (sodium channel effects at high doses). Distinguish from CCB: CCB causes peripheral vasodilation with reflex tachycardia early; beta-blocker causes bradycardia from start."
     }
   }
 };

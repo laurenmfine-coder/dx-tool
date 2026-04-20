@@ -24,20 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Acute Facial Swelling",
-      "icd": "Z00.00",
+      "problem": "Anaphylaxis \u2014 bee sting, IgE-mediated",
+      "icd": "T63.441A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Acute facial swelling, urticaria, vomiting 20 min post-sting. HR 148, BP 78/50."
+    },
+    {
+      "problem": "Hypotension \u2014 distributive shock",
+      "icd": "R57.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Splanchnic vasodilation from histamine \u2014 canine anaphylaxis is GI-dominant"
+    },
+    {
+      "problem": "Hemoconcentration \u2014 fluid shift from vasodilation",
+      "icd": "D75.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "PCV 58% \u2014 hemoconcentration from plasma extravasation"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Epinephrine 0.01mg/kg IM (0.3mL of 1:1000) lateral thigh \u2014 STAT",
+      "sig": "IM injection lateral thigh \u2014 first-line for anaphylaxis. Repeat in 5-10 min if no response.",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "STAT"
+    },
+    {
+      "name": "Diphenhydramine 2mg/kg IV (60mg for 30kg dog)",
+      "sig": "IV injection \u2014 H1 blockade for urticaria and pruritus. NOT first-line \u2014 epinephrine is.",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 0.1mg/kg IV (3mg)",
+      "sig": "IV \u2014 reduce delayed inflammatory response. NOT substitute for epinephrine.",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "LRS IV 20mL/kg bolus (600mL over 15 min)",
+      "sig": "Fluid resuscitation for distributive shock",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -86,7 +124,42 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Anaphylaxis Emergency Panel",
+      "results": [
+        {
+          "test": "PCV (packed cell volume)",
+          "value": "58",
+          "unit": "%",
+          "ref": "37-55",
+          "flag": "H"
+        },
+        {
+          "test": "Total solids",
+          "value": "8.8",
+          "unit": "g/dL",
+          "ref": "5.5-8.5",
+          "flag": "H"
+        },
+        {
+          "test": "Blood glucose",
+          "value": "64",
+          "unit": "mg/dL",
+          "ref": "70-138",
+          "flag": "L"
+        },
+        {
+          "test": "BP (Doppler)",
+          "value": "78",
+          "unit": "mmHg systolic",
+          "ref": ">90",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -119,7 +192,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-anaphylaxis-bee-sting",
-    "diagnosis": "See diagnosis \u2014 Acute Facial Swelling",
+    "diagnosis": "Canine Anaphylaxis \u2014 IgE-Mediated Bee Sting Reaction, 30kg Labrador",
     "acuity": 2,
     "presentation": "Acute Facial Swelling",
     "category": "immunologic"
@@ -166,12 +239,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Dog \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Canine anaphylaxis \u2014 bee sting IgE-mediated (correct)",
+      "Angioedema only \u2014 no systemic signs, less severe",
+      "Vaccine reaction \u2014 timing post-vaccination not sting",
+      "Septic shock \u2014 acute onset, sting history, urticaria pattern inconsistent",
+      "Hereditary angioedema \u2014 rare in dogs, different mechanism",
+      "Toxin ingestion \u2014 urticaria less common"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +254,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Acute Facial Swelling. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) Species-specific anaphylaxis: how does the canine response differ from humans \u2014 and what is your epinephrine dosing in a 30kg dog? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: canine anaphylaxis, bee sting. Key vet learning: (1) Canine vs human anaphylaxis: the SHOCK ORGAN differs. In humans: lungs (bronchospasm dominant). In dogs: LIVER/GI (hepatic venous congestion \u2192 splanchnic pooling \u2192 vomiting/bloody diarrhea \u2192 hypotension). Dogs rarely get bronchospasm as the primary sign. Urticaria and facial swelling are common to both. (2) Epinephrine dosing: 0.01 mg/kg IM (lateral thigh or epaxial muscles). For 30kg dog: 0.3mL of 1:1000 concentration. Epinephrine is the ONLY first-line drug \u2014 antihistamines and steroids are adjuncts, not substitutes. (3) Diphenhydramine does NOT reverse anaphylaxis \u2014 it treats urticaria and pruritus. A dog in circulatory shock from anaphylaxis given only diphenhydramine will die. (4) Fluid therapy: distributive shock requires aggressive volume replacement (20mL/kg LRS bolus, reassess, repeat). Target: capillary refill time <2 seconds, BP >90 mmHg systolic. (5) Discharge criteria and EpiPen discussion: owners of dogs with confirmed anaphylaxis should receive an emergency epinephrine kit (SQ epinephrine) and instructions for home use pending veterinary care."
     }
   }
 };

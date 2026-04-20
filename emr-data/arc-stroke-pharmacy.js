@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: James Okoye",
-      "icd": "Z00.00",
+      "problem": "Ischemic stroke \u2014 AFib \u2014 anticoagulation timing decision",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "James Okoye. AFib identified. When to start anticoagulation? Hemorrhagic transformation risk vs stroke prevention."
+    },
+    {
+      "problem": "Drug interaction \u2014 amiodarone + atorvastatin",
+      "icd": "T46.2X5A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Amiodarone inhibits CYP3A4 \u2192 increased atorvastatin exposure \u2192 myopathy risk. Dose cap needed."
+    },
+    {
+      "problem": "Statin intensity \u2014 high-intensity required for stroke prevention",
+      "icd": "I63.512",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Post-stroke statin reduces recurrent stroke 25%. High-intensity (atorvastatin 80mg) recommended."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 325mg daily (loading) then 81mg \u2014 bridge until anticoagulation starts",
+      "sig": "Antiplatelet bridge during anticoagulation decision period",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 40mg QHS (reduced from 80mg \u2014 amiodarone interaction)",
+      "sig": "Amiodarone is CYP3A4 inhibitor \u2014 atorvastatin 80mg + amiodarone = excessive statin exposure. Cap at 40mg.",
+      "prescriber": "Pharmacy recommendation",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active \u2014 dose adjusted"
+    },
+    {
+      "name": "Apixaban 2.5mg BID (starting day 14 \u2014 small/moderate infarct)",
+      "sig": "Start at day 14 per 1-3-6-12 rule \u2014 small infarct, day 14 appropriate",
+      "prescriber": "Neurology/Pharmacy",
+      "start": "11/2024",
+      "refills": 3,
+      "status": "Scheduled \u2014 start day 14"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/23/2024",
+      "panel": "Post-Stroke Day 5 Pharmacy Monitoring",
+      "results": [
+        {
+          "test": "LDL",
+          "value": "148",
+          "unit": "mg/dL",
+          "ref": "<70 for stroke patient",
+          "flag": "H"
+        },
+        {
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "CrCl (for apixaban dosing)",
+          "value": "68",
+          "unit": "mL/min",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "CK baseline (amiodarone + statin)",
+          "value": "88",
+          "unit": "U/L",
+          "ref": "22-198",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-stroke-pharmacy",
-    "diagnosis": "See diagnosis \u2014 James Okoye",
+    "diagnosis": "Post-Stroke Day 5 \u2014 Pharmacy: Anticoagulation Timing in AFib, Statin Intensity, Drug Interactions",
     "acuity": 3,
     "presentation": "James Okoye",
     "category": "neurologic"
@@ -173,12 +238,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "James Okoye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Anticoagulation day 14, atorvastatin dose adjusted for amiodarone (correct)",
+      "Anticoagulate immediately \u2014 hemorrhagic transformation risk too high in first 14 days",
+      "Never anticoagulate after hemorrhagic stroke \u2014 this is ischemic, not hemorrhagic",
+      "Atorvastatin 80mg safe with amiodarone \u2014 INCORRECT, CYP3A4 interaction is real",
+      "No statin needed \u2014 INCORRECT, high-intensity statin reduces recurrent stroke 25%",
+      "Apixaban dose reduction not needed \u2014 check renal function first for dose criteria"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +253,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: James Okoye. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) James needs long-term antithrombotic therapy for cardioembolic stroke prevention in AFib. He was on warfarin but his INR was subtherapeutic at the time of stroke. He has CrCl 52. His cardiologist asks whether to continue warfarin or switch to a DOAC. Walk through the pharmacological reasoning \u2014 including the stroke-on-anticoagulation implications. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-stroke pharmacy \u2014 AFib anticoagulation timing, statin interaction. Key pharmacy learning: (1) The 1-3-6-12 rule for AFib anticoagulation post-stroke: TIA = day 1. Small non-disabling stroke = day 3. Moderate stroke = day 6. Large/disabling stroke = day 12-14. This patient has moderate stroke (NIHSS 14) \u2192 start apixaban day 6-14. Day 14 is appropriate. (2) Rationale for waiting: anticoagulation in first 3 days after moderate infarct carries hemorrhagic transformation risk (infarcted tissue is fragile, blood-brain barrier disrupted). Risk-benefit favors waiting. (3) Atorvastatin + amiodarone CYP3A4 interaction: amiodarone is a moderate-strong CYP3A4 inhibitor \u2192 atorvastatin AUC increases 2-3x \u2192 myopathy/rhabdomyolysis risk. Atorvastatin dose cap when on amiodarone: 40mg (some sources say 20mg for simvastatin). Rosuvastatin is less CYP3A4-dependent and safer with amiodarone \u2014 may be better long-term option. (4) Apixaban dose criteria (dose reduction to 2.5mg BID): \u22652 of: age \u226580, weight \u226460kg, creatinine \u22651.5 mg/dL. One criterion present \u2192 standard dose 5mg BID. (5) LDL 148 on no statin: needs high-intensity therapy. Atorvastatin 40mg (adjusted for amiodarone) reduces LDL ~40-50%. Target LDL <70 mg/dL for stroke patient. Recheck at 6 weeks."
     }
   }
 };
