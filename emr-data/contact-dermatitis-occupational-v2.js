@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6521 Walnut Dr, Richmond, VA 23227",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(503) 555-2335",
@@ -45,19 +45,19 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Occupation",
-        "Hairstylist 20 years — PPD in hair dye is the trigger"
+        "Hairstylist 20 years \u2014 PPD in hair dye is the trigger"
       ],
       [
         "Impact",
-        "Hands cracking, bleeding — cannot work, losing clients"
+        "Hands cracking, bleeding \u2014 cannot work, losing clients"
       ],
       [
         "Prior care",
-        "Told to \"moisturize more\" — never patch tested"
+        "Told to \"moisturize more\" \u2014 never patch tested"
       ],
       [
         "Financial",
-        "Self-employed — no sick leave, income stopped during flares"
+        "Self-employed \u2014 no sick leave, income stopped during flares"
       ],
       [
         "Identity",
@@ -68,27 +68,27 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "42yo hairstylist with severe hand dermatitis and secondary infection — fissures bleeding through bandages",
+        "chiefComplaint": "42yo hairstylist with severe hand dermatitis and secondary infection \u2014 fissures bleeding through bandages",
         "diagnosis": "Allergic Contact Dermatitis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Severe occupational contact dermatitis — hands",
+          "description": "Severe occupational contact dermatitis \u2014 hands",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "PPD in hair dye — most common cause in hairstylists",
+          "description": "PPD in hair dye \u2014 most common cause in hairstylists",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Secondary bacterial infection — purulent fissures",
+          "description": "Secondary bacterial infection \u2014 purulent fissures",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -102,7 +102,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Self-employed — financial crisis from inability to work",
+          "description": "Self-employed \u2014 financial crisis from inability to work",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -144,7 +144,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "6/10"
         }
@@ -167,7 +167,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -181,7 +181,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -244,8 +244,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "42yo hairstylist with severe hand dermatitis and secondary infection — fissures bleeding through bandages",
-          "hpi": "42F hairstylist with 2-year history of worsening bilateral hand dermatitis. Deep fissures, bleeding, now infected. Multiple physicians said \"moisturize more.\" Never patch tested. This is almost certainly PPD (hair dye) contact allergy — the most common occupational allergen in hairstylists.",
+          "cc": "42yo hairstylist with severe hand dermatitis and secondary infection \u2014 fissures bleeding through bandages",
+          "hpi": "42F hairstylist with 2-year history of worsening bilateral hand dermatitis. Deep fissures, bleeding, now infected. Multiple physicians said \"moisturize more.\" Never patch tested. This is almost certainly PPD (hair dye) contact allergy \u2014 the most common occupational allergen in hairstylists.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -254,7 +254,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "N/A — outpatient",
+        "chiefComplaint": "N/A \u2014 outpatient",
         "diagnosis": "Allergic Contact Dermatitis"
       },
       "problems": [
@@ -274,7 +274,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -297,7 +297,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -311,7 +311,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -374,7 +374,7 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "N/A — outpatient",
+          "cc": "N/A \u2014 outpatient",
           "hpi": "Outpatient management.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -384,13 +384,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — comprehensive patch testing, occupational modification",
+        "chiefComplaint": "A/I consult \u2014 comprehensive patch testing, occupational modification",
         "diagnosis": "Allergic Contact Dermatitis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "PPD strongly positive (3+) — confirmed culprit",
+          "description": "PPD strongly positive (3+) \u2014 confirmed culprit",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -404,7 +404,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Does NOT have to leave hairdressing — can use PPD-free dyes, nitrile gloves, fragrance-free products",
+          "description": "Does NOT have to leave hairdressing \u2014 can use PPD-free dyes, nitrile gloves, fragrance-free products",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -453,7 +453,7 @@ window.EMR_DATA = {
           "bp": "122/76",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "3/10"
         }
@@ -476,7 +476,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -490,7 +490,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -593,7 +593,7 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — comprehensive patch testing, occupational modification",
+          "cc": "A/I consult \u2014 comprehensive patch testing, occupational modification",
           "hpi": "A/I: Comprehensive patch testing confirms PPD as primary driver. She does NOT have to quit hairdressing. PPD-free dye brands exist. Nitrile gloves for all chemical work. Avoid perming solutions. Barrier cream before shifts.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -603,13 +603,13 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — hands healing with product substitution, working full-time again",
+        "chiefComplaint": "Follow-up \u2014 hands healing with product substitution, working full-time again",
         "diagnosis": "Allergic Contact Dermatitis"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "ACD — dramatically improved with PPD-free dyes + glove protocol",
+          "description": "ACD \u2014 dramatically improved with PPD-free dyes + glove protocol",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -623,7 +623,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Fissures healed — maintaining with barrier cream + nitrile gloves",
+          "description": "Fissures healed \u2014 maintaining with barrier cream + nitrile gloves",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -672,7 +672,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -695,7 +695,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -709,7 +709,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -772,7 +772,7 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — hands healing with product substitution, working full-time again",
+          "cc": "Follow-up \u2014 hands healing with product substitution, working full-time again",
           "hpi": "42F hands healed. Working full-time with PPD-free dyes and nitrile gloves. Clients can't tell the difference. \"I thought I'd have to give up everything I love. I just had to change my products.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -795,7 +795,7 @@ window.EMR_DATA = {
     "address": "6271 Clover St, Milwaukee, WI 53210",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(504) 555-6082",
@@ -806,68 +806,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Severe occupational contact dermatitis — hands",
+      "problem": "Occupational allergic contact dermatitis \u2014 PPD (hair dye) and persulfate (bleach)",
+      "icd": "L23.4",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "42yo hairdresser; patch test: PPD +3, ammonium persulfate +2; symptoms at product contact sites; hand/forearm distribution"
     },
     {
-      "id": "prob-2",
-      "description": "PPD in hair dye — most common cause in hairstylists",
+      "problem": "Occupational chemical sensitization \u2014 hairdresser",
+      "icd": "Z57.5",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "10-year hairdressing career; PPD is a cross-sensitizer \u2014 reacts with para-amino compounds (azo dyes, some medications)"
     },
     {
-      "id": "prob-3",
-      "description": "Secondary bacterial infection — purulent fissures",
+      "problem": "Persulfate occupational asthma (concurrent)",
+      "icd": "J45.909",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Never patch tested despite 2 years of symptoms",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Self-employed — financial crisis from inability to work",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "New onset wheezing during bleaching treatments; persulfate asthma \u2014 occupational trigger; spirometry shows reversible obstruction"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Cephalexin",
-      "dose": "500mg",
-      "route": "PO",
-      "frequency": "QID x10 days",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Mometasone furoate 0.1% cream BID",
+      "sig": "Apply thin layer to affected areas twice daily for active flares; limit courses on thin skin",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Clobetasol 0.05%",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "BID x2 weeks",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Albuterol 90mcg MDI 2 puffs q4h PRN",
+      "sig": "2 puffs every 4 hours for wheeze \u2014 especially during bleaching procedures",
+      "prescriber": "Dr. Kim",
+      "start": "11/2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Petroleum jelly",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "After every handwash",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Nitrile accelerator-free gloves (workplace accommodation)",
+      "sig": "Wear vinyl or accelerator-free nitrile gloves for ALL chemical applications; double-glove for bleach",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Accommodation ordered"
     }
   ],
   "allergies": [
@@ -885,7 +868,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": "82",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "6/10"
     }
@@ -896,8 +879,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "42yo hairstylist with severe hand dermatitis and secondary infection — fissures bleeding through bandages",
-      "hpi": "42F hairstylist with 2-year history of worsening bilateral hand dermatitis. Deep fissures, bleeding, now infected. Multiple physicians said \"moisturize more.\" Never patch tested. This is almost certainly PPD (hair dye) contact allergy — the most common occupational allergen in hairstylists.",
+      "cc": "42yo hairstylist with severe hand dermatitis and secondary infection \u2014 fissures bleeding through bandages",
+      "hpi": "42F hairstylist with 2-year history of worsening bilateral hand dermatitis. Deep fissures, bleeding, now infected. Multiple physicians said \"moisturize more.\" Never patch tested. This is almost certainly PPD (hair dye) contact allergy \u2014 the most common occupational allergen in hairstylists.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -905,88 +888,57 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-360281",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "10/20/2024",
+      "panel": "Occupational Patch Testing \u2014 Hairdresser Series",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Paraphenylenediamine (PPD)",
+          "value": "+++",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Ammonium persulfate",
+          "value": "++",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Glyceryl monothioglycolate (permanent wave)",
+          "value": "+",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Thiuram mix (rubber accelerator)",
+          "value": "++",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Formaldehyde (hair preservative)",
+          "value": "+",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Resorcinol (hair dye)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "FEV1/FVC (spirometry \u2014 post-bronchodilator)",
+          "value": "0.72 \u2192 0.81",
+          "unit": "",
+          "ref": ">0.70",
+          "flag": "H"
         }
       ]
     }
@@ -1006,19 +958,19 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Hairstylist 20 years — PPD in hair dye is the trigger"
+      "Hairstylist 20 years \u2014 PPD in hair dye is the trigger"
     ],
     [
       "Impact",
-      "Hands cracking, bleeding — cannot work, losing clients"
+      "Hands cracking, bleeding \u2014 cannot work, losing clients"
     ],
     [
       "Prior care",
-      "Told to \"moisturize more\" — never patch tested"
+      "Told to \"moisturize more\" \u2014 never patch tested"
     ],
     [
       "Financial",
-      "Self-employed — no sick leave, income stopped during flares"
+      "Self-employed \u2014 no sick leave, income stopped during flares"
     ],
     [
       "Identity",
@@ -1098,17 +1050,16 @@ window.EMR_DATA = {
       "Palpate for lymphadenopathy": "Mild bilateral epitrochlear and axillary lymphadenopathy",
       "Examine forearms and wrists": "Mild erythema extending to wrists bilaterally, forearms clear",
       "Assess for nail changes": "Mild onycholysis and pitting of several fingernails",
-      "Check vital signs": "BP 128/78, HR 82, Temp 36.8°C, SpO2 99% - afebrile with normal vital signs",
+      "Check vital signs": "BP 128/78, HR 82, Temp 36.8\u00b0C, SpO2 99% - afebrile with normal vital signs",
       "Examine other potential contact sites": "No dermatitis on face, neck, or other exposed areas"
     },
     "ddxTargets": [
-      "Occupational allergic contact dermatitis with secondary bacterial infection (correct diagnosis)",
-      "Irritant contact dermatitis",
-      "Atopic dermatitis with secondary infection",
-      "Cellulitis",
-      "Necrotizing fasciitis",
-      "Dyshidrotic eczema",
-      "Psoriasis"
+      "Occupational allergic contact dermatitis \u2014 PPD and persulfate, hairdresser (correct)",
+      "Irritant contact dermatitis \u2014 negative patch test; repeated wet work and chemical exposure pattern",
+      "Atopic hand eczema \u2014 history of atopy; negative patch test; distribution more diffuse",
+      "Contact urticaria to persulfate (Type I) \u2014 immediate urticaria; IgE-mediated; different from Type IV ACD",
+      "Psoriasis \u2014 plaque morphology; extensor distribution; nail changes; family history",
+      "Tinea manuum \u2014 KOH positive; asymmetric; 'two feet one hand' pattern typical"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'hand rash' and missing the occupational exposure history and need for patch testing to identify specific allergen",
@@ -1118,7 +1069,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possible causes for bilateral hand dermatitis. What key historical information would help you distinguish between irritant versus allergic contact dermatitis? What occupational exposures should you specifically ask about?",
       "phase5": "Now that you've completed your history and exam, what pattern do you see in the distribution and timing of her symptoms? How does her 20-year career as a hairstylist factor into your diagnostic thinking? What's your next step for definitive diagnosis?",
-      "finalDebrief": "This case highlights classic occupational allergic contact dermatitis in a hairstylist with PPD sensitivity. Notice how the distribution, occupational exposure, and 2-year delay in onset (after years of exposure) fit the pattern. What does this teach us about the importance of patch testing and occupational history in chronic dermatitis?"
+      "finalDebrief": "This case highlights classic occupational allergic contact dermatitis in a hairstylist with PPD sensitivity. Notice how the distribution, occupational exposure, and 2-year delay in onset (after years of exposure) fit the pattern. What does this teach us about the importance of patch testing and occupational history in chronic dermatitis?",
+      "final": "Diagnosis: occupational ACD from PPD and persulfate; concurrent persulfate occupational asthma \u2014 hairdresser. Key teaching points: (1) PPD is a potent sensitizer and cross-reactor \u2014 sensitized individuals may react to: azo dyes (in food, medications, textiles), benzocaine, sulfonamides, PABA sunscreen (para-amino group cross-reactivity). Important counseling point for patient's future care. (2) Persulfate causes BOTH allergic contact dermatitis (Type IV) AND occupational asthma (Type I-like or non-IgE) AND contact urticaria. When a hairdresser develops wheeze with bleaching \u2014 this is persulfate occupational asthma, not coincidental. (3) Occupational asthma = new-onset asthma causally linked to workplace exposure. Management: remove from exposure. Continued exposure leads to permanent airway obstruction. (4) PPD-sensitized patients cannot use black henna tattoos (PPD-rich) \u2014 cross-reaction risk; important consumer safety point. Blonde/red hair dye contains less PPD but still some. (5) Workers' compensation and occupational medicine referral: document occupational causation, discuss modified duty, and assess fitness for continued hairdressing with modifications."
     }
+  },
+  "meta": {
+    "diagnosis": "Occupational Allergic Contact Dermatitis \u2014 Hairdresser; Paraphenylenediamine (PPD) and Persulfate Sensitization"
   }
 };

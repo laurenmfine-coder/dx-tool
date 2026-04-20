@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6241 Dogwood Ln, Phoenix, AZ 85009",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Baptiste",
         "phone": "(212) 555-1753",
@@ -102,7 +102,7 @@ window.EMR_DATA = {
           "bp": "132/82",
           "hr": "92",
           "rr": "18",
-          "temp": "38.0°C",
+          "temp": "38.0\u00b0C",
           "spo2": "98%",
           "pain": "6/10"
         }
@@ -125,7 +125,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -139,7 +139,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -222,7 +222,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Painful burning hives with fever and joint pain",
-          "hpi": "Rosemary Baptiste — Painful burning hives with fever and joint pain",
+          "hpi": "Rosemary Baptiste \u2014 Painful burning hives with fever and joint pain",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -231,7 +231,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for urticarial vasculitis workup — low complement, skin biopsy planned",
+        "chiefComplaint": "Admitted for urticarial vasculitis workup \u2014 low complement, skin biopsy planned",
         "diagnosis": "Urticarial Vasculitis"
       },
       "problems": [
@@ -295,7 +295,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "82",
           "rr": "16",
-          "temp": "37.4°C",
+          "temp": "37.4\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -318,7 +318,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -332,7 +332,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -414,8 +414,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for urticarial vasculitis workup — low complement, skin biopsy planned",
-          "hpi": "Rosemary Baptiste — Admitted for urticarial vasculitis workup — low complement, skin biopsy planned",
+          "cc": "Admitted for urticarial vasculitis workup \u2014 low complement, skin biopsy planned",
+          "hpi": "Rosemary Baptiste \u2014 Admitted for urticarial vasculitis workup \u2014 low complement, skin biopsy planned",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -470,7 +470,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "76",
           "rr": "14",
-          "temp": "37.2°C",
+          "temp": "37.2\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -493,7 +493,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -507,7 +507,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -599,7 +599,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Urticarial vasculitis follow-up — biopsy results, treatment response",
+        "chiefComplaint": "Urticarial vasculitis follow-up \u2014 biopsy results, treatment response",
         "diagnosis": "Urticarial Vasculitis"
       },
       "problems": [
@@ -626,7 +626,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -649,7 +649,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -663,7 +663,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -745,8 +745,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Urticarial vasculitis follow-up — biopsy results, treatment response",
-          "hpi": "Rosemary Baptiste — Urticarial vasculitis follow-up — biopsy results, treatment response",
+          "cc": "Urticarial vasculitis follow-up \u2014 biopsy results, treatment response",
+          "hpi": "Rosemary Baptiste \u2014 Urticarial vasculitis follow-up \u2014 biopsy results, treatment response",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -768,7 +768,7 @@ window.EMR_DATA = {
     "address": "9373 Hickory Rd, Columbus, OH 43203",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Baptiste",
       "phone": "(502) 555-6873",
@@ -779,38 +779,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "SLE (mild)",
+      "problem": "Urticarial vasculitis \u2014 normocomplementemic",
+      "icd": "L95.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Lesions last >24h, painful/burning (not pruritic), resolve with bruising/pigmentation \u2014 classic features; C3/C4 normal = normocomplementemic type"
     },
     {
-      "id": "prob-2",
-      "description": "Recurrent urticaria unresponsive to antihistamines",
+      "problem": "Arthralgia \u2014 bilateral wrists and knees",
+      "icd": "M25.50",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Occurs during urticarial flares; systemic symptom supporting vasculitis over urticaria"
+    },
+    {
+      "problem": "Low-grade fever during flares",
+      "icd": "R50.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Temperature 38.1\u00b0C during lesion flares; systemic involvement requiring evaluation for secondary causes"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Hydroxychloroquine",
-      "dose": "200mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Hydroxychloroquine 200mg BID",
+      "sig": "Take 1 tablet by mouth twice daily \u2014 first-line for normocomplementemic UV; ophthalmic monitoring annually",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Colchicine 0.6mg BID",
+      "sig": "Take 1 tablet by mouth twice daily; GI side effects common \u2014 take with food",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Prednisone 20mg daily x2 weeks (bridge while awaiting hydroxychloroquine effect)",
+      "sig": "Take 1 tablet by mouth daily for 2 weeks, then taper 5mg/week",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 short bridge"
     }
   ],
   "allergies": [
@@ -828,7 +841,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": "76",
       "rr": "14",
-      "temp": "37.2°C",
+      "temp": "37.2\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -848,112 +861,91 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-712810",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/01/2024",
+      "panel": "Urticarial Vasculitis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "C3",
+          "value": "112",
+          "unit": "mg/dL",
+          "ref": "90-180",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "C4",
+          "value": "24",
+          "unit": "mg/dL",
+          "ref": "16-47",
+          "flag": ""
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "C3",
-              "value": "65",
-              "unit": "mg/dL",
-              "range": "90-180",
-              "flag": "L"
-            },
-            {
-              "test": "C4",
-              "value": "8",
-              "unit": "mg/dL",
-              "range": "16-38",
-              "flag": "L"
-            },
-            {
-              "test": "Ana",
-              "value": "1:320",
-              "unit": "titer",
-              "range": "<1:40",
-              "flag": "H"
-            },
-            {
-              "test": "Esr",
-              "value": "42",
-              "unit": "mm/hr",
-              "range": "0-20",
-              "flag": "H"
-            }
-          ]
+          "test": "CH50",
+          "value": "52",
+          "unit": "units/mL",
+          "ref": "31-60",
+          "flag": ""
+        },
+        {
+          "test": "ANA",
+          "value": "1:80, speckled",
+          "unit": "",
+          "ref": "<1:40",
+          "flag": "H"
+        },
+        {
+          "test": "Anti-dsDNA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Anti-C1q antibodies",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Serum cryoglobulins",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "ESR",
+          "value": "52",
+          "unit": "mm/h",
+          "ref": "<20",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "18",
+          "unit": "mg/L",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "CBC \u2014 WBC",
+          "value": "9.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11.0",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/05/2024",
+      "study": "Skin Biopsy \u2014 Urticarial Lesion (right forearm, 18h lesion)",
+      "indication": "Urticaria lasting >24h with systemic symptoms \u2014 biopsy to distinguish urticarial vasculitis from chronic urticaria",
+      "findings": "Perivascular neutrophilic infiltrate with nuclear dust (leukocytoclasia). Fibrinoid necrosis of small vessel walls. Endothelial cell swelling. Extravasation of red blood cells into dermis. No frank purpura. Eosinophils absent.",
+      "impression": "Leukocytoclastic vasculitis of small vessels \u2014 diagnostic for urticarial vasculitis. C3 deposits absent on DIF (normocomplementemic type confirmed)."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -988,7 +980,7 @@ window.EMR_DATA = {
       "validates": [
         "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
         "UAS7 scoring",
-        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Step-up: sgAH \u2192 updose 4x \u2192 omalizumab \u2192 cyclosporine",
         "Post-viral urticaria in children: no allergy testing needed"
       ]
     }
@@ -1001,8 +993,8 @@ window.EMR_DATA = {
     ],
     "boardPearls": [
       "UV vs CSU: UV wheals last >24h, leave bruising, burn more than itch. CSU wheals <24h, fully resolve, pruritic.",
-      "Normcomplementemic UV: usually idiopathic, milder, no systemic involvement. Antihistamines ± dapsone/colchicine.",
-      "Hypocomplementemic UV (HUVS): C1q antibodies, low C3/C4, systemic complications. Associated with SLE, Sjögren's. Hydroxychloroquine ± immunosuppression.",
+      "Normcomplementemic UV: usually idiopathic, milder, no systemic involvement. Antihistamines \u00b1 dapsone/colchicine.",
+      "Hypocomplementemic UV (HUVS): C1q antibodies, low C3/C4, systemic complications. Associated with SLE, Sj\u00f6gren's. Hydroxychloroquine \u00b1 immunosuppression.",
       "Biopsy: leukocytoclastic vasculitis with fibrinoid necrosis = UV. Mast cell infiltrate = CSU.",
       "Workup: CBC, CMP, ESR/CRP, C3, C4, C1q, ANA, anti-dsDNA, ANCA, hepatitis B/C serology.",
       "Treatment: antihistamines (limited effect). Dapsone, colchicine, hydroxychloroquine for normcomplementemic. Systemic steroids + immunosuppression for HUVS."
@@ -1063,16 +1055,15 @@ window.EMR_DATA = {
       "Check for joint swelling or tenderness": "Mild tenderness in metacarpophalangeal joints bilaterally, no obvious swelling",
       "Examine for purpura or petechiae": "Fading brownish discoloration noted at sites of resolved lesions, consistent with post-inflammatory changes",
       "Assess for angioedema": "No facial, lip, or tongue swelling present",
-      "Take temperature and assess for fever": "Low-grade fever at 37.2°C, patient appears mildly ill"
+      "Take temperature and assess for fever": "Low-grade fever at 37.2\u00b0C, patient appears mildly ill"
     },
     "ddxTargets": [
-      "Urticarial vasculitis (correct diagnosis)",
-      "Chronic spontaneous urticaria",
-      "SLE cutaneous manifestation",
-      "Drug-induced hypersensitivity syndrome",
-      "Systemic vasculitis",
-      "Contact dermatitis",
-      "Erythema multiforme"
+      "Normocomplementemic urticarial vasculitis \u2014 idiopathic (correct)",
+      "Chronic spontaneous urticaria \u2014 lesions last <24h; no bruising on resolution; histology normal",
+      "Hypocomplementemic urticarial vasculitis syndrome (HUVS) \u2014 C3/C4 low; anti-C1q antibodies; lung/kidney involvement",
+      "SLE with urticarial vasculitis \u2014 ANA positive but anti-dsDNA negative; insufficient criteria for SLE",
+      "IgA vasculitis (Henoch-Schonlein) \u2014 purpura, not urticaria; IgA deposits on DIF; younger age",
+      "Drug-induced vasculitis \u2014 review new medications in past 2-3 months"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known history of recurrent urticaria and assuming this is just a flare of chronic urticaria rather than recognizing the distinct features of urticarial vasculitis",
@@ -1082,7 +1073,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possible causes for urticarial lesions. As you gather more history, pay particular attention to the timeline and characteristics that might distinguish between different types of urticaria. What specific features would help you differentiate between common chronic urticaria and other urticarial conditions?",
       "phase5": "Now that you've completed your history and physical exam, consider the constellation of findings: lesions lasting >24 hours, burning pain rather than itching, residual bruising, and poor response to antihistamines in a patient with SLE. How do these features fit together, and what does this suggest about the underlying pathophysiology?",
-      "finalDebrief": "This case illustrates the importance of recognizing urticarial vasculitis, which can be easily mistaken for chronic urticaria. The key distinguishing features - individual lesions lasting >24 hours, burning/painful quality, residual bruising, and poor antihistamine response - point to small vessel inflammation rather than simple mast cell degranulation. In patients with SLE, urticarial vasculitis may represent increased disease activity and requires different management approaches."
+      "finalDebrief": "This case illustrates the importance of recognizing urticarial vasculitis, which can be easily mistaken for chronic urticaria. The key distinguishing features - individual lesions lasting >24 hours, burning/painful quality, residual bruising, and poor antihistamine response - point to small vessel inflammation rather than simple mast cell degranulation. In patients with SLE, urticarial vasculitis may represent increased disease activity and requires different management approaches.",
+      "final": "Diagnosis: normocomplementemic urticarial vasculitis (NUV), idiopathic. Key teaching points: (1) The KEY distinguishing feature of urticarial vasculitis from chronic urticaria: lesions last >24 hours, painful/burning rather than pruritic, resolve leaving ecchymosis or pigmentation. Biopsy is definitive. (2) NUV vs. HUVS: normocomplementemic (C3/C4 normal) has better prognosis; hypocomplementemic (HUVS) has systemic complications \u2014 obstructive lung disease, nephritis, uveitis, Jaccoud arthropathy. Anti-C1q antibodies are the HUVS marker. (3) Secondary causes to exclude: SLE, Sj\u00f6gren's, hepatitis B/C, myeloproliferative disease, drugs (hydralazine, penicillins, cimetidine). ANA 1:80 here \u2014 monitor for lupus evolution. (4) Treatment of NUV: hydroxychloroquine + colchicine is first-line. HUVS: dapsone, immunosuppressants. Avoid prolonged systemic steroids. (5) Biopsy timing: biopsy a lesion that has been present 12-24 hours \u2014 older lesions show healed vasculitis; too-early lesions may show only edema."
     }
+  },
+  "meta": {
+    "diagnosis": "Normocomplementemic Urticarial Vasculitis \u2014 Idiopathic; Skin Biopsy Confirmatory"
   }
 };

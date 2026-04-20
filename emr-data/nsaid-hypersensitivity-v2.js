@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "4843 Oak Ave, New Orleans, LA 70114",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Fernandez",
         "phone": "(503) 555-8033",
@@ -61,32 +61,32 @@ window.EMR_DATA = {
       ],
       [
         "Anosmia",
-        "Lost sense of smell 2 years ago — devastating for someone who loved cooking"
+        "Lost sense of smell 2 years ago \u2014 devastating for someone who loved cooking"
       ],
       [
         "Surgeries",
-        "3 polypectomies in 5 years — polyps always recur"
+        "3 polypectomies in 5 years \u2014 polyps always recur"
       ],
       [
         "Aspirin desensitization",
-        "Candidate — would allow daily aspirin to suppress polyp recurrence"
+        "Candidate \u2014 would allow daily aspirin to suppress polyp recurrence"
       ],
       [
         "Occupation",
-        "Chef — cannot smell or taste, career threatened"
+        "Chef \u2014 cannot smell or taste, career threatened"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache — known AERD",
+        "chiefComplaint": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache \u2014 known AERD",
         "diagnosis": "AERD (Samter's Triad)"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "AERD — aspirin-exacerbated respiratory disease",
+          "description": "AERD \u2014 aspirin-exacerbated respiratory disease",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -100,7 +100,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Nasal polyps — recurrent, anosmia",
+          "description": "Nasal polyps \u2014 recurrent, anosmia",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -114,7 +114,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Chef who cannot smell — career and identity crisis",
+          "description": "Chef who cannot smell \u2014 career and identity crisis",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -165,7 +165,7 @@ window.EMR_DATA = {
           "bp": "138/82",
           "hr": "112",
           "rr": "28",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "88%",
           "pain": "7/10"
         }
@@ -188,7 +188,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -202,7 +202,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -298,8 +298,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache — known AERD",
-          "hpi": "38F chef with known AERD took ibuprofen 400mg for headache — grabbed it from kitchen staff's bag without reading label. Within 30 min: progressive bronchospasm, rhinorrhea, chest tightness. Peak flow dropped to 180 (baseline ~380). Continuous albuterol and IV steroids in ED. Bilateral nasal polyps visible on exam. Reports complete anosmia x2 years — unable to taste or smell, devastating for a professional chef. Has had 3 polypectomies — polyps always recur within 6 months. A/I consult for aspirin desensitization — the only treatment that can suppress polyp recurrence and potentially restore her sense of smell.",
+          "cc": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache \u2014 known AERD",
+          "hpi": "38F chef with known AERD took ibuprofen 400mg for headache \u2014 grabbed it from kitchen staff's bag without reading label. Within 30 min: progressive bronchospasm, rhinorrhea, chest tightness. Peak flow dropped to 180 (baseline ~380). Continuous albuterol and IV steroids in ED. Bilateral nasal polyps visible on exam. Reports complete anosmia x2 years \u2014 unable to taste or smell, devastating for a professional chef. Has had 3 polypectomies \u2014 polyps always recur within 6 months. A/I consult for aspirin desensitization \u2014 the only treatment that can suppress polyp recurrence and potentially restore her sense of smell.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -314,7 +314,7 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "AERD — bronchospasm from ibuprofen",
+          "description": "AERD \u2014 bronchospasm from ibuprofen",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -335,14 +335,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Anosmia — complete, 2 years",
+          "description": "Anosmia \u2014 complete, 2 years",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Career impact — chef who cannot smell/taste",
+          "description": "Career impact \u2014 chef who cannot smell/taste",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -381,7 +381,7 @@ window.EMR_DATA = {
           "name": "Zileuton",
           "dose": "600mg",
           "route": "PO",
-          "frequency": "QID (leukotriene synthesis inhibitor — AERD-specific)",
+          "frequency": "QID (leukotriene synthesis inhibitor \u2014 AERD-specific)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -393,7 +393,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "86",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "96%",
           "pain": "3/10"
         }
@@ -416,7 +416,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -430,7 +430,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -494,7 +494,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Admitted for bronchospasm stabilization then aspirin desensitization",
-          "hpi": "38F stable after bronchospasm. Aspirin desensitization scheduled for tomorrow — will be performed in monitored setting with protocol: escalating aspirin doses over 2 days (40.5mg→81→162.5→325→650mg) with monitoring for bronchospasm at each step. Goal: maintenance aspirin 650mg BID indefinitely — suppresses prostaglandin pathway driving polyp formation. Zileuton added (blocks 5-lipoxygenase — the overactive pathway in AERD).",
+          "hpi": "38F stable after bronchospasm. Aspirin desensitization scheduled for tomorrow \u2014 will be performed in monitored setting with protocol: escalating aspirin doses over 2 days (40.5mg\u219281\u2192162.5\u2192325\u2192650mg) with monitoring for bronchospasm at each step. Goal: maintenance aspirin 650mg BID indefinitely \u2014 suppresses prostaglandin pathway driving polyp formation. Zileuton added (blocks 5-lipoxygenase \u2014 the overactive pathway in AERD).",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -503,20 +503,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — aspirin desensitization protocol, dupilumab discussion for refractory polyps",
+        "chiefComplaint": "A/I consult \u2014 aspirin desensitization protocol, dupilumab discussion for refractory polyps",
         "diagnosis": "AERD (Samter's Triad)"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "AERD — desensitization indicated",
+          "description": "AERD \u2014 desensitization indicated",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Aspirin desensitization protocol — 2-day escalation",
+          "description": "Aspirin desensitization protocol \u2014 2-day escalation",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -530,14 +530,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "If aspirin alone insufficient — dupilumab (anti-IL4/13) for polyps",
+          "description": "If aspirin alone insufficient \u2014 dupilumab (anti-IL4/13) for polyps",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Anosmia — may improve with polyp control (30-60% regain some smell)",
+          "description": "Anosmia \u2014 may improve with polyp control (30-60% regain some smell)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -588,7 +588,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -611,7 +611,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -625,7 +625,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -688,8 +688,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — aspirin desensitization protocol, dupilumab discussion for refractory polyps",
-          "hpi": "A/I: 38F with AERD. Aspirin desensitization completed successfully — tolerated 650mg without bronchospasm. Will maintain aspirin 650mg BID indefinitely. This is THE treatment for AERD polyps — suppresses the prostaglandin/leukotriene imbalance that drives polyp growth. If polyps recur despite aspirin + zileuton: dupilumab (biologic targeting IL-4/IL-13 — FDA approved for nasal polyps). Patient asked about smell recovery: 30-60% of AERD patients regain some olfaction with aggressive polyp treatment. Started olfactory training exercises.",
+          "cc": "A/I consult \u2014 aspirin desensitization protocol, dupilumab discussion for refractory polyps",
+          "hpi": "A/I: 38F with AERD. Aspirin desensitization completed successfully \u2014 tolerated 650mg without bronchospasm. Will maintain aspirin 650mg BID indefinitely. This is THE treatment for AERD polyps \u2014 suppresses the prostaglandin/leukotriene imbalance that drives polyp growth. If polyps recur despite aspirin + zileuton: dupilumab (biologic targeting IL-4/IL-13 \u2014 FDA approved for nasal polyps). Patient asked about smell recovery: 30-60% of AERD patients regain some olfaction with aggressive polyp treatment. Started olfactory training exercises.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -698,41 +698,41 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "AERD follow-up — 3 months post-desensitization, polyp status, smell testing",
+        "chiefComplaint": "AERD follow-up \u2014 3 months post-desensitization, polyp status, smell testing",
         "diagnosis": "AERD (Samter's Triad)"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "AERD — on aspirin 650mg BID + zileuton (stable)",
+          "description": "AERD \u2014 on aspirin 650mg BID + zileuton (stable)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Nasal polyps — significantly regressed (nasal endoscopy improved)",
+          "description": "Nasal polyps \u2014 significantly regressed (nasal endoscopy improved)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Anosmia — PARTIAL RECOVERY (can detect strong odors for first time in 2 years)",
+          "description": "Anosmia \u2014 PARTIAL RECOVERY (can detect strong odors for first time in 2 years)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Asthma — better controlled than ever",
+          "description": "Asthma \u2014 better controlled than ever",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Maintaining aspirin — cannot miss doses (resets desensitization)",
+          "description": "Maintaining aspirin \u2014 cannot miss doses (resets desensitization)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -744,7 +744,7 @@ window.EMR_DATA = {
           "name": "Aspirin",
           "dose": "650mg",
           "route": "PO",
-          "frequency": "BID (MUST NOT MISS — resets desensitization)",
+          "frequency": "BID (MUST NOT MISS \u2014 resets desensitization)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -783,7 +783,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -806,7 +806,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -820,7 +820,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -883,8 +883,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "AERD follow-up — 3 months post-desensitization, polyp status, smell testing",
-          "hpi": "38F 3 months post-aspirin desensitization. Nasal endoscopy: polyps dramatically reduced — can breathe through nose for first time in years. And the big news: smell is partially returning. She can detect garlic, citrus, and coffee. Not fully back, but after 2 years of complete anosmia, she was in tears: \"I can smell my food again.\" Continuing olfactory training. Back in kitchen, cooking with renewed purpose. Must NEVER miss aspirin doses — even 48h off aspirin resets desensitization and would require repeat hospitalization for protocol.",
+          "cc": "AERD follow-up \u2014 3 months post-desensitization, polyp status, smell testing",
+          "hpi": "38F 3 months post-aspirin desensitization. Nasal endoscopy: polyps dramatically reduced \u2014 can breathe through nose for first time in years. And the big news: smell is partially returning. She can detect garlic, citrus, and coffee. Not fully back, but after 2 years of complete anosmia, she was in tears: \"I can smell my food again.\" Continuing olfactory training. Back in kitchen, cooking with renewed purpose. Must NEVER miss aspirin doses \u2014 even 48h off aspirin resets desensitization and would require repeat hospitalization for protocol.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -906,88 +906,70 @@ window.EMR_DATA = {
     "address": "7639 Foxglove Dr, Memphis, TN 38112",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Fernandez",
       "phone": "(713) 555-7843",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache — known AERD",
+    "chiefComplaint": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache \u2014 known AERD",
     "diagnosis": "AERD (Samter's Triad)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "AERD — aspirin-exacerbated respiratory disease",
+      "problem": "NSAID-ERD \u2014 unrecognized, second episode with ibuprofen",
+      "icd": "J45.40",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Prior aspirin-triggered bronchospasm in 2022 labeled 'aspirin allergy'; ibuprofen cross-reaction confirms NSAID-ERD pattern (not single-drug)"
     },
     {
-      "id": "prob-2",
-      "description": "Severe bronchospasm after ibuprofen exposure",
+      "problem": "Asthma \u2014 moderate persistent, partially controlled",
+      "icd": "J45.40",
+      "onset": "2020",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "FEV1 68% predicted; on ICS/LABA; 2 exacerbations in past year; eosinophilic phenotype"
     },
     {
-      "id": "prob-3",
-      "description": "Nasal polyps — recurrent, anosmia",
+      "problem": "Nasal polyps \u2014 undiagnosed (found today on nasal endoscopy)",
+      "icd": "J33.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "3 prior polypectomies",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Chef who cannot smell — career and identity crisis",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Bilateral polyps identified on nasal scope today; patient unaware; Samter's triad now confirmed"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Continuous albuterol",
-      "dose": "20mg/hr",
-      "route": "NEB",
-      "frequency": "Continuous",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Budesonide/Formoterol 160/4.5 mcg inhaler 2 puffs BID",
+      "sig": "2 puffs by mouth twice daily; rinse mouth after use",
+      "prescriber": "Dr. Kim",
+      "start": "2021",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Ipratropium",
-      "dose": "0.5mg",
-      "route": "NEB",
-      "frequency": "Q4H",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Albuterol 90mcg MDI 2 puffs q4h PRN",
+      "sig": "2 puffs every 4 hours as needed for breakthrough wheeze",
+      "prescriber": "Dr. Kim",
+      "start": "2021",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Q6H",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "NSAIDS/ASPIRIN \u2014 ALL AVOID",
+      "sig": "CONTRAINDICATED \u2014 all COX-1 inhibitors now documented contraindicated; acetaminophen and celecoxib only",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Contraindicated \u2014 updated today"
     },
     {
-      "id": "med-4",
-      "name": "Magnesium sulfate",
-      "dose": "2g",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Montelukast 10mg nightly (adding)",
+      "sig": "Take 1 tablet by mouth nightly \u2014 leukotriene modifier adjunct for NSAID-ERD and asthma",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active \u2014 new"
     }
   ],
   "allergies": [
@@ -1017,7 +999,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": "112",
       "rr": "28",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "88%",
       "pain": "7/10"
     }
@@ -1028,8 +1010,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache — known AERD",
-      "hpi": "38F chef with known AERD took ibuprofen 400mg for headache — grabbed it from kitchen staff's bag without reading label. Within 30 min: progressive bronchospasm, rhinorrhea, chest tightness. Peak flow dropped to 180 (baseline ~380). Continuous albuterol and IV steroids in ED. Bilateral nasal polyps visible on exam. Reports complete anosmia x2 years — unable to taste or smell, devastating for a professional chef. Has had 3 polypectomies — polyps always recur within 6 months. A/I consult for aspirin desensitization — the only treatment that can suppress polyp recurrence and potentially restore her sense of smell.",
+      "cc": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache \u2014 known AERD",
+      "hpi": "38F chef with known AERD took ibuprofen 400mg for headache \u2014 grabbed it from kitchen staff's bag without reading label. Within 30 min: progressive bronchospasm, rhinorrhea, chest tightness. Peak flow dropped to 180 (baseline ~380). Continuous albuterol and IV steroids in ED. Bilateral nasal polyps visible on exam. Reports complete anosmia x2 years \u2014 unable to taste or smell, devastating for a professional chef. Has had 3 polypectomies \u2014 polyps always recur within 6 months. A/I consult for aspirin desensitization \u2014 the only treatment that can suppress polyp recurrence and potentially restore her sense of smell.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -1037,121 +1019,57 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-183893",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "NSAID-ERD Confirmation Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "8",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "FEV1 (baseline)",
+          "value": "68",
+          "unit": "% predicted",
+          "ref": ">80",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "FEV1/FVC",
+          "value": "0.69",
+          "unit": "",
+          "ref": ">0.70",
+          "flag": "L"
         },
         {
-          "name": "RESPIRATORY",
-          "results": [
-            {
-              "test": "Peak flow",
-              "value": "180",
-              "unit": "L/min",
-              "range": "380-520",
-              "flag": "L"
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.38",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": ""
-            },
-            {
-              "test": "ABG pCO2",
-              "value": "42",
-              "unit": "mmHg",
-              "range": "35-45",
-              "flag": ""
-            },
-            {
-              "test": "Lactate",
-              "value": "2.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Aspirin IgE",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Ibuprofen IgE",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Peripheral blood eosinophils",
+          "value": "0.7",
+          "unit": "K/\u03bcL",
+          "ref": "0.0-0.5",
+          "flag": "H"
+        },
+        {
+          "test": "FeNO (exhaled nitric oxide)",
+          "value": "48",
+          "unit": "ppb",
+          "ref": "<25",
+          "flag": "H"
+        },
+        {
+          "test": "Urinary LTE4 (baseline)",
+          "value": "1,640",
+          "unit": "pg/mg creatinine",
+          "ref": "<1,000",
+          "flag": "H"
         }
       ]
     }
@@ -1175,19 +1093,19 @@ window.EMR_DATA = {
     ],
     [
       "Anosmia",
-      "Lost sense of smell 2 years ago — devastating for someone who loved cooking"
+      "Lost sense of smell 2 years ago \u2014 devastating for someone who loved cooking"
     ],
     [
       "Surgeries",
-      "3 polypectomies in 5 years — polyps always recur"
+      "3 polypectomies in 5 years \u2014 polyps always recur"
     ],
     [
       "Aspirin desensitization",
-      "Candidate — would allow daily aspirin to suppress polyp recurrence"
+      "Candidate \u2014 would allow daily aspirin to suppress polyp recurrence"
     ],
     [
       "Occupation",
-      "Chef — cannot smell or taste, career threatened"
+      "Chef \u2014 cannot smell or taste, career threatened"
     ]
   ],
   "references": [
@@ -1285,13 +1203,12 @@ window.EMR_DATA = {
       "Skin examination for urticaria": "No rash, hives, or angioedema present"
     },
     "ddxTargets": [
-      "AERD exacerbation (NSAID-induced bronchospasm) (correct diagnosis)",
-      "Acute asthma exacerbation",
-      "Anaphylaxis",
-      "Acute coronary syndrome",
-      "Pulmonary embolism",
-      "Vocal cord dysfunction",
-      "Pneumonia with bronchospasm"
+      "NSAID-ERD \u2014 confirmed by ibuprofen cross-reaction; nasal polyps now identified (Samter's triad) (correct)",
+      "Single-drug (ibuprofen) IgE allergy \u2014 both aspirin and ibuprofen trigger = COX-1 class effect; IgE negative",
+      "Exercise-induced bronchospasm \u2014 no exercise cofactor; NSAID was the trigger",
+      "Vocal cord dysfunction \u2014 inspiratory stridor; laryngoscopy shows adduction; tryptase normal",
+      "Cholinergic asthma exacerbation \u2014 triggered by temperature/stress; not NSAID-specific",
+      "Churg-Strauss (EGPA) \u2014 eosinophilia + asthma + vasculitis; ANCA in subset; different clinical picture"
     ],
     "biasFlags": {
       "anchoring": "Don't anchor on 'just another asthma attack' - the NSAID trigger and triad of symptoms (bronchospasm + rhinorrhea + known polyps) points specifically to AERD",
@@ -1301,7 +1218,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified bronchospasm as the primary issue. Now think about what might make this different from typical asthma - what specific triggers or associated symptoms would point you toward a particular subtype of reactive airway disease?",
       "phase5": "You've gathered great information about the NSAID trigger and her history of nasal polyps. How do these findings together point to a specific syndrome rather than just coincidental asthma and rhinitis? What's the pathophysiology here?",
-      "finalDebrief": "This case illustrates AERD - the classic triad of asthma, nasal polyposis, and NSAID hypersensitivity. Notice how the rapid onset after ibuprofen, the severe bronchospasm with concurrent rhinorrhea, and her history of recurrent polyps all fit together. The key learning is recognizing this as a distinct syndrome requiring specific management, including consideration for aspirin desensitization therapy."
+      "finalDebrief": "This case illustrates AERD - the classic triad of asthma, nasal polyposis, and NSAID hypersensitivity. Notice how the rapid onset after ibuprofen, the severe bronchospasm with concurrent rhinorrhea, and her history of recurrent polyps all fit together. The key learning is recognizing this as a distinct syndrome requiring specific management, including consideration for aspirin desensitization therapy.",
+      "final": "Diagnosis: NSAID-ERD confirmed (ibuprofen cross-reaction + aspirin history + nasal polyps = Samter's triad). Prior aspirin allergy label was incomplete \u2014 it's a drug CLASS reaction, not single-drug IgE allergy. Key teaching points: (1) NSAID-ERD is identified when a patient reacts to >1 COX-1 inhibitor \u2014 this case confirms the pattern. The prior 'aspirin allergy' label was never evaluated; ibuprofen reaction confirms class-wide COX-1 sensitivity. (2) Elevated FeNO (>25 ppb) indicates eosinophilic airway inflammation \u2014 supports dupilumab or mepolizumab candidacy for the asthma component. (3) Urinary LTE4 at baseline >1,000 pg/mg = biomarker confirming NSAID-ERD pathophysiology even without oral challenge. (4) Nasal polyps found today: bilateral polyps = Samter's triad now complete. This changes management \u2014 sinus CT, nasal topical steroids, and biologic consideration (dupilumab addresses both asthma + CRSwNP). (5) Critical patient counseling: ALL NSAIDs/aspirin contraindicated, even topical diclofenac can trigger. Acetaminophen (use cautiously >1g at first) and celecoxib are safe alternatives."
     }
+  },
+  "meta": {
+    "diagnosis": "NSAID-Exacerbated Respiratory Disease (NSAID-ERD) \u2014 Unrecognized Second Episode; Ibuprofen Cross-Reactive with Aspirin"
   }
 };

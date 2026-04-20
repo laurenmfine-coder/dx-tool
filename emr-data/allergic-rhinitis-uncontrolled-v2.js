@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "2043 Iris Blvd, Phoenix, AZ 85004",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael O'Brien",
         "phone": "(505) 555-2314",
@@ -46,36 +46,36 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "Failed 5 medications — still miserable, affecting work and sleep"
+        "Failed 5 medications \u2014 still miserable, affecting work and sleep"
       ],
       [
         "Comorbidity",
-        "Asthma — undertreated, rhinitis and asthma are one airway"
+        "Asthma \u2014 undertreated, rhinitis and asthma are one airway"
       ],
       [
         "Occupational",
-        "Veterinary technician — animal dander exposure 8h/day is THE trigger"
+        "Veterinary technician \u2014 animal dander exposure 8h/day is THE trigger"
       ],
       [
         "Dilemma",
-        "Loves her job, animals are her trigger — immunotherapy candidate?"
+        "Loves her job, animals are her trigger \u2014 immunotherapy candidate?"
       ],
       [
         "Sleep",
-        "OSA screening positive — nasal congestion contributing to mouth breathing and snoring"
+        "OSA screening positive \u2014 nasal congestion contributing to mouth breathing and snoring"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Not a typical ED presentation — included for completeness",
-        "diagnosis": "Allergic Rhinitis — Uncontrolled"
+        "chiefComplaint": "Not a typical ED presentation \u2014 included for completeness",
+        "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Allergic rhinitis — severe",
+          "description": "Allergic rhinitis \u2014 severe",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -89,7 +89,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -112,7 +112,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -126,7 +126,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -189,7 +189,7 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Not a typical ED presentation — included for completeness",
+          "cc": "Not a typical ED presentation \u2014 included for completeness",
           "hpi": "Outpatient presentation.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -199,8 +199,8 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "N/A — outpatient management",
-        "diagnosis": "Allergic Rhinitis — Uncontrolled"
+        "chiefComplaint": "N/A \u2014 outpatient management",
+        "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled"
       },
       "problems": [
         {
@@ -219,7 +219,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -242,7 +242,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -256,7 +256,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -319,7 +319,7 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "N/A — outpatient management",
+          "cc": "N/A \u2014 outpatient management",
           "hpi": "Outpatient management only.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -329,13 +329,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — refractory allergic rhinitis in vet tech with daily animal exposure, immunotherapy evaluation",
-        "diagnosis": "Allergic Rhinitis — Uncontrolled"
+        "chiefComplaint": "A/I consult \u2014 refractory allergic rhinitis in vet tech with daily animal exposure, immunotherapy evaluation",
+        "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Allergic rhinitis — severe, refractory to 5 medications",
+          "description": "Allergic rhinitis \u2014 severe, refractory to 5 medications",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -349,35 +349,35 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Asthma — moderate persistent, linked to rhinitis (united airway)",
+          "description": "Asthma \u2014 moderate persistent, linked to rhinitis (united airway)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Occupational animal dander exposure — cat, dog, horse, rabbit daily",
+          "description": "Occupational animal dander exposure \u2014 cat, dog, horse, rabbit daily",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Career dilemma — allergens are her job",
+          "description": "Career dilemma \u2014 allergens are her job",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-6",
-          "description": "OSA screening positive — nasal congestion contributing",
+          "description": "OSA screening positive \u2014 nasal congestion contributing",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-7",
-          "description": "Immunotherapy — strong candidate given occupational unavoidable exposure",
+          "description": "Immunotherapy \u2014 strong candidate given occupational unavoidable exposure",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -428,7 +428,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "2/10"
         }
@@ -451,7 +451,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -465,7 +465,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -582,8 +582,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — refractory allergic rhinitis in vet tech with daily animal exposure, immunotherapy evaluation",
-          "hpi": "A/I consult: 31F vet tech with severe refractory allergic rhinitis despite 5 medications. Allergic to literally everything she works with — cat (very high), dog (high), horse (high). Also dust mite and grass. FeNO 48 confirms eosinophilic airway inflammation (undertreated asthma). KEY DECISION: allergen immunotherapy (SCIT) is the only treatment that modifies the underlying disease. She is an ideal candidate — (1) clearly IgE-mediated, (2) unavoidable occupational exposure, (3) failed maximal pharmacotherapy, (4) linked asthma. Started 4-allergen SCIT: cat, dog, dust mite, grass. Also: workplace modification letter (HEPA filter at workstation, N95 mask during cage cleaning, hand/face washing between animals), and asthma stepped up.",
+          "cc": "A/I consult \u2014 refractory allergic rhinitis in vet tech with daily animal exposure, immunotherapy evaluation",
+          "hpi": "A/I consult: 31F vet tech with severe refractory allergic rhinitis despite 5 medications. Allergic to literally everything she works with \u2014 cat (very high), dog (high), horse (high). Also dust mite and grass. FeNO 48 confirms eosinophilic airway inflammation (undertreated asthma). KEY DECISION: allergen immunotherapy (SCIT) is the only treatment that modifies the underlying disease. She is an ideal candidate \u2014 (1) clearly IgE-mediated, (2) unavoidable occupational exposure, (3) failed maximal pharmacotherapy, (4) linked asthma. Started 4-allergen SCIT: cat, dog, dust mite, grass. Also: workplace modification letter (HEPA filter at workstation, N95 mask during cage cleaning, hand/face washing between animals), and asthma stepped up.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -592,27 +592,27 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Immunotherapy follow-up — 6 months into SCIT, response assessment",
-        "diagnosis": "Allergic Rhinitis — Uncontrolled"
+        "chiefComplaint": "Immunotherapy follow-up \u2014 6 months into SCIT, response assessment",
+        "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Allergic rhinitis — significantly improved on SCIT (6 months in)",
+          "description": "Allergic rhinitis \u2014 significantly improved on SCIT (6 months in)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Asthma — FEV1 improved 85%→94% since starting SCIT + step-up",
+          "description": "Asthma \u2014 FEV1 improved 85%\u219294% since starting SCIT + step-up",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "OSA — improved with nasal congestion resolution, repeat sleep study planned",
+          "description": "OSA \u2014 improved with nasal congestion resolution, repeat sleep study planned",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -626,7 +626,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "Total IgE trending down (680→420) — immunologic response to SCIT",
+          "description": "Total IgE trending down (680\u2192420) \u2014 immunologic response to SCIT",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -677,7 +677,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -700,7 +700,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -714,7 +714,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -777,8 +777,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Immunotherapy follow-up — 6 months into SCIT, response assessment",
-          "hpi": "31F 6 months into allergen immunotherapy. Dramatic improvement — TNSS (Total Nasal Symptom Score) dropped 60%. Can work without N95 mask. Asthma improved — stepped down from ICS/LABA to ICS alone. Sleeping through the night for first time in years. Plan: continue SCIT for 3-5 years total, repeat sleep study at 1 year to reassess OSA, annual PFTs, aim to reduce medications further as SCIT takes full effect. Patient says: \"I actually enjoy going to work again.\"",
+          "cc": "Immunotherapy follow-up \u2014 6 months into SCIT, response assessment",
+          "hpi": "31F 6 months into allergen immunotherapy. Dramatic improvement \u2014 TNSS (Total Nasal Symptom Score) dropped 60%. Can work without N95 mask. Asthma improved \u2014 stepped down from ICS/LABA to ICS alone. Sleeping through the night for first time in years. Plan: continue SCIT for 3-5 years total, repeat sleep study at 1 year to reassess OSA, annual PFTs, aim to reduce medications further as SCIT takes full effect. Patient says: \"I actually enjoy going to work again.\"",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -800,25 +800,64 @@ window.EMR_DATA = {
     "address": "3749 Oak Ave, Richmond, VA 23226",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael O'Brien",
       "phone": "(317) 555-6697",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Not a typical ED presentation — included for completeness",
-    "diagnosis": "Allergic Rhinitis — Uncontrolled"
+    "chiefComplaint": "Not a typical ED presentation \u2014 included for completeness",
+    "diagnosis": "Allergic Rhinitis \u2014 Uncontrolled"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Allergic rhinitis — severe",
+      "problem": "Allergic rhinitis \u2014 perennial, uncontrolled",
+      "icd": "J30.9",
+      "onset": "2018",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "TNSS 9/12 (severe); failed intranasal corticosteroid + antihistamine combination; poorly controlled despite adherence"
+    },
+    {
+      "problem": "House dust mite sensitization (Der p 1, Der f 1)",
+      "icd": "J30.89",
+      "onset": "2018",
+      "status": "Active",
+      "notes": "Dominant allergen \u2014 lives in humid climate; carpet at home; mattress covers not in place"
+    },
+    {
+      "problem": "Cat dander sensitization (Fel d 1)",
+      "icd": "J30.1",
+      "onset": "2018",
+      "status": "Active",
+      "notes": "Owns 2 cats; cat avoidance counseled but declined; AIT covers cat dander"
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Fluticasone propionate nasal spray 2 sprays each nostril daily",
+      "sig": "2 sprays per nostril daily; begin 2 weeks before allergen season; use consistently",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2020",
+      "refills": 5,
+      "status": "Active \u2014 inadequate control"
+    },
+    {
+      "name": "Cetirizine 10mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Rodriguez",
+      "start": "2020",
+      "refills": 5,
+      "status": "Active \u2014 inadequate control"
+    },
+    {
+      "name": "Allergen immunotherapy \u2014 subcutaneous (SCIT) \u2014 House dust mite, cat, grass, tree mix",
+      "sig": "Escalation: weekly injections x15-30 weeks; maintenance: monthly x3-5 years; 30-min observation post-injection",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 12,
+      "status": "Active \u2014 initiated"
+    }
+  ],
   "allergies": [
     {
       "allergen": "NKDA",
@@ -834,7 +873,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "76",
       "rr": "14",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "0/10"
     }
@@ -845,7 +884,7 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "Not a typical ED presentation — included for completeness",
+      "cc": "Not a typical ED presentation \u2014 included for completeness",
       "hpi": "Outpatient presentation.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
@@ -854,88 +893,71 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-897385",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/02/2024",
+      "panel": "Allergen Specific IgE Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Der p 1 (House dust mite \u2014 D. pteronyssinus)",
+          "value": "18.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Der f 1 (House dust mite \u2014 D. farinae)",
+          "value": "16.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Fel d 1 (Cat dander)",
+          "value": "9.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Timothy grass IgE",
+          "value": "4.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Oak tree IgE",
+          "value": "3.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Cockroach IgE",
+          "value": "1.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Mold (Alternaria) IgE",
+          "value": "0.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Total IgE",
+          "value": "580",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "TNSS (Total Nasal Symptom Score)",
+          "value": "9",
+          "unit": "/12",
+          "ref": "<4 controlled",
+          "flag": "H"
         }
       ]
     }
@@ -956,23 +978,23 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "Failed 5 medications — still miserable, affecting work and sleep"
+      "Failed 5 medications \u2014 still miserable, affecting work and sleep"
     ],
     [
       "Comorbidity",
-      "Asthma — undertreated, rhinitis and asthma are one airway"
+      "Asthma \u2014 undertreated, rhinitis and asthma are one airway"
     ],
     [
       "Occupational",
-      "Veterinary technician — animal dander exposure 8h/day is THE trigger"
+      "Veterinary technician \u2014 animal dander exposure 8h/day is THE trigger"
     ],
     [
       "Dilemma",
-      "Loves her job, animals are her trigger — immunotherapy candidate?"
+      "Loves her job, animals are her trigger \u2014 immunotherapy candidate?"
     ],
     [
       "Sleep",
-      "OSA screening positive — nasal congestion contributing to mouth breathing and snoring"
+      "OSA screening positive \u2014 nasal congestion contributing to mouth breathing and snoring"
     ]
   ],
   "references": [
@@ -1005,7 +1027,7 @@ window.EMR_DATA = {
         "SCIT protocols",
         "Cluster/rush protocols",
         "ACE inhibitors increase VIT reactions",
-        "VIT ≥5 years"
+        "VIT \u22655 years"
       ]
     }
   ],
@@ -1068,13 +1090,12 @@ window.EMR_DATA = {
       "Examination of nasal turbinates": "Markedly enlarged and pale inferior turbinates with watery discharge"
     },
     "ddxTargets": [
-      "Severe allergic rhinitis with occupational trigger (correct diagnosis)",
-      "Allergic rhinitis with asthma (united airway disease)",
-      "Chronic rhinosinusitis",
-      "Nasal polyps",
-      "Vasomotor rhinitis",
-      "Medication overuse rhinitis",
-      "Upper respiratory infection"
+      "Perennial allergic rhinitis \u2014 uncontrolled, HDM and cat dominant, AIT indicated (correct)",
+      "Non-allergic rhinitis (vasomotor) \u2014 IgE negative; triggered by temperature, odors, not allergens",
+      "Nasal polyps \u2014 conductive hyposmia; nasal polyposis on scope; often NSAID-sensitive",
+      "Chronic sinusitis \u2014 purulent drainage; facial pressure; sinus imaging shows opacification",
+      "Seasonal allergic rhinitis \u2014 symptoms correlated strictly with pollen season; no perennial symptoms",
+      "Allergic fungal sinusitis \u2014 AFS has characteristic CT findings; fungal allergy predominant"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'just allergies' and missing the severity, occupational component, and associated asthma that requires comprehensive management including immunotherapy consideration",
@@ -1084,7 +1105,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This is an interesting case of someone whose career passion conflicts with their health. What questions would help you understand the severity and impact of her symptoms, and what would you want to know about her work environment and previous treatments?",
       "phase5": "You've identified classic signs of allergic rhinitis, but consider the bigger picture. What does the combination of her occupational exposure, treatment failures, associated symptoms, and exam findings tell you about disease severity and management needs?",
-      "finalDebrief": "This case illustrates severe persistent allergic rhinitis with occupational triggers and united airway disease. How did the patient's work environment, treatment history, and associated asthma change your approach? What management strategies would you consider for someone whose trigger is integral to their career?"
+      "finalDebrief": "This case illustrates severe persistent allergic rhinitis with occupational triggers and united airway disease. How did the patient's work environment, treatment history, and associated asthma change your approach? What management strategies would you consider for someone whose trigger is integral to their career?",
+      "final": "Diagnosis: uncontrolled perennial allergic rhinitis, HDM + cat dominant, AIT candidate. Key teaching points: (1) AIT is the only disease-modifying treatment for allergic rhinitis \u2014 reduces sensitivity, prevents asthma development, reduces new sensitizations. Minimum 3 years for lasting benefit. (2) Step-up criteria: uncontrolled on INCS + antihistamine combination = add INCS + antihistamine + LTRA, or proceed to AIT. Presence of comorbid asthma or animal sensitization are additional AIT indications. (3) SCIT vs. SLIT: SCIT = superior efficacy, requires office administration; SLIT (sublingual) = convenient at-home use, lower efficacy, good for HDM. HDM SLIT (Odactra) is FDA-approved. (4) Environmental control is synergistic with AIT: HEPA air purifiers, allergen-impermeable mattress/pillow covers, humidity control <50%. Cat ownership substantially reduces AIT success if exposure is ongoing. (5) TNSS 9/12 = severely uncontrolled; document TNSS at each visit to track AIT response \u2014 expect improvement after 6-12 months escalation."
     }
+  },
+  "meta": {
+    "diagnosis": "Uncontrolled Perennial Allergic Rhinitis \u2014 House Dust Mite and Pet Dander Sensitization; Allergen Immunotherapy Candidate"
   }
 };

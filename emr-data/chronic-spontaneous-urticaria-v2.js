@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "1594 Jasmine Way, New Orleans, LA 70117",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. James Wu, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Sarah O'Connell",
         "phone": "(415) 555-3973",
@@ -53,7 +53,7 @@ window.EMR_DATA = {
       ],
       [
         "Occupation",
-        "Construction foreman — physical urticaria component (pressure, heat)"
+        "Construction foreman \u2014 physical urticaria component (pressure, heat)"
       ],
       [
         "Stress",
@@ -61,24 +61,24 @@ window.EMR_DATA = {
       ],
       [
         "Mental health",
-        "Not sleeping due to itch — affecting job performance"
+        "Not sleeping due to itch \u2014 affecting job performance"
       ],
       [
         "Prior treatment",
-        "Failed cetirizine, fexofenadine, hydroxyzine — still breaking out daily"
+        "Failed cetirizine, fexofenadine, hydroxyzine \u2014 still breaking out daily"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Severe urticaria flare with angioedema — 3rd ED visit this month, feels like he's going crazy",
+        "chiefComplaint": "Severe urticaria flare with angioedema \u2014 3rd ED visit this month, feels like he's going crazy",
         "diagnosis": "Chronic Spontaneous Urticaria"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CSU — refractory to antihistamines",
+          "description": "CSU \u2014 refractory to antihistamines",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -143,7 +143,7 @@ window.EMR_DATA = {
           "name": "Cetirizine",
           "dose": "20mg",
           "route": "PO",
-          "frequency": "Daily (home — not working)",
+          "frequency": "Daily (home \u2014 not working)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -155,7 +155,7 @@ window.EMR_DATA = {
           "bp": "148/88",
           "hr": "92",
           "rr": "18",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -178,7 +178,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -199,7 +199,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -288,8 +288,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Severe urticaria flare with angioedema — 3rd ED visit this month, feels like he's going crazy",
-          "hpi": "55M with 4-month history of daily hives presenting with 3rd ED visit this month. Large wheals on trunk and extremities with lip angioedema. Failed cetirizine 10mg, fexofenadine 180mg, and hydroxyzine 25mg QHS. Reports hives worsen with physical pressure at work (tool belt, hard hat) and during periods of high stress. Currently going through contentious divorce — not sleeping, drinking more to cope. Says to nurse: \"I feel like I'm losing my mind — the itching never stops.\" TSH found to be low with high anti-TPO — autoimmune thyroiditis may be driving CSU.",
+          "cc": "Severe urticaria flare with angioedema \u2014 3rd ED visit this month, feels like he's going crazy",
+          "hpi": "55M with 4-month history of daily hives presenting with 3rd ED visit this month. Large wheals on trunk and extremities with lip angioedema. Failed cetirizine 10mg, fexofenadine 180mg, and hydroxyzine 25mg QHS. Reports hives worsen with physical pressure at work (tool belt, hard hat) and during periods of high stress. Currently going through contentious divorce \u2014 not sleeping, drinking more to cope. Says to nurse: \"I feel like I'm losing my mind \u2014 the itching never stops.\" TSH found to be low with high anti-TPO \u2014 autoimmune thyroiditis may be driving CSU.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -298,20 +298,20 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Brief observation — starting systemic workup for refractory CSU",
+        "chiefComplaint": "Brief observation \u2014 starting systemic workup for refractory CSU",
         "diagnosis": "Chronic Spontaneous Urticaria"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CSU — refractory, needs biologic",
+          "description": "CSU \u2014 refractory, needs biologic",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Autoimmune thyroiditis (new diagnosis — low TSH, high anti-TPO)",
+          "description": "Autoimmune thyroiditis (new diagnosis \u2014 low TSH, high anti-TPO)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -325,7 +325,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Alcohol use — counsel reduction",
+          "description": "Alcohol use \u2014 counsel reduction",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -339,7 +339,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-6",
-          "description": "Elevated CRP — chronic inflammation",
+          "description": "Elevated CRP \u2014 chronic inflammation",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -390,7 +390,7 @@ window.EMR_DATA = {
           "bp": "138/82",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "3/10"
         }
@@ -413,7 +413,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -434,7 +434,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -497,8 +497,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Brief observation — starting systemic workup for refractory CSU",
-          "hpi": "55M admitted for CSU workup. Autoimmune thyroiditis confirmed — endocrine consult obtained. Starting uptitrated antihistamine regimen while awaiting A/I consult for omalizumab evaluation. Social work: connected to divorce support group, screening positive for PHQ-9 moderate depression — psych referral placed. Alcohol counseling initiated.",
+          "cc": "Brief observation \u2014 starting systemic workup for refractory CSU",
+          "hpi": "55M admitted for CSU workup. Autoimmune thyroiditis confirmed \u2014 endocrine consult obtained. Starting uptitrated antihistamine regimen while awaiting A/I consult for omalizumab evaluation. Social work: connected to divorce support group, screening positive for PHQ-9 moderate depression \u2014 psych referral placed. Alcohol counseling initiated.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -507,34 +507,34 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — refractory CSU with autoimmune thyroiditis, evaluate for omalizumab",
+        "chiefComplaint": "A/I consult \u2014 refractory CSU with autoimmune thyroiditis, evaluate for omalizumab",
         "diagnosis": "Chronic Spontaneous Urticaria"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CSU — failed 3 antihistamines, needs step-up",
+          "description": "CSU \u2014 failed 3 antihistamines, needs step-up",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Autoimmune thyroiditis — likely CSU trigger",
+          "description": "Autoimmune thyroiditis \u2014 likely CSU trigger",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Delayed pressure urticaria — occupational",
+          "description": "Delayed pressure urticaria \u2014 occupational",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Depression — itch-sleep-mood cycle",
+          "description": "Depression \u2014 itch-sleep-mood cycle",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -583,7 +583,7 @@ window.EMR_DATA = {
           "bp": "132/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "2/10"
         }
@@ -606,7 +606,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -627,7 +627,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -690,8 +690,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — refractory CSU with autoimmune thyroiditis, evaluate for omalizumab",
-          "hpi": "A/I consult: 55M with severe refractory CSU (UAS7=38). Autoimmune thyroiditis likely contributing (anti-TPO 342). Delayed pressure urticaria confirmed by dermographism testing and delayed pressure challenge (4h). Recommend omalizumab 300mg Q4wk — insurance PA submitted. In meantime, maximize antihistamines. Address modifiable factors: alcohol reduction (histamine load), stress management, sleep hygiene. Coordinate with endocrine for thyroid management.",
+          "cc": "A/I consult \u2014 refractory CSU with autoimmune thyroiditis, evaluate for omalizumab",
+          "hpi": "A/I consult: 55M with severe refractory CSU (UAS7=38). Autoimmune thyroiditis likely contributing (anti-TPO 342). Delayed pressure urticaria confirmed by dermographism testing and delayed pressure challenge (4h). Recommend omalizumab 300mg Q4wk \u2014 insurance PA submitted. In meantime, maximize antihistamines. Address modifiable factors: alcohol reduction (histamine load), stress management, sleep hygiene. Coordinate with endocrine for thyroid management.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -700,41 +700,41 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "CSU follow-up — 8 weeks on omalizumab, UAS7 reassessment",
+        "chiefComplaint": "CSU follow-up \u2014 8 weeks on omalizumab, UAS7 reassessment",
         "diagnosis": "Chronic Spontaneous Urticaria"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CSU — dramatically improved on omalizumab (UAS7 38→6)",
+          "description": "CSU \u2014 dramatically improved on omalizumab (UAS7 38\u21926)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Autoimmune thyroiditis — on levothyroxine, TSH normalizing",
+          "description": "Autoimmune thyroiditis \u2014 on levothyroxine, TSH normalizing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Delayed pressure urticaria — improved but still present with heavy equipment",
+          "description": "Delayed pressure urticaria \u2014 improved but still present with heavy equipment",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Depression — improving with itch control, started SSRI",
+          "description": "Depression \u2014 improving with itch control, started SSRI",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Alcohol use — reduced to 2-3/week from daily",
+          "description": "Alcohol use \u2014 reduced to 2-3/week from daily",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -785,7 +785,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -808,7 +808,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -829,7 +829,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -892,8 +892,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "CSU follow-up — 8 weeks on omalizumab, UAS7 reassessment",
-          "hpi": "55M dramatic improvement on omalizumab — UAS7 dropped from 38 to 6. Sleeping through the night. Hives rare, no angioedema since starting. Thyroid managed on levothyroxine (TSH normalizing). Depression improving — combination of itch control + sertraline + therapy. Reduced alcohol. Still has some pressure urticaria with heavy equipment at work — discussed ergonomic modifications. Continue omalizumab, plan to reassess in 6 months for possible dose reduction.",
+          "cc": "CSU follow-up \u2014 8 weeks on omalizumab, UAS7 reassessment",
+          "hpi": "55M dramatic improvement on omalizumab \u2014 UAS7 dropped from 38 to 6. Sleeping through the night. Hives rare, no angioedema since starting. Thyroid managed on levothyroxine (TSH normalizing). Depression improving \u2014 combination of itch control + sertraline + therapy. Reduced alcohol. Still has some pressure urticaria with heavy equipment at work \u2014 discussed ergonomic modifications. Continue omalizumab, plan to reassess in 6 months for possible dose reduction.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -915,7 +915,7 @@ window.EMR_DATA = {
     "address": "1813 Clover St, Pittsburgh, PA 15208",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Sarah O'Connell",
       "phone": "(702) 555-9056",
@@ -926,75 +926,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "CSU — refractory to antihistamines",
+      "problem": "Chronic spontaneous urticaria \u2014 refractory to omalizumab 300mg q4w",
+      "icd": "L50.1",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Completed 6 months omalizumab; partial response only; UAS7 currently 16 (inadequate); step-up to cyclosporine or dose escalation under discussion"
     },
     {
-      "id": "prob-2",
-      "description": "Angioedema (lips)",
+      "problem": "Type 2 diabetes mellitus",
+      "icd": "E11.9",
+      "onset": "2019",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Complicates cyclosporine use \u2014 nephrotoxicity and hypertension risk elevated; cyclosporine blood pressure monitoring required"
     },
     {
-      "id": "prob-3",
-      "description": "Physical urticaria component (delayed pressure)",
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2016",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Alcohol use (may worsen)",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Divorce-related stress",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-6",
-      "description": "Depression/insomnia from chronic itch",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "BP 142/88 on current regimen \u2014 suboptimal; cyclosporine may worsen; renal function monitoring essential"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Omalizumab (Xolair) 300mg SC q4 weeks",
+      "sig": "Administer 300mg subcutaneously every 4 weeks; observe 30 min post-injection",
+      "prescriber": "Dr. Rodriguez",
+      "start": "05/2024",
+      "refills": 3,
+      "status": "Active \u2014 partial response only"
     },
     {
-      "id": "med-2",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 20mg daily (up-dosed)",
+      "sig": "Take 2 tablets daily (double standard dose)",
+      "prescriber": "Dr. Rodriguez",
+      "start": "04/2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Cetirizine",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily (home — not working)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Metformin 1000mg BID",
+      "sig": "Take 1 tablet by mouth twice daily with meals",
+      "prescriber": "Dr. Kim",
+      "start": "2020",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 20mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Kim",
+      "start": "2017",
+      "refills": 5,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -1012,7 +996,7 @@ window.EMR_DATA = {
       "bp": "148/88",
       "hr": "92",
       "rr": "18",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -1023,8 +1007,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "Severe urticaria flare with angioedema — 3rd ED visit this month, feels like he's going crazy",
-      "hpi": "55M with 4-month history of daily hives presenting with 3rd ED visit this month. Large wheals on trunk and extremities with lip angioedema. Failed cetirizine 10mg, fexofenadine 180mg, and hydroxyzine 25mg QHS. Reports hives worsen with physical pressure at work (tool belt, hard hat) and during periods of high stress. Currently going through contentious divorce — not sleeping, drinking more to cope. Says to nurse: \"I feel like I'm losing my mind — the itching never stops.\" TSH found to be low with high anti-TPO — autoimmune thyroiditis may be driving CSU.",
+      "cc": "Severe urticaria flare with angioedema \u2014 3rd ED visit this month, feels like he's going crazy",
+      "hpi": "55M with 4-month history of daily hives presenting with 3rd ED visit this month. Large wheals on trunk and extremities with lip angioedema. Failed cetirizine 10mg, fexofenadine 180mg, and hydroxyzine 25mg QHS. Reports hives worsen with physical pressure at work (tool belt, hard hat) and during periods of high stress. Currently going through contentious divorce \u2014 not sleeping, drinking more to cope. Says to nurse: \"I feel like I'm losing my mind \u2014 the itching never stops.\" TSH found to be low with high anti-TPO \u2014 autoimmune thyroiditis may be driving CSU.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -1032,121 +1016,64 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-708949",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/10/2024",
+      "panel": "CSU Monitoring and Cyclosporine Candidacy",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "3",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "UAS7 (Urticaria Activity Score \u2014 7 days)",
+          "value": "16",
+          "unit": "points",
+          "ref": "<7 well-controlled",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "12",
+          "unit": "mg/L",
+          "ref": "<5",
+          "flag": "H"
         },
         {
-          "name": "THYROID/AUTOIMMUNE",
-          "results": [
-            {
-              "test": "TSH",
-              "value": "0.2",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": "L"
-            },
-            {
-              "test": "Anti-TPO",
-              "value": "342",
-              "unit": "IU/mL",
-              "range": "<35",
-              "flag": "H"
-            },
-            {
-              "test": "CRP",
-              "value": "2.8",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.3",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
+        },
+        {
+          "test": "eGFR",
+          "value": "62",
+          "unit": "mL/min/1.73m\u00b2",
+          "ref": ">60",
+          "flag": ""
+        },
+        {
+          "test": "CBC \u2014 WBC",
+          "value": "7.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11.0",
+          "flag": ""
+        },
+        {
+          "test": "Anti-Fc\u03b5RI\u03b1 autoantibodies",
+          "value": "Positive (IgG class)",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "ASST (autologous serum skin test)",
+          "value": "Positive \u2014 6mm wheal",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "TSH",
+          "value": "2.4",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
         }
       ]
     }
@@ -1174,7 +1101,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "Construction foreman — physical urticaria component (pressure, heat)"
+      "Construction foreman \u2014 physical urticaria component (pressure, heat)"
     ],
     [
       "Stress",
@@ -1182,11 +1109,11 @@ window.EMR_DATA = {
     ],
     [
       "Mental health",
-      "Not sleeping due to itch — affecting job performance"
+      "Not sleeping due to itch \u2014 affecting job performance"
     ],
     [
       "Prior treatment",
-      "Failed cetirizine, fexofenadine, hydroxyzine — still breaking out daily"
+      "Failed cetirizine, fexofenadine, hydroxyzine \u2014 still breaking out daily"
     ]
   ],
   "references": [
@@ -1202,7 +1129,7 @@ window.EMR_DATA = {
       "validates": [
         "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
         "UAS7 scoring",
-        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Step-up: sgAH \u2192 updose 4x \u2192 omalizumab \u2192 cyclosporine",
         "Post-viral urticaria in children: no allergy testing needed"
       ]
     }
@@ -1264,13 +1191,12 @@ window.EMR_DATA = {
       "Examine for hepatosplenomegaly": "Abdomen soft, no hepatosplenomegaly detected"
     },
     "ddxTargets": [
-      "Chronic spontaneous urticaria with physical urticaria component (correct diagnosis)",
-      "Chronic inducible urticaria (pressure/dermographic)",
-      "Drug-induced urticaria",
-      "Hereditary angioedema",
-      "Systemic mastocytosis",
-      "Contact dermatitis",
-      "Urticarial vasculitis"
+      "Chronic spontaneous urticaria \u2014 refractory, autoimmune subtype, partial omalizumab response (correct)",
+      "Urticarial vasculitis \u2014 urticaria lasting >24h with bruising; biopsy leukocytoclasia; complement low",
+      "Bullous pemphigoid \u2014 urticarial phase precedes blisters; anti-BP180 antibody positive",
+      "Mastocytosis \u2014 elevated baseline tryptase; Darier sign positive; urticaria pigmentosa skin lesions",
+      "Adult-onset Still disease \u2014 quotidian salmon-colored rash; fever; arthritis; ferritin markedly elevated",
+      "Drug-induced urticaria \u2014 review medication list for new additions in timeline"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'recurrent hives' and missing the chronic spontaneous nature with physical triggers, or focusing too heavily on angioedema component",
@@ -1280,7 +1206,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview this patient, consider the different types of urticaria and their triggers. What specific history would help you distinguish between acute allergic reactions, chronic spontaneous urticaria, and physical urticarias? Think about the timeline and pattern of symptoms.",
       "phase5": "You've identified chronic urticaria with physical components and angioedema. What does the refractory nature to standard antihistamines tell you about next steps? Consider how his occupational and psychosocial stressors might be contributing to the chronicity.",
-      "finalDebrief": "This case illustrates chronic spontaneous urticaria (CSU) with physical urticaria components - a complex condition that's often refractory to standard antihistamine doses. Note how the physical triggers, stress, and alcohol consumption all contribute. The key learning is recognizing when standard urticaria treatment fails and considering step-up therapy or specialist referral for conditions like CSU."
+      "finalDebrief": "This case illustrates chronic spontaneous urticaria (CSU) with physical urticaria components - a complex condition that's often refractory to standard antihistamine doses. Note how the physical triggers, stress, and alcohol consumption all contribute. The key learning is recognizing when standard urticaria treatment fails and considering step-up therapy or specialist referral for conditions like CSU.",
+      "final": "Diagnosis: CSU refractory to omalizumab, autoimmune subtype (anti-Fc\u03b5RI\u03b1+, ASST+), step-up evaluation. Key teaching points: (1) Omalizumab partial responders (UAS7 improvement but >7 remaining): options include omalizumab dose escalation to 450mg or 600mg (off-label), or step up to cyclosporine. EAACI guidelines suggest cyclosporine as Step 4 after omalizumab failure. (2) Autoimmune CSU markers (anti-Fc\u03b5RI\u03b1 IgG, positive ASST) predict SLOWER omalizumab response and higher rate of partial response \u2014 expected finding here. Cyclosporine targets T-cell-driven autoimmune mechanism. (3) Cyclosporine monitoring requirements (every 4-8 weeks): BP, renal function (creatinine), CBC, LFTs. Diabetes + hypertension = higher complication risk \u2014 start low dose (2.5-3 mg/kg/day). (4) Maximum cyclosporine duration: 1-2 years due to nephrotoxicity and hypertension. Goal is disease remission \u2014 then taper off. (5) Emerging therapy: ligelizumab (anti-IgE) and other biologics in trials; dupilumab has some evidence in refractory CSU (anti-IL-4/13). Remibrutinib (BTK inhibitor) approved in some regions for CSU."
     }
+  },
+  "meta": {
+    "diagnosis": "Chronic Spontaneous Urticaria \u2014 Inadequately Controlled on Omalizumab; Cyclosporine Step-Up Considered"
   }
 };
