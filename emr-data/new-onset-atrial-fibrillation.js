@@ -343,56 +343,56 @@ window.EMR_DATA = {
     }
   ],
   "meta": {
-    "diagnosis": "New-Onset Atrial Fibrillation \u2014 Hemodynamically Stable, Rhythm vs Rate Control Decision",
+    "diagnosis": "New-Onset Atrial Fibrillation with Rapid Ventricular Response \u2014 Rate Control and Anticoagulation Decision",
     "caseId": "new-onset-atrial-fibrillation"
   },
   "problems": [
     {
-      "problem": "New-onset atrial fibrillation \u2014 <48 hours duration",
+      "problem": "New-onset atrial fibrillation \u2014 RVR 148 bpm",
       "icd": "I48.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "HR 142, BP 118/72 \u2014 hemodynamically stable. Duration estimated <48h \u2014 cardioversion appropriate."
+      "notes": "Palpitations 6 hours, HR 148 irregular \u2014 new AFib, cardioversion vs rate control decision"
     },
     {
-      "problem": "Hypertension \u2014 underlying AF trigger",
-      "icd": "I10",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "Hypertension is the most common modifiable risk factor for AF"
-    },
-    {
-      "problem": "CHA2DS2-VASc score 2 \u2014 anticoagulation indicated",
+      "problem": "Anticoagulation decision \u2014 CHA2DS2-VASc score 3",
       "icd": "I48.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "Score: female sex (1) + hypertension (1) = 2. Annual stroke risk ~2.2%. Anticoagulation recommended."
+      "notes": "Age 68 (1) + HTN (1) + diabetes (1) = CHA2DS2-VASc 3. Anticoagulation indicated."
+    },
+    {
+      "problem": "Precipitant workup \u2014 thyrotoxicosis, PE, electrolytes",
+      "icd": "I48.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "New AFib requires precipitant search before assuming primary cardiac"
     }
   ],
   "medications": [
     {
-      "name": "Metoprolol tartrate 5mg IV x3 doses PRN \u2014 rate control",
-      "sig": "IV push slowly, may repeat q5min up to 3 doses \u2014 target HR <110",
-      "prescriber": "Cardiology",
+      "name": "Metoprolol tartrate 5mg IV over 5 min \u2014 rate control",
+      "sig": "IV push over 5 min \u2014 repeat q5min up to 3 doses for HR >110",
+      "prescriber": "ED",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Anticoagulation \u2014 heparin bridge THEN apixaban",
-      "sig": "Heparin infusion before cardioversion, then apixaban 5mg BID ongoing",
-      "prescriber": "Cardiology",
+      "name": "Heparin 5000 units SQ BID \u2014 anticoagulation bridge",
+      "sig": "Subcutaneous twice daily pending DOAC initiation",
+      "prescriber": "Medicine",
       "start": "11/2024",
-      "refills": 5,
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "DC cardioversion 200J (if <48h, anticoagulated, hemodynamically stable)",
-      "sig": "Synchronized cardioversion after adequate anticoagulation",
-      "prescriber": "Cardiology",
+      "name": "Apixaban 5mg PO BID \u2014 DOAC start",
+      "sig": "Take twice daily \u2014 starting in hospital, continue indefinitely (CHA2DS2-VASc 3)",
+      "prescriber": "Medicine",
       "start": "11/2024",
-      "refills": 0,
-      "status": "Planned"
+      "refills": 2,
+      "status": "Active \u2014 new"
     }
   ],
   "labs": [
@@ -402,16 +402,23 @@ window.EMR_DATA = {
       "results": [
         {
           "test": "TSH",
-          "value": "0.3",
+          "value": "0.08",
           "unit": "mIU/L",
           "ref": "0.4-4.0",
           "flag": "L"
         },
         {
           "test": "Free T4",
-          "value": "1.9",
+          "value": "2.4",
           "unit": "ng/dL",
           "ref": "0.8-1.8",
+          "flag": "H"
+        },
+        {
+          "test": "BNP",
+          "value": "188",
+          "unit": "pg/mL",
+          "ref": "<100",
           "flag": "H"
         },
         {
@@ -423,7 +430,7 @@ window.EMR_DATA = {
         },
         {
           "test": "Magnesium",
-          "value": "1.6",
+          "value": "1.5",
           "unit": "mg/dL",
           "ref": "1.7-2.4",
           "flag": "L"
@@ -434,20 +441,6 @@ window.EMR_DATA = {
           "unit": "ng/mL",
           "ref": "<0.04",
           "flag": ""
-        },
-        {
-          "test": "BNP",
-          "value": "188",
-          "unit": "pg/mL",
-          "ref": "<100",
-          "flag": "H"
-        },
-        {
-          "test": "CBC \u2014 WBC",
-          "value": "9.2",
-          "unit": "K/\u03bcL",
-          "ref": "4.5-11",
-          "flag": ""
         }
       ]
     }
@@ -456,22 +449,22 @@ window.EMR_DATA = {
     {
       "date": "11/18/2024",
       "study": "12-Lead ECG + Echocardiogram",
-      "indication": "Irregular tachycardia, new AF \u2014 evaluate structure and function",
-      "findings": "ECG: Atrial fibrillation, ventricular rate 142 bpm, irregularly irregular. No ST changes. Echo: EF 58%. Mild left atrial enlargement (LA diameter 4.2cm). No thrombus on TTE (TEE more sensitive if needed pre-cardioversion). No significant valvular disease.",
-      "impression": "New AF with LA enlargement. No LV dysfunction. Subclinical hyperthyroidism identified on labs \u2014 contributing trigger. Hemodynamically stable, candidate for cardioversion."
+      "indication": "New AFib \u2014 characterize ventricular function, valvular disease",
+      "findings": "ECG: Irregularly irregular rhythm, no P waves, ventricular rate 148 bpm. No ST changes. Echo: EF 55%. Mild left atrial enlargement. No significant valvular disease. No LV wall motion abnormalities.",
+      "impression": "AFib with RVR. Preserved EF. Mild LA enlargement. TSH suppressed \u2014 hyperthyroidism as precipitant."
     }
   ],
   "guided": {
     "ddxTargets": [
-      "New AF \u2014 cardioversion and anticoagulation (correct)",
-      "Multifocal atrial tachycardia \u2014 different P-wave morphology, COPD association",
-      "Atrial flutter with variable block \u2014 sawtooth flutter waves, different rate",
-      "Ventricular tachycardia \u2014 wide complex, different hemodynamic impact",
-      "Rate control only strategy \u2014 appropriate for long-standing AF, not new onset in young patient",
-      "Observation only without anticoagulation \u2014 CHA2DS2-VASc 2 requires anticoagulation"
+      "New AFib \u2014 hyperthyroidism as precipitant, rate control + anticoagulation (correct)",
+      "AFib with pre-excitation (WPW) \u2014 different treatment (avoid AV nodal blockers)",
+      "Atrial flutter \u2014 2:1 block may mimic AFib rate, but irregularly irregular excludes",
+      "Multifocal atrial tachycardia \u2014 different rhythm strip morphology",
+      "SVT \u2014 irregular rhythm excludes regular SVT",
+      "Ventricular tachycardia \u2014 wide complex would be present"
     ],
     "coachPrompts": {
-      "final": "Diagnosis: new-onset AF \u2014 subclinical hyperthyroidism as trigger. Key learning: (1) ALWAYS check TSH in new AF: hyperthyroidism (overt or subclinical as here, TSH 0.3 with elevated free T4) is a reversible trigger. Treating the thyroid disorder may restore normal sinus rhythm without cardioversion. (2) Rhythm vs rate control: AFFIRM trial \u2014 no mortality difference. BUT: new onset <48h, symptomatic, structurally normal heart = reasonable to attempt cardioversion. Older patients with long-standing AF, multiple comorbidities = rate control. (3) Cardioversion safety: <48h onset + no LA thrombus on echo = safe to cardiovert without 3-week anticoagulation. Must still anticoagulate AFTER cardioversion (post-cardioversion 'stunning' increases clot risk for 4 weeks). (4) CHA2DS2-VASc: C=heart failure(1), H=HTN(1), A2=age\u226575(2), D=DM(1), S2=prior stroke/TIA(2), V=vascular disease(1), A=age65-74(1), Sc=female sex(1). Score \u22652 in women or \u22652 in men (\u22651 if male) = anticoagulate. DOAC preferred over warfarin. (5) Hypokalemia + hypomagnesemia: electrolyte abnormalities predispose to arrhythmia and reduce cardioversion success. Replete K+ and Mg2+ before cardioversion."
+      "final": "Diagnosis: new AFib with RVR \u2014 hyperthyroid precipitant found. Key learning: (1) Precipitant search first: NEW AFib always requires workup. TSH 0.08 + free T4 2.4 = hyperthyroidism is the precipitant here. Treating AFib without addressing hyperthyroidism = cardioversion will fail. Treat underlying cause: methimazole + beta-blocker (also treats AFib rate). (2) Rate vs rhythm control: 48-hour cardioversion window \u2014 if onset <48h confirmed and no clot (TEE or computed probability), direct cardioversion acceptable. If >48h or unknown: rate control + anticoagulate x3 weeks before cardioversion. TEE-guided cardioversion accelerates timeline. (3) CHA2DS2-VASc calculation: C=CHF(0), H=HTN(1), A2=Age\u226575(0), D=DM(1), S2=Stroke(0), V=Vascular disease(0), A=Age 65-74(1), Sc=Female sex(0). Score=3. Guidelines: anticoagulate if score \u22652 in men, \u22653 in women. DOAC preferred over warfarin. (4) Hypokalemia + hypomagnesemia: both are pro-arrhythmic. Correct both before cardioversion attempt. (5) HAS-BLED score for bleeding risk: should be calculated alongside CHA2DS2-VASc. Do not use HAS-BLED to withhold anticoagulation \u2014 address modifiable bleeding risk factors instead."
     }
   }
 };

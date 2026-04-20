@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Post-Stroke Driver Evaluation",
-      "icd": "Z00.00",
+      "problem": "Post-stroke driver rehabilitation evaluation",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "58yo post-left MCA stroke, wants to return to driving. OT driving evaluation requested."
+    },
+    {
+      "problem": "Right homonymous hemianopsia \u2014 driving disqualification",
+      "icd": "H53.461",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Right visual field loss in both eyes \u2014 Florida requires 130\u00b0 binocular field. Not met."
+    },
+    {
+      "problem": "Executive function deficits \u2014 cognitive screen positive",
+      "icd": "F07.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Trail Making Test B 148 sec (>78 sec = elevated risk). Impulsivity noted on MoCA subtests."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 81mg daily",
+      "sig": "Take daily",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 80mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "09/10/2024",
+      "study": "Humphrey Visual Field 24-2 OU",
+      "indication": "Driving evaluation \u2014 post-stroke field assessment",
+      "findings": "Right eye and left eye: Dense right homonymous hemianopsia. Approximately 90\u00b0 of binocular horizontal visual field remaining. Florida minimum: 130\u00b0.",
+      "impression": "Visual field loss does not meet Florida driving requirements. Clear disqualification on this criterion alone."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "ot-driver-rehabilitation",
-    "diagnosis": "See diagnosis \u2014 Post-Stroke Driver Evaluation",
+    "diagnosis": "Post-Stroke Driver Rehabilitation Evaluation \u2014 Right Homonymous Hemianopsia, Cognitive Screen Positive",
     "acuity": 3,
     "presentation": "Post-Stroke Driver Evaluation",
     "category": "neurologic"
@@ -175,12 +205,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Post-Stroke Driver Evaluation \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-stroke driver evaluation \u2014 visual field disqualifies driving (correct)",
+      "Cleared for driving \u2014 visual field and cognitive screen both abnormal",
+      "Conditional clearance \u2014 one failed criterion is sufficient for disqualification",
+      "Re-evaluate after more recovery \u2014 appropriate if patient requests",
+      "Adaptive driving with bioptic telescope \u2014 not for hemianopsia (designed for low acuity)",
+      "Family override \u2014 patient has right to be evaluated, family cannot override"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +220,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Post-Stroke Driver Evaluation. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Neuropsych testing is normal but the patient had a right hemisphere stroke. What additional cognitive-perceptual tests predict on-road performance \u2014 and who has the final authority on driving fitness? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-stroke driver evaluation \u2014 not cleared (visual field + cognitive deficits). Key OT driving rehabilitation learning: (1) OT driver rehabilitation specialist (DRS) role: evaluate visual, cognitive, and physical capacity for driving. Not a DMV function \u2014 OT provides clinical recommendation, DMV issues or revokes license. (2) Florida driving visual requirements: visual acuity \u226520/70 best corrected, binocular horizontal visual field \u2265130\u00b0. This patient has 90\u00b0 remaining = does NOT meet field requirement regardless of acuity. (3) Cognitive screening for driving: Trail Making Test B >78 sec = elevated crash risk (neuropsychological literature). MoCA <26 with executive deficits = concern. Both are present here. Even if vision were adequate, cognitive deficits would require further evaluation. (4) The difficult conversation: 'Based on my evaluation, I cannot recommend return to driving at this time. You have two findings \u2014 visual field and cognitive \u2014 that create significant safety risk. This is a medical finding, not a judgment. I will document this in my report.' Offer alternatives: ride services, family transportation, public transit. (5) Mandatory reporting: Florida: physicians MAY report, no mandatory statute for OTs specifically. However, if patient indicates they WILL continue driving despite the recommendation, discuss with physician (who has permissive reporting authority). Document all conversations."
     }
   }
 };

@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: ALS Diagnosis",
-      "icd": "Z00.00",
+      "problem": "ALS \u2014 progressive functional decline trajectory",
+      "icd": "G12.21",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Diagnosed 14 months ago. Bilateral UE weakness grade 3/5 proximal, 4/5 distal. Speech slowing (dysarthria)."
+    },
+    {
+      "problem": "Dysarthria \u2014 early, AAC planning needed now",
+      "icd": "R47.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Speech intelligibility declining \u2014 AAC evaluation BEFORE speech unintelligible is critical for voice banking"
+    },
+    {
+      "problem": "Anticipatory care planning \u2014 advance directives needed",
+      "icd": "Z66",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "ALS = terminal diagnosis. Advance directives, ventilation decision, feeding tube timing should be discussed proactively"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Riluzole 50mg BID",
+      "sig": "Take twice daily \u2014 only disease-modifying medication. Extends survival ~3 months on average.",
+      "prescriber": "Neurology",
+      "start": "2023",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Edaravone 60mg IV 10 days/month (if covered)",
+      "sig": "Monthly IV infusion \u2014 antioxidant, may slow functional decline",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Baclofen 20mg TID \u2014 spasticity",
+      "sig": "Take three times daily",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "ot-als-als-equipment",
-    "diagnosis": "See diagnosis \u2014 ALS Diagnosis",
+    "diagnosis": "ALS \u2014 OT Progressive Equipment Planning: AAC, ADL Adaptation, Anticipatory Care Planning",
     "acuity": 3,
     "presentation": "ALS Diagnosis",
     "category": "neurologic"
@@ -175,12 +205,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "ALS Diagnosis \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "ALS \u2014 progressive equipment and anticipatory planning (correct)",
+      "Myasthenia gravis \u2014 fatigable weakness, different from UMN+LMN pattern of ALS",
+      "Multifocal motor neuropathy \u2014 pure LMN, treatable with IVIG",
+      "Kennedy disease \u2014 X-linked bulbospinal, slower progression",
+      "Cervical myelopathy \u2014 imaging distinguishes",
+      "Primary lateral sclerosis \u2014 pure UMN, much slower progression than ALS"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +220,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: ALS Diagnosis. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) What is your equipment planning framework for ALS given the progressive nature \u2014 and at what functional thresholds do you proactively introduce each level of assistive technology? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: ALS \u2014 OT anticipatory equipment planning. Key OT learning: (1) Anticipatory equipment planning is ALS OT's core competency \u2014 do NOT wait until the patient cannot use equipment to order it. Order ahead of functional decline. AAC (augmentative and alternative communication) MUST be evaluated when speech is still 80%+ intelligible for voice banking (recording patient's natural voice for future synthetic speech). (2) OT ALS equipment trajectory: now (dysarthria beginning) \u2192 AAC evaluation + low-tech communication boards. As hand strength declines \u2192 adapted feeding utensils, button hooks, dressing aids, environmental control units. As ambulation declines \u2192 power wheelchair with head/chin controls (evaluate 2+ months before needed). Respiratory decline \u2192 positioning for ventilatory support. (3) Voice banking: apps like ModelTalker, Acapela MyOwnVoice allow patient to record phrases while voice intact. Creates a personalized synthetic voice. This opportunity disappears when dysarthria is severe \u2014 OT must refer now. (4) Advance directive conversation: OT is often the team member with the most patient time. Creating an environment for this discussion is appropriate. Key decisions: (a) PEG feeding tube timing (FVC >50% = better surgical tolerance), (b) Non-invasive ventilation (BiPAP), (c) Invasive ventilation (tracheostomy). Patient chooses, OT documents and supports. (5) Caregiver training: ALS caregiver burden is extreme. OT assesses caregiver capacity, teaches proper transfer techniques early, identifies respite resources."
     }
   }
 };

@@ -30,39 +30,47 @@ window.EMR_DATA = {
       "icd": "I74.3",
       "onset": "2024",
       "status": "Active",
-      "notes": "Sudden pain, pallor, paresthesias, pulselessness right foot \u2014 3 hours duration, surgical window open"
+      "notes": "Pain, pallor, pulselessness, paresthesias onset 3 hours. Vascular surgery emergent consult."
     },
     {
-      "problem": "Atrial fibrillation \u2014 source of embolus",
+      "problem": "Atrial fibrillation \u2014 probable embolic source",
       "icd": "I48.0",
       "onset": "2022",
       "status": "Active",
-      "notes": "Known AFib \u2014 not on anticoagulation (patient non-compliant). Cardioembolism likely source."
+      "notes": "Chronic AFib on aspirin only \u2014 not adequately anticoagulated. Embolus from cardiac thrombus."
     },
     {
-      "problem": "Compartment syndrome risk \u2014 reperfusion injury",
-      "icd": "M79.A01",
+      "problem": "Viability threatened \u2014 3-hour window",
+      "icd": "I74.3",
       "onset": "2024",
       "status": "Active",
-      "notes": "Post-revascularization: compartment pressures must be monitored \u2014 fasciotomy may be required"
+      "notes": "Muscle still viable at 3h but window closing. 6 hours = irreversible ischemia/compartment syndrome."
     }
   ],
   "medications": [
     {
-      "name": "Heparin 5000 units IV bolus THEN infusion",
-      "sig": "Anticoagulation to prevent propagation \u2014 immediate",
+      "name": "Heparin 5000 units IV bolus THEN 1000 units/hr infusion \u2014 STAT",
+      "sig": "Anticoagulation to prevent propagation \u2014 NOT a treatment for existing embolus",
+      "prescriber": "Vascular Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "STAT"
+    },
+    {
+      "name": "Morphine 2-4mg IV PRN pain",
+      "sig": "IV push every 4 hours as needed",
+      "prescriber": "Vascular Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "Aspirin 325mg PO loading dose",
+      "sig": "Antiplatelet \u2014 chew immediately",
       "prescriber": "Vascular Surgery",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
-    },
-    {
-      "name": "Pain management \u2014 morphine 4mg IV PRN",
-      "sig": "IV PRN \u2014 ischemic pain is severe",
-      "prescriber": "ED",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "PRN"
     }
   ],
   "allergies": [
@@ -103,11 +111,11 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "ALI Workup",
+      "panel": "Acute Limb Ischemia Workup",
       "results": [
         {
-          "test": "Hemoglobin",
-          "value": "13.2",
+          "test": "CBC \u2014 Hemoglobin",
+          "value": "13.8",
           "unit": "g/dL",
           "ref": "13.5-17.5",
           "flag": ""
@@ -120,31 +128,31 @@ window.EMR_DATA = {
           "flag": ""
         },
         {
-          "test": "Potassium",
-          "value": "4.8",
-          "unit": "mEq/L",
-          "ref": "3.5-5.0",
-          "flag": ""
-        },
-        {
-          "test": "CK",
-          "value": "2,200",
-          "unit": "U/L",
-          "ref": "22-198",
-          "flag": "H"
-        },
-        {
-          "test": "Lactate",
-          "value": "3.4",
-          "unit": "mmol/L",
-          "ref": "<2.0",
-          "flag": "H"
-        },
-        {
-          "test": "INR",
+          "test": "PT/INR",
           "value": "1.1",
           "unit": "",
           "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.04",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": ""
+        },
+        {
+          "test": "Lactate",
+          "value": "1.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": ""
+        },
+        {
+          "test": "Type and Screen",
+          "value": "A positive",
+          "unit": "",
+          "ref": "",
           "flag": ""
         }
       ]
@@ -153,10 +161,10 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "11/18/2024",
-      "study": "CT Angiography Lower Extremity + Duplex Ultrasound",
-      "indication": "Acute limb ischemia \u2014 localize occlusion, assess outflow",
-      "findings": "CTA: Abrupt occlusion at distal popliteal artery. No calcified plaque at occlusion site (consistent with embolus, not thrombosis). Tibial arteries reconstitute below with poor signal. Left popliteal and tibials: patent.",
-      "impression": "Acute right popliteal embolism \u2014 Rutherford Class IIb (threatened, immediately threatened). Emergent thromboembolectomy or catheter-directed thrombolysis required. Surgical window open at 3 hours."
+      "study": "CT Angiography Right Lower Extremity",
+      "indication": "Acute limb ischemia \u2014 characterize level and mechanism",
+      "findings": "Abrupt cutoff of right common femoral artery at mid-femoral level. Meniscus sign present \u2014 characteristic of embolism. No underlying atherosclerotic stenosis in visualized segments. Left lower extremity: mild atherosclerotic changes but patent. Contralateral popliteal: mild plaque.",
+      "impression": "Acute right femoral artery embolism at mid-femoral level. Meniscus sign confirms embolic mechanism. No significant atherosclerotic disease suggesting thrombosis. Vascular surgery for embolectomy."
     }
   ],
   "immunizations": [
@@ -264,12 +272,12 @@ window.EMR_DATA = {
       "Assess leg hair distribution and skin changes": "Bilateral lower leg hair loss and shiny, atrophic skin changes"
     },
     "ddxTargets": [
-      "Acute limb ischemia \u2014 popliteal embolism, thromboembolectomy (correct)",
-      "Acute DVT \u2014 venous occlusion causes swelling/pain, not pallor and pulselessness",
-      "Leriche syndrome \u2014 chronic, bilateral, different onset",
-      "Peripheral artery disease exacerbation \u2014 no acute occlusion history",
-      "Compartment syndrome \u2014 post-injury, not spontaneous with absent pulse",
-      "Raynaud's phenomenon \u2014 bilateral, vasospastic, warm rewarming"
+      "Acute limb ischemia \u2014 embolic, AFib source (correct)",
+      "Acute thrombosis on underlying atherosclerosis \u2014 meniscus sign and no plaque supports embolism",
+      "DVT \u2014 arterial not venous occlusion, different presentation",
+      "Leriche syndrome \u2014 bilateral claudication, not acute",
+      "Neurological cause of leg weakness \u2014 pulselessness is vascular",
+      "Compartment syndrome \u2014 consequence of ischemia, not the primary diagnosis"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known PAD family history and assuming chronic rather than acute arterial insufficiency",
@@ -280,11 +288,11 @@ window.EMR_DATA = {
       "phase2": "This patient has several cardiovascular risk factors and comorbidities. What specific aspects of his past medical history might be most relevant to acute leg ischemia? How might his current medications factor into your diagnostic thinking?",
       "phase5": "Now that you've completed your history and physical, what do the absent pulses and the '6 P's' findings tell you about the vascular status? How does the acuity and his atrial fibrillation history inform your leading diagnosis?",
       "finalDebrief": "This case illustrates how acute arterial embolism from atrial fibrillation can present dramatically. How did your differential evolve from considering venous vs arterial pathology? What key historical and physical exam features distinguished embolic from thrombotic arterial occlusion?",
-      "final": "Diagnosis: acute limb ischemia \u2014 popliteal embolism. Key learning: (1) 6 Ps: Pain, Pallor, Pulselessness, Paresthesias, Paralysis, Poikilothermia (cold). Paralysis = late finding indicating motor nerve ischemia \u2014 imminent irreversible damage. Paresthesias alone = urgent, hours remain. (2) Rutherford classification: Class I = viable (no sensory loss). Class IIa = marginally threatened (paresthesias, no paralysis). Class IIb = immediately threatened (sensory + weakness). Class III = irreversible (fixed mottling, muscle rigidity). Class IIb here = emergent intervention. (3) Embolism vs thrombosis: embolism = sudden onset, no prior claudication, contralateral pulses normal, often AFib source. Thrombosis = prior PAD symptoms, bilateral disease, gradual onset. Different: thrombosis may need bypass; embolism treated by Fogarty catheter thromboembolectomy. (4) Heparin immediately: prevents propagation while preparing OR. Does not lyse existing clot. (5) Reperfusion syndrome: after 4-6h ischemia, revascularization releases myoglobin, K+, lactate \u2192 rhabdomyolysis, hyperkalemia, acidosis. Post-op: aggressive hydration, monitor K+, consider prophylactic fasciotomy if ischemia >6h."
+      "final": "Diagnosis: acute embolic limb ischemia \u2014 AFib source. Key learning: (1) Six Ps of acute limb ischemia: Pain, Pallor, Pulselessness, Paresthesias, Paralysis, Poikilothermia. The last two (paralysis + paresthesias) indicate nerve and muscle involvement \u2014 irreversible injury approaching. Immediate vascular surgery consult. (2) Embolism vs thrombosis: Embolism \u2014 sudden onset, no prior claudication, meniscus sign on imaging, cardiac source (AFib, post-MI thrombus), contralateral pulses normal. Thrombosis \u2014 prior claudication, atherosclerotic plaque on imaging, bilateral disease. Management differs. (3) Rutherford classification: Class I = viable (no immediate threat), Class IIa = marginally threatened (sensory loss, no paralysis), Class IIb = immediately threatened (sensory + motor loss), Class III = irreversible (profound paralysis, major tissue loss). This patient = Class IIb. (4) Treatment: embolus \u2192 Fogarty catheter embolectomy (surgical). Thrombosis \u2192 catheter-directed thrombolysis OR surgical bypass. Classification determines approach. (5) Heparin immediately: does NOT lyse existing clot but prevents propagation and prevents distal microvascular thrombosis. Give before imaging if limb acutely threatened."
     }
   },
   "meta": {
-    "diagnosis": "Acute Limb Ischemia \u2014 6 Ps, Embolism to Popliteal Artery, 4-Hour Window",
+    "diagnosis": "Acute Limb Ischemia \u2014 Right Lower Extremity, 6 Ps, Embolus vs Thrombosis",
     "caseId": "acute-limb-ischemia"
   }
 };

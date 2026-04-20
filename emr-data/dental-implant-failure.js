@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Implant Placed 3 Months Ago",
-      "icd": "Z00.00",
+      "problem": "Peri-implantitis \u2014 implant #30",
+      "icd": "K08.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Implant placed 3 years ago. Progressive bone loss >3mm on radiograph. Probing depths 7-8mm. Bleeding + suppuration."
+    },
+    {
+      "problem": "Inadequate home care \u2014 risk factor",
+      "icd": "Z72.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Interdental brushing not being done around implant. Biofilm accumulation."
+    },
+    {
+      "problem": "Prior periodontal disease \u2014 risk factor",
+      "icd": "K05.311",
+      "onset": "2019",
+      "status": "Resolved",
+      "notes": "History of moderate periodontitis \u2014 treated, but history increases peri-implantitis risk"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Chlorhexidine 0.12% irrigation during debridement",
+      "sig": "Used during clinical procedure \u2014 not for long-term daily use (staining, resistance)",
+      "prescriber": "Dr. Voss DDS",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active during procedure"
+    },
+    {
+      "name": "Doxycycline 100mg PO BID x2 weeks (adjunct)",
+      "sig": "Take twice daily \u2014 adjunct to mechanical debridement for peri-implantitis",
+      "prescriber": "Dr. Voss DDS",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Periapical Radiograph \u2014 Implant #30 Serial",
+      "indication": "Pain on loading, suppuration, probing depths 7-8mm",
+      "findings": "Implant #30: Crestal bone loss 3.8mm from platform (from post-placement baseline). Bone loss pattern: circumferential. No implant thread exposure to apex \u2014 not failed completely. Implant body: No fracture, no loosening visible.",
+      "impression": "Peri-implantitis with moderate bone loss (3.8mm). Implant potentially salvageable with surgical intervention. Periodontist referral for resective or regenerative peri-implant surgery."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "dental-implant-failure",
-    "diagnosis": "See diagnosis \u2014 Implant Placed 3 Months Ago",
+    "diagnosis": "Peri-Implantitis \u2014 Bone Loss >3mm, Implant #30, Probing Depths 7-8mm",
     "acuity": 3,
     "presentation": "Implant Placed 3 Months Ago",
     "category": "other"
@@ -176,12 +206,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Implant Placed 3 Months Ago \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Peri-implantitis \u2014 moderate, bone loss >3mm (correct)",
+      "Peri-implant mucositis \u2014 soft tissue only, no bone loss",
+      "Implant failure/osseointegration loss \u2014 radiographic and clinical assessment needed",
+      "Occlusal overload \u2014 bone loss pattern would differ",
+      "Foreign body reaction \u2014 diagnose by histology if needed",
+      "Normal crestal bone remodeling \u2014 >3mm is beyond normal (1-1.5mm at year 1 normal)"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -191,7 +221,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a dentistry case with chief complaint: Implant Placed 3 Months Ago. What are the most important questions for a dentistry to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a dentistry perspective, what is the most critical finding that narrows this differential? What is the dentistry-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the dentistry's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for dentistry. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) dentistry assessment revealed the key discriminating features. (3) Distinguish early implant failure (osseointegration failure) from peri-implantitis. What are the risk factors, the clinical criteria for removal, and the management of surrounding bone loss? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: peri-implantitis, moderate severity. Key dentistry learning: (1) Peri-implant disease spectrum: Peri-implant MUCOSITIS = reversible inflammation limited to soft tissue (no bone loss) \u2014 treated with improved hygiene and professional cleaning. Peri-IMPLANTITIS = irreversible bone loss \u2014 requires surgical intervention. Distinguish these before treatment planning. (2) Diagnosis criteria for peri-implantitis: (a) Probing depths increased from baseline, (b) BOP (bleeding on probing) or suppuration, (c) Radiographic bone loss >1.5mm at year 1, >0.2mm per year thereafter. This patient: 3.8mm bone loss, 7-8mm probing, suppuration = peri-implantitis. (3) Treatment options: Non-surgical debridement + antibiotics (limited efficacy for moderate disease with bone loss). Surgical: resective (pocket reduction) vs regenerative (bone graft + membrane). Moderate peri-implantitis with contained bone defect \u2192 regenerative surgery is preferred. (4) Risk factors for peri-implantitis: prior periodontal disease (3x risk), poor home care, smoking, diabetes, thin keratinized tissue, subcrestal placement. Modify all before and after treatment. (5) Salvage vs extraction: if bone loss >50% of implant length, implant mobility (failed osseointegration), or non-resolvable infection \u2192 remove implant. Bone graft socket, consider re-implantation after 3-6 months healing."
     }
   }
 };

@@ -486,7 +486,7 @@ window.EMR_DATA = {
     }
   ],
   "meta": {
-    "diagnosis": "Severe Alcohol Withdrawal \u2014 CIWA-Ar 22, Risk of Seizure and Delirium Tremens",
+    "diagnosis": "Severe Alcohol Withdrawal \u2014 CIWA-Ar 22, Risk of Delirium Tremens and Seizure",
     "caseId": "alcohol-withdrawal"
   },
   "problems": [
@@ -495,116 +495,116 @@ window.EMR_DATA = {
       "icd": "F10.230",
       "onset": "2024",
       "status": "Active",
-      "notes": "Last drink 36 hours ago, CIWA-Ar 22 \u2014 severe withdrawal, DTs risk within 24-48 hours"
+      "notes": "48h since last drink, tremor, diaphoresis, agitation, mild hallucinations \u2014 CIWA-Ar 22 = severe"
     },
     {
-      "problem": "Alcohol use disorder \u2014 heavy daily use, 15+ years",
+      "problem": "Alcohol use disorder \u2014 daily heavy use",
       "icd": "F10.20",
-      "onset": "2009",
+      "onset": "2018",
       "status": "Active",
-      "notes": "1 liter vodka daily \u2014 high tolerance, high withdrawal risk"
+      "notes": "PPD of whiskey x6 years. Prior withdrawal seizure in 2022."
     },
     {
-      "problem": "Thiamine deficiency \u2014 Wernicke encephalopathy risk",
-      "icd": "E51.2",
+      "problem": "Delirium tremens risk \u2014 prior seizure + CIWA >15",
+      "icd": "F10.231",
       "onset": "2024",
       "status": "Active",
-      "notes": "Malnourished alcoholic \u2014 give thiamine BEFORE glucose to prevent Wernicke"
+      "notes": "Risk factors for DT: prior DT/seizure, CIWA >15, heavy use >10 years, medical comorbidities"
     }
   ],
   "medications": [
     {
-      "name": "Thiamine 500mg IV TID x3 days THEN 100mg daily",
-      "sig": "IV infusion \u2014 give BEFORE glucose. Prevents Wernicke encephalopathy.",
+      "name": "Diazepam 10mg IV q1h PRN CIWA-Ar >10 (symptom-triggered)",
+      "sig": "IV every hour as needed for CIWA-Ar >10 \u2014 symptom-triggered dosing superior to fixed schedule",
       "prescriber": "Medicine",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Lorazepam CIWA-Ar protocol \u2014 symptom-triggered",
-      "sig": "Lorazepam 2mg IV/PO for CIWA-Ar 8-15, 4mg for >15 \u2014 reassess q1h",
+      "name": "Thiamine 100mg IV TID x3 days THEN oral",
+      "sig": "IV x3 days \u2014 Wernicke prevention. Give BEFORE glucose.",
       "prescriber": "Medicine",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Phenobarbital 260mg IV (adjunct for refractory withdrawal)",
-      "sig": "IV \u2014 for CIWA-Ar >20 or benzorefractory. Long half-life provides smooth coverage.",
+      "name": "Multivitamin IV daily",
+      "sig": "IV daily \u2014 nutritional repletion",
       "prescriber": "Medicine",
       "start": "11/2024",
       "refills": 0,
-      "status": "Standby"
+      "status": "Active"
     },
     {
-      "name": "Folic acid 1mg daily + Multivitamin",
-      "sig": "Take daily \u2014 nutritional support",
+      "name": "Magnesium sulfate 2g IV over 2h (Mg 1.4)",
+      "sig": "IV replacement \u2014 hypomagnesemia worsens withdrawal and lowers seizure threshold",
       "prescriber": "Medicine",
       "start": "11/2024",
-      "refills": 4,
+      "refills": 0,
       "status": "Active"
     }
   ],
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "Alcohol Withdrawal Labs",
+      "panel": "Alcohol Withdrawal Panel",
       "results": [
         {
-          "test": "BAL (blood alcohol level)",
-          "value": "<10",
+          "test": "Blood alcohol level",
+          "value": "0",
           "unit": "mg/dL",
           "ref": "0",
           "flag": ""
         },
         {
           "test": "Magnesium",
-          "value": "1.2",
+          "value": "1.4",
           "unit": "mg/dL",
           "ref": "1.7-2.4",
           "flag": "L"
         },
         {
-          "test": "Phosphate",
-          "value": "1.8",
-          "unit": "mg/dL",
-          "ref": "2.5-4.5",
-          "flag": "L"
-        },
-        {
           "test": "Potassium",
-          "value": "3.0",
+          "value": "3.1",
           "unit": "mEq/L",
           "ref": "3.5-5.0",
           "flag": "L"
         },
         {
+          "test": "Glucose",
+          "value": "62",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "L"
+        },
+        {
           "test": "AST",
-          "value": "168",
+          "value": "188",
           "unit": "U/L",
           "ref": "10-40",
           "flag": "H"
         },
         {
           "test": "ALT",
-          "value": "72",
+          "value": "84",
           "unit": "U/L",
           "ref": "7-56",
           "flag": "H"
         },
         {
           "test": "AST:ALT ratio",
-          "value": "2.3:1",
+          "value": "2.2",
           "unit": "",
-          "ref": "<2 (>2:1 suggests alcoholic liver disease)",
+          "ref": "<2 in alcoholic hepatitis",
           "flag": "H"
         },
         {
-          "test": "MCV",
-          "value": "104",
-          "unit": "fL",
-          "ref": "80-100",
+          "test": "INR",
+          "value": "1.4",
+          "unit": "",
+          "ref": "0.9-1.1",
           "flag": "H"
         }
       ]
@@ -613,15 +613,15 @@ window.EMR_DATA = {
   "imaging": [],
   "guided": {
     "ddxTargets": [
-      "Severe alcohol withdrawal \u2014 DTs risk, benzodiazepine protocol (correct)",
-      "Benzodiazepine withdrawal \u2014 similar syndrome but different substance history",
-      "Sepsis with altered mental status \u2014 withdrawal is primary here",
-      "Wernicke encephalopathy \u2014 must prevent with thiamine before glucose",
-      "Delirium tremens \u2014 expected evolution without treatment; prevention is the goal",
-      "Subdural hematoma \u2014 trauma history in alcoholics, CT if focal neuro signs"
+      "Severe alcohol withdrawal \u2014 benzodiazepine symptom-triggered protocol (correct)",
+      "Delirium from other cause \u2014 alcohol withdrawal timeline and CIWA match",
+      "Wernicke encephalopathy \u2014 give thiamine immediately regardless",
+      "Stimulant intoxication \u2014 withdrawal timeline and history inconsistent",
+      "Benzodiazepine withdrawal \u2014 different drug, similar mechanism",
+      "Hepatic encephalopathy \u2014 AST/ALT elevated but CIWA withdrawal pattern"
     ],
     "coachPrompts": {
-      "final": "Diagnosis: severe alcohol withdrawal, CIWA-Ar 22. Key learning: (1) CIWA-Ar thresholds: <8 = mild (monitor), 8-15 = moderate (PRN benzos), >15 = severe (standing + PRN benzos), >20 = DTs risk (aggressive treatment). CIWA-Ar 22 = aggressive benzodiazepine protocol. (2) Thiamine BEFORE glucose: glucose metabolism consumes the last of the patient's thiamine reserves \u2192 precipitates acute Wernicke encephalopathy (confusion + ataxia + ophthalmoplegia). In any malnourished/alcoholic patient, ALWAYS give thiamine before IV glucose. This is an inviolable rule. (3) DTs timeline: peak 48-72h after last drink. Features: autonomic instability (tachycardia, hypertension, diaphoresis), fever, severe agitation, hallucinations. Mortality 5-15% if untreated. (4) Symptom-triggered vs fixed-schedule benzos: CIWA-Ar symptom-triggered protocol requires significantly less benzodiazepine (by 40%) than fixed-schedule \u2014 reduces oversedation while maintaining seizure prevention. (5) Phenobarbital adjunct: for patients requiring >40mg lorazepam in 24h or CIWA-Ar refractory to benzos. Long half-life (80-120h) provides 'ceiling' preventing seizure breakthrough. AST:ALT >2:1 confirms alcoholic hepatitis \u2014 liver disease can slow benzodiazepine metabolism."
+      "final": "Diagnosis: severe alcohol withdrawal \u2014 CIWA 22, DT risk. Key learning: (1) CIWA-Ar scoring: tremor + diaphoresis + agitation + anxiety + nausea + headache + perceptual disturbances + orientation. Score >15 = severe, high risk for seizures and DT. Score >20 = admit to monitored setting. (2) Symptom-triggered > fixed-dose benzodiazepines: SYMPTOM-TRIGGERED protocol uses less total benzos, shorter ICU stay, similar outcomes. CIWA >10 \u2192 give diazepam \u2192 reassess in 1 hour. Do not give scheduled doses regardless of symptoms. (3) Thiamine BEFORE glucose: Wernicke encephalopathy precipitated by glucose loading without thiamine (Embden-Meyerhof pathway depletes remaining thiamine). Give 100mg IV thiamine before any dextrose. This is a class A recommendation. (4) Delirium tremens: occurs 48-72h after last drink. Features: global confusion, severe autonomic hyperactivity (tachycardia, hypertension, fever), hallucinations, seizures. Mortality 5% with treatment, 15-35% untreated. DT = ICU admission. (5) Phenobarbital for refractory withdrawal: if benzodiazepine-refractory (requiring >40mg diazepam/hour), consider phenobarbital loading \u2014 different GABA-A receptor subunit, additive effect. Propofol infusion for extreme cases."
     }
   }
 };

@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Dementia",
-      "icd": "Z00.00",
+      "problem": "High fall risk \u2014 Morse Fall Score 65, dementia",
+      "icd": "Z91.81",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "82yo with Alzheimer's dementia, confused at 0200 attempting to get out of bed unassisted"
+    },
+    {
+      "problem": "Nighttime delirium superimposed on dementia",
+      "icd": "F05",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Hospital delirium worsens sundowning \u2014 orientation interventions, minimize sedative medications"
+    },
+    {
+      "problem": "Hip fracture risk \u2014 osteoporosis + fall-prone",
+      "icd": "M81.0",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Prior fall with rib fracture 2021. Current admission for pneumonia. Fall would be catastrophic."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Melatonin 3mg PO QHS \u2014 sleep support",
+      "sig": "Take at bedtime \u2014 promotes circadian rhythm, minimal side effects",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Haloperidol 0.5mg PO PRN (LAST RESORT for safety only)",
+      "sig": "PRN \u2014 Beers Criteria in elderly, use ONLY if imminent safety risk. Not routine.",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN \u2014 last resort"
+    },
+    {
+      "name": "Diphenhydramine \u2014 AVOID (was self-medicating at home)",
+      "sig": "HOLD \u2014 anticholinergic, causes paradoxical agitation in elderly, increases fall risk",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HELD"
     }
   ],
   "allergies": [
@@ -97,7 +127,42 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Fall Risk Evaluation",
+      "results": [
+        {
+          "test": "Sodium",
+          "value": "132",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "94",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": ""
+        },
+        {
+          "test": "UA \u2014 WBC",
+          "value": "8",
+          "unit": "cells/HPF",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "TSH",
+          "value": "2.8",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "nursing-fall-prevention-night",
-    "diagnosis": "See diagnosis \u2014 Dementia",
+    "diagnosis": "Nighttime Fall Risk \u2014 82yo Dementia, Morse Fall Score 65, 0200 Delirium Episode",
     "acuity": 2,
     "presentation": "Dementia",
     "category": "geriatric"
@@ -177,12 +242,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "82yo Dementia \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Nighttime fall risk \u2014 delirium + dementia + hyponatremia (correct)",
+      "Use bed alarm only \u2014 inadequate for Morse 65 with delirium",
+      "Restraints to prevent fall \u2014 physical restraints worsen delirium and cause injury",
+      "Chemical restraint as first-line \u2014 Beers Criteria, never first-line",
+      "No special precautions needed \u2014 Morse 65 requires institutional fall protocol",
+      "Family at bedside 24/7 \u2014 unrealistic, system-level interventions required"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +257,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Dementia. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Walk through the evidence-based decision tree: what do you do first, second, and third without restraints? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: high nighttime fall risk \u2014 multi-factorial, nursing prevention protocol. Key nursing learning: (1) Morse Fall Scale \u226545 = high risk. Required nursing actions: fall prevention protocol documented in care plan, bed in lowest position + wheels locked + call light within reach, non-skid socks on, hourly rounding at night, fall risk armband and door sign. (2) This patient's contributing factors: dementia baseline + hyponatremia (Na 132 \u2014 contributes to confusion) + hospital environment unfamiliarity. Address the correctable: Na replacement order, reorientation interventions, limit nighttime interruptions. (3) Delirium prevention at 0200: when patient is found confused: (a) Turn on nighttime light (not overhead \u2014 dim), (b) Calm reassuring voice, call patient by name, (c) Reorient: 'You're in the hospital, it's the middle of the night, you're safe,' (d) Offer water or warm blanket, (e) Keep patient in bed \u2014 do NOT leave unattended. (4) Diphenhydramine: commonly used at home as sleep aid. STOP in hospital. Causes paradoxical agitation in elderly, severe anticholinergic effects, increases fall risk. Document hold prominently. (5) Bed alarm vs sitter: bed alarm alerts AFTER patient is getting up \u2014 inadequate for high fall risk with delirium. 1:1 sitter may be needed if q1h rounds are insufficient. Nursing supervisor escalation for sitter order."
     }
   }
 };

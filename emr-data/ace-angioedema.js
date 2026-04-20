@@ -751,59 +751,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "ACE inhibitor angioedema \u2014 tongue and oropharynx",
+      "problem": "ACE inhibitor-induced angioedema \u2014 lisinopril",
       "icd": "T46.4X5A",
       "onset": "2024",
       "status": "Active",
-      "notes": "Lisinopril x3 years, progressive tongue swelling over 4h \u2014 bradykinin-mediated, not histamine"
+      "notes": "Lip and tongue swelling 2 hours after lisinopril dose. On it 3 years \u2014 late-onset is classic."
     },
     {
-      "problem": "Airway compromise risk \u2014 posterior tongue involvement",
-      "icd": "J98.09",
-      "onset": "2024",
+      "problem": "Hypertension \u2014 requires antihypertensive change",
+      "icd": "I10",
+      "onset": "2019",
       "status": "Active",
-      "notes": "Stridor developing \u2014 anesthesia on standby for awake fiberoptic intubation"
+      "notes": "Lisinopril must be permanently stopped. Switch to ARB (low cross-reactivity) or CCB."
     },
     {
-      "problem": "Bradykinin mechanism \u2014 epinephrine ineffective",
-      "icd": "T46.4X5A",
+      "problem": "Airway status \u2014 monitoring for laryngeal involvement",
+      "icd": "J38.4",
       "onset": "2024",
       "status": "Active",
-      "notes": "ACE inhibitor blocks bradykinin degradation \u2192 accumulation \u2192 vascular permeability. Antihistamines/epi do NOT work."
+      "notes": "Tongue swelling present \u2014 laryngeal edema monitoring required. Anesthesia on standby."
     }
   ],
   "medications": [
     {
-      "name": "STOP lisinopril PERMANENTLY \u2014 causative agent",
-      "sig": "Do not rechallenge. Document allergy as ACE inhibitor class.",
-      "prescriber": "ED",
-      "start": "11/2024",
+      "name": "Lisinopril 10mg \u2014 STOP PERMANENTLY",
+      "sig": "Discontinue immediately. Never restart ACEi class.",
+      "prescriber": "Dr. Kim",
+      "start": "2021",
       "refills": 0,
-      "status": "STOPPED"
+      "status": "PERMANENTLY STOPPED"
     },
     {
-      "name": "Fresh frozen plasma 2 units IV (contains ACE enzyme \u2014 degrades bradykinin)",
-      "sig": "IV infusion \u2014 provides exogenous ACE to degrade bradykinin",
+      "name": "Diphenhydramine 25mg IV \u2014 limited benefit (bradykinin-mediated)",
+      "sig": "IV push \u2014 histamine blockade has minimal effect on ACEi angioedema (bradykinin, not histamine). Give for comfort.",
       "prescriber": "ED",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Icatibant 30mg SQ \u2014 bradykinin B2 receptor antagonist (if available)",
-      "sig": "Subcutaneous injection \u2014 specific antagonist, works in 30-60 min",
+      "name": "Fresh frozen plasma 2 units IV (if worsening)",
+      "sig": "Contains ACE (kininase II) \u2014 breaks down bradykinin. Use if progressive or airway threatened.",
       "prescriber": "ED",
       "start": "11/2024",
       "refills": 0,
-      "status": "Active if available"
+      "status": "Standby"
     },
     {
-      "name": "Epinephrine 0.3mg IM \u2014 for airway compromise ONLY, NOT effective for bradykinin angioedema",
-      "sig": "Use ONLY if anaphylaxis co-occurring or airway emergency. Will not reduce bradykinin swelling.",
+      "name": "Icatibant 30mg SQ (if available)",
+      "sig": "Bradykinin B2 receptor antagonist \u2014 specific treatment for bradykinin-mediated angioedema",
       "prescriber": "ED",
       "start": "11/2024",
       "refills": 0,
-      "status": "PRN \u2014 airway emergency only"
+      "status": "If available"
     }
   ],
   "allergies": [
@@ -842,48 +842,47 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "ACE Angioedema Workup",
+      "panel": "Angioedema Workup",
       "results": [
         {
-          "test": "C4 complement",
-          "value": "22",
-          "unit": "mg/dL",
-          "ref": "16-47",
-          "flag": ""
-        },
-        {
-          "test": "C1 esterase inhibitor (level)",
+          "test": "C4 level",
           "value": "Normal",
-          "unit": "",
-          "ref": "Normal",
+          "unit": "mg/dL",
+          "ref": "16-38",
           "flag": ""
         },
         {
-          "test": "Tryptase",
-          "value": "4.2",
-          "unit": "ng/mL",
-          "ref": "<11.4 (elevated in anaphylaxis)",
+          "test": "C1 inhibitor level",
+          "value": "Normal",
+          "unit": "mg/dL",
+          "ref": "21-39",
+          "flag": ""
+        },
+        {
+          "test": "C1 inhibitor function",
+          "value": "Normal",
+          "unit": "%",
+          "ref": ">50%",
           "flag": ""
         },
         {
           "test": "CBC \u2014 WBC",
-          "value": "9.8",
+          "value": "9.2",
           "unit": "K/\u03bcL",
           "ref": "4.5-11",
+          "flag": ""
+        },
+        {
+          "test": "Tryptase",
+          "value": "3.4",
+          "unit": "ng/mL",
+          "ref": "<11.4",
           "flag": ""
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "11/18/2024",
-      "study": "Lateral Neck X-ray + Fiberoptic Laryngoscopy",
-      "indication": "Tongue angioedema, stridor \u2014 assess airway compromise",
-      "findings": "Lateral neck: Soft tissue swelling oral cavity and oropharynx. Supraglottis visible but narrowed. No epiglottic thickening. Laryngoscopy: Posterior tongue edematous. Uvula enlarged. Posterior pharyngeal wall edematous. Vocal cords visible but edematous, aperture 30% normal.",
-      "impression": "Moderate-severe airway compromise from ACE inhibitor angioedema. Anesthesia present \u2014 awake fiberoptic intubation on standby."
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -998,12 +997,12 @@ window.EMR_DATA = {
       "Palpate for facial tenderness": "No tenderness to palpation of swollen areas or facial bones."
     },
     "ddxTargets": [
-      "ACE inhibitor angioedema \u2014 bradykinin-mediated (correct)",
-      "Allergic angioedema (IgE-mediated) \u2014 tryptase would be elevated, antihistamines would help",
-      "Hereditary angioedema (C1-INH deficiency) \u2014 low C4, no ACE inhibitor history",
-      "Anaphylaxis \u2014 tryptase low, no urticaria, no hypotension",
-      "Angioedema from ARB \u2014 class effect, rare cross-reactivity",
-      "Ludwig's angina \u2014 dental source, bilateral floor of mouth"
+      "ACE inhibitor-induced angioedema \u2014 bradykinin mediated (correct)",
+      "Allergic/histaminergic angioedema \u2014 no urticaria, tryptase normal",
+      "Hereditary angioedema \u2014 C4 normal rules out HAE",
+      "Acquired angioedema \u2014 C4 normal, no lymphoma",
+      "Food allergy angioedema \u2014 urticaria typical, tryptase normal here",
+      "NSAID-induced angioedema \u2014 not on NSAIDs"
     ],
     "biasFlags": {
       "anchoring": "Students may anchor on 'allergic reaction' and focus extensively on allergen exposure, missing the medication-induced etiology despite ACE inhibitor use.",
@@ -1014,11 +1013,11 @@ window.EMR_DATA = {
       "phase2": "I see you're considering several causes of facial swelling. What specific historical features would help you differentiate between allergic and non-allergic angioedema? How might this patient's demographic and medication profile influence your thinking?",
       "phase5": "You've gathered good information about the swelling pattern and associated symptoms. What's significant about the absence of urticaria in this presentation? How does the patient's medication list and ethnic background factor into your diagnostic reasoning?",
       "finalDebrief": "This case illustrates classic ACE inhibitor-induced angioedema, which occurs more frequently in African American patients and can develop even after months or years of stable therapy. How did the absence of urticaria help distinguish this from IgE-mediated allergic reactions? What's your approach to managing this patient's hypertension going forward?",
-      "final": "Diagnosis: ACE inhibitor angioedema \u2014 bradykinin-mediated. Key learning: (1) Mechanism: ACE normally degrades bradykinin. ACE inhibitor \u2192 bradykinin accumulates \u2192 B2 receptor \u2192 vascular permeability \u2192 non-pitting, non-pruritic angioedema. No mast cell involvement. (2) This means: epinephrine, antihistamines, and steroids are INEFFECTIVE. This is the critical teaching point. The ER may give epi reflexively \u2014 it will not help. Treatments that work: stop ACE inhibitor, FFP (provides ACE enzyme), icatibant (B2 receptor blocker), C1-esterase inhibitor concentrate (if HAE-like mechanism). (3) Tryptase: normal = no mast cell degranulation = not anaphylaxis. This differentiates ACE angioedema from true anaphylaxis. (4) Timing: can occur YEARS after starting ACE inhibitor \u2014 not just at initiation. Ask about lisinopril/enalapril/ramipril in ANY unexplained angioedema. (5) Class switch: never rechallenge with ANY ACE inhibitor. ARBs have ~0.1-1% cross-reactivity \u2014 may use with monitoring if compelling indication, but document the risk."
+      "final": "Diagnosis: ACEi-induced angioedema \u2014 bradykinin mechanism. Key learning: (1) Mechanism: ACEi block kininase II (ACE) \u2192 bradykinin accumulates \u2192 B2 receptor activation \u2192 increased vascular permeability \u2192 angioedema. NOT histamine-mediated. This is why antihistamines, epinephrine, and steroids have limited effect. (2) Late onset: ACEi angioedema can occur after months to years on the drug. Do not reassure a patient 'you've been on it for years safely' \u2014 late onset (median 3 years) is classic. (3) Treatment: (a) Stop ACEi immediately and permanently. (b) FFP contains kininase II (ACE itself) and ACE-related peptidases \u2014 breaks down accumulated bradykinin, works in 30-60 min. (c) Icatibant (B2 receptor antagonist) or C1-INH concentrate if available. (d) Antihistamines for comfort only. Epinephrine for airway \u2014 not for edema reversal. (4) Cross-reactivity: ACEi \u2192 ARB class switch has low cross-reactivity (<10%). CCB (amlodipine) has zero cross-reactivity. Both are acceptable alternatives for hypertension. (5) Airway: tongue involvement means laryngeal edema is possible. If stridor, drooling, or dysphagia develops \u2192 emergent intubation or surgical airway."
     }
   },
   "meta": {
-    "diagnosis": "ACE Inhibitor-Induced Angioedema \u2014 Bradykinin-Mediated, Tongue and Oropharynx",
+    "diagnosis": "ACE Inhibitor-Induced Angioedema \u2014 Bradykinin-Mediated, No Urticaria, Lisinopril",
     "caseId": "ace-angioedema"
   }
 };
