@@ -1,4 +1,4 @@
-/* emr-data/acute-urticaria.js — Multi-Setting Allergy Case: Acute Urticaria */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "8769 Maple St, Baltimore, MD 21216",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Thomas Gutierrez",
         "phone": "(630) 555-2040",
@@ -62,7 +62,7 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "UTI — started TMP-SMX today",
+          "description": "UTI \u2014 started TMP-SMX today",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -86,7 +86,7 @@ window.EMR_DATA = {
           "bp": "122/76",
           "hr": "88",
           "rr": "16",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -109,7 +109,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -123,7 +123,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -188,7 +188,7 @@ window.EMR_DATA = {
       "problems": [
         {
           "id": "prob-1",
-          "description": "UTI — started TMP-SMX today",
+          "description": "UTI \u2014 started TMP-SMX today",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -221,7 +221,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "2/10"
         }
@@ -244,7 +244,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -258,7 +258,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -308,7 +308,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Brief observation after acute urticaria with partial angioedema",
-          "hpi": "Sofia Gutierrez — Brief observation after acute urticaria with partial angioedema",
+          "hpi": "Sofia Gutierrez \u2014 Brief observation after acute urticaria with partial angioedema",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -317,13 +317,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — urticaria triggered by TMP-SMX, evaluate drug allergy",
+        "chiefComplaint": "A/I consult \u2014 urticaria triggered by TMP-SMX, evaluate drug allergy",
         "diagnosis": "Acute Urticaria"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "UTI — started TMP-SMX today",
+          "description": "UTI \u2014 started TMP-SMX today",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -347,7 +347,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -370,7 +370,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -384,7 +384,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -433,8 +433,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — urticaria triggered by TMP-SMX, evaluate drug allergy",
-          "hpi": "Sofia Gutierrez — A/I consult — urticaria triggered by TMP-SMX, evaluate drug allergy",
+          "cc": "A/I consult \u2014 urticaria triggered by TMP-SMX, evaluate drug allergy",
+          "hpi": "Sofia Gutierrez \u2014 A/I consult \u2014 urticaria triggered by TMP-SMX, evaluate drug allergy",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -443,13 +443,13 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up after drug-induced urticaria — confirm safe antibiotic alternatives",
+        "chiefComplaint": "Follow-up after drug-induced urticaria \u2014 confirm safe antibiotic alternatives",
         "diagnosis": "Acute Urticaria"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "UTI — started TMP-SMX today",
+          "description": "UTI \u2014 started TMP-SMX today",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -463,7 +463,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -486,7 +486,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -500,7 +500,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -549,8 +549,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up after drug-induced urticaria — confirm safe antibiotic alternatives",
-          "hpi": "Sofia Gutierrez — Follow-up after drug-induced urticaria — confirm safe antibiotic alternatives",
+          "cc": "Follow-up after drug-induced urticaria \u2014 confirm safe antibiotic alternatives",
+          "hpi": "Sofia Gutierrez \u2014 Follow-up after drug-induced urticaria \u2014 confirm safe antibiotic alternatives",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -572,7 +572,7 @@ window.EMR_DATA = {
     "address": "4471 Clover St, Baltimore, MD 21210",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Thomas Gutierrez",
       "phone": "(630) 555-8668",
@@ -583,22 +583,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "UTI — started TMP-SMX today",
+      "problem": "Acute urticaria \u2014 widespread wheals 24h duration",
+      "icd": "L50.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Generalized urticaria, pruritic, migratory wheals, 24h \u2014 no clear trigger identified"
+    },
+    {
+      "problem": "Angioedema \u2014 periorbital, mild",
+      "icd": "T78.3XXA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Periorbital swelling associated with urticaria \u2014 histamine-mediated (not bradykinin)"
+    },
+    {
+      "problem": "Idiopathic urticaria \u2014 most likely etiology",
+      "icd": "L50.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "60-70% of acute urticaria has no identifiable cause \u2014 viral URI most common precipitant"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "TMP-SMX",
-      "dose": "160/800mg",
-      "route": "PO",
-      "frequency": "BID (started today)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 10mg daily (or 20mg if inadequate)",
+      "sig": "Take 1 tablet daily \u2014 first-line non-sedating H1 antihistamine",
+      "prescriber": "Allergy",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Ranitidine 150mg BID (or famotidine) \u2014 H2 blocker adjunct",
+      "sig": "Take twice daily \u2014 H2 blockade adds 10-15% additional effect",
+      "prescriber": "Allergy",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
+    },
+    {
+      "name": "Prednisone 40mg daily x5 days (if inadequate antihistamine response)",
+      "sig": "Take daily for 5 days \u2014 short course for severe/refractory acute urticaria",
+      "prescriber": "Allergy",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN if antihistamines insufficient"
     }
   ],
   "allergies": [
@@ -616,7 +645,7 @@ window.EMR_DATA = {
       "bp": "122/76",
       "hr": "88",
       "rr": "16",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "4/10"
     }
@@ -636,74 +665,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-383463",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Acute Urticaria Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CBC \u2014 WBC + differential",
+          "value": "11.2 with 12% eosinophils",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "TSH",
+          "value": "2.4",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "CMP \u2014 LFTs",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Anti-nuclear antibody (ANA)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "IgE (total)",
+          "value": "420",
+          "unit": "IU/mL",
+          "ref": "<100",
+          "flag": "H"
         }
       ]
     }
@@ -743,7 +741,7 @@ window.EMR_DATA = {
       "validates": [
         "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
         "UAS7 scoring",
-        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Step-up: sgAH \u2192 updose 4x \u2192 omalizumab \u2192 cyclosporine",
         "Post-viral urticaria in children: no allergy testing needed"
       ]
     }
@@ -751,15 +749,15 @@ window.EMR_DATA = {
   "teachingPoints": {
     "keyLearning": [
       "Acute urticaria (<6 weeks) is most commonly triggered by: viral infection (most common cause in children), food (IgE-mediated), drugs (NSAIDs, antibiotics), or is idiopathic. In adults, underlying infection workup is rarely needed for acute urticaria.",
-      "Management: identify and remove trigger. Oral H1 antihistamine (cetirizine, loratadine) for symptom control. Add short-course oral steroids (prednisone 40 mg × 5 days) for severe cases. Epinephrine only if anaphylaxis features (hypotension, bronchospasm).",
-      "Distinguishing urticaria from angioedema: urticaria — superficial dermis, pruritic, blanches, resolves <24h. Angioedema — deep dermis/submucosa, burning/pain, non-pruritic, lasts 24–72h. Both can coexist."
+      "Management: identify and remove trigger. Oral H1 antihistamine (cetirizine, loratadine) for symptom control. Add short-course oral steroids (prednisone 40 mg \u00d7 5 days) for severe cases. Epinephrine only if anaphylaxis features (hypotension, bronchospasm).",
+      "Distinguishing urticaria from angioedema: urticaria \u2014 superficial dermis, pruritic, blanches, resolves <24h. Angioedema \u2014 deep dermis/submucosa, burning/pain, non-pruritic, lasts 24\u201372h. Both can coexist."
     ],
     "boardPearls": [
       "Acute urticaria most common cause: viral URI (especially in children). Food allergy, NSAIDs, antibiotics in adults.",
-      "Urticaria characteristics: raised erythematous wheals, pruritic, blanching on pressure, individual lesions resolve <24h (wheals lasting >24h → suspect urticarial vasculitis).",
-      "Treatment: H1 antihistamine (cetirizine 10 mg BID or loratadine 10 mg daily). Prednisone 40 mg × 5 days for refractory/severe acute urticaria.",
-      "No extensive workup needed for first episode of acute urticaria — only if recurring or systemic symptoms suggest underlying disease.",
-      "Dermatographism: most common physical urticaria. Stroking skin → wheal-and-flare within 5 min. H1 antihistamine effective."
+      "Urticaria characteristics: raised erythematous wheals, pruritic, blanching on pressure, individual lesions resolve <24h (wheals lasting >24h \u2192 suspect urticarial vasculitis).",
+      "Treatment: H1 antihistamine (cetirizine 10 mg BID or loratadine 10 mg daily). Prednisone 40 mg \u00d7 5 days for refractory/severe acute urticaria.",
+      "No extensive workup needed for first episode of acute urticaria \u2014 only if recurring or systemic symptoms suggest underlying disease.",
+      "Dermatographism: most common physical urticaria. Stroking skin \u2192 wheal-and-flare within 5 min. H1 antihistamine effective."
     ]
   },
   "guided": {
@@ -821,13 +819,12 @@ window.EMR_DATA = {
       "Assess overall appearance and respiratory distress": "Patient appears well but anxious, no respiratory distress, speaking in full sentences"
     },
     "ddxTargets": [
-      "Drug-induced urticaria (correct diagnosis)",
-      "Acute spontaneous urticaria",
-      "Contact dermatitis",
-      "Anaphylaxis (must-not-miss diagnosis 1)",
-      "Angioedema (must-not-miss diagnosis 2)",
-      "Viral exanthem (common mimic 1)",
-      "Food allergy reaction (common mimic 2)"
+      "Idiopathic acute urticaria \u2014 viral URI trigger likely (correct)",
+      "Food allergy urticaria \u2014 no temporal relationship with a meal",
+      "Drug-induced urticaria \u2014 no new medications",
+      "Urticarial vasculitis \u2014 >24h individual wheals, burning, hyperpigmentation after resolution",
+      "Contact urticaria \u2014 localized, not generalized",
+      "Mastocytosis \u2014 urticaria pigmentosa pattern, Darier's sign"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'NKDA' in chart and dismissing drug reaction, or focusing only on TMP-SMX while missing other potential triggers",
@@ -837,7 +834,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified urticaria as a key finding. What are the most important historical elements you need to gather to differentiate between the various causes of acute hives? Consider both the timing and the potential triggers in this case.",
       "phase5": "Now that you've completed your history and exam, walk me through your assessment of this patient's risk stratification. What findings help you determine the severity and urgency of this reaction?",
-      "finalDebrief": "This case demonstrates a classic drug-induced urticaria from sulfa antibiotics. How did the temporal relationship and absence of systemic signs help narrow your differential? What would change your management approach if she had developed respiratory symptoms or facial swelling?"
+      "finalDebrief": "This case demonstrates a classic drug-induced urticaria from sulfa antibiotics. How did the temporal relationship and absence of systemic signs help narrow your differential? What would change your management approach if she had developed respiratory symptoms or facial swelling?",
+      "final": "Diagnosis: acute urticaria, idiopathic \u2014 viral URI most likely trigger. Key learning: (1) Acute vs chronic urticaria: acute = <6 weeks, chronic = >6 weeks daily/near-daily. Acute urticaria: 60-70% idiopathic, 10-15% infection-related (URI, GI infection), <5% true food allergy. Extensive workup for ACUTE urticaria is not indicated unless history suggests specific cause. (2) Individual wheal duration: urticaria wheals come and go over minutes to hours. A single wheal lasting >24h is NOT typical urticaria \u2014 consider urticarial vasculitis (skin biopsy needed). (3) Antihistamine step-up: Step 1 = non-sedating H1 antihistamine (cetirizine, fexofenadine, loratadine). Step 2 = increase dose 2-4x. Step 3 = add H2 blocker. Step 4 = add leukotriene receptor antagonist. Omalizumab for chronic refractory. (4) Food allergy testing in acute urticaria: NOT indicated without clear temporal relationship (symptoms within 2h of eating a specific food). Random IgE panel \u2192 false positives \u2192 unnecessary avoidance. (5) When to refer to allergy: recurrent acute urticaria >3 episodes, suspected specific food/drug trigger, concurrent angioedema (rule out HAE), anaphylaxis history."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Urticaria \u2014 Idiopathic (Most Common), Allergy Workup Algorithm",
+    "caseId": "acute-urticaria"
   }
 };

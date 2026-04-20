@@ -26,56 +26,56 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "DIC \u2014 obstetric hemorrhage trigger",
+      "problem": "DIC \u2014 consumptive coagulopathy from PPH",
       "icd": "D65",
       "onset": "2024",
       "status": "Active",
-      "notes": "Postpartum 2h, bleeding 2.5L. Fibrinogen <100, PT/PTT prolonged. Classic obstetric DIC."
+      "notes": "Post-partum hemorrhage 2000mL, fibrinogen 68, PT/aPTT markedly prolonged \u2014 DIC pattern"
     },
     {
-      "problem": "Massive postpartum hemorrhage \u2014 2500mL blood loss",
+      "problem": "Post-partum hemorrhage \u2014 uterine atony",
       "icd": "O72.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "Uterine atony after prolonged labor. MTP activated."
+      "notes": "Atony not responding to oxytocin \u2014 surgical and interventional radiology teams on standby"
     },
     {
-      "problem": "Hypofibrinogenemia \u2014 fibrinogen 62 mg/dL",
-      "icd": "D68.4",
+      "problem": "Massive transfusion \u2014 1:1:1 MTP activated",
+      "icd": "D65",
       "onset": "2024",
       "status": "Active",
-      "notes": "Fibrinogen most rapidly depleted in obstetric DIC \u2014 early cryoprecipitate critical"
+      "notes": "Hemorrhagic shock + DIC = massive transfusion protocol: pRBC:FFP:platelets 1:1:1"
     }
   ],
   "medications": [
     {
-      "name": "Massive Transfusion Protocol (MTP) activated \u2014 1:1:1 ratio",
-      "sig": "pRBC:FFP:Platelets in 1:1:1 ratio. Give first 6-pack before labs.",
-      "prescriber": "OB/Anesthesia",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "Active"
-    },
-    {
-      "name": "Cryoprecipitate 10 units \u2014 fibrinogen replacement",
-      "sig": "Each unit of cryo raises fibrinogen ~5 mg/dL. 10 units raises ~50 mg/dL. Give for fibrinogen <150 in DIC.",
-      "prescriber": "OB/Hematology",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "Active"
-    },
-    {
-      "name": "Tranexamic acid 1g IV over 10 min \u2014 antifibrinolytic",
-      "sig": "Reduces fibrinolysis. WOMAN trial: reduces PPH mortality if given within 3 hours of delivery.",
+      "name": "Oxytocin 20-40 units in 1L NS IV (uterotonic)",
+      "sig": "IV infusion \u2014 uterine atony treatment",
       "prescriber": "OB",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Oxytocin 30 units in 500mL NS at 125 mL/hr \u2014 uterotonic",
-      "sig": "IV infusion for uterine atony \u2014 promote uterine contraction to stop bleeding source",
+      "name": "Tranexamic acid 1g IV over 10 min x1 (WOMAN trial)",
+      "sig": "IV \u2014 antifibrinolytic, reduces mortality in PPH by 31%. Give WITHIN 3 hours of hemorrhage.",
       "prescriber": "OB",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Cryoprecipitate 10 units (fibrinogen replacement)",
+      "sig": "IV \u2014 each unit raises fibrinogen ~10 mg/dL. Target fibrinogen >150-200 mg/dL.",
+      "prescriber": "Hematology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Massive Transfusion Protocol: pRBC:FFP:platelets 1:1:1",
+      "sig": "Balanced hemostatic resuscitation \u2014 avoid dilutional coagulopathy from pRBC alone",
+      "prescriber": "Trauma/OB",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
@@ -119,55 +119,55 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "DIC Panel \u2014 STAT",
+      "panel": "DIC/MTP Panel",
       "results": [
         {
           "test": "Fibrinogen",
-          "value": "62",
+          "value": "68",
           "unit": "mg/dL",
-          "ref": "200-400 (target >150 in DIC)",
+          "ref": "200-400",
           "flag": "L"
         },
         {
           "test": "PT",
-          "value": "22",
+          "value": "24",
           "unit": "sec",
           "ref": "11-13.5",
           "flag": "H"
         },
         {
-          "test": "PTT",
-          "value": "68",
+          "test": "aPTT",
+          "value": "62",
           "unit": "sec",
           "ref": "25-35",
           "flag": "H"
         },
         {
-          "test": "D-dimer",
-          "value": ">20",
-          "unit": "\u03bcg/mL FEU",
-          "ref": "<0.5",
-          "flag": "H"
-        },
-        {
           "test": "Platelets",
-          "value": "58",
+          "value": "62",
           "unit": "K/\u03bcL",
           "ref": "150-400",
           "flag": "L"
         },
         {
+          "test": "D-dimer",
+          "value": ">10,000",
+          "unit": "ng/mL",
+          "ref": "<500",
+          "flag": "H"
+        },
+        {
           "test": "Hemoglobin",
-          "value": "6.2",
+          "value": "6.8",
           "unit": "g/dL",
           "ref": "12-16",
           "flag": "L"
         },
         {
-          "test": "Schistocytes on smear",
-          "value": "Present",
+          "test": "Schistocytes on peripheral smear",
+          "value": "Present \u2014 3+ fragments",
           "unit": "",
-          "ref": "Absent",
+          "ref": "None",
           "flag": "H"
         }
       ]
@@ -279,12 +279,12 @@ window.EMR_DATA = {
       "Assess for signs of volume depletion": "Hypotensive, tachycardic, poor skin turgor, dry mucous membranes"
     },
     "ddxTargets": [
-      "Obstetric DIC from postpartum hemorrhage (correct)",
-      "TTP \u2014 fibrinogen preserved, schistocytes different pattern",
-      "Primary fibrinolysis \u2014 D-dimer elevated in both, but platelet consumption distinguishes DIC",
-      "Hemophilia \u2014 no prior bleeding history, obstetric context",
-      "HELLP syndrome evolving to DIC \u2014 different timing/context",
-      "Warfarin effect \u2014 not on anticoagulation"
+      "DIC from PPH \u2014 consumptive coagulopathy (correct)",
+      "TTP \u2014 schistocytes present but fibrinogen NOT low in TTP (elevated instead)",
+      "HELLP syndrome \u2014 liver enzymes would be elevated, different pattern",
+      "Primary fibrinolysis \u2014 rare, treated differently (antifibrinolytics without blood)",
+      "Hemophilia \u2014 baseline coagulopathy, not DIC",
+      "Massive transfusion coagulopathy \u2014 dilutional but fibrinogen would not be this low this fast"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'surgical bleeding' and missing the systemic coagulopathy affecting multiple sites simultaneously",
@@ -295,11 +295,11 @@ window.EMR_DATA = {
       "phase2": "This patient has concerning diffuse bleeding after surgery. What systemic conditions could cause bleeding from multiple unrelated sites simultaneously? Think about what might be triggered by major trauma and surgical stress.",
       "phase5": "You've identified diffuse bleeding from multiple sites with signs of shock. What laboratory studies would help distinguish between different coagulopathies? Consider what processes consume clotting factors and platelets.",
       "finalDebrief": "This case illustrates DIC triggered by splenic trauma and surgery. The key was recognizing the pattern of diffuse bleeding from multiple sites, not just surgical bleeding. How did the combination of consumed clotting factors, thrombocytopenia, and paradoxical fibrinolysis create this clinical picture?",
-      "final": "Diagnosis: obstetric DIC. Key nursing learning: (1) Massive transfusion protocol \u2014 nursing role: immediately call blood bank and activate MTP (pre-set orders for 1:1:1 ratio). Obtain large-bore IV access (2x 16-gauge minimum or IO/central). Warm blood products (hypothermia worsens coagulopathy). Document each product given and time. Reassess after each 6-pack with labs. (2) Fibrinogen is the most critical lab in obstetric DIC: fibrinogen <100 = severe DIC, massive hemorrhage risk. Standard FFP contains only ~2g/dL fibrinogen. Cryoprecipitate is concentrated fibrinogen + Factor VIII + vWF \u2014 10 units raises fibrinogen ~50 mg/dL. In obstetric DIC, give cryo early, not as afterthought. (3) The lethal triad: hypothermia + acidosis + coagulopathy \u2014 each worsens the others. Nursing actively warms patient (forced air warming blanket, warm fluids), monitors pH, tracks coagulation labs. (4) WOMAN trial: TXA 1g IV within 3 hours of delivery reduced PPH death by 19%. Nursing ensures this is given promptly. After 3 hours, benefit disappears. (5) Uterine atony signs: soft/boggy uterus, fundal massage not firming. Nursing palpates fundus every 15 min post-delivery. 'Boggy uterus + increasing pad saturation = call OB now.'"
+      "final": "Diagnosis: DIC from PPH \u2014 consumptive coagulopathy. Key nursing learning (case is nursing-framed): (1) DIC lab pattern: 'everything falls' \u2014 fibrinogen LOW (consumed), PT/aPTT PROLONGED, platelets LOW, D-dimer HIGH (from massive clot formation and fibrinolysis), schistocytes on smear (microangiopathic hemolysis). TTP contrast: schistocytes present but fibrinogen is NORMAL or elevated in TTP. (2) Massive Transfusion Protocol (MTP) \u2014 nursing's role: activate MTP early, coordinate blood bank for rapid product delivery, document all units given (quantity and timing), monitor for transfusion reactions, prepare calcium gluconate 1g IV (calcium chelated by citrate in blood products \u2192 hypocalcemia \u2192 cardiac). (3) Tranexamic acid (TXA): WOMAN trial showed 1g TXA IV within 3 hours of PPH onset reduces mortality by 31% with no increase in thrombosis. Give WITHIN 3 hours \u2014 benefit disappears if delayed. Nursing role: ensure TXA is given promptly when MTP activated for PPH. (4) Fibrinogen threshold: target >150-200 mg/dL in obstetric DIC. Cryoprecipitate is the most concentrated fibrinogen source. 10 units cryoprecipitate raise fibrinogen ~100 mg/dL. (5) Treat the cause: ALL DIC treatment is supportive (blood products) \u2014 the ONLY way to stop DIC is to treat the underlying cause (in PPH: control the bleeding \u2014 oxytocin, surgical, IR uterine artery embolization)."
     }
   },
   "meta": {
-    "diagnosis": "Disseminated Intravascular Coagulation \u2014 Postpartum Hemorrhage, Massive Transfusion Protocol",
+    "diagnosis": "Disseminated Intravascular Coagulation \u2014 Post-Partum Hemorrhage, Massive Transfusion Protocol",
     "caseId": "dic-massive-transfusion"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/acquired-c1esterase-inhibitor-deficiency.js — Multi-Setting Allergy Case: Acquired C1-INH Deficiency */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "8565 Walnut Dr, Kansas City, MO 64120",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "Publix Pharmacy — Weston Rd",
+      "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
       "emergencyContact": {
         "name": "Jennifer Jefferson",
         "phone": "(503) 555-5581",
@@ -82,7 +82,7 @@ window.EMR_DATA = {
           "bp": "138/82",
           "hr": "88",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -105,7 +105,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -126,7 +126,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -252,7 +252,7 @@ window.EMR_DATA = {
           "bp": "132/78",
           "hr": "82",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "3/10"
         }
@@ -275,7 +275,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -296,7 +296,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -383,7 +383,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — distinguish acquired vs hereditary C1-INH deficiency",
+        "chiefComplaint": "A/I consult \u2014 distinguish acquired vs hereditary C1-INH deficiency",
         "diagnosis": "Acquired C1-INH Deficiency"
       },
       "problems": [
@@ -413,7 +413,7 @@ window.EMR_DATA = {
           "bp": "130/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -436,7 +436,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -457,7 +457,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -534,8 +534,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — distinguish acquired vs hereditary C1-INH deficiency",
-          "hpi": "Harold Jefferson presents with a/i consult — distinguish acquired vs hereditary c1-inh deficiency.",
+          "cc": "A/I consult \u2014 distinguish acquired vs hereditary C1-INH deficiency",
+          "hpi": "Harold Jefferson presents with a/i consult \u2014 distinguish acquired vs hereditary c1-inh deficiency.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -544,7 +544,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "A/I follow-up — angioedema control with lymphoma treatment",
+        "chiefComplaint": "A/I follow-up \u2014 angioedema control with lymphoma treatment",
         "diagnosis": "Acquired C1-INH Deficiency"
       },
       "problems": [
@@ -583,7 +583,7 @@ window.EMR_DATA = {
           "bp": "128/76",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -606,7 +606,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -627,7 +627,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -704,8 +704,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "A/I follow-up — angioedema control with lymphoma treatment",
-          "hpi": "Harold Jefferson presents with a/i follow-up — angioedema control with lymphoma treatment.",
+          "cc": "A/I follow-up \u2014 angioedema control with lymphoma treatment",
+          "hpi": "Harold Jefferson presents with a/i follow-up \u2014 angioedema control with lymphoma treatment.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -727,7 +727,7 @@ window.EMR_DATA = {
     "address": "8105 Dogwood Ln, Denver, CO 80210",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
     "emergencyContact": {
       "name": "Jennifer Jefferson",
       "phone": "(619) 555-1166",
@@ -738,22 +738,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Acquired C1-INH Deficiency",
+      "problem": "Acquired C1-INH deficiency \u2014 recurrent angioedema",
+      "icd": "D84.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "C4 undetectable, C1-INH level and function low, anti-C1-INH antibodies positive \u2014 acquired type II"
+    },
+    {
+      "problem": "B-cell lymphoma \u2014 suspected underlying cause",
+      "icd": "C85.90",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Acquired C1-INH deficiency in adult = paraneoplastic until proven otherwise \u2014 lymphoma workup ordered"
+    },
+    {
+      "problem": "Recurrent abdominal attacks \u2014 missed diagnosis x3 years",
+      "icd": "D84.1",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Three ER visits for 'GI pain' \u2014 HAE abdominal attacks are severe colic without peritonitis"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Rituximab",
-      "dose": "",
-      "route": "IV",
-      "frequency": "Per oncology",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "C1-esterase inhibitor concentrate (Berinert) 20 units/kg IV \u2014 acute attack",
+      "sig": "IV for acute attacks \u2014 replaces deficient protein",
+      "prescriber": "Hematology/Allergy",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active acute"
+    },
+    {
+      "name": "Icatibant 30mg SQ PRN \u2014 acute attacks",
+      "sig": "Subcutaneous injection \u2014 bradykinin B2 blocker",
+      "prescriber": "Allergy",
+      "start": "11/2024",
+      "refills": 4,
+      "status": "PRN acute"
+    },
+    {
+      "name": "Tranexamic acid 1g TID \u2014 prophylaxis (if antifibrinolytic tolerated)",
+      "sig": "Antifibrinolytic \u2014 reduces contact activation and bradykinin production",
+      "prescriber": "Hematology",
+      "start": "11/2024",
+      "refills": 4,
+      "status": "Active prophylaxis"
     }
   ],
   "allergies": [
@@ -771,7 +800,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": "88",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -791,114 +820,63 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-835110",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "HAE/Acquired C1-INH Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "C4 complement",
+          "value": "<1",
+          "unit": "mg/dL",
+          "ref": "16-47",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "C1q complement",
+          "value": "Low \u2014 4 mg/dL",
+          "unit": "mg/dL",
+          "ref": "14-22",
+          "flag": "L"
+        },
+        {
+          "test": "C1-INH level",
+          "value": "6",
+          "unit": "mg/dL",
+          "ref": "21-39",
+          "flag": "L"
+        },
+        {
+          "test": "C1-INH function",
+          "value": "12",
+          "unit": "%",
+          "ref": ">68",
+          "flag": "L"
+        },
+        {
+          "test": "Anti-C1-INH antibodies",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "SPEP/IPEP",
+          "value": "IgM monoclonal spike \u2014 suspicious for lymphoma",
+          "unit": "",
+          "ref": "No M spike",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "CT Chest/Abdomen/Pelvis with Contrast (lymphoma staging)",
+      "indication": "Acquired C1-INH deficiency \u2014 workup for underlying B-cell malignancy",
+      "findings": "Multiple enlarged lymph nodes bilateral axillae and retroperitoneum \u2014 largest 2.8cm right axilla. Splenomegaly 16cm. No hepatomegaly. No free fluid.",
+      "impression": "Lymphadenopathy and splenomegaly \u2014 suspicious for lymphoma. PET-CT and lymph node biopsy recommended. Findings consistent with B-cell lymphoma as cause of acquired C1-INH deficiency."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -919,7 +897,7 @@ window.EMR_DATA = {
   "references": [
     {
       "id": "WAO-HAE-2022",
-      "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+      "title": "International WAO/EAACI guideline for management of hereditary angioedema \u2014 2021 revision",
       "authors": "Maurer M, Magerl M, Betschel S, et al.",
       "journal": "Allergy",
       "year": 2022,
@@ -958,11 +936,11 @@ window.EMR_DATA = {
       "Associated conditions: B-cell lymphoma, MGUS, multiple myeloma, SLE. ALL patients with new-onset AAE require lymphoma/B-cell malignancy workup."
     ],
     "boardPearls": [
-      "AAE vs HAE: AAE — adult onset, no family history, C1q LOW, malignancy association. HAE — younger onset, positive family history, C1q NORMAL.",
+      "AAE vs HAE: AAE \u2014 adult onset, no family history, C1q LOW, malignancy association. HAE \u2014 younger onset, positive family history, C1q NORMAL.",
       "Complement in AAE: C4 low + C3 low/normal + C1-INH low + C1q LOW.",
       "Complement in HAE Type I: C4 low + C3 normal + C1-INH low + C1q NORMAL.",
       "AAE workup: SPEP, UPEP, flow cytometry for B-cell clone, CT chest/abdomen/pelvis for lymphadenopathy, bone marrow biopsy if indicated.",
-      "AAE treatment: same acute agents as HAE (C1-INH concentrate, icatibant). Treat underlying malignancy if identified — may resolve AAE.",
+      "AAE treatment: same acute agents as HAE (C1-INH concentrate, icatibant). Treat underlying malignancy if identified \u2014 may resolve AAE.",
       "Anti-C1-INH antibodies: present in ~60% of AAE. Rituximab effective in autoimmune AAE."
     ]
   },
@@ -1025,13 +1003,12 @@ window.EMR_DATA = {
       "Assess for signs of respiratory distress": "No use of accessory muscles, normal respiratory rate and effort"
     },
     "ddxTargets": [
-      "Acquired C1-INH deficiency (correct diagnosis)",
-      "Drug-induced angioedema from rituximab",
-      "Idiopathic angioedema",
-      "Hereditary angioedema (must-not-miss diagnosis 1)",
-      "Anaphylaxis (must-not-miss diagnosis 2)",
-      "Allergic reaction (common mimic 1)",
-      "Superior vena cava syndrome (common mimic 2)"
+      "Acquired C1-INH deficiency \u2014 paraneoplastic B-cell lymphoma (correct)",
+      "Hereditary angioedema Type I/II \u2014 C1q is LOW in acquired (normal in HAE), anti-C1-INH antibodies positive",
+      "ACE inhibitor angioedema \u2014 not on ACE inhibitor",
+      "Allergic angioedema \u2014 C4/C1-INH normal",
+      "Idiopathic angioedema \u2014 diagnosis of exclusion, rule out structural/malignant cause",
+      "HAE with normal C1-INH (Type III) \u2014 factor XII mutation, different mechanism"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on rituximab as the cause and missing the underlying acquired C1-INH deficiency associated with B-cell lymphoma",
@@ -1041,7 +1018,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified angioedema in a patient with B-cell lymphoma on rituximab. What's the relationship between B-cell lymphomas and complement system disorders? How might this influence your differential diagnosis beyond just drug reactions?",
       "phase5": "The patient has non-urticarial angioedema without respiratory compromise. Given his B-cell lymphoma history, what acquired complement disorder should you be considering? How would you differentiate between drug-induced angioedema and complement-mediated angioedema?",
-      "finalDebrief": "This case illustrates acquired C1-INH deficiency secondary to B-cell lymphoma. How did the absence of urticaria and the lymphoma history point you toward complement-mediated rather than allergic angioedema? What's the mechanism by which B-cell lymphomas cause C1-INH consumption?"
+      "finalDebrief": "This case illustrates acquired C1-INH deficiency secondary to B-cell lymphoma. How did the absence of urticaria and the lymphoma history point you toward complement-mediated rather than allergic angioedema? What's the mechanism by which B-cell lymphomas cause C1-INH consumption?",
+      "final": "Diagnosis: acquired C1-INH deficiency \u2014 paraneoplastic. Key learning: (1) HAE vs Acquired distinction: HAE (hereditary) = C4 low, C1q NORMAL, family history. Acquired C1-INH = C4 low + C1q LOW + anti-C1-INH antibodies + adult onset without family history. Low C1q is the key distinguishing finding. (2) Acquired C1-INH in adults = malignancy workup mandatory. Most common: B-cell lymphoma (follicular, marginal zone, CLL), monoclonal gammopathy. Mechanism: lymphoma cells consume or produce antibodies against C1-INH. Treating the underlying malignancy often resolves the angioedema. (3) Abdominal attacks: HAE/acquired C1-INH causes severe abdominal colic from intestinal edema \u2014 often misdiagnosed as surgical abdomen. Key: NO peritoneal signs, severe pain, resolves in 48-72h without surgery. Unnecessary laparotomies are a complication of missed HAE diagnosis. (4) Acute treatment: C1-INH concentrate is first-line. Icatibant (B2 blocker) or fresh frozen plasma are alternatives. Epinephrine and antihistamines are INEFFECTIVE (same mechanism as ACE angioedema). (5) Prophylaxis for procedures: ANY surgical/dental procedure requires prophylactic C1-INH concentrate 1 hour prior \u2014 intubation and mucosal manipulation trigger attacks."
     }
+  },
+  "meta": {
+    "diagnosis": "Acquired C1-Esterase Inhibitor Deficiency \u2014 Recurrent Angioedema, B-Cell Lymphoma Association",
+    "caseId": "acquired-c1esterase-inhibitor-deficiency"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/acute-limb-ischemia.js — EMR case data for Acute Limb Ischemia (Embolic) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Jennings",
@@ -15,103 +15,60 @@ window.EMR_DATA = {
     "address": "3435 Spruce St, Richmond, VA 23226",
     "insurance": "Cigna",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Publix Pharmacy — Pines Blvd",
+    "pharmacy": "Publix Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Sarah Bailey",
       "phone": "(803) 555-1845",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
+    "chiefComplaint": "My right leg went cold and painful suddenly Right lower leg and foot \u2014 sudden onset",
     "diagnosis": "Acute Limb Ischemia (Embolic)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Atrial fibrillation",
+      "problem": "Acute limb ischemia \u2014 right lower extremity",
+      "icd": "I74.3",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Sudden pain, pallor, paresthesias, pulselessness right foot \u2014 3 hours duration, surgical window open"
     },
     {
-      "id": "prob-2",
-      "description": "Congestive heart failure",
+      "problem": "Atrial fibrillation \u2014 source of embolus",
+      "icd": "I48.0",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Known AFib \u2014 not on anticoagulation (patient non-compliant). Cardioembolism likely source."
     },
     {
-      "id": "prob-3",
-      "description": "Prior stroke",
+      "problem": "Compartment syndrome risk \u2014 reperfusion injury",
+      "icd": "M79.A01",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Hypertension",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Type 2 Diabetes",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Post-revascularization: compartment pressures must be monitored \u2014 fasciotomy may be required"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Warfarin",
-      "dose": "5mg daily (INR has been subtherapeutic — last check 1.6 two weeks ago)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Heparin 5000 units IV bolus THEN infusion",
+      "sig": "Anticoagulation to prevent propagation \u2014 immediate",
+      "prescriber": "Vascular Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Metoprolol",
-      "dose": "50mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
-    },
-    {
-      "id": "med-3",
-      "name": "Furosemide",
-      "dose": "40mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
-    },
-    {
-      "id": "med-4",
-      "name": "Lisinopril",
-      "dose": "20mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
-    },
-    {
-      "id": "med-5",
-      "name": "Metformin",
-      "dose": "500mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Pain management \u2014 morphine 4mg IV PRN",
+      "sig": "IV PRN \u2014 ischemic pain is severe",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
     }
   ],
   "allergies": [
     {
       "allergen": "Heparin",
-      "reaction": "Thrombocytopenia (HIT) — CRITICAL: cannot use unfractionated heparin",
+      "reaction": "Thrombocytopenia (HIT) \u2014 CRITICAL: cannot use unfractionated heparin",
       "severity": "Moderate",
       "type": "Drug"
     }
@@ -123,7 +80,7 @@ window.EMR_DATA = {
       "bp": "148/88",
       "hr": "82 (irregularly irregular)",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "97%",
       "pain": "8/10",
       "bmi": "28",
@@ -136,199 +93,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
-      "hpi": "Harold Jennings is a 75-year-old male presenting with my right leg went cold and painful suddenly right lower leg and foot — sudden onset. Past medical history includes Atrial fibrillation, Congestive heart failure, Prior stroke, Hypertension, Type 2 Diabetes. See chart for full details.",
+      "cc": "My right leg went cold and painful suddenly Right lower leg and foot \u2014 sudden onset",
+      "hpi": "Harold Jennings is a 75-year-old male presenting with my right leg went cold and painful suddenly right lower leg and foot \u2014 sudden onset. Past medical history includes Atrial fibrillation, Congestive heart failure, Prior stroke, Hypertension, Type 2 Diabetes. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Limb Ischemia (Embolic) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Limb Ischemia (Embolic) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-411339",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "ALI Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.9",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "45",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "168",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "13.2",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "15",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "73",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "INR",
-              "value": "1.4",
-              "unit": "",
-              "range": "2.0-3.0 (therapeutic for AFib)",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "3.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "CK Total",
-              "value": "480",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            }
-          ]
+          "test": "Potassium",
+          "value": "4.8",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
+        },
+        {
+          "test": "CK",
+          "value": "2,200",
+          "unit": "U/L",
+          "ref": "22-198",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "3.4",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "INR",
+          "value": "1.1",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-417544",
-      "clinical": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CTA Lower Extremity",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-961178",
-      "clinical": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
-      "technique": "Standard protocol",
-      "findings": "COMPLETE OCCLUSION of the right popliteal artery at the level of the knee joint. Abrupt cutoff with 'meniscus sign' (convex proximal thrombus margin — classic for embolism). No significant atherosclerotic disease proximal to occlusion. Reconstitution of flow distally via collaterals with poor opacification of anterior tibial, posterior tibial, and peroneal arteries. Left lower extremity: patent vasculature with mild atherosclerotic changes.",
-      "impression": "ACUTE EMBOLIC OCCLUSION of right popliteal artery — Rutherford class IIa (marginally threatened limb with sensory loss, no motor deficit initially, now developing). EMERGENT vascular surgery consultation for thrombectomy or catheter-directed thrombolysis.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-209998",
-      "clinical": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
-      "technique": "Standard 12-lead",
-      "findings": "Atrial fibrillation at 82 bpm. Old Q waves in V1-V3 (prior anterior wall infarct). No acute ST changes",
-      "impression": "Chronic atrial fibrillation — embolic source. Prior anterior MI noted.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "CT Angiography Lower Extremity + Duplex Ultrasound",
+      "indication": "Acute limb ischemia \u2014 localize occlusion, assess outflow",
+      "findings": "CTA: Abrupt occlusion at distal popliteal artery. No calcified plaque at occlusion site (consistent with embolus, not thrombosis). Tibial arteries reconstitute below with poor signal. Left popliteal and tibials: patent.",
+      "impression": "Acute right popliteal embolism \u2014 Rutherford Class IIb (threatened, immediately threatened). Emergent thromboembolectomy or catheter-directed thrombolysis required. Surgical window open at 3 hours."
     }
   ],
   "immunizations": [
@@ -436,13 +264,12 @@ window.EMR_DATA = {
       "Assess leg hair distribution and skin changes": "Bilateral lower leg hair loss and shiny, atrophic skin changes"
     },
     "ddxTargets": [
-      "Acute arterial embolism (correct diagnosis)",
-      "Acute arterial thrombosis",
-      "Acute deep vein thrombosis",
-      "Aortic dissection with limb ischemia",
-      "Compartment syndrome",
-      "Severe peripheral arterial disease exacerbation",
-      "Acute limb compartment syndrome"
+      "Acute limb ischemia \u2014 popliteal embolism, thromboembolectomy (correct)",
+      "Acute DVT \u2014 venous occlusion causes swelling/pain, not pallor and pulselessness",
+      "Leriche syndrome \u2014 chronic, bilateral, different onset",
+      "Peripheral artery disease exacerbation \u2014 no acute occlusion history",
+      "Compartment syndrome \u2014 post-injury, not spontaneous with absent pulse",
+      "Raynaud's phenomenon \u2014 bilateral, vasospastic, warm rewarming"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known PAD family history and assuming chronic rather than acute arterial insufficiency",
@@ -452,7 +279,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient has several cardiovascular risk factors and comorbidities. What specific aspects of his past medical history might be most relevant to acute leg ischemia? How might his current medications factor into your diagnostic thinking?",
       "phase5": "Now that you've completed your history and physical, what do the absent pulses and the '6 P's' findings tell you about the vascular status? How does the acuity and his atrial fibrillation history inform your leading diagnosis?",
-      "finalDebrief": "This case illustrates how acute arterial embolism from atrial fibrillation can present dramatically. How did your differential evolve from considering venous vs arterial pathology? What key historical and physical exam features distinguished embolic from thrombotic arterial occlusion?"
+      "finalDebrief": "This case illustrates how acute arterial embolism from atrial fibrillation can present dramatically. How did your differential evolve from considering venous vs arterial pathology? What key historical and physical exam features distinguished embolic from thrombotic arterial occlusion?",
+      "final": "Diagnosis: acute limb ischemia \u2014 popliteal embolism. Key learning: (1) 6 Ps: Pain, Pallor, Pulselessness, Paresthesias, Paralysis, Poikilothermia (cold). Paralysis = late finding indicating motor nerve ischemia \u2014 imminent irreversible damage. Paresthesias alone = urgent, hours remain. (2) Rutherford classification: Class I = viable (no sensory loss). Class IIa = marginally threatened (paresthesias, no paralysis). Class IIb = immediately threatened (sensory + weakness). Class III = irreversible (fixed mottling, muscle rigidity). Class IIb here = emergent intervention. (3) Embolism vs thrombosis: embolism = sudden onset, no prior claudication, contralateral pulses normal, often AFib source. Thrombosis = prior PAD symptoms, bilateral disease, gradual onset. Different: thrombosis may need bypass; embolism treated by Fogarty catheter thromboembolectomy. (4) Heparin immediately: prevents propagation while preparing OR. Does not lyse existing clot. (5) Reperfusion syndrome: after 4-6h ischemia, revascularization releases myoglobin, K+, lactate \u2192 rhabdomyolysis, hyperkalemia, acidosis. Post-op: aggressive hydration, monitor K+, consider prophylactic fasciotomy if ischemia >6h."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Limb Ischemia \u2014 6 Ps, Embolism to Popliteal Artery, 4-Hour Window",
+    "caseId": "acute-limb-ischemia"
   }
 };

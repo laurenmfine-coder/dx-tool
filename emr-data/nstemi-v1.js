@@ -1,4 +1,4 @@
-/* emr-data/nstemi-v1.js — Auto-generated EMR case data for NSTEMI */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Giovanna DeLuca",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "3563 S Halsted St, Louisville, KY 40202",
     "insurance": "Medicaid",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Kevin DeLuca",
       "phone": "(312) 555-4764",
@@ -26,70 +26,67 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Hypertension",
+      "problem": "NSTEMI \u2014 anterior distribution",
+      "icd": "I21.19",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Troponin 2.8 (rising), dynamic ST depression V2-V4, GRACE score 142 \u2014 early invasive strategy indicated"
     },
     {
-      "id": "prob-2",
-      "description": "Chronic Kidney Disease Stage 3",
+      "problem": "Hypertension + hyperlipidemia + diabetes \u2014 risk factor burden",
+      "icd": "I10",
+      "onset": "2017",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Three major modifiable CV risk factors \u2014 secondary prevention intensification required"
     },
     {
-      "id": "prob-3",
-      "description": "Type 2 Diabetes",
+      "problem": "TIMI risk score 4 \u2014 intermediate-high",
+      "icd": "I21.19",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Prior TIA",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Age >65, ST deviation, positive cardiac markers, aspirin use x7 days = TIMI 4"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Amlodipine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Aspirin 325mg loading THEN 81mg daily",
+      "sig": "325mg chew immediately, then 81mg daily indefinitely",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 11,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Metoprolol Succinate",
-      "dose": "50mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Ticagrelor 180mg loading THEN 90mg BID (dual antiplatelet)",
+      "sig": "180mg loading dose, then 90mg twice daily \u2014 PLATO trial: superior to clopidogrel",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Clopidogrel",
-      "dose": "75mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Heparin infusion \u2014 weight-based protocol",
+      "sig": "IV infusion \u2014 anticoagulation bridging to cath",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Insulin Glargine",
-      "dose": "20 units",
-      "route": "SC",
-      "frequency": "Nightly",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Atorvastatin 80mg QHS (high-intensity)",
+      "sig": "Take at bedtime \u2014 high-intensity statin for ACS",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Metoprolol tartrate 25mg BID",
+      "sig": "Take twice daily \u2014 beta-blockade post-ACS",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 4,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -107,7 +104,7 @@ window.EMR_DATA = {
       "bp": "148/88",
       "hr": "86",
       "rr": "18",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "97%",
       "pain": "6/10",
       "bmi": "36",
@@ -123,165 +120,67 @@ window.EMR_DATA = {
       "cc": "Intermittent chest pressure for 6 hours",
       "hpi": "Giovanna DeLuca is a 63-year-old female presenting with intermittent chest pressure for 6 hours. Past medical history includes Hypertension, Chronic Kidney Disease Stage 3, Type 2 Diabetes, Prior TIA. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "NSTEMI — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "NSTEMI \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-804278",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "NSTEMI Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I (high-sensitivity) \u2014 0h",
+          "value": "0.8",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "210",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I (high-sensitivity) \u2014 3h",
+          "value": "2.8",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Troponin",
-              "value": "0.82",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
-            }
-          ]
+          "test": "BNP",
+          "value": "188",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "HbA1c",
+          "value": "8.4",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "LDL",
+          "value": "138",
+          "unit": "mg/dL",
+          "ref": "<70 for ACS",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-838031",
-      "clinical": "Intermittent chest pressure for 6 hours",
-      "technique": "Standard protocol",
-      "findings": "Cardiomegaly. No acute pulmonary disease.",
-      "impression": "Cardiomegaly without acute process.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/01/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-819303",
-      "clinical": "Intermittent chest pressure for 6 hours",
-      "technique": "Standard protocol",
-      "findings": "Normal sinus rhythm. ST depression V4-V6 and I, aVL. T-wave inversions in lateral leads.",
-      "impression": "Ischemic changes consistent with NSTEMI.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/18/2024",
+      "study": "12-Lead ECG + Echocardiogram",
+      "indication": "Chest pain, rising troponin \u2014 evaluate ischemia",
+      "findings": "ECG: Sinus tachycardia 96 bpm. Dynamic ST depression 1.5mm V2-V4, leads I and aVL. No ST elevation. No pathological Q waves. Echo: EF 48% (reduced from prior 62%). Anterior wall hypokinesis. No significant valvular disease.",
+      "impression": "NSTEMI with dynamic anterior ST changes. Reduced EF from prior study \u2014 anterior territory in jeopardy. GRACE score 142 \u2014 high risk, early invasive strategy (cath within 24h) indicated."
     }
   ],
   "immunizations": [
@@ -385,13 +284,12 @@ window.EMR_DATA = {
       "General appearance and distress level": "Appears mildly anxious but in no acute distress, alert and oriented"
     },
     "ddxTargets": [
-      "Unstable Angina (correct diagnosis)",
-      "Non-ST elevation myocardial infarction",
-      "Gastroesophageal reflux disease",
-      "ST-elevation myocardial infarction",
-      "Pulmonary embolism",
-      "Chest wall pain/costochondritis",
-      "Anxiety/panic disorder"
+      "NSTEMI \u2014 GRACE high risk, early invasive strategy (correct)",
+      "STEMI \u2014 no ST elevation, no cath lab activation required immediately",
+      "Unstable angina \u2014 troponin is positive, making this NSTEMI",
+      "Myopericarditis \u2014 ST depression not elevation, no friction rub",
+      "Type 2 MI (supply-demand mismatch) \u2014 no precipitating illness; spontaneous type 1",
+      "Takotsubo cardiomyopathy \u2014 apical ballooning pattern, typically post-stress"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on GERD given patient's trial of antacids and atypical presentation in older diabetic female",
@@ -401,7 +299,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, I see you're considering several possibilities. Given this patient's risk factors - diabetes, hypertension, CKD, prior TIA, and strong family history - which conditions would you want to rule out first? What specific questions might help you distinguish between cardiac and non-cardiac causes?",
       "phase5": "Your history and physical exam findings are thorough. The patient has intermittent chest pressure with radiation, associated dyspnea, and multiple cardiac risk factors, but a relatively normal physical exam. How does this constellation of findings influence your differential? What would be your next steps in evaluation?",
-      "finalDebrief": "This case highlights the challenge of diagnosing unstable angina, particularly in high-risk patients like Ms. DeLuca with diabetes and multiple cardiovascular risk factors. Her presentation with exertional chest pressure, radiation to the arm, and associated dyspnea was classic despite her normal physical exam. How did your thinking evolve as you gathered more information, and what key features ultimately pointed you toward the cardiac diagnosis?"
+      "finalDebrief": "This case highlights the challenge of diagnosing unstable angina, particularly in high-risk patients like Ms. DeLuca with diabetes and multiple cardiovascular risk factors. Her presentation with exertional chest pressure, radiation to the arm, and associated dyspnea was classic despite her normal physical exam. How did your thinking evolve as you gathered more information, and what key features ultimately pointed you toward the cardiac diagnosis?",
+      "final": "Diagnosis: NSTEMI, high-risk, early invasive strategy. Key learning: (1) NSTEMI vs Unstable Angina: NSTEMI = positive troponin + ischemic symptoms \u00b1 ST changes. UA = same but troponin negative. Management is identical but NSTEMI is higher risk. (2) GRACE score: calculates risk of in-hospital death + MI. Score >140 = high risk \u2192 cardiac catheterization within 24 hours. Score 109-140 = intermediate \u2192 within 72 hours. Score <109 = low risk \u2192 non-invasive testing first acceptable. (3) Dual antiplatelet: aspirin + P2Y12 inhibitor (ticagrelor > clopidogrel per PLATO trial, NNT 46 to prevent death/MI/stroke). Ticagrelor: no CYP2C19 metabolism (unlike clopidogrel), more consistent platelet inhibition. Hold if CABG likely. (4) Post-ACS secondary prevention: high-intensity statin (atorvastatin 80mg) for ALL patients regardless of baseline LDL. Beta-blocker: reduces mortality in reduced EF. ACEi/ARB: if EF <40% or diabetes or hypertension. (5) EF 48%: previously 62% \u2014 new wall motion abnormality. This patient has sustained ischemic injury. Cardiac rehab referral at discharge is Class I recommendation."
     }
+  },
+  "meta": {
+    "diagnosis": "NSTEMI \u2014 Type 1 (Spontaneous), Anterior Distribution, GRACE Score High Risk",
+    "caseId": "nstemi-v1"
   }
 };

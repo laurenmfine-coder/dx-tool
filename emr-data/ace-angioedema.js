@@ -1,4 +1,4 @@
-/* emr-data/ace-angioedema.js — Multi-Setting Allergy Case: ACE Inhibitor Angioedema */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6983 Oak Ave, Memphis, TN 38116",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Lisa Chang, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Sarah Washington",
         "phone": "(503) 555-9890",
@@ -95,7 +95,7 @@ window.EMR_DATA = {
           "bp": "152/88",
           "hr": "88",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "97%",
           "pain": "5/10"
         }
@@ -118,7 +118,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -139,7 +139,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -226,7 +226,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for airway monitoring — tongue swelling progressing",
+        "chiefComplaint": "Admitted for airway monitoring \u2014 tongue swelling progressing",
         "diagnosis": "ACE Inhibitor Angioedema"
       },
       "problems": [
@@ -265,7 +265,7 @@ window.EMR_DATA = {
           "bp": "142/82",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "3/10"
         }
@@ -288,7 +288,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -309,7 +309,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -386,8 +386,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for airway monitoring — tongue swelling progressing",
-          "hpi": "Darnell Washington presents with admitted for airway monitoring — tongue swelling progressing.",
+          "cc": "Admitted for airway monitoring \u2014 tongue swelling progressing",
+          "hpi": "Darnell Washington presents with admitted for airway monitoring \u2014 tongue swelling progressing.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -396,7 +396,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — recurrent angioedema on ACE inhibitor, confirm mechanism",
+        "chiefComplaint": "A/I consult \u2014 recurrent angioedema on ACE inhibitor, confirm mechanism",
         "diagnosis": "ACE Inhibitor Angioedema"
       },
       "problems": [
@@ -426,7 +426,7 @@ window.EMR_DATA = {
           "bp": "138/82",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -449,7 +449,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -470,7 +470,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -547,8 +547,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — recurrent angioedema on ACE inhibitor, confirm mechanism",
-          "hpi": "Darnell Washington presents with a/i consult — recurrent angioedema on ace inhibitor, confirm mechanism.",
+          "cc": "A/I consult \u2014 recurrent angioedema on ACE inhibitor, confirm mechanism",
+          "hpi": "Darnell Washington presents with a/i consult \u2014 recurrent angioedema on ace inhibitor, confirm mechanism.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -557,7 +557,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up 6 weeks after ACE angioedema — BP management without ACE/ARB",
+        "chiefComplaint": "Follow-up 6 weeks after ACE angioedema \u2014 BP management without ACE/ARB",
         "diagnosis": "ACE Inhibitor Angioedema"
       },
       "problems": [
@@ -596,7 +596,7 @@ window.EMR_DATA = {
           "bp": "134/78",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -619,7 +619,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -640,7 +640,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -717,8 +717,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up 6 weeks after ACE angioedema — BP management without ACE/ARB",
-          "hpi": "Darnell Washington presents with follow-up 6 weeks after ace angioedema — bp management without ace/arb.",
+          "cc": "Follow-up 6 weeks after ACE angioedema \u2014 BP management without ACE/ARB",
+          "hpi": "Darnell Washington presents with follow-up 6 weeks after ace angioedema \u2014 bp management without ace/arb.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -740,7 +740,7 @@ window.EMR_DATA = {
     "address": "7914 Daisy Ave, Richmond, VA 23225",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Sarah Washington",
       "phone": "(312) 555-4388",
@@ -751,31 +751,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "ACE Inhibitor Angioedema",
+      "problem": "ACE inhibitor angioedema \u2014 tongue and oropharynx",
+      "icd": "T46.4X5A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Lisinopril x3 years, progressive tongue swelling over 4h \u2014 bradykinin-mediated, not histamine"
+    },
+    {
+      "problem": "Airway compromise risk \u2014 posterior tongue involvement",
+      "icd": "J98.09",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Stridor developing \u2014 anesthesia on standby for awake fiberoptic intubation"
+    },
+    {
+      "problem": "Bradykinin mechanism \u2014 epinephrine ineffective",
+      "icd": "T46.4X5A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "ACE inhibitor blocks bradykinin degradation \u2192 accumulation \u2192 vascular permeability. Antihistamines/epi do NOT work."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Lisinopril",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "STOP lisinopril PERMANENTLY \u2014 causative agent",
+      "sig": "Do not rechallenge. Document allergy as ACE inhibitor class.",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "STOPPED"
     },
     {
-      "id": "med-2",
-      "name": "Amlodipine",
-      "dose": "5mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Fresh frozen plasma 2 units IV (contains ACE enzyme \u2014 degrades bradykinin)",
+      "sig": "IV infusion \u2014 provides exogenous ACE to degrade bradykinin",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Icatibant 30mg SQ \u2014 bradykinin B2 receptor antagonist (if available)",
+      "sig": "Subcutaneous injection \u2014 specific antagonist, works in 30-60 min",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active if available"
+    },
+    {
+      "name": "Epinephrine 0.3mg IM \u2014 for airway compromise ONLY, NOT effective for bradykinin angioedema",
+      "sig": "Use ONLY if anaphylaxis co-occurring or airway emergency. Will not reduce bradykinin swelling.",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN \u2014 airway emergency only"
     }
   ],
   "allergies": [
@@ -793,7 +821,7 @@ window.EMR_DATA = {
       "bp": "152/88",
       "hr": "88",
       "rr": "18",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "97%",
       "pain": "5/10"
     }
@@ -813,114 +841,49 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-557655",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "ACE Angioedema Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "C4 complement",
+          "value": "22",
+          "unit": "mg/dL",
+          "ref": "16-47",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "C1 esterase inhibitor (level)",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Tryptase",
+          "value": "4.2",
+          "unit": "ng/mL",
+          "ref": "<11.4 (elevated in anaphylaxis)",
+          "flag": ""
+        },
+        {
+          "test": "CBC \u2014 WBC",
+          "value": "9.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Lateral Neck X-ray + Fiberoptic Laryngoscopy",
+      "indication": "Tongue angioedema, stridor \u2014 assess airway compromise",
+      "findings": "Lateral neck: Soft tissue swelling oral cavity and oropharynx. Supraglottis visible but narrowed. No epiglottic thickening. Laryngoscopy: Posterior tongue edematous. Uvula enlarged. Posterior pharyngeal wall edematous. Vocal cords visible but edematous, aperture 30% normal.",
+      "impression": "Moderate-severe airway compromise from ACE inhibitor angioedema. Anesthesia present \u2014 awake fiberoptic intubation on standby."
+    }
+  ],
   "immunizations": [
     {
       "name": "Influenza",
@@ -963,17 +926,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "ACE inhibitor angioedema occurs in 0.1–0.7% of patients on ACEi, more common in Black patients (3-4× higher risk), and can occur years after starting the medication. Mechanism: ACEi inhibits bradykinin degradation → bradykinin accumulates → B2 receptor activation → angioedema.",
-      "ACEi angioedema is bradykinin-mediated, NOT histamine. Antihistamines and epinephrine have limited efficacy — icatibant (bradykinin B2 antagonist) or C1-INH concentrate can be used for severe attacks.",
-      "All ACE inhibitors are absolutely contraindicated after ACEi angioedema. ARBs carry a small cross-reactivity risk (~3–10%) — use with caution and monitoring. ARNI (sacubitril/valsartan) — contraindicated (neprilysin inhibition raises bradykinin levels further)."
+      "ACE inhibitor angioedema occurs in 0.1\u20130.7% of patients on ACEi, more common in Black patients (3-4\u00d7 higher risk), and can occur years after starting the medication. Mechanism: ACEi inhibits bradykinin degradation \u2192 bradykinin accumulates \u2192 B2 receptor activation \u2192 angioedema.",
+      "ACEi angioedema is bradykinin-mediated, NOT histamine. Antihistamines and epinephrine have limited efficacy \u2014 icatibant (bradykinin B2 antagonist) or C1-INH concentrate can be used for severe attacks.",
+      "All ACE inhibitors are absolutely contraindicated after ACEi angioedema. ARBs carry a small cross-reactivity risk (~3\u201310%) \u2014 use with caution and monitoring. ARNI (sacubitril/valsartan) \u2014 contraindicated (neprilysin inhibition raises bradykinin levels further)."
     ],
     "boardPearls": [
       "ACEi angioedema mechanism: bradykinin accumulation (NOT IgE/histamine). Responds poorly to epinephrine/antihistamines.",
-      "Epidemiology: 0.1–0.7% ACEi users. Black patients: 3–4× higher risk. Can occur after years on the drug.",
+      "Epidemiology: 0.1\u20130.7% ACEi users. Black patients: 3\u20134\u00d7 higher risk. Can occur after years on the drug.",
       "Treatment: stop ACEi immediately. Airway management first. Icatibant or C1-INH for severe/refractory attacks.",
-      "Contraindications after ACEi angioedema: ALL ACE inhibitors. ARBs: cautiously permissible (3–10% risk). ARNI (sacubitril/valsartan): contraindicated.",
-      "Complement testing: normal C4, C3, C1-INH — distinguishes from HAE and acquired C1-INH deficiency.",
-      "Resolution: after ACEi discontinuation, angioedema typically resolves within 48–72h but may rarely persist weeks."
+      "Contraindications after ACEi angioedema: ALL ACE inhibitors. ARBs: cautiously permissible (3\u201310% risk). ARNI (sacubitril/valsartan): contraindicated.",
+      "Complement testing: normal C4, C3, C1-INH \u2014 distinguishes from HAE and acquired C1-INH deficiency.",
+      "Resolution: after ACEi discontinuation, angioedema typically resolves within 48\u201372h but may rarely persist weeks."
     ]
   },
   "guided": {
@@ -1035,13 +998,12 @@ window.EMR_DATA = {
       "Palpate for facial tenderness": "No tenderness to palpation of swollen areas or facial bones."
     },
     "ddxTargets": [
-      "ACE inhibitor-induced angioedema (correct diagnosis)",
-      "Hereditary angioedema",
-      "Allergic angioedema",
-      "Anaphylaxis",
-      "Airway obstruction",
-      "Cellulitis",
-      "Contact dermatitis"
+      "ACE inhibitor angioedema \u2014 bradykinin-mediated (correct)",
+      "Allergic angioedema (IgE-mediated) \u2014 tryptase would be elevated, antihistamines would help",
+      "Hereditary angioedema (C1-INH deficiency) \u2014 low C4, no ACE inhibitor history",
+      "Anaphylaxis \u2014 tryptase low, no urticaria, no hypotension",
+      "Angioedema from ARB \u2014 class effect, rare cross-reactivity",
+      "Ludwig's angina \u2014 dental source, bilateral floor of mouth"
     ],
     "biasFlags": {
       "anchoring": "Students may anchor on 'allergic reaction' and focus extensively on allergen exposure, missing the medication-induced etiology despite ACE inhibitor use.",
@@ -1051,7 +1013,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "I see you're considering several causes of facial swelling. What specific historical features would help you differentiate between allergic and non-allergic angioedema? How might this patient's demographic and medication profile influence your thinking?",
       "phase5": "You've gathered good information about the swelling pattern and associated symptoms. What's significant about the absence of urticaria in this presentation? How does the patient's medication list and ethnic background factor into your diagnostic reasoning?",
-      "finalDebrief": "This case illustrates classic ACE inhibitor-induced angioedema, which occurs more frequently in African American patients and can develop even after months or years of stable therapy. How did the absence of urticaria help distinguish this from IgE-mediated allergic reactions? What's your approach to managing this patient's hypertension going forward?"
+      "finalDebrief": "This case illustrates classic ACE inhibitor-induced angioedema, which occurs more frequently in African American patients and can develop even after months or years of stable therapy. How did the absence of urticaria help distinguish this from IgE-mediated allergic reactions? What's your approach to managing this patient's hypertension going forward?",
+      "final": "Diagnosis: ACE inhibitor angioedema \u2014 bradykinin-mediated. Key learning: (1) Mechanism: ACE normally degrades bradykinin. ACE inhibitor \u2192 bradykinin accumulates \u2192 B2 receptor \u2192 vascular permeability \u2192 non-pitting, non-pruritic angioedema. No mast cell involvement. (2) This means: epinephrine, antihistamines, and steroids are INEFFECTIVE. This is the critical teaching point. The ER may give epi reflexively \u2014 it will not help. Treatments that work: stop ACE inhibitor, FFP (provides ACE enzyme), icatibant (B2 receptor blocker), C1-esterase inhibitor concentrate (if HAE-like mechanism). (3) Tryptase: normal = no mast cell degranulation = not anaphylaxis. This differentiates ACE angioedema from true anaphylaxis. (4) Timing: can occur YEARS after starting ACE inhibitor \u2014 not just at initiation. Ask about lisinopril/enalapril/ramipril in ANY unexplained angioedema. (5) Class switch: never rechallenge with ANY ACE inhibitor. ARBs have ~0.1-1% cross-reactivity \u2014 may use with monitoring if compelling indication, but document the risk."
     }
+  },
+  "meta": {
+    "diagnosis": "ACE Inhibitor-Induced Angioedema \u2014 Bradykinin-Mediated, Tongue and Oropharynx",
+    "caseId": "ace-angioedema"
   }
 };

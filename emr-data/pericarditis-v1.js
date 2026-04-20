@@ -1,4 +1,4 @@
-/* emr-data/pericarditis-v1.js — Auto-generated EMR case data for Pericarditis */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Daniel Okafor",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "5993 E Roosevelt Rd, Minneapolis, MN 55403",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Rite Aid — Palm Ave",
+    "pharmacy": "Rite Aid \u2014 Palm Ave",
     "emergencyContact": {
       "name": "Teresa Okafor",
       "phone": "(502) 555-5285",
@@ -26,14 +26,53 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Recent URI 2 weeks ago",
+      "problem": "Acute pericarditis \u2014 pleuritic chest pain, friction rub",
+      "icd": "I30.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Sharp pleuritic pain, positional (better leaning forward), friction rub \u2014 viral 2 weeks after URI"
+    },
+    {
+      "problem": "Pericardial effusion \u2014 small",
+      "icd": "I31.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Echo: 6mm posterior pericardial effusion. No tamponade physiology."
+    },
+    {
+      "problem": "Athletic restriction required \u2014 myopericarditis risk",
+      "icd": "I30.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Return to sports: NO until symptom-free + normal CRP + normal echo \u2014 typically 3 months"
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Ibuprofen 600mg TID x2 weeks (then taper)",
+      "sig": "Take 3 times daily with food for 2 weeks, then 400mg TID x1 week, then 200mg TID x1 week",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
+    },
+    {
+      "name": "Colchicine 0.5mg BID x3 months",
+      "sig": "Take twice daily for 3 months \u2014 COPE/ICAP trial: halves recurrence rate",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Omeprazole 20mg daily \u2014 GI protection while on NSAIDs",
+      "sig": "Take daily \u2014 gastroprotection",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
       "allergen": "NKDA",
@@ -49,7 +88,7 @@ window.EMR_DATA = {
       "bp": "122/76",
       "hr": "92",
       "rr": "18",
-      "temp": "38.2°C",
+      "temp": "38.2\u00b0C",
       "spo2": "99%",
       "pain": "7/10",
       "bmi": "27",
@@ -65,179 +104,67 @@ window.EMR_DATA = {
       "cc": "Sharp chest pain worse with inspiration and lying flat",
       "hpi": "Daniel Okafor is a 26-year-old male presenting with sharp chest pain worse with inspiration and lying flat. Past medical history includes Recent URI 2 weeks ago. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Pericarditis — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Pericarditis \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-743302",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Pericarditis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "8.4",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "ESR",
+          "value": "64",
+          "unit": "mm/hr",
+          "ref": "0-20",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Troponin",
-              "value": "0.06",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
-            },
-            {
-              "test": "Esr",
-              "value": "48",
-              "unit": "mm/hr",
-              "range": "0-20",
-              "flag": "H"
-            },
-            {
-              "test": "Crp",
-              "value": "8.2",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.08",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "11.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "ANA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "TSH",
+          "value": "2.1",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-884363",
-      "clinical": "Sharp chest pain worse with inspiration and lying flat",
-      "technique": "Standard protocol",
-      "findings": "Diffuse ST elevation with PR depression in leads II, III, aVF, V3-V6. PR elevation in aVR.",
-      "impression": "Classic ECG findings of acute pericarditis.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/01/2026",
-      "study": "Echocardiogram",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-916629",
-      "clinical": "Sharp chest pain worse with inspiration and lying flat",
-      "technique": "Standard protocol",
-      "findings": "Small circumferential pericardial effusion. Normal LV/RV function. No tamponade physiology.",
-      "impression": "Small pericardial effusion consistent with pericarditis.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Echocardiogram + 12-Lead ECG",
+      "indication": "Pleuritic chest pain, friction rub",
+      "findings": "Echo: EF 62%, normal wall motion. Small 6mm posterior pericardial effusion. No right atrial or ventricular diastolic collapse. ECG: Diffuse ST elevation (saddle-shaped/concave up) in I, II, III, aVF, V2-V6. PR depression leads I, II, aVF. Sinus tachycardia 104 bpm.",
+      "impression": "Findings diagnostic of acute pericarditis. Small effusion without tamponade. Troponin elevation suggests myopericarditis component."
     }
   ],
   "immunizations": [
@@ -328,7 +255,7 @@ window.EMR_DATA = {
       "ECG interpretation"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 122/76, HR 92, RR 18, Temp 38.2°C, O2 sat 99% on room air",
+      "Vital signs assessment": "BP 122/76, HR 92, RR 18, Temp 38.2\u00b0C, O2 sat 99% on room air",
       "Cardiac auscultation": "Three-component pericardial friction rub best heard at left sternal border with patient leaning forward",
       "Lung auscultation": "Clear breath sounds bilaterally, no rales or wheezes",
       "Chest wall palpation": "No chest wall tenderness, no crepitus",
@@ -340,13 +267,12 @@ window.EMR_DATA = {
       "ECG interpretation": "Diffuse ST elevation in leads I, II, aVF, V2-V6 with PR depression"
     },
     "ddxTargets": [
-      "Acute pericarditis (correct diagnosis)",
-      "Viral myocarditis",
-      "Pleuritis/pleurisy",
-      "Acute myocardial infarction",
-      "Pulmonary embolism",
-      "Costochondritis",
-      "GERD with chest pain"
+      "Acute pericarditis \u2014 viral etiology (correct)",
+      "STEMI \u2014 pericarditis has concave (saddle-shaped) diffuse ST elevation vs convex focal STEMI elevation",
+      "Pulmonary embolism \u2014 pleuritic pain but different ECG/echo",
+      "Aortic dissection \u2014 different pain quality, mediastinal widening",
+      "Pleuritis \u2014 pleural rub not pericardial, no ECG changes",
+      "Myocarditis \u2014 troponin elevated, may coexist as myopericarditis"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on recent URI and dismissing cardiac causes, or conversely anchoring on chest pain and over-investigating for MI in young patient",
@@ -356,7 +282,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some good differentials for chest pain in a young adult. Given his recent viral illness, what post-viral complications should you specifically explore? What key historical features will help you distinguish between inflammatory and ischemic causes?",
       "phase5": "Excellent work identifying the friction rub and positional chest pain. How do the ECG changes and clinical presentation fit together? What's your assessment of this patient's hemodynamic stability, and what would make you concerned about complications?",
-      "finalDebrief": "This case demonstrates classic acute pericarditis following viral URI. Notice how the combination of pleuritic chest pain, fever, friction rub, and diffuse ST elevation with PR depression clinched the diagnosis. What red flags would prompt you to worry about cardiac tamponade in pericarditis patients?"
+      "finalDebrief": "This case demonstrates classic acute pericarditis following viral URI. Notice how the combination of pleuritic chest pain, fever, friction rub, and diffuse ST elevation with PR depression clinched the diagnosis. What red flags would prompt you to worry about cardiac tamponade in pericarditis patients?",
+      "final": "Diagnosis: acute pericarditis with myopericarditis component (elevated troponin). Key learning: (1) Diagnostic criteria (COPE/ESC): \u22652 of: (a) pleuritic chest pain, (b) friction rub, (c) diffuse saddle-shaped ST elevation/PR depression, (d) new/worsening pericardial effusion. This patient has all 4. (2) ECG distinction from STEMI: pericarditis = diffuse concave ST elevation in ALL leads (not focal territory), PR depression (pathognomonic), no reciprocal changes. STEMI = convex ST elevation in specific territory, reciprocal changes in opposite leads. (3) Colchicine evidence: COPE and ICAP trials showed colchicine added to NSAID reduces recurrence from 30% to 15% at 18 months. Standard of care for all acute pericarditis. (4) Troponin elevation: this patient has myopericarditis (pericarditis + myocardial involvement). Implications: (a) more restricted activity, (b) avoid NSAIDs if significant myocarditis (may worsen), (c) no sports until troponin normalizes, EF preserved on echo, CRP normal. (5) Return to sport: the most commonly missed counseling point. Athletes with pericarditis require 3 months minimum restriction from competitive sports regardless of symptom resolution."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Pericarditis \u2014 Viral Etiology, Colchicine + NSAIDs, Activity Restriction",
+    "caseId": "pericarditis-v1"
   }
 };
