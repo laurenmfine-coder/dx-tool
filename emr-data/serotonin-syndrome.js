@@ -1,4 +1,4 @@
-/* emr-data/serotonin-syndrome.js — Auto-generated EMR case data for Serotonin Syndrome */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Andrew Chen",
@@ -15,49 +15,70 @@ window.EMR_DATA = {
     "address": "6329 Magnolia Blvd, Phoenix, AZ 85013",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Mei Chen",
       "phone": "(404) 555-3116",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",
+    "chiefComplaint": "Agitation, diaphoresis, tremor, clonus \u2014 recently started new antidepressant",
     "diagnosis": "Serotonin Syndrome"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Depression",
+      "problem": "Serotonin syndrome \u2014 Hunter criteria positive",
+      "icd": "T43.221A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Clonus + agitation + diaphoresis after tramadol added to sertraline"
     },
     {
-      "id": "prob-2",
-      "description": "Started MAOI (phenelzine) 1 week ago while still on sertraline",
+      "problem": "Major depressive disorder \u2014 on sertraline",
+      "icd": "F32.1",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Sertraline 150mg daily \u2014 serotonergic baseline"
+    },
+    {
+      "problem": "Chronic back pain \u2014 tramadol newly added",
+      "icd": "M54.5",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Tramadol is a weak serotonin reuptake inhibitor \u2014 sufficient to precipitate SS with sertraline"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Sertraline",
-      "dose": "200mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wu, MD"
+      "name": "HOLD sertraline AND tramadol \u2014 both serotonergic",
+      "sig": "Discontinue both immediately",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HELD"
     },
     {
-      "id": "med-2",
-      "name": "Phenelzine",
-      "dose": "15mg",
-      "route": "PO",
-      "frequency": "TID (started 7 days ago)",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Cyproheptadine 12mg PO loading then 2mg q2h",
+      "sig": "5-HT2A antagonist \u2014 specific antidote for serotonin syndrome",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Lorazepam 1-2mg IV PRN agitation/myoclonus",
+      "sig": "Benzodiazepine \u2014 reduces agitation and neuromuscular hyperactivity",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "External cooling \u2014 fever management",
+      "sig": "Cooling blanket and ice packs \u2014 target temperature <38.5\u00b0C",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -75,7 +96,7 @@ window.EMR_DATA = {
       "bp": "168/102",
       "hr": "128",
       "rr": "24",
-      "temp": "39.8°C",
+      "temp": "39.8\u00b0C",
       "spo2": "96%",
       "pain": "5/10",
       "bmi": "25",
@@ -88,153 +109,57 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",
-      "hpi": "Andrew Chen is a 40-year-old male presenting with agitation, diaphoresis, tremor, clonus — recently started new antidepressant. Past medical history includes Depression, Started MAOI (phenelzine) 1 week ago while still on sertraline. See chart for full details.",
+      "cc": "Agitation, diaphoresis, tremor, clonus \u2014 recently started new antidepressant",
+      "hpi": "Andrew Chen is a 40-year-old male presenting with agitation, diaphoresis, tremor, clonus \u2014 recently started new antidepressant. Past medical history includes Depression, Started MAOI (phenelzine) 1 week ago while still on sertraline. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Serotonin Syndrome — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Serotonin Syndrome \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-759360",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Serotonin Syndrome Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "12.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CK",
+          "value": "4,200",
+          "unit": "U/L",
+          "ref": "22-198",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Temperature",
+          "value": "39.8",
+          "unit": "\u00b0C",
+          "ref": "<37.5",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Ck",
-              "value": "1800",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            }
-          ]
+          "test": "WBC",
+          "value": "14.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.3",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "134",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-307093",
-      "clinical": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial abnormality.",
-      "impression": "Normal.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -314,7 +239,7 @@ window.EMR_DATA = {
       "Cardiovascular examination"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 168/102, HR 128, Temp 39.8°C, RR 22, SpO2 96% on room air",
+      "Vital signs assessment": "BP 168/102, HR 128, Temp 39.8\u00b0C, RR 22, SpO2 96% on room air",
       "Mental status examination": "Alert and oriented but restless, anxious affect, no confusion or altered consciousness",
       "Deep tendon reflexes": "Hyperreflexia 3+ throughout, most pronounced in lower extremities",
       "Ankle clonus testing": "Sustained clonus present bilaterally, more than 5 beats",
@@ -326,13 +251,12 @@ window.EMR_DATA = {
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, elevated blood pressure"
     },
     "ddxTargets": [
-      "Serotonin syndrome (correct diagnosis)",
-      "Neuroleptic malignant syndrome",
-      "Anticholinergic toxicity",
-      "Malignant hyperthermia",
-      "Thyrotoxicosis",
-      "Sympathomimetic intoxication",
-      "Withdrawal syndrome"
+      "Serotonin syndrome \u2014 sertraline + tramadol (correct)",
+      "NMS \u2014 lead-pipe rigidity vs clonus is the key distinguishing exam finding",
+      "Anticholinergic toxicity \u2014 dry/hot/flushed not diaphoretic",
+      "Stimulant toxicity \u2014 cocaine/amphetamine",
+      "Malignant hyperthermia \u2014 requires inhalation anesthetic",
+      "Sepsis \u2014 infection source absent"
     ],
     "biasFlags": {
       "anchoring": "May anchor on psychiatric history and assume this is anxiety or panic disorder, missing the medication interaction",
@@ -342,7 +266,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient has concerning vital signs and neurologic symptoms after starting a new psychiatric medication. Before you interview him, think about what specific medication interactions might cause this constellation of findings. What questions would help you identify a potentially dangerous drug combination?",
       "phase5": "You've identified hyperreflexia, clonus, hyperthermia, and autonomic instability in a patient on multiple psychiatric medications. This triad of findings should make you think of a specific toxidrome. How do the physical findings help narrow your differential diagnosis, and what's the most likely explanation for this patient's presentation?",
-      "finalDebrief": "This case demonstrates classic serotonin syndrome from concurrent MAOI and SSRI use. The key teaching points are recognizing the triad of altered mental status, neuromuscular abnormalities (clonus, hyperreflexia), and autonomic instability. This highlights the critical importance of medication reconciliation and proper washout periods when switching between antidepressant classes. How did your thinking evolve as you gathered more history about the medication timing and physical exam findings?"
+      "finalDebrief": "This case demonstrates classic serotonin syndrome from concurrent MAOI and SSRI use. The key teaching points are recognizing the triad of altered mental status, neuromuscular abnormalities (clonus, hyperreflexia), and autonomic instability. This highlights the critical importance of medication reconciliation and proper washout periods when switching between antidepressant classes. How did your thinking evolve as you gathered more history about the medication timing and physical exam findings?",
+      "final": "Diagnosis: serotonin syndrome, sertraline + tramadol. Key pharmacy learning: (1) Hunter criteria (more sensitive than Sternbach): clonus + agitation OR hyperreflexia + agitation OR ocular clonus + diaphoresis/agitation = serotonin syndrome. Clonus (inducible, spontaneous, or ocular) is the KEY distinguishing feature from NMS and anticholinergic toxicity. (2) Tramadol is the most commonly missed serotonergic drug \u2014 it inhibits serotonin reuptake AND is a weak opioid agonist. Commonly prescribed with SSRIs without recognizing the interaction. (3) NMS vs SS key distinction: NMS = slow onset (days), lead-pipe rigidity, bradyreflexia, low serum iron. SS = rapid onset (hours), hyperreflexia, myoclonus, clonus, diaphoresis. (4) Cyproheptadine is the only oral 5-HT2A antagonist available \u2014 specific antidote. Benzodiazepines reduce agitation and neuromuscular hyperactivity (preferred IV). (5) Resolution: most cases resolve within 24h after stopping offending agents. Severe cases require ICU. This case \u2014 moderate severity \u2014 should resolve with cyproheptadine + benzo + supportive care."
     }
+  },
+  "meta": {
+    "diagnosis": "Serotonin Syndrome \u2014 Sertraline + Tramadol, Hunter Criteria Met",
+    "caseId": "serotonin-syndrome"
   }
 };

@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: James Okoye",
-      "icd": "Z00.00",
+      "problem": "Ischemic stroke \u2014 post-acute day 2",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "James Okoye, 58M \u2014 NIHSS was 14, now 10. Aphasia improving. DVT/PE timing decision pending."
+    },
+    {
+      "problem": "Dysphagia \u2014 aspiration risk",
+      "icd": "R13.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Speech path NPO order still active \u2014 nursing must screen before any oral intake"
+    },
+    {
+      "problem": "DVT prophylaxis decision \u2014 anticoagulation timing in ischemic stroke",
+      "icd": "I63.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Day 2: start heparin prophylaxis vs aspirin controversy \u2014 awaiting neurology guidance"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 325mg via NG tube daily (loading dose)",
+      "sig": "Via NG \u2014 NPO for dysphagia. Antiplatelet for ischemic stroke.",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 80mg via NG tube QHS",
+      "sig": "Via NG tube at bedtime",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily \u2014 DVT prophylaxis",
+      "sig": "Subcutaneous daily \u2014 mechanical prophylaxis insufficient alone",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,8 +127,58 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Post-Stroke Day 2",
+      "results": [
+        {
+          "test": "Glucose",
+          "value": "168",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "138",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": ""
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "13.8",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": ""
+        },
+        {
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "LDL",
+          "value": "148",
+          "unit": "mg/dL",
+          "ref": "<70 for stroke",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/19/2024",
+      "study": "MRI Brain DWI/FLAIR Day 1 Post-Stroke",
+      "indication": "Left MCA stroke \u2014 confirm infarct extent, hemorrhagic transformation",
+      "findings": "Left MCA territory infarct, corona radiata and posterior frontal. No hemorrhagic transformation. Infarct volume ~40 mL.",
+      "impression": "Established left MCA infarct, no hemorrhagic transformation. Safe for antiplatelet therapy."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +210,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-stroke-nursing",
-    "diagnosis": "See diagnosis \u2014 James Okoye",
+    "diagnosis": "Post-Stroke Day 2 \u2014 Nursing Priority: Dysphagia Screen, NIHSS Monitoring, Anticoagulation Timing",
     "acuity": 3,
     "presentation": "James Okoye",
     "category": "neurologic"
@@ -177,12 +257,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "James Okoye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Ischemic stroke \u2014 dysphagia nursing priority (correct)",
+      "Hemorrhagic transformation \u2014 no evidence on MRI",
+      "Post-stroke depression \u2014 too early to assess formally",
+      "Aspiration pneumonia \u2014 not yet, but imminent risk if dysphagia missed",
+      "Neurological worsening \u2014 NIHSS improving, not worsening",
+      "CAUTI \u2014 Foley present, early surveillance"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +272,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: James Okoye. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) You complete your hourly neuro check. James's right grip is now trace versus 2/5 yesterday, and he is not following commands he followed this morning. BP is 192/108. His NIHSS was 14 at admission. You need to escalate. What does your NIHSS re-assessment tell you \u2014 and what is your SBAR to the neurology team right now? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: ischemic stroke day 2 \u2014 nursing surveillance priorities. Key nursing learning: (1) Dysphagia screen is NURSING's responsibility before ANYTHING by mouth \u2014 including medications. Use the 3-oz water swallow test or validated bedside screen. Failed screen = NPO + SLP consult same day. Aspiration pneumonia post-stroke is the #1 preventable complication. (2) NIHSS trending: document NIHSS every shift with neurological checks q4h. Sudden NIHSS increase \u22654 points = call neurology immediately (hemorrhagic transformation or new stroke). (3) Glucose management: post-stroke hyperglycemia worsens infarct \u2014 target glucose <180 mg/dL. Insulin per protocol. Hypoglycemia also dangerous \u2014 glucose <60 = immediate action. (4) Positioning: head of bed 30\u00b0 or higher to reduce aspiration risk. (5) Afib detection: continuous cardiac monitoring x72h post-stroke to detect paroxysmal AFib (changes from antiplatelet to anticoagulation)."
     }
   }
 };

@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Margaret Chen",
-      "icd": "Z00.00",
+      "problem": "Post-ORIF hip fracture \u2014 hospital day 3",
+      "icd": "S72.001A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Margaret Chen, 78F \u2014 new confusion this AM, Morse Fall Score 65"
+    },
+    {
+      "problem": "Acute delirium \u2014 post-operative",
+      "icd": "F05",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "CAM positive: acute onset + inattention + disorganized thinking. Hyperactive subtype."
+    },
+    {
+      "problem": "Urinary tract infection \u2014 suspected precipitant",
+      "icd": "N39.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Foley catheter day 3 \u2014 new confusion, UA sent, bacteria on dipstick"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Cefazolin 1g IV q8h (CAUTI treatment \u2014 pending culture)",
+      "sig": "IV infusion every 8 hours \u2014 empiric UTI treatment",
+      "prescriber": "Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily \u2014 DVT prophylaxis",
+      "sig": "Subcutaneous daily",
+      "prescriber": "Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Acetaminophen 650mg q6h scheduled (pain control)",
+      "sig": "Scheduled \u2014 opioid-sparing for elderly delirium prevention",
+      "prescriber": "Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Oxycodone 5mg PO q4h PRN (MINIMIZE \u2014 delirium risk)",
+      "sig": "PRN only \u2014 use acetaminophen first, limit opioids in elderly",
+      "prescriber": "Orthopedics",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
     }
   ],
   "allergies": [
@@ -97,7 +135,56 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Delirium Workup",
+      "results": [
+        {
+          "test": "UA \u2014 WBC",
+          "value": ">50",
+          "unit": "cells/HPF",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "UA \u2014 bacteria",
+          "value": "Many",
+          "unit": "",
+          "ref": "None",
+          "flag": "H"
+        },
+        {
+          "test": "UA \u2014 nitrites",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "132",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "9.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "TSH",
+          "value": "2.4",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +217,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hip-fracture-nursing",
-    "diagnosis": "See diagnosis \u2014 Margaret Chen",
+    "diagnosis": "Post-ORIF Hip Day 3 \u2014 Nursing Priority: New Confusion + Fall Risk + Delirium Workup",
     "acuity": 3,
     "presentation": "Margaret Chen",
     "category": "geriatric"
@@ -177,12 +264,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Margaret Chen \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-op delirium \u2014 CAUTI precipitant (correct)",
+      "Pain-related agitation \u2014 under-controlled pain",
+      "Medication-induced delirium \u2014 opioids contributing",
+      "Hyponatremia as primary delirium cause \u2014 contributing",
+      "Stroke \u2014 new neuro event (no focal findings)",
+      "Dementia exacerbation \u2014 no prior cognitive baseline documented"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +279,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Margaret Chen. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) It is 0600. Margaret was oriented yesterday. This morning she is confused, pulling at her IV, and calling for her deceased husband. Her temperature is 38.1, HR 102. Her urine output overnight was 180mL. You need to call the surgical resident. Build your complete SBAR \u2014 and identify the three most dangerous post-op complications this presentation could represent. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-op delirium precipitated by CAUTI. Key nursing learning: (1) CAM assessment (Confusion Assessment Method): (a) Acute onset + fluctuating course? (b) Inattention? (c) Disorganized thinking? (d) Altered level of consciousness? Positive CAM requires A + B + either C or D. This patient = positive. Document and escalate. (2) THINK mnemonic for delirium: Toxic (medications), Hypoxia, Infection/Immobility, Nutritional, K+ and electrolytes. This patient has infection (CAUTI) + hyponatremia + opioids. Address all. (3) Foley catheter: day 3 Foley in elderly = significant CAUTI risk. Nursing initiates early Foley removal (CAUTI prevention bundle) \u2014 this should have been assessed daily. Once delirium develops, nursing advocates for removal. (4) Non-pharmacological delirium prevention: orient q2h (clock, board, date), mobilize out of bed with PT, maintain glasses/hearing aids, sleep hygiene, minimize nighttime interruptions, keep room bright during daytime. (5) Opioid minimization: opioids contribute to delirium. Scheduled acetaminophen reduces opioid requirement. This is a nursing drug-reconciliation responsibility."
     }
   }
 };

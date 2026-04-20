@@ -1,4 +1,4 @@
-/* emr-data/severe-hyponatremia.js — Auto-generated EMR case data for Severe Hyponatremia */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Petrowski",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "1512 Iris Blvd, Denver, CO 80211",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
     "emergencyContact": {
       "name": "Thomas Petrowski",
       "phone": "(614) 555-3126",
@@ -26,70 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Depression",
+      "problem": "Severe symptomatic hyponatremia \u2014 Na+ 118",
+      "icd": "E87.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Confusion + nausea + gait instability \u2014 cerebral edema threshold approaching"
     },
     {
-      "id": "prob-2",
-      "description": "Hypothyroidism",
+      "problem": "SIADH \u2014 SSRI-induced (sertraline)",
+      "icd": "E22.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Urine osmolality >100, urine Na+ >40, volume euvolemic \u2014 SIADH criteria met"
     },
     {
-      "id": "prob-3",
-      "description": "Hypertension",
+      "problem": "Hyponatremia correction risk \u2014 osmotic demyelination syndrome",
+      "icd": "G37.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "SIADH suspected",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Max correction: 8-10 mEq/L per 24h. Faster = osmotic demyelination (central pontine myelinolysis)."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "SSRI (Escitalopram)",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "3% NaCl 150mL IV over 20 min (for acute symptomatic correction)",
+      "sig": "Hypertonic saline bolus \u2014 raise Na+ 4-6 mEq/L to relieve cerebral edema acutely",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Levothyroxine",
-      "dose": "75mcg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wu, MD"
+      "name": "HOLD sertraline \u2014 contributing cause",
+      "sig": "Discontinue SSRI until sodium corrected",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HELD"
     },
     {
-      "id": "med-3",
-      "name": "HCTZ",
-      "dose": "25mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michelle Foster, MD"
-    },
-    {
-      "id": "med-4",
-      "name": "Lisinopril",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Fluid restriction 500-800 mL/day (after acute correction)",
+      "sig": "Primary SIADH treatment \u2014 free water restriction",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -107,7 +88,7 @@ window.EMR_DATA = {
       "bp": "138/78",
       "hr": "72",
       "rr": "16",
-      "temp": "36.6°C",
+      "temp": "36.6\u00b0C",
       "spo2": "98%",
       "pain": "2/10",
       "bmi": "35",
@@ -123,162 +104,74 @@ window.EMR_DATA = {
       "cc": "Confusion, nausea, and unsteady gait",
       "hpi": "Linda Petrowski is a 70-year-old female presenting with confusion, nausea, and unsteady gait. Past medical history includes Depression, Hypothyroidism, Hypertension, SIADH suspected. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Severe Hyponatremia — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Severe Hyponatremia \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-590634",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Hyponatremia Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Serum sodium",
+          "value": "118",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "112",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Serum osmolality",
+          "value": "245",
+          "unit": "mOsm/kg",
+          "ref": "285-295",
+          "flag": "L"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Osmolality",
-              "value": "235",
-              "unit": "mOsm/kg",
-              "range": "275-295",
-              "flag": "L"
-            },
-            {
-              "test": "Urine Na",
-              "value": "68",
-              "unit": "mEq/L",
-              "range": "<40",
-              "flag": "H"
-            },
-            {
-              "test": "Urine Osm",
-              "value": "520",
-              "unit": "mOsm/kg",
-              "range": "300-900",
-              "flag": "H"
-            }
-          ]
+          "test": "Urine osmolality",
+          "value": "620",
+          "unit": "mOsm/kg",
+          "ref": "should be <100 if kidneys working normally",
+          "flag": "H"
+        },
+        {
+          "test": "Urine sodium",
+          "value": "48",
+          "unit": "mEq/L",
+          "ref": "<20 if pre-renal",
+          "flag": "H"
+        },
+        {
+          "test": "TSH",
+          "value": "2.1",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "Cortisol (AM)",
+          "value": "18",
+          "unit": "mcg/dL",
+          "ref": "6-23",
+          "flag": ""
+        },
+        {
+          "test": "BUN",
+          "value": "8",
+          "unit": "mg/dL",
+          "ref": "7-20",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-550908",
-      "clinical": "Confusion, nausea, and unsteady gait",
-      "technique": "Standard protocol",
-      "findings": "Mild cerebral edema. No focal lesion.",
-      "impression": "Cerebral edema likely secondary to severe hyponatremia.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/18/2024",
+      "study": "CT Head Without Contrast",
+      "indication": "Altered mental status with severe hyponatremia",
+      "findings": "No acute intracranial hemorrhage or mass effect. No midline shift. Mild sulcal effacement consistent with cerebral edema from hyponatremia.",
+      "impression": "Mild cerebral edema \u2014 consistent with acute hyponatremia. No structural cause for altered mental status."
     }
   ],
   "immunizations": [
@@ -315,7 +208,7 @@ window.EMR_DATA = {
     ],
     [
       "Water intake",
-      "Drinks excessive water — 4-5 liters daily"
+      "Drinks excessive water \u2014 4-5 liters daily"
     ],
     [
       "Living",
@@ -381,13 +274,12 @@ window.EMR_DATA = {
       "Assessment of muscle strength and tone": "Mild generalized weakness, worse proximally. Normal muscle tone."
     },
     "ddxTargets": [
-      "Hyponatremia/SIADH (correct diagnosis)",
-      "Medication-induced encephalopathy",
-      "Thyroid dysfunction",
-      "Subdural hematoma",
-      "Meningitis/encephalitis",
-      "Urinary tract infection with delirium",
-      "Electrolyte imbalance (other than sodium)"
+      "SIADH \u2014 SSRI-induced, Na+ 118 (correct)",
+      "Psychogenic polydipsia \u2014 urine osmolality would be dilute (<100)",
+      "Hypothyroidism \u2014 TSH normal",
+      "Adrenal insufficiency \u2014 cortisol normal",
+      "Heart failure hyponatremia \u2014 hypervolemic, not euvolemic",
+      "Beer potomania \u2014 different history"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on age-related cognitive decline or dementia given the patient's age and assisted living residence, potentially missing acute metabolic causes",
@@ -397,7 +289,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several reasonable possibilities for altered mental status in an elderly patient. Before interviewing the patient, consider what specific historical details might help you differentiate between metabolic, infectious, and structural causes. Pay particular attention to any clues about fluid balance and medication effects.",
       "phase5": "Now that you've gathered history and physical findings, think about the constellation of confusion, nausea, and gait instability in the context of this patient's medications and excessive water intake. What laboratory studies would be most helpful to confirm your leading hypothesis? Consider how certain medications might predispose to electrolyte abnormalities.",
-      "finalDebrief": "This case illustrates how SIADH can present with subtle neurological symptoms that might initially be attributed to age-related changes. The key was recognizing the triad of altered mental status, nausea, and unsteady gait in a patient taking an SSRI with excessive water intake. This highlights the importance of considering medication-induced metabolic disturbances, particularly in elderly patients on multiple drugs."
+      "finalDebrief": "This case illustrates how SIADH can present with subtle neurological symptoms that might initially be attributed to age-related changes. The key was recognizing the triad of altered mental status, nausea, and unsteady gait in a patient taking an SSRI with excessive water intake. This highlights the importance of considering medication-induced metabolic disturbances, particularly in elderly patients on multiple drugs.",
+      "final": "Diagnosis: severe SIADH, SSRI-induced, Na+ 118. Key MBS learning: (1) SIADH criteria: low serum osm + urine osm >100 (inappropriately concentrated) + urine Na+ >40 + euvolemia + normal thyroid/adrenal. All met here. (2) Why SSRI causes SIADH: serotonin receptor activation in hypothalamus stimulates ADH (vasopressin) release. ADH \u2192 aquaporin-2 insertion in collecting duct \u2192 water reabsorption \u2192 dilutional hyponatremia. This is a class effect of all SSRIs. (3) Osmotic demyelination syndrome (ODS): rapid correction of chronic hyponatremia \u2192 oligodendrocytes dehydrate faster than they can adapt \u2192 myelin sheath destruction. MAX 8-10 mEq/L per 24h. Correction of >12 mEq/24h = risk of central pontine myelinolysis: locked-in syndrome, quadriplegia, dysarthria appearing 2-6 days after over-correction. (4) Hypertonic saline 3%: ONLY for symptomatic patients (seizure, altered consciousness). Purpose: raise Na+ 4-6 mEq/L to relieve cerebral edema acutely, not to fully correct. (5) Correction formula: for each liter of 3% NaCl infused: Na+ rises approximately (513 - patient's Na+) / (total body water + 1). Calculate carefully, monitor q2h initially."
     }
+  },
+  "meta": {
+    "diagnosis": "Severe Symptomatic Hyponatremia \u2014 SIADH from SSRIs, Na+ 118 with Altered Mental Status",
+    "caseId": "severe-hyponatremia"
   }
 };

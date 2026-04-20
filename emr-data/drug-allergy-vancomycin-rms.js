@@ -1,4 +1,4 @@
-/* emr-data/drug-allergy-vancomycin-rms.js — Multi-Setting Allergy Case: Vancomycin Red Man Syndrome */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "1455 Magnolia Blvd, Richmond, VA 23219",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Jennifer Hagen",
         "phone": "(513) 555-9056",
@@ -27,7 +27,7 @@ window.EMR_DATA = {
       {
         "allergen": "Vancomycin",
         "reaction": "Flushing and pruritus during infusion",
-        "severity": "Unknown — needs evaluation",
+        "severity": "Unknown \u2014 needs evaluation",
         "type": "Drug"
       }
     ],
@@ -45,7 +45,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Infusion details",
-        "1g infused over 30 minutes (too fast) — flushing appeared in upper body"
+        "1g infused over 30 minutes (too fast) \u2014 flushing appeared in upper body"
       ],
       [
         "Key question",
@@ -60,13 +60,13 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Flushing and pruritus during vancomycin infusion — called code allergy",
+        "chiefComplaint": "Flushing and pruritus during vancomycin infusion \u2014 called code allergy",
         "diagnosis": "Vancomycin Red Man Syndrome"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "MRSA bacteremia — needs vancomycin",
+          "description": "MRSA bacteremia \u2014 needs vancomycin",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -115,7 +115,7 @@ window.EMR_DATA = {
           "bp": "142/84",
           "hr": "96",
           "rr": "18",
-          "temp": "38.2°C",
+          "temp": "38.2\u00b0C",
           "spo2": "98%",
           "pain": "3/10"
         }
@@ -138,7 +138,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -152,7 +152,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -220,8 +220,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Flushing and pruritus during vancomycin infusion — called code allergy",
-          "hpi": "Gerald Hagen — Flushing and pruritus during vancomycin infusion — called code allergy",
+          "cc": "Flushing and pruritus during vancomycin infusion \u2014 called code allergy",
+          "hpi": "Gerald Hagen \u2014 Flushing and pruritus during vancomycin infusion \u2014 called code allergy",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -230,13 +230,13 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "MRSA bacteremia — needs vancomycin, had infusion reaction requiring A/I input",
+        "chiefComplaint": "MRSA bacteremia \u2014 needs vancomycin, had infusion reaction requiring A/I input",
         "diagnosis": "Vancomycin Red Man Syndrome"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "MRSA bacteremia — needs vancomycin",
+          "description": "MRSA bacteremia \u2014 needs vancomycin",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -264,7 +264,7 @@ window.EMR_DATA = {
           "name": "Vancomycin",
           "dose": "1g",
           "route": "IV",
-          "frequency": "Q12H — infuse over 2 hours with premedication",
+          "frequency": "Q12H \u2014 infuse over 2 hours with premedication",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -276,7 +276,7 @@ window.EMR_DATA = {
           "bp": "136/82",
           "hr": "86",
           "rr": "16",
-          "temp": "38.0°C",
+          "temp": "38.0\u00b0C",
           "spo2": "98%",
           "pain": "2/10"
         }
@@ -299,7 +299,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -313,7 +313,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -381,8 +381,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "MRSA bacteremia — needs vancomycin, had infusion reaction requiring A/I input",
-          "hpi": "Gerald Hagen — MRSA bacteremia — needs vancomycin, had infusion reaction requiring A/I input",
+          "cc": "MRSA bacteremia \u2014 needs vancomycin, had infusion reaction requiring A/I input",
+          "hpi": "Gerald Hagen \u2014 MRSA bacteremia \u2014 needs vancomycin, had infusion reaction requiring A/I input",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -391,13 +391,13 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "Flushing, pruritus, and rash during vancomycin infusion — consult to differentiate RMS from allergy",
+        "chiefComplaint": "Flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate RMS from allergy",
         "diagnosis": "Vancomycin Red Man Syndrome vs True Allergy"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "MRSA bacteremia — needs vancomycin",
+          "description": "MRSA bacteremia \u2014 needs vancomycin",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -428,7 +428,7 @@ window.EMR_DATA = {
           "bp": "138/82",
           "hr": "88",
           "rr": "16",
-          "temp": "38.2°C",
+          "temp": "38.2\u00b0C",
           "spo2": "98%",
           "pain": "2/10"
         }
@@ -451,7 +451,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -465,7 +465,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -533,8 +533,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist (Consultant)",
-          "cc": "Flushing, pruritus, and rash during vancomycin infusion — consult to differentiate RMS from allergy",
-          "hpi": "Gerald Hagen presents with flushing, pruritus, and rash during vancomycin infusion — consult to differentiate rms from allergy.",
+          "cc": "Flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate RMS from allergy",
+          "hpi": "Gerald Hagen presents with flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate rms from allergy.",
           "exam": "See documentation.",
           "assessment": "Vancomycin Red Man Syndrome vs True Allergy",
           "plan": "See orders."
@@ -543,13 +543,13 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — vancomycin tolerance established, document RMS vs allergy in chart",
+        "chiefComplaint": "Follow-up \u2014 vancomycin tolerance established, document RMS vs allergy in chart",
         "diagnosis": "Vancomycin Red Man Syndrome"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "MRSA bacteremia — needs vancomycin",
+          "description": "MRSA bacteremia \u2014 needs vancomycin",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -570,7 +570,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -593,7 +593,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -607,7 +607,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -675,8 +675,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — vancomycin tolerance established, document RMS vs allergy in chart",
-          "hpi": "Gerald Hagen — Follow-up — vancomycin tolerance established, document RMS vs allergy in chart",
+          "cc": "Follow-up \u2014 vancomycin tolerance established, document RMS vs allergy in chart",
+          "hpi": "Gerald Hagen \u2014 Follow-up \u2014 vancomycin tolerance established, document RMS vs allergy in chart",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -698,47 +698,69 @@ window.EMR_DATA = {
     "address": "4603 Peachtree Rd, Columbus, OH 43211",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Jennifer Hagen",
       "phone": "(615) 555-3740",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Flushing, pruritus, and rash during vancomycin infusion — consult to differentiate RMS from allergy",
+    "chiefComplaint": "Flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate RMS from allergy",
     "diagnosis": "Vancomycin Red Man Syndrome vs True Allergy"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "MRSA bacteremia — needs vancomycin",
+      "problem": "Red man syndrome \u2014 vancomycin infusion-related reaction",
+      "icd": "T36.8X5A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Flushing + pruritus + erythema during infusion \u2014 rate-dependent, not IgE allergy"
     },
     {
-      "id": "prob-2",
-      "description": "Developed flushing/rash during first infusion",
+      "problem": "MRSA bacteremia \u2014 requires vancomycin continuation",
+      "icd": "A41.02",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "No alternatives as effective as vancomycin for MRSA blood culture positive"
+    },
+    {
+      "problem": "Vancomycin labeled 'allergy' by nurse \u2014 INCORRECT, requires clarification",
+      "icd": "Z88.7",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Red man syndrome is not an allergy and should not be documented as one"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Vancomycin",
-      "dose": "1g",
-      "route": "IV",
-      "frequency": "Q12H (held after reaction)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Vancomycin \u2014 slow infusion rate 10mg/min (was infusing at 15mg/min)",
+      "sig": "Maximum infusion rate 10mg/min \u2014 over at least 60-90 min per dose",
+      "prescriber": "Pharmacy/ID",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 rate corrected"
+    },
+    {
+      "name": "Diphenhydramine 25mg IV 30 min before each vancomycin dose",
+      "sig": "Premedication \u2014 H1 blockade reduces histamine release",
+      "prescriber": "Pharmacy",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Hydrocortisone 25mg IV 30 min before each dose (if premedication insufficient)",
+      "sig": "Steroid premedication \u2014 reduces mast cell degranulation",
+      "prescriber": "Pharmacy",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Conditional"
     }
   ],
   "allergies": [
     {
       "allergen": "Vancomycin",
       "reaction": "Flushing and pruritus during infusion",
-      "severity": "Unknown — needs evaluation",
+      "severity": "Unknown \u2014 needs evaluation",
       "type": "Drug"
     }
   ],
@@ -749,7 +771,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": "88",
       "rr": "16",
-      "temp": "38.2°C",
+      "temp": "38.2\u00b0C",
       "spo2": "98%",
       "pain": "2/10"
     }
@@ -760,8 +782,8 @@ window.EMR_DATA = {
       "type": "Consultation",
       "date": "03/02/2026",
       "provider": "Dr. Allergist (Consultant)",
-      "cc": "Flushing, pruritus, and rash during vancomycin infusion — consult to differentiate RMS from allergy",
-      "hpi": "Gerald Hagen presents with flushing, pruritus, and rash during vancomycin infusion — consult to differentiate rms from allergy.",
+      "cc": "Flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate RMS from allergy",
+      "hpi": "Gerald Hagen presents with flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate rms from allergy.",
       "exam": "See documentation.",
       "assessment": "Vancomycin Red Man Syndrome vs True Allergy",
       "plan": "See orders."
@@ -769,93 +791,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-878164",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Vancomycin Monitoring",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Vancomycin AUC/MIC",
+          "value": "388",
+          "unit": "mg\u00b7h/L",
+          "ref": "400-600 target",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Trough (old method)",
+          "value": "12",
+          "unit": "mcg/mL",
+          "ref": "15-20 for bacteremia",
+          "flag": "L"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Tryptase",
-              "value": "4.8",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": ""
-            },
-            {
-              "test": "Vancomycin Trough",
-              "value": "12",
-              "unit": "mcg/mL",
-              "range": "15-20",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "WBC",
+          "value": "14.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Tryptase (drawn during reaction)",
+          "value": "3.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
         }
       ]
     }
@@ -875,7 +847,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Infusion details",
-      "1g infused over 30 minutes (too fast) — flushing appeared in upper body"
+      "1g infused over 30 minutes (too fast) \u2014 flushing appeared in upper body"
     ],
     [
       "Key question",
@@ -915,24 +887,24 @@ window.EMR_DATA = {
       "openAccess": true,
       "validates": [
         "RMS = histamine release, NOT IgE",
-        "Slow infusion ≥2h + premedication",
+        "Slow infusion \u22652h + premedication",
         "NOT a true allergy"
       ]
     }
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Red Man Syndrome (RMS) is a non-IgE, non-immune pharmacologic mast cell activation via MRGPRX2 receptor by vancomycin. Flushing, pruritus, erythema of face/neck/upper torso occur during or within 4–10 minutes of infusion. NOT an allergic reaction — NOT a contraindication to future vancomycin use.",
-      "Prevention: infuse vancomycin over ≥60 min (≥90 min for doses >1g). Pre-treat with H1 antihistamine (diphenhydramine 25–50 mg IV/PO) 30–60 min before infusion.",
-      "Distinguish RMS from true vancomycin anaphylaxis: RMS — flushing + pruritis during infusion, no hypotension/bronchospasm, resolves with infusion pause + antihistamine. True anaphylaxis — hypotension + bronchospasm = requires epinephrine, NOT just rate adjustment."
+      "Red Man Syndrome (RMS) is a non-IgE, non-immune pharmacologic mast cell activation via MRGPRX2 receptor by vancomycin. Flushing, pruritus, erythema of face/neck/upper torso occur during or within 4\u201310 minutes of infusion. NOT an allergic reaction \u2014 NOT a contraindication to future vancomycin use.",
+      "Prevention: infuse vancomycin over \u226560 min (\u226590 min for doses >1g). Pre-treat with H1 antihistamine (diphenhydramine 25\u201350 mg IV/PO) 30\u201360 min before infusion.",
+      "Distinguish RMS from true vancomycin anaphylaxis: RMS \u2014 flushing + pruritis during infusion, no hypotension/bronchospasm, resolves with infusion pause + antihistamine. True anaphylaxis \u2014 hypotension + bronchospasm = requires epinephrine, NOT just rate adjustment."
     ],
     "boardPearls": [
-      "RMS mechanism: MRGPRX2 direct mast cell activation → histamine → flushing, pruritus, erythema. NOT IgE-mediated.",
+      "RMS mechanism: MRGPRX2 direct mast cell activation \u2192 histamine \u2192 flushing, pruritus, erythema. NOT IgE-mediated.",
       "Distribution: face, neck, upper torso (high mast cell density in these areas).",
-      "RMS management: pause/slow infusion + diphenhydramine 25–50 mg IV. Restart at slower rate. NOT contraindication to vancomycin.",
-      "Prevention: infuse over ≥60 min (≥90 min for >1g). Pre-medicate with H1 antihistamine.",
-      "True vancomycin IgE anaphylaxis: rare. Hypotension + bronchospasm → epinephrine. Requires formal allergy evaluation.",
-      "Other MRGPRX2 activators: opioids (morphine, codeine), fluoroquinolones, neuromuscular blockers, radiocontrast — same mechanism, not IgE.",
+      "RMS management: pause/slow infusion + diphenhydramine 25\u201350 mg IV. Restart at slower rate. NOT contraindication to vancomycin.",
+      "Prevention: infuse over \u226560 min (\u226590 min for >1g). Pre-medicate with H1 antihistamine.",
+      "True vancomycin IgE anaphylaxis: rare. Hypotension + bronchospasm \u2192 epinephrine. Requires formal allergy evaluation.",
+      "Other MRGPRX2 activators: opioids (morphine, codeine), fluoroquinolones, neuromuscular blockers, radiocontrast \u2014 same mechanism, not IgE.",
       "If patient needs vancomycin with history of RMS: pre-medicate + slow rate. If true anaphylaxis history: allergy testing + desensitization if no alternative."
     ]
   },
@@ -995,13 +967,12 @@ window.EMR_DATA = {
       "Examine IV site for local reaction": "IV site clean without erythema, induration, or local reaction"
     },
     "ddxTargets": [
-      "Red Man Syndrome (correct diagnosis)",
-      "IgE-mediated vancomycin allergy",
-      "Non-specific drug hypersensitivity reaction",
-      "Anaphylaxis",
-      "Angioedema",
-      "Contact dermatitis from IV materials",
-      "Systemic inflammatory response syndrome"
+      "Red man syndrome \u2014 rate-dependent infusion reaction (correct)",
+      "True IgE-mediated vancomycin allergy (INCORRECT \u2014 tryptase normal, no anaphylaxis)",
+      "Anaphylaxis \u2014 no hypotension, bronchospasm, or angioedema",
+      "MRSA bacteremia treatment failure requiring alternative",
+      "Contact dermatitis from IV tubing",
+      "Drug rash from beta-lactam started concurrently"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'vancomycin allergy' label without considering rate-dependent Red Man Syndrome as more likely given rapid infusion time and symptom pattern",
@@ -1011,7 +982,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Before you interview the patient, think about the key distinguishing features between Red Man Syndrome and a true IgE-mediated allergic reaction. What specific historical details and timeline would help you differentiate these two conditions?",
       "phase5": "Excellent history and physical exam. Now let's think through this systematically - you noted the rapid infusion rate and the specific symptom pattern. How does the absence of urticaria, respiratory symptoms, and hypotension help narrow your differential? What does this tell you about the underlying mechanism?",
-      "finalDebrief": "This case highlights the importance of distinguishing Red Man Syndrome from true vancomycin allergy. The key differentiators were the rapid infusion rate (30 minutes vs recommended 60+ minutes), the specific pattern of upper body flushing without urticaria, and the absence of IgE-mediated features. This distinction is clinically crucial because Red Man Syndrome can be prevented with slower infusion rates and premedication, allowing continued vancomycin use for serious MRSA infections."
+      "finalDebrief": "This case highlights the importance of distinguishing Red Man Syndrome from true vancomycin allergy. The key differentiators were the rapid infusion rate (30 minutes vs recommended 60+ minutes), the specific pattern of upper body flushing without urticaria, and the absence of IgE-mediated features. This distinction is clinically crucial because Red Man Syndrome can be prevented with slower infusion rates and premedication, allowing continued vancomycin use for serious MRSA infections.",
+      "final": "Diagnosis: red man syndrome \u2014 NOT true allergy. Key pharmacy learning: (1) Red man syndrome mechanism: vancomycin (especially fast infusion) \u2192 direct mast cell degranulation \u2192 histamine release \u2192 flushing, pruritus, erythema of face/neck/upper torso. NOT IgE-mediated. Tryptase elevation (marker of true anaphylaxis) is typically ABSENT or minimal. (2) Documentation matters enormously: labeling this as 'vancomycin allergy' in the chart will follow the patient forever and may deprive them of first-line MRSA therapy in future. The pharmacist's duty: correct the documentation, communicate to the team, update the allergy record. (3) Management: slow the infusion rate (10mg/min max), premedicate with diphenhydramine. Patient can continue vancomycin. (4) True vancomycin allergy: rare (AICD, thrombocytopenia, interstitial nephritis). Features that distinguish: urticaria + hypotension + bronchospasm + positive tryptase = true allergy. (5) AUC monitoring: pharmacy now monitors AUC/MIC (target 400-600) rather than troughs \u2014 reduces nephrotoxicity without sacrificing efficacy. This patient's AUC 388 is sub-therapeutic \u2014 dose adjustment needed alongside rate correction."
     }
+  },
+  "meta": {
+    "diagnosis": "Red Man Syndrome \u2014 Vancomycin Infusion Reaction (Not True IgE-Mediated Allergy)",
+    "caseId": "drug-allergy-vancomycin-rms"
   }
 };

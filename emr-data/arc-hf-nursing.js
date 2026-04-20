@@ -23,20 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Dorothy Williams",
-      "icd": "Z00.00",
+      "problem": "HFrEF \u2014 EF 28%, discharge today",
+      "icd": "I50.20",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "Dorothy Williams, 3rd HF hospitalization \u2014 30-day readmission prevention is the nursing goal"
+    },
+    {
+      "problem": "Medication reconciliation \u2014 3 new medications added this admission",
+      "icd": "Z79.899",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Sacubitril-valsartan new, metoprolol dose changed, spironolactone added \u2014 teach-back required"
+    },
+    {
+      "problem": "Readmission risk \u2014 prior non-compliance with daily weights",
+      "icd": "Z87.891",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Gained 8 lbs before this admission without presenting to clinic \u2014 education gap"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Sacubitril-valsartan (Entresto) 24/26mg BID \u2014 NEW",
+      "sig": "Take twice daily \u2014 replace prior lisinopril. DO NOT take with lisinopril.",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active \u2014 NEW"
+    },
+    {
+      "name": "Metoprolol succinate 100mg daily (increased from 50mg)",
+      "sig": "Take 1 tablet daily \u2014 do not stop suddenly",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active \u2014 dose changed"
+    },
+    {
+      "name": "Spironolactone 25mg daily \u2014 NEW",
+      "sig": "Take 1 tablet daily \u2014 monitor for hyperkalemia",
+      "prescriber": "Cardiology",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active \u2014 NEW"
+    },
+    {
+      "name": "Furosemide 40mg daily \u2014 continued",
+      "sig": "Take 1 tablet daily. If weight up >2 lbs \u2192 take 80mg and call clinic.",
+      "prescriber": "Cardiology",
+      "start": "2021",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,7 +135,42 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/20/2024",
+      "panel": "Pre-Discharge Labs",
+      "results": [
+        {
+          "test": "BNP",
+          "value": "486",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "Potassium",
+          "value": "4.2",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.6-1.1",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "134",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +203,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hf-nursing",
-    "diagnosis": "See diagnosis \u2014 Dorothy Williams",
+    "diagnosis": "HFrEF Discharge Day \u2014 Nursing Priority: Teach-Back Education, Daily Weights, Medication Reconciliation",
     "acuity": 3,
     "presentation": "Dorothy Williams",
     "category": "cardiovascular"
@@ -177,12 +250,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Dorothy Williams \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "HFrEF discharge \u2014 nursing readmission prevention priority (correct)",
+      "Premature discharge \u2014 BNP still elevated but clinical decongestion adequate",
+      "Volume overload persisting \u2014 clinical exam guides, not BNP alone",
+      "Medication error risk \u2014 3 medication changes at discharge",
+      "30-day readmission \u2014 primary preventable nursing outcome",
+      "Patient non-compliance \u2014 reframe as health literacy gap, not willful non-compliance"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +265,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Dorothy Williams. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Dorothy is being discharged. She has had three admissions this year. Research shows that failure of patient self-monitoring is the top modifiable predictor of HF readmission. What are the five specific self-monitoring parameters you teach her \u2014 with thresholds that mean call the clinic versus call 911 \u2014 and what is the evidence for structured HF education on 30-day readmission? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: HFrEF discharge \u2014 primary nursing outcome is preventing 30-day readmission. Key nursing learning: (1) Teach-back is non-negotiable: ask 'Can you tell me in your own words what you should do if you gain more than 2 pounds overnight?' Not 'Do you understand?' The patient must demonstrate understanding. Document teach-back was performed. (2) Daily weight protocol: same time, same scale, same clothes, before eating, after voiding. >2 lb overnight = extra furosemide AND call clinic. This patient didn't do this before admission \u2014 the education gap is the re-admission cause. (3) Entresto (sacubitril-valsartan) critical teaching: do NOT take with lisinopril (ACEi) \u2014 36-hour washout required. Do NOT take if pregnant. (4) Spironolactone education: check potassium in 1 week, avoid salt substitutes (high potassium), call if muscle weakness or cramps (hyperkalemia symptoms). (5) Red flags that mean 'go to ED now': sudden weight gain >5 lbs, can't walk across room without breathlessness, swelling above knee, confusion."
     }
   }
 };

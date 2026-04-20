@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Kevin Torres",
-      "icd": "Z00.00",
+      "problem": "Chronic pain \u2014 opioid-tolerant patient, admitted for unrelated reason",
+      "icd": "G89.29",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Kevin Torres, oxycodone 30mg/day at home \u2014 hospital formulary dose equivalent required"
+    },
+    {
+      "problem": "Opioid tolerance \u2014 home dose must be continued to prevent withdrawal",
+      "icd": "F11.20",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Tolerance is NOT addiction \u2014 must maintain home dose or prescribe equivalent"
+    },
+    {
+      "problem": "Undertreated pain \u2014 nursing failure to reassess after analgesic",
+      "icd": "G89.29",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Pain 8/10 after morphine 2mg IV \u2014 inadequate dose for opioid-tolerant patient"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Morphine 4mg IV q4h scheduled (equianalgesic to home oxycodone)",
+      "sig": "Oxycodone 30mg/day = ~45mg oral morphine/day = ~15mg IV morphine/day. 4mg q4h = 24mg/day.",
+      "prescriber": "Pain Management",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 equianalgesic calculation"
+    },
+    {
+      "name": "Oxycodone 15mg PO q4h PRN breakthrough (preferred oral)",
+      "sig": "When able to take PO \u2014 continue home opioid class",
+      "prescriber": "Pain Management",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active PRN"
+    },
+    {
+      "name": "Non-opioid multimodal \u2014 acetaminophen 650mg q6h scheduled",
+      "sig": "Scheduled \u2014 opioid-sparing adjunct",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,7 +127,35 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Pain/Opioid Safety Panel",
+      "results": [
+        {
+          "test": "Urine drug screen",
+          "value": "Oxycodone positive \u2014 consistent with prescription",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "Hepatic function panel",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +188,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-pain-nursing",
-    "diagnosis": "See diagnosis \u2014 Kevin Torres",
+    "diagnosis": "Chronic Pain Patient Admitted for Unrelated Illness \u2014 Nursing: Opioid Safety, Pain Assessment, Pseudoaddiction vs Tolerance",
     "acuity": 3,
     "presentation": "Kevin Torres",
     "category": "musculoskeletal"
@@ -177,12 +235,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Kevin Torres \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Opioid-tolerant patient \u2014 home dose continuation required (correct)",
+      "Opioid-seeking behavior \u2014 tolerance \u2260 addiction, reassess with equianalgesic calculation",
+      "Opioid overdose risk at home doses \u2014 tolerance protects against respiratory depression",
+      "Underprescribing \u2014 most common nursing error in opioid-tolerant patients",
+      "Pain as drug-seeking behavior \u2014 stigmatizing misclassification",
+      "Opioid rotation needed \u2014 no evidence of tolerance failure"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +250,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Kevin Torres. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Kevin is admitted for an elective hernia repair. His home oxycodone is 30mg/day. The surgical team orders oxycodone 5mg q4h PRN post-op \u2014 significantly less than his home dose. He is already agitated pre-op. What is your patient education approach before surgery, how do you advocate for an adequate post-op pain plan, and what opioid withdrawal signs do you monitor for post-operatively? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: opioid-tolerant patient with undertreated pain. Key nursing learning: (1) Opioid tolerance is not addiction. Tolerance = physiologic adaptation requiring higher doses for same effect. Addiction = compulsive use despite harm. A patient on chronic opioids for legitimate pain requiring their home dose in the hospital is demonstrating tolerance \u2014 not drug-seeking. (2) Equianalgesic dosing: the pharmacist is the resource. For this patient: oral oxycodone 30mg/day \u00f7 1.5 (IV:oral opioid ratio) = 20mg IV morphine equivalent/day. Nurses must advocate for adequate equivalent dosing. (3) Pain reassessment: document pain score 30-60 minutes after any analgesic intervention. Pain still 7/10 after morphine 2mg IV = INADEQUATE \u2014 escalate to prescriber. Do not wait for next scheduled dose. (4) Pseudoaddiction: undertreated pain creates behaviors that LOOK like addiction (clock-watching, demanding pain meds) but resolve when pain is adequately treated. The solution is better pain management, not labeling. (5) Naloxone at bedside: for ANY patient on scheduled opioids in the hospital \u2014 have naloxone on the floor unit regardless of tolerance status."
     }
   }
 };
