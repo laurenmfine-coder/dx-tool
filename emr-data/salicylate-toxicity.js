@@ -1,4 +1,4 @@
-/* emr-data/salicylate-toxicity.js — Auto-generated EMR case data for Salicylate Toxicity */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Eleanor Dunn",
@@ -15,56 +15,54 @@ window.EMR_DATA = {
     "address": "341 Dogwood Ln, Columbus, OH 43210",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Rite Aid — Palm Ave",
+    "pharmacy": "Rite Aid \u2014 Palm Ave",
     "emergencyContact": {
       "name": "Reginald Dunn",
       "phone": "(312) 555-9856",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Tinnitus, vomiting, tachypnea — chronic aspirin use for arthritis",
+    "chiefComplaint": "Tinnitus, vomiting, tachypnea \u2014 chronic aspirin use for arthritis",
     "diagnosis": "Salicylate Toxicity"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Osteoarthritis",
+      "problem": "Acute salicylate toxicity",
+      "icd": "T39.011A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Level 65 mg/dL \u2014 tinnitus, hyperventilation, confusion"
     },
     {
-      "id": "prob-2",
-      "description": "Chronic pain",
+      "problem": "Mixed acid-base disorder",
+      "icd": "E87.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Respiratory alkalosis + metabolic acidosis \u2014 classic salicylate pattern"
     },
     {
-      "id": "prob-3",
-      "description": "Tinnitus (new)",
+      "problem": "Hypokalemia \u2014 barrier to urine alkalinization",
+      "icd": "E87.6",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "K+ 3.1 \u2014 must replete before alkalinization will work"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Aspirin",
-      "dose": "650mg",
-      "route": "PO",
-      "frequency": "Q4H (self-dosing)",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "NS 1L IV over 30 min then D5W + 3 amps NaHCO3 at 250mL/hr",
+      "sig": "Rehydrate then alkalinize \u2014 target urine pH 7.5-8.0",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Lisinopril",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "KCl 40 mEq in IV fluids",
+      "sig": "Add to every liter \u2014 cannot alkalinize urine without replete K+",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -82,7 +80,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": "108",
       "rr": "30",
-      "temp": "37.6°C",
+      "temp": "37.6\u00b0C",
       "spo2": "97%",
       "pain": "6/10",
       "bmi": "26",
@@ -95,151 +93,66 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Tinnitus, vomiting, tachypnea — chronic aspirin use for arthritis",
-      "hpi": "Eleanor Dunn is a 69-year-old female presenting with tinnitus, vomiting, tachypnea — chronic aspirin use for arthritis. Past medical history includes Osteoarthritis, Chronic pain, Tinnitus (new). See chart for full details.",
+      "cc": "Tinnitus, vomiting, tachypnea \u2014 chronic aspirin use for arthritis",
+      "hpi": "Eleanor Dunn is a 69-year-old female presenting with tinnitus, vomiting, tachypnea \u2014 chronic aspirin use for arthritis. Past medical history includes Osteoarthritis, Chronic pain, Tinnitus (new). See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Salicylate Toxicity — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Salicylate Toxicity \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-228070",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Salicylate Toxicity Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Salicylate level",
+          "value": "65",
+          "unit": "mg/dL",
+          "ref": "<25 (therapeutic 15-30)",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "L"
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "14",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": "L"
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Arterial pH",
+          "value": "7.48",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Salicylate Level",
-              "value": "55",
-              "unit": "mg/dL",
-              "range": "15-30 therapeutic",
-              "flag": "H"
-            },
-            {
-              "test": "Ph",
-              "value": "7.48",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            },
-            {
-              "test": "Pco2",
-              "value": "18",
-              "unit": "mmHg",
-              "range": "35-45",
-              "flag": "L"
-            }
-          ]
+          "test": "pCO2",
+          "value": "28",
+          "unit": "mmHg",
+          "ref": "35-45",
+          "flag": "L"
+        },
+        {
+          "test": "HCO3",
+          "value": "20",
+          "unit": "mEq/L",
+          "ref": "22-26",
+          "flag": "L"
+        },
+        {
+          "test": "Potassium",
+          "value": "3.1",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "62",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "L"
+        },
+        {
+          "test": "Urine pH",
+          "value": "5.5",
+          "unit": "",
+          "ref": "target >7.5 with treatment",
+          "flag": "L"
         }
       ]
     }
@@ -325,7 +238,7 @@ window.EMR_DATA = {
       "Fundoscopic examination"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 138/82, HR 108, RR 24, Temp 37.6°C, SpO2 97% on room air",
+      "Vital signs assessment": "BP 138/82, HR 108, RR 24, Temp 37.6\u00b0C, SpO2 97% on room air",
       "Otoscopic examination": "Tympanic membranes appear normal bilaterally, no cerumen impaction, no signs of infection",
       "Weber and Rinne tests": "Weber test lateralizes equally, Rinne test shows air conduction greater than bone conduction bilaterally",
       "Neurological assessment including mental status": "Patient appears mildly confused and has difficulty concentrating, reflexes are brisk, no focal neurological deficits",
@@ -337,13 +250,12 @@ window.EMR_DATA = {
       "Fundoscopic examination": "Optic discs appear normal, no papilledema"
     },
     "ddxTargets": [
-      "Salicylate toxicity (correct diagnosis)",
-      "Vestibular neuritis",
-      "Gastroenteritis with dehydration",
-      "Acute coronary syndrome",
-      "Sepsis",
-      "Meniere's disease",
-      "Medication-induced tinnitus"
+      "Acute salicylate toxicity \u2014 urine alkalinization (correct)",
+      "Sepsis with lactic acidosis",
+      "Hyperventilation syndrome \u2014 respiratory alkalosis only",
+      "DKA \u2014 metabolic acidosis but different electrolytes",
+      "Theophylline toxicity \u2014 similar autonomic picture",
+      "Alcohol intoxication \u2014 different pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on tinnitus as an isolated ear problem rather than recognizing it as part of salicylate toxicity syndrome, especially given the patient's age and chronic aspirin use",
@@ -353,7 +265,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified tinnitus, vomiting, and tachypnea in a patient with chronic aspirin use. What questions about her medication regimen would be most important? Consider how these seemingly disparate symptoms might be connected by a single underlying process.",
       "phase5": "Now that you have the history of high-dose aspirin use and the physical findings of tachypnea, altered mental status, and tinnitus, what unifying diagnosis explains this constellation of findings? What would you expect to see on arterial blood gas and basic metabolic panel?",
-      "finalDebrief": "This case demonstrates classic salicylate toxicity with the triad of tinnitus, altered mental status, and mixed acid-base disorder. The key was recognizing that chronic therapeutic aspirin use can lead to toxicity, especially in elderly patients. How did your differential diagnosis evolve as you gathered the medication history and recognized the pattern?"
+      "finalDebrief": "This case demonstrates classic salicylate toxicity with the triad of tinnitus, altered mental status, and mixed acid-base disorder. The key was recognizing that chronic therapeutic aspirin use can lead to toxicity, especially in elderly patients. How did your differential diagnosis evolve as you gathered the medication history and recognized the pattern?",
+      "final": "Diagnosis: salicylate toxicity, level 65. Key pharmacy learning: (1) Acid-base: salicylates directly stimulate medullary respiratory center \u2192 hyperventilation \u2192 respiratory alkalosis. Also uncouple oxidative phosphorylation \u2192 metabolic acidosis. Mixed pattern is the fingerprint. (2) Urine alkalinization: salicylate pKa 3.5 \u2014 at urine pH 7.5+ >99.9% ionized and cannot be reabsorbed (ion trapping). Eliminates 5-10x faster. (3) Potassium: hypokalemia prevents alkalinization \u2014 kidney swaps K+ for H+, acidifying urine. Replete K+ aggressively. (4) Glucose: give dextrose even if serum glucose 'normal' \u2014 CNS glucose may be low. Salicylate + CNS hypoglycemia = severe toxicity. (5) HD threshold: level >100, severe CNS toxicity, renal failure, pulmonary edema."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Salicylate Toxicity \u2014 Level 65 mg/dL, Mixed Respiratory Alkalosis + Metabolic Acidosis",
+    "caseId": "salicylate-toxicity"
   }
 };

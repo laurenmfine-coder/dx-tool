@@ -1,4 +1,4 @@
-/* emr-data/hyperkalemia-cardiac.js — Auto-generated EMR case data for Hyperkalemia with Cardiac Changes */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Ahmed Hassan",
@@ -15,81 +15,70 @@ window.EMR_DATA = {
     "address": "5003 N Western Ave, Phoenix, AZ 85013",
     "insurance": "Oscar Health",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Teresa Hassan",
       "phone": "(404) 555-7438",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "Weakness and palpitations — missed dialysis",
+    "chiefComplaint": "Weakness and palpitations \u2014 missed dialysis",
     "diagnosis": "Hyperkalemia with Cardiac Changes"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "ESRD on hemodialysis (MWF)",
+      "problem": "Severe hyperkalemia \u2014 ESRD, missed dialysis",
+      "icd": "E87.5",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "K+ 7.0 \u2014 peaked T-waves, widened QRS, bradycardia HR 48"
     },
     {
-      "id": "prob-2",
-      "description": "Diabetes",
+      "problem": "End-stage renal disease \u2014 dialysis-dependent",
+      "icd": "N18.6",
+      "onset": "2021",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Missed 2 sessions \u2014 potassium accumulated without clearance"
     },
     {
-      "id": "prob-3",
-      "description": "Hypertension",
+      "problem": "Metabolic acidosis \u2014 from ESRD",
+      "icd": "E87.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "AV Fistula left arm",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "pH 7.24 \u2014 bicarbonate shifts K+ intracellularly when corrected"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Sevelamer",
-      "dose": "800mg",
-      "route": "PO",
-      "frequency": "TID with meals",
-      "status": "Active",
-      "prescriber": "Dr. Michelle Foster, MD"
+      "name": "Calcium gluconate 1g IV over 2-3 min STAT",
+      "sig": "Membrane stabilizer \u2014 works in 1-3 min. Does NOT lower K+.",
+      "prescriber": "Emergency Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "STAT"
     },
     {
-      "id": "med-2",
-      "name": "Insulin Glargine",
-      "dose": "18 units",
-      "route": "SC",
-      "frequency": "Nightly",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Regular insulin 10 units IV + D50 50mL IV",
+      "sig": "Shifts K+ intracellularly \u2014 onset 15-30 min, lasts 1-2h. Monitor glucose.",
+      "prescriber": "Emergency Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Amlodipine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Sodium bicarbonate 3 amps IV",
+      "sig": "Intracellular shift in acidotic patients \u2014 use if pH <7.2",
+      "prescriber": "Emergency Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Conditional"
     },
     {
-      "id": "med-4",
-      "name": "Epoetin alfa",
-      "dose": "",
-      "route": "SC",
-      "frequency": "Per dialysis",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Emergent hemodialysis \u2014 definitive",
+      "sig": "Removes K+ from body \u2014 all other treatments are bridges",
+      "prescriber": "Nephrology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -107,7 +96,7 @@ window.EMR_DATA = {
       "bp": "172/98",
       "hr": "52",
       "rr": "18",
-      "temp": "36.6°C",
+      "temp": "36.6\u00b0C",
       "spo2": "96%",
       "pain": "3/10",
       "bmi": "36",
@@ -120,139 +109,63 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Weakness and palpitations — missed dialysis",
-      "hpi": "Ahmed Hassan is a 64-year-old male presenting with weakness and palpitations — missed dialysis. Past medical history includes ESRD on hemodialysis (MWF), Diabetes, Hypertension, AV Fistula left arm. See chart for full details.",
+      "cc": "Weakness and palpitations \u2014 missed dialysis",
+      "hpi": "Ahmed Hassan is a 64-year-old male presenting with weakness and palpitations \u2014 missed dialysis. Past medical history includes ESRD on hemodialysis (MWF), Diabetes, Hypertension, AV Fistula left arm. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Hyperkalemia with Cardiac Changes — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Hyperkalemia with Cardiac Changes \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-840656",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Hyperkalemia Emergency",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Potassium",
+          "value": "7.0",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "7.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "16",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": "L"
-            },
-            {
-              "test": "BUN",
-              "value": "82",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "8.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Bicarbonate",
+          "value": "16",
+          "unit": "mEq/L",
+          "ref": "22-26",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "12.4",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "pH (venous)",
+          "value": "7.24",
+          "unit": "",
+          "ref": "7.32-7.42",
+          "flag": "L"
+        },
+        {
+          "test": "Glucose",
+          "value": "142",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
+      "date": "11/18/2024",
       "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-608536",
-      "clinical": "Weakness and palpitations — missed dialysis",
-      "technique": "Standard protocol",
-      "findings": "Peaked T waves, widened QRS (140ms), loss of P waves, sine wave pattern developing. Heart rate 48.",
-      "impression": "Critical hyperkalemia with ECG changes. Emergent treatment required.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "indication": "Hyperkalemia with bradycardia",
+      "findings": "Sinus bradycardia 48 bpm. Tall peaked symmetric T-waves V2-V5. QRS 114ms widened. PR 226ms prolonged. No P-wave absence yet.",
+      "impression": "ECG changes consistent with severe hyperkalemia. Immediate treatment required \u2014 risk of VF/asystole."
     }
   ],
   "immunizations": [
@@ -281,7 +194,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Dialysis",
-      "Missed last 2 sessions — car broke down"
+      "Missed last 2 sessions \u2014 car broke down"
     ],
     [
       "Diet",
@@ -347,13 +260,12 @@ window.EMR_DATA = {
       "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds"
     },
     "ddxTargets": [
-      "Hyperkalemia (correct diagnosis)",
-      "Uremic pericarditis",
-      "Volume overload/fluid retention",
-      "Acute myocardial infarction",
-      "Arrhythmia secondary to electrolyte imbalance",
-      "Medication toxicity",
-      "Hypoglycemia from insulin"
+      "Severe hyperkalemia with cardiac toxicity \u2014 ESRD (correct)",
+      "Pseudohyperkalemia \u2014 hemolyzed sample",
+      "ACEi/ARB hyperkalemia in CKD",
+      "DKA with total-body K+ depletion (serum K+ elevated early)",
+      "Ischemic ECG changes \u2014 different T-wave morphology",
+      "Digoxin toxicity \u2014 different arrhythmia pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'missed dialysis' and immediately assuming volume overload without considering life-threatening hyperkalemia from dietary indiscretions",
@@ -363,7 +275,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This dialysis patient has concerning cardiac symptoms after missing sessions. What specific complications of missed dialysis should you be most worried about? Consider both volume-related and electrolyte-related causes - which could be immediately life-threatening?",
       "phase5": "You've identified a dialysis patient with bradycardia, irregular rhythm, and ECG changes after dietary indiscretion with high-potassium foods. What does this constellation of findings suggest, and what's your most urgent concern for this patient's immediate management?",
-      "finalDebrief": "This case illustrates how hyperkalemia in ESRD patients can present with life-threatening cardiac effects. Notice how the combination of missed dialysis, high-potassium food intake, bradycardia, and ECG changes pointed to hyperkalemia rather than simple volume overload. What early clues helped differentiate this from other post-dialysis complications?"
+      "finalDebrief": "This case illustrates how hyperkalemia in ESRD patients can present with life-threatening cardiac effects. Notice how the combination of missed dialysis, high-potassium food intake, bradycardia, and ECG changes pointed to hyperkalemia rather than simple volume overload. What early clues helped differentiate this from other post-dialysis complications?",
+      "final": "Diagnosis: severe hyperkalemia with ECG cardiac toxicity. Key MBS learning: (1) Nernst equation: resting membrane potential set by K+ gradient (~-90mV). Rising extracellular K+ \u2192 gradient narrows \u2192 resting potential less negative \u2192 threshold approached \u2192 hyperexcitability then inexcitability (Na+ channel inactivation). (2) ECG progression: 5.5-6.5 \u2192 peaked T-waves (increased repolarization K+ conductance). 6.5-7.5 \u2192 PR prolongation, QRS widening. 7.5-9.0 \u2192 P-wave loss, sine-wave. >9.0 \u2192 VF/asystole. (3) Three treatment compartments: (a) Membrane stabilization \u2014 calcium gluconate (threshold \u2191, does NOT lower K+). (b) Redistribution \u2014 insulin/dextrose, NaHCO3 (K+ into cells, temporary). (c) Removal \u2014 dialysis, loop diuretics. (4) Calcium gluconate does NOT lower serum K+ \u2014 it restores the gap between resting potential and threshold by raising the threshold potential. (5) Bradycardia at K+ 7.0: AV conduction slows when the gradient narrows enough to slow phase 4 depolarization in nodal cells. Precedes complete AV block."
     }
+  },
+  "meta": {
+    "diagnosis": "Severe Hyperkalemia with Cardiac Membrane Instability \u2014 K+ 7.0, Wide QRS, Peaked T-Waves",
+    "caseId": "hyperkalemia-cardiac"
   }
 };

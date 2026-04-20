@@ -23,19 +23,41 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Neck Pain + Bilateral Hand Numbness + Gait Disturbance",
-      "icd": "Z00.00",
+      "problem": "Cervical spondylotic myelopathy \u2014 suspected",
+      "icd": "G99.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Bilateral hand numbness + gait disturbance + hyperreflexia \u2014 UMN signs"
+    },
+    {
+      "problem": "Cervical spondylosis \u2014 multilevel",
+      "icd": "M47.12",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "MRI ordered \u2014 clinical presentation sufficient for urgent referral"
+    },
+    {
+      "problem": "Fall risk \u2014 spastic gait",
+      "icd": "R26.89",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Wide-based gait, tandem walk impaired \u2014 myelopathic pattern"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
+      "name": "Naproxen 500mg BID PRN",
+      "sig": "For cervical pain as needed",
+      "prescriber": "PCP",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Gabapentin 300mg BID",
+      "sig": "Take twice daily \u2014 neuropathic paresthesias",
+      "prescriber": "PCP",
+      "start": "2024",
       "refills": 3,
       "status": "Active"
     }
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Cervical Spine X-ray + MRI Ordered Urgently",
+      "indication": "UMN signs \u2014 myelopathy screen",
+      "findings": "X-ray: C5-C6 and C6-C7 disc space narrowing, osteophytes. MRI PENDING \u2014 ordered urgently.",
+      "impression": "Multilevel cervical spondylosis on plain film. MRI required before any cervical PT intervention."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "cervical-myelopathy-screen-pt",
-    "diagnosis": "See diagnosis \u2014 Neck Pain + Bilateral Hand Numbness + Gait Disturbance",
+    "diagnosis": "Cervical Spondylotic Myelopathy \u2014 UMN Signs on Screen, Urgent Neurosurgical Referral Required",
     "acuity": 2,
     "presentation": "Neck Pain + Bilateral Hand Numbness + Gait Disturbance",
     "category": "musculoskeletal"
@@ -180,12 +210,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Neck Pain + Bilateral Hand Numbness + Gait Disturbance \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Cervical spondylotic myelopathy \u2014 neurosurgical referral (correct, NOT a PT case yet)",
+      "Cervical radiculopathy \u2014 LMN signs, different clinical picture",
+      "Multiple sclerosis \u2014 cervical compression must be excluded first",
+      "ALS \u2014 workup needed but myelopathy priority",
+      "Peripheral neuropathy \u2014 cannot explain UMN signs",
+      "Normal pressure hydrocephalus \u2014 different gait pattern"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +225,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Neck Pain + Bilateral Hand Numbness + Gait Disturbance. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) Before you treat: what UMN signs make this a referral rather than a PT case? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: cervical spondylotic myelopathy \u2014 NOT safe for cervical PT until neurosurgical clearance. Key PT learning: (1) UMN screening is the most important cervical PT skill. Red flags: Hoffman's sign, Babinski, hyperreflexia (biceps/triceps/brachioradialis), ankle clonus, inverted supinator, Lhermitte's sign. ANY positive = stop, refer, do not treat. (2) Immediate action: call referring physician (not a fax), communicate 'I found UMN signs \u2014 needs urgent neurosurgical evaluation before cervical PT.' Document time of call. (3) Why urgent: cord compression from spondylosis is progressive. Manual therapy, traction, or aggressive AROM on a myelopathic spine risks cord injury. Minor fall = catastrophic cord event. (4) What PT CAN do now: cervical precaution education, advise against contact sports/heavy lifting/high-risk yoga, refer for fall safety assessment. (5) Documentation: 'Cervical PT deferred pending neurosurgical clearance \u2014 UMN signs identified. Referring provider notified [time].'"
     }
   }
 };

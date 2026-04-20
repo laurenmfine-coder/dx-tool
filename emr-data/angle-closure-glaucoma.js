@@ -1,4 +1,4 @@
-/* emr-data/angle-closure-glaucoma.js — EMR case data for Acute Angle-Closure Glaucoma */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Dolores Eriksen",
@@ -15,65 +15,70 @@ window.EMR_DATA = {
     "address": "7923 Peachtree Rd, New Orleans, LA 70116",
     "insurance": "Cigna",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "Rite Aid — Federal Hwy",
+    "pharmacy": "Rite Aid \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Daniel Scott",
       "phone": "(513) 555-8793",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "My right eye is killing me Right eye — deep, severe pain",
+    "chiefComplaint": "My right eye is killing me Right eye \u2014 deep, severe pain",
     "diagnosis": "Acute Angle-Closure Glaucoma"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Hyperopia",
+      "problem": "Acute angle-closure attack, left eye",
+      "icd": "H40.211",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "IOP 54 mmHg, mid-dilated fixed pupil, corneal edema \u2014 angle closed 360\u00b0"
     },
     {
-      "id": "prob-2",
-      "description": "Hypertension",
+      "problem": "Narrow angles bilateral \u2014 fellow eye prophylaxis needed",
+      "icd": "H40.029",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Right eye has occludable angles \u2014 prophylactic LPI indicated"
     },
     {
-      "id": "prob-3",
-      "description": "GERD",
+      "problem": "Hyperopia \u2014 anatomic risk factor",
+      "icd": "H52.00",
+      "onset": "2015",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Short axial length \u2192 shallow anterior chamber \u2192 angle closure risk"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Amlodipine",
-      "dose": "5mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Timolol 0.5% 1 drop left eye STAT",
+      "sig": "Reduce aqueous production immediately",
+      "prescriber": "Dr. Chen OD",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Omeprazole",
-      "dose": "20mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "Brimonidine 0.15% 1 drop left eye STAT",
+      "sig": "Alpha-2 agonist \u2014 reduces aqueous and increases outflow",
+      "prescriber": "Dr. Chen OD",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Diphenhydramine",
-      "dose": "25mg PRN sleep (anticholinergic — could have contributed to attack)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "Pilocarpine 1% 1 drop left eye q15min x2",
+      "sig": "Miotic \u2014 constricts pupil, pulls iris from angle",
+      "prescriber": "Dr. Chen OD",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Acetazolamide 500mg PO STAT",
+      "sig": "Systemic CAI \u2014 immediate IOP lowering",
+      "prescriber": "Dr. Chen OD",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -91,7 +96,7 @@ window.EMR_DATA = {
       "bp": "162/94",
       "hr": "88",
       "rr": "16",
-      "temp": "36.9°C",
+      "temp": "36.9\u00b0C",
       "spo2": "99%",
       "pain": "9/10",
       "bmi": "22",
@@ -104,173 +109,21 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "My right eye is killing me Right eye — deep, severe pain",
-      "hpi": "Dolores Eriksen is a 52-year-old female presenting with my right eye is killing me right eye — deep, severe pain. Past medical history includes Hyperopia, Hypertension, GERD. See chart for full details.",
+      "cc": "My right eye is killing me Right eye \u2014 deep, severe pain",
+      "hpi": "Dolores Eriksen is a 52-year-old female presenting with my right eye is killing me right eye \u2014 deep, severe pain. Past medical history includes Hyperopia, Hypertension, GERD. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Angle-Closure Glaucoma — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Angle-Closure Glaucoma \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
-  "labs": [
-    {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-718497",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
-        {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "5.3",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.3",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "152",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "8",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.3",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "labs": [],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-980547",
-      "clinical": "My right eye is killing me Right eye — deep, severe pain",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-413131",
-      "clinical": "My right eye is killing me Right eye — deep, severe pain",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial pathology. No mass, no hemorrhage. Orbits normal on bone windows.",
-      "impression": "Normal — headache and eye pain not from intracranial cause",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-829206",
-      "clinical": "My right eye is killing me Right eye — deep, severe pain",
-      "technique": "Standard 12-lead",
-      "findings": "Normal sinus rhythm at 88 bpm. Normal intervals",
-      "impression": "Normal ECG",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/18/2024",
+      "study": "Gonioscopy + Anterior Segment OCT",
+      "indication": "Acute IOP elevation, mid-dilated pupil",
+      "findings": "Gonioscopy: 360\u00b0 angle closure, no trabecular meshwork visible, appositional \u2014 no PAS yet. Right eye: Grade I-II narrow angle. Anterior segment OCT: iris bomb\u00e9, shallow AC, corneal edema.",
+      "impression": "Acute primary angle closure left eye. Narrow angles right eye. LPI both eyes after IOP medically lowered."
     }
   ],
   "immunizations": [
@@ -378,13 +231,12 @@ window.EMR_DATA = {
       "Visual field assessment by confrontation": "Difficult to assess accurately due to pain and visual disturbance"
     },
     "ddxTargets": [
-      "Acute angle-closure glaucoma (correct diagnosis)",
-      "Acute iritis/anterior uveitis",
-      "Corneal abrasion or ulcer",
-      "Optic neuritis",
-      "Temporal arteritis",
-      "Migraine with visual aura",
-      "Cluster headache"
+      "Acute primary angle-closure glaucoma (correct)",
+      "Anterior uveitis with IOP spike \u2014 different pupil, no iris bomb\u00e9",
+      "Malignant glaucoma \u2014 rare, different anatomy",
+      "Neovascular glaucoma \u2014 no rubeosis iridis",
+      "Secondary angle closure \u2014 no predisposing medications",
+      "Acute corneal hydrops \u2014 different presentation"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'eye pain' as simple conjunctivitis or dry eyes, missing the acute nature and systemic symptoms that suggest angle-closure glaucoma",
@@ -394,7 +246,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. You've identified several causes of acute eye pain. Given this patient's age, family history, and the sudden onset with systemic symptoms like nausea, what sight-threatening condition should you be most concerned about? How will your history questions help distinguish between these possibilities?",
       "phase5": "Excellent work gathering the history and physical findings. You found elevated intraocular pressure, a shallow anterior chamber, and corneal edema in a patient with acute severe eye pain and nausea. How do these findings help narrow your differential? What's the most likely diagnosis and what's your next step?",
-      "finalDebrief": "This case demonstrates classic acute angle-closure glaucoma - the triad of sudden severe eye pain, nausea/vomiting, and visual disturbances in a hyperopic patient with family history of glaucoma. The key was recognizing that not all 'eye pain' is benign and that the systemic symptoms were crucial clues. The elevated IOP and shallow anterior chamber confirmed the diagnosis. This is an ophthalmologic emergency requiring immediate treatment to prevent permanent vision loss."
+      "finalDebrief": "This case demonstrates classic acute angle-closure glaucoma - the triad of sudden severe eye pain, nausea/vomiting, and visual disturbances in a hyperopic patient with family history of glaucoma. The key was recognizing that not all 'eye pain' is benign and that the systemic symptoms were crucial clues. The elevated IOP and shallow anterior chamber confirmed the diagnosis. This is an ophthalmologic emergency requiring immediate treatment to prevent permanent vision loss.",
+      "final": "Diagnosis: acute primary angle-closure glaucoma, IOP 54. Key OD learning: (1) Clinical triad: red eye + mid-dilated FIXED pupil + IOP >40. Halos and pain from corneal edema. This triad = angle closure until proven otherwise. (2) Pathophysiology: pupillary block \u2192 posterior chamber aqueous cannot reach anterior chamber \u2192 iris bomb\u00e9 (forward bowing) \u2192 angle closes \u2192 IOP spikes. Pilocarpine mechanically opens angle by pulling iris posteriorly. (3) Treatment sequence: topical cocktail (timolol + brimonidine + pilocarpine) + systemic acetazolamide \u2192 when IOP <35 \u2192 laser peripheral iridotomy. LPI creates alternate aqueous pathway bypassing pupillary block. (4) Fellow eye: 40% bilateral risk within 5 years without prophylaxis. Prophylactic LPI right eye same-day or next day. Non-negotiable. (5) Time matters: every hour at IOP 54 causes optic nerve damage. Start medical treatment in the office, phone ophthalmologist NOW if cannot manage LPI."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Primary Angle-Closure Glaucoma, Left Eye \u2014 IOP 54 mmHg, Peripheral Laser Iridotomy Urgent",
+    "caseId": "angle-closure-glaucoma"
   }
 };

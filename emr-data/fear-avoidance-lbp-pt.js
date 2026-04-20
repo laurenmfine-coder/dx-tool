@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Chronic LBP",
-      "icd": "Z00.00",
+      "problem": "Chronic non-specific LBP \u2014 fear-avoidance dominant",
+      "icd": "M54.5",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Tampa Scale 46, refuses exercise, disability claim \u2014 biopsychosocial model required"
+    },
+    {
+      "problem": "Kinesiophobia \u2014 movement catastrophizing",
+      "icd": "F40.298",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Believes movement causes damage \u2014 pain beliefs drive disability, not structural pathology"
+    },
+    {
+      "problem": "Deconditioning \u2014 8 months inactivity",
+      "icd": "Z73.6",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Secondary to fear avoidance \u2014 now a physical contributor"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Oxycodone 10mg BID \u2014 wean plan in progress",
+      "sig": "Wean per pain management",
+      "prescriber": "Pain Mgmt",
+      "start": "2023",
+      "refills": 2,
+      "status": "Active \u2014 weaning"
+    },
+    {
+      "name": "Duloxetine 60mg daily",
+      "sig": "Take daily \u2014 chronic pain + depression component",
+      "prescriber": "PCP",
+      "start": "2024",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "06/15/2024",
+      "study": "MRI Lumbar Spine",
+      "indication": "Chronic LBP \u2014 structural evaluation",
+      "findings": "L4-L5 Grade 1 anterolisthesis, moderate disc desiccation, mild foraminal narrowing. L5-S1 disc bulge without root compression.",
+      "impression": "Mild degenerative changes \u2014 age-appropriate, common in asymptomatic adults. Structural findings do NOT correlate with this degree of disability."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "fear-avoidance-lbp-pt",
-    "diagnosis": "See diagnosis \u2014 Chronic LBP",
+    "diagnosis": "Chronic LBP \u2014 Fear-Avoidance Model, Tampa Scale 46, Kinesiophobia-Driven Disability",
     "acuity": 3,
     "presentation": "Chronic LBP",
     "category": "musculoskeletal"
@@ -180,12 +210,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "Chronic LBP 8mo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Chronic LBP \u2014 fear-avoidance model, kinesiophobia-driven disability (correct)",
+      "Structural pathology causing disability \u2014 MRI findings are minimal",
+      "Malingering \u2014 fear-avoidance is real, measurable, evidence-based",
+      "Radiculopathy \u2014 no dermatomal symptoms",
+      "Spondylolisthesis requiring surgery \u2014 Grade 1, not surgical",
+      "Depression as primary \u2014 contributing but distinct from fear-avoidance"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +225,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: Chronic LBP. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What psychosocial yellow flags does this patient have \u2014 and how does your treatment approach change when fear-avoidance drives disability? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: chronic LBP \u2014 fear-avoidance model dominant. Key PT learning: (1) Tampa Scale: score \u226537 = clinically significant kinesiophobia. Score 46 = high. Better predictor of PT dropout and poor outcomes than structural imaging. (2) Fear-avoidance cycle: pain \u2192 catastrophizing \u2192 movement fear \u2192 avoidance \u2192 deconditioning + hypervigilance \u2192 more pain. Breaking this cycle requires graded exposure \u2014 NOT validation of avoidance. (3) Session 1 strategy: build therapeutic alliance FIRST. Do NOT load the patient physically. Validate pain experience without validating avoidance beliefs. Explain pain neuroscience (pain \u2260 damage). (4) Pain neuroscience education (PNE): explaining pain as a protective nervous system output \u2014 not a tissue damage signal \u2014 reduces catastrophizing and improves willingness to move. 15-min PNE before exercise improves outcomes over exercise alone. (5) Graded exposure: hierarchy of feared activities, start with least feared, demonstrate safety through controlled experience. 'You bent forward without damage \u2014 this shows your back can move safely.'"
     }
   }
 };

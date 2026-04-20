@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Left MCA Stroke Day 10",
-      "icd": "Z00.00",
+      "problem": "Left MCA ischemic stroke \u2014 post-acute day 10",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Right hemiplegia, expressive aphasia \u2014 OT occupational profile and ADL eval"
+    },
+    {
+      "problem": "Expressive aphasia \u2014 Broca's type",
+      "icd": "R47.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Understands instructions, cannot produce speech \u2014 AAC strategies required for OT"
+    },
+    {
+      "problem": "Moderate ADL dependence \u2014 max assist",
+      "icd": "Z74.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Feeding independent, dressing max assist, toilet transfers moderate assist"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 81mg daily",
+      "sig": "Take 1 tablet daily",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 11,
+      "status": "Active"
+    },
+    {
+      "name": "Atorvastatin 80mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take 1 tablet daily",
+      "prescriber": "Neurology",
+      "start": "11/2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -98,7 +128,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "11/05/2024",
+      "study": "MRI Brain DWI/FLAIR",
+      "indication": "Acute stroke",
+      "findings": "Left MCA territory infarct \u2014 frontal, anterior parietal, corona radiata. Broca area involvement.",
+      "impression": "Left MCA infarct explaining right hemiplegia and expressive aphasia."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +168,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "stroke-ot-profile",
-    "diagnosis": "See diagnosis \u2014 Left MCA Stroke Day 10",
+    "diagnosis": "Left MCA Stroke Day 10 \u2014 OT Occupational Profile: Expressive Aphasia, Moderate ADL Dependence",
     "acuity": 3,
     "presentation": "Left MCA Stroke Day 10",
     "category": "neurologic"
@@ -175,12 +213,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Left MCA Stroke Day 10 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Left MCA stroke \u2014 OT occupational profile (correct)",
+      "Right MCA stroke \u2014 contralateral deficits",
+      "Hemorrhagic stroke \u2014 different rehab trajectory",
+      "Brain tumor \u2014 slower onset",
+      "MS relapse \u2014 different MRI pattern",
+      "Todd's paralysis \u2014 transient, resolves quickly"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +228,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Left MCA Stroke Day 10. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) Build the occupational profile \u2014 what are the three most important occupational performance areas before discharge planning begins? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: left MCA stroke \u2014 OT focus. Key OT learning: (1) Expressive aphasia changes every assessment \u2014 use yes/no questions, picture boards, written choices, gestures. Comprehension is intact. Never assume cognitive impairment from inability to speak. (2) Occupational profile priority questions: What mattered most to this person before? (construction foreman, coaches kids' soccer) What is the hardest thing now? What does success look like for discharge? (3) Three must-achieve before discharge: (a) Safe toilet transfer, (b) Supervised oral feeding, (c) Caregiver training for wife on 2-person transfer technique. (4) Neuroplasticity window: Week 2 post-stroke is still early-critical period. High-intensity, task-specific training NOW has disproportionate long-term benefit. OT should be 2-3 sessions/day. (5) Team communication: 'He points to pictures reliably to communicate preferences. He prioritizes independence with self-feeding and toilet transfers over upper extremity recovery. Wife needs hands-on training before home discharge.'"
     }
   }
 };

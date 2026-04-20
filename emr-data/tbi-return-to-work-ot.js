@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Moderate TBI Ago",
-      "icd": "Z00.00",
+      "problem": "Moderate TBI \u2014 dysexecutive syndrome",
+      "icd": "S06.2X4A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Normal MoCA in clinic; failing at work \u2014 ecological validity gap"
+    },
+    {
+      "problem": "Cognitive fatigue \u2014 post-TBI",
+      "icd": "G93.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Functional collapse after 3-4 hours \u2014 energy envelope exceeded"
+    },
+    {
+      "problem": "Return-to-work failure \u2014 work demands exceed capacity",
+      "icd": "Z56.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Employer considering termination \u2014 OT RTW assessment needed urgently"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
+      "name": "Amantadine 100mg BID",
+      "sig": "Take twice daily",
+      "prescriber": "Neurology",
+      "start": "2024",
       "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Melatonin 5mg QHS",
+      "sig": "Take at bedtime",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 6,
       "status": "Active"
     }
   ],
@@ -98,7 +120,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/10/2024",
+      "study": "MRI Brain (3mo post-TBI)",
+      "indication": "Moderate TBI surveillance",
+      "findings": "Bilateral frontal microhemorrhages on SWI. Right frontal contusion evolving. White matter changes frontal projections.",
+      "impression": "Frontal lobe injury pattern explaining dysexecutive syndrome."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +160,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "tbi-return-to-work-ot",
-    "diagnosis": "See diagnosis \u2014 Moderate TBI Ago",
+    "diagnosis": "Moderate TBI 7 Months Post \u2014 Dysexecutive Syndrome Causing Work Failure Despite Normal Clinic Testing",
     "acuity": 3,
     "presentation": "Moderate TBI Ago",
     "category": "neurologic"
@@ -175,12 +205,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Moderate TBI 7mo Ago \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Moderate TBI \u2014 dysexecutive syndrome, ecologically valid assessment needed (correct)",
+      "Malingering \u2014 fear of secondary gain (OT assessment objectively characterizes impairment)",
+      "Major depression \u2014 cognitive symptoms overlap, co-evaluate",
+      "ADHD \u2014 pre-existing or unmasked",
+      "Medication side effect \u2014 amantadine",
+      "Full recovery \u2014 normal clinic test is falsely reassuring"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +220,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Moderate TBI Ago. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) In-clinic ADL assessments are normal \u2014 why is this patient failing at work, and what ecologically valid assessment captures what testing missed? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: moderate TBI, dysexecutive syndrome \u2014 normal clinic testing misses real-world failure. Key OT learning: (1) Ecological validity gap: clinic testing is quiet, one-on-one, no distractions, short duration. Work = noise, competing priorities, interruptions, sustained 8 hours. This patient FAILS under load, not in controlled settings. (2) Use ecologically valid assessments: Multiple Errands Test (real shopping environment), kitchen task observation, simulated work tasks. These capture breakdown under cognitive load. (3) Energy envelope: post-TBI fatigue is neurological \u2014 not depression, not motivation. Limited daily cognitive budget. Once exceeded, performance deteriorates for hours to days. Teach pacing: structured breaks q90min, priority tasks in AM, written external memory aids. (4) RTW recommendations for employer: phased return (start 4h/day), quiet workspace, written daily task list, no >2-3 simultaneous priorities, flexible scheduling. (5) OT report language: 'This employee has documented cognitive limitations consistent with TBI. Reasonable accommodations under ADA include X, Y, Z. Phased return over 8-12 weeks is medically supported.'"
     }
   }
 };

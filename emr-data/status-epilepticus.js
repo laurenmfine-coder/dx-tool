@@ -1,4 +1,4 @@
-/* emr-data/status-epilepticus.js — Auto-generated EMR case data for Status Epilepticus */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Michael Chang",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "8937 Daisy Ave, Kansas City, MO 64108",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Rite Aid — Palm Ave",
+    "pharmacy": "Rite Aid \u2014 Palm Ave",
     "emergencyContact": {
       "name": "Emily Chang",
       "phone": "(615) 555-1317",
@@ -26,38 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Epilepsy (poorly controlled)",
+      "problem": "Refractory status epilepticus \u2014 GTC ongoing",
+      "icd": "G41.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Seizure 15+ min, lorazepam 4mg given without response"
     },
     {
-      "id": "prob-2",
-      "description": "History of non-adherence",
+      "problem": "Remote TBI \u2014 epileptogenic scar, probable etiology",
+      "icd": "S09.90",
+      "onset": "2021",
+      "status": "Resolved",
+      "notes": "Right frontal encephalomalacia on imaging"
+    },
+    {
+      "problem": "Aspiration risk \u2014 ongoing seizure",
+      "icd": "J69.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Lateral positioning, suction available"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Levetiracetam",
-      "dose": "1000mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Lorazepam 4mg IV x2 (given \u2014 no response)",
+      "sig": "First-line given \u2014 no clinical response",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Lacosamide",
-      "dose": "200mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Levetiracetam 3000mg IV over 10 min",
+      "sig": "ESETT trial second-line \u2014 infuse over 10 minutes",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Propofol infusion (third-line if LEV fails)",
+      "sig": "Requires intubation \u2014 anesthesia on standby",
+      "prescriber": "ICU",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Standby"
     }
   ],
   "allergies": [
@@ -75,7 +88,7 @@ window.EMR_DATA = {
       "bp": "168/102",
       "hr": "128",
       "rr": "8",
-      "temp": "38.6°C",
+      "temp": "38.6\u00b0C",
       "spo2": "88%",
       "pain": "N/A",
       "bmi": "36",
@@ -91,155 +104,60 @@ window.EMR_DATA = {
       "cc": "Witnessed generalized seizure for >5 minutes, not returning to baseline",
       "hpi": "Michael Chang is a 33-year-old male presenting with witnessed generalized seizure for >5 minutes, not returning to baseline. Past medical history includes Epilepsy (poorly controlled), History of non-adherence. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Status Epilepticus — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Status Epilepticus \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-987761",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "SE Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Glucose (POC)",
+          "value": "82",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "42",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "L"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Sodium",
+          "value": "136",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "6.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Ck",
-              "value": "2400",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            }
-          ]
+          "test": "pH (ABG)",
+          "value": "7.22",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "L"
+        },
+        {
+          "test": "Lactate",
+          "value": "6.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "Temperature",
+          "value": "38.8",
+          "unit": "\u00b0C",
+          "ref": "<38.0",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-509113",
-      "clinical": "Witnessed generalized seizure for >5 minutes, not returning to baseline",
-      "technique": "Standard protocol",
-      "findings": "No acute hemorrhage or mass. No midline shift.",
-      "impression": "No acute structural etiology for seizures.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/18/2024",
+      "study": "CT Head Without Contrast",
+      "indication": "New-onset SE \u2014 rule out structural cause",
+      "findings": "Right frontal encephalomalacia consistent with prior TBI. No acute hemorrhage or mass effect.",
+      "impression": "Prior TBI scar \u2014 probable epileptogenic focus. No acute structural cause."
     }
   ],
   "immunizations": [
@@ -276,7 +194,7 @@ window.EMR_DATA = {
     ],
     [
       "Medication adherence",
-      "Stopped taking seizure meds 2 weeks ago — felt fine"
+      "Stopped taking seizure meds 2 weeks ago \u2014 felt fine"
     ],
     [
       "Occupation",
@@ -342,13 +260,12 @@ window.EMR_DATA = {
       "Skin examination for trauma or tongue biting": "Lateral tongue laceration present, minor abrasions on forehead, no other trauma"
     },
     "ddxTargets": [
-      "Status epilepticus (correct diagnosis)",
-      "Prolonged postictal state",
-      "Intracranial infection (meningitis/encephalitis)",
-      "Intracranial hemorrhage",
-      "Hypoglycemia or metabolic encephalopathy",
-      "Alcohol withdrawal seizures",
-      "Drug intoxication or withdrawal"
+      "Refractory GCSE \u2014 second-line treatment required (correct)",
+      "Non-convulsive SE after motor cessation \u2014 need cEEG",
+      "Psychogenic non-epileptic spell \u2014 not during true SE",
+      "Metabolic encephalopathy with myoclonus \u2014 labs normal",
+      "Encephalitis \u2014 CSF pending",
+      "Eclampsia \u2014 not pregnant"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known epilepsy history and missing secondary causes like infection or metabolic disorders that could precipitate status epilepticus",
@@ -358,7 +275,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some key possibilities in your differential. This patient has a seizure lasting over 5 minutes with persistent altered mental status. What specific historical elements would help you distinguish between simple medication non-compliance versus an acute precipitating factor? Consider his vital signs - what might the fever and altered mental status suggest?",
       "phase5": "Now that you've completed your assessment, let's think through this systematically. You found evidence of a prolonged seizure with persistent confusion, fever, and hyperreflexia. How does this clinical picture help narrow your differential? What's the most concerning diagnosis you need to rule out immediately, and what would be your next steps in management?",
-      "finalDebrief": "This case illustrates status epilepticus precipitated by medication non-adherence but complicated by possible infection. Your DDx likely evolved from simple seizure to considering status epilepticus, then incorporating the fever and altered mental status. The key learning points are recognizing status epilepticus criteria, identifying potential precipitants beyond just medication non-compliance, and understanding that fever in this context requires immediate investigation for CNS infection. How might you counsel this patient about medication adherence going forward?"
+      "finalDebrief": "This case illustrates status epilepticus precipitated by medication non-adherence but complicated by possible infection. Your DDx likely evolved from simple seizure to considering status epilepticus, then incorporating the fever and altered mental status. The key learning points are recognizing status epilepticus criteria, identifying potential precipitants beyond just medication non-compliance, and understanding that fever in this context requires immediate investigation for CNS infection. How might you counsel this patient about medication adherence going forward?",
+      "final": "Diagnosis: refractory GCSE. Key nursing learning: (1) Airway first \u2014 lateral position, suction, O2, anesthesia on standby. (2) Time benchmarks: benzos by 5 min, second-line by 20 min, third-line by 40 min. Each delay worsens neuronal injury. (3) ESETT trial: LEV 4500mg, fosphenytoin 20mg PE/kg, valproate 40mg/kg \u2014 all equivalent (~47% efficacy). LEV preferred: no cardiac monitoring required vs. fosphenytoin. (4) After motor stops: non-convulsive SE is common. Do NOT assume patient is post-ictal without cEEG. (5) Third-line = propofol/ketamine infusion \u2192 intubation + ICU. Nursing prepares RSI equipment, monitors continuous vitals."
     }
+  },
+  "meta": {
+    "diagnosis": "Refractory Generalized Convulsive Status Epilepticus \u2014 Second-Line Agent Required",
+    "caseId": "status-epilepticus"
   }
 };

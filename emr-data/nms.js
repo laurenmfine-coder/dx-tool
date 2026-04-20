@@ -1,4 +1,4 @@
-/* emr-data/nms.js — EMR case data for Neuroleptic Malignant Syndrome (NMS) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Bradley Chung",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "4261 Maple St, Minneapolis, MN 55406",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "CVS Pharmacy — Sunrise Blvd",
+    "pharmacy": "CVS Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "William Phillips",
       "phone": "(414) 555-8555",
@@ -26,54 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Schizophrenia",
+      "problem": "Neuroleptic malignant syndrome",
+      "icd": "G21.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Temp 41.2\u00b0C, lead-pipe rigidity, autonomic instability, CK 18,000"
     },
     {
-      "id": "prob-2",
-      "description": "Tardive dyskinesia",
+      "problem": "Schizophrenia \u2014 haloperidol offending agent",
+      "icd": "F20.9",
+      "onset": "2019",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Dose increased 5\u219210mg 3 days ago"
     },
     {
-      "id": "prob-3",
-      "description": "Type 2 Diabetes",
+      "problem": "AKI \u2014 myoglobinuria from rhabdomyolysis",
+      "icd": "N17.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CK 18,000 \u2192 myoglobin nephrotoxicity"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Olanzapine",
-      "dose": "20mg daily (increased from 10mg 4 days ago — switched from haloperidol 2 weeks ago)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "HOLD ALL ANTIPSYCHOTICS \u2014 immediate",
+      "sig": "Discontinue haloperidol and all dopamine-blocking agents",
+      "prescriber": "Medicine/Psychiatry",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "HELD"
     },
     {
-      "id": "med-2",
-      "name": "Benztropine",
-      "dose": "1mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Bromocriptine 2.5mg PO TID",
+      "sig": "Dopamine agonist \u2014 restore D2 tone",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Metformin",
-      "dose": "500mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Dantrolene 2.5mg/kg IV PRN severe rigidity",
+      "sig": "IV \u2014 blocks SR Ca++ release, reduces rigidity",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "NS 1-1.5 L/hr IV \u2014 rhabdomyolysis hydration",
+      "sig": "Target UO 200 mL/hr",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -91,7 +96,7 @@ window.EMR_DATA = {
       "bp": "168/98 (fluctuating: was 92/60 an hour ago per EMS)",
       "hr": "126",
       "rr": "26",
-      "temp": "40.7°C",
+      "temp": "40.7\u00b0C",
       "spo2": "94%",
       "pain": "/10",
       "bmi": "28",
@@ -107,226 +112,61 @@ window.EMR_DATA = {
       "cc": "Group home staff: 'He's burning up and stiff as a board' Whole body stiffness, no specific pain reported",
       "hpi": "Bradley Chung is a 34-year-old male presenting with group home staff: 'he's burning up and stiff as a board' whole body stiffness, no specific pain reported. Past medical history includes Schizophrenia, Tardive dyskinesia, Type 2 Diabetes. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Neuroleptic Malignant Syndrome (NMS) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Neuroleptic Malignant Syndrome (NMS) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-751336",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "NMS Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "18.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.3",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CK",
+          "value": "18,000",
+          "unit": "U/L",
+          "ref": "22-198",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "5.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "99",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "22",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "224",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Temperature",
+          "value": "41.2",
+          "unit": "\u00b0C",
+          "ref": "36.5-37.5",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "CK Total",
-              "value": "18,600",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            },
-            {
-              "test": "AST",
-              "value": "420",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "5.6",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.28",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            },
-            {
-              "test": "Myoglobin",
-              "value": ">1,000",
-              "unit": "ng/mL",
-              "range": "<85",
-              "flag": "H"
-            },
-            {
-              "test": "Blood Cultures",
-              "value": "Pending",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            },
-            {
-              "test": "Procalcitonin",
-              "value": "0.3",
-              "unit": "ng/mL",
-              "range": "<0.5",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "16.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Serum iron",
+          "value": "28",
+          "unit": "\u03bcg/dL",
+          "ref": "60-170",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "2.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Urine myoglobin",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-514343",
-      "clinical": "Group home staff: 'He's burning up and stiff as a board' Whole body stiffness, no specific pain reported",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial pathology. No hemorrhage, mass, or hydrocephalus.",
-      "impression": "Normal — altered mental status from NMS, not structural cause",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-205990",
-      "clinical": "Group home staff: 'He's burning up and stiff as a board' Whole body stiffness, no specific pain reported",
-      "technique": "Standard protocol",
-      "findings": "Low lung volumes (limited inspiration from thoracic rigidity). No focal consolidation. No aspiration pattern.",
-      "impression": "Low volumes from rigidity. No pneumonia currently.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-760533",
-      "clinical": "Group home staff: 'He's burning up and stiff as a board' Whole body stiffness, no specific pain reported",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 126 bpm. Prolonged QTc at 520ms. No ST changes",
-      "impression": "Sinus tachycardia with prolonged QTc — olanzapine effect + metabolic derangement. QTc prolongation increases arrhythmia risk.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -421,7 +261,7 @@ window.EMR_DATA = {
     ],
     "examFindings": {
       "General appearance and mental status assessment": "Diaphoretic, altered mental status with confusion and disorientation, appears acutely ill",
-      "Vital signs including orthostatic measurements": "Hypertensive 168/98 with previous hypotension 92/60, tachycardic at 126, hyperthermia 40.7°C, mildly hypoxic 94%",
+      "Vital signs including orthostatic measurements": "Hypertensive 168/98 with previous hypotension 92/60, tachycardic at 126, hyperthermia 40.7\u00b0C, mildly hypoxic 94%",
       "Neurologic examination for rigidity and cogwheeling": "Severe generalized rigidity with lead-pipe stiffness, no cogwheeling present",
       "Assessment of muscle tone and resistance to passive movement": "Marked increase in muscle tone throughout all extremities with resistance to passive movement",
       "Evaluation of tremor and involuntary movements": "No resting tremor, minimal voluntary movement due to rigidity",
@@ -432,13 +272,12 @@ window.EMR_DATA = {
       "Evaluation of reflexes and coordination": "Hyperreflexia present, coordination difficult to assess due to rigidity"
     },
     "ddxTargets": [
-      "Neuroleptic Malignant Syndrome (correct diagnosis)",
-      "Serotonin syndrome",
-      "Malignant hyperthermia",
-      "Meningitis/encephalitis",
-      "Sepsis with altered mental status",
-      "Heat stroke",
-      "Anticholinergic toxicity"
+      "Neuroleptic malignant syndrome \u2014 haloperidol (correct)",
+      "Serotonin syndrome \u2014 hyperreflexia/clonus, not lead-pipe rigidity",
+      "Malignant hyperthermia \u2014 inhaled anesthetic trigger required",
+      "Lethal catatonia \u2014 possibly same entity, different treatment",
+      "Anticholinergic toxicity \u2014 hot/dry/flushed but no rigidity",
+      "Heat stroke \u2014 no antipsychotic exposure"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on psychiatric history and assuming behavioral cause rather than recognizing life-threatening medication reaction",
@@ -448,7 +287,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, what key clinical features would help you distinguish between these conditions? Consider the medication history and the specific constellation of symptoms. What questions about timing and recent medication changes would be most critical?",
       "phase5": "You've identified the classic tetrad of findings. How does the patient's medication regimen and the temporal relationship to antipsychotic therapy support your leading diagnosis? What immediate management priorities should guide your next steps, and what complications are you most concerned about?",
-      "finalDebrief": "NMS represents a rare but life-threatening reaction to antipsychotic medications. How did the combination of hyperthermia, rigidity, altered mental status, and autonomic instability help differentiate this from your other considerations? What does this case teach you about medication safety monitoring in psychiatric patients?"
+      "finalDebrief": "NMS represents a rare but life-threatening reaction to antipsychotic medications. How did the combination of hyperthermia, rigidity, altered mental status, and autonomic instability help differentiate this from your other considerations? What does this case teach you about medication safety monitoring in psychiatric patients?",
+      "final": "Diagnosis: NMS from haloperidol dose escalation. Key pharmacy learning: (1) Mechanism: D2 blockade in striatum (rigidity), hypothalamus (hyperthermia), ANS (instability). Classic tetrad: fever + rigidity + altered consciousness + autonomic instability + elevated CK. (2) NMS vs serotonin syndrome: NMS = slow onset (days), lead-pipe rigidity, normal reflexes. SS = rapid onset (hours), hyperreflexia, myoclonus, clonus. Do not confuse \u2014 treatment differs. (3) Treatment: STOP the antipsychotic. Bromocriptine (DA agonist) counteracts D2 blockade. Dantrolene for severe muscle rigidity. Aggressive cooling and hydration. (4) Rhabdomyolysis: CK 18,000 \u2192 myoglobin nephrotoxicity \u2192 AKI. Aggressive NS at 1L/hr until CK trending down. (5) Antipsychotic restart: minimum 2 weeks after full resolution. Choose lower-potency, lower-D2-affinity agent (quetiapine over haloperidol)."
     }
+  },
+  "meta": {
+    "diagnosis": "Neuroleptic Malignant Syndrome \u2014 Haloperidol Dose Increase, CK 18,000, ICU Care",
+    "caseId": "nms"
   }
 };

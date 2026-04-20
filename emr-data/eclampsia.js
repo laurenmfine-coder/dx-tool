@@ -1,4 +1,4 @@
-/* emr-data/eclampsia.js — EMR case data for Eclampsia */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Catalina Reyes",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "1136 Mulberry St, Pittsburgh, PA 15205",
     "insurance": "Medicare",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "Rite Aid — Sunrise Blvd",
+    "pharmacy": "Rite Aid \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Linda Carter",
       "phone": "(615) 555-3390",
@@ -26,59 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "First pregnancyat 34 weeks",
+      "problem": "Eclampsia \u2014 first seizure at 38 weeks",
+      "icd": "O15.02",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "GTC witnessed, resolved in 2 min, now postictal. Magnesium started."
     },
     {
-      "id": "prob-2",
-      "description": "BMI 36",
+      "problem": "Severe preeclampsia \u2014 unrecognized antepartum",
+      "icd": "O14.12",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "BP labeled 'white coat' \u2014 anchoring error. Three prior readings >140/90."
     },
     {
-      "id": "prob-3",
-      "description": "No prior hypertension",
+      "problem": "HELLP syndrome \u2014 developing",
+      "icd": "O14.22",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "No seizure history",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Prenatal care: blood pressure was elevated at last visit5 days ago — told to 'monitor at home'",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Platelets 112K, LDH 788, AST 88 \u2014 all abnormal"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Prenatal vitamin",
-      "dose": "Daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Magnesium sulfate 6g IV load over 20 min THEN 2g/hr",
+      "sig": "Higher loading dose for active eclampsia vs. prophylaxis (4g)",
+      "prescriber": "OB",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Iron supplement",
-      "dose": "325mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Labetalol 20mg IV q10min PRN BP >160/110",
+      "sig": "For acute severe hypertension \u2014 repeat x2 if needed",
+      "prescriber": "OB",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "Calcium gluconate 1g IV at bedside \u2014 magnesium antidote",
+      "sig": "Administer if patellar reflex absent or RR <12",
+      "prescriber": "OB",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "On standby"
     }
   ],
   "allergies": [
@@ -96,7 +88,7 @@ window.EMR_DATA = {
       "bp": "194/118",
       "hr": "108",
       "rr": "20",
-      "temp": "37.2°C",
+      "temp": "37.2\u00b0C",
       "spo2": "96%",
       "pain": "10/10",
       "bmi": "28",
@@ -109,246 +101,64 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "What happened Severe headache — bilateral, throbbing, 'worst headache'",
-      "hpi": "Catalina Reyes is a 28-year-old female presenting with what happened severe headache — bilateral, throbbing, 'worst headache'. Past medical history includes First pregnancyat 34 weeks, BMI 36, No prior hypertension, No seizure history, Prenatal care: blood pressure was elevated at last visit5 days ago — told to 'monitor at home'. See chart for full details.",
+      "cc": "What happened Severe headache \u2014 bilateral, throbbing, 'worst headache'",
+      "hpi": "Catalina Reyes is a 28-year-old female presenting with what happened severe headache \u2014 bilateral, throbbing, 'worst headache'. Past medical history includes First pregnancyat 34 weeks, BMI 36, No prior hypertension, No seizure history, Prenatal care: blood pressure was elevated at last visit5 days ago \u2014 told to 'monitor at home'. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Eclampsia — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Eclampsia \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-408172",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Eclampsia/HELLP Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "9.7",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "82",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "Platelets",
+          "value": "112",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "145",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.5",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.5",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "LDH",
+          "value": "788",
+          "unit": "U/L",
+          "ref": "122-222",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "AST",
-              "value": "248",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "ALT",
-              "value": "196",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "LDH",
-              "value": "680",
-              "unit": "U/L",
-              "range": "140-280",
-              "flag": "H"
-            },
-            {
-              "test": "Uric Acid",
-              "value": "8.2",
-              "unit": "mg/dL",
-              "range": "2.5-5.5",
-              "flag": "H"
-            },
-            {
-              "test": "PT/INR",
-              "value": "1.2",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "Fibrinogen",
-              "value": "180",
-              "unit": "mg/dL",
-              "range": "200-400 (elevated in pregnancy, usually 400-600)",
-              "flag": "H"
-            },
-            {
-              "test": "Urinalysis",
-              "value": "3+ protein, no infection",
-              "unit": "",
-              "range": "Trace protein",
-              "flag": "H"
-            }
-          ]
+          "test": "AST",
+          "value": "88",
+          "unit": "U/L",
+          "ref": "10-40",
+          "flag": "H"
+        },
+        {
+          "test": "Urine protein dipstick",
+          "value": "3+",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Uric acid",
+          "value": "6.8",
+          "unit": "mg/dL",
+          "ref": "<6.0",
+          "flag": "H"
+        },
+        {
+          "test": "Magnesium (post-load)",
+          "value": "4.8",
+          "unit": "mg/dL",
+          "ref": "therapeutic 4-7",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-394338",
-      "clinical": "What happened Severe headache — bilateral, throbbing, 'worst headache'",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "POCUS – FAST Exam",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-756181",
-      "clinical": "What happened Severe headache — bilateral, throbbing, 'worst headache'",
-      "technique": "Standard protocol",
-      "findings": "No free intraperitoneal fluid. Normal-appearing liver parenchyma. Fetal heart rate 145 bpm, appropriate for gestational age. Normal amniotic fluid volume.",
-      "impression": "No abruption-related free fluid. Fetus currently viable.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-123462",
-      "clinical": "What happened Severe headache — bilateral, throbbing, 'worst headache'",
-      "technique": "Standard protocol",
-      "findings": "No intracranial hemorrhage. Mild diffuse cerebral edema. No mass lesion. No midline shift.",
-      "impression": "No hemorrhage — cerebral edema consistent with eclampsia/posterior reversible encephalopathy syndrome (PRES)",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-789414",
-      "clinical": "What happened Severe headache — bilateral, throbbing, 'worst headache'",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 108 bpm. No ST changes. Normal intervals",
-      "impression": "Sinus tachycardia — stress and hypertensive crisis",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -388,7 +198,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "Elementary school teacher — on leave since 32 weeks"
+      "Elementary school teacher \u2014 on leave since 32 weeks"
     ],
     [
       "Living",
@@ -454,13 +264,12 @@ window.EMR_DATA = {
       "Assessment of facial and extremity swelling": "Notable facial puffiness and hand swelling that patient reports as new"
     },
     "ddxTargets": [
-      "Severe preeclampsia with features (correct diagnosis)",
-      "Gestational hypertension",
-      "Chronic hypertension with superimposed preeclampsia",
-      "Eclampsia",
-      "HELLP syndrome",
-      "Primary headache disorder (migraine/tension)",
-      "Secondary headache (intracranial pathology)"
+      "Eclampsia \u2014 new seizure in severe preeclampsia (correct)",
+      "Epilepsy with coincidental hypertension \u2014 no prior seizure history",
+      "Hypertensive encephalopathy",
+      "TTP \u2014 thrombocytopenia + neuro symptoms (preeclampsia fits better in pregnancy)",
+      "PRES \u2014 may coexist",
+      "Gestational hypertension only \u2014 labs prove more than that"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'headache' and missing the hypertensive emergency context in pregnancy, or focusing solely on neurological causes",
@@ -470,7 +279,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified headache as the chief complaint in a third-trimester patient. What specific pregnancy-related conditions should be at the top of your differential? Think about what additional history would help you distinguish between benign pregnancy headaches and more serious complications.",
       "phase5": "Now that you have the history and physical findings, let's think systematically. You have a third-trimester patient with severe headache, significantly elevated blood pressure, proteinuria, hyperreflexia, and edema. How do these findings fit together? What does this constellation of symptoms suggest?",
-      "finalDebrief": "This case demonstrates the importance of considering preeclampsia in any pregnant patient presenting with headache after 20 weeks gestation. The combination of severe headache, hypertension, proteinuria, and hyperreflexia indicates severe preeclampsia with features. The family history was a key risk factor. How did your thinking evolve from initial presentation to final diagnosis?"
+      "finalDebrief": "This case demonstrates the importance of considering preeclampsia in any pregnant patient presenting with headache after 20 weeks gestation. The combination of severe headache, hypertension, proteinuria, and hyperreflexia indicates severe preeclampsia with features. The family history was a key risk factor. How did your thinking evolve from initial presentation to final diagnosis?",
+      "final": "Diagnosis: eclampsia. Key nursing learning: (1) Classic bias trap: prior 'white coat hypertension' label prevented correct diagnosis. Three readings >140/90 in third trimester = preeclampsia. Nursing surveillance catches trending vitals when providers dismiss individual readings. (2) Mag toxicity monitoring \u2014 primary nursing responsibility: patellar reflex q1h (first sign of toxicity), RR q15min (depression at levels >12 mg/dL), hourly UO (mag is renally cleared \u2014 oliguria = accumulation). Therapeutic range 4-7 mg/dL. (3) Calcium gluconate at bedside BEFORE starting mag. 1g IV push over 2 min for respiratory arrest. (4) 25-40% of eclamptic seizures occur postpartum \u2014 continue mag 24h after delivery. Monitor BP closely for 48h post-delivery. (5) Delivery is the only cure. Eclampsia = expedited delivery regardless of gestational age."
     }
+  },
+  "meta": {
+    "diagnosis": "Eclampsia \u2014 New-Onset Seizure at 38 Weeks Gestation, Severe Preeclampsia Features",
+    "caseId": "eclampsia"
   }
 };

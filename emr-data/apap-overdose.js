@@ -1,4 +1,4 @@
-/* emr-data/apap-overdose.js — Auto-generated EMR case data for Acetaminophen Overdose */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Megan Fisher",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "4006 N Kedzie Blvd, Memphis, TN 38104",
     "insurance": "Oscar Health",
     "pcp": "Dr. Michelle Foster, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Reginald Fisher",
       "phone": "(314) 555-1782",
@@ -26,45 +26,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Depression",
+      "problem": "Acetaminophen overdose \u2014 intentional",
+      "icd": "T39.1X1A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Level 210 mcg/mL at 6h \u2014 high-risk zone on nomogram"
     },
     {
-      "id": "prob-2",
-      "description": "Anxiety",
+      "problem": "Major depressive disorder \u2014 precipitant",
+      "icd": "F32.1",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Psychiatry consult ordered"
     },
     {
-      "id": "prob-3",
-      "description": "Recent breakup",
+      "problem": "Early hepatotoxicity \u2014 transaminases rising",
+      "icd": "K72.00",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "AST/ALT trending up at hour 6"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Sertraline",
-      "dose": "100mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "N-Acetylcysteine 150mg/kg IV over 1h THEN 50mg/kg/4h THEN 100mg/kg/16h",
+      "sig": "3-bag IV Ramsay protocol \u2014 start immediately",
+      "prescriber": "Toxicology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Alprazolam",
-      "dose": "0.5mg",
-      "route": "PO",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Michelle Foster, MD"
+      "name": "Ondansetron 4mg IV PRN",
+      "sig": "IV push q6h PRN nausea",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
     }
   ],
   "allergies": [
@@ -82,7 +80,7 @@ window.EMR_DATA = {
       "bp": "112/68",
       "hr": "88",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "3/10",
       "bmi": "24",
@@ -98,155 +96,49 @@ window.EMR_DATA = {
       "cc": "Intentional ingestion of approximately 30g of acetaminophen 8 hours ago",
       "hpi": "Megan Fisher is a 27-year-old female presenting with intentional ingestion of approximately 30g of acetaminophen 8 hours ago. Past medical history includes Depression, Anxiety, Recent breakup. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acetaminophen Overdose — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acetaminophen Overdose \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-378771",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/18/2024",
+      "panel": "Acetaminophen Toxicity",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "APAP level (6h post-ingestion)",
+          "value": "210",
+          "unit": "mcg/mL",
+          "ref": "<10 therapeutic",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "AST",
+          "value": "88",
+          "unit": "U/L",
+          "ref": "10-40",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Alt",
-              "value": "42",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "Ast",
-              "value": "38",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Inr",
-              "value": "1.1",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Apap Level",
-              "value": "185",
-              "unit": "mcg/mL",
-              "range": "10-30 therapeutic",
-              "flag": "H"
-            },
-            {
-              "test": "Ph",
-              "value": "7.38",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": ""
-            }
-          ]
+          "test": "ALT",
+          "value": "104",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": "H"
+        },
+        {
+          "test": "INR",
+          "value": "1.2",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
         }
       ]
     }
@@ -348,13 +240,12 @@ window.EMR_DATA = {
       "Overall toxicity assessment": "Appears well, no signs of acute toxicity at this time"
     },
     "ddxTargets": [
-      "Acetaminophen poisoning (correct diagnosis)",
-      "Mixed drug overdose",
-      "Acute gastritis from alcohol and medication",
-      "Salicylate poisoning",
-      "Tricyclic antidepressant overdose",
-      "Acute anxiety reaction",
-      "Alcohol intoxication"
+      "Acetaminophen overdose \u2014 high-risk, NAC indicated (correct)",
+      "Non-toxic ingestion \u2014 level below treatment line",
+      "Hepatitis A/B \u2014 no exposure history",
+      "Alcohol hepatitis \u2014 coingestion possible but APAP is primary",
+      "Salicylate overdose \u2014 different acid-base pattern",
+      "Serotonin syndrome \u2014 no serotonergic agents involved"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on psychiatric presentation and missing the serious toxicological emergency requiring immediate NAC treatment",
@@ -364,7 +255,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, think about acetaminophen overdose specifically. What's unique about the timeline of acetaminophen toxicity? When do patients typically develop symptoms, and what does this mean for your assessment at 8 hours post-ingestion?",
       "phase5": "The patient appears well now, but you've confirmed a significant acetaminophen ingestion 8 hours ago. What's the most critical next step in management, and why is timing essential? What specific lab value will guide your treatment decision?",
-      "finalDebrief": "This case highlights the deceptive nature of acetaminophen poisoning - patients often appear well initially but develop fulminant hepatic failure 2-3 days later without treatment. The key is recognizing that NAC effectiveness decreases significantly after 8 hours, making this a true emergency despite the benign appearance. How did your differential evolve as you gathered more history about the timing and quantity of ingestion?"
+      "finalDebrief": "This case highlights the deceptive nature of acetaminophen poisoning - patients often appear well initially but develop fulminant hepatic failure 2-3 days later without treatment. The key is recognizing that NAC effectiveness decreases significantly after 8 hours, making this a true emergency despite the benign appearance. How did your differential evolve as you gathered more history about the timing and quantity of ingestion?",
+      "final": "Diagnosis: APAP overdose, Rumack-Matthew high-risk zone. Key pharmacy learning: (1) Nomogram: level 210 at 6h is well above the treatment line (150 at 4h). NAC is definitively indicated. (2) NAC mechanism: replenishes glutathione to conjugate NAPQI (toxic CYP2E1 metabolite). Effective even 10-24h post-ingestion. (3) Hepatotoxicity window: 24-72h. AST rising at 6h = early marker \u2014 NAC now prevents fulminant failure. (4) INR elevation follows transaminases and predicts severity \u2014 King's College criteria for transplant listing. (5) Late NAC: give even after 24h in massive ingestion \u2014 antioxidant and anti-inflammatory benefit persists."
     }
+  },
+  "meta": {
+    "diagnosis": "Acetaminophen Overdose \u2014 Rumack-Matthew High-Risk Zone, NAC Initiated",
+    "caseId": "apap-overdose"
   }
 };
