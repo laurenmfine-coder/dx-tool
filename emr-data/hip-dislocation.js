@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "James Edward Porter",
-  "patientHPI": "I've been having more trouble getting dressed and buttoning my shirts lately, and my right hand has this shaking that's gotten worse over the past few months. My walking has gotten slower too - I feel like I'm shuffling instead of taking normal steps, and it takes me forever to get anywhere.",
+    "patientHPI": "I've been having more trouble getting dressed and buttoning my shirts lately, and my right hand has this shaking that's gotten worse over the past few months. My walking has gotten slower too - I feel like I'm shuffling instead of taking normal steps, and it takes me forever to get anywhere.",
     "dob": "12/06/1943",
     "age": 81,
     "sex": "Male",
@@ -181,27 +181,93 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.0", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "42.0", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "218", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.0",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "42.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "218",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "VITAMIN D",
           "results": [
-            { "test": "Vitamin D, 25-OH", "value": "34", "unit": "ng/mL", "range": "30-100", "flag": "" }
+            {
+              "test": "Vitamin D, 25-OH",
+              "value": "34",
+              "unit": "ng/mL",
+              "range": "30-100",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -269,19 +335,46 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 76"
   ],
   "socialHistory": [
-    ["Occupation", "Retired civil engineer — 38 years"],
-    ["Marital", "Married — 56 years"],
-    ["Tobacco", "Former smoker — 10 pack-years; quit 1985"],
-    ["Alcohol", "Rare — glass of wine with dinner occasionally"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Daily walks with wife using walker; home PT 2x/week"],
-    ["Housing", "Lives with wife in single-story home; modifications: raised toilet seat, shower chair, grab bars, reaching aids"],
-    ["Safety", "Uses rolling walker; no throw rugs; wife assists with dressing/transfers; drives SHORT distances only — wife concerned"],
-    ["Advance Directive", "Yes — healthcare proxy: wife Barbara Porter; full code"]
+    [
+      "Occupation",
+      "Retired civil engineer — 38 years"
+    ],
+    [
+      "Marital",
+      "Married — 56 years"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 10 pack-years; quit 1985"
+    ],
+    [
+      "Alcohol",
+      "Rare — glass of wine with dinner occasionally"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Daily walks with wife using walker; home PT 2x/week"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home; modifications: raised toilet seat, shower chair, grab bars, reaching aids"
+    ],
+    [
+      "Safety",
+      "Uses rolling walker; no throw rugs; wife assists with dressing/transfers; drives SHORT distances only — wife concerned"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: wife Barbara Porter; full code"
+    ]
   ],
   "meta": {
     "caseId": "hip-dislocation",
-    "diagnosis": "Prosthetic Hip Dislocation (Posterior THA)",
+    "diagnosis": "Posterior Prosthetic Hip Dislocation (Post-THA)",
     "acuity": 2,
     "presentation": "Geriatric Emergency",
     "category": "musculoskeletal"
@@ -290,73 +383,74 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "James Edward Porter is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did geriatric emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having more trouble getting dressed and buttoning my shirts lately, an.'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Prosthetic Hip Dislocation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Carbidopa-Levodopa 25/100mg TID; Amlodipine 5mg daily; Acetaminophen 1000mg TID; Vitamin D3 2000 IU daily.'",
-        "allergies": "'My allergies are NSAIDs (Ibuprofen).'",
-        "family": "Mother: Osteoarthritis, Parkinson disease (diagnosed age 76), deceased at 84  Father: CAD, MI, deceased at 72  Brother: OA bilateral knees, TKR, alive at 78",
-        "social": "Occupation: Retired civil engineer \u2014 38 years  Marital: Married \u2014 56 years  Tobacco: Former smoker \u2014 10 pack-years; quit 1985  Alcohol: Rare \u2014 glass of wine with dinner occasionally  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been having more trouble getting dressed and buttoning my shirts lately, an.'",
+      "character": "'It's geriatric emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Prosthetic Hip Dislocation.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Carbidopa-Levodopa 25/100mg TID; Amlodipine 5mg daily; Acetaminophen 1000mg TID; Vitamin D3 2000 IU daily.'",
+      "allergies": "'My allergies are NSAIDs (Ibuprofen).'",
+      "family": "Mother: Osteoarthritis, Parkinson disease (diagnosed age 76), deceased at 84  Father: CAD, MI, deceased at 72  Brother: OA bilateral knees, TKR, alive at 78",
+      "social": "Occupation: Retired civil engineer — 38 years  Marital: Married — 56 years  Tobacco: Former smoker — 10 pack-years; quit 1985  Alcohol: Rare — glass of wine with dinner occasionally  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Prosthetic Hip Dislocation. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Prosthetic Hip Dislocation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Prosthetic Hip Dislocation (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Prosthetic Hip Dislocation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Prosthetic Hip Dislocation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Prosthetic Hip Dislocation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Prosthetic Hip Dislocation, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Prosthetic Hip Dislocation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Prosthetic Hip Dislocation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed James Edward Porter's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Prosthetic Hip Dislocation (Posterior THA). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed James Edward Porter's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Prosthetic Hip Dislocation (Posterior THA). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: posterior prosthetic hip dislocation in a patient with a prior total hip arthroplasty (THA). Key learning: (1) Prosthetic hip dislocation is one of the most common complications after THA (1-3% lifetime risk, higher in revision cases, elderly, and those with neuromuscular or cognitive impairment). The classic mechanism is flexion combined with internal rotation and adduction — putting on socks, crossing legs, rising from a low chair, or a fall. Presentation is dramatic: sudden severe pain, inability to bear weight, and the affected limb held in a characteristic position — flexed, adducted, and internally rotated with apparent limb shortening for posterior dislocations (which account for 85-90%), versus extended and externally rotated for anterior dislocations. (2) Diagnosis is clinical but confirmed with AP pelvis and cross-table lateral radiographs. Assess for associated fractures (periprosthetic femoral fracture, acetabular fracture), component position (signs of loosening, malpositioning), and sciatic nerve involvement (foot drop, altered sensation in sciatic distribution — up to 10% of posterior dislocations). A careful neurovascular exam before AND after reduction is mandatory and must be documented. (3) Closed reduction is the immediate priority and should be attempted expeditiously — prolonged dislocation increases the risk of sciatic nerve injury, avascular necrosis of acetabular bone, and soft-tissue contracture. Reduction is performed under procedural sedation with adequate muscle relaxation (propofol +/- a short-acting opioid; occasionally general anesthesia is required). Common techniques: Allis maneuver (patient supine, assistant stabilizes pelvis, operator flexes hip to 90 degrees with knee flexed and applies longitudinal traction with gentle internal/external rotation) or Captain Morgan maneuver. Confirm reduction with post-reduction imaging and repeat neurovascular exam. (4) Post-reduction management: hip precautions (no hip flexion over 90 degrees, no adduction past midline, no internal rotation) for 6 weeks, abduction pillow or brace if instability is marked, physical therapy for gait and strengthening, and orthopedic follow-up. Recurrent dislocation (especially more than 2 episodes) prompts evaluation for revision arthroplasty — component malposition, polyethylene wear, abductor insufficiency, or anatomic issues may need surgical correction. (5) Classic pitfalls: (a) missing a periprosthetic femoral fracture before attempting reduction — always review films carefully; reducing a fracture-dislocation with traction can displace the fracture and damage the prosthesis. (b) Inadequate sedation leading to failed reduction and muscle spasm that makes repeat attempts harder. (c) Discharging without confirming neurovascular status, hip precautions education, and orthopedic follow-up. (d) In native (non-prosthetic) hip dislocation, which is almost always high-energy trauma, the urgency is even greater — AVN risk climbs sharply after 6 hours of dislocation, and these patients need emergent orthopedic consultation."
     }
-}
+  }
 };
