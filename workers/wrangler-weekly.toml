@@ -1,0 +1,14 @@
+name = "rdx-weekly-case"
+main = "rdx-weekly-case-worker.js"
+compatibility_date = "2024-01-01"
+
+[triggers]
+crons = [
+  "0 17 * * MON",
+  "0 17 * * THU"
+]
+# Monday and Thursday at 17:00 UTC = 12:00 PM ET (1:00 PM EDT)
+
+# Secrets — set via:
+#   wrangler secret put RESEND_API_KEY
+#   wrangler secret put SUPABASE_ANON_KEY
