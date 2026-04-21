@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Abiodun Okafor",
-  "patientHPI": "For the past few months, I've been getting these crampy stomach pains around my belly button about 30 minutes to an hour after I eat - they last for an hour or two and sometimes make me nauseous, but then they go away on their own.",
+    "patientHPI": "For the past few months, I've been getting these crampy stomach pains around my belly button about 30 minutes to an hour after I eat - they last for an hour or two and sometimes make me nauseous, but then they go away on their own.",
     "dob": "01/30/1988",
     "age": 37,
     "sex": "Male",
@@ -189,44 +189,182 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "82", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "18", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Albumin", "value": "3.8", "unit": "g/dL", "range": "3.5-5.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "82",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.8",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.0", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "37.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "MCV", "value": "76", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "298", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.0",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "76",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "298",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron", "value": "38", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "TIBC", "value": "410", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "10", "unit": "ng/mL", "range": "30-400", "flag": "L" },
-            { "test": "Transferrin Saturation", "value": "9", "unit": "%", "range": "20-50", "flag": "L" }
+            {
+              "test": "Iron",
+              "value": "38",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "410",
+              "unit": "µg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Ferritin",
+              "value": "10",
+              "unit": "ng/mL",
+              "range": "30-400",
+              "flag": "L"
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "9",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "VITAMIN LEVELS",
           "results": [
-            { "test": "Vitamin B12", "value": "380", "unit": "pg/mL", "range": "200-900", "flag": "" },
-            { "test": "Folate", "value": "14", "unit": "ng/mL", "range": ">3.0", "flag": "" },
-            { "test": "Vitamin D, 25-OH", "value": "28", "unit": "ng/mL", "range": "30-100", "flag": "L" }
+            {
+              "test": "Vitamin B12",
+              "value": "380",
+              "unit": "pg/mL",
+              "range": "200-900",
+              "flag": ""
+            },
+            {
+              "test": "Folate",
+              "value": "14",
+              "unit": "ng/mL",
+              "range": ">3.0",
+              "flag": ""
+            },
+            {
+              "test": "Vitamin D, 25-OH",
+              "value": "28",
+              "unit": "ng/mL",
+              "range": "30-100",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -287,15 +425,42 @@ window.EMR_DATA = {
     "Sister: Healthy, age 32"
   ],
   "socialHistory": [
-    ["Occupation", "Software engineer at healthcare technology company"],
-    ["Marital", "Married — 8 years; 2 children (ages 4 and 6)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Minimal — 1-2 drinks/month; avoids due to post-RYGB dumping risk"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Runs 3x/week; strength training 2x/week — very active post-surgery"],
-    ["Housing", "Lives with wife and 2 children in single-family home"],
-    ["Safety", "Wears seatbelt; smoke detectors; pool fence installed"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Software engineer at healthcare technology company"
+    ],
+    [
+      "Marital",
+      "Married — 8 years; 2 children (ages 4 and 6)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Minimal — 1-2 drinks/month; avoids due to post-RYGB dumping risk"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Runs 3x/week; strength training 2x/week — very active post-surgery"
+    ],
+    [
+      "Housing",
+      "Lives with wife and 2 children in single-family home"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; smoke detectors; pool fence installed"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "small-bowel-volvulus",
@@ -308,73 +473,74 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Abiodun Okafor appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did gi emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started For the past few months, I've been getting these crampy stomach pains around my .'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Small Bowel Volvulus.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Ferrous Sulfate 325mg BID; Cyanocobalamin (B12) 1000mcg IM monthly; Multivitamin with Iron daily; Calcium Citrate 600mg with Vitamin D 400IU BID; Omeprazole 20mg daily.'",
-        "allergies": "'My allergies are Amoxicillin.'",
-        "family": "Mother: Hypertension, obesity, T2DM, alive at 62  Father: Obesity, hyperlipidemia, alive at 65  Brother: Obesity (BMI 42), alive at 35",
-        "social": "Occupation: Software engineer at healthcare technology company  Marital: Married \u2014 8 years; 2 children (ages 4 and 6)  Tobacco: Never smoker  Alcohol: Minimal \u2014 1-2 drinks/month; avoids due to post-RYGB dumping risk  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started For the past few months, I've been getting these crampy stomach pains around my .'",
+      "character": "'It's gi emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Small Bowel Volvulus.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Ferrous Sulfate 325mg BID; Cyanocobalamin (B12) 1000mcg IM monthly; Multivitamin with Iron daily; Calcium Citrate 600mg with Vitamin D 400IU BID; Omeprazole 20mg daily.'",
+      "allergies": "'My allergies are Amoxicillin.'",
+      "family": "Mother: Hypertension, obesity, T2DM, alive at 62  Father: Obesity, hyperlipidemia, alive at 65  Brother: Obesity (BMI 42), alive at 35",
+      "social": "Occupation: Software engineer at healthcare technology company  Marital: Married — 8 years; 2 children (ages 4 and 6)  Tobacco: Never smoker  Alcohol: Minimal — 1-2 drinks/month; avoids due to post-RYGB dumping risk  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "General appearance",
+      "Vital signs",
+      "Abdominal inspection",
+      "Abdominal auscultation",
+      "Abdominal palpation light and deep",
+      "Rebound and guarding assessment",
+      "Rectal examination if indicated",
+      "Skin for jaundice or stigmata"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe."
+      "General appearance": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Abdominal inspection": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Abdominal auscultation": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Abdominal palpation light and deep": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Rebound and guarding assessment": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Rectal examination if indicated": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe.",
+      "Skin for jaundice or stigmata": "Clinical finding consistent with Small Bowel Volvulus. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Small Bowel Volvulus (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Small Bowel Volvulus (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Small Bowel Volvulus, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Small Bowel Volvulus, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Small Bowel Volvulus based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Small Bowel Volvulus, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Small Bowel Volvulus, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Small Bowel Volvulus based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Abiodun Okafor's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Small Bowel Volvulus (Internal Hernia Post-RYGB). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Abiodun Okafor's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Small Bowel Volvulus (Internal Hernia Post-RYGB). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: small bowel volvulus from internal hernia following Roux-en-Y gastric bypass (RYGB) surgery. Key learning: (1) Post-bariatric internal hernia is a potentially catastrophic complication, occurring in up to 3-5% of RYGB patients, typically 1-2 years post-operatively (coinciding with weight loss that creates mesenteric defects). The three potential spaces: Petersen space (between the Roux limb mesentery and transverse colon mesentery), mesocolic (transverse mesocolic) defect from the retrocolic Roux limb, and jejunojejunostomy mesenteric defect. Weight loss reduces mesenteric fat, opening these spaces and allowing bowel herniation and volvulus. (2) Presentation can be subtle and intermittent — cramping abdominal pain after meals, vomiting, bloating, intermittent obstruction. Recurrent 'vague abdominal pain' in a post-bariatric patient warrants urgent evaluation — delay can be fatal from ischemia and infarction. Acute presentation: severe abdominal pain, vomiting, distension, hemodynamic instability from bowel ischemia. Lab abnormalities: leukocytosis, elevated lactate (late), metabolic acidosis. (3) Imaging. CT abdomen/pelvis with IV contrast is the imaging of choice: signs of internal hernia include mesenteric swirl ('whirlpool sign' of rotating mesentery — most sensitive), clustered small bowel loops in an abnormal location, mesenteric vessel abnormalities (SMA/SMV rotated), displacement of jejunojejunostomy, twisted mesentery, and dilated Roux or biliopancreatic limb. Signs of ischemia: bowel wall thickening, pneumatosis, portal venous gas, reduced enhancement, free fluid. Normal CT does NOT rule out internal hernia — if clinical suspicion is high, proceed to operative exploration. (4) Management. Internal hernia is a SURGICAL EMERGENCY. Laparoscopic or open exploration with reduction of the herniated loop, assessment of bowel viability, closure of mesenteric defects (all three spaces should be evaluated and closed, regardless of which was involved — done prophylactically at all future bariatric operations now). Ischemic bowel requires resection, which can be devastating in a post-bypass patient because it shortens the functional intestine and compounds malabsorption. NPO, IV fluids, NG decompression, broad-spectrum antibiotics for perforation/ischemia. (5) Post-bariatric surgical complications beyond internal hernia. Other complications to consider in post-bariatric abdominal pain: marginal ulcer (at gastrojejunostomy — endoscopy), anastomotic stricture, cholelithiasis (rapid weight loss), dumping syndrome (carbohydrate-triggered), bariatric-specific vitamin deficiencies (B12, iron, thiamine, folate, calcium, vitamin D), nephrolithiasis (oxalate), and small intestinal bacterial overgrowth. Emergency providers should know: always ask about prior bariatric surgery, have low threshold for surgical consultation in any post-bariatric abdominal pain, and consider internal hernia even with unremarkable imaging. Classic pitfalls: (a) attributing post-bariatric abdominal pain to dumping syndrome or 'gas' without imaging — internal hernia can be intermittent and progress quickly. (b) Being reassured by a 'normal' CT — internal hernia is subtle; get a radiologist familiar with bariatric imaging. (c) Not closing all three mesenteric defects at index bariatric operation — primary prevention is key. (d) Missing ischemic bowel at exploration — always inspect entire small bowel carefully, warm compresses, check pulsation and peristalsis before closing. (e) Forgetting to educate bariatric patients about warning symptoms and the need for prompt evaluation of any concerning abdominal pain — they often minimize symptoms, attributing to 'normal' post-surgical changes."
     }
-}
+  }
 };
