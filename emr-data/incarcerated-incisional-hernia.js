@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Washington",
-  "patientHPI": "I'm here because this bulge in my belly where I had surgery a few years ago has gotten much bigger over the past few months. My wife noticed it sticks out more now, and it's been hurting when I cough, which happens a lot because of my lung problems. Usually I can push it back in, but today it feels different and won't go back.",
+    "patientHPI": "I'm here because this bulge in my belly where I had surgery a few years ago has gotten much bigger over the past few months. My wife noticed it sticks out more now, and it's been hurting when I cough, which happens a lot because of my lung problems. Usually I can push it back in, but today it feels different and won't go back.",
     "dob": "08/20/1955",
     "age": 69,
     "sex": "Male",
@@ -196,31 +196,121 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "136", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "28", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "24", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "136",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "28",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.6", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.6",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.0", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "42.0", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "248", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.0",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "42.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "248",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -288,15 +378,42 @@ window.EMR_DATA = {
     "Sister: T2DM, alive at 66"
   ],
   "socialHistory": [
-    ["Occupation", "Retired truck driver"],
-    ["Marital", "Married — 42 years"],
-    ["Tobacco", "Current smoker — 0.5 PPD x 50 years (25 pack-years); declined cessation counseling"],
-    ["Alcohol", "Social — 1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited — short walks; limited by dyspnea and hernia discomfort"],
-    ["Housing", "Lives with wife in single-story home"],
-    ["Safety", "Wears seatbelt; no fall history; abdominal binder used"],
-    ["Advance Directive", "Yes — healthcare proxy: wife Lorraine Washington"]
+    [
+      "Occupation",
+      "Retired truck driver"
+    ],
+    [
+      "Marital",
+      "Married — 42 years"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 0.5 PPD x 50 years (25 pack-years); declined cessation counseling"
+    ],
+    [
+      "Alcohol",
+      "Social — 1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited — short walks; limited by dyspnea and hernia discomfort"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; no fall history; abdominal binder used"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: wife Lorraine Washington"
+    ]
   ],
   "meta": {
     "caseId": "incarcerated-incisional-hernia",
@@ -309,73 +426,74 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Harold Washington is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did gi emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here because this bulge in my belly where I had surgery a few years ago has .'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Incarcerated Incisional Hernia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 1000mg BID; Sitagliptin 100mg daily; Budesonide-Formoterol (Symbicort) 160/4.5mcg BID; Tiotropium (Spiriva) 2.5mcg 2 puffs daily; Albuterol 90mcg MDI PRN.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Mother: T2DM, hypertension, deceased at 78 (stroke)  Father: Lung cancer (smoker), deceased at 65  Brother: COPD, alive at 72",
-        "social": "Occupation: Retired truck driver  Marital: Married \u2014 42 years  Tobacco: Current smoker \u2014 0.5 PPD x 50 years (25 pack-years); declined cessation counseling  Alcohol: Social \u2014 1-2 beers on weekends  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I'm here because this bulge in my belly where I had surgery a few years ago has .'",
+      "character": "'It's gi emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Incarcerated Incisional Hernia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Metformin 1000mg BID; Sitagliptin 100mg daily; Budesonide-Formoterol (Symbicort) 160/4.5mcg BID; Tiotropium (Spiriva) 2.5mcg 2 puffs daily; Albuterol 90mcg MDI PRN.'",
+      "allergies": "'My allergies are Penicillin.'",
+      "family": "Mother: T2DM, hypertension, deceased at 78 (stroke)  Father: Lung cancer (smoker), deceased at 65  Brother: COPD, alive at 72",
+      "social": "Occupation: Retired truck driver  Marital: Married — 42 years  Tobacco: Current smoker — 0.5 PPD x 50 years (25 pack-years); declined cessation counseling  Alcohol: Social — 1-2 beers on weekends  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "General appearance",
+      "Vital signs",
+      "Abdominal inspection",
+      "Abdominal auscultation",
+      "Abdominal palpation light and deep",
+      "Rebound and guarding assessment",
+      "Rectal examination if indicated",
+      "Skin for jaundice or stigmata"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe."
+      "General appearance": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Abdominal inspection": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Abdominal auscultation": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Abdominal palpation light and deep": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Rebound and guarding assessment": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Rectal examination if indicated": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe.",
+      "Skin for jaundice or stigmata": "Clinical finding consistent with Incarcerated Incisional Hernia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Incarcerated Incisional Hernia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Incarcerated Incisional Hernia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Incarcerated Incisional Hernia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Incarcerated Incisional Hernia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Incarcerated Incisional Hernia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Incarcerated Incisional Hernia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Incarcerated Incisional Hernia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Incarcerated Incisional Hernia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Incarcerated Incisional Hernia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Harold Washington's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Incarcerated Incisional Hernia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: incarcerated incisional (ventral) hernia. Key learning: (1) Incisional hernias develop through prior surgical incisions, usually midline laparotomy scars, with reported incidence of 10-20% after open abdominal surgery (higher with wound infection, obesity, COPD, diabetes, malnutrition, steroid use, connective tissue disease, and emergency surgery). They can present at any time from months to many years after the index operation. Incisional hernias tend to be larger and have more complex anatomy than primary ventral hernias, often with multiple defects, adhesions, and loss of domain (contents no longer 'fit' back in the abdominal cavity). (2) Presentation spans asymptomatic bulge to acute incarceration or strangulation. Classic clues to incarceration: sudden increase in pain, inability to reduce a previously reducible bulge, nausea, vomiting, and obstipation if bowel is involved. Physical exam documents size, reducibility, fascial defect dimensions, skin changes, and tenderness. Valsalva or standing accentuates the bulge. (3) Imaging is usually CT abdomen/pelvis with IV contrast — it defines the defect, characterizes contents (bowel, omentum, bladder), assesses bowel viability, identifies secondary obstruction, and plans repair. Look for transition points, bowel wall thickening, mesenteric stranding, pneumatosis, and free fluid. MRI is reserved for special cases. (4) Management. Emergent operation for strangulation or obstruction unresponsive to brief conservative measures. For incarcerated but non-strangulated hernias, a trial of gentle reduction under analgesia is reasonable in selected patients; if successful, plan semi-urgent or elective repair. Repair options depend on defect size, location, contamination, and patient factors: primary repair (small defects), mesh repair (most adults — reduces recurrence), component separation (large or complex defects with loss of domain), open vs laparoscopic vs robotic approach. Contamination (strangulated or perforated bowel) changes mesh choice: avoid synthetic permanent mesh in contaminated fields, use biologic or biosynthetic mesh or delayed repair. Optimize modifiable risk factors pre-operatively when elective: weight loss, smoking cessation, diabetic control, nutritional optimization, and prehabilitation. (5) Classic pitfalls: (a) repeatedly reducing a symptomatic incisional hernia without offering elective repair — recurrent incarceration increases emergency risk. (b) Using synthetic mesh in a contaminated field, leading to chronic mesh infection and reoperation. (c) Missing a Spigelian hernia along the semilunar line, which can mimic an incisional hernia and is often missed on exam. (d) Underestimating perioperative risk in obese, sarcopenic, or cardiopulmonary-compromised patients; dedicated hernia center referral improves outcomes in complex cases."
     }
-}
+  }
 };
