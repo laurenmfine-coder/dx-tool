@@ -1,6 +1,3 @@
-// Virtual EMR Case: Epididymo-orchitis
-// Variant: epididymoorchitis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part A/B + AARP Supplement",
     "pcp": "Dr. Jennifer Liu, MD",
-    "pharmacy": "Publix Pharmacy — 1801 N Pine Island Rd, Plantation, FL",
+    "pharmacy": "Publix Pharmacy \u2014 1801 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "White",
     "address": "1184 Larkspur Ln, Indianapolis, IN 46219",
@@ -26,81 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Benign Prostatic Hyperplasia",
-      "icd": "N40.1",
-      "onset": "2018",
+      "problem": "Epididymo-orchitis \u2014 right-sided, STI-related",
+      "icd": "N45.3",
+      "onset": "2024",
       "status": "Active",
-      "notes": "IPSS 18; on combination therapy"
+      "notes": "David Torres, 26M \u2014 4-day right scrotal pain with fever 38.6\u00b0C, urethral discharge, both epididymis and testis tender. Doppler: increased flow both epididymis and testis. NAAT: gonorrhea positive."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2006",
+      "problem": "Testicular involvement \u2014 orchitis component",
+      "icd": "N45.3",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Well controlled"
+      "notes": "Orchitis (testicular inflammation) in addition to epididymitis. Risk of testicular atrophy and subfertility if severe. Follow-up for fertility concerns."
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2010",
+      "problem": "Gonorrhea \u2014 partner notification and reporting",
+      "icd": "A54.23",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On statin"
-    },
-    {
-      "problem": "Urinary Tract Infection, recurrent",
-      "icd": "N39.0",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "2 UTIs in past year; likely related to BPH and incomplete bladder emptying"
-    },
-    {
-      "problem": "Osteoarthritis, bilateral knees",
-      "icd": "M17.0",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "Managed conservatively"
+      "notes": "Gonorrhea is a notifiable disease. All sexual partners within 60 days require evaluation and treatment. HIV, syphilis, chlamydia co-testing mandatory."
     }
   ],
   "medications": [
     {
-      "name": "Tamsulosin 0.4mg QHS",
-      "sig": "Take 1 capsule by mouth at bedtime",
-      "prescriber": "Dr. Patel",
-      "start": "06/2018",
-      "refills": 3,
+      "name": "Ceftriaxone 500mg IM x1 + doxycycline 100mg BID x 10 days",
+      "sig": "CDC dual therapy \u2014 gonorrhea (ceftriaxone) + chlamydia (doxycycline). Co-infection common. Doxycycline 10 days for epididymo-orchitis (longer than simple urethritis).",
+      "prescriber": "Emergency/Urology/ID",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Finasteride 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Patel",
-      "start": "01/2020",
-      "refills": 3,
+      "name": "Scrotal support + NSAIDs + bed rest",
+      "sig": "Athletic supporter, ibuprofen 600mg TID, limit activity. Scrotal elevation reduces pain and swelling.",
+      "prescriber": "Urology",
+      "start": "2024",
+      "refills": 1,
       "status": "Active"
     },
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Liu",
-      "start": "03/2007",
-      "refills": 5,
+      "name": "HIV + syphilis co-testing + partner referral",
+      "sig": "All STI workup mandatory. Partner referral. Repeat STI testing in 3 months.",
+      "prescriber": "ID/Public Health",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
-    },
-    {
-      "name": "Rosuvastatin 10mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Liu",
-      "start": "05/2011",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Acetaminophen 500mg PRN",
-      "sig": "Take 1-2 tablets by mouth every 6 hours as needed for joint pain; max 3000mg/day",
-      "prescriber": "Dr. Liu",
-      "start": "01/2020",
-      "refills": 5,
-      "status": "PRN"
     }
   ],
   "allergies": [
@@ -118,7 +85,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 72,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "195 lbs",
       "ht": "5'11\"",
@@ -130,7 +97,7 @@ window.EMR_DATA = {
       "bp": "136/80",
       "hr": 70,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "193 lbs",
       "ht": "5'11\"",
@@ -142,7 +109,7 @@ window.EMR_DATA = {
       "bp": "130/76",
       "hr": 68,
       "rr": 14,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "98%",
       "wt": "196 lbs",
       "ht": "5'11\"",
@@ -159,7 +126,7 @@ window.EMR_DATA = {
       "cc": "Follow-up: BPH, recurrent UTIs, HTN",
       "hpi": "66-year-old male with BPH on combination therapy (tamsulosin/finasteride) presenting for routine follow-up. Reports persistent nocturia 3-4x/night despite medication. Weak stream and hesitancy continue. Had UTI 2 months ago treated with nitrofurantoin. Post-void residual at urology was 120 mL. Urologist discussing possible TURP. BP well controlled. Knee pain stable.",
       "exam": "General: NAD. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, NT/ND, no suprapubic fullness. GU: Deferred (recent urology exam). MSK: Bilateral knee crepitus, mild effusion left > right. Neuro: A&O x3.",
-      "assessment": "1. BPH — symptomatic despite combination therapy; urology follow-up for surgical planning\n2. Recurrent UTIs — related to incomplete bladder emptying\n3. HTN — well controlled\n4. Bilateral knee OA — stable",
+      "assessment": "1. BPH \u2014 symptomatic despite combination therapy; urology follow-up for surgical planning\n2. Recurrent UTIs \u2014 related to incomplete bladder emptying\n3. HTN \u2014 well controlled\n4. Bilateral knee OA \u2014 stable",
       "plan": "1. Continue tamsulosin/finasteride; urology follow-up 2/2025\n2. UA today to check for subclinical UTI\n3. Continue lisinopril and rosuvastatin\n4. Knee: continue acetaminophen PRN; consider PT referral\n5. RTC 4 months"
     },
     {
@@ -168,191 +135,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Jennifer Liu, MD",
       "cc": "Dysuria, frequency x 2 days",
-      "hpi": "66-year-old male with BPH presenting with dysuria, urinary frequency, and urgency x 2 days. Low-grade fever at home 99.5°F. No flank pain. No hematuria. Second UTI this year.",
+      "hpi": "66-year-old male with BPH presenting with dysuria, urinary frequency, and urgency x 2 days. Low-grade fever at home 99.5\u00b0F. No flank pain. No hematuria. Second UTI this year.",
       "exam": "General: Mild distress. Abdomen: Soft, mild suprapubic tenderness. CVA: Nontender bilaterally. GU: No scrotal swelling or tenderness.",
-      "assessment": "1. UTI — recurrent, likely related to BPH",
-      "plan": "1. UA/culture obtained — positive for nitrites and leukocyte esterase\n2. Nitrofurantoin 100mg BID x 7 days (fluoroquinolone allergy)\n3. Increase fluid intake\n4. Urology referral for BPH management escalation\n5. Follow-up culture in 2 weeks"
+      "assessment": "1. UTI \u2014 recurrent, likely related to BPH",
+      "plan": "1. UA/culture obtained \u2014 positive for nitrites and leukocyte esterase\n2. Nitrofurantoin 100mg BID x 7 days (fluoroquinolone allergy)\n3. Increase fluid intake\n4. Urology referral for BPH management escalation\n5. Follow-up culture in 2 weeks"
     }
   ],
   "labs": [
     {
-      "date": "12/18/2024",
-      "time": "09:15",
-      "orderedBy": "Dr. Jennifer Liu, MD",
-      "collected": "12/18/2024 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-121852",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA), Urine",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Epididymo-orchitis",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "96",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.2",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.3",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "20",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "22",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "NAAT GC/Chlamydia \u2014 urine",
+          "value": "GC positive, Chlamydia negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "PSA",
-          "results": [
-            {
-              "test": "PSA, Total",
-              "value": "3.2",
-              "unit": "ng/mL",
-              "range": "<4.0",
-              "flag": ""
-            }
-          ]
+          "test": "HIV rapid test",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         },
         {
-          "name": "URINALYSIS",
-          "results": [
-            {
-              "test": "Color",
-              "value": "Yellow",
-              "unit": "",
-              "range": "Yellow",
-              "flag": ""
-            },
-            {
-              "test": "Clarity",
-              "value": "Clear",
-              "unit": "",
-              "range": "Clear",
-              "flag": ""
-            },
-            {
-              "test": "Specific Gravity",
-              "value": "1.018",
-              "unit": "",
-              "range": "1.005-1.030",
-              "flag": ""
-            },
-            {
-              "test": "pH",
-              "value": "6.0",
-              "unit": "",
-              "range": "5.0-8.0",
-              "flag": ""
-            },
-            {
-              "test": "Leukocyte Esterase",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "Nitrites",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "WBC",
-              "value": "2",
-              "unit": "/HPF",
-              "range": "0-5",
-              "flag": ""
-            },
-            {
-              "test": "Bacteria",
-              "value": "None",
-              "unit": "",
-              "range": "None",
-              "flag": ""
-            }
-          ]
+          "test": "RPR (syphilis)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Scrotal Doppler",
+          "value": "Increased flow epididymis AND testis right \u2014 epididymo-orchitis",
+          "unit": "",
+          "ref": "Symmetric",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "14.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "06/12/2024",
-      "study": "RENAL/BLADDER ULTRASOUND",
-      "accession": "IMG-2024-06121",
-      "status": "FINAL",
-      "orderedBy": "Dr. Rajiv Patel, MD (Urology)",
-      "readBy": "Dr. Lisa Tran, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "66M BPH, recurrent UTIs. Evaluate upper tracts and post-void residual.",
-      "technique": "Real-time ultrasound of kidneys, ureters, and bladder with pre- and post-void imaging.",
-      "findings": "Right kidney: 11.2 cm, normal cortical thickness, no hydronephrosis or mass.\\n\\nLeft kidney: 11.0 cm, normal cortical thickness, no hydronephrosis or mass.\\n\\nBladder: Pre-void volume 380 mL. Post-void residual 120 mL. Thickened bladder wall suggesting trabeculation.\\n\\nProstate: Enlarged, estimated 55 grams.",
-      "impression": "1. Enlarged prostate (~55 grams) with elevated post-void residual (120 mL).\\n2. Trabeculated bladder wall consistent with chronic outlet obstruction.\\n3. No hydronephrosis or renal mass bilaterally.",
-      "dictated": "06/12/2024 14:45",
-      "verified": "06/12/2024 17:00"
+      "date": "04/2024",
+      "study": "Scrotal Doppler Ultrasound",
+      "findings": "Enlarged right epididymis and testis with increased color Doppler flow. Reactive hydrocele. No abscess. Left testis normal.",
+      "impression": "Right epididymo-orchitis. No abscess. No torsion."
     }
   ],
   "immunizations": [
@@ -395,7 +232,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2015",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     }
   ],
@@ -420,7 +257,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Occasional — 1-2 glasses wine with dinner"
+      "Occasional \u2014 1-2 glasses wine with dinner"
     ],
     [
       "Drugs",
@@ -440,12 +277,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Health care proxy designated — wife"
+      "Health care proxy designated \u2014 wife"
     ]
   ],
   "meta": {
     "caseId": "epididymoorchitis",
-    "diagnosis": "Epididymo-orchitis",
+    "diagnosis": "Epididymo-orchitis \u2014 Sexually Transmitted, Bilateral Involvement",
     "acuity": 3,
     "presentation": "Urologic Emergency",
     "category": "urologic"
@@ -497,7 +334,7 @@ window.EMR_DATA = {
       "Prehn's sign evaluation"
     ],
     "examFindings": {
-      "General appearance and vital signs assessment": "Patient appears uncomfortable, walking with a slight waddle. Vitals stable with mild tachycardia HR 88, low-grade fever 100.2°F",
+      "General appearance and vital signs assessment": "Patient appears uncomfortable, walking with a slight waddle. Vitals stable with mild tachycardia HR 88, low-grade fever 100.2\u00b0F",
       "Abdominal examination": "Soft, non-tender, no masses or organomegaly. Bowel sounds normal.",
       "Inspection of external genitalia": "Left hemiscrotum appears swollen and erythematous. No obvious skin lesions or discharge from urethral meatus.",
       "Palpation of testicles": "Left testicle tender to palpation, normal size and consistency. Right testicle normal, non-tender.",
@@ -509,13 +346,11 @@ window.EMR_DATA = {
       "Prehn's sign evaluation": "Elevation of left testicle provides partial relief of pain, positive Prehn's sign."
     },
     "ddxTargets": [
-      "Epididymo-orchitis (correct diagnosis)",
-      "Testicular torsion",
-      "Torsion of testicular appendix",
-      "Testicular cancer",
-      "Incarcerated inguinal hernia",
-      "Urinary tract infection with referred pain",
-      "Prostatitis"
+      "Epididymo-orchitis \u2014 gonorrheal (correct)",
+      "Testicular torsion \u2014 absent Doppler flow; negative Prehn sign; surgical emergency",
+      "Mumps orchitis \u2014 bilateral; parotitis; unvaccinated; viral",
+      "Testicular tumor \u2014 painless mass; no fever; ultrasound shows solid nodule",
+      "Epididymitis alone \u2014 epididymis only; testis normal on Doppler"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known BPH and recent UTI history, potentially missing acute testicular pathology requiring urgent evaluation",
@@ -525,7 +360,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified testicular torsion as a possibility - excellent, that's a must-not-miss diagnosis. What key historical features would help you differentiate between torsion and epididymitis? What questions might help clarify the onset and progression?",
       "phase5": "Your physical exam reveals some key findings. How does the positive Prehn's sign and the patient's age help narrow your differential? Given his fluoroquinolone allergy, what are your antibiotic options for treatment?",
-      "finalDebrief": "This case highlights the importance of not anchoring on known conditions like BPH. While Frank's urologic history was relevant, the acute presentation required focused evaluation of scrotal pathology. The positive Prehn's sign and gradual onset helped distinguish this from testicular torsion, which would have been urologic emergency requiring immediate surgery."
+      "finalDebrief": "This case highlights the importance of not anchoring on known conditions like BPH. While Frank's urologic history was relevant, the acute presentation required focused evaluation of scrotal pathology. The positive Prehn's sign and gradual onset helped distinguish this from testicular torsion, which would have been urologic emergency requiring immediate surgery.",
+      "final": "Diagnosis: epididymo-orchitis, gonorrheal. Key learning: (1) Epididymitis vs epididymo-orchitis: epididymitis = epididymis only inflamed. Epididymo-orchitis = both epididymis and testis. Epididymo-orchitis has worse prognosis with higher risk of testicular atrophy and subfertility. (2) STI cause by age: <35 = chlamydia/gonorrhea. >35 = enteric organisms (E. coli, Klebsiella) from BPH/prostatism. Important because treatment differs. (3) Torsion exclusion: always Doppler ultrasound when scrotal pain + swelling. Increased flow = epididymo-orchitis. Absent flow = torsion (OR immediately). Clinical findings (Prehn sign, cremasteric reflex) are helpful but not reliable enough to exclude torsion without imaging. (4) Gonorrhea treatment: increasing resistance \u2014 ceftriaxone dose has been increased from 250mg to 500mg. IV ceftriaxone 1g for disseminated gonococcal infection. Partner treatment mandatory. (5) Complications of untreated epididymo-orchitis: epididymal obstruction \u2192 obstructive azoospermia, testicular atrophy, chronic scrotal pain, abscess formation requiring orchiectomy."
     }
   }
 };

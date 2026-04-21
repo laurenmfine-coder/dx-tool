@@ -1,6 +1,3 @@
-// Virtual EMR Case: Exertional Heat Stroke
-// Variant: exertional-heat-stroke | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "UnitedHealthcare (parent plan)",
     "pcp": "Dr. Brian Jacobs, MD",
-    "pharmacy": "Publix Pharmacy — 6800 Stirling Rd, Riverside, FL",
+    "pharmacy": "Publix Pharmacy \u2014 6800 Stirling Rd, Riverside, FL",
     "language": "English",
     "race": "Black/African American",
     "address": "4907 Sycamore Dr, Detroit, MI 48210",
@@ -26,43 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Sickle Cell Trait",
+      "problem": "Exertional heat stroke \u2014 core temp 41.8\u00b0C, multiorgan failure",
+      "icd": "T67.01XA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Marcus Johnson, 22M \u2014 football practice in August heat. Collapsed on field, confused, not sweating. Core rectal temp 41.8\u00b0C. GCS 10. Rhabdomyolysis, AKI, coagulopathy developing. Heat stroke = hyperthermia >40\u00b0C + CNS dysfunction."
+    },
+    {
+      "problem": "Rhabdomyolysis \u2014 CK >100,000, AKI",
+      "icd": "M62.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Myoglobin from muscle necrosis \u2192 renal tubular precipitation \u2192 AKI. Aggressive IV fluid resuscitation mandatory. Target urine output 200-300mL/hr and urine myoglobin clearance."
+    },
+    {
+      "problem": "Sickle cell trait \u2014 exertional sickling risk",
       "icd": "D57.3",
-      "onset": "2007",
+      "onset": "2024",
       "status": "Active",
-      "notes": "HbAS; newborn screen; counseled on exertional risks"
-    },
-    {
-      "problem": "Exercise-Induced Asthma",
-      "icd": "J45.990",
-      "onset": "2015",
-      "status": "Active",
-      "notes": "Uses albuterol PRN before exercise; no daily controller"
-    },
-    {
-      "problem": "ADHD, Combined Type",
-      "icd": "F90.2",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "On stimulant medication"
+      "notes": "Sickle cell trait (not disease) increases risk of exertional heat injury and exertional sickling \u2014 muscle ischemia from sickle cells in microvasculature. High body heat + exertion = sickling risk."
     }
   ],
   "medications": [
     {
-      "name": "Lisdexamfetamine (Vyvanse) 50mg daily",
-      "sig": "Take 1 capsule by mouth every morning",
-      "prescriber": "Dr. Jacobs",
-      "start": "08/2021",
+      "name": "RAPID COOLING \u2014 ice water immersion target 39\u00b0C within 30 minutes",
+      "sig": "Cooling rate is the most important determinant of outcome. Target core temp <39\u00b0C within 30 minutes. Ice water immersion (1-15\u00b0C) most effective. Ice packs to neck, axilla, groin. Cold IV fluids. Fan + misting is inferior.",
+      "prescriber": "Emergency",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "IMMEDIATE \u2014 ice water immersion"
     },
     {
-      "name": "Albuterol 90mcg MDI PRN",
-      "sig": "Inhale 2 puffs by mouth 15 minutes before exercise as needed",
-      "prescriber": "Dr. Jacobs",
-      "start": "03/2016",
-      "refills": 2,
-      "status": "PRN"
+      "name": "Aggressive IV fluid \u2014 NS 1-2L then titrate to urine output",
+      "sig": "Target urine output 200-300mL/hr to flush myoglobin from renal tubules. Aggressive hydration is the cornerstone of rhabdomyolysis management.",
+      "prescriber": "Emergency/Critical Care",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 2L/hr initial"
+    },
+    {
+      "name": "Avoid antipyretics \u2014 not effective in heat stroke",
+      "sig": "NSAIDs and acetaminophen work by inhibiting prostaglandins/cyclooxygenase \u2014 the hypothalamic set-point mechanism. Heat stroke is NOT a fever \u2014 it is failure of heat dissipation. Antipyretics have no role.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "Do NOT give"
     }
   ],
   "allergies": [
@@ -80,7 +85,7 @@ window.EMR_DATA = {
       "bp": "118/68",
       "hr": 66,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "178 lbs",
       "ht": "6'2\"",
@@ -92,7 +97,7 @@ window.EMR_DATA = {
       "bp": "114/66",
       "hr": 62,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "174 lbs",
       "ht": "6'2\"",
@@ -104,7 +109,7 @@ window.EMR_DATA = {
       "bp": "112/64",
       "hr": 60,
       "rr": 12,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "100%",
       "wt": "170 lbs",
       "ht": "6'2\"",
@@ -118,10 +123,10 @@ window.EMR_DATA = {
       "date": "08/12/2024",
       "type": "Primary Care",
       "provider": "Dr. Brian Jacobs, MD",
-      "cc": "Pre-season sports physical — high school football",
-      "hpi": "17-year-old male presenting for pre-season football physical clearance. Rising senior and starting wide receiver. Reports good exercise tolerance. Asthma well controlled — uses albuterol before practice occasionally. ADHD managed on Vyvanse with good academic performance. No syncope, chest pain, or palpitations with exertion. Sickle cell trait counseled on hydration, heat acclimatization, and recognition of exertional sickling symptoms.",
+      "cc": "Pre-season sports physical \u2014 high school football",
+      "hpi": "17-year-old male presenting for pre-season football physical clearance. Rising senior and starting wide receiver. Reports good exercise tolerance. Asthma well controlled \u2014 uses albuterol before practice occasionally. ADHD managed on Vyvanse with good academic performance. No syncope, chest pain, or palpitations with exertion. Sickle cell trait counseled on hydration, heat acclimatization, and recognition of exertional sickling symptoms.",
       "exam": "General: Fit, muscular male, NAD. CV: RRR, no murmurs, no S3/S4. Lungs: CTAB. MSK: Full ROM all joints. Neuro: A&O, CN intact.",
-      "assessment": "1. Sports physical — cleared with precautions\n2. Sickle cell trait — counseled on exertional heat illness and sickling risks; hydration plan reviewed\n3. ADHD — stable on Vyvanse; note stimulant can impair thermoregulation and appetite\n4. Exercise-induced asthma — controlled",
+      "assessment": "1. Sports physical \u2014 cleared with precautions\n2. Sickle cell trait \u2014 counseled on exertional heat illness and sickling risks; hydration plan reviewed\n3. ADHD \u2014 stable on Vyvanse; note stimulant can impair thermoregulation and appetite\n4. Exercise-induced asthma \u2014 controlled",
       "plan": "1. Sports clearance granted with SCT precautions: graduated heat acclimatization, unlimited water access, immediate stop for any muscle cramping/weakness/collapse\n2. Letter to athletic trainer regarding SCT and heat illness protocol\n3. Continue Vyvanse; ensure adequate breakfast and hydration\n4. Albuterol MDI pre-exercise PRN; carry at all practices\n5. RTC 1 year or PRN"
     },
     {
@@ -132,109 +137,54 @@ window.EMR_DATA = {
       "cc": "ADHD medication check; growth monitoring",
       "hpi": "17-year-old male for routine ADHD medication follow-up. Grades improved. Appetite suppressed during day but eating well at dinner. No cardiovascular symptoms. Growth velocity appropriate. Sleep adequate 7-8 hrs.",
       "exam": "General: NAD. CV: RRR, HR 62. Growth: 75th percentile height, 60th percentile weight. BP: 114/66 (normal for age).",
-      "assessment": "1. ADHD — well managed on Vyvanse 50mg\n2. Appetite suppression — mild, eating dinner well",
+      "assessment": "1. ADHD \u2014 well managed on Vyvanse 50mg\n2. Appetite suppression \u2014 mild, eating dinner well",
       "plan": "1. Continue Vyvanse 50mg\n2. High-calorie breakfast/snacks encouraged\n3. RTC 6 months with vitals and weight"
     }
   ],
   "labs": [
     {
-      "date": "08/12/2024",
-      "time": "10:00",
-      "orderedBy": "Dr. Brian Jacobs, MD",
-      "collected": "08/12/2024 09:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-621830",
-      "status": "Final",
-      "specimenType": "Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Exertional Heat Stroke",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.6",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "43.8",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "244",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Core rectal temperature",
+          "value": "41.8",
+          "unit": "\u00b0C",
+          "ref": "<37.5",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN ELECTROPHORESIS",
-          "results": [
-            {
-              "test": "Hemoglobin A",
-              "value": "58.2",
-              "unit": "%",
-              "range": "95-98",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin S",
-              "value": "39.5",
-              "unit": "%",
-              "range": "0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin A2",
-              "value": "2.3",
-              "unit": "%",
-              "range": "2.0-3.5",
-              "flag": ""
-            },
-            {
-              "test": "Interpretation",
-              "value": "Hemoglobin AS — Sickle Cell Trait",
-              "unit": "",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "CK",
+          "value": "112,000",
+          "unit": "U/L",
+          "ref": "<200",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "3.2",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "INR",
+          "value": "2.1",
+          "unit": "",
+          "ref": "<1.2 (coagulopathy \u2014 DIC)",
+          "flag": "H"
+        },
+        {
+          "test": "Urine myoglobin",
+          "value": "Dark brown \u2014 positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "08/12/2024",
-      "study": "ECG — 12-LEAD",
-      "accession": "IMG-2024-62183",
-      "status": "FINAL",
-      "orderedBy": "Dr. Brian Jacobs, MD",
-      "readBy": "Dr. Brian Jacobs, MD",
-      "facility": "ReasonDx Medical Center",
-      "priority": "Routine",
-      "clinical": "17M pre-sports physical. SCT. R/O cardiac abnormality.",
-      "technique": "Standard 12-lead electrocardiogram.",
-      "findings": "Rate: 64 bpm. Rhythm: Normal sinus rhythm. Axis: Normal. PR: 152ms. QRS: 88ms. QTc: 398ms.\\n\\nEarly repolarization pattern in V2-V4 (normal variant in young athlete).\\n\\nNo ST changes, no hypertrophy, no conduction delays.",
-      "impression": "1. Normal sinus rhythm.\\n2. Early repolarization — normal variant.\\n3. No pathologic findings.",
-      "dictated": "08/12/2024 10:15",
-      "verified": "08/12/2024 10:20"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -254,21 +204,21 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2022",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
-      "vaccine": "Meningococcal ACWY (Menactra) — Booster",
+      "vaccine": "Meningococcal ACWY (Menactra) \u2014 Booster",
       "date": "2023",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — Series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 Series complete",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -301,7 +251,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Varsity football — practices 5 days/week in summer heat; weightlifting 3x/week"
+      "Varsity football \u2014 practices 5 days/week in summer heat; weightlifting 3x/week"
     ],
     [
       "Housing",
@@ -313,12 +263,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Minor — mother is legal guardian"
+      "Minor \u2014 mother is legal guardian"
     ]
   ],
   "meta": {
     "caseId": "exertional-heat-stroke",
-    "diagnosis": "Exertional Heat Stroke (with Sickle Cell Trait and Stimulant Medication as Risk Factors)",
+    "diagnosis": "Exertional Heat Stroke \u2014 with Sickle Cell Trait and Stimulant Use",
     "acuity": 1,
     "presentation": "Environmental Emergency",
     "category": "environmental"
@@ -369,7 +319,7 @@ window.EMR_DATA = {
       "Assessment of heat tolerance and thermoregulation"
     ],
     "examFindings": {
-      "Vital signs including core temperature": "BP 118/68, HR 66, Temp 98.4°F, RR 16, SpO2 99% - currently normal at rest",
+      "Vital signs including core temperature": "BP 118/68, HR 66, Temp 98.4\u00b0F, RR 16, SpO2 99% - currently normal at rest",
       "Cardiovascular examination": "Regular rate and rhythm, no murmurs, gallops, or rubs. Normal S1/S2. No signs of cardiomyopathy",
       "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes or rales, normal respiratory effort at rest",
       "Neurological assessment including mental status": "Alert and oriented x3, normal cognitive function, no focal deficits, appropriate affect",
@@ -380,13 +330,11 @@ window.EMR_DATA = {
       "Assessment of heat tolerance and thermoregulation": "Patient appears to have normal thermoregulation at rest, but multiple risk factors for heat illness present"
     },
     "ddxTargets": [
-      "Exertional Heat Stroke (with Sickle Cell Trait and Stimulant Medication as Risk Factors) (correct diagnosis)",
-      "Exercise-induced sickling/vaso-occlusive crisis",
-      "Stimulant-induced hyperthermia",
-      "Exertional rhabdomyolysis",
-      "Sudden cardiac death in athletes",
-      "Exercise-induced asthma exacerbation",
-      "Dehydration/heat exhaustion"
+      "Exertional heat stroke (correct)",
+      "Heat exhaustion \u2014 no CNS dysfunction; temperature <40\u00b0C; responds to rest and oral hydration",
+      "Neuroleptic malignant syndrome \u2014 antipsychotic exposure; rigidity; slow onset; different mechanism",
+      "Serotonin syndrome \u2014 serotonergic drug; hyperreflexia, clonus; rapid onset",
+      "Malignant hyperthermia \u2014 volatile anesthetic or succinylcholine trigger; OR setting; dantrolene treatment"
     ],
     "biasFlags": {
       "anchoring": "May anchor on 'routine sports physical' and miss the significant risk factor constellation of sickle cell trait + stimulant medication + high-intensity sports",
@@ -396,7 +344,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview this patient, consider what risk factors might be present for serious complications during athletic participation. What combination of conditions and medications might create a perfect storm for heat-related illness?",
       "phase5": "Now that you've completed your history and physical, think about this patient's risk stratification. How do sickle cell trait, stimulant medications, and intense athletics interact? What specific recommendations does this patient need?",
-      "finalDebrief": "This case highlights how multiple seemingly manageable conditions can create compounding risk. Discuss how sickle cell trait increases heat stroke susceptibility, how stimulants impair thermoregulation, and why pre-participation physicals must identify high-risk combinations rather than just individual diagnoses."
+      "finalDebrief": "This case highlights how multiple seemingly manageable conditions can create compounding risk. Discuss how sickle cell trait increases heat stroke susceptibility, how stimulants impair thermoregulation, and why pre-participation physicals must identify high-risk combinations rather than just individual diagnoses.",
+      "final": "Diagnosis: exertional heat stroke. Key learning: (1) Heat stroke vs heat exhaustion: heat EXHAUSTION = elevated temp <40\u00b0C, intact CNS, responds to rest/cooling/fluids. Heat STROKE = core temp >40\u00b0C + CNS DYSFUNCTION (confusion, seizure, coma). Heat stroke is life-threatening. (2) Cooling is the intervention \u2014 antipyretics don't work: heat stroke is a failure of thermoregulation, not a reset of the hypothalamic set-point. NSAIDs/acetaminophen work on set-point \u2014 useless here. Only physical cooling works. Target <39\u00b0C within 30 minutes. (3) Ice water immersion is most effective: most rapid cooling rate. Other methods (evaporative, fans, ice packs) are inferior. Remove from immersion at 39\u00b0C to avoid overshoot hypothermia. (4) Rhabdomyolysis management: aggressive IVF (1-2L NS initial bolus, then titrate to UO 200-300mL/hr). Dark brown urine = myoglobinuria. Sodium bicarbonate to alkalinize urine (reduces myoglobin precipitation) is controversial but used in some centers. Monitor CK, creatinine, electrolytes, coagulation. (5) Sickle cell trait + exertional heat: exertional sickling can cause muscle ischemia independent of classic heat stroke. The combination of heat stress + exertion in sickle cell trait individuals dramatically increases heat stroke risk. NCAA has mandated sickle cell trait testing for college athletes."
     }
   }
 };

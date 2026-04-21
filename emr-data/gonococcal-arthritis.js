@@ -1,6 +1,3 @@
-// Virtual EMR Case: Gonococcal Arthritis
-// Variant: gonococcal-arthritis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "United Healthcare Bronze",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Walgreens — 3800 Hollywood Blvd, Hollywood, FL",
+    "pharmacy": "Walgreens \u2014 3800 Hollywood Blvd, Hollywood, FL",
     "language": "English",
     "race": "Black/African American",
     "address": "2985 Mulberry St, Albuquerque, NM 87110",
@@ -26,36 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Chlamydia — Treated",
-      "icd": "A74.9",
-      "onset": "2023",
-      "status": "Resolved",
-      "notes": "Treated with azithromycin 1g single dose; partner treated; test of cure negative"
+      "problem": "Disseminated gonococcal infection \u2014 septic arthritis right knee",
+      "icd": "A54.42",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Ashley Chen, 23F \u2014 3-day migratory polyarthralgia, fever, tenosynovitis right wrist, now hot swollen right knee. Dermatitis: sparse papulopustular lesions on extremities. Sexually active, new partner. DGI = most common cause of septic arthritis in sexually active adults <40."
     },
     {
-      "problem": "Anxiety Disorder — Generalized",
-      "icd": "F41.1",
-      "onset": "2020",
+      "problem": "Tenosynovitis \u2014 DGI triad component",
+      "icd": "A54.49",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On sertraline; in counseling"
+      "notes": "Tenosynovitis (inflammation of tendon sheaths) is part of the DGI triad: (1) migratory polyarthralgia, (2) tenosynovitis, (3) dermatitis. Gonococcal septic arthritis is the purulent phase."
+    },
+    {
+      "problem": "Cervical/urethral source \u2014 asymptomatic in 75% of women",
+      "icd": "A54.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "75% of women with disseminated gonococcal infection have NO genital symptoms. Cervical NAAT is usually positive even without symptoms \u2014 always test the source."
     }
   ],
   "medications": [
     {
-      "name": "Sertraline 50mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Chang",
-      "start": "06/2021",
-      "refills": 3,
-      "status": "Active"
+      "name": "Ceftriaxone 1g IV q24h \u2014 until improvement, then step-down",
+      "sig": "IV ceftriaxone for DGI. Step down to oral cefixime 400mg BID after 24-48h clinical improvement. Total duration 7 days. Test for cure in 1 week.",
+      "prescriber": "Infectious Disease/Rheumatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV"
     },
     {
-      "name": "Levonorgestrel IUD (Mirena) — in situ",
-      "sig": "Intrauterine device placed; effective through 2030",
-      "prescriber": "Dr. Chang",
-      "start": "03/2023",
+      "name": "Doxycycline 100mg BID x 7 days \u2014 chlamydia co-treatment",
+      "sig": "Co-treat for chlamydia even if negative NAAT \u2014 co-infection common. Doxycycline added to gonorrhea treatment.",
+      "prescriber": "Infectious Disease",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "Active \u2014 concurrent"
+    },
+    {
+      "name": "Joint aspiration \u2014 diagnostic and therapeutic",
+      "sig": "Right knee arthrocentesis: confirm Gram stain/culture, cell count, crystals. Joint drainage reduces bacterial burden and inflammatory mediators.",
+      "prescriber": "Rheumatology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Done \u2014 WBC 62,000"
     }
   ],
   "allergies": [
@@ -73,7 +85,7 @@ window.EMR_DATA = {
       "bp": "112/70",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "140 lbs",
       "ht": "5'6\"",
@@ -85,7 +97,7 @@ window.EMR_DATA = {
       "bp": "110/68",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'6\"",
@@ -100,105 +112,74 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Lisa Chang, MD",
       "cc": "Annual wellness; STI screening",
-      "hpi": "25-year-old female for annual wellness exam and STI screening. Reports new sexual partner in past 3 months — inconsistent condom use. No dysuria, vaginal discharge, pelvic pain, or abnormal bleeding. Mirena IUD in place and functioning well. GAD stable on sertraline. Prior history of chlamydia (2023, treated). Requests full STI panel.",
+      "hpi": "25-year-old female for annual wellness exam and STI screening. Reports new sexual partner in past 3 months \u2014 inconsistent condom use. No dysuria, vaginal discharge, pelvic pain, or abnormal bleeding. Mirena IUD in place and functioning well. GAD stable on sertraline. Prior history of chlamydia (2023, treated). Requests full STI panel.",
       "exam": "General: NAD, healthy-appearing. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT. GU: External genitalia normal. IUD strings visualized. No cervical motion tenderness. No adnexal tenderness. No discharge. Skin: No rashes, lesions, or joint swelling. MSK: Full ROM all joints.",
-      "assessment": "1. Annual wellness — healthy\n2. STI screening — ordered (GC/CT NAAT, RPR, HIV, HBV/HCV)\n3. GAD — stable on sertraline\n4. Mirena IUD — in place",
-      "plan": "1. STI panel — results pending\n2. Counseled on consistent condom use for STI prevention (IUD provides contraception only)\n3. Continue sertraline\n4. Pap smear — up to date (done 2023)\n5. RTC PRN or if results abnormal; called with results"
+      "assessment": "1. Annual wellness \u2014 healthy\n2. STI screening \u2014 ordered (GC/CT NAAT, RPR, HIV, HBV/HCV)\n3. GAD \u2014 stable on sertraline\n4. Mirena IUD \u2014 in place",
+      "plan": "1. STI panel \u2014 results pending\n2. Counseled on consistent condom use for STI prevention (IUD provides contraception only)\n3. Continue sertraline\n4. Pap smear \u2014 up to date (done 2023)\n5. RTC PRN or if results abnormal; called with results"
     },
     {
       "id": "V002",
       "date": "09/20/2024",
-      "type": "Primary Care — Phone Follow-up",
+      "type": "Primary Care \u2014 Phone Follow-up",
       "provider": "Dr. Lisa Chang, MD",
       "cc": "STI results review",
       "hpi": "Phone call to review STI screening results from 09/12/2024. All results negative: GC/CT NAAT negative, RPR non-reactive, HIV-1/2 Ag/Ab non-reactive, HBsAg negative, HCV Ab negative. Patient informed; counseled to rescreen in 3 months given ongoing risk factors and new partner.",
-      "exam": "N/A — phone visit",
-      "assessment": "1. STI screening — all negative",
+      "exam": "N/A \u2014 phone visit",
+      "assessment": "1. STI screening \u2014 all negative",
       "plan": "1. Results shared with patient\n2. Repeat screening in 3 months recommended\n3. Consistent condom use reinforced\n4. RTC PRN"
     }
   ],
   "labs": [
     {
-      "date": "09/12/2024",
-      "time": "10:15",
-      "orderedBy": "Dr. Lisa Chang, MD",
-      "collected": "09/12/2024 09:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-091215",
-      "status": "Final",
-      "specimenType": "Serum, Cervical Swab, Urine",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "DGI Assessment",
+      "results": [
         {
-          "name": "STI SCREENING PANEL",
-          "results": [
-            {
-              "test": "Neisseria gonorrhoeae NAAT (Cervical)",
-              "value": "Not Detected",
-              "unit": "—",
-              "range": "Not Detected",
-              "flag": ""
-            },
-            {
-              "test": "Chlamydia trachomatis NAAT (Cervical)",
-              "value": "Not Detected",
-              "unit": "—",
-              "range": "Not Detected",
-              "flag": ""
-            },
-            {
-              "test": "RPR (Syphilis Screen)",
-              "value": "Non-reactive",
-              "unit": "—",
-              "range": "Non-reactive",
-              "flag": ""
-            },
-            {
-              "test": "HIV-1/2 Ag/Ab Combo",
-              "value": "Non-reactive",
-              "unit": "—",
-              "range": "Non-reactive",
-              "flag": ""
-            }
-          ]
+          "test": "Synovial fluid WBC \u2014 right knee",
+          "value": "62,000",
+          "unit": "cells/\u03bcL (PMN dominant)",
+          "ref": "<2000 normal; >50,000 = septic",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "39.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "240",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Cervical NAAT \u2014 GC/Chlamydia",
+          "value": "GC positive, Chlamydia negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures",
+          "value": "Negative (blood cultures positive in <50% DGI)",
+          "unit": "",
+          "ref": "No growth",
+          "flag": ""
+        },
+        {
+          "test": "Synovial fluid Gram stain",
+          "value": "Gram-negative diplococci (low sensitivity in DGI)",
+          "unit": "",
+          "ref": "No organisms",
+          "flag": "H"
+        },
+        {
+          "test": "Uric acid",
+          "value": "4.8",
+          "unit": "mg/dL",
+          "ref": "3.5-7.2 (gout excluded)",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "Right Knee X-Ray",
+      "findings": "Joint effusion. No fracture. No chondrocalcinosis. Normal joint space.",
+      "impression": "Joint effusion consistent with inflammatory arthritis. No bony destruction."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -215,30 +196,30 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2015",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     },
     {
       "vaccine": "Tdap (Boostrix)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Meningococcal ACWY (Menactra)",
       "date": "2017",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     }
   ],
   "familyHistory": [
     "Mother: HTN, T2DM, alive at 52",
-    "Father: Unknown — not involved",
+    "Father: Unknown \u2014 not involved",
     "Sister: Healthy, age 22",
     "No family history of autoimmune or rheumatologic disease"
   ],
@@ -282,7 +263,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "gonococcal-arthritis",
-    "diagnosis": "Disseminated Gonococcal Infection with Septic Arthritis — Right Knee (Neisseria gonorrhoeae)",
+    "diagnosis": "Disseminated Gonococcal Infection (DGI) with Septic Arthritis",
     "acuity": 3,
     "presentation": "Musculoskeletal Emergency",
     "category": "infectious"
@@ -316,7 +297,7 @@ window.EMR_DATA = {
       "associated": "Actually, I did have a few spots on my hands and arms last week that looked like little red bumps, but they went away. And I've been more tired than usual.",
       "denies": "No burning when I pee, no unusual discharge, no pelvic pain, no fever that I noticed.",
       "history": "No, I've never had joint problems before. I got treated for chlamydia about two years ago but that's it.",
-      "medications": "Sertraline 50mg daily; Levonorgestrel IUD (Mirena) — in situ",
+      "medications": "Sertraline 50mg daily; Levonorgestrel IUD (Mirena) \u2014 in situ",
       "allergies": "NKDA",
       "family": "My mom has diabetes and high blood pressure, but no one in my family has joint problems or anything like that.",
       "social": "I work retail, so I'm on my feet a lot. I'm single but seeing someone new for about three months. I don't smoke, drink socially on weekends, no drugs."
@@ -343,16 +324,14 @@ window.EMR_DATA = {
       "Cervical examination and swab": "Cervix appears normal, minimal discharge, samples obtained for testing",
       "Tenosynovitis assessment (hands/wrists)": "Mild tenderness over flexor tendon sheaths of bilateral hands",
       "Lymph node examination": "No significant lymphadenopathy",
-      "Temperature assessment": "Afebrile at 98.6°F"
+      "Temperature assessment": "Afebrile at 98.6\u00b0F"
     },
     "ddxTargets": [
-      "Disseminated Gonococcal Infection with Septic Arthritis — Right Knee (Neisseria gonorrhoeae) (correct diagnosis)",
-      "Reactive arthritis (Reiter's syndrome)",
-      "Septic arthritis from other bacterial causes",
-      "Endocarditis with septic emboli",
-      "Acute rheumatic fever",
-      "Crystalline arthropathy (gout/pseudogout)",
-      "Traumatic arthritis from occupational stress"
+      "Disseminated gonococcal infection \u2014 septic arthritis (correct)",
+      "Non-gonococcal septic arthritis \u2014 S. aureus most common; older patient; no genital symptoms; no dermatitis-tenosynovitis",
+      "Reactive arthritis (Reiter) \u2014 post-infectious; STI or GI trigger; uveitis, urethritis, arthritis triad; no bacteremia",
+      "Pseudogout \u2014 CPP crystals on synovial fluid; chondrocalcinosis on X-ray; no fever",
+      "Rheumatoid arthritis flare \u2014 chronic history; symmetric; RF/anti-CCP positive; no dermatitis pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'routine STI screening' request and missing the systemic manifestations of disseminated gonococcal infection, especially when patient downplays joint symptoms",
@@ -362,7 +341,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient came in requesting STI screening but mentioned some joint discomfort when pressed. What questions would help you determine if this is simple gonorrhea/chlamydia or something more systemic? Think about the classic triad of disseminated gonococcal infection.",
       "phase5": "You've found monoarticular arthritis of the knee, resolving skin lesions, and mild tenosynovitis in a sexually active patient. How do these findings fit together? What's the most likely unifying diagnosis, and what would be your next diagnostic steps?",
-      "finalDebrief": "This case illustrates how disseminated gonococcal infection can present subtly, with patients seeking routine care while harboring serious complications. The classic triad includes arthritis, dermatitis, and tenosynovitis. What clues in the history and physical exam should have pointed you toward DGI rather than simple urogenital gonorrhea?"
+      "finalDebrief": "This case illustrates how disseminated gonococcal infection can present subtly, with patients seeking routine care while harboring serious complications. The classic triad includes arthritis, dermatitis, and tenosynovitis. What clues in the history and physical exam should have pointed you toward DGI rather than simple urogenital gonorrhea?",
+      "final": "Diagnosis: disseminated gonococcal infection with septic arthritis. Key learning: (1) DGI is the most common cause of septic arthritis in sexually active patients <40 years. The DGI triad: (1) migratory polyarthralgia \u2192 (2) tenosynovitis \u2192 (3) dermatitis + arthritis. Tenosynovitis (fingers, wrists, ankles) is highly characteristic of DGI \u2014 rare in other septic arthritis. (2) DGI stages: bacteremic phase (migratory arthralgia, dermatitis, tenosynovitis, low-grade fever) \u2192 localized phase (frank septic arthritis, monoarticular). These stages overlap. (3) Gonococcal septic arthritis vs other organisms: DGI typically has lower WBC in joint fluid (20,000-60,000 vs >100,000 for S. aureus), positive genital cultures (but blood/joint cultures often negative), better prognosis (responds rapidly to antibiotics, no joint destruction). (4) Dermatitis of DGI: sparse (<20) papulopustular lesions on extremities/trunk. Painless or mildly tender. Punch skin biopsy: GC occasionally cultured from lesions. (5) Treatment duration: IV ceftriaxone 24-48h until clinical improvement then oral step-down. Total 7 days. Repeat STI testing in 3 months. Partner treatment."
     }
   }
 };

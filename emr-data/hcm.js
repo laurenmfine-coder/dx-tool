@@ -1,6 +1,3 @@
-// Virtual EMR Case: Hypertrophic Cardiomyopathy — Exertional Syncope
-// Variant: hcm | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Cigna PPO (parent plan)",
     "pcp": "Dr. Sandra Ellis, MD",
-    "pharmacy": "CVS Pharmacy — 4401 Sheridan St, Hollywood, FL",
+    "pharmacy": "CVS Pharmacy \u2014 4401 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "Black (African American)",
     "address": "1619 Daisy Ave, Birmingham, AL 35211",
@@ -27,28 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Systolic Murmur — Under Investigation",
-      "icd": "R01.1",
-      "onset": "2025",
+      "problem": "HOCM \u2014 exertional syncope, dynamic LVOT obstruction",
+      "icd": "I42.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Noted at pre-sports physical 09/2025; described as grade 2/6 systolic murmur at LLSB that increases with Valsalva; referral to cardiology placed but patient did not follow up"
+      "notes": "Ryan Park, 22M \u2014 syncope during basketball game. Father died suddenly at 35 (undiagnosed heart disease). Echo: severe asymmetric septal hypertrophy (septum 2.4cm), systolic anterior motion (SAM) of mitral valve, LVOT gradient 80mmHg at rest."
     },
     {
-      "problem": "Exercise-Induced Lightheadedness",
-      "icd": "R42",
-      "onset": "2025",
+      "problem": "Family history of sudden cardiac death \u2014 genetic condition",
+      "icd": "I42.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Reported at sports physical — 2-3 episodes of near-syncope during basketball practice in past year; attributed to dehydration; no formal workup"
+      "notes": "Autosomal dominant inheritance. Family members require screening echo. Genetic testing for MYH7, MYBPC3 mutations. SCD risk assessment for implantable defibrillator decision."
+    },
+    {
+      "problem": "Sudden cardiac death risk \u2014 ICD consideration",
+      "icd": "I42.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "HOCM is the most common cause of SCD in young athletes. Major risk factors: prior cardiac arrest, sustained VT, family SCD, syncope, massive LVH (wall >30mm), abnormal exercise BP response, NSVT on Holter."
     }
   ],
   "medications": [
     {
-      "name": "None — No chronic medications",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
+      "name": "Metoprolol succinate 25-50mg daily \u2014 first-line",
+      "sig": "Beta-blockers reduce heart rate \u2192 increases diastolic filling \u2192 reduces LVOT gradient and SAM. Reduces symptoms and improves exercise tolerance. Avoid positive inotropes (digoxin) and vasodilators (nitrates, ACE inhibitors).",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Initiating"
+    },
+    {
+      "name": "ICD \u2014 consider for high-risk HOCM",
+      "sig": "ICD indicated for: prior cardiac arrest or VT, family history SCD + own syncope. Calculate HCM Risk-SCD score at 5 years (>6% = ICD recommended). This patient: syncope + family SCD = high risk.",
+      "prescriber": "Electrophysiology/Cardiology",
+      "start": "2024",
       "refills": 0,
-      "status": ""
+      "status": "Under evaluation"
+    },
+    {
+      "name": "Avoid competitive sports \u2014 activity restriction",
+      "sig": "All patients with HOCM should avoid intense competitive sports. Increased heart rate + reduced preload from exertion \u2192 increased LVOT gradient \u2192 dynamic obstruction. Basketball is high-risk.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Counseled \u2014 activity restricted"
     }
   ],
   "allergies": [
@@ -66,7 +86,7 @@ window.EMR_DATA = {
       "bp": "108/68",
       "hr": 96,
       "rr": 20,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "195 lbs",
       "ht": "6'3\"",
@@ -78,7 +98,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": 64,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "192 lbs",
       "ht": "6'3\"",
@@ -92,117 +112,62 @@ window.EMR_DATA = {
       "date": "09/08/2025",
       "type": "Primary Care",
       "provider": "Dr. Sandra Ellis, MD",
-      "cc": "Pre-participation sports physical — college basketball",
-      "hpi": "21M presents for annual pre-sports physical for college basketball team. Reports feeling 'fine' overall. On direct questioning, admits to 2-3 episodes of lightheadedness during intense practice over past year — lasted seconds, resolved with sitting down and drinking water. One episode involved 'graying out' briefly but no full LOC. Attributes to dehydration and South Florida heat. No chest pain with exertion. No palpitations. No family history of sudden death (patient unsure about father's side — parents separated, limited contact with biological father).",
+      "cc": "Pre-participation sports physical \u2014 college basketball",
+      "hpi": "21M presents for annual pre-sports physical for college basketball team. Reports feeling 'fine' overall. On direct questioning, admits to 2-3 episodes of lightheadedness during intense practice over past year \u2014 lasted seconds, resolved with sitting down and drinking water. One episode involved 'graying out' briefly but no full LOC. Attributes to dehydration and South Florida heat. No chest pain with exertion. No palpitations. No family history of sudden death (patient unsure about father's side \u2014 parents separated, limited contact with biological father).",
       "exam": "Athletic, well-developed male. CV: RRR, grade 2/6 harsh systolic murmur best at LLSB; murmur increases with Valsalva maneuver and standing; decreases with squatting. Bilateral carotid upstrokes brisk (bisferiens pulse questionable). PMI laterally displaced and forceful. Lungs: CTAB. MSK: Full ROM all joints. Neuro: Intact.",
-      "assessment": "1. Systolic murmur that increases with Valsalva — concerning for HCM vs HOCM\n2. Exertional near-syncope — needs urgent cardiac evaluation BEFORE return to sports\n3. Must be cleared by cardiology before athletic participation",
-      "plan": "1. STAT referral to cardiology — echocardiogram and ECG\n2. Athletic restriction until cardiology clearance\n3. Letter sent to athletic department regarding medical hold\n4. Patient counseled on importance of not playing until evaluated\n5. Family history needs clarification — biological father's cardiac history"
+      "assessment": "1. Systolic murmur that increases with Valsalva \u2014 concerning for HCM vs HOCM\n2. Exertional near-syncope \u2014 needs urgent cardiac evaluation BEFORE return to sports\n3. Must be cleared by cardiology before athletic participation",
+      "plan": "1. STAT referral to cardiology \u2014 echocardiogram and ECG\n2. Athletic restriction until cardiology clearance\n3. Letter sent to athletic department regarding medical hold\n4. Patient counseled on importance of not playing until evaluated\n5. Family history needs clarification \u2014 biological father's cardiac history"
     }
   ],
   "labs": [
     {
-      "date": "09/08/2025",
-      "time": "10:00",
-      "orderedBy": "Dr. Ellis",
-      "collected": "09/08/2025 10:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-800908",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "HOCM Assessment",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "84",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": ""
-            }
-          ]
+          "test": "Echo \u2014 septal thickness",
+          "value": "2.4",
+          "unit": "cm",
+          "ref": "<1.2 normal; \u22651.5 = HCM; \u22653.0 = massive hypertrophy",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "47.4",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "LVOT gradient \u2014 resting",
+          "value": "80",
+          "unit": "mmHg",
+          "ref": "<30 mmHg (obstructive \u226530)",
+          "flag": "H"
+        },
+        {
+          "test": "SAM (systolic anterior motion)",
+          "value": "Present \u2014 mitral valve drawn into LVOT during systole",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
+        },
+        {
+          "test": "Holter monitor \u2014 48h",
+          "value": "NSVT episodes x3 (3-6 beats)",
+          "unit": "",
+          "ref": "No VT",
+          "flag": "H"
+        },
+        {
+          "test": "Exercise stress test \u2014 BP response",
+          "value": "Abnormal \u2014 BP fails to rise >20mmHg with exercise",
+          "unit": "",
+          "ref": "Normal rise",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "09/08/2025",
-      "study": "ELECTROCARDIOGRAM — 12-LEAD",
-      "accession": "ECG-2025-090822",
-      "status": "FINAL",
-      "orderedBy": "Dr. Ellis",
-      "readBy": "Dr. Ellis, MD",
-      "facility": "ReasonDx Medical Center",
-      "priority": "STAT",
-      "clinical": "Pre-sports physical, new murmur, exertional near-syncope",
-      "technique": "Standard 12-lead ECG at rest.",
-      "findings": "Rate: 62 bpm. Rhythm: Normal sinus rhythm.\n\nIntervals: PR 160 ms, QRS 98 ms, QTc 440 ms.\n\nAxis: Normal.\n\nAbnormalities: Left ventricular hypertrophy by voltage criteria (SV1 + RV5 = 42 mm). Deep narrow Q waves in leads I, aVL, V5-V6 ('dagger' Q waves). T-wave inversions in V4-V6 and I, aVL. Strain pattern in lateral leads.",
-      "impression": "1. LVH by voltage criteria with repolarization abnormality.\n2. Deep narrow Q waves in lateral leads — suggestive of septal hypertrophy (HCM pattern).\n3. Echocardiogram strongly recommended for definitive evaluation.",
-      "dictated": "09/08/2025 10:45",
-      "verified": "09/08/2025 11:00"
+      "date": "04/2024",
+      "study": "Cardiac MRI with Gadolinium",
+      "findings": "Severe asymmetric septal hypertrophy (2.4cm). Systolic anterior motion of mitral valve causing LVOT obstruction. Late gadolinium enhancement (LGE) in midwall of hypertrophied segments \u2014 fibrosis marker. No other structural abnormality.",
+      "impression": "Obstructive HCM with fibrosis (LGE). ICD consideration given high-risk features."
     }
   ],
   "immunizations": [
@@ -228,7 +193,7 @@ window.EMR_DATA = {
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — Series Complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 Series Complete",
       "date": "2019",
       "site": "Left deltoid IM",
       "lot": "HP19-440",
@@ -242,7 +207,7 @@ window.EMR_DATA = {
       "mfr": "Sanofi"
     },
     {
-      "vaccine": "Meningococcal B (Bexsero) — Series Complete",
+      "vaccine": "Meningococcal B (Bexsero) \u2014 Series Complete",
       "date": "2022",
       "site": "Left deltoid IM",
       "lot": "MB22-110",
@@ -251,14 +216,14 @@ window.EMR_DATA = {
   ],
   "familyHistory": [
     "Mother: Healthy, alive at 46",
-    "Biological father: Limited information — parents separated when patient was 5; mother reports father had 'heart problems' in his 30s but no details; paternal grandfather died suddenly age 44 (cause unknown)",
+    "Biological father: Limited information \u2014 parents separated when patient was 5; mother reports father had 'heart problems' in his 30s but no details; paternal grandfather died suddenly age 44 (cause unknown)",
     "Maternal grandmother: HTN, T2DM, alive at 72",
     "Half-brother (maternal): Healthy, alive at 14"
   ],
   "socialHistory": [
     [
       "Occupation",
-      "College junior — kinesiology major; scholarship basketball player (starting point guard)"
+      "College junior \u2014 kinesiology major; scholarship basketball player (starting point guard)"
     ],
     [
       "Marital",
@@ -270,7 +235,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — 1-2 drinks on weekends during off-season; abstains during season"
+      "Social \u2014 1-2 drinks on weekends during off-season; abstains during season"
     ],
     [
       "Drugs",
@@ -290,12 +255,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed (age 21); mother is emergency contact"
+      "None \u2014 not discussed (age 21); mother is emergency contact"
     ]
   ],
   "meta": {
     "caseId": "hcm",
-    "diagnosis": "Hypertrophic Obstructive Cardiomyopathy (HOCM — Exertional Syncope During Basketball in Young Athlete with Undiagnosed HCM, Family History of Sudden Cardiac Death)",
+    "diagnosis": "Hypertrophic Obstructive Cardiomyopathy (HOCM) \u2014 Exertional Syncope",
     "acuity": 2,
     "presentation": "Syncope",
     "category": "cardiovascular"
@@ -329,7 +294,7 @@ window.EMR_DATA = {
       "associated": "Sometimes I feel like my heart is racing really fast during exercise, more than my teammates. No chest pain, but maybe a little shortness of breath during the hardest parts of practice.",
       "denies": "No chest pain, no swelling in my legs, no problems breathing when I'm resting. I don't get dizzy standing up normally.",
       "history": "I've had that lightheaded feeling maybe 4-5 times over the past year, but I always just pushed through it. This was the first time I actually passed out.",
-      "medications": "None — No chronic medications",
+      "medications": "None \u2014 No chronic medications",
       "allergies": "NKDA",
       "family": "My mom is healthy, but my dad had some kind of heart problem in his 30s - my parents split when I was young so I don't know details. My mom mentioned my paternal grandfather died suddenly when he was 44, but nobody knows why.",
       "social": "I'm a junior studying kinesiology on a basketball scholarship. I live on campus, don't smoke, and only drink socially on weekends during off-season. No drugs or supplements."
@@ -359,13 +324,11 @@ window.EMR_DATA = {
       "Neurological assessment including cranial nerves": "Alert and oriented, normal cranial nerve exam, no focal neurological deficits"
     },
     "ddxTargets": [
-      "Hypertrophic Obstructive Cardiomyopathy (HOCM — Exertional Syncope During Basketball in Young Athlete with Undiagnosed HCM, Family History of Sudden Cardiac Death) (correct diagnosis)",
-      "Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)",
-      "Long QT Syndrome",
-      "Aortic Stenosis",
-      "Sudden Cardiac Death Risk in Athletes",
-      "Exercise-Induced Arrhythmias",
-      "Vasovagal Syncope"
+      "HOCM \u2014 obstructive (correct)",
+      "Hypertensive hypertrophy \u2014 symmetric; HTN history; no LVOT gradient; no SAM",
+      "Athlete's heart \u2014 physiologic hypertrophy; symmetric; no LVOT gradient; regresses with detraining",
+      "Aortic stenosis \u2014 fixed (not dynamic) gradient; valve calcification on echo; different mechanism",
+      "Fabry disease \u2014 symmetric hypertrophy; alpha-galactosidase A deficiency; enzyme assay"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'young healthy athlete' and dismissing syncope as dehydration or overexertion, missing the pathological murmur findings",
@@ -375,7 +338,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This young athlete presents with exertional syncope. What are the key features that distinguish benign causes from potentially life-threatening cardiac conditions? What aspects of the history and family background should heighten your concern?",
       "phase5": "You've identified a murmur that changes with maneuvers and noted the family history. How do the dynamic changes in murmur intensity with Valsalva and position changes help narrow your differential diagnosis? What is your biggest concern for this patient?",
-      "finalDebrief": "This case highlights the critical importance of cardiac screening in young athletes. How did the murmur characteristics and family history guide you toward HOCM? What would be your next steps for this patient, and why is early diagnosis crucial for preventing sudden cardiac death?"
+      "finalDebrief": "This case highlights the critical importance of cardiac screening in young athletes. How did the murmur characteristics and family history guide you toward HOCM? What would be your next steps for this patient, and why is early diagnosis crucial for preventing sudden cardiac death?",
+      "final": "Diagnosis: hypertrophic obstructive cardiomyopathy (HOCM). Key learning: (1) HOCM is the most common cause of sudden cardiac death in young athletes. The dynamic LVOT obstruction worsens with: decreased preload (dehydration, nitrates, Valsalva), decreased afterload (vasodilators), increased contractility (digoxin, exercise). The opposite maneuvers (increased preload, increased afterload) reduce the gradient. (2) Dynamic vs fixed obstruction distinction: HOCM murmur increases with standing (preload \u2193) and Valsalva, decreases with squatting (preload \u2191). Aortic stenosis murmur does the opposite. This is the key bedside maneuver. (3) HCM Risk-SCD score: calculator using age, max wall thickness, LA diameter, LVOT gradient, family SCD, NSVT, unexplained syncope. Score \u22656% at 5 years = ICD recommended. (4) Medications to avoid in HOCM: nitrates (preload reduction \u2192 more obstruction \u2192 severe hypotension), ACE inhibitors/ARBs (afterload reduction), digoxin (positive inotrope), diuretics (volume reduction). Treat HF symptoms with beta-blockers and disopyramide. (5) Septal reduction therapy: severe symptomatic HOCM refractory to medical therapy \u2192 surgical myomectomy (gold standard) or alcohol septal ablation (catheter-based alternative for poor surgical candidates)."
     }
   }
 };

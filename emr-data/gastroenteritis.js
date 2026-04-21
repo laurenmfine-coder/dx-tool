@@ -1,10 +1,7 @@
-// Virtual EMR Case: Gastroenteritis
-// Variant: gastroenteritis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
-    "name": "Sophia Petit-Frère",
+    "name": "Sophia Petit-Fr\u00e8re",
     "patientHPI": "My mom brought me in for my regular checkup - I've been doing really well lately, walking around everywhere and saying mama, dada, and a few other words that make everyone so excited, and I love eating the same food as everyone else at the table.",
     "dob": "09/03/2023",
     "age": 1,
@@ -13,64 +10,64 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicaid (Florida KidCare)",
     "pcp": "Dr. Rachel Kim, MD (Pediatrics)",
-    "pharmacy": "Walgreens — 3001 Broward Blvd, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 3001 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Haitian",
     "address": "5639 Magnolia Blvd, Memphis, TN 38107",
     "phone": "(954) 555-6738",
     "email": "m.petitfrere@email.com",
     "emergencyContact": {
-      "name": "Marie Petit-Frère (Mother)",
+      "name": "Marie Petit-Fr\u00e8re (Mother)",
       "phone": "(954) 555-6740"
     }
   },
   "problems": [
     {
-      "problem": "Acute Gastroenteritis with Dehydration",
-      "icd": "A09",
-      "onset": "2025",
-      "status": "Active",
-      "notes": "Current presentation — 3 days of vomiting and diarrhea"
-    },
-    {
-      "problem": "History of Prematurity (35 weeks)",
-      "icd": "P07.38",
-      "onset": "2023",
-      "status": "Resolved",
-      "notes": "Born at 35 weeks; 3-day NICU stay for feeding; no complications since discharge"
-    },
-    {
-      "problem": "Eczema",
-      "icd": "L30.9",
+      "problem": "Acute viral gastroenteritis \u2014 norovirus pattern",
+      "icd": "A08.11",
       "onset": "2024",
       "status": "Active",
-      "notes": "Mild; managed with moisturizers and occasional hydrocortisone 1%"
+      "notes": "Kevin Park, 32M \u2014 24-hour illness, profuse watery diarrhea 8x/day, vomiting, crampy abdominal pain. No blood. Cluster of cases at work event 48h ago \u2014 classic norovirus incubation. Moderate dehydration."
+    },
+    {
+      "problem": "Moderate dehydration \u2014 IV hydration indicated",
+      "icd": "E86.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Dry mucous membranes, tachycardia 108, orthostasis. Moderate dehydration. Unable to tolerate oral fluids due to vomiting. IV hydration required."
+    },
+    {
+      "problem": "Inflammatory diarrhea exclusion \u2014 no antibiotics without indication",
+      "icd": "A08.11",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Watery (not bloody), no fever, brief illness \u2014 viral pattern. Inflammatory diarrhea (fever + bloody stool + recent antibiotics or foreign travel) = culture + consider antibiotics."
     }
   ],
   "medications": [
     {
-      "name": "Hydrocortisone 1% cream — apply BID PRN",
-      "sig": "Apply thin layer to affected areas twice daily as needed for eczema flares",
-      "prescriber": "Dr. Kim",
-      "start": "06/2024",
-      "refills": 2,
-      "status": "PRN"
-    },
-    {
-      "name": "Infant Acetaminophen 160mg/5mL — 3.75mL Q4-6h PRN",
-      "sig": "Give 3.75 mL by mouth every 4-6 hours as needed for fever or pain",
-      "prescriber": "Dr. Kim",
-      "start": "09/2024",
+      "name": "IV normal saline 1-2L \u2014 rehydration",
+      "sig": "For vomiting patient unable to tolerate PO. 1L NS bolus then reassess. Transition to oral hydration once vomiting controlled.",
+      "prescriber": "Emergency",
+      "start": "2024",
       "refills": 0,
-      "status": "PRN"
+      "status": "Active"
     },
     {
-      "name": "Vitamin D 400 IU drops daily",
-      "sig": "Give 1 mL by mouth daily",
-      "prescriber": "Dr. Kim",
-      "start": "10/2023",
-      "refills": 3,
+      "name": "Ondansetron 4mg IV/ODT \u2014 antiemetic",
+      "sig": "Reduces vomiting and facilitates oral rehydration. ODT (orally disintegrating tablet) preferred once patient can tolerate sublingual.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "No antibiotics \u2014 viral gastroenteritis",
+      "sig": "Antibiotics not indicated for viral gastroenteritis. Inappropriate antibiotic use = C. diff risk, antibiotic resistance, no benefit. Culture if bloody stool, fever, severe illness, or immunocompromised.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "Not indicated"
     }
   ],
   "allergies": [
@@ -88,7 +85,7 @@ window.EMR_DATA = {
       "bp": "78/48",
       "hr": 178,
       "rr": 38,
-      "temp": "100.9°F",
+      "temp": "100.9\u00b0F",
       "spo2": "98%",
       "wt": "19.6 lbs",
       "ht": "29\"",
@@ -100,7 +97,7 @@ window.EMR_DATA = {
       "bp": "82/52",
       "hr": 128,
       "rr": 28,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "21.2 lbs",
       "ht": "29\"",
@@ -112,7 +109,7 @@ window.EMR_DATA = {
       "bp": "80/50",
       "hr": 124,
       "rr": 30,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "19.8 lbs",
       "ht": "28\"",
@@ -126,10 +123,10 @@ window.EMR_DATA = {
       "date": "12/10/2024",
       "type": "Primary Care",
       "provider": "Dr. Rachel Kim, MD",
-      "cc": "Well-child visit — 15-month checkup",
+      "cc": "Well-child visit \u2014 15-month checkup",
       "hpi": "15-month-old female presenting for well-child visit. Mother reports she is walking independently, saying 3-4 words, and eating table foods well. No current illness. Stooling normally. Good appetite. Sleeping through the night.",
       "exam": "General: Well-appearing, active toddler. HEENT: Anterior fontanelle closed, TMs clear, oropharynx clear with 8 teeth. CV: RRR. Lungs: CTA. Abdomen: Soft, NT, no hepatosplenomegaly. Skin: Mild dry patches on bilateral antecubital fossae. Neuro: Walking independently, transfers objects, age-appropriate.",
-      "assessment": "1. Well-child 15-month visit\n2. Eczema — mild, well-controlled\n3. Growth and development — appropriate",
+      "assessment": "1. Well-child 15-month visit\n2. Eczema \u2014 mild, well-controlled\n3. Growth and development \u2014 appropriate",
       "plan": "1. Immunizations per schedule (DTaP, Hep A)\n2. Continue Vitamin D supplementation\n3. Continue moisturizers for eczema\n4. Anticipatory guidance: safety, nutrition, language development\n5. RTC 3 months for 18-month visit"
     },
     {
@@ -138,172 +135,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Rachel Kim, MD",
       "cc": "Vomiting and diarrhea x 1 day",
-      "hpi": "17-month-old female brought in by mother for 1 day of non-bloody, non-bilious vomiting (6 episodes) and watery diarrhea (4 episodes). Low-grade fever of 100.2°F at home. Taking small sips of Pedialyte but vomited twice after. One wet diaper in the past 8 hours. No sick contacts known but attends daycare. No recent travel.",
+      "hpi": "17-month-old female brought in by mother for 1 day of non-bloody, non-bilious vomiting (6 episodes) and watery diarrhea (4 episodes). Low-grade fever of 100.2\u00b0F at home. Taking small sips of Pedialyte but vomited twice after. One wet diaper in the past 8 hours. No sick contacts known but attends daycare. No recent travel.",
       "exam": "General: Fussy, mild lethargy, no tears when crying. HEENT: Anterior fontanelle flat, mucous membranes tacky, lips slightly dry. CV: Tachycardic, regular. Lungs: CTA. Abdomen: Soft, mildly distended, hyperactive bowel sounds, no tenderness. Skin: Slightly decreased turgor. Cap refill 2-3 sec.",
-      "assessment": "1. Acute gastroenteritis — likely viral (rotavirus vs norovirus)\n2. Mild-moderate dehydration — decreased urine output, tacky mucous membranes, no tears",
-      "plan": "1. Trial oral rehydration with Pedialyte — 5 mL q5min\n2. If unable to tolerate PO → consider ED for IV fluids\n3. Strict output monitoring — wet diapers, stool frequency\n4. Return precautions: persistent vomiting, bloody stools, lethargy, no wet diaper x 8 hrs, sunken fontanelle\n5. Mother given detailed dehydration warning handout"
+      "assessment": "1. Acute gastroenteritis \u2014 likely viral (rotavirus vs norovirus)\n2. Mild-moderate dehydration \u2014 decreased urine output, tacky mucous membranes, no tears",
+      "plan": "1. Trial oral rehydration with Pedialyte \u2014 5 mL q5min\n2. If unable to tolerate PO \u2192 consider ED for IV fluids\n3. Strict output monitoring \u2014 wet diapers, stool frequency\n4. Return precautions: persistent vomiting, bloody stools, lethargy, no wet diaper x 8 hrs, sunken fontanelle\n5. Mother given detailed dehydration warning handout"
     }
   ],
   "labs": [
     {
-      "date": "02/20/2025",
-      "time": "14:22",
-      "orderedBy": "Dr. Amanda Liu, MD (ED)",
-      "collected": "02/20/2025 14:10",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-094182",
-      "status": "Final",
-      "specimenType": "Whole Blood (EDTA), Serum",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Gastroenteritis Assessment",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "68",
-              "unit": "mg/dL",
-              "range": "60-110",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "5-18",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.4",
-              "unit": "mg/dL",
-              "range": "0.1-0.4",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "134",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "3.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.5",
-              "flag": "L"
-            },
-            {
-              "test": "Chloride",
-              "value": "98",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "16",
-              "unit": "mEq/L",
-              "range": "20-28",
-              "flag": "L"
-            }
-          ]
+          "test": "BMP \u2014 sodium",
+          "value": "142",
+          "unit": "mEq/L",
+          "ref": "136-145 (check for hypo/hypernatremia in dehydration)",
+          "flag": ""
         },
         {
-          "name": "COMPLETE BLOOD COUNT (CBC)",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "12.8",
-              "unit": "x10³/µL",
-              "range": "6.0-14.5",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.2",
-              "unit": "g/dL",
-              "range": "10.5-13.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.1",
-              "unit": "%",
-              "range": "33-39",
-              "flag": "H"
-            },
-            {
-              "test": "Platelets",
-              "value": "284",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "BMP \u2014 creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3 (mild prerenal elevation)",
+          "flag": "H"
         },
         {
-          "name": "URINALYSIS",
-          "results": [
-            {
-              "test": "Specific Gravity",
-              "value": "1.032",
-              "unit": "",
-              "range": "1.005-1.030",
-              "flag": "H"
-            },
-            {
-              "test": "Ketones",
-              "value": "Moderate",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "WBC",
-              "value": "0-2",
-              "unit": "/HPF",
-              "range": "0-5",
-              "flag": ""
-            },
-            {
-              "test": "Bacteria",
-              "value": "None",
-              "unit": "",
-              "range": "None",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "10.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11 (normal \u2014 viral)",
+          "flag": ""
+        },
+        {
+          "test": "Stool culture",
+          "value": "Pending \u2014 sent because work cluster (public health)",
+          "unit": "",
+          "ref": "No growth",
+          "flag": ""
+        },
+        {
+          "test": "Stool C. difficile",
+          "value": "Negative \u2014 no recent antibiotics",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "02/20/2025",
-      "study": "ABDOMINAL X-RAY — SUPINE",
-      "accession": "IMG-2025-09271",
-      "status": "FINAL",
-      "orderedBy": "Dr. Amanda Liu, MD",
-      "readBy": "Dr. Angela Reyes, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "17-month-old with vomiting, diarrhea, abdominal distension — rule out obstruction",
-      "technique": "Single supine AP radiograph of the abdomen obtained.",
-      "findings": "BOWEL GAS PATTERN: Mildly dilated loops of small and large bowel with diffusely increased gas throughout. No focal dilated loop or transition point. No air-fluid levels on this supine view.\n\nNO FREE AIR: No pneumoperitoneum.\n\nSOFT TISSUES: Unremarkable.\n\nBONY STRUCTURES: Normal for age.",
-      "impression": "1. Non-specific gaseous distension of bowel — consistent with gastroenteritis/ileus\n2. No evidence of bowel obstruction or perforation",
-      "dictated": "02/20/2025 14:50",
-      "verified": "02/20/2025 15:05"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "DTaP (Daptacel)",
@@ -349,10 +230,10 @@ window.EMR_DATA = {
     }
   ],
   "familyHistory": [
-    "Mother (age 26): Sickle cell trait — asymptomatic carrier",
+    "Mother (age 26): Sickle cell trait \u2014 asymptomatic carrier",
     "Father (age 29): Hypertension, pre-diabetes",
     "Maternal grandmother (age 54): Type 2 Diabetes, hypertension, obesity",
-    "Paternal grandfather (age 61): Deceased — stroke at age 58",
+    "Paternal grandfather (age 61): Deceased \u2014 stroke at age 58",
     "No known family history of IBD, celiac disease, or GI malignancy"
   ],
   "socialHistory": [
@@ -366,7 +247,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco Exposure",
-      "None — no smokers in household"
+      "None \u2014 no smokers in household"
     ],
     [
       "Pets",
@@ -391,7 +272,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "gastroenteritis",
-    "diagnosis": "Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis",
+    "diagnosis": "Acute Viral Gastroenteritis \u2014 Moderate Dehydration, Norovirus",
     "acuity": 3,
     "presentation": "Pediatric Emergency",
     "category": "infectious"
@@ -425,7 +306,7 @@ window.EMR_DATA = {
       "associated": "She's been really tired and sleepy, her fever started this morning, and she feels warm. She's been very clingy and crying more than usual.",
       "denies": "No blood in the stool or vomit, no trouble breathing, no rash, and she hasn't hit her head or fallen recently.",
       "history": "She had something similar when she was about 8 months old but not this bad. That time it only lasted a day and she didn't get dehydrated.",
-      "medications": "Hydrocortisone 1% cream — apply BID PRN; Infant Acetaminophen 160mg/5mL — 3.75mL Q4-6h PRN; Vitamin D 400 IU drops daily",
+      "medications": "Hydrocortisone 1% cream \u2014 apply BID PRN; Infant Acetaminophen 160mg/5mL \u2014 3.75mL Q4-6h PRN; Vitamin D 400 IU drops daily",
       "allergies": "NKDA",
       "family": "Her dad has high blood pressure and pre-diabetes, I have sickle cell trait but no problems, and my mom has diabetes. No one in the family has had stomach problems like this.",
       "social": "She goes to a small home daycare with 6 other kids. No one smokes around her, and we live in an apartment with my mother. Her dad visits regularly but lives separately."
@@ -455,13 +336,12 @@ window.EMR_DATA = {
       "Weight comparison to previous visits if available": "Weight is down approximately 8% from last well-child visit 2 months ago"
     },
     "ddxTargets": [
-      "Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis (correct diagnosis)",
-      "Bacterial gastroenteritis (Salmonella, Shigella, Campylobacter)",
-      "Rotavirus gastroenteritis with dehydration",
-      "Intussusception",
-      "Appendicitis (atypical presentation in toddler)",
-      "Food poisoning or dietary indiscretion",
-      "Urinary tract infection with associated GI symptoms"
+      "Viral gastroenteritis \u2014 norovirus (correct)",
+      "Bacterial gastroenteritis \u2014 fever + bloody stool; recent travel, raw food; culture-guided antibiotics",
+      "C. difficile colitis \u2014 recent antibiotics; watery diarrhea; positive toxin; metronidazole/vancomycin",
+      "Appendicitis \u2014 RLQ pain; fever; peritoneal signs; CT abdomen",
+      "Food poisoning \u2014 S. aureus (rapid onset 1-6h); B. cereus; C. perfringens; shorter course than norovirus",
+      "Inflammatory bowel disease \u2014 chronic/recurrent; blood/mucus; colonoscopy"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'routine checkup' mentioned in HPI and missing acute illness, or anchoring on fever alone without recognizing dehydration severity",
@@ -471,7 +351,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Before you interview the patient, think about what key historical features would help you distinguish between viral and bacterial causes, and what questions would help you assess the severity of dehydration. Also consider what 'must-not-miss' diagnoses you need to rule out in a 1-year-old with vomiting and apparent abdominal pain.",
       "phase5": "Nice work gathering the history and exam findings. You've identified signs of dehydration, but let's think deeper about the physiology here. What do the vital signs tell you about her compensatory mechanisms? The tachycardia and tachypnea pattern, combined with her hydration status - what might her acid-base status be, and why?",
-      "finalDebrief": "This case illustrates how gastroenteritis in young children can quickly lead to dehydration and metabolic consequences. The key was recognizing that her tachycardia and mild tachypnea weren't just from fever, but represented compensation for non-anion gap metabolic acidosis from bicarbonate losses. Her history of prematurity may have made her more susceptible to rapid dehydration. How did your differential evolve as you gathered more data about her hydration status?"
+      "finalDebrief": "This case illustrates how gastroenteritis in young children can quickly lead to dehydration and metabolic consequences. The key was recognizing that her tachycardia and mild tachypnea weren't just from fever, but represented compensation for non-anion gap metabolic acidosis from bicarbonate losses. Her history of prematurity may have made her more susceptible to rapid dehydration. How did your differential evolve as you gathered more data about her hydration status?",
+      "final": "Diagnosis: acute viral gastroenteritis, norovirus. Key learning: (1) Norovirus characteristics: incubation 12-48 hours (food poisoning vs 1-6h), outbreak pattern (cruise ships, restaurants, healthcare facilities), profuse watery (non-bloody) vomiting and diarrhea, self-limited 24-72 hours, highly contagious. (2) Antibiotic decision in diarrhea: antibiotics indicated for: febrile dysentery (fever + bloody stool), Salmonella typhi, Shigella, traveler's diarrhea (moderate-severe), C. diff, immunocompromised host. NOT indicated for: watery non-bloody viral gastroenteritis. (3) Oral rehydration therapy (ORT): WHO ORS solution (75mEq Na+, 20mEq K+, 75mmol glucose, 10g rice in 1L water) exploits glucose-sodium cotransporter that remains active even during diarrhea. Effective in >90% of mild-moderate dehydration. IV fluids only when unable to tolerate PO. (4) Infectious diarrhea risk factors for bacterial cause: fever, bloody stool, >3 days duration, immunocompromised, recent antibiotics (C. diff), seafood (Vibrio), eggs/poultry (Salmonella), foreign travel. (5) Infection control for norovirus: highly contagious (10-100 virions infectious), survives on surfaces 2 weeks, alcohol gels ineffective (use soap and water for 20 seconds). Cohorting and contact precautions for hospitalized patients."
     }
   }
 };

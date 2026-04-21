@@ -1,6 +1,3 @@
-// Virtual EMR Case: Gout Flare
-// Variant: gout-flare | Acuity: ESI-4
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Maria Santos, MD",
-    "pharmacy": "CVS Pharmacy — 5200 S University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 5200 S University Dr, Riverside, FL",
     "language": "English, Vietnamese",
     "race": "Asian (Vietnamese)",
     "address": "1969 Sycamore Dr, Birmingham, AL 35207",
@@ -26,73 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Gout — Recurrent",
-      "icd": "M10.9",
-      "onset": "2018",
+      "problem": "Acute gout flare \u2014 first MTP (podagra)",
+      "icd": "M10.071",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Recurrent monoarticular flares; first MTP joint predominant; 3-4 flares/year; uric acid 8.6; allopurinol started 2023 — patient non-adherent (stopped taking 'because no pain')"
+      "notes": "Harold Kim, 58M \u2014 sudden onset severe right first MTP joint pain, redness, swelling overnight. Cannot bear weight. Serum uric acid 9.8. Known gout, non-adherent to allopurinol."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2014",
+      "problem": "Non-adherence to urate-lowering therapy \u2014 target uric acid <6",
+      "icd": "M10.071",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On hydrochlorothiazide — CONTRIBUTING to hyperuricemia; discussed switching but patient declined"
+      "notes": "On allopurinol 100mg daily but takes it only sometimes. Uric acid 9.8 (target <6.0 for most patients; <5.0 for tophaceous gout). Non-adherence driving recurrent flares and tophi formation."
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2016",
+      "problem": "Tophi \u2014 urate crystal deposits in soft tissue",
+      "icd": "M10.071",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On atorvastatin"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 2",
-      "icd": "N18.2",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "eGFR 72; likely related to HTN and gout nephropathy"
+      "notes": "Chalky white deposits over right olecranon. Tophi = chronic urate crystal deposition = indication for more aggressive ULT and target uric acid <5.0."
     }
   ],
   "medications": [
     {
-      "name": "Hydrochlorothiazide 25mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Santos",
-      "start": "06/2015",
-      "refills": 4,
-      "status": "Active"
+      "name": "Colchicine 1.2mg then 0.6mg 1h later \u2014 acute attack",
+      "sig": "Most effective when started within 12-24h of symptom onset. Anti-inflammatory via microtubule inhibition \u2192 inhibits neutrophil migration. Dose-dependent GI toxicity (diarrhea). Reduce dose in CKD and strong CYP3A4 inhibitors.",
+      "prescriber": "Rheumatology/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 acute treatment"
     },
     {
-      "name": "Atorvastatin 20mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Santos",
-      "start": "06/2017",
-      "refills": 4,
-      "status": "Active"
+      "name": "Naproxen 500mg BID OR indomethacin 50mg TID \u2014 if colchicine fails",
+      "sig": "NSAIDs as alternative for acute gout if no renal impairment or GI contraindication. Indomethacin is traditional but all NSAIDs equally effective.",
+      "prescriber": "Rheumatology/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Alternative PRN"
     },
     {
-      "name": "Allopurinol 100mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Santos",
-      "start": "03/2023",
+      "name": "Allopurinol \u2014 escalate to 300mg daily, do NOT start/stop during flare",
+      "sig": "Do NOT start or stop allopurinol during an acute flare \u2014 changes in uric acid level can prolong flare. Continue if already on it. Escalate dose after flare resolves. Target uric acid <6.0 (or <5.0 for tophaceous gout).",
+      "prescriber": "Rheumatology",
+      "start": "2024",
       "refills": 3,
-      "status": "Active — PATIENT NON-ADHERENT (self-discontinued)"
-    },
-    {
-      "name": "Colchicine 0.6mg PRN (flare)",
-      "sig": "Take 2 tablets at first sign of flare, then 1 tablet 1 hour later; max 3 tablets in 1 hour",
-      "prescriber": "Dr. Santos",
-      "start": "01/2019",
-      "refills": 2,
-      "status": "PRN"
+      "status": "Continue at current dose \u2014 escalate after flare"
     }
   ],
   "allergies": [
     {
       "allergen": "NSAIDs (Indomethacin)",
       "type": "Drug",
-      "reaction": "GI bleeding — melena",
+      "reaction": "GI bleeding \u2014 melena",
       "severity": "Severe",
       "verified": "Yes"
     }
@@ -103,7 +85,7 @@ window.EMR_DATA = {
       "bp": "142/90",
       "hr": 76,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "98%",
       "wt": "198 lbs",
       "ht": "5'8\"",
@@ -115,7 +97,7 @@ window.EMR_DATA = {
       "bp": "138/86",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "195 lbs",
       "ht": "5'8\"",
@@ -130,101 +112,63 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Maria Santos, MD",
       "cc": "Follow-up: gout, HTN, CKD",
-      "hpi": "52-year-old male for follow-up. Reports he stopped allopurinol 4 months ago — 'felt fine, didn't think I needed it.' Has had 2 gout flares since stopping (right 1st MTP in July, left ankle in September). Used colchicine at home — partial relief. Reports recent dietary indiscretions: increased beer consumption and seafood at family gatherings. HTN borderline on HCTZ. CKD 2 stable. Discussed HCTZ contributing to hyperuricemia — patient again declined switching diuretic.",
+      "hpi": "52-year-old male for follow-up. Reports he stopped allopurinol 4 months ago \u2014 'felt fine, didn't think I needed it.' Has had 2 gout flares since stopping (right 1st MTP in July, left ankle in September). Used colchicine at home \u2014 partial relief. Reports recent dietary indiscretions: increased beer consumption and seafood at family gatherings. HTN borderline on HCTZ. CKD 2 stable. Discussed HCTZ contributing to hyperuricemia \u2014 patient again declined switching diuretic.",
       "exam": "General: Obese male, NAD. CV: RRR. Extremities: No acute joint swelling or erythema today. Right 1st MTP: mild bony enlargement (chronic). Left ankle: full ROM, no effusion. Feet: No tophi. Kidneys: Non-tender.",
-      "assessment": "1. Gout — recurrent, poorly controlled; non-adherent to allopurinol\n2. Hyperuricemia — worsened off allopurinol; HCTZ contributing\n3. HTN — borderline controlled\n4. CKD 2 — stable\n5. Hyperlipidemia — stable",
-      "plan": "1. RESTART allopurinol 100mg daily — MUST TAKE DAILY even without flares; this is prevention\n2. Colchicine 0.6mg daily x 6 months for flare prophylaxis during allopurinol titration\n3. Target uric acid <6; recheck in 4 weeks; titrate allopurinol up if needed\n4. Dietary counseling: limit beer (especially), organ meats, shellfish, high-fructose drinks\n5. Strongly recommend switching HCTZ to losartan (uricosuric effect) — patient to consider\n6. Labs: uric acid, BMP, CBC\n7. RTC 4 weeks"
+      "assessment": "1. Gout \u2014 recurrent, poorly controlled; non-adherent to allopurinol\n2. Hyperuricemia \u2014 worsened off allopurinol; HCTZ contributing\n3. HTN \u2014 borderline controlled\n4. CKD 2 \u2014 stable\n5. Hyperlipidemia \u2014 stable",
+      "plan": "1. RESTART allopurinol 100mg daily \u2014 MUST TAKE DAILY even without flares; this is prevention\n2. Colchicine 0.6mg daily x 6 months for flare prophylaxis during allopurinol titration\n3. Target uric acid <6; recheck in 4 weeks; titrate allopurinol up if needed\n4. Dietary counseling: limit beer (especially), organ meats, shellfish, high-fructose drinks\n5. Strongly recommend switching HCTZ to losartan (uricosuric effect) \u2014 patient to consider\n6. Labs: uric acid, BMP, CBC\n7. RTC 4 weeks"
     }
   ],
   "labs": [
     {
-      "date": "10/30/2024",
-      "time": "09:00",
-      "orderedBy": "Dr. Maria Santos, MD",
-      "collected": "10/30/2024 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-103015",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Gout Assessment",
+      "results": [
         {
-          "name": "METABOLIC AND RENAL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "102",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "20",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.2",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "eGFR",
-              "value": "72",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": ""
-            },
-            {
-              "test": "Uric Acid",
-              "value": "8.6",
-              "unit": "mg/dL",
-              "range": "3.0-7.0",
-              "flag": "H"
-            },
-            {
-              "test": "Potassium",
-              "value": "3.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            }
-          ]
+          "test": "Serum uric acid",
+          "value": "9.8",
+          "unit": "mg/dL",
+          "ref": "Target <6.0 (normal <7.0 in men)",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.6",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "228",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.3",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3 (borderline \u2014 adjust allopurinol)",
+          "flag": ""
+        },
+        {
+          "test": "Synovial fluid \u2014 MSU crystals",
+          "value": "Negatively birefringent needle-shaped crystals \u2014 monosodium urate confirmed",
+          "unit": "",
+          "ref": "No crystals",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "12.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11 (mild inflammation)",
+          "flag": "H"
+        },
+        {
+          "test": "ESR",
+          "value": "68",
+          "unit": "mm/hr",
+          "ref": "<20",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "Right Foot X-Ray",
+      "findings": "Soft tissue swelling first MTP. Punched-out erosions with overhanging edges at first MTP \u2014 chronic gouty erosions. Tophi calcification right olecranon.",
+      "impression": "Gout with chronic erosive changes. Tophaceous gout."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -251,7 +195,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -264,7 +208,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Restaurant owner — Vietnamese cuisine"
+      "Restaurant owner \u2014 Vietnamese cuisine"
     ],
     [
       "Marital",
@@ -272,7 +216,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — 10 pack-years; quit 2018"
+      "Former smoker \u2014 10 pack-years; quit 2018"
     ],
     [
       "Alcohol",
@@ -301,7 +245,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "gout-flare",
-    "diagnosis": "Acute Gouty Arthritis — Right First MTP (Podagra), Non-Adherent to Urate-Lowering Therapy",
+    "diagnosis": "Acute Gouty Arthritis \u2014 Right First MTP (Podagra), Non-Adherent to Allopurinol",
     "acuity": 4,
     "presentation": "Musculoskeletal Emergency",
     "category": "rheumatologic"
@@ -361,13 +305,11 @@ window.EMR_DATA = {
       "Lymph node examination of inguinal region": "No palpable lymphadenopathy in bilateral inguinal regions"
     },
     "ddxTargets": [
-      "Acute Gouty Arthritis — Right First MTP (Podagra), Non-Adherent to Urate-Lowering Therapy (correct diagnosis)",
-      "Septic Arthritis of First MTP Joint",
-      "Acute Pseudogout (CPPD Crystal Arthropathy)",
-      "Osteomyelitis of First Metatarsal Head",
-      "Necrotizing Soft Tissue Infection",
-      "Cellulitis with Secondary Arthritis",
-      "Acute Rheumatoid Arthritis Flare"
+      "Acute gout \u2014 podagra (correct)",
+      "Pseudogout (CPPD) \u2014 calcium pyrophosphate crystals (positively birefringent); knee more common; chondrocalcinosis",
+      "Septic arthritis \u2014 WBC >50,000; Gram stain/culture; no crystals; treat as septic until excluded",
+      "Reactive arthritis \u2014 post-infection; asymmetric oligoarthritis; Reiter syndrome triad",
+      "Cellulitis \u2014 skin infection; no joint involvement; no crystals"
     ],
     "biasFlags": {
       "anchoring": "The classic presentation of podagra in a patient with known gout history may cause immediate anchoring on gout without considering infectious causes that require urgent treatment",
@@ -377,7 +319,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You're thinking about gout given his history, which makes sense. But before you interview him, what other serious conditions can present with acute monoarticular arthritis that you absolutely cannot miss? How will you differentiate between crystal arthropathy and infection during your history?",
       "phase5": "The clinical picture is quite suggestive of gout, especially with his medication non-adherence. However, what additional testing might you consider to definitively confirm your diagnosis and rule out your must-not-miss differentials? How does his CKD affect your treatment options?",
-      "finalDebrief": "This case highlights the importance of medication adherence in gout management. Notice how the classic podagra presentation with known gout history made the diagnosis likely, but you still needed to systematically exclude septic arthritis. How did the presence of tophi and his non-adherence history strengthen your diagnostic confidence? What does this teach you about the challenges of chronic disease management?"
+      "finalDebrief": "This case highlights the importance of medication adherence in gout management. Notice how the classic podagra presentation with known gout history made the diagnosis likely, but you still needed to systematically exclude septic arthritis. How did the presence of tophi and his non-adherence history strengthen your diagnostic confidence? What does this teach you about the challenges of chronic disease management?",
+      "final": "Diagnosis: acute gouty arthritis (podagra), tophaceous gout. Key learning: (1) Acute gout treatment: colchicine 1.2mg then 0.6mg 1h later (START WITHIN 24h \u2014 dramatically more effective early), NSAIDs, or short course steroids. All three are equally effective if started early. Low-dose colchicine (as above) has same efficacy as high-dose with fewer GI side effects. (2) Crystal identification on arthrocentesis: MSU (gout) = negatively birefringent, needle-shaped crystals (yellow when parallel to polarizer axis). CPP (pseudogout) = positively birefringent, rhomboid-shaped crystals (blue when parallel to polarizer). (3) Do NOT start/stop allopurinol during acute flare: mobilization of urate from deposits causes paradoxical flare. If patient already taking allopurinol \u2192 continue. If starting ULT \u2192 wait until flare completely resolved (usually 2-4 weeks). (4) Urate-lowering therapy targets: most patients = uric acid <6.0 mg/dL. Tophaceous gout (as here) = <5.0 mg/dL. Allopurinol dose: start 100mg, increase monthly by 100mg to target. Max 800mg. Adjust for CKD. (5) Foods to avoid: red meat, organ meats, shellfish, high-fructose corn syrup, alcohol (especially beer). Increase water, dairy, coffee, cherries (anti-inflammatory). Weight loss reduces uric acid."
     }
   }
 };
