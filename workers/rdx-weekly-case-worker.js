@@ -216,7 +216,7 @@ function buildWeeklyEmail(user, caseData) {
     <p style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin:0">Clinical Reasoning Education</p>
   </div>
 
-  <!-- Body -->
+  <!-- Greeting -->
   <div style="padding:44px 48px 0">
     <p style="font-family:Georgia,serif;font-size:17px;color:#0d2b3e;margin:0 0 22px">Hi ${firstName},</p>
     <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:0 0 20px">Your weekly case is ready.</p>
@@ -225,7 +225,7 @@ function buildWeeklyEmail(user, caseData) {
   <!-- Divider -->
   <div style="padding:0 48px">
     <hr style="border:none;border-top:1px solid #e8ecf0;margin:8px 0 0">
-    <hr style="border:none;border-top:2px solid #2874A6;width:40px;margin:0 0 24px">
+    <div style="border-top:2px solid #2874A6;width:40px;margin:0 0 24px"></div>
   </div>
 
   <!-- Case card -->
@@ -242,24 +242,54 @@ function buildWeeklyEmail(user, caseData) {
   <!-- CTA -->
   <div style="padding:28px 48px 8px;text-align:center">
     <a href="${caseUrl}" style="display:inline-block;background:#2874A6;color:#fff;font-family:'Courier New',monospace;font-size:12px;font-weight:bold;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:16px 40px;border-radius:2px">Work Through This Case →</a>
-    <p style="font-family:Georgia,serif;font-size:12px;color:#94a3b8;font-style:italic;margin:10px 0 0">Opens the full patient chart. No signup required.</p>
+    <p style="font-family:Georgia,serif;font-size:12px;color:#94a3b8;font-style:italic;margin:10px 0 0">Opens the full patient chart directly. No signup required.</p>
   </div>
 
   <!-- Divider -->
   <div style="padding:0 48px">
     <hr style="border:none;border-top:1px solid #e8ecf0;margin:28px 0 0">
-    <hr style="border:none;border-top:2px solid #2874A6;width:40px;margin:0 0 28px">
+    <div style="border-top:2px solid #2874A6;width:40px;margin:0 0 28px"></div>
   </div>
 
-  <!-- Growth note -->
+  <!-- Growth + sharing note -->
   <div style="padding:0 48px">
     <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:0 0 20px">Every single day, new students are joining ReasonDx. From medical schools across the US, from programs around the world, across multiple health professions. People are finding this, sharing it with their classmates, and coming back every week.</p>
     <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:0 0 20px">If you've shared it — thank you. If you haven't yet, this is your sign. The platform gets better as it grows, and you're helping build something that's reaching further than I ever imagined.</p>
   </div>
 
+  <!-- Share links -->
+  <div style="padding:0 48px 4px">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+          <span style="font-size:15px;margin-right:10px">🔗</span>
+          <span style="font-size:14px;color:#3d4f61;font-family:Georgia,serif">Post on <strong>LinkedIn or X</strong> — tag a classmate who would use it</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+          <span style="font-size:15px;margin-right:10px">💬</span>
+          <span style="font-size:14px;color:#3d4f61;font-family:Georgia,serif">Drop the link in your <strong>class WhatsApp, GroupMe, or study group thread</strong></span>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+          <span style="font-size:15px;margin-right:10px">📱</span>
+          <span style="font-size:14px;color:#3d4f61;font-family:Georgia,serif">Share on <strong>Reddit</strong> — r/medicalschool, r/premed, r/Step1, r/Step2, SDN</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:10px 0">
+          <span style="font-size:15px;margin-right:10px">🏥</span>
+          <span style="font-size:14px;color:#3d4f61;font-family:Georgia,serif">Tell your <strong>program director</strong> — free educator version at <a href="https://reasondx.com/for-educators" style="color:#2874A6">reasondx.com/for-educators</a></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
   <!-- Divider -->
   <div style="padding:0 48px">
-    <hr style="border:none;border-top:1px solid #e8ecf0;margin:8px 0 20px">
+    <hr style="border:none;border-top:1px solid #e8ecf0;margin:24px 0">
   </div>
 
   <!-- Poll -->
@@ -269,13 +299,13 @@ function buildWeeklyEmail(user, caseData) {
   </div>
 
   <!-- Poll options -->
-  <div style="padding:0 48px 32px;display:flex;gap:12px">
+  <div style="padding:0 48px 32px">
     <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
       <td width="32%" style="border:1.5px solid #10b981;padding:18px 10px 16px;text-align:center">
         <a href="${pollUrl}" style="text-decoration:none;display:block">
           <span style="font-size:22px;display:block;margin-bottom:8px">📅</span>
           <span style="font-family:'Courier New',monospace;font-size:10px;font-weight:bold;letter-spacing:.1em;text-transform:uppercase;color:#059669;display:block;margin-bottom:3px">Weekly is perfect</span>
-          <span style="font-size:11px;color:#94a3b8;display:block">Keep it as is</span>
+          <span style="font-size:11px;color:#94a3b8;display:block;font-family:Georgia,serif">Keep it as is</span>
         </a>
       </td>
       <td width="4%"></td>
@@ -283,7 +313,7 @@ function buildWeeklyEmail(user, caseData) {
         <a href="${pollUrl}" style="text-decoration:none;display:block">
           <span style="font-size:22px;display:block;margin-bottom:8px">📬</span>
           <span style="font-family:'Courier New',monospace;font-size:10px;font-weight:bold;letter-spacing:.1em;text-transform:uppercase;color:#2874A6;display:block;margin-bottom:3px">2–3x per week</span>
-          <span style="font-size:11px;color:#94a3b8;display:block">More cases, please</span>
+          <span style="font-size:11px;color:#94a3b8;display:block;font-family:Georgia,serif">More cases, please</span>
         </a>
       </td>
       <td width="4%"></td>
@@ -291,7 +321,7 @@ function buildWeeklyEmail(user, caseData) {
         <a href="${pollUrl}" style="text-decoration:none;display:block">
           <span style="font-size:22px;display:block;margin-bottom:8px">🗓️</span>
           <span style="font-family:'Courier New',monospace;font-size:10px;font-weight:bold;letter-spacing:.1em;text-transform:uppercase;color:#7c3aed;display:block;margin-bottom:3px">Daily</span>
-          <span style="font-size:11px;color:#94a3b8;display:block">Every day if possible</span>
+          <span style="font-size:11px;color:#94a3b8;display:block;font-family:Georgia,serif">Every day if possible</span>
         </a>
       </td>
     </tr></table>
@@ -299,21 +329,21 @@ function buildWeeklyEmail(user, caseData) {
 
   <!-- Sign-off -->
   <div style="padding:0 48px 44px">
-    <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:12px 0 0">See you next week.</p>
+    <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:12px 0 0;font-family:Georgia,serif">See you next week.</p>
     <p style="font-family:Georgia,serif;font-size:16px;color:#0d2b3e;margin:20px 0 3px">Lauren Fine, MD</p>
     <p style="font-family:Georgia,serif;font-size:12px;color:#94a3b8;font-style:italic;margin:0">Founder, ReasonDx</p>
   </div>
 
-  <!-- Social -->
+  <!-- Social share footer -->
   <div style="padding:0 48px 36px">
     <hr style="border:none;border-top:1px solid #e8ecf0;margin-bottom:24px">
     <p style="font-family:Georgia,serif;font-size:13px;color:#94a3b8;text-align:center;margin:0">
       Know someone who would find this useful?<br>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://reasondx.com" style="color:#2874A6;">Share on LinkedIn</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://reasondx.com" style="color:#2874A6">Share on LinkedIn</a>
       &nbsp;·&nbsp;
-      <a href="https://twitter.com/intent/tweet?text=Free%20clinical%20reasoning%20cases%20for%20health%20professions%20students%20%E2%80%94%20https://reasondx.com" style="color:#2874A6;">Share on X</a>
+      <a href="https://twitter.com/intent/tweet?text=Free%20clinical%20reasoning%20cases%20for%20health%20professions%20students%20%E2%80%94%20https://reasondx.com" style="color:#2874A6">Share on X</a>
       &nbsp;·&nbsp;
-      <a href="https://reasondx.com/for-educators" style="color:#2874A6;">For Educators</a>
+      <a href="https://reasondx.com/for-educators" style="color:#2874A6">For Educators</a>
     </p>
   </div>
 
