@@ -9,7 +9,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Cigna EPO",
     "pcp": "Dr. Michael Torres, MD",
-    "pharmacy": "CVS Pharmacy \u2014 1340 Oak St, Hollywood, FL",
+    "pharmacy": "CVS Pharmacy — 1340 Oak St, Hollywood, FL",
     "language": "English",
     "chiefComplaint": "Chest pain and shortness of breath",
     "race": "Multiracial",
@@ -89,66 +89,66 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/15/2025",
-        "bp": "172/102",
-        "hr": 105,
-        "rr": 14,
-        "temp": "99.0\u00b0F",
-        "spo2": "98%",
-        "wt": "168 lbs",
-        "ht": "5'6\"",
-        "bmi": 27.1,
-        "setting": "PCP Office"
+      "date": "01/15/2025",
+      "bp": "172/102",
+      "hr": 105,
+      "rr": 14,
+      "temp": "99.0°F",
+      "spo2": "98%",
+      "wt": "168 lbs",
+      "ht": "5'6\"",
+      "bmi": 27.1,
+      "setting": "PCP Office"
     },
     {
-        "date": "10/03/2024",
-        "bp": "173/97",
-        "hr": 107,
-        "rr": 16,
-        "temp": "98.4\u00b0F",
-        "spo2": "96%",
-        "wt": "176 lbs",
-        "ht": "5'6\"",
-        "bmi": 28.4,
-        "setting": "PCP Office"
+      "date": "10/03/2024",
+      "bp": "173/97",
+      "hr": 107,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "96%",
+      "wt": "176 lbs",
+      "ht": "5'6\"",
+      "bmi": 28.4,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/22/2024",
-        "bp": "173/102",
-        "hr": 110,
-        "rr": 18,
-        "temp": "98.2\u00b0F",
-        "spo2": "95%",
-        "wt": "156 lbs",
-        "ht": "5'6\"",
-        "bmi": 25.2,
-        "setting": "Urgent Care"
+      "date": "07/22/2024",
+      "bp": "173/102",
+      "hr": 110,
+      "rr": 18,
+      "temp": "98.2°F",
+      "spo2": "95%",
+      "wt": "156 lbs",
+      "ht": "5'6\"",
+      "bmi": 25.2,
+      "setting": "Urgent Care"
     },
     {
-        "date": "04/10/2024",
-        "bp": "155/92",
-        "hr": 110,
-        "rr": 18,
-        "temp": "98.4\u00b0F",
-        "spo2": "98%",
-        "wt": "199 lbs",
-        "ht": "5'6\"",
-        "bmi": 32.1,
-        "setting": "PCP Office"
+      "date": "04/10/2024",
+      "bp": "155/92",
+      "hr": 110,
+      "rr": 18,
+      "temp": "98.4°F",
+      "spo2": "98%",
+      "wt": "199 lbs",
+      "ht": "5'6\"",
+      "bmi": 32.1,
+      "setting": "PCP Office"
     },
     {
-        "date": "01/08/2024",
-        "bp": "155/99",
-        "hr": 102,
-        "rr": 20,
-        "temp": "98.6\u00b0F",
-        "spo2": "97%",
-        "wt": "165 lbs",
-        "ht": "5'6\"",
-        "bmi": 26.6,
-        "setting": "PCP Office"
+      "date": "01/08/2024",
+      "bp": "155/99",
+      "hr": 102,
+      "rr": 20,
+      "temp": "98.6°F",
+      "spo2": "97%",
+      "wt": "165 lbs",
+      "ht": "5'6\"",
+      "bmi": 26.6,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -158,7 +158,7 @@ window.EMR_DATA = {
       "cc": "Follow-up: Type 2 Diabetes Mellitus (10 years), Hypertension (8 years),",
       "hpi": "50-year-old female presenting for routine follow-up of Type 2 Diabetes Mellitus (10 years), Hypertension (8 years), Hyperlipidemia (5 years). Patient reports compliance with medications. No new complaints. Denies chest pain, shortness of breath, or weight changes.",
       "exam": "General: Well-appearing female in NAD. HEENT: PERRL, EOMI, oropharynx clear. Neck: Supple, no LAD. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, NT/ND. Extremities: No edema. Neuro: A&O x3.",
-      "assessment": "1. Type 2 Diabetes Mellitus (10 years) \u2014 stable on current regimen\n2. Hypertension (8 years) \u2014 stable on current regimen\n3. Hyperlipidemia (5 years) \u2014 stable on current regimen",
+      "assessment": "1. Type 2 Diabetes Mellitus (10 years) — stable on current regimen\n2. Hypertension (8 years) — stable on current regimen\n3. Hyperlipidemia (5 years) — stable on current regimen",
       "plan": "1. Continue current medications; f/u 3 months\n2. Continue current medications; f/u 3 months\n3. Continue current medications; f/u 3 months"
     },
     {
@@ -274,7 +274,7 @@ window.EMR_DATA = {
               "test": "Est. Avg Glucose (eAG)",
               "value": "165",
               "unit": "mg/dL",
-              "range": "\u2014",
+              "range": "—",
               "flag": ""
             }
           ]
@@ -285,7 +285,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.6",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -306,7 +306,7 @@ window.EMR_DATA = {
             {
               "test": "Platelet Count",
               "value": "269",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -352,7 +352,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "\u2014",
+      "lot": "—",
       "mfr": "GSK"
     },
     {
@@ -410,7 +410,7 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None \u2014 discussed"
+      "None — discussed"
     ]
   ],
   "meta": {
@@ -496,7 +496,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "The student has submitted their initial differential based only on the chief complaint of chest pain and shortness of breath. Coach them on the breadth of their differential — are all life-threatening causes of chest pain represented? Do not give the diagnosis.",
       "phase5": "The student has now completed history and physical exam. Their Phase 2 differential was: {{ddx2}}. Their refined differential is: {{ddx5}}. Compare them. If anchoring is present, challenge it through Socratic questioning. Ask about the finding that should have most changed their thinking.",
-      "finalDebrief": "The final diagnosis is STEMI. The student's DDx progression was: Phase 2: {{ddx2}} → Phase 5: {{ddx5}} → Final: {{ddxFinal}}. Walk them through what they got right, what cognitive biases were present if any, and what the key teaching points of this case are."
+      "finalDebrief": "The final diagnosis is STEMI. The student's DDx progression was: Phase 2: {{ddx2}} → Phase 5: {{ddx5}} → Final: {{ddxFinal}}. Walk them through what they got right, what cognitive biases were present if any, and what the key teaching points of this case are.",
+      "final": "Diagnosis: ST-elevation myocardial infarction (STEMI) — a time-sensitive cardiac emergency. Key learning: (1) STEMI criteria: new ST elevation at the J-point in at least 2 contiguous leads of >=1 mm in most leads, >=2 mm in leads V2-V3 (1.5 mm in women; 2.5 mm in men under 40), OR new left bundle branch block with clinical features of ischemia (Sgarbossa criteria helpful), OR posterior MI (ST depression V1-V3 with dominant R waves and posterior leads V7-V9 showing STE). The diagnosis activates an emergent pathway regardless of time from symptom onset — every minute of reperfusion delay increases mortality. (2) Treatment is rapid reperfusion. (a) PRIMARY PERCUTANEOUS CORONARY INTERVENTION (PCI) is the preferred reperfusion strategy when available within 90 minutes of first medical contact (120 minutes if transferred from a non-PCI hospital). Door-to-balloon time target <90 minutes for PCI-capable facilities. (b) FIBRINOLYTIC THERAPY (alteplase, tenecteplase, reteplase) if PCI not available within 120 minutes, given within 30 minutes of first medical contact. Contraindications to fibrinolysis must be reviewed: active bleeding, prior intracranial hemorrhage, ischemic stroke within 3 months, suspected aortic dissection, severe uncontrolled hypertension (>180/110). After fibrinolysis, transfer for PCI (rescue if failed, routine if successful — 'pharmacoinvasive' strategy). (3) Adjunctive therapy ('MONA-BASH' is outdated — contemporary: dual antiplatelet, anticoagulation, beta-blocker, statin, and oxygen only if hypoxic). (a) Aspirin 325 mg chewed (loading). (b) P2Y12 inhibitor loading — ticagrelor 180 mg or prasugrel 60 mg (preferred over clopidogrel 600 mg in PCI-STEMI when no increased bleeding risk; prasugrel contraindicated with prior stroke/TIA and caution over age 75). (c) Anticoagulation — unfractionated heparin (bolus 60 units/kg then 12 units/kg/hr) OR bivalirudin. Enoxaparin if fibrinolysis given. (d) High-intensity statin — atorvastatin 80 mg or rosuvastatin 40 mg (pleiotropic benefits plus lipid lowering). (e) Beta-blocker within 24 hours if no hypotension, heart failure, or contraindication. (f) Nitroglycerin for ongoing ischemia, hypertension, or pulmonary edema (avoid in RV infarct, severe hypotension, recent PDE-5 inhibitor use). (g) Oxygen ONLY if SpO2 <90% (routine oxygen in normoxemic patients may cause harm). (h) Morphine for refractory pain (use sparingly — delays gastric absorption of antiplatelets and may increase mortality per recent data). (4) Localization and RV involvement. Inferior STEMI (II, III, aVF): ST elevation greater in III than II suggests RCA occlusion; less in III than II suggests LCx. Right-sided ECG (V4R) for inferior STEMI — ST elevation in V4R indicates RV infarct. RV infarct management differs: preload-dependent, AVOID nitrates and diuretics (can precipitate shock), volume loading, maintain sinus rhythm (AV pacing may be needed), and early reperfusion. Anterior STEMI (V1-V6): LAD occlusion — larger territory, higher mortality, higher risk of arrhythmia and mechanical complications. Posterior STEMI: ST depression V1-V3 with tall R waves; posterior lead ECG confirms. (5) Complications and long-term management. Acute: arrhythmia (VF/VT in first 48 hours), cardiogenic shock, mechanical complications (papillary muscle rupture causing acute MR, VSD, free wall rupture — typically days 3-7 post-MI), pericarditis (early fibrinous, or late Dressler syndrome). Secondary prevention: dual antiplatelet therapy x 12 months (longer for some high-risk), indefinite aspirin, statin, beta-blocker, ACE-I or ARB (especially for LV dysfunction), MRA for EF <40% with symptoms, SGLT2 inhibitor for HFrEF or diabetes, cardiac rehabilitation (proven mortality benefit). Risk factor modification: smoking cessation, BP control, lipid management, diabetes control, weight loss, exercise, Mediterranean diet. Classic pitfalls: (a) missing STEMI in atypical presentations — women, elderly, diabetics may present with dyspnea, epigastric pain, fatigue rather than classic chest pain. (b) Delaying reperfusion for lab results or imaging — time is muscle. (c) Using nitrates or diuretics in RV infarct. (d) Not pursuing dual antiplatelet duration adherence — premature discontinuation is the leading cause of stent thrombosis. (e) Forgetting cardiac rehabilitation referral — reduces mortality by ~20-30%."
     }
   }
 };
