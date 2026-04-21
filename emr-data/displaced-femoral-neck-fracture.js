@@ -1,6 +1,3 @@
-// Virtual EMR Case: Displaced Femoral Neck Fracture
-// Variant: displaced-femoral-neck-fracture | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B with Humana Medicare Advantage",
     "pcp": "Dr. Lawrence Chen, MD",
-    "pharmacy": "CVS Pharmacy — 2600 Broward Blvd, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2600 Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
     "address": "4561 E Roosevelt Rd, Minneapolis, MN 55403",
@@ -26,104 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Osteoporosis, Severe",
-      "icd": "M80.08XA",
-      "onset": "2015",
+      "problem": "Displaced femoral neck fracture \u2014 Garden III",
+      "icd": "S72.001A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "T-score -3.4 femoral neck; -3.1 lumbar spine; on zoledronic acid annual infusion; prior vertebral compression fracture T12 (2020)"
+      "notes": "Dorothy Hansen, 78F \u2014 fell from standing height, cannot bear weight on right hip. Hip shortened and externally rotated. X-ray: displaced femoral neck fracture (Garden III \u2014 complete, displaced). Surgical repair within 24-48 hours."
     },
     {
-      "problem": "Vertebral Compression Fracture T12",
-      "icd": "M80.08XS",
-      "onset": "2020",
-      "status": "Resolved",
-      "notes": "Osteoporotic compression fracture; managed conservatively with bracing"
+      "problem": "Avascular necrosis risk \u2014 displaced fracture disrupts blood supply",
+      "icd": "S72.001A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Femoral head blood supply (medial femoral circumflex artery) disrupted by displaced fracture \u2192 avascular necrosis if managed with ORIF. Arthroplasty avoids AVN risk for displaced fractures."
     },
     {
-      "problem": "Atrial Fibrillation, Persistent",
-      "icd": "I48.1",
-      "onset": "2017",
+      "problem": "Surgical timing \u2014 24-48 hours for optimal outcomes",
+      "icd": "S72.001A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Rate controlled; on warfarin (CHA2DS2-VASc 5)"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "eGFR 52; multifactorial — age, HTN, DM"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2008",
-      "status": "Active",
-      "notes": "A1c 7.0%; on metformin (dose-adjusted for CKD) and glipizide"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2000",
-      "status": "Active",
-      "notes": "On losartan and metoprolol"
+      "notes": "Hip fracture surgery within 24-48 hours reduces mortality, pain, delirium risk, and hospital complications. Surgery >48h associated with worse outcomes."
     }
   ],
   "medications": [
     {
-      "name": "Warfarin 3mg daily (dose varies per INR)",
-      "sig": "Take as directed by INR clinic — currently 3mg daily",
-      "prescriber": "Dr. Chen",
-      "start": "06/2017",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Chen",
-      "start": "06/2017",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Losartan 50mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Chen",
-      "start": "01/2002",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals (renal dose)",
-      "prescriber": "Dr. Chen",
-      "start": "01/2009",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Glipizide 5mg daily",
-      "sig": "Take 1 tablet by mouth once daily before breakfast",
-      "prescriber": "Dr. Chen",
-      "start": "06/2018",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Zoledronic Acid 5mg IV annually",
-      "sig": "Infuse 5 mg IV over 15 minutes annually — administered in office",
-      "prescriber": "Dr. Chen",
-      "start": "06/2021",
+      "name": "Hemiarthroplasty or total hip arthroplasty \u2014 within 24-48h",
+      "sig": "Displaced femoral neck fracture in elderly: arthroplasty preferred over ORIF (reduces re-operation rate from AVN). Active patients with good bone quality \u2192 THA. Sedentary/low-demand patients \u2192 hemiarthroplasty (faster, less complex).",
+      "prescriber": "Orthopedic Surgery",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "Scheduled \u2014 within 24h"
     },
     {
-      "name": "Calcium-Vitamin D 600mg/800IU BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Chen",
-      "start": "06/2016",
-      "refills": 5,
-      "status": "Active"
+      "name": "Fascia iliaca nerve block \u2014 pre-operative analgesia",
+      "sig": "Regional nerve block provides superior analgesia to IV opioids for hip fracture pre-operatively. Reduces opioid requirements, reduces delirium risk, facilitates mobilization.",
+      "prescriber": "Anesthesia/Orthopedics",
+      "start": "2024",
+      "refills": 0,
+      "status": "Administered"
+    },
+    {
+      "name": "Anticoagulation \u2014 post-operative VTE prophylaxis",
+      "sig": "DVT/PE risk after hip surgery is high without prophylaxis. Aspirin 81mg (preferred per recent evidence) or LMWH x 28-35 days post-operatively.",
+      "prescriber": "Orthopedics",
+      "start": "2024",
+      "refills": 0,
+      "status": "Post-op"
     }
   ],
   "allergies": [
@@ -148,7 +92,7 @@ window.EMR_DATA = {
       "bp": "136/72",
       "hr": 72,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "95%",
       "wt": "124 lbs",
       "ht": "5'2\"",
@@ -160,7 +104,7 @@ window.EMR_DATA = {
       "bp": "140/74",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "126 lbs",
       "ht": "5'2\"",
@@ -172,7 +116,7 @@ window.EMR_DATA = {
       "bp": "134/70",
       "hr": 70,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "128 lbs",
       "ht": "5'2\"",
@@ -187,10 +131,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Lawrence Chen, MD",
       "cc": "Fall risk assessment; INR check; DM/HTN management",
-      "hpi": "83-year-old female with severe osteoporosis (T-score -3.4 femoral neck), persistent atrial fibrillation on warfarin, CKD 3a, DM2, and prior T12 compression fracture for routine visit. Has been increasingly unsteady on feet — daughter reports 2 near-falls in past month (caught herself on furniture). Uses cane at home but daughter wants her to use walker. Kyphotic posture worsening since compression fracture. INR has been labile — ranged 1.8-4.2 over past 3 months. Compliant with zoledronic acid (last infusion 06/2024).",
+      "hpi": "83-year-old female with severe osteoporosis (T-score -3.4 femoral neck), persistent atrial fibrillation on warfarin, CKD 3a, DM2, and prior T12 compression fracture for routine visit. Has been increasingly unsteady on feet \u2014 daughter reports 2 near-falls in past month (caught herself on furniture). Uses cane at home but daughter wants her to use walker. Kyphotic posture worsening since compression fracture. INR has been labile \u2014 ranged 1.8-4.2 over past 3 months. Compliant with zoledronic acid (last infusion 06/2024).",
       "exam": "General: Thin elderly female, kyphotic posture. CV: Irregularly irregular. Lungs: CTAB. MSK: Thoracic kyphosis. Gait: Slow, unsteady, uses cane. Timed Up-and-Go: 18 seconds (elevated fall risk). Skin: No bruising.",
-      "assessment": "1. Fall risk — HIGH; TUG 18 seconds; osteoporosis with prior fragility fracture; on warfarin\n2. Osteoporosis, severe — on zoledronic acid; kyphosis worsening\n3. AF on warfarin — labile INR; BLEEDING RISK with falls\n4. CKD 3a — stable\n5. DM2 — well controlled",
-      "plan": "1. STRONGLY recommend transition from cane to rolling walker — daughter to purchase\n2. Home safety assessment ordered — remove throw rugs, improve lighting, grab bars\n3. PT referral for balance and strengthening\n4. INR today: 2.6 (therapeutic); recheck in 2 weeks\n5. Discussed switching warfarin to apixaban — renal function borderline; will discuss with cardiologist\n6. DEXA scan due — order for February\n7. HIGH FALL RISK WARNING: hip fracture would be catastrophic given severe osteoporosis and anticoagulation"
+      "assessment": "1. Fall risk \u2014 HIGH; TUG 18 seconds; osteoporosis with prior fragility fracture; on warfarin\n2. Osteoporosis, severe \u2014 on zoledronic acid; kyphosis worsening\n3. AF on warfarin \u2014 labile INR; BLEEDING RISK with falls\n4. CKD 3a \u2014 stable\n5. DM2 \u2014 well controlled",
+      "plan": "1. STRONGLY recommend transition from cane to rolling walker \u2014 daughter to purchase\n2. Home safety assessment ordered \u2014 remove throw rugs, improve lighting, grab bars\n3. PT referral for balance and strengthening\n4. INR today: 2.6 (therapeutic); recheck in 2 weeks\n5. Discussed switching warfarin to apixaban \u2014 renal function borderline; will discuss with cardiologist\n6. DEXA scan due \u2014 order for February\n7. HIGH FALL RISK WARNING: hip fracture would be catastrophic given severe osteoporosis and anticoagulation"
     },
     {
       "id": "V002",
@@ -198,161 +142,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Lawrence Chen, MD",
       "cc": "Post zoledronic acid infusion check; routine labs",
-      "hpi": "82-year-old female 1 week post annual zoledronic acid infusion. Tolerated well — mild flu-like symptoms for 24 hours post-infusion, resolved with acetaminophen. No new symptoms.",
+      "hpi": "82-year-old female 1 week post annual zoledronic acid infusion. Tolerated well \u2014 mild flu-like symptoms for 24 hours post-infusion, resolved with acetaminophen. No new symptoms.",
       "exam": "General: NAD. MSK: Kyphotic, stable.",
-      "assessment": "1. Post zoledronic acid — tolerated\n2. Stable chronic conditions",
-      "plan": "1. Continue current medications\n2. INR 2.4 — therapeutic\n3. RTC 6 months"
+      "assessment": "1. Post zoledronic acid \u2014 tolerated\n2. Stable chronic conditions",
+      "plan": "1. Continue current medications\n2. INR 2.4 \u2014 therapeutic\n3. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "12/04/2024",
-      "time": "09:30",
-      "orderedBy": "Dr. Lawrence Chen, MD",
-      "collected": "12/04/2024 09:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-285030",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Hip Fracture Pre-Op",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "106",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.3",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "52",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "11.8",
+          "unit": "g/dL",
+          "ref": "12-16 (transfuse if <8 or symptomatic)",
+          "flag": "L"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "34.2",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "182",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "INR",
+          "value": "1.1",
+          "unit": "",
+          "ref": "<1.5 for surgery",
+          "flag": ""
         },
         {
-          "name": "COAGULATION",
-          "results": [
-            {
-              "test": "PT",
-              "value": "24.8",
-              "unit": "seconds",
-              "range": "11.0-13.5",
-              "flag": "H"
-            },
-            {
-              "test": "INR",
-              "value": "2.6",
-              "unit": "",
-              "range": "2.0-3.0 (target AF)",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.5-1.1",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "7.0",
-              "unit": "%",
-              "range": "<5.7 normal",
-              "flag": "H"
-            }
-          ]
+          "test": "BMP/electrolytes",
+          "value": "Sodium 138, K 3.8, normal metabolic panel",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "ECG",
+          "value": "Normal sinus rhythm \u2014 pre-op clearance",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "03/2020",
-      "study": "CT THORACIC SPINE WITHOUT CONTRAST",
-      "accession": "IMG-2020-28503",
-      "status": "FINAL",
-      "orderedBy": "Dr. Lawrence Chen, MD",
-      "readBy": "Dr. Robert Anderson, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Urgent",
-      "clinical": "78F with acute mid-back pain after bending. Severe osteoporosis. R/O compression fracture.",
-      "technique": "CT thoracic spine without contrast.",
-      "findings": "T12 vertebral body: Acute compression fracture with approximately 40% loss of anterior vertebral body height. No retropulsion into spinal canal. Posterior elements intact.\\n\\nRemaining thoracic vertebral bodies: Diffuse osteopenia. No additional acute fractures. Old T8 mild anterior wedging — chronic.\\n\\nSpinal canal: Patent. No cord compression.",
-      "impression": "1. Acute T12 vertebral compression fracture — osteoporotic, 40% anterior height loss.\\n2. Diffuse osteopenia.\\n3. Chronic mild T8 wedging.\\n4. No spinal canal compromise.",
-      "dictated": "03/15/2020 14:00",
-      "verified": "03/15/2020 16:00"
+      "date": "04/2024",
+      "study": "Hip X-Ray AP and Cross-Table Lateral",
+      "findings": "Complete femoral neck fracture with displacement (Garden III). Femoral head in acetabulum. No acetabular fracture. Osteopenic bone.",
+      "impression": "Displaced femoral neck fracture. Orthopedic surgery consultation for arthroplasty."
     }
   ],
   "immunizations": [
@@ -371,17 +215,17 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "2023",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Pfizer"
     },
     {
       "vaccine": "Shingrix (2/2)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -394,11 +238,11 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Retired librarian — 30 years at Broward County Library"
+      "Retired librarian \u2014 30 years at Broward County Library"
     ],
     [
       "Marital",
-      "Widowed — husband deceased 2012"
+      "Widowed \u2014 husband deceased 2012"
     ],
     [
       "Tobacco",
@@ -414,7 +258,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Limited — walks indoors with cane; seated exercises"
+      "Limited \u2014 walks indoors with cane; seated exercises"
     ],
     [
       "Housing",
@@ -426,12 +270,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Yes — healthcare proxy: daughter Patricia Campbell-Ross; full code"
+      "Yes \u2014 healthcare proxy: daughter Patricia Campbell-Ross; full code"
     ]
   ],
   "meta": {
     "caseId": "displaced-femoral-neck-fracture",
-    "diagnosis": "Displaced Femoral Neck Fracture",
+    "diagnosis": "Displaced Femoral Neck Fracture \u2014 Hip Arthroplasty Indicated",
     "acuity": 2,
     "presentation": "Geriatric Emergency",
     "category": "musculoskeletal"
@@ -495,13 +339,11 @@ window.EMR_DATA = {
       "Patrick's test (FABER)": "Unable to perform due to severe pain with hip flexion and external rotation"
     },
     "ddxTargets": [
-      "Displaced Femoral Neck Fracture (correct diagnosis)",
-      "Intertrochanteric Hip Fracture",
-      "Hip Dislocation",
-      "Septic Arthritis of Hip",
-      "Pathological Fracture from Metastatic Disease",
-      "Severe Hip Osteoarthritis with Acute Exacerbation",
-      "Greater Trochanteric Bursitis"
+      "Displaced femoral neck fracture \u2014 arthroplasty indicated (correct)",
+      "Intertrochanteric fracture \u2014 extracapsular; treated with ORIF (DHS); different fracture pattern",
+      "Femoral head fracture \u2014 rare; associated with hip dislocation; CT for classification",
+      "Pathological fracture \u2014 known malignancy; permeative lytic lesion on X-ray; screen for cancer",
+      "Acetabular fracture \u2014 CT for characterization; different surgical approach"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'typical elderly fall' and missing the specific fracture pattern, or focusing solely on osteoporosis history without considering other pathological causes",
@@ -511,7 +353,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview Mrs. Campbell, think about the key historical features that would help you differentiate between the various causes of hip pain in an elderly patient with osteoporosis. What specific mechanism of injury details and functional limitations would be most concerning for fracture versus other conditions?",
       "phase5": "Now that you've gathered your history and physical exam findings, let's think through this systematically. Mrs. Campbell has classic signs - what does the combination of external rotation, shortening, and inability to bear weight tell you? How does her osteoporosis history and the mechanism of injury factor into your diagnostic reasoning?",
-      "finalDebrief": "This case illustrates the importance of recognizing the classic presentation of displaced femoral neck fractures - the external rotation and shortening are pathognomonic signs. Notice how your differential evolved from considering various hip pathologies to focusing on fracture types based on the mechanism and physical findings. The patient's osteoporosis, anticoagulation status, and comorbidities all factor into surgical planning and prognosis."
+      "finalDebrief": "This case illustrates the importance of recognizing the classic presentation of displaced femoral neck fractures - the external rotation and shortening are pathognomonic signs. Notice how your differential evolved from considering various hip pathologies to focusing on fracture types based on the mechanism and physical findings. The patient's osteoporosis, anticoagulation status, and comorbidities all factor into surgical planning and prognosis.",
+      "final": "Diagnosis: displaced femoral neck fracture (Garden III) \u2014 arthroplasty indicated. Key learning: (1) Garden classification: I = incomplete/impacted, II = complete undisplaced, III = complete partially displaced, IV = complete fully displaced. Garden I and II = ORIF (preserve femoral head). Garden III and IV in elderly = ARTHROPLASTY (replace femoral head \u2014 avoids AVN). (2) ORIF vs arthroplasty: ORIF preserves the native femoral head but risks AVN and fixation failure (re-operation rate 25-40% in displaced fractures). Arthroplasty eliminates AVN risk and allows immediate weight-bearing but is a larger operation. For active elderly patients with good bone quality \u2192 THA. For frail/low-demand patients \u2192 hemiarthroplasty. (3) Surgical timing: within 24-48 hours reduces: mortality at 30 days, pain, pressure ulcers, delirium, deep vein thrombosis, pneumonia, urinary infections. Surgery delays beyond 48 hours without medical reason = inferior quality metric. (4) Analgesia before surgery: fascia iliaca compartment block provides superior pain control and reduces opioid requirements (opioids increase delirium risk in elderly). (5) Osteoporosis evaluation: hip fracture = osteoporosis diagnosis by definition. Start bisphosphonate or denosumab after fracture healing. DEXA scan. Fall prevention assessment."
     }
   }
 };

@@ -1,6 +1,3 @@
-// Virtual EMR Case: Drug-Induced AV Block
-// Variant: druginduced-av-block | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B with Aetna Supplement",
     "pcp": "Dr. Patricia Coleman, MD",
-    "pharmacy": "CVS Pharmacy — 5200 S University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 5200 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White",
     "address": "6553 Clover St, San Antonio, TX 78207",
@@ -27,96 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Atrial Fibrillation, Persistent",
-      "icd": "I48.1",
-      "onset": "2018",
+      "problem": "Complete AV block \u2014 digoxin toxicity",
+      "icd": "T46.0X1A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Rate-controlled strategy; on diltiazem + digoxin; CHA2DS2-VASc 4"
+      "notes": "Henry Morrison, 74M \u2014 CKD stage 3, on digoxin 0.25mg daily for AF. Now GCS 12, bradycardia rate 34, nausea/vomiting, visual disturbances (yellow-green halos). Dig level 4.2 ng/mL (toxic). Complete heart block."
     },
     {
-      "problem": "Heart Failure with Preserved Ejection Fraction",
-      "icd": "I50.32",
-      "onset": "2020",
+      "problem": "CKD accumulation \u2014 digoxin is renally cleared",
+      "icd": "T46.0X1A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "EF 55%; diastolic dysfunction; NYHA Class II"
+      "notes": "Digoxin is renally excreted unchanged. CKD \u2192 reduced clearance \u2192 accumulation. Also acute AKI (dehydration this week) further reduced clearance. Classic scenario: stable patient becomes toxic with intercurrent illness."
     },
     {
-      "problem": "Chronic Kidney Disease, Stage 3b",
-      "icd": "N18.32",
-      "onset": "2021",
+      "problem": "Hypokalemia \u2014 potentiates digoxin toxicity",
+      "icd": "E87.6",
+      "onset": "2024",
       "status": "Active",
-      "notes": "eGFR 36; important — affects digoxin clearance"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2000",
-      "status": "Active",
-      "notes": ""
-    },
-    {
-      "problem": "Hypothyroidism",
-      "icd": "E03.9",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "Can affect digoxin sensitivity"
-    },
-    {
-      "problem": "Osteoarthritis, Bilateral Hands",
-      "icd": "M19.049",
-      "onset": "2015",
-      "status": "Active",
-      "notes": ""
+      "notes": "K 3.1 mEq/L. Hypokalemia potentiates digoxin toxicity \u2014 low potassium increases digoxin binding to Na-K-ATPase. Correct potassium as part of treatment."
     }
   ],
   "medications": [
     {
-      "name": "Diltiazem ER 240mg daily",
-      "sig": "Take 1 capsule by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "10/2018",
-      "refills": 4,
-      "status": "Active"
+      "name": "Digoxin-specific antibody fragments (DigiFab) \u2014 IMMEDIATE",
+      "sig": "Specific antidote for digoxin toxicity. Dose calculation: [dig level (ng/mL) \u00d7 weight (kg)] / 100 = vials of DigiFab. Or empiric 10 vials for acute severe toxicity. Onset within 30 minutes. Reverses all cardiac and extracardiac toxicity.",
+      "prescriber": "Emergency/Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
     },
     {
-      "name": "Digoxin 0.25mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "04/2019",
-      "refills": 3,
-      "status": "Active"
+      "name": "Transcutaneous pacing \u2014 bridge to DigiFab",
+      "sig": "Temporary pacing for hemodynamic compromise while DigiFab is being prepared. Atropine often ineffective in high-degree AV block from digoxin.",
+      "prescriber": "Emergency/Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 bridge"
     },
     {
-      "name": "Apixaban 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily",
-      "prescriber": "Dr. Singh",
-      "start": "10/2018",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Furosemide 20mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Singh",
-      "start": "06/2020",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Levothyroxine 75mcg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach",
-      "prescriber": "Dr. Coleman",
-      "start": "08/2013",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Acetaminophen 500mg q6h PRN",
-      "sig": "Take 1-2 tablets by mouth every 6 hours as needed for pain; max 3000mg/day",
-      "prescriber": "Dr. Coleman",
-      "start": "03/2016",
-      "refills": 3,
-      "status": "PRN"
+      "name": "Potassium replacement \u2014 IV KCl",
+      "sig": "Target K+ 4.0-5.0 mEq/L. Correction of hypokalemia reduces digoxin-Na-K-ATPase binding. Give IV in monitored setting (arrhythmia risk if too fast).",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV KCl"
     }
   ],
   "allergies": [
@@ -141,7 +93,7 @@ window.EMR_DATA = {
       "bp": "96/58",
       "hr": 38,
       "rr": 18,
-      "temp": "97.8°F",
+      "temp": "97.8\u00b0F",
       "spo2": "94%",
       "wt": "152 lbs",
       "ht": "5'4\"",
@@ -153,7 +105,7 @@ window.EMR_DATA = {
       "bp": "128/72",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "154 lbs",
       "ht": "5'4\"",
@@ -165,7 +117,7 @@ window.EMR_DATA = {
       "bp": "132/76",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "156 lbs",
       "ht": "5'4\"",
@@ -177,7 +129,7 @@ window.EMR_DATA = {
       "bp": "130/74",
       "hr": 70,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "154 lbs",
       "ht": "5'4\"",
@@ -192,10 +144,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Rajiv Singh, MD (Cardiology)",
       "cc": "AFib rate control; HFpEF management",
-      "hpi": "77-year-old female with persistent AFib and HFpEF for follow-up. Reports good rate control — no palpitations. Mild exertional dyspnea (NYHA II), stable. Able to do housework and walk 3 blocks. Weight stable. No edema. Digoxin level last checked 06/2025 was 1.0 ng/mL (therapeutic). Renal function trending downward — eGFR 36 from 42 prior year. Discussed reducing digoxin dose given declining eGFR but patient stable, so continued with close monitoring.",
+      "hpi": "77-year-old female with persistent AFib and HFpEF for follow-up. Reports good rate control \u2014 no palpitations. Mild exertional dyspnea (NYHA II), stable. Able to do housework and walk 3 blocks. Weight stable. No edema. Digoxin level last checked 06/2025 was 1.0 ng/mL (therapeutic). Renal function trending downward \u2014 eGFR 36 from 42 prior year. Discussed reducing digoxin dose given declining eGFR but patient stable, so continued with close monitoring.",
       "exam": "General: NAD. CV: Irregularly irregular (AFib), rate 68. No S3. Lungs: Clear. Extremities: No edema.",
-      "assessment": "1. Persistent AFib — rate controlled on diltiazem + digoxin\n2. HFpEF — stable, NYHA II\n3. CKD 3b — eGFR 36; declining; affects digoxin clearance\n4. Anticoagulation — therapeutic on apixaban",
-      "plan": "1. Continue current regimen\n2. Recheck digoxin level and BMP in 3 months — consider dose reduction if eGFR declines further\n3. TSH at next visit\n4. Echo in 12 months\n5. RTC 3 months"
+      "assessment": "1. Persistent AFib \u2014 rate controlled on diltiazem + digoxin\n2. HFpEF \u2014 stable, NYHA II\n3. CKD 3b \u2014 eGFR 36; declining; affects digoxin clearance\n4. Anticoagulation \u2014 therapeutic on apixaban",
+      "plan": "1. Continue current regimen\n2. Recheck digoxin level and BMP in 3 months \u2014 consider dose reduction if eGFR declines further\n3. TSH at next visit\n4. Echo in 12 months\n5. RTC 3 months"
     },
     {
       "id": "V002",
@@ -203,170 +155,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Patricia Coleman, MD",
       "cc": "Chronic disease follow-up",
-      "hpi": "77-year-old female for routine follow-up. Cardiac symptoms stable. Mild joint pain in hands. Thyroid stable — TSH 2.8 last check. CKD monitored. Reports no dizziness, no falls.",
+      "hpi": "77-year-old female for routine follow-up. Cardiac symptoms stable. Mild joint pain in hands. Thyroid stable \u2014 TSH 2.8 last check. CKD monitored. Reports no dizziness, no falls.",
       "exam": "General: NAD. CV: Irregularly irregular. Lungs: CTAB. Hands: Heberden and Bouchard nodes bilaterally. No synovitis.",
-      "assessment": "1. HTN — controlled\n2. Hypothyroidism — stable\n3. OA hands — stable\n4. CKD 3b — monitoring",
+      "assessment": "1. HTN \u2014 controlled\n2. Hypothyroidism \u2014 stable\n3. OA hands \u2014 stable\n4. CKD 3b \u2014 monitoring",
       "plan": "1. Continue medications\n2. Labs: BMP, TSH, digoxin level\n3. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "02/22/2026",
-      "time": "10:15",
-      "orderedBy": "Dr. James Park, MD (ED)",
-      "collected": "02/22/2026 09:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-022248",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Digoxin Toxicity",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "38",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.2",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "22",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "134",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "5.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Magnesium",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "1.7-2.2",
-              "flag": "L"
-            },
-            {
-              "test": "Calcium",
-              "value": "10.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Digoxin level",
+          "value": "4.2",
+          "unit": "ng/mL",
+          "ref": "0.5-2.0 ng/mL therapeutic",
+          "flag": "H"
         },
         {
-          "name": "DIGOXIN LEVEL",
-          "results": [
-            {
-              "test": "Digoxin",
-              "value": "3.2",
-              "unit": "ng/mL",
-              "range": "0.8-2.0 therapeutic",
-              "flag": "H"
-            }
-          ]
+          "test": "Potassium",
+          "value": "3.1",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "L"
         },
         {
-          "name": "CARDIAC MARKERS",
-          "results": [
-            {
-              "test": "Troponin I",
-              "value": "0.02",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": ""
-            },
-            {
-              "test": "BNP",
-              "value": "420",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Creatinine",
+          "value": "2.8",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3 (AKI on CKD)",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "5.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "33.6",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "204",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "ECG",
+          "value": "Complete heart block, rate 34, junctional escape rhythm",
+          "unit": "",
+          "ref": "Normal sinus",
+          "flag": "H"
+        },
+        {
+          "test": "Magnesium",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "1.7-2.2",
+          "flag": "L"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "11/12/2024",
-      "study": "TRANSTHORACIC ECHOCARDIOGRAM",
-      "accession": "IMG-2024-11125",
-      "status": "FINAL",
-      "orderedBy": "Dr. Rajiv Singh, MD",
-      "readBy": "Dr. Rajiv Singh, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "77F with persistent AFib, HFpEF. Annual echo.",
-      "technique": "2D and Doppler transthoracic echocardiography.",
-      "findings": "Left ventricle: Normal cavity size. Concentric LVH. EF 55% by biplane Simpson's. Grade II diastolic dysfunction (E/A reversal, elevated E/e' ratio 14).\\n\\nLeft atrium: Moderately dilated (44 mm).\\n\\nValves: Mild mitral annular calcification. Trivial MR. Aortic valve: mildly sclerotic, no stenosis.\\n\\nRight heart: Normal RV. RVSP 32 mmHg.\\n\\nNo pericardial effusion.",
-      "impression": "1. HFpEF — EF 55%, Grade II diastolic dysfunction.\\n2. Moderate LA dilation consistent with chronic AFib.\\n3. Concentric LVH.\\n4. No significant valvular disease.",
-      "dictated": "11/12/2024 14:40",
-      "verified": "11/12/2024 16:50"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent, High-Dose)",
@@ -441,16 +279,16 @@ window.EMR_DATA = {
     ],
     [
       "Safety",
-      "Denies IPV; fall risk — uses grab bars in bathroom; wears medical alert device"
+      "Denies IPV; fall risk \u2014 uses grab bars in bathroom; wears medical alert device"
     ],
     [
       "Advance Directive",
-      "POLST on file — Full Code; HCP: daughter Rebecca Stein"
+      "POLST on file \u2014 Full Code; HCP: daughter Rebecca Stein"
     ]
   ],
   "meta": {
     "caseId": "druginduced-av-block",
-    "diagnosis": "Drug-Induced Complete AV Block (Digoxin Toxicity with CKD Progression)",
+    "diagnosis": "Drug-Induced Complete AV Block \u2014 Digoxin Toxicity with CKD",
     "acuity": 2,
     "presentation": "Cardiac Emergency",
     "category": "cardiovascular"
@@ -514,13 +352,11 @@ window.EMR_DATA = {
       "Skin examination for color and perfusion": "Slightly pale, cool extremities, capillary refill 3 seconds"
     },
     "ddxTargets": [
-      "Drug-Induced Complete AV Block (Digoxin Toxicity with CKD Progression) (correct diagnosis)",
-      "Diltiazem-induced bradycardia",
-      "Progressive heart failure decompensation",
-      "Acute myocardial infarction with conduction block",
-      "Hyperkalemia with cardiac conduction abnormalities",
-      "Sick sinus syndrome progression",
-      "Hypothyroidism exacerbation"
+      "Digoxin toxicity \u2014 complete heart block (correct)",
+      "Beta-blocker/CCB overdose \u2014 AV block; different drug history; calcium or glucagon as antidote",
+      "Hyperkalemia-induced AV block \u2014 K+ normal or elevated (not low); peaked T waves; different history",
+      "Lyme carditis \u2014 endemic area; rash; Lyme serology; different context",
+      "Idiopathic degenerative AV block \u2014 no drug cause; permanent pacemaker indicated"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on heart failure exacerbation given her established HFpEF, missing the medication toxicity component",
@@ -530,7 +366,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good differential thinking. Given her medication regimen and kidney disease history, what specific drug interactions or toxicities should you be most concerned about in an elderly patient? How might her renal function impact her current medications?",
       "phase5": "Excellent history and physical. You found bradycardia with fatigue and mild confusion in a patient on both digoxin and diltiazem with known CKD. What's the next most important step in your evaluation, and what specific lab values would help differentiate your top differentials?",
-      "finalDebrief": "This case highlights how chronic kidney disease can lead to drug accumulation over time. Notice how the combination of digoxin and diltiazem in the setting of declining renal function created a perfect storm for toxicity. The key learning point is always considering medication toxicity in elderly patients with multiple cardiac drugs, especially when renal function may be declining."
+      "finalDebrief": "This case highlights how chronic kidney disease can lead to drug accumulation over time. Notice how the combination of digoxin and diltiazem in the setting of declining renal function created a perfect storm for toxicity. The key learning point is always considering medication toxicity in elderly patients with multiple cardiac drugs, especially when renal function may be declining.",
+      "final": "Diagnosis: digoxin toxicity with complete heart block. Key learning: (1) Digoxin toxicity signs: cardiac (bradyarrhythmias, AV block, junctional tachycardia, bidirectional VT \u2014 the most characteristic) and extracardiac (nausea/vomiting, visual disturbances including xanthopsia/yellow-green vision, confusion). The visual symptoms are pathognomonic. (2) CKD + digoxin = toxicity risk: digoxin is renally cleared unchanged. Any acute reduction in GFR (dehydration, AKI, NSAID use) \u2192 digoxin accumulation. Digoxin dose must be reduced in CKD (0.125mg QOD or less). (3) Hypokalemia potentiates digoxin: digoxin inhibits Na-K-ATPase. Hypokalemia increases binding affinity. Diuretics given for AF cause hypokalemia \u2192 digoxin toxicity even at therapeutic levels. Always correct K+ in digoxin toxicity. (4) DigiFab (digoxin-specific Fab fragments): the specific antidote. Dose by formula or empirically. Onset 30 minutes. Works by binding free digoxin \u2192 removes from receptors. After DigiFab: total digoxin level rises (bound to Fab, not active) \u2014 do not re-dose based on level. (5) Narrow therapeutic index: digoxin therapeutic range 0.5-2.0 ng/mL. Recent evidence: target 0.5-0.9 ng/mL for HF mortality benefit. Levels >2.0 = toxicity. The toxic dose is close to the therapeutic dose \u2014 requires careful monitoring."
     }
   }
 };

@@ -1,6 +1,3 @@
-// Virtual EMR Case: DIC from Trauma/Surgery with Hemorrhagic Complications
-// Variant: dic-from-traumasurgery-with-hemorrhagic | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "United Healthcare PPO",
     "pcp": "Dr. Amanda Torres, MD",
-    "pharmacy": "Walgreens — 5601 W Broward Blvd, Plantation, FL",
+    "pharmacy": "Walgreens \u2014 5601 W Broward Blvd, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
     "address": "3979 Oak Ave, Birmingham, AL 35210",
@@ -26,58 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Right Tibial Plateau Fracture — Schatzker Type V",
-      "icd": "S82.101A",
-      "onset": "2025",
+      "problem": "Acute DIC \u2014 trauma-induced, hemorrhagic phase",
+      "icd": "D65",
+      "onset": "2024",
       "status": "Active",
-      "notes": "High-energy injury from motorcycle collision 01/28/2025; ORIF performed 01/29/2025"
+      "notes": "Kevin Park, 32M \u2014 major trauma (MVA, polytrauma). Now diffuse bleeding: IV sites, surgical wounds, GI. PT 28s, INR 2.4, platelets 44, fibrinogen 68, D-dimer critically elevated. Acute DIC with hemorrhagic predominance."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2018",
+      "problem": "Underlying trigger \u2014 ongoing trauma/hemorrhagic shock",
+      "icd": "D65",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Controlled on lisinopril"
+      "notes": "Treat the underlying cause. DIC from trauma driven by tissue factor release, massive transfusion, hypothermia, acidosis \u2014 the lethal triad. Damage control surgery to control hemorrhage."
     },
     {
-      "problem": "Obesity, Class I",
-      "icd": "E66.01",
-      "onset": "2019",
+      "problem": "Lethal triad \u2014 hypothermia, acidosis, coagulopathy",
+      "icd": "D65",
+      "onset": "2024",
       "status": "Active",
-      "notes": "BMI 32"
-    },
-    {
-      "problem": "Sickle Cell Trait",
-      "icd": "D57.3",
-      "onset": "1982",
-      "status": "Active",
-      "notes": "Carrier; no sickle cell disease; documented on prior anesthetic records"
+      "notes": "Temp 35.2\u00b0C, pH 7.18, coagulopathy. The lethal triad of trauma is self-reinforcing: coagulopathy worsens acidosis worsens hypothermia worsens coagulopathy. Correct all three simultaneously."
     }
   ],
   "medications": [
     {
-      "name": "Lisinopril 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Torres",
-      "start": "06/2018",
-      "refills": 4,
+      "name": "Fresh frozen plasma 4 units \u2014 replace clotting factors",
+      "sig": "FFP for DIC with active bleeding and prolonged PT/INR. Target fibrinogen >150 mg/dL, INR <1.5. Use 1:1:1 ratio with pRBC and platelets (damage control resuscitation).",
+      "prescriber": "Trauma Surgery/Critical Care",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 ongoing"
+    },
+    {
+      "name": "Cryoprecipitate 10 units \u2014 fibrinogen replacement",
+      "sig": "Each unit cryoprecipitate contains fibrinogen (200-400mg), Factor VIII, vWF, Factor XIII. Use when fibrinogen <150 mg/dL (as here: 68). Target fibrinogen >150-200 mg/dL.",
+      "prescriber": "Trauma Surgery/Critical Care",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Ibuprofen 600mg TID PRN",
-      "sig": "Take 1 tablet by mouth three times daily as needed for pain with food",
-      "prescriber": "Dr. Torres",
-      "start": "03/2023",
-      "refills": 2,
-      "status": "PRN"
-    },
-    {
-      "name": "Multivitamin daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Torres",
-      "start": "01/2020",
-      "refills": 5,
-      "status": "Active"
+      "name": "Tranexamic acid 1g IV over 10 min \u2014 within 3 hours of injury",
+      "sig": "CRASH-2 trial: TXA within 3 hours of injury reduces mortality from hemorrhage. Antifibrinolytic mechanism. After 3 hours: no benefit and possible harm. Give early in major trauma with hemorrhage.",
+      "prescriber": "Trauma Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Administered \u2014 within 3h"
     }
   ],
   "allergies": [
@@ -95,7 +85,7 @@ window.EMR_DATA = {
       "bp": "98/62",
       "hr": 118,
       "rr": 22,
-      "temp": "97.8°F",
+      "temp": "97.8\u00b0F",
       "spo2": "95%",
       "wt": "220 lbs",
       "ht": "5'11\"",
@@ -107,7 +97,7 @@ window.EMR_DATA = {
       "bp": "134/84",
       "hr": 76,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "225 lbs",
       "ht": "5'11\"",
@@ -119,7 +109,7 @@ window.EMR_DATA = {
       "bp": "130/82",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "222 lbs",
       "ht": "5'11\"",
@@ -133,11 +123,11 @@ window.EMR_DATA = {
       "date": "01/28/2025",
       "type": "ED",
       "provider": "Dr. Marcus Johnson, MD",
-      "cc": "Motorcycle collision — right leg injury, significant hemorrhage",
+      "cc": "Motorcycle collision \u2014 right leg injury, significant hemorrhage",
       "hpi": "42-year-old male brought by EMS after motorcycle vs. SUV collision at approximately 35 mph. Patient was helmeted. Primary impact to right lower extremity. On scene: right leg deformity with open wound over proximal tibia, significant hemorrhage controlled with tourniquet. GCS 15 on arrival. C-collar in place. Reports severe right leg pain. Denies LOC, headache, neck pain, abdominal pain, or chest pain. Estimated blood loss on scene 800-1000 mL.",
-      "exam": "Primary survey: A — patent, speaking full sentences. B — bilateral breath sounds, no crepitus. C — tachycardic, hypotensive, 2 large-bore IVs, tourniquet right leg. D — GCS 15, pupils equal and reactive. E — right tibial plateau open fracture with skin laceration, moderate ongoing hemorrhage. Secondary survey: Head/neck: No midline cervical tenderness. Chest: No rib tenderness. Abdomen: Soft, non-tender. Pelvis: Stable on compression. Right leg: Gross deformity, open wound 8 cm with visible bone. DP pulse dopplerable, decreased sensation lateral leg. Left extremities: No injury.",
-      "assessment": "1. Open right tibial plateau fracture — Gustilo type IIIA, Schatzker type V\n2. Hemorrhagic shock — Class II-III, EBL ~1 liter\n3. Risk for DIC given traumatic mechanism and hemorrhage\n4. Sickle cell trait — noted for anesthetic planning",
-      "plan": "1. Massive transfusion protocol — 2 units pRBC, 1 unit FFP, 1 platelet pack initiated\n2. TXA 1g IV\n3. Tetanus booster\n4. Cefazolin 2g IV + gentamicin 5mg/kg for open fracture\n5. Ortho trauma consult — ORIF scheduled for tomorrow AM\n6. CT right lower extremity with angiography to assess vascular injury\n7. Serial labs: CBC, coags, fibrinogen, lactate Q4h\n8. ICU admission for hemorrhage monitoring"
+      "exam": "Primary survey: A \u2014 patent, speaking full sentences. B \u2014 bilateral breath sounds, no crepitus. C \u2014 tachycardic, hypotensive, 2 large-bore IVs, tourniquet right leg. D \u2014 GCS 15, pupils equal and reactive. E \u2014 right tibial plateau open fracture with skin laceration, moderate ongoing hemorrhage. Secondary survey: Head/neck: No midline cervical tenderness. Chest: No rib tenderness. Abdomen: Soft, non-tender. Pelvis: Stable on compression. Right leg: Gross deformity, open wound 8 cm with visible bone. DP pulse dopplerable, decreased sensation lateral leg. Left extremities: No injury.",
+      "assessment": "1. Open right tibial plateau fracture \u2014 Gustilo type IIIA, Schatzker type V\n2. Hemorrhagic shock \u2014 Class II-III, EBL ~1 liter\n3. Risk for DIC given traumatic mechanism and hemorrhage\n4. Sickle cell trait \u2014 noted for anesthetic planning",
+      "plan": "1. Massive transfusion protocol \u2014 2 units pRBC, 1 unit FFP, 1 platelet pack initiated\n2. TXA 1g IV\n3. Tetanus booster\n4. Cefazolin 2g IV + gentamicin 5mg/kg for open fracture\n5. Ortho trauma consult \u2014 ORIF scheduled for tomorrow AM\n6. CT right lower extremity with angiography to assess vascular injury\n7. Serial labs: CBC, coags, fibrinogen, lactate Q4h\n8. ICU admission for hemorrhage monitoring"
     },
     {
       "id": "V002",
@@ -145,177 +135,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Amanda Torres, MD",
       "cc": "Annual wellness exam",
-      "hpi": "42-year-old male for annual exam. No acute complaints. HTN controlled. Exercises intermittently. Reports motorcycle riding as hobby — wears helmet. No hospitalizations. Sickle cell trait carrier — documented, no complications.",
+      "hpi": "42-year-old male for annual exam. No acute complaints. HTN controlled. Exercises intermittently. Reports motorcycle riding as hobby \u2014 wears helmet. No hospitalizations. Sickle cell trait carrier \u2014 documented, no complications.",
       "exam": "General: NAD, well-appearing obese male. HEENT: WNL. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, obese, NT. Extremities: No edema. Neuro: A&O x3.",
-      "assessment": "1. Annual wellness exam\n2. HTN — controlled\n3. Obesity — counseled\n4. Sickle cell trait — stable carrier",
+      "assessment": "1. Annual wellness exam\n2. HTN \u2014 controlled\n3. Obesity \u2014 counseled\n4. Sickle cell trait \u2014 stable carrier",
       "plan": "1. Continue lisinopril\n2. Weight management counseling\n3. Labs: CMP, CBC, lipid panel\n4. RTC 1 year or PRN"
     }
   ],
   "labs": [
     {
-      "date": "01/28/2025",
-      "time": "19:30",
-      "orderedBy": "Dr. Marcus Johnson, MD",
-      "collected": "01/28/2025 19:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-012830",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA, Citrate)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Trauma DIC Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "16.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "9.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "27.6",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "112",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "PT/INR",
+          "value": "28s / 2.4",
+          "unit": "",
+          "ref": "12s / <1.2",
+          "flag": "H"
         },
         {
-          "name": "COAGULATION PANEL",
-          "results": [
-            {
-              "test": "PT",
-              "value": "16.2",
-              "unit": "seconds",
-              "range": "11.0-13.5",
-              "flag": "H"
-            },
-            {
-              "test": "INR",
-              "value": "1.4",
-              "unit": "",
-              "range": "0.8-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "aPTT",
-              "value": "42",
-              "unit": "seconds",
-              "range": "25-35",
-              "flag": "H"
-            },
-            {
-              "test": "Fibrinogen",
-              "value": "148",
-              "unit": "mg/dL",
-              "range": "200-400",
-              "flag": "L"
-            },
-            {
-              "test": "D-Dimer",
-              "value": "8.4",
-              "unit": "µg/mL FEU",
-              "range": "<0.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Fibrinogen",
+          "value": "68",
+          "unit": "mg/dL",
+          "ref": "200-400 (critically low)",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "24",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "Potassium",
-              "value": "5.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "4.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Platelets",
+          "value": "44",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
         },
         {
-          "name": "HEMOLYSIS MARKERS",
-          "results": [
-            {
-              "test": "LDH",
-              "value": "420",
-              "unit": "U/L",
-              "range": "140-280",
-              "flag": "H"
-            },
-            {
-              "test": "Haptoglobin",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "30-200",
-              "flag": "L"
-            }
-          ]
+          "test": "D-dimer",
+          "value": ">20",
+          "unit": "\u03bcg/mL",
+          "ref": "<0.5 (critically elevated)",
+          "flag": "H"
+        },
+        {
+          "test": "ISTH DIC Score",
+          "value": "7 (>5 = overt DIC)",
+          "unit": "",
+          "ref": "<5 = non-overt",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "01/28/2025",
-      "study": "CT RIGHT LOWER EXTREMITY WITH ANGIOGRAPHY",
-      "accession": "IMG-2025-01281",
-      "status": "FINAL",
-      "orderedBy": "Dr. Marcus Johnson, MD",
-      "readBy": "Dr. Lisa Moreno, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "42M MVC, open right tibial plateau fracture, assess for vascular injury.",
-      "technique": "CT right lower extremity with CT angiography runoff.",
-      "findings": "Fracture: Comminuted tibial plateau fracture involving both medial and lateral plateaus with articular depression (Schatzker type V). Fracture fragments displaced 6 mm. Associated proximal fibula fracture.\\n\\nSoft tissue: Extensive soft tissue swelling and hemorrhage. Open wound defect noted anterolaterally.\\n\\nVascular: Popliteal artery patent with normal caliber. Anterior tibial, posterior tibial, and peroneal arteries patent to level of ankle. No active extravasation or pseudoaneurysm.\\n\\nCompartments: Anterior and lateral compartments appear enlarged — clinical correlation for compartment syndrome recommended.",
-      "impression": "1. Comminuted open tibial plateau fracture, Schatzker type V, with lateral plateau depression and proximal fibula fracture.\\n2. No vascular injury — patent three-vessel runoff.\\n3. Soft tissue swelling concerning for evolving compartment syndrome — recommend serial compartment pressure checks.",
-      "dictated": "01/28/2025 20:15",
-      "verified": "01/28/2025 20:48"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -335,7 +204,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
@@ -363,7 +232,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — 5 pack-years; quit 2019"
+      "Former smoker \u2014 5 pack-years; quit 2019"
     ],
     [
       "Alcohol",
@@ -392,7 +261,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "dic-from-traumasurgery-with-hemorrhagic",
-    "diagnosis": "Disseminated Intravascular Coagulation (Trauma-Induced with Hemorrhagic Complications)",
+    "diagnosis": "Disseminated Intravascular Coagulation \u2014 Trauma-Induced",
     "acuity": 1,
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
@@ -456,13 +325,11 @@ window.EMR_DATA = {
       "Assessment of wound bleeding and clot formation": "Fracture site continues to ooze despite pressure, clots appear friable and break down easily"
     },
     "ddxTargets": [
-      "Disseminated Intravascular Coagulation (Trauma-Induced with Hemorrhagic Complications) (correct diagnosis)",
-      "Acute blood loss anemia secondary to trauma",
-      "Thrombocytopenia (trauma-induced or idiopathic)",
-      "Fat embolism syndrome",
-      "Acute compartment syndrome",
-      "Primary coagulopathy (hemophilia, von Willebrand disease)",
-      "Medication-induced bleeding (ibuprofen-related)"
+      "Trauma-induced DIC \u2014 hemorrhagic phase (correct)",
+      "Massive transfusion dilutional coagulopathy \u2014 similar lab pattern; overlaps with DIC; treat with same products",
+      "Liver failure coagulopathy \u2014 similar PT/INR; but fibrinogen less severely low; no D-dimer elevation",
+      "TTP \u2014 thrombocytopenia + MAHA; normal coagulation; no trauma history",
+      "Heparin overdose \u2014 anti-Xa level; aPTT-specific prolongation; protamine reversal"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on obvious tibial fracture and missing systemic coagulopathy - the dramatic orthopedic injury may overshadow subtle signs of DIC",
@@ -472,7 +339,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider this: What makes bleeding 'pathologic' versus expected blood loss from trauma? What patterns would suggest a systemic coagulopathy rather than simple hemorrhage?",
       "phase5": "You've identified concerning bleeding patterns beyond the fracture site. What laboratory studies would help differentiate between different causes of coagulopathy? How does the timeline and mechanism connect to your differential?",
-      "finalDebrief": "This case illustrates how major trauma can trigger DIC through tissue factor release and consumption of clotting factors. How did the pattern of bleeding - spontaneous gingival bleeding, IV site oozing, and poor clot formation - point you toward systemic coagulopathy rather than simple blood loss?"
+      "finalDebrief": "This case illustrates how major trauma can trigger DIC through tissue factor release and consumption of clotting factors. How did the pattern of bleeding - spontaneous gingival bleeding, IV site oozing, and poor clot formation - point you toward systemic coagulopathy rather than simple blood loss?",
+      "final": "Diagnosis: trauma-induced DIC. Key learning: (1) DIC pathophysiology: massive tissue factor release (trauma, sepsis, malignancy) \u2192 thrombin generation \u2192 fibrin clot formation \u2192 consumption of clotting factors and platelets \u2192 bleeding. Simultaneously, fibrinolysis activated \u2192 elevated D-dimer (fibrin degradation products). (2) ISTH DIC score: platelet count (>100=0, <100=1, <50=2) + D-dimer (normal=0, moderate=2, strong=3) + PT prolongation + fibrinogen (<1g/L=1). Score \u22655 = overt DIC. (3) DIC lab pattern: PT \u2191, aPTT \u2191, INR \u2191, fibrinogen \u2193 (consumed), D-dimer \u2191\u2191 (fibrinolysis), platelets \u2193. Key: fibrinogen is an acute phase reactant that is actually ELEVATED in early DIC (can appear normal or high before dropping). (4) Trauma resuscitation \u2014 damage control: 1:1:1 ratio of pRBC:FFP:platelets. Permissive hypotension (MAP 50-65) until surgical hemorrhage control. Tranexamic acid within 3 hours (CRASH-2). Avoid NS (hyperchloremic acidosis worsens coagulopathy). Warm all blood products. (5) Lethal triad treatment: rewarm (Bair Hugger, warm fluids), correct acidosis (resuscitation, NaHCO3 if severe), replace clotting factors (FFP, cryo, platelets). All three must be addressed simultaneously."
     }
   }
 };

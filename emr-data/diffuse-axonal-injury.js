@@ -1,6 +1,3 @@
-// Virtual EMR Case: Diffuse Axonal Injury
-// Variant: diffuse-axonal-injury | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Aetna (Parent Plan)",
     "pcp": "Dr. Robert Kim, MD",
-    "pharmacy": "Publix Pharmacy — 801 S University Dr, Plantation, FL",
+    "pharmacy": "Publix Pharmacy \u2014 801 S University Dr, Plantation, FL",
     "language": "English",
     "race": "Asian",
     "address": "841 Sycamore Dr, Birmingham, AL 35210",
@@ -26,43 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Attention-Deficit/Hyperactivity Disorder",
-      "icd": "F90.0",
-      "onset": "2012",
+      "problem": "Diffuse axonal injury \u2014 GCS 6, CT appears normal",
+      "icd": "S06.2X3A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Diagnosed in childhood; managed with medication"
+      "notes": "James Wilson, 28M \u2014 high-speed MVA, unrestrained. GCS 6 at scene and on arrival. CT head: subtle microhemorrhages at grey-white junction and corpus callosum. MRI shows extensive white matter injury."
     },
     {
-      "problem": "Seasonal Allergic Rhinitis",
-      "icd": "J30.2",
-      "onset": "2016",
+      "problem": "CT underestimates DAI \u2014 MRI required",
+      "icd": "S06.2X3A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Spring and fall seasons"
+      "notes": "CT is insensitive for DAI \u2014 may appear normal or show only subtle microhemorrhages. MRI with SWI (susceptibility-weighted imaging) and DWI is the gold standard for DAI diagnosis."
     },
     {
-      "problem": "Concussion, resolved",
-      "icd": "S06.0X0A",
-      "onset": "2021",
-      "status": "Resolved",
-      "notes": "Sports-related concussion (soccer); full recovery at 3 weeks"
+      "problem": "Prognosis \u2014 corpus callosum and brainstem involvement = poor outcome",
+      "icd": "S06.2X3A",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "DAI grade: Grade I = white matter only. Grade II = + corpus callosum. Grade III = + brainstem. Grade III DAI has high mortality and severe disability rate."
     }
   ],
   "medications": [
     {
-      "name": "Adderall XR 20mg daily",
-      "sig": "Take 1 capsule by mouth every morning",
-      "prescriber": "Dr. Kim",
-      "start": "08/2018",
+      "name": "ICP monitoring \u2014 if GCS \u22648 with abnormal CT or clinical concern",
+      "sig": "Intracranial pressure monitoring with EVD or parenchymal monitor for GCS \u22648 TBI. Target ICP <20 mmHg, CPP 60-70 mmHg. Hyperosmolar therapy (mannitol, 3% NaCl) for ICP spikes.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "Placed \u2014 ICU"
     },
     {
-      "name": "Fluticasone nasal spray 50mcg 2 sprays each nostril daily",
-      "sig": "2 sprays in each nostril once daily during allergy season",
-      "prescriber": "Dr. Kim",
-      "start": "03/2020",
-      "refills": 3,
-      "status": "PRN"
+      "name": "Neuroprotective measures \u2014 temperature, glucose, seizure",
+      "sig": "Normothermia (target 36-37\u00b0C). Normoglycemia (140-180 mg/dL). Levetiracetam prophylaxis x 7 days. Head of bed 30\u00b0. Avoid hypotension (CPP \u226560). Avoid hypoxia (SpO2 >95%).",
+      "prescriber": "Neurosurgery/Critical Care",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 bundle"
+    },
+    {
+      "name": "No surgery \u2014 no surgical lesion in DAI",
+      "sig": "DAI is a non-surgical injury. Axonal shearing cannot be surgically repaired. Management is supportive neuroprotection and rehabilitation.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Non-operative"
     }
   ],
   "allergies": [
@@ -87,7 +92,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "165 lbs",
       "ht": "5'10\"",
@@ -99,7 +104,7 @@ window.EMR_DATA = {
       "bp": "116/70",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "162 lbs",
       "ht": "5'10\"",
@@ -111,7 +116,7 @@ window.EMR_DATA = {
       "bp": "114/68",
       "hr": 66,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "99%",
       "wt": "160 lbs",
       "ht": "5'10\"",
@@ -128,7 +133,7 @@ window.EMR_DATA = {
       "cc": "ADHD medication refill and annual checkup",
       "hpi": "21-year-old male college student presenting for ADHD medication management and routine checkup. Reports Adderall XR 20mg continues to be effective for focus. Denies side effects including palpitations, insomnia, or appetite suppression. Doing well academically. Plays intramural soccer. Occasional alcohol use on weekends.",
       "exam": "General: Well-appearing young male in NAD. HEENT: PERRL, EOMI, oropharynx clear. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, NT/ND. Neuro: A&O x3, normal gait, no focal deficits.",
-      "assessment": "1. ADHD — well controlled on current regimen\n2. Routine wellness — healthy young male",
+      "assessment": "1. ADHD \u2014 well controlled on current regimen\n2. Routine wellness \u2014 healthy young male",
       "plan": "1. Continue Adderall XR 20mg daily; 3-month prescriptions with follow-up\n2. Anticipatory guidance: alcohol, drug safety, safe driving\n3. RTC 6 months or PRN"
     },
     {
@@ -139,120 +144,61 @@ window.EMR_DATA = {
       "cc": "ADHD follow-up",
       "hpi": "21-year-old male for routine ADHD medication check. No concerns. Tolerating medication well. Reports improved study habits. Denies mood changes, sleep disturbance.",
       "exam": "General: NAD. Vitals: WNL. CV: RRR. Neuro: A&O x3.",
-      "assessment": "1. ADHD — stable",
+      "assessment": "1. ADHD \u2014 stable",
       "plan": "1. Continue Adderall XR 20mg\n2. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "08/22/2024",
-      "time": "10:00",
-      "orderedBy": "Dr. Robert Kim, MD",
-      "collected": "08/22/2024 09:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-082245",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Severe TBI/DAI",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "12",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "141",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "GCS",
+          "value": "6 (E1V1M4)",
+          "unit": "",
+          "ref": "15 normal",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15.6",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "46.2",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "230",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Pupils",
+          "value": "Equal, 3mm, sluggishly reactive",
+          "unit": "",
+          "ref": "Equal, briskly reactive",
+          "flag": "H"
+        },
+        {
+          "test": "INR/platelets",
+          "value": "Normal \u2014 no coagulopathy",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "Glucose",
+          "value": "182",
+          "unit": "mg/dL",
+          "ref": "Target 140-180 in TBI",
+          "flag": ""
+        },
+        {
+          "test": "Temperature",
+          "value": "37.2",
+          "unit": "\u00b0C",
+          "ref": "Target normothermia 36-37",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "MRI Brain SWI and DWI",
+      "findings": "Multiple microhemorrhages on SWI at bilateral grey-white junctions, corpus callosum splenium, and dorsolateral midbrain \u2014 Grade III DAI pattern. DWI: restricted diffusion in white matter tracts consistent with axonal injury. CT head showed only subtle microhemorrhages.",
+      "impression": "Grade III diffuse axonal injury with brainstem involvement. Poor prognosis. Neurocritical care."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -269,24 +215,24 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2017",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     },
     {
       "vaccine": "Tdap (Boostrix)",
       "date": "2017",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Meningococcal ACWY (Menactra)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     }
   ],
@@ -311,7 +257,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — weekends only, 3-4 drinks"
+      "Social \u2014 weekends only, 3-4 drinks"
     ],
     [
       "Drugs",
@@ -331,12 +277,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed"
+      "None \u2014 not discussed"
     ]
   ],
   "meta": {
     "caseId": "diffuse-axonal-injury",
-    "diagnosis": "Diffuse Axonal Injury",
+    "diagnosis": "Diffuse Axonal Injury (DAI) \u2014 Severe TBI with Normal Initial CT",
     "acuity": 1,
     "presentation": "Trauma",
     "category": "trauma"
@@ -400,13 +346,11 @@ window.EMR_DATA = {
       "Deep tendon reflexes and pathological reflexes": "Deep tendon reflexes 2+ bilaterally, no pathological reflexes elicited"
     },
     "ddxTargets": [
-      "Diffuse Axonal Injury (correct diagnosis)",
-      "Post-concussive syndrome",
-      "Traumatic brain injury with contusion",
-      "Intracranial hemorrhage (subdural/epidural hematoma)",
-      "Brain tumor or space-occupying lesion",
-      "Medication-related cognitive changes",
-      "Substance abuse-related cognitive impairment"
+      "Diffuse axonal injury \u2014 Grade III (correct)",
+      "Cerebral contusion \u2014 focal, CT visible; different from DAI",
+      "Epidural/subdural hematoma \u2014 CT shows collection; surgical lesion",
+      "Hypoxic-ischemic injury \u2014 cardiac arrest precedes; watershed territory; different MRI pattern",
+      "ADEM (post-infectious) \u2014 demyelination; history of infection; different demographics"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the patient's known ADHD and attributing cognitive symptoms to baseline attention difficulties rather than recognizing new traumatic brain injury",
@@ -416,7 +360,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview Tyler, consider what specific aspects of his cognitive presentation might help you differentiate between different types of traumatic brain injury. How might diffuse axonal injury present differently from a simple concussion or focal brain injury?",
       "phase5": "Now that you've gathered your history and physical exam findings, what patterns do you notice in Tyler's cognitive and neurological presentation? How do his bilateral, non-focal findings and persistent cognitive impairment a week after injury inform your differential diagnosis?",
-      "finalDebrief": "Diffuse axonal injury represents widespread damage to white matter tracts throughout the brain, explaining Tyler's global cognitive dysfunction without focal deficits. How did his bilateral cerebellar signs, persistent cognitive impairment beyond typical concussion, and lack of focal findings support this diagnosis? What imaging would you order next, and how might this case have evolved differently if you had anchored on his ADHD history?"
+      "finalDebrief": "Diffuse axonal injury represents widespread damage to white matter tracts throughout the brain, explaining Tyler's global cognitive dysfunction without focal deficits. How did his bilateral cerebellar signs, persistent cognitive impairment beyond typical concussion, and lack of focal findings support this diagnosis? What imaging would you order next, and how might this case have evolved differently if you had anchored on his ADHD history?",
+      "final": "Diagnosis: diffuse axonal injury, Grade III. Key learning: (1) DAI mechanism: rapid rotational acceleration-deceleration forces cause shearing of axons at grey-white junction, corpus callosum, and brainstem. The injury is to the axon itself (axolemmal disruption) \u2014 not focal hemorrhage. (2) CT vs MRI in DAI: CT is insensitive \u2014 microhemorrhages may be absent or subtle. MRI with SWI (shows microhemorrhages) and DWI (shows axonal edema) is the gold standard. Grade the injury: I = white matter, II = + corpus callosum, III = + brainstem. Grade predicts prognosis. (3) The GCS-CT disconnect: GCS of 6 with a CT that looks relatively normal = think DAI. The injury is at the microscopic axonal level, not visible as a large hematoma. (4) Neuroprotection bundle: avoid secondary injury \u2014 maintain CPP 60-70, SpO2 >95%, normoglycemia (140-180), normothermia, head of bed 30\u00b0. Each secondary insult (hypotension, hypoxia, hyperthermia) worsens axonal injury. (5) Prognosis: Grade I DAI = good recovery possible. Grade II = moderate disability. Grade III (brainstem involvement) = high mortality and persistent vegetative state. Rehabilitation is critical for all survivors."
     }
   }
 };
