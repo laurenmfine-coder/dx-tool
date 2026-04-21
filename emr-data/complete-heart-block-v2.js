@@ -1,6 +1,3 @@
-// Virtual EMR Case: Complete Heart Block
-// Variant: complete-heart-block-v2 | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B with Humana Supplement",
     "pcp": "Dr. Maria Fernandez, MD",
-    "pharmacy": "Publix Pharmacy — 1601 N Hiatus Rd, Pembroke Pines, FL",
+    "pharmacy": "Publix Pharmacy \u2014 1601 N Hiatus Rd, Pembroke Pines, FL",
     "language": "English",
     "race": "White",
     "address": "5902 Cedar Blvd, Pittsburgh, PA 15201",
@@ -27,103 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Aortic Stenosis, Severe",
-      "icd": "I35.0",
-      "onset": "2022",
+      "problem": "Complete (third-degree) AV block \u2014 young adult",
+      "icd": "I44.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Calcific degenerative; AVA 0.8 cm²; mean gradient 42 mmHg; symptomatic — dyspnea and presyncope; TAVR evaluation initiated"
+      "notes": "Jennifer Kim, 35F \u2014 syncope while jogging. ECG: AV dissociation, ventricular rate 38, wide QRS escape. Young patient \u2014 reversible causes mandatory workup."
     },
     {
-      "problem": "Sick Sinus Syndrome",
-      "icd": "I49.5",
-      "onset": "2023",
+      "problem": "Lyme carditis \u2014 most common reversible cause in young adults",
+      "icd": "A69.20",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Holter showing sinus bradycardia with pauses up to 3.2 sec; tachybrady syndrome"
+      "notes": "Hiked in Connecticut last month, rash 2 weeks ago (erythema migrans). Lyme serology pending. Endemic area + tick exposure + rash = strong suspicion."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "1990",
+      "problem": "Hemodynamic instability \u2014 transcutaneous pacing bridge",
+      "icd": "I44.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Controlled"
-    },
-    {
-      "problem": "Osteoporosis with Compression Fractures",
-      "icd": "M80.08XA",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "T12 and L2 compression fractures (2018, 2021)"
-    },
-    {
-      "problem": "Hypothyroidism",
-      "icd": "E03.9",
-      "onset": "2005",
-      "status": "Active",
-      "notes": ""
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3b",
-      "icd": "N18.32",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "eGFR 38"
+      "notes": "Rate 38, near-syncope. Transcutaneous pacing while etiology determined. Do NOT implant permanent pacemaker until reversible causes excluded."
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Fernandez",
-      "start": "03/2005",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Losartan 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Fernandez",
-      "start": "06/2008",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Levothyroxine 50mcg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach",
-      "prescriber": "Dr. Fernandez",
-      "start": "08/2006",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Denosumab 60mg SubQ q6months",
-      "sig": "Inject subcutaneously every 6 months for osteoporosis",
-      "prescriber": "Dr. Fernandez",
-      "start": "01/2019",
+      "name": "Transcutaneous pacing \u2014 bridge to diagnosis",
+      "sig": "Temporary support at rate 60 bpm. Sedation required (uncomfortable). Confirms capture.",
+      "prescriber": "Cardiology/Emergency",
+      "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Calcium/Vitamin D 600mg/400IU BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Fernandez",
-      "start": "06/2011",
-      "refills": 6,
-      "status": "Active"
+      "name": "IV ceftriaxone 2g daily x 14 days \u2014 if Lyme confirmed",
+      "sig": "Hospitalized Lyme carditis with high-degree AV block: IV ceftriaxone then oral doxycycline to complete 21 days. AV block resolves within 1-6 weeks of antibiotics.",
+      "prescriber": "Cardiology/ID",
+      "start": "2024",
+      "refills": 0,
+      "status": "Pending serology"
     },
     {
-      "name": "Acetaminophen 500mg q6h PRN",
-      "sig": "Take 1-2 tablets by mouth every 6 hours as needed for pain; max 3000mg/day",
-      "prescriber": "Dr. Fernandez",
-      "start": "08/2018",
-      "refills": 3,
-      "status": "PRN"
+      "name": "HOLD permanent pacemaker \u2014 reversible cause first",
+      "sig": "Lyme carditis AV block is completely reversible. Premature PPM implantation = unnecessary permanent device. Hold until antibiotic trial complete.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "HOLD"
     }
   ],
   "allergies": [
     {
       "allergen": "Beta-Blockers (Metoprolol)",
       "type": "Drug",
-      "reaction": "Symptomatic bradycardia (HR 38, near-syncope) — held given sick sinus syndrome",
+      "reaction": "Symptomatic bradycardia (HR 38, near-syncope) \u2014 held given sick sinus syndrome",
       "severity": "Severe",
       "verified": "Yes"
     },
@@ -141,7 +93,7 @@ window.EMR_DATA = {
       "bp": "108/62",
       "hr": 34,
       "rr": 20,
-      "temp": "98.0°F",
+      "temp": "98.0\u00b0F",
       "spo2": "94%",
       "wt": "118 lbs",
       "ht": "5'2\"",
@@ -153,7 +105,7 @@ window.EMR_DATA = {
       "bp": "128/72",
       "hr": 52,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "120 lbs",
       "ht": "5'2\"",
@@ -165,7 +117,7 @@ window.EMR_DATA = {
       "bp": "132/74",
       "hr": 54,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "122 lbs",
       "ht": "5'2\"",
@@ -177,7 +129,7 @@ window.EMR_DATA = {
       "bp": "130/76",
       "hr": 56,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "124 lbs",
       "ht": "5'2\"",
@@ -192,10 +144,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Rajiv Singh, MD (Cardiology)",
       "cc": "Aortic stenosis follow-up; TAVR evaluation; syncope risk",
-      "hpi": "84-year-old female with severe calcific aortic stenosis (AVA 0.8 cm²) and sick sinus syndrome presenting for TAVR evaluation. Reports increasing dyspnea on exertion — now occurring with ADLs (dressing, bathing). Two near-syncopal episodes in past 2 months — lightheadedness upon standing, resolved with sitting. No frank syncope. Baseline HR in low 50s. Cannot tolerate beta-blockers. ECG today: sinus bradycardia HR 52, first-degree AV block (PR 280ms), LBBB (QRS 140ms). Echo (10/2025): severe AS with AVA 0.8 cm², mean gradient 42 mmHg, EF 45%.",
+      "hpi": "84-year-old female with severe calcific aortic stenosis (AVA 0.8 cm\u00b2) and sick sinus syndrome presenting for TAVR evaluation. Reports increasing dyspnea on exertion \u2014 now occurring with ADLs (dressing, bathing). Two near-syncopal episodes in past 2 months \u2014 lightheadedness upon standing, resolved with sitting. No frank syncope. Baseline HR in low 50s. Cannot tolerate beta-blockers. ECG today: sinus bradycardia HR 52, first-degree AV block (PR 280ms), LBBB (QRS 140ms). Echo (10/2025): severe AS with AVA 0.8 cm\u00b2, mean gradient 42 mmHg, EF 45%.",
       "exam": "General: Frail elderly female. CV: Bradycardic (HR 52), regular, harsh crescendo-decrescendo systolic murmur at RUSB radiating to carotids, diminished S2. Lungs: Bibasilar crackles. Extremities: Trace edema bilaterally. Neuro: A&O x3; unsteady gait.",
-      "assessment": "1. Severe aortic stenosis — symptomatic; TAVR candidate\n2. Sick sinus syndrome with first-degree AV block and LBBB — high risk for complete heart block, especially with TAVR\n3. Near-syncope — likely multifactorial (AS + conduction disease)\n4. EF declining (45% from 50% last year)",
-      "plan": "1. TAVR Heart Team review — likely combined TAVR + permanent pacemaker\n2. Pre-TAVR workup: CT angio aorta, coronary angiogram, carotid duplex, PFTs\n3. Hold on any rate-lowering medications\n4. If syncope occurs → ED immediately\n5. Monitor for progression to complete heart block\n6. RTC 4 weeks for Heart Team decision"
+      "assessment": "1. Severe aortic stenosis \u2014 symptomatic; TAVR candidate\n2. Sick sinus syndrome with first-degree AV block and LBBB \u2014 high risk for complete heart block, especially with TAVR\n3. Near-syncope \u2014 likely multifactorial (AS + conduction disease)\n4. EF declining (45% from 50% last year)",
+      "plan": "1. TAVR Heart Team review \u2014 likely combined TAVR + permanent pacemaker\n2. Pre-TAVR workup: CT angio aorta, coronary angiogram, carotid duplex, PFTs\n3. Hold on any rate-lowering medications\n4. If syncope occurs \u2192 ED immediately\n5. Monitor for progression to complete heart block\n6. RTC 4 weeks for Heart Team decision"
     },
     {
       "id": "V002",
@@ -203,161 +155,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Maria Fernandez, MD",
       "cc": "Chronic disease follow-up; medication management",
-      "hpi": "84-year-old female for routine follow-up. Mild dyspnea with moderate exertion. BP controlled. Thyroid stable. CKD stable (eGFR 38). Reports occasional dizziness when standing quickly. Falls risk concern — using walker for longer distances.",
+      "hpi": "84-year-old female for routine follow-up. Mild dyspnea with moderate exertion. BP controlled. Thyroid stable. CKD stable (eGFR 38). Reports occasional dizziness when standing quickly. Falls risk concern \u2014 using walker for longer distances.",
       "exam": "General: Frail, alert. CV: Bradycardic, systolic murmur (known AS). Lungs: Clear. Extremities: No edema.",
-      "assessment": "1. Severe AS — under cardiology care\n2. CKD 3b — stable\n3. Hypothyroidism — stable\n4. Falls risk — high",
+      "assessment": "1. Severe AS \u2014 under cardiology care\n2. CKD 3b \u2014 stable\n3. Hypothyroidism \u2014 stable\n4. Falls risk \u2014 high",
       "plan": "1. Continue current medications\n2. Labs: TSH, BMP\n3. PT evaluation for balance/fall prevention\n4. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "02/10/2026",
-      "time": "06:30",
-      "orderedBy": "Dr. Karen Moy, MD (ED)",
-      "collected": "02/10/2026 06:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-021042",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Complete Heart Block Workup",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "106",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "34",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "28",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "136",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "5.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Lyme ELISA (two-tier)",
+          "value": "Positive \u2014 IgM 1:256",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "CARDIAC MARKERS",
-          "results": [
-            {
-              "test": "Troponin I",
-              "value": "0.04",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": ""
-            },
-            {
-              "test": "BNP",
-              "value": "680",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Lyme Western blot",
+          "value": "Positive \u2014 IgM bands (23kDa, 39kDa, 41kDa)",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "32.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "196",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.38",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "THYROID",
-          "results": [
-            {
-              "test": "TSH",
-              "value": "3.8",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            }
-          ]
+          "test": "ANA/ANCA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "TSH",
+          "value": "2.1",
+          "unit": "mIU/L",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "10/28/2025",
-      "study": "TRANSTHORACIC ECHOCARDIOGRAM",
-      "accession": "IMG-2025-10285",
-      "status": "FINAL",
-      "orderedBy": "Dr. Rajiv Singh, MD",
-      "readBy": "Dr. Rajiv Singh, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "84F with known severe aortic stenosis. TAVR evaluation.",
-      "technique": "2D and Doppler transthoracic echocardiography with color flow mapping.",
-      "findings": "Aortic valve: Severely calcified, trileaflet (but heavily calcified with restricted mobility). Peak velocity 4.3 m/s. Mean gradient 42 mmHg. Calculated AVA 0.8 cm² by continuity equation.\\n\\nLeft ventricle: Concentric LVH. EF estimated 45% (decreased from 50% in 2024). Mild global hypokinesis.\\n\\nLeft atrium: Mildly dilated (42 mm).\\n\\nMitral valve: Mild mitral regurgitation, mild annular calcification.\\n\\nRight heart: Normal RV size and function. RVSP estimated 38 mmHg.\\n\\nNo pericardial effusion.",
-      "impression": "1. Severe calcific aortic stenosis — AVA 0.8 cm², mean gradient 42 mmHg.\\n2. Declining LVEF 45% (previously 50%) — early AS cardiomyopathy.\\n3. Concentric LVH.\\n4. Mild mitral regurgitation.\\n5. TAVR evaluation recommended.",
-      "dictated": "10/28/2025 15:00",
-      "verified": "10/28/2025 17:20"
+      "date": "04/2024",
+      "study": "Echocardiogram",
+      "findings": "Normal LV size and function. EF 60%. No wall motion abnormalities. No pericardial effusion.",
+      "impression": "Normal systolic function. No structural cause for AV block."
     }
   ],
   "immunizations": [
@@ -386,14 +238,14 @@ window.EMR_DATA = {
       "vaccine": "Shingrix (1/2)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Shingrix (2/2)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -426,24 +278,24 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Very limited — short walks with walker; chair exercises"
+      "Very limited \u2014 short walks with walker; chair exercises"
     ],
     [
       "Housing",
-      "Assisted living facility — independent room with daily check-ins"
+      "Assisted living facility \u2014 independent room with daily check-ins"
     ],
     [
       "Safety",
-      "Fall risk — uses walker; wears personal emergency response device; 2 falls in past year (no fracture)"
+      "Fall risk \u2014 uses walker; wears personal emergency response device; 2 falls in past year (no fracture)"
     ],
     [
       "Advance Directive",
-      "POLST on file — Full Code; HCP: son Anthony Marchetti"
+      "POLST on file \u2014 Full Code; HCP: son Anthony Marchetti"
     ]
   ],
   "meta": {
     "caseId": "complete-heart-block-v2",
-    "diagnosis": "Complete Heart Block (Degenerative Conduction Disease with Severe Aortic Stenosis)",
+    "diagnosis": "Complete Heart Block \u2014 Lyme Carditis in Young Adult",
     "acuity": 1,
     "presentation": "Cardiac Emergency",
     "category": "cardiovascular"
@@ -507,13 +359,11 @@ window.EMR_DATA = {
       "Abdominal examination for hepatomegaly": "Liver edge palpable 2 cm below costal margin, no ascites or splenomegaly"
     },
     "ddxTargets": [
-      "Complete Heart Block (Degenerative Conduction Disease with Severe Aortic Stenosis) (correct diagnosis)",
-      "Severe Aortic Stenosis with Heart Failure",
-      "Sick Sinus Syndrome with Bradycardia",
-      "Acute Myocardial Infarction with Heart Block",
-      "Hyperkalemia or Drug-Induced Bradycardia",
-      "Decompensated Heart Failure with Bradycardia",
-      "Medication-Induced Bradycardia"
+      "Lyme carditis \u2014 complete heart block (correct)",
+      "Degenerative conduction disease \u2014 older patient; no Lyme exposure; PPM indicated",
+      "Sarcoid heart disease \u2014 bilateral hilar adenopathy; ACE level; cardiac MRI",
+      "Myocarditis \u2014 troponin elevated here (Lyme myocarditis component)",
+      "Medication toxicity \u2014 digoxin, beta-blockers, CCBs; review medication list"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the obvious bradycardia and missing the underlying complete heart block, or focusing solely on aortic stenosis without recognizing the conduction disease component requiring urgent intervention",
@@ -523,7 +373,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. I see you're thinking about cardiac causes for her presentation. Given her age, known cardiac history, and the combination of symptoms, what specific aspects of the cardiac conduction system might you want to explore? How might her severe aortic stenosis interact with potential rhythm disorders?",
       "phase5": "Excellent work gathering the history and physical findings. You've identified bradycardia, signs of heart failure, and severe aortic stenosis. Now, looking at that heart rate of 34 with her symptoms - what does this constellation tell you about her conduction system? How does this change your management priorities?",
-      "finalDebrief": "This case illustrates the importance of recognizing complete heart block in elderly patients with structural heart disease. Notice how the combination of severe aortic stenosis with degenerative conduction disease created a perfect storm - the stenosis limited cardiac output while the heart block prevented compensatory tachycardia. The family history of both aortic stenosis and pacemaker placement was a crucial clue. This patient needs urgent pacemaker placement before any consideration of valve intervention."
+      "finalDebrief": "This case illustrates the importance of recognizing complete heart block in elderly patients with structural heart disease. Notice how the combination of severe aortic stenosis with degenerative conduction disease created a perfect storm - the stenosis limited cardiac output while the heart block prevented compensatory tachycardia. The family history of both aortic stenosis and pacemaker placement was a crucial clue. This patient needs urgent pacemaker placement before any consideration of valve intervention.",
+      "final": "Diagnosis: Lyme carditis with complete heart block. Key learning: (1) Lyme carditis is completely reversible with antibiotics \u2014 the critical point. In complete heart block in patient <50 from endemic area: always ask about Lyme exposure, tick bite, erythema migrans rash. (2) Two-tier Lyme testing: ELISA first \u2192 if positive, Western blot confirmation. IgM = early. IgG = later/persistent. Do not diagnose on ELISA alone. (3) Treatment prevents PPM: antibiotics resolve AV block within 1-6 weeks in most cases. High-degree block = IV ceftriaxone inpatient. Lower-degree = oral doxycycline outpatient with monitoring. (4) Other reversible causes of complete heart block: medications (digoxin, beta-blockers, CCBs), hyperkalemia, myocarditis, sarcoidosis, Chagas disease, hypothyroidism. Always exclude before PPM. (5) PPM indication: complete heart block NOT from reversible cause, or reversible cause not resolving after appropriate treatment. For Lyme: if AV block persists >3-4 weeks of antibiotics, reassess for PPM."
     }
   }
 };

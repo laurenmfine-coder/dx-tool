@@ -1,6 +1,3 @@
-// Virtual EMR Case: Deep Vein Thrombosis
-// Variant: deep-vein-thrombosis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Robert Kim, MD",
-    "pharmacy": "Publix Pharmacy — 1800 N Pine Island Rd, Plantation, FL",
+    "pharmacy": "Publix Pharmacy \u2014 1800 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
     "address": "4683 Birch Ln, Milwaukee, WI 53203",
@@ -26,65 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Obesity, Class II",
-      "icd": "E66.01",
-      "onset": "2012",
+      "problem": "Acute proximal DVT \u2014 left femoral vein, unprovoked",
+      "icd": "I82.4Y1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "BMI 37.2; counseled on weight management; declined bariatric referral"
+      "notes": "Maria Chen, 38F \u2014 2-week left leg swelling, pain, erythema. No recent travel, surgery, or immobilization. Wells score 3 (high). Duplex ultrasound: left femoral vein DVT extending to popliteal. Unprovoked = requires 3-6 months anticoagulation minimum."
     },
     {
-      "problem": "Combined Oral Contraceptive Use",
-      "icd": "Z79.3",
-      "onset": "2019",
+      "problem": "Unprovoked DVT \u2014 malignancy and thrombophilia workup",
+      "icd": "I82.4Y1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Ethinyl estradiol/norgestimate (Sprintec); counseled on VTE risk given BMI and age"
+      "notes": "Unprovoked DVT in a patient <50 warrants age-appropriate cancer screening (breast, colorectal, cervical) and consideration of thrombophilia testing. Factor V Leiden most common inherited thrombophilia."
     },
     {
-      "problem": "Hypertension — Mild",
-      "icd": "I10",
-      "onset": "2021",
+      "problem": "PE risk \u2014 proximal DVT has 50% PE rate without treatment",
+      "icd": "I82.4Y1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On lisinopril; controlled"
-    },
-    {
-      "problem": "Iron Deficiency Anemia — History",
-      "icd": "D50.9",
-      "onset": "2022",
-      "status": "Resolved",
-      "notes": "Menorrhagia-related; resolved after iron supplementation and OCP regulation of menses"
+      "notes": "Proximal DVT (above popliteal) has 50% risk of PE without anticoagulation. Isolated distal DVT (calf) has lower PE risk \u2014 anticoagulate based on symptoms and extension risk."
     }
   ],
   "medications": [
     {
-      "name": "Ethinyl Estradiol/Norgestimate (Sprintec) daily",
-      "sig": "Take 1 tablet by mouth daily at the same time each day",
-      "prescriber": "Dr. Kim",
-      "start": "03/2019",
+      "name": "Apixaban 10mg BID x 7 days then 5mg BID x 3-6 months",
+      "sig": "DOAC is first-line for VTE treatment (AMPLIFY trial). No need for bridging heparin. Reduces stroke, PE, and VTE recurrence. Preferred over warfarin (no INR monitoring, fewer interactions).",
+      "prescriber": "Medicine/Hematology",
+      "start": "2024",
       "refills": 3,
       "status": "Active"
     },
     {
-      "name": "Lisinopril 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Kim",
-      "start": "06/2021",
-      "refills": 4,
+      "name": "Compression stockings \u2014 left leg",
+      "sig": "Graduated compression stockings reduce post-thrombotic syndrome (PTS) risk. Wear for at least 2 years after proximal DVT.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Vitamin D3 2000 IU daily",
-      "sig": "Take 1 capsule by mouth daily",
-      "prescriber": "Dr. Kim",
-      "start": "01/2023",
-      "refills": 5,
-      "status": "Active"
+      "name": "Thrombophilia workup \u2014 defer until off anticoagulation",
+      "sig": "Test after completing anticoagulation (results affected by active anticoagulation). Factor V Leiden, prothrombin G20210A, protein C/S, antithrombin III, antiphospholipid antibodies.",
+      "prescriber": "Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Deferred 3-6 months"
     }
   ],
   "allergies": [
     {
       "allergen": "Sulfa drugs",
       "type": "Drug",
-      "reaction": "Hives — diffuse urticaria",
+      "reaction": "Hives \u2014 diffuse urticaria",
       "severity": "Moderate",
       "verified": "Yes"
     }
@@ -95,7 +85,7 @@ window.EMR_DATA = {
       "bp": "128/80",
       "hr": 76,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "218 lbs",
       "ht": "5'5\"",
@@ -107,7 +97,7 @@ window.EMR_DATA = {
       "bp": "130/82",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "222 lbs",
       "ht": "5'5\"",
@@ -122,94 +112,63 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Robert Kim, MD",
       "cc": "Follow-up: HTN, OCP refill, weight management",
-      "hpi": "44-year-old female for follow-up. Reports feeling well. HTN controlled. On combined OCP (Sprintec) for menorrhagia control and contraception. VTE risk re-discussed given BMI 36 and age — patient wishes to continue OCPs; understands risks. Denies leg swelling, chest pain, or SOB. Planning a trip to Jamaica next month — 4-hour flight. Weight stable.",
+      "hpi": "44-year-old female for follow-up. Reports feeling well. HTN controlled. On combined OCP (Sprintec) for menorrhagia control and contraception. VTE risk re-discussed given BMI 36 and age \u2014 patient wishes to continue OCPs; understands risks. Denies leg swelling, chest pain, or SOB. Planning a trip to Jamaica next month \u2014 4-hour flight. Weight stable.",
       "exam": "General: Obese, NAD. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT. Extremities: No edema, no calf tenderness, negative Homan sign. Skin: No rashes.",
-      "assessment": "1. HTN — controlled\n2. OCP use — continued; VTE risk discussed (obesity + estrogen + age approaching 45)\n3. Obesity — stable; nutritional counseling offered\n4. Upcoming travel — DVT prevention counseled",
+      "assessment": "1. HTN \u2014 controlled\n2. OCP use \u2014 continued; VTE risk discussed (obesity + estrogen + age approaching 45)\n3. Obesity \u2014 stable; nutritional counseling offered\n4. Upcoming travel \u2014 DVT prevention counseled",
       "plan": "1. Continue lisinopril and Sprintec\n2. Travel DVT prevention: compression stockings, hydration, walk every 1-2 hours on flight, ankle pumps\n3. Weight management: referred to nutritionist\n4. If calf swelling, pain, or redness: seek urgent evaluation\n5. RTC 6 months; consider transitioning to progestin-only method at age 45"
     }
   ],
   "labs": [
     {
-      "date": "11/20/2024",
-      "time": "09:30",
-      "orderedBy": "Dr. Robert Kim, MD",
-      "collected": "11/20/2024 09:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-112015",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "DVT/PE Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.0",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.8",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "275",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "D-dimer",
+          "value": "4.8",
+          "unit": "\u03bcg/mL",
+          "ref": "<0.5",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "218",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL Cholesterol",
-              "value": "138",
-              "unit": "mg/dL",
-              "range": "<100 optimal",
-              "flag": "H"
-            },
-            {
-              "test": "HDL Cholesterol",
-              "value": "48",
-              "unit": "mg/dL",
-              "range": ">50",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "160",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "CBC \u2014 platelet count",
+          "value": "228",
+          "unit": "K/\u03bcL",
+          "ref": "150-400 (baseline for anticoagulation)",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "0.9",
+          "unit": "mg/dL",
+          "ref": "0.5-1.1 (renal function for DOAC dosing)",
+          "flag": ""
+        },
+        {
+          "test": "Beta-hCG",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Wells DVT Score",
+          "value": "3 \u2014 high probability",
+          "unit": "",
+          "ref": "\u22653 = high probability",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "Lower Extremity Venous Duplex Ultrasound",
+      "findings": "Non-compressible left femoral vein extending to popliteal vein. No flow on Doppler. Right lower extremity normal. No Baker cyst.",
+      "impression": "Acute left femoral-popliteal DVT. Anticoagulation indicated."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -229,19 +188,19 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2008",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
   "familyHistory": [
-    "Mother: DVT at age 50 (provoked — post-surgical), HTN, alive at 70",
+    "Mother: DVT at age 50 (provoked \u2014 post-surgical), HTN, alive at 70",
     "Father: T2DM, CAD, alive at 72",
     "Sister: Factor V Leiden heterozygous (diagnosed during pregnancy), alive at 41",
     "No family history of PE or unprovoked clots"
@@ -249,7 +208,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Office manager — sedentary desk job; 8+ hours sitting daily"
+      "Office manager \u2014 sedentary desk job; 8+ hours sitting daily"
     ],
     [
       "Marital",
@@ -286,7 +245,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "deep-vein-thrombosis",
-    "diagnosis": "Acute Proximal Deep Vein Thrombosis — Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel)",
+    "diagnosis": "Acute Proximal DVT \u2014 Left Femoral Vein, Unprovoked",
     "acuity": 3,
     "presentation": "Musculoskeletal Emergency",
     "category": "vascular"
@@ -350,13 +309,11 @@ window.EMR_DATA = {
       "Basic cardiopulmonary examination": "Heart rate regular, lungs clear to auscultation bilaterally, no signs of pulmonary embolism"
     },
     "ddxTargets": [
-      "Acute Proximal Deep Vein Thrombosis — Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel) (correct diagnosis)",
-      "Superficial thrombophlebitis",
-      "Cellulitis of left lower extremity",
-      "Pulmonary embolism with associated DVT",
-      "Acute arterial occlusion",
-      "Muscle strain or hematoma",
-      "Chronic venous insufficiency exacerbation"
+      "Proximal DVT \u2014 unprovoked (correct)",
+      "Cellulitis \u2014 unilateral erythema but no clot on ultrasound; non-compressibility distinguishes",
+      "Ruptured Baker cyst \u2014 posterior knee pain; ultrasound shows cyst rupture; mimic DVT",
+      "Superficial thrombophlebitis \u2014 palpable cord; superficial vein; limited PE risk; NSAIDs",
+      "Lymphedema \u2014 bilateral; pitting; no D-dimer elevation; chronic onset"
     ],
     "biasFlags": {
       "anchoring": "May anchor on musculoskeletal injury given chief complaint category rather than considering vascular emergency given multiple thrombotic risk factors",
@@ -366,7 +323,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Before you interview the patient, what specific risk factors for venous thromboembolism should you be thinking about given what you know about this 44-year-old woman? How might her medications and recent activities influence your questioning?",
       "phase5": "Now that you've completed your history and physical, let's think about risk stratification. What scoring system could help you here, and what are the key clinical features you've identified that point toward your leading diagnosis? What would be your next immediate step?",
-      "finalDebrief": "This case highlights the importance of recognizing provoked DVT in patients with multiple risk factors. How did the combination of oral contraceptives, obesity, prolonged travel, and family history influence the clinical presentation? What does this teach us about managing patients on estrogen-containing contraceptives?"
+      "finalDebrief": "This case highlights the importance of recognizing provoked DVT in patients with multiple risk factors. How did the combination of oral contraceptives, obesity, prolonged travel, and family history influence the clinical presentation? What does this teach us about managing patients on estrogen-containing contraceptives?",
+      "final": "Diagnosis: acute proximal DVT, unprovoked. Key learning: (1) Wells DVT score: each criterion = 1 point (+2 for active cancer; +1 for paralysis, recent plaster/cast; +1 for recently bedridden >3 days or surgery within 12 weeks; +1 for localized tenderness; +1 for entire leg swollen; +1 for calf swelling >3cm vs contralateral; +1 for pitting edema; +1 for collateral superficial veins; -2 for alternative diagnosis at least as likely). \u22653 = high probability. (2) D-dimer: highly sensitive but non-specific. Negative D-dimer in low-pretest probability = excludes DVT (NPV >99%). Elevated D-dimer with high probability = confirm with ultrasound, not add more tests. (3) DOAC vs warfarin for DVT: DOACs (apixaban, rivaroxaban) are preferred \u2014 noninferior, no INR monitoring, fewer interactions, lower bleeding risk. Warfarin still used in antiphospholipid syndrome (target INR 2-3 or 3-4 depending on risk). (4) Duration of anticoagulation: provoked (surgery, trauma, immobilization) = 3 months. Unprovoked = minimum 3-6 months, consider indefinite if high recurrence risk (male, proximal, no reversible risk factor). (5) Post-thrombotic syndrome: complication of DVT from venous hypertension \u2192 chronic leg pain, edema, skin changes, ulceration. Compression stockings for \u22652 years after proximal DVT reduce PTS risk."
     }
   }
 };

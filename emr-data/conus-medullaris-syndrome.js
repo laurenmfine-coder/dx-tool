@@ -1,6 +1,3 @@
-// Virtual EMR Case: Conus Medullaris Syndrome
-// Variant: conus-medullaris-syndrome | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicaid",
     "pcp": "Dr. Rachel Toussaint, MD",
-    "pharmacy": "CVS Pharmacy — 601 N State Rd 7, Hollywood, FL",
+    "pharmacy": "CVS Pharmacy \u2014 601 N State Rd 7, Hollywood, FL",
     "language": "English, Haitian Creole",
     "race": "Black or African American",
     "address": "4935 Clover St, Baltimore, MD 21214",
@@ -26,105 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Metastatic Prostate Adenocarcinoma",
-      "icd": "C61",
-      "onset": "2023",
+      "problem": "Metastatic epidural cord compression \u2014 oncological emergency",
+      "icd": "G99.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Gleason 4+4=8; diagnosed Stage IV with bone metastases to pelvis and lumbar spine; on ADT + docetaxel; PSA rising despite treatment"
+      "notes": "Barbara Chen, 62F \u2014 metastatic breast cancer. Acute low back pain, perianal numbness, urinary retention, bilateral leg weakness. MRI: T12-L1 epidural metastasis compressing conus medullaris."
     },
     {
-      "problem": "Osseous Metastases, Lumbar Spine and Pelvis",
-      "icd": "C79.51",
-      "onset": "2023",
+      "problem": "Conus medullaris \u2014 mixed UMN/LMN features",
+      "icd": "G99.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "L1, L3 vertebral body lesions; bilateral iliac; pathologic compression fracture L1"
+      "notes": "T12-L1 injury = mixed UMN + LMN: hyperreflexia + flaccid paralysis, saddle anesthesia, bladder/bowel dysfunction. Distinguishes from cauda equina (pure LMN) and thoracic cord (pure UMN)."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2008",
+      "problem": "Urinary retention \u2014 bladder from conus",
+      "icd": "R33.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Controlled"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2014",
-      "status": "Active",
-      "notes": "HbA1c 7.4%"
-    },
-    {
-      "problem": "Chronic Pain Syndrome",
-      "icd": "G89.29",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Bone metastasis-related; on opioid therapy"
+      "notes": "Conus controls bladder via S2-S4. Detrusor areflexia \u2192 urinary retention. Immediate catheterization."
     }
   ],
   "medications": [
     {
-      "name": "Leuprolide 22.5mg IM q3months",
-      "sig": "Inject intramuscularly every 3 months by provider",
-      "prescriber": "Dr. Patel (Oncology)",
-      "start": "06/2023",
+      "name": "Dexamethasone 10mg IV then 4mg q6h \u2014 IMMEDIATE",
+      "sig": "Reduces spinal cord edema. Start immediately on clinical suspicion \u2014 before MRI if deficits present. Every hour of untreated compression = permanent neurological loss.",
+      "prescriber": "Oncology/Neurosurgery",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "IMMEDIATE"
     },
     {
-      "name": "Abiraterone 1000mg daily",
-      "sig": "Take 2 tablets (500mg each) by mouth daily on empty stomach",
-      "prescriber": "Dr. Patel (Oncology)",
-      "start": "01/2025",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Prednisone 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with abiraterone",
-      "prescriber": "Dr. Patel (Oncology)",
-      "start": "01/2025",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Denosumab 120mg SubQ q4weeks",
-      "sig": "Inject subcutaneously every 4 weeks by provider for bone metastases",
-      "prescriber": "Dr. Patel (Oncology)",
-      "start": "08/2023",
+      "name": "Emergent spinal irradiation \u2014 within 24h",
+      "sig": "Radiation first-line for most metastatic cord compression. Start within 24 hours. Surgery first for radioresistant tumors or mechanical instability.",
+      "prescriber": "Radiation Oncology",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "URGENT"
     },
     {
-      "name": "Oxycodone ER 20mg BID",
-      "sig": "Take 1 tablet by mouth every 12 hours for chronic pain; do not crush or chew",
-      "prescriber": "Dr. Patel (Oncology)",
-      "start": "10/2024",
-      "refills": 1,
-      "status": "Active"
-    },
-    {
-      "name": "Oxycodone IR 5mg q4h PRN",
-      "sig": "Take 1 tablet by mouth every 4 hours as needed for breakthrough pain",
-      "prescriber": "Dr. Patel (Oncology)",
-      "start": "10/2024",
-      "refills": 1,
-      "status": "PRN"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Toussaint",
-      "start": "03/2015",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Toussaint",
-      "start": "06/2009",
-      "refills": 5,
-      "status": "Active"
+      "name": "Urinary catheterization \u2014 immediate",
+      "sig": "Foley for urinary retention. Prevent bladder overdistension injury.",
+      "prescriber": "Oncology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Done \u2014 450mL residual"
     }
   ],
   "allergies": [
@@ -142,7 +85,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 88,
       "rr": 18,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "96%",
       "wt": "172 lbs",
       "ht": "5'10\"",
@@ -154,7 +97,7 @@ window.EMR_DATA = {
       "bp": "134/82",
       "hr": 78,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "176 lbs",
       "ht": "5'10\"",
@@ -166,7 +109,7 @@ window.EMR_DATA = {
       "bp": "130/80",
       "hr": 76,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "180 lbs",
       "ht": "5'10\"",
@@ -178,7 +121,7 @@ window.EMR_DATA = {
       "bp": "132/82",
       "hr": 74,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "98%",
       "wt": "184 lbs",
       "ht": "5'10\"",
@@ -193,10 +136,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Anil Patel, MD (Oncology)",
       "cc": "Prostate cancer follow-up; rising PSA; pain management",
-      "hpi": "55-year-old male with metastatic prostate cancer (Gleason 8, Stage IV) presenting for follow-up. PSA rising to 24.6 from 12.8 three months ago despite abiraterone + prednisone (added 01/2025 after progression on ADT + docetaxel). CT shows stable bone lesions. Reports worsening lower back pain (8/10) requiring increased breakthrough oxycodone — now using 3-4 doses/day vs prior 1-2. Pain radiates bilaterally to buttocks. No new neurologic symptoms currently. Weight down 4 lbs. Appetite decreased. Fatigue worsening.",
+      "hpi": "55-year-old male with metastatic prostate cancer (Gleason 8, Stage IV) presenting for follow-up. PSA rising to 24.6 from 12.8 three months ago despite abiraterone + prednisone (added 01/2025 after progression on ADT + docetaxel). CT shows stable bone lesions. Reports worsening lower back pain (8/10) requiring increased breakthrough oxycodone \u2014 now using 3-4 doses/day vs prior 1-2. Pain radiates bilaterally to buttocks. No new neurologic symptoms currently. Weight down 4 lbs. Appetite decreased. Fatigue worsening.",
       "exam": "General: Cachectic-appearing male, chronically ill. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT. Spine: Tenderness L1-L3 midline. Neuro: A&O x3. Motor: 5/5 all extremities. Sensation: Intact. Rectal: Prostate indurated, non-tender.",
-      "assessment": "1. Metastatic castration-resistant prostate cancer — PSA progression on abiraterone\n2. Osseous metastases — stable imaging; worsening pain\n3. Chronic cancer pain — escalating opioid needs\n4. Weight loss — cancer-related cachexia",
-      "plan": "1. Switch to enzalutamide 160mg daily; discontinue abiraterone\n2. Continue denosumab for bone protection\n3. Increase oxycodone ER to 20mg BID (from 15mg)\n4. Palliative radiation to L1 considered if pain not controlled\n5. Nutrition consult; Megace for appetite\n6. Discuss goals of care at next visit\n7. Restaging CT and bone scan in 3 months\n8. Monitor for spinal cord compression — educate on warning signs"
+      "assessment": "1. Metastatic castration-resistant prostate cancer \u2014 PSA progression on abiraterone\n2. Osseous metastases \u2014 stable imaging; worsening pain\n3. Chronic cancer pain \u2014 escalating opioid needs\n4. Weight loss \u2014 cancer-related cachexia",
+      "plan": "1. Switch to enzalutamide 160mg daily; discontinue abiraterone\n2. Continue denosumab for bone protection\n3. Increase oxycodone ER to 20mg BID (from 15mg)\n4. Palliative radiation to L1 considered if pain not controlled\n5. Nutrition consult; Megace for appetite\n6. Discuss goals of care at next visit\n7. Restaging CT and bone scan in 3 months\n8. Monitor for spinal cord compression \u2014 educate on warning signs"
     },
     {
       "id": "V002",
@@ -206,140 +149,59 @@ window.EMR_DATA = {
       "cc": "Prostate cancer follow-up; treatment response",
       "hpi": "55-year-old male for follow-up after starting abiraterone in 01/2025. PSA decreased initially to 8.4 but now rising to 12.8. Bone scan shows no new lesions. Pain managed at 5/10 with current regimen. Tolerating abiraterone without significant side effects.",
       "exam": "General: Thin but NAD. Spine: Mild midline tenderness L1. Neuro: Grossly intact.",
-      "assessment": "1. Metastatic prostate cancer — PSA nadir 8.4, now rising\n2. Pain — controlled currently",
+      "assessment": "1. Metastatic prostate cancer \u2014 PSA nadir 8.4, now rising\n2. Pain \u2014 controlled currently",
       "plan": "1. Continue current regimen; recheck PSA in 3 months\n2. If PSA continues rising, consider switch to enzalutamide\n3. Continue denosumab\n4. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "02/02/2026",
-      "time": "14:30",
-      "orderedBy": "Dr. James Park, MD (ED)",
-      "collected": "02/02/2026 14:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-020242",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Metastatic Cord Compression",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "156",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.2",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Lower extremity strength",
+          "value": "3/5 bilateral hip flexors; 2/5 ankle dorsiflexion",
+          "unit": "",
+          "ref": "5/5",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "30.6",
-              "unit": "%",
-              "range": "38.0-50.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "178",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Perianal sensation",
+          "value": "Reduced \u2014 saddle anesthesia",
+          "unit": "",
+          "ref": "Intact",
+          "flag": "H"
         },
         {
-          "name": "TUMOR MARKER",
-          "results": [
-            {
-              "test": "PSA, Total",
-              "value": "38.4",
-              "unit": "ng/mL",
-              "range": "0-4.0",
-              "flag": "H"
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "312",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": "H"
-            }
-          ]
+          "test": "Bulbocavernosus reflex",
+          "value": "Absent (conus S3-4)",
+          "unit": "",
+          "ref": "Present",
+          "flag": "H"
+        },
+        {
+          "test": "Calcium",
+          "value": "11.8",
+          "unit": "mg/dL",
+          "ref": "8.5-10.5",
+          "flag": "H"
+        },
+        {
+          "test": "CEA",
+          "value": "68",
+          "unit": "ng/mL",
+          "ref": "<3",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "09/08/2025",
-      "study": "CT ABDOMEN AND PELVIS WITH CONTRAST",
-      "accession": "IMG-2025-09085",
-      "status": "FINAL",
-      "orderedBy": "Dr. Anil Patel, MD",
-      "readBy": "Dr. Elena Suarez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "55M with metastatic prostate cancer. Restaging.",
-      "technique": "MDCT of abdomen and pelvis with IV contrast.",
-      "findings": "Prostate: Enlarged, irregular. No significant lymphadenopathy.\\n\\nBone: Known sclerotic metastases L1 and L3 vertebral bodies — L1 with pathologic compression fracture, ~30% height loss, stable. Bilateral iliac sclerotic lesions stable. No new osseous lesions.\\n\\nLiver/Spleen: Normal.\\n\\nKidneys: Normal bilaterally.\\n\\nSpinal canal: No epidural mass or cord compression on this study (MRI recommended for definitive evaluation).",
-      "impression": "1. Stable sclerotic osseous metastases L1, L3, bilateral iliac.\\n2. Pathologic L1 compression fracture — stable.\\n3. No new metastatic lesions.\\n4. No definite epidural disease on CT — MRI recommended if neurologic symptoms develop.",
-      "dictated": "09/08/2025 16:10",
-      "verified": "09/08/2025 18:30"
+      "date": "04/2024",
+      "study": "MRI Thoracolumbar Spine with Gadolinium",
+      "findings": "T12-L1 epidural metastasis with cord compression at conus medullaris. Pathological T12 fracture. Signal change within conus.",
+      "impression": "Metastatic epidural spinal cord compression at conus. Dexamethasone + radiation oncology urgently."
     }
   ],
   "immunizations": [
@@ -408,7 +270,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Minimal — limited by pain and fatigue; short walks in neighborhood"
+      "Minimal \u2014 limited by pain and fatigue; short walks in neighborhood"
     ],
     [
       "Housing",
@@ -416,16 +278,16 @@ window.EMR_DATA = {
     ],
     [
       "Safety",
-      "Denies IPV; fall risk — uses cane for ambulation"
+      "Denies IPV; fall risk \u2014 uses cane for ambulation"
     ],
     [
       "Advance Directive",
-      "POLST on file — Full Code transitioning to DNR discussion; HCP: wife Claudette"
+      "POLST on file \u2014 Full Code transitioning to DNR discussion; HCP: wife Claudette"
     ]
   ],
   "meta": {
     "caseId": "conus-medullaris-syndrome",
-    "diagnosis": "Conus Medullaris Syndrome (Metastatic Epidural Spinal Cord Compression)",
+    "diagnosis": "Conus Medullaris Syndrome \u2014 Metastatic Epidural Spinal Cord Compression",
     "acuity": 2,
     "presentation": "Back Pain",
     "category": "oncologic"
@@ -489,13 +351,10 @@ window.EMR_DATA = {
       "Romberg test": "Negative for cerebellar dysfunction, but patient has difficulty maintaining balance due to weakness."
     },
     "ddxTargets": [
-      "Conus Medullaris Syndrome (Metastatic Epidural Spinal Cord Compression) (correct diagnosis)",
-      "Cauda Equina Syndrome",
-      "Pathologic vertebral compression fracture",
-      "Spinal epidural abscess",
-      "Cauda equina syndrome due to central disc herniation",
-      "Mechanical low back pain with radiculopathy",
-      "Spinal stenosis with neurogenic claudication"
+      "Metastatic epidural cord compression at conus (correct)",
+      "Cauda equina syndrome \u2014 L2 and below; pure LMN; different level",
+      "Transverse myelitis \u2014 inflammatory; CSF pleocytosis; no mass",
+      "Epidural abscess \u2014 fever; elevated inflammatory markers; drainage required"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'chronic cancer pain progression' and missing acute neurologic emergency requiring immediate intervention",
@@ -505,7 +364,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given this patient's oncologic history and the acute change in his pain pattern, what specific neurologic emergencies should you be most concerned about? What key symptoms would help you differentiate between conus medullaris and cauda equina syndromes?",
       "phase5": "Excellent history and physical exam. You've identified several concerning neurologic findings including saddle anesthesia, decreased sphincter tone, and bilateral lower extremity weakness. How do these findings help narrow your differential? What is the most likely anatomical location of this patient's pathology based on the pattern of deficits?",
-      "finalDebrief": "This case demonstrates the importance of recognizing conus medullaris syndrome as an oncologic emergency. The key clinical clues were the acute worsening of pain in a patient with known spinal metastases, combined with saddle anesthesia, bowel/bladder dysfunction, and bilateral lower extremity weakness. Early recognition and emergent MRI with immediate neurosurgical consultation are critical for optimal outcomes."
+      "finalDebrief": "This case demonstrates the importance of recognizing conus medullaris syndrome as an oncologic emergency. The key clinical clues were the acute worsening of pain in a patient with known spinal metastases, combined with saddle anesthesia, bowel/bladder dysfunction, and bilateral lower extremity weakness. Early recognition and emergent MRI with immediate neurosurgical consultation are critical for optimal outcomes.",
+      "final": "Diagnosis: metastatic epidural cord compression at conus medullaris. Key learning: (1) Spinal cord level localization: cervical/thoracic = UMN (spasticity, hyperreflexia, upgoing plantar). Conus medullaris (T12-L1) = MIXED UMN + LMN + saddle anesthesia + bladder/bowel. Cauda equina (below L1) = pure LMN, flaccid, areflexic, saddle anesthesia. (2) This is an oncological emergency: dexamethasone immediately (before MRI if deficits present), then emergent MRI, then radiation. Every hour = more permanent loss. (3) MRI entire spine: 30% of patients have multiple compression sites. Always image full spine. (4) Dexamethasone dose: 10mg IV bolus then 4mg q6h. Higher doses cause more side effects without benefit. (5) Surgery indication: radioresistant tumor, mechanical instability, unknown primary needing tissue diagnosis, neurological deterioration during radiation. Surgery + radiation superior to radiation alone (ASTRO trial)."
     }
   }
 };

@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Cholecystitis with Choledocholithiasis
-// Variant: cholelithiasis-cholecystitis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "BlueCross BlueShield HMO",
     "pcp": "Dr. Renee Augustin, MD",
-    "pharmacy": "Publix Pharmacy — 2200 S University Dr, Riverside, FL",
+    "pharmacy": "Publix Pharmacy \u2014 2200 S University Dr, Riverside, FL",
     "language": "English, Haitian Creole",
     "race": "Black (Haitian American)",
     "address": "689 Dogwood Ln, Richmond, VA 23222",
@@ -26,65 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Cholelithiasis — Known",
-      "icd": "K80.20",
+      "problem": "Acute cholecystitis + choledocholithiasis",
+      "icd": "K80.42",
       "onset": "2024",
       "status": "Active",
-      "notes": "Incidental finding on RUQ US (08/2024) for RUQ discomfort; multiple gallstones without cholecystitis at that time; elective cholecystectomy discussed — patient deferred surgery"
+      "notes": "Patricia Monroe, 56F \u2014 RUQ pain, fever 38.8\u00b0C, Murphy sign positive, jaundice. ALT 180, direct bilirubin 3.2, CBD 12mm dilated on ultrasound \u2014 CBD stone plus cholecystitis."
     },
     {
-      "problem": "Obesity, BMI 36.8",
-      "icd": "E66.01",
-      "onset": "2014",
-      "status": "Active",
-      "notes": "Class II obesity; weight gain since second pregnancy"
-    },
-    {
-      "problem": "Sickle Cell Trait",
-      "icd": "D57.3",
-      "onset": "Birth",
-      "status": "Active",
-      "notes": "Hemoglobin AS; contributes to pigmented gallstone risk; otherwise asymptomatic"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "On amlodipine; controlled"
-    },
-    {
-      "problem": "Prior Episodes of Biliary Colic",
-      "icd": "K80.20",
+      "problem": "Choledocholithiasis \u2014 ERCP indicated before cholecystectomy",
+      "icd": "K80.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "3 episodes of postprandial RUQ pain in past year — lasted 30-60 min, self-resolved; no fever or jaundice with prior episodes; increasingly frequent"
+      "notes": "CBD stone causing biliary obstruction. ERCP with stone extraction required before or during cholecystectomy."
+    },
+    {
+      "problem": "Ascending cholangitis screen \u2014 Charcot triad",
+      "icd": "K83.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Fever + jaundice + RUQ pain = Charcot triad. Monitor closely for septic cholangitis (Reynolds pentad)."
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Augustin",
-      "start": "06/2020",
-      "refills": 5,
+      "name": "Piperacillin-tazobactam 3.375g IV q6h",
+      "sig": "Empiric biliary coverage for gram-negative organisms.",
+      "prescriber": "Surgery/GI",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Acetaminophen 500mg PRN",
-      "sig": "Take 1-2 tablets by mouth every 6 hours as needed for pain; max 3000mg/day",
-      "prescriber": "Dr. Augustin",
-      "start": "08/2024",
-      "refills": 3,
-      "status": "PRN"
+      "name": "ERCP with sphincterotomy and stone extraction \u2014 within 24h",
+      "sig": "CBD stone must be cleared before laparoscopic cholecystectomy. ERCP first, then same-admission cholecystectomy.",
+      "prescriber": "GI/Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Scheduled"
     },
     {
-      "name": "Omeprazole 20mg daily",
-      "sig": "Take 1 capsule by mouth once daily before breakfast",
-      "prescriber": "Dr. Augustin",
-      "start": "09/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Laparoscopic cholecystectomy \u2014 after ERCP",
+      "sig": "After CBD cleared, proceed with laparoscopic cholecystectomy same admission.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Planned"
     }
   ],
   "allergies": [
@@ -102,7 +85,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 104,
       "rr": 20,
-      "temp": "102.4°F",
+      "temp": "102.4\u00b0F",
       "spo2": "97%",
       "wt": "214 lbs",
       "ht": "5'5\"",
@@ -114,7 +97,7 @@ window.EMR_DATA = {
       "bp": "132/84",
       "hr": 78,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "218 lbs",
       "ht": "5'5\"",
@@ -126,7 +109,7 @@ window.EMR_DATA = {
       "bp": "128/82",
       "hr": 74,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "220 lbs",
       "ht": "5'5\"",
@@ -140,140 +123,73 @@ window.EMR_DATA = {
       "date": "08/18/2024",
       "type": "Primary Care",
       "provider": "Dr. Renee Augustin, MD",
-      "cc": "RUQ pain — recurrent; ultrasound results review",
-      "hpi": "42F with obesity presents for recurrent RUQ pain. Has had 3 episodes of postprandial RUQ pain over past 4 months — each after fatty meals, lasting 30-60 minutes, radiating to right scapula, associated with nausea. Self-resolves. No fever, no jaundice. US (08/2024) shows multiple gallstones. Surgery consult placed. Sickle cell trait — contributes to pigmented stone risk.",
+      "cc": "RUQ pain \u2014 recurrent; ultrasound results review",
+      "hpi": "42F with obesity presents for recurrent RUQ pain. Has had 3 episodes of postprandial RUQ pain over past 4 months \u2014 each after fatty meals, lasting 30-60 minutes, radiating to right scapula, associated with nausea. Self-resolves. No fever, no jaundice. US (08/2024) shows multiple gallstones. Surgery consult placed. Sickle cell trait \u2014 contributes to pigmented stone risk.",
       "exam": "Obese female, NAD. Abdomen: Soft, mild RUQ tenderness to deep palpation; no rebound or guarding; negative Murphy sign. No jaundice.",
-      "assessment": "1. Symptomatic cholelithiasis — recurrent biliary colic\n2. Sickle cell trait — pigmented stone predisposition\n3. Elective cholecystectomy indicated",
-      "plan": "1. General surgery referral for elective laparoscopic cholecystectomy\n2. Low-fat diet counseling\n3. Omeprazole 20mg daily for concomitant dyspepsia\n4. Acetaminophen PRN for pain (avoid NSAIDs — surgical planning)\n5. Return if fevers, persistent pain >6 hours, jaundice, or vomiting"
+      "assessment": "1. Symptomatic cholelithiasis \u2014 recurrent biliary colic\n2. Sickle cell trait \u2014 pigmented stone predisposition\n3. Elective cholecystectomy indicated",
+      "plan": "1. General surgery referral for elective laparoscopic cholecystectomy\n2. Low-fat diet counseling\n3. Omeprazole 20mg daily for concomitant dyspepsia\n4. Acetaminophen PRN for pain (avoid NSAIDs \u2014 surgical planning)\n5. Return if fevers, persistent pain >6 hours, jaundice, or vomiting"
     },
     {
       "id": "V002",
       "date": "03/10/2024",
       "type": "Primary Care",
       "provider": "Dr. Renee Augustin, MD",
-      "cc": "RUQ discomfort — new",
+      "cc": "RUQ discomfort \u2014 new",
       "hpi": "42F with obesity presents with 2-week history of intermittent RUQ discomfort after meals, especially after fried food. Describes 'crampy' feeling that lasts 20-30 minutes. No fevers, no jaundice. No change in stool color. First episode like this.",
       "exam": "Obese female, NAD. Abdomen: Soft, nontender today. No Murphy sign.",
-      "assessment": "1. Dyspepsia vs early biliary colic\n2. Sickle cell trait — gallstone risk factor",
+      "assessment": "1. Dyspepsia vs early biliary colic\n2. Sickle cell trait \u2014 gallstone risk factor",
       "plan": "1. RUQ ultrasound ordered\n2. Low-fat diet trial\n3. Return after US results"
     }
   ],
   "labs": [
     {
-      "date": "08/18/2024",
-      "time": "10:00",
-      "orderedBy": "Dr. Augustin",
-      "collected": "08/18/2024 10:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-800818",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Cholecystitis + Choledocholithiasis",
+      "results": [
         {
-          "name": "HEPATIC PANEL",
-          "results": [
-            {
-              "test": "ALT",
-              "value": "28",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST",
-              "value": "24",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "ALP",
-              "value": "82",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Direct Bilirubin",
-              "value": "0.2",
-              "unit": "mg/dL",
-              "range": "0.0-0.3",
-              "flag": ""
-            }
-          ]
+          "test": "ALT",
+          "value": "180",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "264",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Direct bilirubin",
+          "value": "3.2",
+          "unit": "mg/dL",
+          "ref": "0-0.3",
+          "flag": "H"
         },
         {
-          "name": "LIPASE",
-          "results": [
-            {
-              "test": "Lipase",
-              "value": "42",
-              "unit": "U/L",
-              "range": "10-140",
-              "flag": ""
-            }
-          ]
+          "test": "ALP",
+          "value": "320",
+          "unit": "U/L",
+          "ref": "44-147",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "16.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Lipase",
+          "value": "48",
+          "unit": "U/L",
+          "ref": "10-140",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "08/2024",
-      "study": "ULTRASOUND ABDOMEN — RIGHT UPPER QUADRANT",
-      "accession": "IMG-2024-80814",
-      "status": "FINAL",
-      "orderedBy": "Dr. Augustin",
-      "readBy": "Dr. Patricia Gomez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "Recurrent RUQ pain — evaluate for cholelithiasis",
-      "technique": "Real-time ultrasound of the right upper quadrant.",
-      "findings": "Gallbladder: Multiple echogenic foci with posterior acoustic shadowing consistent with cholelithiasis — largest stone measures 1.8 cm. Gallbladder wall thickness 2 mm (normal). No pericholecystic fluid. Negative sonographic Murphy sign.\n\nCommon bile duct: 4 mm (normal).\n\nLiver: Normal echogenicity. No focal lesions.\n\nRight kidney: Normal.",
-      "impression": "1. Cholelithiasis — multiple gallstones; largest 1.8 cm.\n2. No sonographic evidence of acute cholecystitis.\n3. Normal caliber common bile duct.",
-      "dictated": "08/14/2024 11:00",
-      "verified": "08/14/2024 13:00"
+      "date": "04/2024",
+      "study": "RUQ Ultrasound",
+      "findings": "Gallstones, wall thickening 6mm, pericholecystic fluid, Murphy sign positive. CBD 12mm with echogenic material consistent with stone.",
+      "impression": "Acute cholecystitis with CBD stone and biliary obstruction. ERCP indicated."
     }
   ],
   "immunizations": [
@@ -307,7 +223,7 @@ window.EMR_DATA = {
     }
   ],
   "familyHistory": [
-    "Mother: Gallstones — cholecystectomy at age 40; HTN; alive at 68",
+    "Mother: Gallstones \u2014 cholecystectomy at age 40; HTN; alive at 68",
     "Father: Sickle cell trait; T2DM; alive at 72",
     "Sister: Gallstones; sickle cell trait; alive at 40",
     "Brother: Sickle cell disease (SS); alive at 38 (frequent crises)"
@@ -327,7 +243,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Rare — occasional wine at holidays"
+      "Rare \u2014 occasional wine at holidays"
     ],
     [
       "Drugs",
@@ -347,12 +263,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed"
+      "None \u2014 not discussed"
     ]
   ],
   "meta": {
     "caseId": "cholelithiasis-cholecystitis",
-    "diagnosis": "Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone with Obstructive Jaundice — Patient Who Deferred Elective Cholecystectomy, Sickle Cell Trait with Pigmented Stones)",
+    "diagnosis": "Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone)",
     "acuity": 2,
     "presentation": "Toxicologic Emergency",
     "category": "gastrointestinal"
@@ -412,17 +328,14 @@ window.EMR_DATA = {
       "Rovsing's sign": "Negative - no right lower quadrant pain with left lower quadrant palpation",
       "Psoas sign": "Negative - no pain with hip flexion against resistance",
       "Bowel sounds auscultation": "Hypoactive bowel sounds throughout all quadrants",
-      "Vital signs assessment": "BP 148/92, HR 104 (tachycardic), Temp 102.4°F (febrile), SpO2 97%",
+      "Vital signs assessment": "BP 148/92, HR 104 (tachycardic), Temp 102.4\u00b0F (febrile), SpO2 97%",
       "Charcot's triad evaluation": "Present - fever, jaundice, and right upper quadrant pain consistent with ascending cholangitis"
     },
     "ddxTargets": [
-      "Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone with Obstructive Jaundice — Patient Who Deferred Elective Cholecystectomy, Sickle Cell Trait with Pigmented Stones) (correct diagnosis)",
-      "Ascending cholangitis",
-      "Acute pancreatitis",
-      "Hepatitis (viral or drug-induced)",
-      "Perforated peptic ulcer",
-      "Right lower lobe pneumonia",
-      "Acute appendicitis (retrocecal)"
+      "Acute cholecystitis with choledocholithiasis (correct)",
+      "Cholecystitis without CBD stone \u2014 bilirubin/ALP pattern + CBD dilation distinguishes",
+      "Ascending cholangitis \u2014 Charcot triad present; treat same; ERCP emergent if septic",
+      "Gallstone pancreatitis \u2014 lipase normal here; ALT >150 suggests gallstone trigger"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known gallstones and missing the CBD stone component and developing cholangitis, or focusing only on cholecystitis without recognizing biliary obstruction",
@@ -432,7 +345,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider what additional information would help you differentiate between uncomplicated cholecystitis and more serious biliary complications. What specific questions about the character and evolution of her symptoms might be most revealing given her known gallstone history?",
       "phase5": "Now that you've completed your history and physical, let's think through what you've found. You have a patient with known gallstones who presents with Charcot's triad. How does this change your assessment of urgency, and what does the presence of jaundice tell you about the location of the problem?",
-      "finalDebrief": "This case illustrates the progression from asymptomatic cholelithiasis to acute cholecystitis with choledocholithiasis. Notice how the patient's sickle cell trait predisposed her to pigmented stones, and her decision to defer elective surgery led to this emergency presentation. The presence of Charcot's triad indicated ascending cholangitis requiring urgent decompression. What clues in the history and physical examination helped distinguish this from uncomplicated cholecystitis?"
+      "finalDebrief": "This case illustrates the progression from asymptomatic cholelithiasis to acute cholecystitis with choledocholithiasis. Notice how the patient's sickle cell trait predisposed her to pigmented stones, and her decision to defer elective surgery led to this emergency presentation. The presence of Charcot's triad indicated ascending cholangitis requiring urgent decompression. What clues in the history and physical examination helped distinguish this from uncomplicated cholecystitis?",
+      "final": "Diagnosis: acute cholecystitis with choledocholithiasis. Key learning: (1) CBD stone detection: elevated direct bilirubin + ALP/GGT + dilated CBD on ultrasound. ALT >150 in cholecystitis strongly suggests gallstone cause. CBD >8mm warrants MRCP or ERCP. (2) Management sequence: confirm CBD stone \u2192 ERCP first \u2192 then laparoscopic cholecystectomy (same admission preferred). Cholecystectomy without clearing CBD = retained CBD stone. (3) Ascending cholangitis: Charcot triad = fever + RUQ pain + jaundice. Reynolds pentad adds hypotension and altered consciousness = septic cholangitis = emergent ERCP within hours. (4) ERCP complications: post-ERCP pancreatitis most common (2-3%). Success rate >90% for CBD stone extraction. (5) Gallstone pancreatitis rule: ALT >150 in acute pancreatitis = gallstone etiology (95% specific). ERCP only if concurrent cholangitis \u2014 not for uncomplicated gallstone pancreatitis."
     }
   }
 };

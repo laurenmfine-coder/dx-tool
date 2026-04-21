@@ -1,6 +1,3 @@
-// Virtual EMR Case: Complex Migraine (Hemiplegic Migraine)
-// Variant: complex-migraine | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Sandra Morales, MD",
-    "pharmacy": "Publix Pharmacy — 1800 N Pine Island Rd, Plantation, FL",
+    "pharmacy": "Publix Pharmacy \u2014 1800 N Pine Island Rd, Plantation, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
     "address": "8039 Hollyhock Rd, San Antonio, TX 78211",
@@ -27,88 +24,65 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Hemiplegic Migraine, Sporadic",
+      "problem": "Sporadic hemiplegic migraine \u2014 diagnosis of exclusion",
       "icd": "G43.409",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "Diagnosed after workup for recurrent hemiparesis with headache; MRI/MRA normal; negative for FHM gene panel; triptans contraindicated"
-    },
-    {
-      "problem": "Migraine with Aura",
-      "icd": "G43.109",
-      "onset": "2014",
-      "status": "Active",
-      "notes": "Visual aura (scintillating scotoma) preceding typical migraine; 4-6 episodes/month"
-    },
-    {
-      "problem": "Mitral Valve Prolapse",
-      "icd": "I34.1",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "Mild MVP with trivial MR; no indication for prophylaxis"
-    },
-    {
-      "problem": "Iron Deficiency Anemia",
-      "icd": "D50.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "Menorrhagia-related"
+      "notes": "Rachel Kim, 28F \u2014 3rd episode over 2 years. Right throbbing headache with left arm and leg weakness developing over 20 minutes, resolving completely within 2 hours. MRI normal. No family history."
+    },
+    {
+      "problem": "Stroke mimicry \u2014 mandatory workup each episode",
+      "icd": "G43.409",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Every episode requires acute stroke exclusion. MRI DWI is the key test. New neurological deficit = treat as stroke until imaging clears."
+    },
+    {
+      "problem": "Triptan/ergotamine contraindication",
+      "icd": "G43.409",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Triptans and ergotamines contraindicated in hemiplegic migraine \u2014 theoretical vasoconstriction risk. Use antiemetics + NSAIDs."
     }
   ],
   "medications": [
     {
-      "name": "Verapamil ER 240mg daily",
-      "sig": "Take 1 tablet by mouth daily for migraine prophylaxis",
-      "prescriber": "Dr. Larson",
-      "start": "09/2020",
-      "refills": 3,
+      "name": "Prochlorperazine 10mg IV \u2014 acute attack",
+      "sig": "IV dopamine antagonist effective for migraine. Avoid triptans and ergotamines in hemiplegic migraine.",
+      "prescriber": "Neurology/Emergency",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Topiramate 50mg BID",
-      "sig": "Take 1 tablet by mouth twice daily",
-      "prescriber": "Dr. Larson",
-      "start": "03/2022",
-      "refills": 3,
+      "name": "Ketorolac 30mg IV + IV hydration",
+      "sig": "IV NSAID adjunct. Hydration improves headache regardless of status.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Naproxen 500mg PRN",
-      "sig": "Take 1 tablet by mouth every 12 hours as needed for headache with food; max 2 doses/day",
-      "prescriber": "Dr. Morales",
-      "start": "06/2018",
+      "name": "Verapamil 240mg daily \u2014 preventive",
+      "sig": "Calcium channel blockade is first-line preventive for hemiplegic migraine. Avoid beta-blockers.",
+      "prescriber": "Neurology",
+      "start": "2024",
       "refills": 3,
-      "status": "PRN"
-    },
-    {
-      "name": "Metoclopramide 10mg PRN",
-      "sig": "Take 1 tablet by mouth as needed for migraine-associated nausea; max 3 doses/day",
-      "prescriber": "Dr. Larson",
-      "start": "01/2021",
-      "refills": 2,
-      "status": "PRN"
-    },
-    {
-      "name": "Ferrous Sulfate 325mg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach with vitamin C",
-      "prescriber": "Dr. Morales",
-      "start": "05/2024",
-      "refills": 4,
-      "status": "Active"
+      "status": "Initiating"
     }
   ],
   "allergies": [
     {
       "allergen": "Triptans (All classes)",
       "type": "Drug",
-      "reaction": "Contraindicated — hemiplegic migraine (risk of vasospasm)",
+      "reaction": "Contraindicated \u2014 hemiplegic migraine (risk of vasospasm)",
       "severity": "Severe",
       "verified": "Yes"
     },
     {
       "allergen": "Ergotamine",
       "type": "Drug",
-      "reaction": "Contraindicated — hemiplegic migraine",
+      "reaction": "Contraindicated \u2014 hemiplegic migraine",
       "severity": "Severe",
       "verified": "Yes"
     }
@@ -119,7 +93,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": 68,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
@@ -131,7 +105,7 @@ window.EMR_DATA = {
       "bp": "112/70",
       "hr": 64,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "136 lbs",
       "ht": "5'5\"",
@@ -143,7 +117,7 @@ window.EMR_DATA = {
       "bp": "110/68",
       "hr": 66,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "137 lbs",
       "ht": "5'5\"",
@@ -155,7 +129,7 @@ window.EMR_DATA = {
       "bp": "108/66",
       "hr": 62,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "135 lbs",
       "ht": "5'5\"",
@@ -170,10 +144,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Eric Larson, MD (Neurology)",
       "cc": "Migraine follow-up; hemiplegic episode last month",
-      "hpi": "33-year-old female with sporadic hemiplegic migraine presenting for follow-up. Reports 1 hemiplegic episode in last 3 months — 10/2025: right-sided weakness, aphasia, and visual aura lasting 90 minutes followed by severe left-sided headache. Husband brought her to ED where CT head was negative; symptoms resolved spontaneously over 3 hours. Standard migraines occurring 4-5 times/month, down from 6-8 since topiramate was added. Uses naproxen with partial relief. Reports menstrual trigger pattern. Side effects from topiramate: mild paresthesias in hands, cognitive dulling (word-finding difficulty).",
+      "hpi": "33-year-old female with sporadic hemiplegic migraine presenting for follow-up. Reports 1 hemiplegic episode in last 3 months \u2014 10/2025: right-sided weakness, aphasia, and visual aura lasting 90 minutes followed by severe left-sided headache. Husband brought her to ED where CT head was negative; symptoms resolved spontaneously over 3 hours. Standard migraines occurring 4-5 times/month, down from 6-8 since topiramate was added. Uses naproxen with partial relief. Reports menstrual trigger pattern. Side effects from topiramate: mild paresthesias in hands, cognitive dulling (word-finding difficulty).",
       "exam": "General: NAD. Neuro: A&O x3. Cranial nerves II-XII intact. Motor 5/5 all extremities bilaterally. Sensation intact. Coordination: finger-to-nose and heel-to-shin normal. Gait: Normal. No papilledema on fundoscopy. Speech fluent, no aphasia.",
-      "assessment": "1. Sporadic hemiplegic migraine — intermittent episodes; triptans/ergots contraindicated\n2. Migraine with aura — improved frequency on prophylaxis\n3. Topiramate side effects — cognitive dulling",
-      "plan": "1. Continue verapamil ER 240mg daily\n2. Topiramate — reduce to 25mg BID given cognitive side effects; consider switch to valproate if ineffective\n3. Acute hemiplegic episodes: naproxen + metoclopramide; if severe, IV magnesium in ED\n4. Migraine diary — track menstrual correlation\n5. MRI brain with/without contrast — repeat in 12 months\n6. RTC 3 months"
+      "assessment": "1. Sporadic hemiplegic migraine \u2014 intermittent episodes; triptans/ergots contraindicated\n2. Migraine with aura \u2014 improved frequency on prophylaxis\n3. Topiramate side effects \u2014 cognitive dulling",
+      "plan": "1. Continue verapamil ER 240mg daily\n2. Topiramate \u2014 reduce to 25mg BID given cognitive side effects; consider switch to valproate if ineffective\n3. Acute hemiplegic episodes: naproxen + metoclopramide; if severe, IV magnesium in ED\n4. Migraine diary \u2014 track menstrual correlation\n5. MRI brain with/without contrast \u2014 repeat in 12 months\n6. RTC 3 months"
     },
     {
       "id": "V002",
@@ -181,9 +155,9 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Sandra Morales, MD",
       "cc": "Annual wellness; anemia follow-up",
-      "hpi": "33-year-old female for annual exam. Migraines managed by neurology. Reports heavy menstrual periods — menorrhagia improving since starting OCP. Iron supplementation ongoing. Energy level improved. MVP stable — last echo 2023 showed trivial MR. No palpitations, no syncope.",
+      "hpi": "33-year-old female for annual exam. Migraines managed by neurology. Reports heavy menstrual periods \u2014 menorrhagia improving since starting OCP. Iron supplementation ongoing. Energy level improved. MVP stable \u2014 last echo 2023 showed trivial MR. No palpitations, no syncope.",
       "exam": "General: NAD. HEENT: Conjunctivae slightly pale. CV: RRR, mid-systolic click. Lungs: CTAB. Abdomen: Soft, NT/ND. Neuro: Grossly intact.",
-      "assessment": "1. Annual wellness\n2. Iron deficiency anemia — improving\n3. MVP — stable\n4. Hemiplegic migraine — managed by neurology",
+      "assessment": "1. Annual wellness\n2. Iron deficiency anemia \u2014 improving\n3. MVP \u2014 stable\n4. Hemiplegic migraine \u2014 managed by neurology",
       "plan": "1. Continue ferrous sulfate; recheck CBC, ferritin in 3 months\n2. Continue OCP for menorrhagia\n3. Neurology follow-up ongoing\n4. RTC 6 months"
     },
     {
@@ -194,161 +168,59 @@ window.EMR_DATA = {
       "cc": "Acute right arm/leg weakness, difficulty speaking, severe headache",
       "hpi": "33-year-old female with known sporadic hemiplegic migraine brought in by husband. Onset 2 hours ago: began with scintillating scotoma in right visual field, followed by progressive right arm then leg weakness, and difficulty finding words. Severe left-sided throbbing headache developed 30 minutes after motor symptoms. Husband reports this is consistent with her prior hemiplegic episodes but more prolonged than usual. Last normal at 10:00 AM, current time 12:15 PM. Not on anticoagulation. No trauma.",
       "exam": "General: In pain, photophobic, lying in darkened room. Neuro: A&O x3 but slow to respond. Speech: Mild expressive aphasia, comprehension intact. CN: Left pupil reactive, right visual field deficit. Motor: 3/5 right upper extremity, 4/5 right lower extremity, 5/5 left. Sensation: Decreased to light touch right arm. DTRs: 2+ bilaterally. Babinski: Equivocal right, downgoing left. NIHSS: 8.",
-      "assessment": "1. Acute right hemiparesis with aphasia — must rule out ischemic stroke vs hemiplegic migraine\n2. Known hemiplegic migraine history but symptoms more prolonged\n3. NIHSS 8 — within tPA window if stroke",
-      "plan": "1. Emergent CT head without contrast — negative for hemorrhage\n2. CTA head/neck — no large vessel occlusion, no dissection\n3. Neurology emergent consult — Dr. Larson contacted\n4. Decision made NOT to administer tPA given clinical presentation most consistent with hemiplegic migraine\n5. IV magnesium sulfate 2g, IV ketorolac 30mg, IV metoclopramide 10mg\n6. Symptoms gradually improved over 3 hours; motor strength 5/5 at discharge\n7. MRI brain within 24 hours as outpatient — normal\n8. Discharge with neurology follow-up"
+      "assessment": "1. Acute right hemiparesis with aphasia \u2014 must rule out ischemic stroke vs hemiplegic migraine\n2. Known hemiplegic migraine history but symptoms more prolonged\n3. NIHSS 8 \u2014 within tPA window if stroke",
+      "plan": "1. Emergent CT head without contrast \u2014 negative for hemorrhage\n2. CTA head/neck \u2014 no large vessel occlusion, no dissection\n3. Neurology emergent consult \u2014 Dr. Larson contacted\n4. Decision made NOT to administer tPA given clinical presentation most consistent with hemiplegic migraine\n5. IV magnesium sulfate 2g, IV ketorolac 30mg, IV metoclopramide 10mg\n6. Symptoms gradually improved over 3 hours; motor strength 5/5 at discharge\n7. MRI brain within 24 hours as outpatient \u2014 normal\n8. Discharge with neurology follow-up"
     }
   ],
   "labs": [
     {
-      "date": "02/10/2026",
-      "time": "20:15",
-      "orderedBy": "Dr. Karen Moy, MD (ED)",
-      "collected": "02/10/2026 19:50",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-021062",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Hemiplegic Migraine Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "34.2",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "MCV",
-              "value": "78.4",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "286",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "MRI DWI",
+          "value": "No restricted diffusion \u2014 no acute ischemia",
+          "unit": "",
+          "ref": "No stroke",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "10",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.7",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            }
-          ]
+          "test": "MRA brain",
+          "value": "Normal \u2014 no stenosis or occlusion",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         },
         {
-          "name": "COAGULATION",
-          "results": [
-            {
-              "test": "PT",
-              "value": "12.8",
-              "unit": "sec",
-              "range": "11.0-13.5",
-              "flag": ""
-            },
-            {
-              "test": "INR",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.8-1.1",
-              "flag": ""
-            },
-            {
-              "test": "PTT",
-              "value": "28",
-              "unit": "sec",
-              "range": "25-35",
-              "flag": ""
-            }
-          ]
+          "test": "CADASIL screen (NOTCH3)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Antiphospholipid antibodies",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "ESR/CRP",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "10/19/2025",
-      "study": "MRI BRAIN WITHOUT AND WITH CONTRAST",
-      "accession": "IMG-2025-10192",
-      "status": "FINAL",
-      "orderedBy": "Dr. Eric Larson, MD",
-      "readBy": "Dr. David Rosenberg, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "33F with hemiplegic migraine and recent prolonged episode with right hemiparesis and aphasia. R/O ischemic stroke, structural lesion.",
-      "technique": "MRI brain without and with gadolinium contrast. Sequences: T1, T2, FLAIR, DWI, ADC, SWI, post-contrast T1.",
-      "findings": "Gray-white matter: Normal signal intensity throughout. No restricted diffusion on DWI/ADC to suggest acute infarct.\\n\\nFLAIR: No white matter hyperintensities. No mass lesion.\\n\\nSWI: No microhemorrhages.\\n\\nVentricular system: Normal size and configuration.\\n\\nExtra-axial spaces: Normal.\\n\\nPost-contrast: No abnormal enhancement.\\n\\nMRA Circle of Willis: Normal. No aneurysm, stenosis, or AVM.",
-      "impression": "1. Normal MRI brain without evidence of acute or chronic ischemia.\\n2. No mass, hemorrhage, or structural abnormality.\\n3. Normal MRA Circle of Willis.\\n4. Findings support clinical diagnosis of hemiplegic migraine.",
-      "dictated": "10/19/2025 11:30",
-      "verified": "10/19/2025 14:10"
+      "date": "04/2024",
+      "study": "MRI Brain with DWI and MRA",
+      "findings": "No restricted diffusion. No enhancing lesions. No white matter lesions. Normal MRA.",
+      "impression": "Normal MRI brain. No acute ischemia. No structural cause."
     }
   ],
   "immunizations": [
@@ -370,14 +242,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "HPV (Gardasil 9) (3/3)",
       "date": "2016",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -402,7 +274,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Avoids — alcohol is a known migraine trigger"
+      "Avoids \u2014 alcohol is a known migraine trigger"
     ],
     [
       "Drugs",
@@ -427,7 +299,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "complex-migraine",
-    "diagnosis": "Complex Migraine (Sporadic Hemiplegic Migraine)",
+    "diagnosis": "Sporadic Hemiplegic Migraine \u2014 After Stroke Exclusion",
     "acuity": 2,
     "presentation": "Altered Mental Status",
     "category": "neurologic"
@@ -491,13 +363,11 @@ window.EMR_DATA = {
       "Cardiovascular examination including cardiac auscultation": "Regular rate and rhythm, soft mid-systolic click consistent with known mitral valve prolapse, no murmurs"
     },
     "ddxTargets": [
-      "Complex Migraine (Sporadic Hemiplegic Migraine) (correct diagnosis)",
-      "Transient Ischemic Attack (TIA)",
-      "Focal Seizure with Todd's Paralysis",
-      "Acute Cerebrovascular Accident (Stroke)",
-      "Intracranial Mass Lesion",
-      "Multiple Sclerosis",
-      "Conversion Disorder"
+      "Sporadic hemiplegic migraine (correct \u2014 after stroke excluded)",
+      "Acute ischemic stroke \u2014 DWI negative excludes acute ischemia",
+      "TIA \u2014 fully resolved; but slow spreading aura distinguishes from sudden TIA",
+      "Focal seizure with Todd paralysis \u2014 EEG abnormality; seizure activity",
+      "CADASIL \u2014 white matter lesions; NOTCH3 mutation; subcortical infarcts"
     ],
     "biasFlags": {
       "anchoring": "Young healthy female with known migraine history may anchor thinking to 'just migraines' and miss the complexity of hemiplegic migraine requiring workup",
@@ -507,7 +377,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some key differentials for acute weakness. What specific historical features would help you distinguish between a vascular event, seizure disorder, and a complex migraine? What questions about the temporal pattern and associated symptoms will be most crucial?",
       "phase5": "The normal interictal exam is important - what does this tell you about vascular causes? Given the patient's age, stereotyped episodes, and migraine history, how has your differential evolved? What workup would you want before making a definitive diagnosis?",
-      "finalDebrief": "This case highlights sporadic hemiplegic migraine, a rare but important migraine variant that can mimic stroke. Notice how the family history, stereotyped nature of episodes, and complete interictal recovery pointed toward migraine. What red flags would have made you more concerned for stroke, and how do the diagnostic criteria for hemiplegic migraine help distinguish it from other causes of transient weakness?"
+      "finalDebrief": "This case highlights sporadic hemiplegic migraine, a rare but important migraine variant that can mimic stroke. Notice how the family history, stereotyped nature of episodes, and complete interictal recovery pointed toward migraine. What red flags would have made you more concerned for stroke, and how do the diagnostic criteria for hemiplegic migraine help distinguish it from other causes of transient weakness?",
+      "final": "Diagnosis: sporadic hemiplegic migraine. Key learning: (1) Hemiplegic migraine = migraine with MOTOR aura. Diagnosis of exclusion \u2014 every episode must exclude stroke. Aura spreads SLOWLY over 20-30 minutes (unlike sudden stroke onset) but DWI MRI is still mandatory. (2) Familial vs sporadic: familial = autosomal dominant, gene mutations (CACNA1A, ATP1A2, SCN1A). Sporadic = no family history, same clinical presentation. (3) Triptan contraindication: avoid triptans and ergotamines \u2014 theoretical vasoconstriction risk during possible reduced cerebral perfusion. Use IV prochlorperazine + ketorolac instead. (4) Cortical spreading depression: the pathophysiology \u2014 wave of neuronal depolarization followed by suppression spreading at 2-3mm/min across cortex. Explains the slow spread of symptoms. (5) Preventive: verapamil first-line. Valproate and topiramate also used. Avoid propranolol (theoretical worsening in hemiplegic migraine)."
     }
   }
 };

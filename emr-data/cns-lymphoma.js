@@ -1,6 +1,3 @@
-// Virtual EMR Case: CNS Lymphoma
-// Variant: cns-lymphoma | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part A/B + Cigna Supplement",
     "pcp": "Dr. Michael Torres, MD",
-    "pharmacy": "CVS Pharmacy — 1801 E Sunrise Blvd, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 1801 E Sunrise Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian",
     "address": "2031 Birch Ln, Columbus, OH 43206",
@@ -27,96 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary CNS Lymphoma — Suspected",
-      "icd": "C85.10",
-      "onset": "2025",
+      "problem": "Primary CNS lymphoma \u2014 periventricular butterfly pattern",
+      "icd": "C85.20",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Current presentation — new-onset seizure with periventricular enhancing mass; biopsy pending"
+      "notes": "Elizabeth Park, 68F \u2014 immunocompetent. Progressive confusion, personality change, right arm weakness. MRI: periventricular butterfly-pattern homogeneous enhancing mass crossing corpus callosum."
     },
     {
-      "problem": "Rheumatoid Arthritis",
-      "icd": "M06.9",
-      "onset": "2008",
+      "problem": "Dramatic steroid response \u2014 diagnostic trap",
+      "icd": "C85.20",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Seropositive (RF+, anti-CCP+); on methotrexate 15mg weekly + folic acid; mild-moderate disease; had been on adalimumab 2015-2022 — discontinued due to recurrent infections"
+      "notes": "PCNSL melts with corticosteroids. Steroids before biopsy = non-diagnostic biopsy. Withhold steroids until tissue obtained."
     },
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.9",
-      "onset": "2012",
+      "problem": "Biopsy required \u2014 tissue diagnosis mandatory",
+      "icd": "C85.20",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On metformin and glipizide; A1c 7.2"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2006",
-      "status": "Active",
-      "notes": "On losartan + HCTZ combo"
-    },
-    {
-      "problem": "Benign Prostatic Hyperplasia",
-      "icd": "N40.0",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "On tamsulosin; IPSS 12; stable"
+      "notes": "Stereotactic biopsy before any steroids. High yield >90% in PCNSL."
     }
   ],
   "medications": [
     {
-      "name": "Methotrexate 15mg weekly (oral)",
-      "sig": "Take 6 tablets (2.5mg each) by mouth every Monday",
-      "prescriber": "Dr. Chen (Rheumatology)",
-      "start": "03/2009",
-      "refills": 3,
-      "status": "Active"
+      "name": "HOLD steroids until biopsy obtained",
+      "sig": "PCNSL is steroid-sensitive \u2014 lymphoma cells lyse \u2192 non-diagnostic biopsy. Only use dexamethasone if life-threatening herniation.",
+      "prescriber": "Neurosurgery/Neuro-oncology",
+      "start": "2024",
+      "refills": 0,
+      "status": "HOLD"
     },
     {
-      "name": "Folic Acid 1mg daily (except methotrexate day)",
-      "sig": "Take 1 tablet by mouth daily except Mondays",
-      "prescriber": "Dr. Chen",
-      "start": "03/2009",
-      "refills": 5,
-      "status": "Active"
+      "name": "High-dose methotrexate \u22653.5g/m\u00b2 \u2014 post-biopsy",
+      "sig": "Backbone of PCNSL treatment. Penetrates BBB at high doses. Combined with rituximab and cytarabine consolidation. CR in 35-60%.",
+      "prescriber": "Neuro-oncology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Post-biopsy"
     },
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Torres",
-      "start": "06/2013",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Glipizide 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily before meals",
-      "prescriber": "Dr. Torres",
-      "start": "01/2020",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Losartan/HCTZ 50/12.5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Torres",
-      "start": "04/2008",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Tamsulosin 0.4mg QHS",
-      "sig": "Take 1 capsule by mouth at bedtime",
-      "prescriber": "Dr. Torres",
-      "start": "11/2018",
-      "refills": 4,
-      "status": "Active"
+      "name": "Stereotactic biopsy \u2014 before steroids",
+      "sig": "MRI-guided biopsy. Diagnostic yield >90%. Avoid steroids 7-10 days before biopsy if possible.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Scheduled"
     }
   ],
   "allergies": [
     {
       "allergen": "Sulfa drugs (Sulfamethoxazole)",
       "type": "Drug",
-      "reaction": "Stevens-Johnson syndrome (2002 — documented, biopsy-confirmed)",
+      "reaction": "Stevens-Johnson syndrome (2002 \u2014 documented, biopsy-confirmed)",
       "severity": "Severe",
       "verified": "Yes"
     }
@@ -127,7 +86,7 @@ window.EMR_DATA = {
       "bp": "158/92",
       "hr": 94,
       "rr": 18,
-      "temp": "99.2°F",
+      "temp": "99.2\u00b0F",
       "spo2": "97%",
       "wt": "192 lbs",
       "ht": "5'11\"",
@@ -139,7 +98,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": 74,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "98%",
       "wt": "196 lbs",
       "ht": "5'11\"",
@@ -151,7 +110,7 @@ window.EMR_DATA = {
       "bp": "134/80",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "198 lbs",
       "ht": "5'11\"",
@@ -166,10 +125,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Michael Torres, MD",
       "cc": "Follow-up: diabetes, hypertension, RA; new complaint of intermittent headache and personality change",
-      "hpi": "70-year-old male presenting for routine follow-up. Wife accompanied and reports husband has been 'not himself' for 3-4 weeks — more forgetful, occasionally confused about day/time, less engaged in conversations. Patient attributes this to 'getting old.' New intermittent frontal headache over past month, worse in mornings. No visual changes, weakness, or speech difficulty. No seizure activity noted. Weight loss 4 lbs in past 3 months — attributes to decreased appetite.",
+      "hpi": "70-year-old male presenting for routine follow-up. Wife accompanied and reports husband has been 'not himself' for 3-4 weeks \u2014 more forgetful, occasionally confused about day/time, less engaged in conversations. Patient attributes this to 'getting old.' New intermittent frontal headache over past month, worse in mornings. No visual changes, weakness, or speech difficulty. No seizure activity noted. Weight loss 4 lbs in past 3 months \u2014 attributes to decreased appetite.",
       "exam": "General: Well-appearing for age, cooperative. HEENT: PERRL, EOMI. CV: RRR. Lungs: CTA. Abdomen: Soft, NT. Extremities: Mild RA changes in MCPs, no active synovitis. Neuro: A&O x3 but slow to respond. Slight decreased verbal fluency. Mild short-term memory impairment (recalled 1/3 objects at 5 min). No focal motor or sensory deficits. Gait: Normal.",
-      "assessment": "1. New cognitive changes and headache in 70-year-old — differential includes early dementia, depression, hypothyroidism, B12 deficiency, intracranial pathology\n2. T2DM — A1c 7.2, acceptable\n3. HTN — controlled\n4. RA — stable on methotrexate",
-      "plan": "1. Labs: TSH, B12, folate, CMP, CBC, RPR\n2. MoCA screening: 22/30 — below expected\n3. If labs unrevealing → brain MRI\n4. Wife instructed to monitor for worsening confusion, personality change, or new neurologic symptoms\n5. Continue all current medications\n6. RTC 4-6 weeks with lab results; sooner if worsening"
+      "assessment": "1. New cognitive changes and headache in 70-year-old \u2014 differential includes early dementia, depression, hypothyroidism, B12 deficiency, intracranial pathology\n2. T2DM \u2014 A1c 7.2, acceptable\n3. HTN \u2014 controlled\n4. RA \u2014 stable on methotrexate",
+      "plan": "1. Labs: TSH, B12, folate, CMP, CBC, RPR\n2. MoCA screening: 22/30 \u2014 below expected\n3. If labs unrevealing \u2192 brain MRI\n4. Wife instructed to monitor for worsening confusion, personality change, or new neurologic symptoms\n5. Continue all current medications\n6. RTC 4-6 weeks with lab results; sooner if worsening"
     },
     {
       "id": "V002",
@@ -177,135 +136,66 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Michael Torres, MD",
       "cc": "Lab follow-up; worsening cognition and headache",
-      "hpi": "70-year-old male returns with wife. Labs from 11/2024: TSH 2.8, B12 normal, folate normal, RPR non-reactive. Wife reports cognitive decline has worsened — husband got lost driving to familiar grocery store, left stove on twice. Headache now daily, worse in AM. Two episodes of right hand 'jerking' lasting 30-60 seconds over the past week — wife unsure if these are seizures.",
+      "hpi": "70-year-old male returns with wife. Labs from 11/2024: TSH 2.8, B12 normal, folate normal, RPR non-reactive. Wife reports cognitive decline has worsened \u2014 husband got lost driving to familiar grocery store, left stove on twice. Headache now daily, worse in AM. Two episodes of right hand 'jerking' lasting 30-60 seconds over the past week \u2014 wife unsure if these are seizures.",
       "exam": "Neuro: A&O x2 (person, place). Speech somewhat dysarthric compared to baseline. Right hand fine motor coordination slightly decreased. Mild right facial droop (new). Grip strength 4/5 R. MoCA: 18/30 (decline from 22).",
-      "assessment": "1. Progressive cognitive decline with new focal deficits and possible focal seizures — URGENT concern for intracranial mass lesion\n2. Right facial droop and hand weakness — localizing to left hemisphere",
-      "plan": "1. STAT MRI brain with and without contrast\n2. If mass identified → neurosurgery referral\n3. Consider starting levetiracetam if seizures confirmed\n4. Discussed possibility of brain tumor with wife; patient has limited insight\n5. MRI scheduled for 01/12/2025 — wife instructed to go to ED if seizure, worsening weakness, or severe headache"
+      "assessment": "1. Progressive cognitive decline with new focal deficits and possible focal seizures \u2014 URGENT concern for intracranial mass lesion\n2. Right facial droop and hand weakness \u2014 localizing to left hemisphere",
+      "plan": "1. STAT MRI brain with and without contrast\n2. If mass identified \u2192 neurosurgery referral\n3. Consider starting levetiracetam if seizures confirmed\n4. Discussed possibility of brain tumor with wife; patient has limited insight\n5. MRI scheduled for 01/12/2025 \u2014 wife instructed to go to ED if seizure, worsening weakness, or severe headache"
     }
   ],
   "labs": [
     {
-      "date": "02/26/2025",
-      "time": "15:40",
-      "orderedBy": "Dr. Kevin Tran, MD (ED)",
-      "collected": "02/26/2025 15:25",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-108912",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "PCNSL Workup",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "162",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "LDH",
-              "value": "342",
-              "unit": "U/L",
-              "range": "120-246",
-              "flag": "H"
-            },
-            {
-              "test": "Uric Acid",
-              "value": "8.2",
-              "unit": "mg/dL",
-              "range": "3.5-7.2",
-              "flag": "H"
-            }
-          ]
+          "test": "HIV test",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         },
         {
-          "name": "COMPLETE BLOOD COUNT (CBC)",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "5.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.4",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "198",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CSF cytology",
+          "value": "Atypical lymphocytes \u2014 suspicious",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "CSF EBV PCR",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "CSF IL-10:IL-6 ratio",
+          "value": ">1 (elevated IL-10 = PCNSL)",
+          "unit": "",
+          "ref": "<1 normal",
+          "flag": "H"
+        },
+        {
+          "test": "Whole body PET",
+          "value": "No systemic lymphoma",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "02/26/2025",
-      "study": "MRI BRAIN WITH AND WITHOUT CONTRAST",
-      "accession": "IMG-2025-10791",
-      "status": "FINAL",
-      "orderedBy": "Dr. Kevin Tran, MD (ED) / Neurosurgery",
-      "readBy": "Dr. Robert Nash, MD (Neuroradiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "70-year-old on chronic methotrexate with progressive cognitive decline, focal seizures, and new facial droop — concern for intracranial mass",
-      "technique": "Multiplanar MRI of the brain with and without gadolinium contrast. Sequences: T1, T2, FLAIR, DWI, post-contrast T1.",
-      "findings": "LEFT PERIVENTRICULAR WHITE MATTER / CORPUS CALLOSUM: A large homogeneously enhancing mass centered in the left periventricular region extending across the splenium of the corpus callosum to the right side ('butterfly pattern'). The lesion measures 4.2 x 3.6 x 3.8 cm. It demonstrates restricted diffusion on DWI (high cellularity). T2/FLAIR shows extensive surrounding edema in the left frontal and parietal white matter. Mass effect with partial effacement of the left lateral ventricle and 6 mm rightward midline shift.\n\nSUBEPENDYMAL SPREAD: Linear enhancement along the left lateral ventricular ependyma, suggestive of subependymal tumor spread.\n\nOTHER: No additional lesions. No hemorrhage. No hydrocephalus despite ventricular compression.\n\nCOMPARISON: CT head from 01/12/2025 showed a 3.4 cm left periventricular hypodense mass — current MRI confirms interval growth.",
-      "impression": "1. LARGE PERIVENTRICULAR HOMOGENEOUSLY ENHANCING MASS with corpus callosum involvement (butterfly pattern), restricted diffusion, and subependymal spread — imaging pattern HIGHLY CHARACTERISTIC of primary CNS lymphoma (PCNSL)\n2. Interval growth from 3.4 cm (CT 01/12) to 4.2 cm (MRI 02/26) — rapid progression\n3. 6 mm midline shift with significant vasogenic edema\n4. Differential: PCNSL (most likely given periventricular location, homogeneous enhancement, restricted diffusion, immunosuppressed patient on methotrexate) >> high-grade glioma >> metastasis (less likely given pattern)\n5. Stereotactic biopsy recommended for definitive diagnosis\n6. NOTE: Avoid empiric corticosteroids prior to biopsy if possible (steroids can cause transient regression of CNS lymphoma, obscuring pathology — 'vanishing tumor')",
-      "dictated": "02/26/2025 16:30",
-      "verified": "02/26/2025 16:42"
+      "date": "04/2024",
+      "study": "MRI Brain with Gadolinium",
+      "findings": "Periventricular homogeneous enhancing mass (4.2cm) crossing corpus callosum \u2014 butterfly pattern. Restricted diffusion on DWI. No ring enhancement.",
+      "impression": "Periventricular butterfly-pattern lesion highly characteristic of PCNSL. Biopsy before steroids."
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (High-Dose — Fluzone)",
+      "vaccine": "Influenza (High-Dose \u2014 Fluzone)",
       "date": "10/2024",
       "site": "Left deltoid IM",
       "lot": "FH821K",
@@ -319,7 +209,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "12/2023",
       "site": "Left deltoid IM",
       "lot": "PV812T",
@@ -341,8 +231,8 @@ window.EMR_DATA = {
     }
   ],
   "familyHistory": [
-    "Mother: Deceased at age 84 — Alzheimer disease",
-    "Father: Deceased at age 78 — prostate cancer (indolent)",
+    "Mother: Deceased at age 84 \u2014 Alzheimer disease",
+    "Father: Deceased at age 78 \u2014 prostate cancer (indolent)",
     "Sister (age 68): Rheumatoid arthritis, hypothyroidism",
     "Brother (age 73): CAD, T2DM",
     "No family history of brain tumors or lymphoma"
@@ -350,7 +240,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Retired — former high school principal"
+      "Retired \u2014 former high school principal"
     ],
     [
       "Marital",
@@ -362,7 +252,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — 1 glass wine with dinner most evenings"
+      "Social \u2014 1 glass wine with dinner most evenings"
     ],
     [
       "Drugs",
@@ -382,12 +272,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Yes — full code; healthcare proxy: wife (Carol Whitmore)"
+      "Yes \u2014 full code; healthcare proxy: wife (Carol Whitmore)"
     ]
   ],
   "meta": {
     "caseId": "cns-lymphoma",
-    "diagnosis": "Primary CNS Lymphoma (Suspected) — Periventricular Butterfly Lesion with Corpus Callosum Involvement in Immunosuppressed Patient on Methotrexate",
+    "diagnosis": "Primary CNS Lymphoma \u2014 Periventricular, Immunocompetent",
     "acuity": 2,
     "presentation": "Seizure",
     "category": "oncologic"
@@ -451,13 +341,11 @@ window.EMR_DATA = {
       "Lymph node examination": "No palpable lymphadenopathy in cervical, axillary, or inguinal regions."
     },
     "ddxTargets": [
-      "Primary CNS Lymphoma (Suspected) — Periventricular Butterfly Lesion with Corpus Callosum Involvement in Immunosuppressed Patient on Methotrexate",
-      "Glioblastoma multiforme",
-      "Brain metastases from unknown primary",
-      "Bacterial brain abscess",
-      "Subdural hematoma",
-      "Alzheimer disease with seizure",
-      "Metabolic encephalopathy with seizure"
+      "Primary CNS lymphoma (correct)",
+      "GBM \u2014 butterfly pattern can occur; heterogeneous ring enhancement more typical",
+      "CNS toxoplasmosis \u2014 ring-enhancing; CD4 <200; IgG positive; AIDS",
+      "Tumefactive MS \u2014 young patient; open ring sign; oligoclonal bands",
+      "Brain metastasis \u2014 known primary; multiple lesions more common"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'normal aging' explanation for cognitive symptoms, especially given family history of Alzheimer's, while missing the immunosuppression context",
@@ -467,7 +355,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. I notice you've included both common and serious causes of new-onset seizure in a 70-year-old. Before you interview the patient, think about what specific risk factors this patient might have that could guide your questioning. What do you know about his medical history that might be relevant?",
       "phase5": "Excellent history and physical exam. You've identified some concerning focal neurological findings and cognitive changes in an immunosuppressed patient. Given his medication regimen and the pattern of symptoms, what does this constellation suggest to you? How does his immunosuppression change your thinking about the most likely diagnoses?",
-      "finalDebrief": "This case highlights the importance of considering medication-induced immunosuppression as a major risk factor. Primary CNS lymphoma, while rare in the general population, has a much higher incidence in immunosuppressed patients like those on methotrexate. The bilateral periventricular location and butterfly pattern across the corpus callosum are classic imaging findings. How did your differential evolve as you gathered more information about his immunosuppression and focal findings?"
+      "finalDebrief": "This case highlights the importance of considering medication-induced immunosuppression as a major risk factor. Primary CNS lymphoma, while rare in the general population, has a much higher incidence in immunosuppressed patients like those on methotrexate. The bilateral periventricular location and butterfly pattern across the corpus callosum are classic imaging findings. How did your differential evolve as you gathered more information about his immunosuppression and focal findings?",
+      "final": "Diagnosis: primary CNS lymphoma. Key learning: (1) PCNSL classic MRI: periventricular, corpus callosum (butterfly), HOMOGENEOUS enhancement (not ring-enhancing), restricted diffusion. 90% DLBCL. Median age 65. (2) The steroid trap: dexamethasone causes lymphoma cell lysis \u2192 lesion shrinks or disappears \u2192 biopsy non-diagnostic. Rule: no steroids before biopsy unless herniation. (3) AIDS vs immunocompetent PCNSL: AIDS = EBV-driven, CD4 <50, responds to ART. Immunocompetent = EBV-negative, requires high-dose MTX-based chemotherapy. (4) High-dose MTX rationale: MTX at \u22653.5g/m\u00b2 penetrates BBB. Low-dose does not. Leucovorin rescue 24h after MTX is mandatory. (5) Whole-body staging with PET-CT to rule out systemic lymphoma. Vitreoretinal involvement in 15-25% \u2014 ophthalmology slit-lamp exam."
     }
   }
 };
