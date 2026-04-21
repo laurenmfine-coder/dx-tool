@@ -1,6 +1,3 @@
-// Virtual EMR Case: Corneal Abrasion/Keratitis
-// Variant: corneal-abrasionkeratitis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Aetna PPO",
     "pcp": "Dr. Lauren Fischer, MD",
-    "pharmacy": "Walgreens — 2600 Weston Rd, Weston, FL",
+    "pharmacy": "Walgreens \u2014 2600 Weston Rd, Weston, FL",
     "language": "English, Hindi",
     "race": "Asian (South Asian)",
     "address": "331 Peachtree Rd, Memphis, TN 38107",
@@ -26,50 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Myopia — High",
-      "icd": "H52.13",
-      "onset": "2008",
+      "problem": "Bacterial keratitis \u2014 contact lens-related, Pseudomonas suspected",
+      "icd": "H16.009",
+      "onset": "2024",
       "status": "Active",
-      "notes": "-6.50 OU; daily contact lens wearer (soft, monthly replacement); extended wear on occasion"
+      "notes": "Jason Park, 24M \u2014 contact lens wearer (extended wear). 2-day severe right eye pain, photophobia, decreased vision, purulent discharge. Slit lamp: central corneal ulcer 3mm, hypopyon (layering white cells in anterior chamber). Emergency ophthalmology."
     },
     {
-      "problem": "Contact Lens Overwear — History",
-      "icd": "H18.829",
-      "onset": "2022",
-      "status": "Resolved",
-      "notes": "Corneal neovascularization noted by optometrist 2022; counseled on proper wear and removal schedule"
+      "problem": "Hypopyon \u2014 severe anterior chamber inflammation",
+      "icd": "H16.009",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Hypopyon (white layering of inflammatory cells in anterior chamber) indicates severe infection with significant anterior chamber reaction. Poor prognostic sign for corneal scar."
     },
     {
-      "problem": "Seasonal Allergic Conjunctivitis",
-      "icd": "H10.45",
-      "onset": "2015",
-      "status": "Chronic",
-      "notes": "Bilateral; spring and fall; uses antihistamine drops PRN"
+      "problem": "Contact lens complication \u2014 extended wear highest risk",
+      "icd": "H16.009",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Extended wear contact lenses (overnight wear) increase risk 10-15x vs daily wear. Pseudomonas aeruginosa is the most common pathogen in contact lens keratitis \u2014 can cause rapidly progressive corneal destruction."
     }
   ],
   "medications": [
     {
-      "name": "Ketotifen 0.025% ophthalmic drops BID PRN",
-      "sig": "Instill 1 drop in each eye twice daily as needed for allergic eye symptoms",
-      "prescriber": "Dr. Fischer",
-      "start": "04/2020",
-      "refills": 3,
-      "status": "PRN"
+      "name": "Ciprofloxacin 0.3% ophthalmic drops \u2014 q1h initially",
+      "sig": "Fluoroquinolone first-line for bacterial keratitis. Load: q15min x 6 doses first hour, then q30min x 6h, then q1h. Adjust to q4h as clinical improvement.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 q1h"
     },
     {
-      "name": "Oral Contraceptive (Levonorgestrel-Ethinyl Estradiol)",
-      "sig": "Take 1 tablet by mouth daily at same time each day",
-      "prescriber": "Dr. Fischer",
-      "start": "01/2018",
-      "refills": 6,
-      "status": "Active"
+      "name": "Discontinue contact lenses immediately \u2014 forever this eye",
+      "sig": "Remove all contact lenses immediately. Do not reinsert until fully healed and ophthalmology clears. Extended wear should be permanently discontinued.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Discontinued"
+    },
+    {
+      "name": "Corneal scraping for culture \u2014 before starting antibiotics",
+      "sig": "Corneal scraping of ulcer edge for Gram stain and culture. Guides antibiotic therapy. Must be done before antibiotics \u2014 sensitivity drops rapidly after treatment started.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Done \u2014 before antibiotics"
     }
   ],
   "allergies": [
     {
       "allergen": "Erythromycin",
       "type": "Drug",
-      "reaction": "GI upset — severe nausea and cramping",
+      "reaction": "GI upset \u2014 severe nausea and cramping",
       "severity": "Moderate",
       "verified": "Patient-reported"
     },
@@ -87,7 +92,7 @@ window.EMR_DATA = {
       "bp": "110/68",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "125 lbs",
       "ht": "5'3\"",
@@ -99,7 +104,7 @@ window.EMR_DATA = {
       "bp": "108/66",
       "hr": 70,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "123 lbs",
       "ht": "5'3\"",
@@ -111,7 +116,7 @@ window.EMR_DATA = {
       "bp": "112/70",
       "hr": 68,
       "rr": 14,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "99%",
       "wt": "122 lbs",
       "ht": "5'3\"",
@@ -128,7 +133,7 @@ window.EMR_DATA = {
       "cc": "Annual wellness exam",
       "hpi": "28-year-old female for annual wellness visit. No acute complaints. Wears monthly soft contact lenses daily, sometimes sleeps in them despite counseling. Allergic conjunctivitis well-managed with OTC ketotifen. OCP tolerated well. Exercises regularly. Denies headaches, vision changes, or eye pain.",
       "exam": "General: NAD, well-appearing. HEENT: PERRL, EOMI, conjunctivae clear bilaterally, contact lenses in place. Neck: Supple. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT.",
-      "assessment": "1. Annual wellness — healthy young female\n2. High myopia with contact lens use — counseled again on proper wear hygiene, no sleeping in lenses\n3. Allergic conjunctivitis — controlled",
+      "assessment": "1. Annual wellness \u2014 healthy young female\n2. High myopia with contact lens use \u2014 counseled again on proper wear hygiene, no sleeping in lenses\n3. Allergic conjunctivitis \u2014 controlled",
       "plan": "1. Continue current medications\n2. Reinforced: remove contact lenses nightly, hand hygiene before handling, replace per schedule\n3. Optometry follow-up for annual contact lens evaluation\n4. RTC 1 year or PRN"
     },
     {
@@ -136,83 +141,52 @@ window.EMR_DATA = {
       "date": "04/10/2024",
       "type": "Primary Care",
       "provider": "Dr. Lauren Fischer, MD",
-      "cc": "Eye redness and itching — seasonal allergies",
+      "cc": "Eye redness and itching \u2014 seasonal allergies",
       "hpi": "28-year-old female presents with bilateral eye itching, tearing, and mild redness x 5 days. Consistent with prior spring allergy episodes. No pain, discharge, photophobia, or vision changes. Using ketotifen drops with partial relief.",
       "exam": "General: NAD. Eyes: Bilateral mild conjunctival injection, chemosis, no discharge, corneas clear by penlight exam, pupils reactive.",
-      "assessment": "1. Seasonal allergic conjunctivitis — bilateral, mild\n2. No concerning features for infectious etiology",
+      "assessment": "1. Seasonal allergic conjunctivitis \u2014 bilateral, mild\n2. No concerning features for infectious etiology",
       "plan": "1. Continue ketotifen drops BID\n2. Add olopatadine 0.1% if inadequate response\n3. Cool compresses\n4. Avoid rubbing eyes especially with contacts in\n5. Return if purulent discharge, pain, vision change"
     }
   ],
   "labs": [
     {
-      "date": "10/22/2024",
-      "time": "09:00",
-      "orderedBy": "Dr. Lauren Fischer, MD",
-      "collected": "10/22/2024 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-102220",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Bacterial Keratitis",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.0",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Slit lamp \u2014 ulcer size",
+          "value": "3mm central corneal ulcer with dense stromal infiltrate",
+          "unit": "",
+          "ref": "No ulcer",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "84",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "12",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.7",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            }
-          ]
+          "test": "Hypopyon",
+          "value": "Present \u2014 2mm layering",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
+        },
+        {
+          "test": "Visual acuity right",
+          "value": "20/400",
+          "unit": "",
+          "ref": "20/20",
+          "flag": "H"
+        },
+        {
+          "test": "Corneal scraping \u2014 Gram stain",
+          "value": "Gram-negative rods \u2014 Pseudomonas suspected",
+          "unit": "",
+          "ref": "No organisms",
+          "flag": "H"
+        },
+        {
+          "test": "IOP right",
+          "value": "14",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": ""
         }
       ]
     }
@@ -237,14 +211,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2014",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -257,7 +231,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Accountant — office work; extensive screen time"
+      "Accountant \u2014 office work; extensive screen time"
     ],
     [
       "Marital",
@@ -294,7 +268,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "corneal-abrasionkeratitis",
-    "diagnosis": "Contact Lens-Related Bacterial Keratitis (Pseudomonas Suspected)",
+    "diagnosis": "Contact Lens-Related Bacterial Keratitis \u2014 Pseudomonas",
     "acuity": 3,
     "presentation": "Eye Emergency",
     "category": "ophthalmologic"
@@ -358,13 +332,11 @@ window.EMR_DATA = {
       "Fundoscopic examination": "Left eye normal, right eye view obscured by corneal opacity"
     },
     "ddxTargets": [
-      "Contact Lens-Related Bacterial Keratitis (Pseudomonas Suspected) (correct diagnosis)",
-      "Acanthamoeba Keratitis",
-      "Viral Keratitis (HSV)",
-      "Corneal Perforation",
-      "Endophthalmitis",
-      "Allergic Conjunctivitis",
-      "Contact Lens-Induced Giant Papillary Conjunctivitis"
+      "Bacterial keratitis \u2014 Pseudomonas (contact lens) (correct)",
+      "Acanthamoeba keratitis \u2014 contact lens wearer + fresh water exposure; ring infiltrate; severe pain out of proportion; propamidine treatment",
+      "Herpes simplex keratitis \u2014 dendritic ulcer on fluorescein; no hypopyon initially; acyclovir ophthalmic",
+      "Fungal keratitis \u2014 trauma with vegetable matter; feathery infiltrate; voriconazole",
+      "Corneal abrasion \u2014 no infiltrate; no hypopyon; superficial; heals quickly with antibiotic drops"
     ],
     "biasFlags": {
       "anchoring": "Student may anchor on the patient's history of allergic conjunctivitis and initially dismiss this as a more severe allergic reaction, missing the infectious component",
@@ -374,7 +346,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified this as an eye emergency in a contact lens wearer. What specific historical details will help you distinguish between mechanical irritation, infectious keratitis, and other contact lens complications? Consider what questions might reveal high-risk behaviors.",
       "phase5": "Your exam findings show corneal involvement with epithelial defect and stromal changes in a contact lens overwear patient. How does this constellation of findings help narrow your differential? What makes this particularly concerning for Pseudomonas infection?",
-      "finalDebrief": "This case highlights how contact lens overwear, especially sleeping in lenses, creates an ideal environment for Pseudomonas keratitis. The rapid onset, severe pain, and central corneal involvement were key distinguishing features from simple irritation or viral causes. How did the patient's risk factors and clinical presentation guide your diagnostic reasoning?"
+      "finalDebrief": "This case highlights how contact lens overwear, especially sleeping in lenses, creates an ideal environment for Pseudomonas keratitis. The rapid onset, severe pain, and central corneal involvement were key distinguishing features from simple irritation or viral causes. How did the patient's risk factors and clinical presentation guide your diagnostic reasoning?",
+      "final": "Diagnosis: contact lens-related bacterial keratitis, Pseudomonas. Key learning: (1) Bacterial keratitis vs corneal abrasion: corneal abrasion = superficial defect, no stromal infiltrate, heals quickly. Bacterial keratitis = stromal infiltrate (white opacity), hypopyon, severe pain, progressive. The presence of a stromal infiltrate is the key finding. (2) Pseudomonas keratitis in contact lens wearers: Pseudomonas aeruginosa produces proteases that cause rapid corneal melting (keratolysis). Can progress from small ulcer to corneal perforation in 24-48 hours if untreated. Extended wear lenses have the highest risk. (3) Fluoroquinolone loading dose: ciprofloxacin 0.3% or moxifloxacin 0.5% ophthalmic \u2014 intensive loading (q15min initially) to achieve therapeutic concentrations in corneal stroma. Concentration-dependent killing. (4) Culture before antibiotics: corneal scraping for Gram stain and culture must be performed before antibiotics \u2014 sensitivity drops rapidly. Ophthalmology performs this under slit lamp with blade or spatula. (5) Hypopyon: sterile layering of inflammatory cells, not pus. Indicates severe anterior chamber reaction. In bacterial keratitis, hypopyon is reactive (bacteria usually NOT in anterior chamber). Resolves with treatment. If bacteria are IN the anterior chamber \u2192 endophthalmitis (worse prognosis, requires vitrectomy)."
     }
   }
 };

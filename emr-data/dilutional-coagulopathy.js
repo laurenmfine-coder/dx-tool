@@ -1,6 +1,3 @@
-// Virtual EMR Case: Dilutional Coagulopathy
-// Variant: dilutional-coagulopathy | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part B with Humana Supplemental",
     "pcp": "Dr. Patricia Ramos, MD",
-    "pharmacy": "CVS Pharmacy — 7110 Pines Blvd, Pembroke Pines, FL",
+    "pharmacy": "CVS Pharmacy \u2014 7110 Pines Blvd, Pembroke Pines, FL",
     "language": "English, Vietnamese",
     "race": "Asian",
     "address": "7555 Foxglove Dr, Pittsburgh, PA 15210",
@@ -26,102 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Abdominal Aortic Aneurysm — 6.2 cm",
-      "icd": "I71.4",
-      "onset": "2023",
+      "problem": "Dilutional coagulopathy \u2014 massive transfusion",
+      "icd": "D68.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Infrarenal AAA diagnosed on screening US; 6.2 cm on most recent CT angiography; EVAR scheduled 02/2025"
+      "notes": "Robert Chen, 68M \u2014 endovascular AAA repair, unexpected hemorrhage requiring 12 units pRBC. Now: PT 22s, INR 1.9, fibrinogen 94, platelets 68. Dilutional coagulopathy from massive transfusion of packed red cells without FFP."
     },
     {
-      "problem": "Coronary Artery Disease — History of NSTEMI",
-      "icd": "I25.10",
-      "onset": "2019",
+      "problem": "Massive transfusion definition \u2014 >10 units pRBC in 24h",
+      "icd": "D68.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "PCI with DES to LAD 2019; on DAPT for 12 months, then ASA monotherapy"
+      "notes": "Massive transfusion protocol (MTP) should have been activated. 1:1:1 ratio (pRBC:FFP:platelets) prevents dilutional coagulopathy. Was not initiated \u2014 now treating resultant coagulopathy."
     },
     {
-      "problem": "Peripheral Arterial Disease",
-      "icd": "I73.9",
-      "onset": "2021",
+      "problem": "Ongoing surgical hemorrhage \u2014 need coagulation correction",
+      "icd": "D68.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Bilateral, ABI 0.72 right, 0.68 left; claudication at 2 blocks"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2005",
-      "status": "Active",
-      "notes": ""
-    },
-    {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2006",
-      "status": "Active",
-      "notes": "On high-intensity statin"
-    },
-    {
-      "problem": "Former Tobacco Use Disorder",
-      "icd": "F17.210",
-      "onset": "1975",
-      "status": "Resolved",
-      "notes": "40 pack-year history; quit 2019 after MI"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "eGFR 55; atherosclerotic etiology"
+      "notes": "Still in OR. Active hemorrhage continues. Coagulation factors must be repleted immediately. Viscoelastic testing (TEG/ROTEM) guides product selection."
     }
   ],
   "medications": [
     {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Ramos",
-      "start": "04/2019",
-      "refills": 5,
+      "name": "Fresh frozen plasma 4 units \u2014 replace coagulation factors",
+      "sig": "FFP contains all clotting factors. Target INR <1.5 for active hemorrhage. Give ahead of lab results if MTP activated (1:1:1 ratio).",
+      "prescriber": "Anesthesia/Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 ongoing"
+    },
+    {
+      "name": "Cryoprecipitate 10 units \u2014 fibrinogen <150",
+      "sig": "Cryoprecipitate is the fastest source of fibrinogen. Target fibrinogen >200 mg/dL in surgical hemorrhage. Each unit raises fibrinogen 5-10 mg/dL.",
+      "prescriber": "Anesthesia",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Ramos",
-      "start": "04/2019",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 80mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Ramos",
-      "start": "05/2019",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Ramos",
-      "start": "01/2010",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Ramos",
-      "start": "08/2020",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Cilostazol 100mg BID",
-      "sig": "Take 1 tablet by mouth twice daily, 30 minutes before or 2 hours after meals",
-      "prescriber": "Dr. Ramos",
-      "start": "03/2022",
-      "refills": 2,
+      "name": "Platelets 1 apheresis unit \u2014 target >100K in active hemorrhage",
+      "sig": "Platelets consumed with massive transfusion. Target >100K for surgical hemorrhage (higher than non-bleeding threshold of 50K).",
+      "prescriber": "Anesthesia",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -129,7 +74,7 @@ window.EMR_DATA = {
     {
       "allergen": "Clopidogrel",
       "type": "Drug",
-      "reaction": "Severe GI bleeding (UGI hemorrhage while on DAPT — attributed to clopidogrel component)",
+      "reaction": "Severe GI bleeding (UGI hemorrhage while on DAPT \u2014 attributed to clopidogrel component)",
       "severity": "Severe",
       "verified": "Yes"
     }
@@ -140,7 +85,7 @@ window.EMR_DATA = {
       "bp": "148/86",
       "hr": 68,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "168 lbs",
       "ht": "5'7\"",
@@ -152,7 +97,7 @@ window.EMR_DATA = {
       "bp": "142/84",
       "hr": 64,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "170 lbs",
       "ht": "5'7\"",
@@ -164,7 +109,7 @@ window.EMR_DATA = {
       "bp": "138/80",
       "hr": 66,
       "rr": 14,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "97%",
       "wt": "172 lbs",
       "ht": "5'7\"",
@@ -179,10 +124,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Patricia Ramos, MD",
       "cc": "Pre-operative clearance for EVAR",
-      "hpi": "69-year-old male presents for pre-operative evaluation prior to endovascular aortic aneurysm repair (EVAR) scheduled 02/10/2025. AAA has grown from 5.5 cm to 6.2 cm over 18 months. History of NSTEMI with PCI (2019) — cleared by cardiology for surgery. PAD stable — claudication at 2 blocks. CKD Stage 3a — creatinine 1.4. On aspirin (held clopidogrel due to prior GI bleed). Reports good exercise tolerance on flat ground. No chest pain, SOB at rest, or syncope.",
+      "hpi": "69-year-old male presents for pre-operative evaluation prior to endovascular aortic aneurysm repair (EVAR) scheduled 02/10/2025. AAA has grown from 5.5 cm to 6.2 cm over 18 months. History of NSTEMI with PCI (2019) \u2014 cleared by cardiology for surgery. PAD stable \u2014 claudication at 2 blocks. CKD Stage 3a \u2014 creatinine 1.4. On aspirin (held clopidogrel due to prior GI bleed). Reports good exercise tolerance on flat ground. No chest pain, SOB at rest, or syncope.",
       "exam": "General: NAD, thin male. HEENT: WNL. Neck: No bruits. CV: RRR, no murmurs. Lungs: Diminished at bases, no crackles. Abdomen: Pulsatile mass palpable in periumbilical region. Extremities: Diminished DP pulses bilaterally, no ulcers. Neuro: A&O x3.",
-      "assessment": "1. AAA 6.2 cm — EVAR planned\n2. CAD — stable post-PCI; cardiology cleared for surgery\n3. PAD — stable claudication\n4. CKD 3a — hydration protocol for contrast\n5. Pre-op labs and clearance",
-      "plan": "1. Pre-op labs: CBC, CMP, coagulation studies, type and screen, UA\n2. Hold aspirin 7 days pre-op per vascular surgery\n3. Hold cilostazol 3 days pre-op\n4. Continue beta-blocker and statin perioperatively\n5. IV hydration protocol for CKD — pre and post contrast\n6. Sent clearance letter to vascular surgery"
+      "assessment": "1. AAA 6.2 cm \u2014 EVAR planned\n2. CAD \u2014 stable post-PCI; cardiology cleared for surgery\n3. PAD \u2014 stable claudication\n4. CKD 3a \u2014 hydration protocol for contrast\n5. Pre-op labs and clearance",
+      "plan": "1. Pre-op labs: CBC, CMP, coagulation studies, type and screen, UA\n2. Hold aspirin 7 days pre-op per vascular surgery\n3. Hold cilostazol 3 days pre-op\n4. Continue beta-blocker and statin perioperatively\n5. IV hydration protocol for CKD \u2014 pre and post contrast\n6. Sent clearance letter to vascular surgery"
     },
     {
       "id": "V002",
@@ -190,163 +135,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Patricia Ramos, MD",
       "cc": "Follow-up: AAA, CAD, PAD, HTN",
-      "hpi": "69-year-old male for chronic disease follow-up. AAA last measured 5.8 cm on CT 06/2024. Vascular surgery recommends repair when >5.5 cm — scheduling EVAR. Claudication stable. No chest pain. Denies syncope or back pain.",
+      "hpi": "69-year-old male for chronic disease follow-up. AAA last measured 5.8 cm on CT 06/2024. Vascular surgery recommends repair when >5.5 cm \u2014 scheduling EVAR. Claudication stable. No chest pain. Denies syncope or back pain.",
       "exam": "General: NAD. CV: RRR. Lungs: CTAB. Abdomen: Pulsatile mass unchanged. Extremities: Diminished pulses, no ulcers.",
-      "assessment": "1. AAA — 5.8 cm, growing; EVAR recommended\n2. CAD — stable\n3. PAD — stable",
+      "assessment": "1. AAA \u2014 5.8 cm, growing; EVAR recommended\n2. CAD \u2014 stable\n3. PAD \u2014 stable",
       "plan": "1. Vascular surgery referral for EVAR planning\n2. Repeat CTA in 3 months\n3. Continue current medications\n4. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "01/08/2025",
-      "time": "08:30",
-      "orderedBy": "Dr. Patricia Ramos, MD",
-      "collected": "01/08/2025 08:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-010812",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA, Citrate)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Massive Transfusion Coagulopathy",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.2",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "195",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "PT/INR",
+          "value": "22s / 1.9",
+          "unit": "",
+          "ref": "12s / <1.2",
+          "flag": "H"
         },
         {
-          "name": "COAGULATION PANEL",
-          "results": [
-            {
-              "test": "PT",
-              "value": "12.2",
-              "unit": "seconds",
-              "range": "11.0-13.5",
-              "flag": ""
-            },
-            {
-              "test": "INR",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.8-1.1",
-              "flag": ""
-            },
-            {
-              "test": "aPTT",
-              "value": "28",
-              "unit": "seconds",
-              "range": "25-35",
-              "flag": ""
-            }
-          ]
+          "test": "Fibrinogen",
+          "value": "94",
+          "unit": "mg/dL",
+          "ref": "200-400",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "26",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "55",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            }
-          ]
+          "test": "Platelets",
+          "value": "68",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
         },
         {
-          "name": "TYPE AND SCREEN",
-          "results": [
-            {
-              "test": "ABO/Rh",
-              "value": "A Positive",
-              "unit": "",
-              "range": "—",
-              "flag": ""
-            },
-            {
-              "test": "Antibody Screen",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            }
-          ]
+          "test": "TEG/ROTEM",
+          "value": "Prolonged clot formation time, reduced amplitude \u2014 confirms dilutional coagulopathy",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "Temperature",
+          "value": "35.6",
+          "unit": "\u00b0C",
+          "ref": "37 \u2014 hypothermia worsens coagulopathy",
+          "flag": "L"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "10/15/2024",
-      "study": "CT ANGIOGRAPHY AORTA — CHEST ABDOMEN PELVIS",
-      "accession": "IMG-2024-10151",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Lee, MD (Vascular Surgery)",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "69M AAA surveillance — prior 5.8 cm, evaluate for EVAR planning.",
-      "technique": "CT angiography of the thoracic and abdominal aorta with runoff to iliofemoral vessels.",
-      "findings": "Thoracic aorta: Mural atherosclerotic calcification. No aneurysm or dissection. Aortic arch normal.\\n\\nAbdominal aorta: Infrarenal fusiform aneurysm measuring 6.2 x 5.8 cm (previously 5.8 cm). Begins 2.5 cm below renal arteries. Neck length 2.1 cm, diameter 24 mm — suitable for standard EVAR. Mural thrombus lines 60% of circumference.\\n\\nIliac arteries: Common iliacs tortuous but patent. Right CIA 14 mm, left CIA 12 mm. No iliac aneurysm. External iliacs patent.\\n\\nRenal arteries: Patent bilaterally, normal origins.\\n\\nRunoff: Bilateral SFA patent with scattered calcifications. DP and PT arteries reconstructed bilaterally.",
-      "impression": "1. Infrarenal AAA now 6.2 cm, increased from 5.8 cm (6 months prior) — exceeds threshold for repair.\\n2. Favorable anatomy for endovascular repair (adequate neck length and diameter).\\n3. Diffuse atherosclerotic disease.\\n4. Patent renal arteries.",
-      "dictated": "10/15/2024 15:30",
-      "verified": "10/15/2024 17:00"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent, High-Dose)",
@@ -363,7 +201,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "03/2023",
       "site": "Left deltoid IM",
       "lot": "PV23-077",
@@ -380,7 +218,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2015",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -401,7 +239,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — 40 pack-years (1975-2019); quit after MI"
+      "Former smoker \u2014 40 pack-years (1975-2019); quit after MI"
     ],
     [
       "Alcohol",
@@ -430,7 +268,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "dilutional-coagulopathy",
-    "diagnosis": "Dilutional Coagulopathy (Massive Transfusion During EVAR Complicated by Hemorrhage)",
+    "diagnosis": "Dilutional Coagulopathy \u2014 Massive Transfusion During EVAR",
     "acuity": 1,
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
@@ -482,7 +320,7 @@ window.EMR_DATA = {
       "Evaluation for signs of shock"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 90/55 (dropped from pre-op 148/86), HR 118, RR 24, Temp 97.2°F, SpO2 92% on 2L NC",
+      "Vital signs assessment": "BP 90/55 (dropped from pre-op 148/86), HR 118, RR 24, Temp 97.2\u00b0F, SpO2 92% on 2L NC",
       "Cardiovascular examination": "Tachycardic, regular rhythm, no murmurs, delayed capillary refill >3 seconds, weak peripheral pulses",
       "Abdominal examination": "Soft, mild tenderness, no obvious hematoma, bowel sounds present but diminished",
       "Groin/femoral access site inspection": "Persistent oozing from bilateral femoral access sites despite pressure dressings, surrounding ecchymosis",
@@ -494,13 +332,11 @@ window.EMR_DATA = {
       "Evaluation for signs of shock": "Signs of hypovolemic shock: hypotension, tachycardia, delayed cap refill, altered mental status, oliguria"
     },
     "ddxTargets": [
-      "Dilutional Coagulopathy (Massive Transfusion During EVAR Complicated by Hemorrhage) (correct diagnosis)",
-      "Disseminated Intravascular Coagulation (DIC)",
-      "Medication-induced coagulopathy",
-      "Retroperitoneal hematoma with ongoing bleeding",
-      "Vascular injury with arterial bleeding",
-      "Thrombocytopenia (drug-induced or dilutional)",
-      "Hereditary bleeding disorder (previously undiagnosed)"
+      "Dilutional coagulopathy from massive transfusion (correct)",
+      "DIC \u2014 D-dimer critically elevated; fibrinogen even lower; underlying trigger (trauma, sepsis, cancer)",
+      "Hemophilia A/B \u2014 factor assay; history; specific factor replacement",
+      "Liver failure coagulopathy \u2014 hepatic synthetic failure; elevated bilirubin; no hemorrhage trigger",
+      "Vitamin K deficiency \u2014 warfarin or malnutrition; PT prolonged predominantly; not acute setting"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on surgical bleeding as simply technical/mechanical rather than considering systemic coagulopathy from massive transfusion protocol",
@@ -510,7 +346,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This is a post-operative bleeding case following EVAR. Consider what happens to coagulation factors when patients require massive transfusion. What lab studies would help differentiate between mechanical bleeding versus coagulopathy? Think about the timeline and pattern of bleeding.",
       "phase5": "You've identified multiple bleeding sites and signs of shock. The pattern of generalized oozing from multiple puncture sites is key. What does this suggest about the coagulation cascade? How does massive transfusion affect clotting factors, platelets, and fibrinogen levels?",
-      "finalDebrief": "This case demonstrates dilutional coagulopathy from massive transfusion during complicated EVAR. The key was recognizing that bleeding from multiple sites (surgical, IV sites, gums) indicated systemic coagulopathy rather than just surgical bleeding. Massive transfusion dilutes clotting factors, platelets, and fibrinogen, requiring replacement with FFP, platelets, and cryoprecipitate guided by coagulation studies and thromboelastography when available."
+      "finalDebrief": "This case demonstrates dilutional coagulopathy from massive transfusion during complicated EVAR. The key was recognizing that bleeding from multiple sites (surgical, IV sites, gums) indicated systemic coagulopathy rather than just surgical bleeding. Massive transfusion dilutes clotting factors, platelets, and fibrinogen, requiring replacement with FFP, platelets, and cryoprecipitate guided by coagulation studies and thromboelastography when available.",
+      "final": "Diagnosis: dilutional coagulopathy from massive transfusion. Key learning: (1) Massive transfusion protocol (MTP): 1:1:1 ratio (pRBC:FFP:platelets) mimics whole blood and prevents dilutional coagulopathy. Activating MTP early (>6 units pRBC anticipated) prevents the coagulopathy before it develops \u2014 treating it after is more difficult. (2) Dilutional coagulopathy mechanism: packed red cells contain no clotting factors or platelets. Transfusing 12 units pRBC = massive dilution of patient's own clotting factors \u2192 PT/INR prolonged, fibrinogen falls, platelets fall. Simple math problem. (3) Fibrinogen is the critical target: fibrinogen falls first and fastest in massive hemorrhage/dilution. Target fibrinogen >200 mg/dL during active hemorrhage. Cryoprecipitate is the fastest/most concentrated fibrinogen source. (4) Viscoelastic testing (TEG/ROTEM): provides real-time coagulation analysis in 10-15 minutes. Guides component therapy more precisely than INR/PT alone. Shows which specific component is deficient. (5) Lethal triad in surgical hemorrhage: hypothermia + acidosis + coagulopathy. All three are self-reinforcing. Rewarm, correct acidosis, replace clotting products simultaneously. Warm all blood products. Warm OR environment."
     }
   }
 };

@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Epididymitis
-// Variant: epididymitis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "United Healthcare EPO",
     "pcp": "Dr. Sandra Gutierrez, MD",
-    "pharmacy": "Walgreens — 2101 N University Dr, Coral Springs, FL",
+    "pharmacy": "Walgreens \u2014 2101 N University Dr, Coral Springs, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
     "address": "2581 Ash St, Pittsburgh, PA 15210",
@@ -26,35 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Chlamydia Infection, treated",
-      "icd": "A56.2",
-      "onset": "2022",
-      "status": "Resolved",
-      "notes": "Treated with azithromycin; TOC negative"
-    },
-    {
-      "problem": "Seasonal Allergic Rhinitis",
-      "icd": "J30.2",
-      "onset": "2014",
+      "problem": "Acute epididymitis \u2014 STI-related",
+      "icd": "N45.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Spring/fall"
+      "notes": "Marcus Davis, 24M \u2014 3-day progressive right scrotal pain and swelling, fever 38.1\u00b0C, urethral discharge. Positive Prehn sign (scrotal elevation relieves pain). Doppler ultrasound: increased right epididymal blood flow."
     },
     {
-      "problem": "Low Back Pain, Mechanical",
-      "icd": "M54.5",
-      "onset": "2023",
-      "status": "Resolved",
-      "notes": "Resolved with PT"
+      "problem": "STI exposure \u2014 Chlamydia/Gonorrhea workup",
+      "icd": "A74.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Sexually active, new partner last month. In men <35, STIs (Chlamydia trachomatis, Neisseria gonorrhoeae) are the most common cause of epididymitis. Partner notification required."
+    },
+    {
+      "problem": "Testicular torsion exclusion \u2014 critical",
+      "icd": "N45.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Testicular torsion presents similarly but requires immediate surgical detorsion. Positive Prehn sign (pain relief with elevation) suggests epididymitis. Doppler shows increased flow (epididymitis) vs absent flow (torsion). Torsion = absent flow = OR immediately."
     }
   ],
   "medications": [
     {
-      "name": "Loratadine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily as needed during allergy season",
-      "prescriber": "Dr. Gutierrez",
-      "start": "03/2020",
-      "refills": 5,
-      "status": "PRN"
+      "name": "Ceftriaxone 500mg IM x1 + doxycycline 100mg BID x 10 days",
+      "sig": "CDC-recommended dual therapy for epididymitis likely due to STI (gonorrhea + chlamydia coverage). Ceftriaxone for gonorrhea (escalating resistance \u2014 dose increased to 500mg). Doxycycline for chlamydia.",
+      "prescriber": "Emergency/Urology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "NSAIDs \u2014 scrotal support and analgesia",
+      "sig": "Ibuprofen 600mg TID for pain and inflammation. Athletic supporter or snug underwear for scrotal elevation and support.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active"
+    },
+    {
+      "name": "Partner notification \u2014 STI treatment",
+      "sig": "Sexual partner(s) within 60 days require STI evaluation and treatment. Public health notification for gonorrhea.",
+      "prescriber": "Public Health",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 partner referral"
     }
   ],
   "allergies": [
@@ -72,7 +85,7 @@ window.EMR_DATA = {
       "bp": "120/76",
       "hr": 70,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "175 lbs",
       "ht": "5'9\"",
@@ -84,7 +97,7 @@ window.EMR_DATA = {
       "bp": "118/74",
       "hr": 68,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "172 lbs",
       "ht": "5'9\"",
@@ -96,7 +109,7 @@ window.EMR_DATA = {
       "bp": "116/72",
       "hr": 72,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "99%",
       "wt": "170 lbs",
       "ht": "5'9\"",
@@ -113,7 +126,7 @@ window.EMR_DATA = {
       "cc": "Annual wellness visit",
       "hpi": "29-year-old male presenting for routine annual exam. No active complaints. Sexually active with new partner; inconsistent condom use. Denies dysuria, discharge, or genital lesions. Low back pain from 2023 resolved after physical therapy course. Reports good general health.",
       "exam": "General: Well-appearing male in NAD. HEENT: PERRL, EOMI. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, NT/ND. GU: Deferred per patient preference. MSK: Full ROM lumbar spine, no tenderness. Neuro: A&O x3.",
-      "assessment": "1. Annual wellness — healthy young male\n2. STI risk — counseled on safe sex practices\n3. Prior chlamydia — resolved",
+      "assessment": "1. Annual wellness \u2014 healthy young male\n2. STI risk \u2014 counseled on safe sex practices\n3. Prior chlamydia \u2014 resolved",
       "plan": "1. STI screening panel ordered (per patient's request)\n2. Safe sex counseling; condom provision\n3. RTC 1 year or PRN"
     },
     {
@@ -124,120 +137,61 @@ window.EMR_DATA = {
       "cc": "Urethral discharge x 3 days",
       "hpi": "29-year-old sexually active male presenting with clear-to-whitish urethral discharge and mild dysuria x 3 days. New sexual partner 2 weeks ago; no condom used. Denies testicular pain, fever, or rash.",
       "exam": "General: NAD. GU: Mucopurulent urethral discharge expressed. No inguinal lymphadenopathy. Testes nontender bilaterally, no scrotal swelling.",
-      "assessment": "1. Urethritis — presumptive chlamydia/gonorrhea",
-      "plan": "1. NAAT for chlamydia/gonorrhea — sent\n2. Ceftriaxone 500mg IM x 1 + Azithromycin 1g PO x 1 (empiric)\n3. Abstain from sex x 7 days; treat partner(s)\n4. Test of cure in 4 weeks"
+      "assessment": "1. Urethritis \u2014 presumptive chlamydia/gonorrhea",
+      "plan": "1. NAAT for chlamydia/gonorrhea \u2014 sent\n2. Ceftriaxone 500mg IM x 1 + Azithromycin 1g PO x 1 (empiric)\n3. Abstain from sex x 7 days; treat partner(s)\n4. Test of cure in 4 weeks"
     }
   ],
   "labs": [
     {
-      "date": "09/20/2024",
-      "time": "10:30",
-      "orderedBy": "Dr. Sandra Gutierrez, MD",
-      "collected": "09/20/2024 10:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-092045",
-      "status": "Final",
-      "specimenType": "Urine, Serum",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Epididymitis Workup",
+      "results": [
         {
-          "name": "STI SCREENING PANEL",
-          "results": [
-            {
-              "test": "Chlamydia NAAT (Urine)",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "Gonorrhea NAAT (Urine)",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "HIV 1/2 Ag/Ab Combo",
-              "value": "Non-reactive",
-              "unit": "",
-              "range": "Non-reactive",
-              "flag": ""
-            },
-            {
-              "test": "RPR (Syphilis)",
-              "value": "Non-reactive",
-              "unit": "",
-              "range": "Non-reactive",
-              "flag": ""
-            }
-          ]
+          "test": "NAAT (urine) \u2014 GC/Chlamydia",
+          "value": "Positive \u2014 Chlamydia trachomatis",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "86",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "141",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Prehn sign",
+          "value": "Positive \u2014 pain improves with elevation",
+          "unit": "",
+          "ref": "Positive = epididymitis (not torsion)",
+          "flag": ""
+        },
+        {
+          "test": "Scrotal Doppler \u2014 right epididymis",
+          "value": "Increased blood flow right epididymis",
+          "unit": "",
+          "ref": "Symmetric flow = normal",
+          "flag": "H"
+        },
+        {
+          "test": "Urinalysis",
+          "value": "WBC 18, bacteria present",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "Temperature",
+          "value": "38.1",
+          "unit": "\u00b0C",
+          "ref": "<38",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "Scrotal Doppler Ultrasound",
+      "findings": "Enlarged right epididymis with increased color flow on Doppler. Right testis: normal size, normal echogenicity, normal blood flow. No abscess. No hydrocele.",
+      "impression": "Acute epididymitis. Testicular torsion excluded (normal testicular blood flow). No abscess."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -254,17 +208,17 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2013",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     },
     {
       "vaccine": "Tdap (Boostrix)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -289,7 +243,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — 4-6 drinks/week"
+      "Social \u2014 4-6 drinks/week"
     ],
     [
       "Drugs",
@@ -297,7 +251,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Daily — weight training and cardio"
+      "Daily \u2014 weight training and cardio"
     ],
     [
       "Housing",
@@ -309,12 +263,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed"
+      "None \u2014 not discussed"
     ]
   ],
   "meta": {
     "caseId": "epididymitis",
-    "diagnosis": "Acute Epididymitis",
+    "diagnosis": "Acute Epididymitis \u2014 Sexually Transmitted (Chlamydia/Gonorrhea)",
     "acuity": 3,
     "presentation": "Urologic Emergency",
     "category": "urologic"
@@ -378,13 +332,11 @@ window.EMR_DATA = {
       "Urethral meatus inspection": "Normal appearing urethral meatus, no discharge or erythema"
     },
     "ddxTargets": [
-      "Acute Epididymitis (correct diagnosis)",
-      "Testicular Torsion",
-      "Torsion of Testicular Appendix",
-      "Testicular Cancer",
-      "Fournier's Gangrene",
-      "Orchitis",
-      "Inguinal Hernia"
+      "Acute epididymitis \u2014 STI-related (correct)",
+      "Testicular torsion \u2014 absent Doppler flow; negative Prehn sign; surgical emergency; bell-clapper deformity",
+      "Orchitis alone \u2014 isolated testicular inflammation; epididymis spared; often mumps-related",
+      "Inguinal hernia \u2014 bowel palpable; no fever; reducible; different exam",
+      "Epididymo-orchitis \u2014 both structures involved; more severe; same treatment principle"
     ],
     "biasFlags": {
       "anchoring": "Students may anchor on the patient's young age and sexual activity, immediately assuming STI-related epididymitis without considering other causes or conducting thorough examination",
@@ -394,7 +346,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, I see you're considering several causes of acute scrotal pain. What key historical features would help you distinguish between testicular torsion and epididymitis? What questions about the onset and character of pain would be most important here?",
       "phase5": "Now that you've completed your history and physical exam, let's think through what you found. The patient has a positive Prehn's sign and normal cremasteric reflex - how do these findings help narrow your differential? Given his sexual history and age, what would be your next steps in workup?",
-      "finalDebrief": "This case nicely illustrates how acute epididymitis can present in a sexually active young male. Notice how the gradual onset, positive Prehn's sign, and preserved cremasteric reflex helped distinguish this from testicular torsion. His sexual history and previous chlamydia infection were key risk factors. What red flags would have made you more concerned about torsion and required emergent urology consultation?"
+      "finalDebrief": "This case nicely illustrates how acute epididymitis can present in a sexually active young male. Notice how the gradual onset, positive Prehn's sign, and preserved cremasteric reflex helped distinguish this from testicular torsion. His sexual history and previous chlamydia infection were key risk factors. What red flags would have made you more concerned about torsion and required emergent urology consultation?",
+      "final": "Diagnosis: acute epididymitis, STI-related. Key learning: (1) Testicular torsion vs epididymitis clinical distinction: TORSION = sudden onset severe pain, nausea/vomiting, absent cremasteric reflex, high-riding testicle (bell-clapper), Prehn sign NEGATIVE (elevation doesn't help), Doppler ABSENT flow. EPIDIDYMITIS = gradual onset, fever, urethral discharge, Prehn sign POSITIVE, Doppler INCREASED flow. Any doubt \u2192 scrotal ultrasound immediately, and if still uncertain \u2192 OR. (2) Epididymitis by age: <35 years = STI (chlamydia, gonorrhea). >35 years = enteric organisms (E. coli, Klebsiella) from BPH, UTI, instrumentation. Treatment differs. (3) CDC dual therapy for STI epididymitis: ceftriaxone 500mg IM (gonorrhea) + doxycycline 100mg BID x 10 days (chlamydia). Increasing gonorrhea resistance has pushed ceftriaxone dose from 250mg to 500mg. (4) Complications without treatment: epididymo-orchitis, epididymal abscess, infarction, infertility. (5) Partner notification: notifiable STI \u2014 gonorrhea must be reported. All partners within 60 days require evaluation and treatment. Abstain from sex until both patient and partner complete treatment and symptoms resolve."
     }
   }
 };

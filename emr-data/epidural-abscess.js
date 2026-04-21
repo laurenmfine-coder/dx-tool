@@ -1,6 +1,3 @@
-// Virtual EMR Case: Spinal Epidural Abscess
-// Variant: epidural-abscess | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicaid",
     "pcp": "Dr. Anthony Reyes, MD",
-    "pharmacy": "Walgreens — 1300 S Andrews Ave, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 1300 S Andrews Ave, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
     "address": "1900 W Haddon Ave, New Orleans, LA 70118",
@@ -26,73 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Opioid Use Disorder, in Remission on MAT",
-      "icd": "F11.21",
-      "onset": "2010",
+      "problem": "Spinal epidural abscess \u2014 post-ESI, L4-L5",
+      "icd": "G06.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "History of IV heroin use (2010-2022); on buprenorphine/naloxone since 2022; compliant with MAT"
+      "notes": "William Chen, 58M \u2014 lumbar epidural steroid injection 2 weeks ago. Progressive severe back pain since injection, now bilateral leg weakness and urinary retention developing over 48h. MRI: epidural abscess L4-5 with cord/cauda compression."
     },
     {
-      "problem": "Hepatitis C, Chronic, Treated",
-      "icd": "B18.2",
-      "onset": "2015",
-      "status": "Resolved",
-      "notes": "SVR achieved 2021 after DAA therapy; genotype 1a"
+      "problem": "Progressive neurological deficits \u2014 surgical emergency",
+      "icd": "G06.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Bilateral leg weakness + urinary retention = impending cauda equina syndrome. Every hour of untreated compression = permanent neurological deficit."
     },
     {
-      "problem": "Lumbar Disc Herniation, L4-L5",
-      "icd": "M51.16",
-      "onset": "2020",
+      "problem": "Staphylococcus aureus \u2014 most common pathogen",
+      "icd": "G06.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Right-sided; managed conservatively; ESI x2 (most recent 12/2025)"
-    },
-    {
-      "problem": "Chronic Low Back Pain",
-      "icd": "M54.5",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "History of construction work; multifactorial"
-    },
-    {
-      "problem": "Major Depressive Disorder",
-      "icd": "F33.0",
-      "onset": "2014",
-      "status": "Active",
-      "notes": "Stable on escitalopram"
+      "notes": "S. aureus accounts for >65% of spinal epidural abscesses. MRSA and MSSA both common. IV drug use, spinal procedures, and bacteremia are leading risk factors."
     }
   ],
   "medications": [
     {
-      "name": "Buprenorphine/Naloxone 8/2mg SL BID",
-      "sig": "Place 1 film under tongue twice daily; allow to dissolve",
-      "prescriber": "Dr. Reyes",
-      "start": "08/2022",
-      "refills": 2,
-      "status": "Active"
+      "name": "Surgical decompression \u2014 emergent laminectomy",
+      "sig": "Epidural abscess with neurological deficits = surgical emergency. Emergent laminectomy and drainage. Every hour of delay = more permanent neurological damage.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 OR"
     },
     {
-      "name": "Escitalopram 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "03/2019",
-      "refills": 3,
-      "status": "Active"
+      "name": "Vancomycin 25-30mg/kg IV q8-12h \u2014 MRSA coverage",
+      "sig": "Empiric vancomycin pending cultures. Covers MRSA and MSSA. De-escalate to nafcillin if MSSA confirmed. Target vancomycin AUC 400-600 (or trough 15-20).",
+      "prescriber": "Infectious Disease/Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
     },
     {
-      "name": "Cyclobenzaprine 10mg TID PRN",
-      "sig": "Take 1 tablet by mouth three times daily as needed for muscle spasm",
-      "prescriber": "Dr. Reyes",
-      "start": "06/2020",
-      "refills": 2,
-      "status": "PRN"
-    },
-    {
-      "name": "Naproxen 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with food",
-      "prescriber": "Dr. Reyes",
-      "start": "06/2020",
-      "refills": 3,
-      "status": "Active"
+      "name": "Long-term IV antibiotics \u2014 4-8 weeks post-drainage",
+      "sig": "SEA requires prolonged IV antibiotics (4-8 weeks) due to poor penetration into abscess cavity and adjacent bone. Duration based on clinical response and follow-up MRI.",
+      "prescriber": "Infectious Disease",
+      "start": "2024",
+      "refills": 0,
+      "status": "Plan \u2014 post-drainage"
     }
   ],
   "allergies": [
@@ -110,7 +85,7 @@ window.EMR_DATA = {
       "bp": "136/84",
       "hr": 104,
       "rr": 18,
-      "temp": "101.8°F",
+      "temp": "101.8\u00b0F",
       "spo2": "97%",
       "wt": "168 lbs",
       "ht": "5'11\"",
@@ -122,7 +97,7 @@ window.EMR_DATA = {
       "bp": "124/78",
       "hr": 76,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "170 lbs",
       "ht": "5'11\"",
@@ -134,7 +109,7 @@ window.EMR_DATA = {
       "bp": "122/74",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "172 lbs",
       "ht": "5'11\"",
@@ -146,7 +121,7 @@ window.EMR_DATA = {
       "bp": "120/76",
       "hr": 74,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "174 lbs",
       "ht": "5'11\"",
@@ -161,10 +136,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Michael Torres, MD (Pain Management)",
       "cc": "Lumbar ESI; chronic low back pain",
-      "hpi": "43-year-old male with chronic LBP and L4-L5 disc herniation presenting for second epidural steroid injection. First ESI (06/2025) provided 3 months of relief. Right-sided radicular pain returned — 7/10 radiating to right buttock and posterior thigh. MRI (09/2025) shows stable L4-L5 right paracentral herniation. Non-opioid management due to OUD history. Currently managed with naproxen, cyclobenzaprine, and physical therapy.",
-      "exam": "General: NAD. Spine: Tenderness L4-L5 midline and right paraspinal. SLR: Positive right at 50°. Motor: 5/5 all. Sensation: Diminished right L5 dermatome.",
-      "assessment": "1. Lumbar radiculopathy L5 — recurrent; proceeding with ESI #2\n2. Chronic LBP\n3. OUD — compliant with buprenorphine; no opioid prescriptions",
-      "plan": "1. Right L4-L5 interlaminar ESI performed — triamcinolone 80mg/lidocaine 1%\n2. Sterile technique; no complications\n3. Continue naproxen, cyclobenzaprine\n4. Continue PT\n5. RTC 6 weeks for reassessment"
+      "hpi": "43-year-old male with chronic LBP and L4-L5 disc herniation presenting for second epidural steroid injection. First ESI (06/2025) provided 3 months of relief. Right-sided radicular pain returned \u2014 7/10 radiating to right buttock and posterior thigh. MRI (09/2025) shows stable L4-L5 right paracentral herniation. Non-opioid management due to OUD history. Currently managed with naproxen, cyclobenzaprine, and physical therapy.",
+      "exam": "General: NAD. Spine: Tenderness L4-L5 midline and right paraspinal. SLR: Positive right at 50\u00b0. Motor: 5/5 all. Sensation: Diminished right L5 dermatome.",
+      "assessment": "1. Lumbar radiculopathy L5 \u2014 recurrent; proceeding with ESI #2\n2. Chronic LBP\n3. OUD \u2014 compliant with buprenorphine; no opioid prescriptions",
+      "plan": "1. Right L4-L5 interlaminar ESI performed \u2014 triamcinolone 80mg/lidocaine 1%\n2. Sterile technique; no complications\n3. Continue naproxen, cyclobenzaprine\n4. Continue PT\n5. RTC 6 weeks for reassessment"
     },
     {
       "id": "V002",
@@ -172,168 +147,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Anthony Reyes, MD",
       "cc": "Follow-up: OUD, depression, back pain",
-      "hpi": "43-year-old male for routine follow-up. OUD — compliant with buprenorphine x 3 years; attending weekly NA meetings. Depression stable on escitalopram. Back pain managed with NSAIDs and PT — improved after ESI in 06/2025. Working part-time at auto parts store. Denies any substance use. UDS consistent with buprenorphine only.",
+      "hpi": "43-year-old male for routine follow-up. OUD \u2014 compliant with buprenorphine x 3 years; attending weekly NA meetings. Depression stable on escitalopram. Back pain managed with NSAIDs and PT \u2014 improved after ESI in 06/2025. Working part-time at auto parts store. Denies any substance use. UDS consistent with buprenorphine only.",
       "exam": "General: NAD. Psych: Euthymic, good rapport. Spine: Mild tenderness. Neuro: Grossly intact. Arms: No track marks; old scars bilateral antecubital fossae.",
-      "assessment": "1. OUD — in remission on MAT; compliant\n2. MDD — stable\n3. Chronic LBP — improved post-ESI\n4. HCV — SVR sustained",
+      "assessment": "1. OUD \u2014 in remission on MAT; compliant\n2. MDD \u2014 stable\n3. Chronic LBP \u2014 improved post-ESI\n4. HCV \u2014 SVR sustained",
       "plan": "1. Continue buprenorphine/naloxone\n2. Continue escitalopram\n3. UDS quarterly\n4. Pain management follow-up for possible repeat ESI\n5. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "02/16/2026",
-      "time": "16:20",
-      "orderedBy": "Dr. Karen Moy, MD (ED)",
-      "collected": "02/16/2026 15:50",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-021648",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Spinal Epidural Abscess",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "18.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Neutrophils",
-              "value": "86",
-              "unit": "%",
-              "range": "40-70",
-              "flag": "H"
-            },
-            {
-              "test": "Bands",
-              "value": "8",
-              "unit": "%",
-              "range": "0-5",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "39.6",
-              "unit": "%",
-              "range": "38.0-50.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "342",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "22.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "INFLAMMATORY MARKERS",
-          "results": [
-            {
-              "test": "ESR",
-              "value": "82",
-              "unit": "mm/hr",
-              "range": "0-22",
-              "flag": "H"
-            },
-            {
-              "test": "CRP",
-              "value": "14.8",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Procalcitonin",
-              "value": "2.4",
-              "unit": "ng/mL",
-              "range": "<0.1",
-              "flag": "H"
-            }
-          ]
+          "test": "ESR",
+          "value": "118",
+          "unit": "mm/hr",
+          "ref": "<20",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "118",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Sodium",
-              "value": "137",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "240",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
         },
         {
-          "name": "BLOOD CULTURES",
-          "results": [
-            {
-              "test": "Blood Culture x2",
-              "value": "Pending",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            }
-          ]
+          "test": "Blood cultures x2",
+          "value": "Pending \u2014 before antibiotics",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Bilateral leg strength",
+          "value": "3/5 bilaterally \u2014 progressive weakness",
+          "unit": "",
+          "ref": "5/5",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "09/15/2025",
-      "study": "MRI LUMBAR SPINE WITHOUT CONTRAST",
-      "accession": "IMG-2025-09153",
-      "status": "FINAL",
-      "orderedBy": "Dr. Michael Torres, MD",
-      "readBy": "Dr. David Rosenberg, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "43M with chronic LBP, L4-L5 disc herniation. Reevaluation prior to repeat ESI.",
-      "technique": "MRI lumbar spine without contrast. Sagittal T1, T2, STIR; Axial T2.",
-      "findings": "L4-L5: Right paracentral disc herniation, stable in size. Mild right foraminal stenosis with right L5 nerve root contact. No central stenosis.\\n\\nOther levels: Mild degenerative changes L3-L4 and L5-S1. No herniation.\\n\\nConus: Normal, terminating at L1.\\n\\nCauda equina: No compression.\\n\\nNo epidural collection or abnormal enhancement (non-contrast study).\\n\\nVertebral bodies: Normal marrow signal. No compression fracture.",
-      "impression": "1. Stable right paracentral L4-L5 disc herniation with right L5 nerve root contact.\\n2. Mild multilevel degenerative changes.\\n3. No spinal canal stenosis or cauda equina compression.",
-      "dictated": "09/15/2025 14:50",
-      "verified": "09/15/2025 17:10"
+      "date": "04/2024",
+      "study": "MRI Spine with Gadolinium \u2014 Lumbar",
+      "findings": "Epidural abscess L3-L5 with rim enhancement. Cord/cauda equina compression at L4-5. Adjacent discitis and osteomyelitis L4-5. Epidural extension anteriorly.",
+      "impression": "Spinal epidural abscess with cauda equina compression and adjacent discitis-osteomyelitis. Emergent neurosurgical consultation."
     }
   ],
   "immunizations": [
@@ -355,21 +223,21 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
       "vaccine": "Hepatitis A (Havrix) (2/2)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Hepatitis B (Engerix-B) (3/3)",
       "date": "2016",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -390,7 +258,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Current smoker — 1/2 PPD x 20 years (10 pack-year)"
+      "Current smoker \u2014 1/2 PPD x 20 years (10 pack-year)"
     ],
     [
       "Alcohol",
@@ -419,7 +287,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "epidural-abscess",
-    "diagnosis": "Spinal Epidural Abscess (Post-ESI, MSSA)",
+    "diagnosis": "Spinal Epidural Abscess \u2014 Post-Epidural Steroid Injection, MSSA",
     "acuity": 2,
     "presentation": "Back Pain",
     "category": "infectious"
@@ -483,13 +351,11 @@ window.EMR_DATA = {
       "Neurological examination for upper motor neuron signs": "No pathologic reflexes, no clonus"
     },
     "ddxTargets": [
-      "Spinal Epidural Abscess (Post-ESI, MSSA) (correct diagnosis)",
-      "Recurrent disc herniation with radiculopathy",
-      "Lumbar osteomyelitis",
-      "Cauda equina syndrome",
-      "Spinal cord compression",
-      "Mechanical low back pain exacerbation",
-      "Drug-seeking behavior/pseudoaddiction"
+      "Spinal epidural abscess \u2014 post-ESI (correct)",
+      "Metastatic epidural cord compression \u2014 known cancer; no fever; no inflammatory markers; different MRI enhancement",
+      "Herniated disc with cauda equina \u2014 no fever; no inflammatory markers; different MRI \u2014 disc material not enhancing abscess",
+      "Transverse myelitis \u2014 inflammatory; CSF pleocytosis; different MRI pattern; no focal collection",
+      "Discitis-osteomyelitis alone \u2014 can coexist; but epidural collection is key finding requiring surgery"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's substance use history and dismissing pain as drug-seeking behavior rather than investigating serious pathology",
@@ -499,7 +365,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview this patient, consider the timeline and quality of his symptoms. What red flags might distinguish serious spinal pathology from routine mechanical back pain? How might his recent procedure and medical history influence your approach?",
       "phase5": "Now that you've completed your history and exam, what key features distinguish this presentation from typical mechanical back pain? What specific combination of findings should prompt urgent imaging and specialist consultation?",
-      "finalDebrief": "This case highlights the importance of recognizing post-procedural complications and avoiding bias based on substance use history. How did the fever, constant pain quality, and percussion tenderness help differentiate epidural abscess from mechanical causes? What systemic factors in this patient's history may have predisposed him to this complication?"
+      "finalDebrief": "This case highlights the importance of recognizing post-procedural complications and avoiding bias based on substance use history. How did the fever, constant pain quality, and percussion tenderness help differentiate epidural abscess from mechanical causes? What systemic factors in this patient's history may have predisposed him to this complication?",
+      "final": "Diagnosis: spinal epidural abscess. Key learning: (1) Classic SEA triad: back pain + fever + neurological deficit. Only 13% have all three at presentation \u2014 most present with back pain and fever initially. The triad fully present = late presentation. Do not wait for the full triad \u2014 MRI immediately if back pain + fever + any neurological symptom. (2) Post-procedure SEA: epidural steroid injections, spinal surgery, epidural anesthesia \u2014 all introduce bacteria into the epidural space. New or worsening back pain after spinal procedure = SEA until proven otherwise. ESR and CRP are highly sensitive markers. (3) Surgery vs antibiotics alone: neurological deficits = surgery immediately. No deficits + small abscess + poor surgical candidate = antibiotics alone with very close monitoring. Any neurological deterioration = OR. (4) S. aureus dominant: >65% of cases. MRSA increasingly common. Empiric vancomycin. De-escalate to nafcillin/oxacillin for MSSA (better CNS penetration than vancomycin). Duration: 4-8 weeks IV antibiotics after drainage. (5) Adjacent discitis-osteomyelitis: SEA frequently coexists with discitis-osteomyelitis. Treat both simultaneously \u2014 longer antibiotic course required for bone involvement."
     }
   }
 };
