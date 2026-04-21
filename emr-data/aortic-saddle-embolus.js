@@ -1,6 +1,3 @@
-// Virtual EMR Case: Aortic Saddle Embolus
-// Variant: aortic-saddle-embolus | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B + BlueCross BlueShield Supplement",
     "pcp": "Dr. Antonio Vega, MD",
-    "pharmacy": "CVS Pharmacy — 1901 N Pine Island Rd, Plantation, FL",
+    "pharmacy": "CVS Pharmacy \u2014 1901 N Pine Island Rd, Plantation, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
     "address": "328 Birch Ln, Minneapolis, MN 55407",
@@ -27,96 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Atrial Fibrillation, Paroxysmal",
+      "problem": "Aortic saddle embolus \u2014 bilateral ALI, Rutherford IIb",
+      "icd": "I74.09",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Dorothy Allen, 68F \u2014 known AFib, subtherapeutic anticoagulation. Sudden onset bilateral lower extremity pain, coldness, pulselessness. Classic 'saddle' embolus straddling aortic bifurcation."
+    },
+    {
+      "problem": "Atrial fibrillation \u2014 cardioembolic source",
       "icd": "I48.0",
-      "onset": "2021",
+      "onset": "2018",
       "status": "Active",
-      "notes": "CHA₂DS₂-VASc 4; recently self-discontinued apixaban due to cost"
+      "notes": "INR 1.4 \u2014 subtherapeutic. Large left atrial thrombus = source of saddle embolus."
     },
     {
-      "problem": "Rheumatic Mitral Stenosis, Moderate",
-      "icd": "I05.0",
-      "onset": "2019",
+      "problem": "Bilateral motor deficit \u2014 Rutherford IIb, immediately threatened",
+      "icd": "I74.09",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Valve area 1.3 cm²; cardiology monitoring; childhood rheumatic fever in Cuba"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2005",
-      "status": "Active",
-      "notes": "Controlled"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "A1c 7.0%; well controlled on metformin"
-    },
-    {
-      "problem": "Osteoporosis",
-      "icd": "M81.0",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "T-score −2.8 lumbar spine"
+      "notes": "Cannot move ankles or toes bilaterally. Bilateral motor deficit = Rutherford IIb \u00d7 2 = absolute emergency."
     }
   ],
   "medications": [
     {
-      "name": "Apixaban 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily — SELF-DISCONTINUED 3 weeks ago",
-      "prescriber": "Dr. Rojas",
-      "start": "09/2021",
+      "name": "Heparin UFH 100 units/kg bolus \u2014 IMMEDIATE",
+      "sig": "Prevent propagation. Start before imaging if diagnosis obvious. Time is bilateral limbs.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
       "refills": 0,
-      "status": "Discontinued"
+      "status": "IMMEDIATE"
     },
     {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Rojas",
-      "start": "09/2021",
-      "refills": 3,
-      "status": "Active"
+      "name": "Emergent bilateral surgical embolectomy \u2014 OR NOW",
+      "sig": "Bilateral Rutherford IIb from saddle embolus = surgical emergency. Bilateral transfemoral embolectomy with Fogarty catheter. Target OR within 1-2 hours.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 OR"
     },
     {
-      "name": "Lisinopril 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Vega",
-      "start": "01/2006",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Vega",
-      "start": "06/2013",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Alendronate 70mg weekly",
-      "sig": "Take 1 tablet by mouth on empty stomach weekly with 8 oz water",
-      "prescriber": "Dr. Vega",
-      "start": "04/2021",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 20mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Vega",
-      "start": "01/2015",
-      "refills": 5,
-      "status": "Active"
+      "name": "Bilateral fasciotomy \u2014 anticipate reperfusion injury",
+      "sig": "Bilateral leg fasciotomy at time of revascularization. Bilateral prolonged ischemia \u2192 severe reperfusion injury \u2192 bilateral compartment syndrome virtually certain.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Planned \u2014 intraoperative"
     }
   ],
   "allergies": [
     {
       "allergen": "Lisinopril",
       "type": "Drug",
-      "reaction": "Persistent dry cough (tolerated — prefers to continue)",
+      "reaction": "Persistent dry cough (tolerated \u2014 prefers to continue)",
       "severity": "Mild",
       "verified": "Yes"
     }
@@ -127,7 +86,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 82,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "138 lbs",
       "ht": "5'2\"",
@@ -139,7 +98,7 @@ window.EMR_DATA = {
       "bp": "128/76",
       "hr": 78,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "140 lbs",
       "ht": "5'2\"",
@@ -151,7 +110,7 @@ window.EMR_DATA = {
       "bp": "130/80",
       "hr": 80,
       "rr": 14,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "98%",
       "wt": "142 lbs",
       "ht": "5'2\"",
@@ -166,10 +125,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Antonio Vega, MD",
       "cc": "Chronic disease management; medication cost concerns",
-      "hpi": "66-year-old female with paroxysmal AFib, rheumatic mitral stenosis, HTN, T2DM, and osteoporosis. Presents for routine follow-up. Reports she stopped taking apixaban 3 weeks ago because her Medicare Part D plan changed and copay increased to $180/month. She understands the importance but cannot afford it. Otherwise feels well. Occasional palpitations. No dyspnea at rest. Mild exertional DOE walking upstairs. No chest pain, syncope, or neurologic symptoms. A1c 7.0% — pleased with diabetes control.",
+      "hpi": "66-year-old female with paroxysmal AFib, rheumatic mitral stenosis, HTN, T2DM, and osteoporosis. Presents for routine follow-up. Reports she stopped taking apixaban 3 weeks ago because her Medicare Part D plan changed and copay increased to $180/month. She understands the importance but cannot afford it. Otherwise feels well. Occasional palpitations. No dyspnea at rest. Mild exertional DOE walking upstairs. No chest pain, syncope, or neurologic symptoms. A1c 7.0% \u2014 pleased with diabetes control.",
       "exam": "General: Well-appearing elderly female in NAD. CV: Irregularly irregular rate 82; low-pitched diastolic rumble at apex with opening snap; no S3. JVP 6 cm. Lungs: CTAB. Abdomen: Soft, NT/ND. Extremities: No edema. Neuro: A&O x3, no focal deficits.",
-      "assessment": "1. AFib — OFF anticoagulation x 3 weeks (high embolic risk with mitral stenosis)\n2. Rheumatic mitral stenosis — stable moderate; echocardiography due\n3. HTN — controlled\n4. T2DM — well controlled, A1c 7.0%\n5. Osteoporosis — on bisphosphonate",
-      "plan": "1. URGENT: Restarted anticoagulation — applied for manufacturer patient assistance program for apixaban; prescribed warfarin 5mg as bridge until resolved; INR check in 5 days\n2. Cardiology follow-up for echocardiogram and valve reassessment\n3. Continue metoprolol, lisinopril, metformin, atorvastatin, alendronate\n4. Social work referral for medication assistance programs\n5. RTC 2 weeks for INR and reassessment"
+      "assessment": "1. AFib \u2014 OFF anticoagulation x 3 weeks (high embolic risk with mitral stenosis)\n2. Rheumatic mitral stenosis \u2014 stable moderate; echocardiography due\n3. HTN \u2014 controlled\n4. T2DM \u2014 well controlled, A1c 7.0%\n5. Osteoporosis \u2014 on bisphosphonate",
+      "plan": "1. URGENT: Restarted anticoagulation \u2014 applied for manufacturer patient assistance program for apixaban; prescribed warfarin 5mg as bridge until resolved; INR check in 5 days\n2. Cardiology follow-up for echocardiogram and valve reassessment\n3. Continue metoprolol, lisinopril, metformin, atorvastatin, alendronate\n4. Social work referral for medication assistance programs\n5. RTC 2 weeks for INR and reassessment"
     },
     {
       "id": "V002",
@@ -179,168 +138,59 @@ window.EMR_DATA = {
       "cc": "Routine follow-up",
       "hpi": "66-year-old female for routine visit. All conditions stable. Taking all medications as prescribed including apixaban. No palpitations, dyspnea, or chest pain. A1c 7.2%.",
       "exam": "General: NAD. CV: Irregularly irregular at times; diastolic murmur at apex. Lungs: CTAB. Extremities: No edema.",
-      "assessment": "1. Chronic conditions — stable on current regimens",
+      "assessment": "1. Chronic conditions \u2014 stable on current regimens",
       "plan": "1. Continue all medications\n2. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "01/22/2025",
-      "time": "09:30",
-      "orderedBy": "Dr. Antonio Vega, MD",
-      "collected": "01/22/2025 08:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-012254",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Saddle Embolus",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "102",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "18",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "20",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "Lactate",
+          "value": "5.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "7.0",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            },
-            {
-              "test": "Est. Avg Glucose (eAG)",
-              "value": "154",
-              "unit": "mg/dL",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "CK",
+          "value": "3200",
+          "unit": "U/L",
+          "ref": "<200",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.6",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "37.2",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "INR",
+          "value": "1.4",
+          "unit": "",
+          "ref": "2.0-3.0 (subtherapeutic)",
+          "flag": "L"
+        },
+        {
+          "test": "Femoral Doppler \u2014 bilateral",
+          "value": "Absent bilateral",
+          "unit": "",
+          "ref": "Present",
+          "flag": "H"
+        },
+        {
+          "test": "ECG",
+          "value": "Atrial fibrillation",
+          "unit": "",
+          "ref": "NSR",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "03/2024",
-      "study": "ECHOCARDIOGRAM (TRANSTHORACIC)",
-      "accession": "IMG-2024-03151",
-      "status": "FINAL",
-      "orderedBy": "Dr. Luis Rojas, MD (Cardiology)",
-      "readBy": "Dr. Luis Rojas, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "66F AFib, rheumatic mitral stenosis. Annual reassessment.",
-      "technique": "Standard 2D transthoracic echocardiogram with Doppler.",
-      "findings": "LV: Normal size, LVEF 60%.\\n\\nMitral valve: Thickened, calcified leaflets with restricted motion. Mean gradient 8 mmHg. Planimetry valve area 1.3 cm² (moderate stenosis). Mild mitral regurgitation.\\n\\nLA: Severely dilated (volume index 58 mL/m²). Spontaneous echo contrast noted.\\n\\nAortic valve: Mild sclerosis, no stenosis.\\n\\nRV: Normal size and function.\\n\\nPericardium: No effusion.",
-      "impression": "1. Moderate rheumatic mitral stenosis (MVA 1.3 cm²).\\n2. Severely dilated left atrium with spontaneous echo contrast — thromboembolic risk.\\n3. Mild mitral regurgitation.\\n4. Preserved LV function (LVEF 60%).",
-      "dictated": "03/15/2024 16:00",
-      "verified": "03/16/2024 09:00"
+      "date": "04/2024",
+      "study": "CT Angiogram Aorta/Lower Extremities",
+      "findings": "Large filling defect straddling aortic bifurcation extending into bilateral common iliac arteries \u2014 saddle embolus. No flow in bilateral external iliacs or below. No significant atherosclerosis.",
+      "impression": "Aortic saddle embolus with bilateral limb ischemia. Emergent surgical embolectomy indicated."
     }
   ],
   "immunizations": [
@@ -421,12 +271,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Health care proxy — husband Miguel"
+      "Health care proxy \u2014 husband Miguel"
     ]
   ],
   "meta": {
     "caseId": "aortic-saddle-embolus",
-    "diagnosis": "Aortic Saddle Embolus",
+    "diagnosis": "Aortic Saddle Embolus \u2014 Bilateral Acute Limb Ischemia",
     "acuity": 1,
     "presentation": "Vascular Emergency",
     "category": "vascular"
@@ -490,13 +340,11 @@ window.EMR_DATA = {
       "Skin mottling or livedo reticularis assessment": "Pronounced mottling and livedo reticularis pattern from mid-thigh distally, more pronounced on the right"
     },
     "ddxTargets": [
-      "Aortic Saddle Embolus (correct diagnosis)",
-      "Acute Aortic Thrombosis",
-      "Bilateral Acute Limb Ischemia",
-      "Acute Aortic Dissection with Malperfusion",
-      "Massive Pulmonary Embolism with Shock",
-      "Acute Cauda Equina Syndrome",
-      "Bilateral Deep Vein Thrombosis"
+      "Aortic saddle embolus (correct)",
+      "Bilateral DVT \u2014 venous; no pulse loss; no ABI change",
+      "Aortic dissection extending to iliacs \u2014 dissection flap on CT; different mechanism",
+      "Leriche syndrome (atherosclerotic aortoiliac occlusion) \u2014 chronic gradual onset; claudication history; atherosclerosis on CTA",
+      "Phlegmasia cerulea dolens bilateral \u2014 massive venous thrombosis; pulseless but venous mechanism"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the social history of medication non-compliance and missing the acute vascular emergency nature of this presentation",
@@ -506,7 +354,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview this patient, consider her known cardiac conditions and recent medication change. What vascular complications should you be most concerned about in someone with atrial fibrillation who stopped anticoagulation? How might this influence your history-taking priorities?",
       "phase5": "Now that you've completed your assessment, let's think through the key findings. You have a patient with known afib off anticoagulation presenting with acute bilateral leg pain, absent pulses, and motor/sensory deficits. What anatomical location could explain this bilateral presentation? What's the most likely pathophysiology here?",
-      "finalDebrief": "This case illustrates how social determinants of health can directly lead to medical emergencies. Claudia's saddle embolus resulted from medication non-compliance due to cost - a preventable tragedy. Notice how the bilateral nature of her symptoms, absent distal pulses, and cardiac history should have pointed you toward this diagnosis. What systems issues contributed to this outcome, and how might we prevent similar cases?"
+      "finalDebrief": "This case illustrates how social determinants of health can directly lead to medical emergencies. Claudia's saddle embolus resulted from medication non-compliance due to cost - a preventable tragedy. Notice how the bilateral nature of her symptoms, absent distal pulses, and cardiac history should have pointed you toward this diagnosis. What systems issues contributed to this outcome, and how might we prevent similar cases?",
+      "final": "Diagnosis: aortic saddle embolus. Key learning: (1) Saddle embolus = embolus straddling the aortic bifurcation \u2192 bilateral acute limb ischemia. Classic presentation: sudden bilateral lower extremity pain + absent femoral pulses bilaterally. Almost always from cardiac source (AFib, recent MI). (2) Leriche syndrome distinction: chronic atherosclerotic aortoiliac occlusion (gradual claudication, erectile dysfunction, absent femoral pulses). Saddle embolus = acute catastrophic onset. CTA distinguishes (atherosclerosis vs clean vessels with acute filling defect). (3) Surgical urgency: bilateral Rutherford IIb (motor deficit) = emergent bilateral surgical embolectomy. Fogarty catheter embolectomy via bilateral groin incisions. No time for CDT in bilateral IIb \u2014 motor deficit means revascularize NOW. (4) Reperfusion injury: bilateral prolonged ischemia \u2192 bilateral massive reperfusion \u2192 hyperkalemia, myoglobinuric AKI, bilateral compartment syndrome. Anticipate: pre-hydration, NaHCO3 urine alkalinization, bilateral prophylactic fasciotomy at time of revascularization, continuous electrolyte monitoring. (5) Anticoagulation after repair: lifelong warfarin or DOAC for AF. This event occurred because anticoagulation was subtherapeutic \u2014 patient education critical."
     }
   }
 };

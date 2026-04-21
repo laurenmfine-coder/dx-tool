@@ -9,7 +9,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Cigna HMO",
     "pcp": "Dr. Robert Chen, MD",
-    "pharmacy": "Publix Pharmacy — 951 S State Rd 7, Plantation, FL",
+    "pharmacy": "Publix Pharmacy \u2014 951 S State Rd 7, Plantation, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
     "address": "1820 NW 62nd Ave, Sunrise, FL 33313",
@@ -22,57 +22,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Chronic Lymphocytic Leukemia — Rai Stage I",
+      "problem": "Warm AIHA \u2014 CLL-associated secondary hemolysis",
+      "icd": "D59.11",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "David Park, 62M \u2014 known CLL stage II. Progressive fatigue, pallor, jaundice. Hgb 6.8 from 12.4 over 2 months. DAT (direct Coombs) positive IgG + C3. LDH 3200, haptoglobin undetectable."
+    },
+    {
+      "problem": "CLL \u2014 underlying disease driving AIHA",
       "icd": "C91.10",
       "onset": "2022",
       "status": "Active",
-      "notes": "Diagnosed incidentally on routine CBC; lymphocytosis and lymphadenopathy; watch-and-wait per hematology-oncology; no treatment initiated"
+      "notes": "CLL is the most common cause of secondary warm AIHA (10-25% of CLL patients develop AIHA). Requires treatment of both the AIHA and the underlying CLL."
     },
     {
-      "problem": "Hypothyroidism",
-      "icd": "E03.9",
-      "onset": "2016",
+      "problem": "Symptomatic anemia \u2014 transfusion threshold assessment",
+      "icd": "D59.11",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Autoimmune (Hashimoto); on levothyroxine; TSH at goal"
-    },
-    {
-      "problem": "Osteopenia",
-      "icd": "M81.0",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "DEXA T-score -1.8 lumbar spine; on calcium and vitamin D"
-    },
-    {
-      "problem": "Gastroesophageal Reflux Disease",
-      "icd": "K21.0",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "Controlled with omeprazole"
+      "notes": "Hgb 6.8 + symptoms (dyspnea on exertion, palpitations). Transfusion may be needed but challenging \u2014 autoantibodies react with all donor cells, making crossmatch difficult."
     }
   ],
   "medications": [
     {
-      "name": "Levothyroxine 75mcg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach, 30-60 minutes before breakfast",
-      "prescriber": "Dr. Chen",
-      "start": "09/2016",
-      "refills": 4,
+      "name": "Prednisone 1mg/kg/day \u2014 first-line for warm AIHA",
+      "sig": "Corticosteroids suppress autoantibody production and reduce RBC destruction. 70-80% initial response rate. Taper over 4-6 months after Hgb stabilizes.",
+      "prescriber": "Hematology",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Omeprazole 20mg daily",
-      "sig": "Take 1 capsule by mouth daily 30 minutes before breakfast",
-      "prescriber": "Dr. Chen",
-      "start": "06/2019",
+      "name": "Rituximab \u2014 second-line or steroid-sparing",
+      "sig": "Anti-CD20 depletes B-cells \u2192 reduces autoantibody production. Also treats underlying CLL. Combined rituximab + steroid increasingly first-line for severe AIHA.",
+      "prescriber": "Hematology/Oncology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Planned \u2014 if steroid failure"
+    },
+    {
+      "name": "Folate supplementation \u2014 1mg daily",
+      "sig": "Compensatory erythropoiesis in hemolytic anemia depletes folate. Supplementation prevents megaloblastic change.",
+      "prescriber": "Hematology",
+      "start": "2024",
       "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Calcium Carbonate 600mg with Vitamin D 400 IU BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Chen",
-      "start": "01/2024",
-      "refills": 5,
       "status": "Active"
     }
   ],
@@ -98,7 +91,7 @@ window.EMR_DATA = {
       "bp": "136/82",
       "hr": 104,
       "rr": 20,
-      "temp": "99.4°F",
+      "temp": "99.4\u00b0F",
       "spo2": "96%",
       "wt": "162 lbs",
       "ht": "5'6\"",
@@ -110,7 +103,7 @@ window.EMR_DATA = {
       "bp": "126/78",
       "hr": 76,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "160 lbs",
       "ht": "5'6\"",
@@ -122,7 +115,7 @@ window.EMR_DATA = {
       "bp": "128/80",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "98%",
       "wt": "158 lbs",
       "ht": "5'6\"",
@@ -137,10 +130,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Robert Chen, MD",
       "cc": "Progressive fatigue, pallor, dark urine x 1 week",
-      "hpi": "49-year-old female with CLL (watch-and-wait) presents with 1 week of progressive fatigue, exertional dyspnea, and dizziness. Husband noticed pallor and yellowing of eyes 3 days ago. Reports dark brown urine. No bleeding, melena, or hematochezia. No fever, chills, or weight loss. No recent infections or new medications. CLL last evaluated 3 months ago — stable lymphocytosis. Denies recent cold exposure (cold agglutinin screen).",
-      "exam": "General: Pale, mildly icteric female, tachycardic. HEENT: Scleral icterus bilaterally, pale conjunctivae. Neck: Bilateral non-tender cervical lymphadenopathy (1-2 cm, mobile, rubbery — chronic/known). CV: Tachycardic, RRR, II/VI systolic flow murmur. Lungs: CTAB. Abdomen: Spleen palpable 3 cm below left costal margin. Liver edge at costal margin. Extremities: No edema, no petechiae.",
-      "assessment": "1. Acute symptomatic anemia with jaundice — high suspicion for autoimmune hemolytic anemia (warm AIHA), likely CLL-associated\n2. CLL — Rai Stage I, previously stable; AIHA is known complication\n3. Need emergent workup: DAT, reticulocyte count, LDH, haptoglobin, bilirubin, peripheral smear",
-      "plan": "1. STAT labs drawn in office (CBC, retic, LDH, haptoglobin, total/direct bilirubin, DAT, peripheral smear)\n2. Refer to ED for possible transfusion if Hgb critically low\n3. Contact hematology-oncology (Dr. Patel) for urgent co-management\n4. Anticipate starting corticosteroids (prednisone 1mg/kg) if AIHA confirmed\n5. Type and screen — note: DAT-positive may complicate crossmatch"
+      "hpi": "49-year-old female with CLL (watch-and-wait) presents with 1 week of progressive fatigue, exertional dyspnea, and dizziness. Husband noticed pallor and yellowing of eyes 3 days ago. Reports dark brown urine. No bleeding, melena, or hematochezia. No fever, chills, or weight loss. No recent infections or new medications. CLL last evaluated 3 months ago \u2014 stable lymphocytosis. Denies recent cold exposure (cold agglutinin screen).",
+      "exam": "General: Pale, mildly icteric female, tachycardic. HEENT: Scleral icterus bilaterally, pale conjunctivae. Neck: Bilateral non-tender cervical lymphadenopathy (1-2 cm, mobile, rubbery \u2014 chronic/known). CV: Tachycardic, RRR, II/VI systolic flow murmur. Lungs: CTAB. Abdomen: Spleen palpable 3 cm below left costal margin. Liver edge at costal margin. Extremities: No edema, no petechiae.",
+      "assessment": "1. Acute symptomatic anemia with jaundice \u2014 high suspicion for autoimmune hemolytic anemia (warm AIHA), likely CLL-associated\n2. CLL \u2014 Rai Stage I, previously stable; AIHA is known complication\n3. Need emergent workup: DAT, reticulocyte count, LDH, haptoglobin, bilirubin, peripheral smear",
+      "plan": "1. STAT labs drawn in office (CBC, retic, LDH, haptoglobin, total/direct bilirubin, DAT, peripheral smear)\n2. Refer to ED for possible transfusion if Hgb critically low\n3. Contact hematology-oncology (Dr. Patel) for urgent co-management\n4. Anticipate starting corticosteroids (prednisone 1mg/kg) if AIHA confirmed\n5. Type and screen \u2014 note: DAT-positive may complicate crossmatch"
     },
     {
       "id": "V002",
@@ -148,165 +141,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Robert Chen, MD",
       "cc": "Follow-up: CLL, hypothyroidism",
-      "hpi": "49-year-old female for routine follow-up. CLL stable — last CBC showed WBC 18,000 with lymphocyte predominance, Hgb 13.0. No B symptoms. Hypothyroidism well-controlled. GERD managed. No new complaints.",
+      "hpi": "49-year-old female for routine follow-up. CLL stable \u2014 last CBC showed WBC 18,000 with lymphocyte predominance, Hgb 13.0. No B symptoms. Hypothyroidism well-controlled. GERD managed. No new complaints.",
       "exam": "General: NAD, well-appearing. Neck: Small bilateral cervical nodes, stable. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Spleen tip just palpable. Skin: No petechiae.",
-      "assessment": "1. CLL — stable, no treatment indications\n2. Hypothyroidism — TSH at goal\n3. Osteopenia — on calcium/vitamin D",
+      "assessment": "1. CLL \u2014 stable, no treatment indications\n2. Hypothyroidism \u2014 TSH at goal\n3. Osteopenia \u2014 on calcium/vitamin D",
       "plan": "1. Continue watch-and-wait for CLL; hematology follow-up Q6 months\n2. Continue levothyroxine\n3. Recheck CBC in 3 months\n4. RTC 3-4 months"
     }
   ],
   "labs": [
     {
-      "date": "08/14/2024",
-      "time": "08:30",
-      "orderedBy": "Dr. Robert Chen, MD",
-      "collected": "08/14/2024 08:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-081418",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Warm AIHA Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "18.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Lymphocytes",
-              "value": "78",
-              "unit": "%",
-              "range": "20-40",
-              "flag": "H"
-            },
-            {
-              "test": "ALC",
-              "value": "14.2",
-              "unit": "x10³/µL",
-              "range": "1.0-4.8",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.0",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.8",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "185",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "6.8",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
         },
         {
-          "name": "THYROID FUNCTION",
-          "results": [
-            {
-              "test": "TSH",
-              "value": "2.4",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            },
-            {
-              "test": "Free T4",
-              "value": "1.2",
-              "unit": "ng/dL",
-              "range": "0.8-1.8",
-              "flag": ""
-            }
-          ]
+          "test": "Direct Coombs (DAT)",
+          "value": "Positive \u2014 IgG + C3d",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "90",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "22",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "26",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "LDH",
-              "value": "195",
-              "unit": "U/L",
-              "range": "140-280",
-              "flag": ""
-            }
-          ]
+          "test": "LDH",
+          "value": "3200",
+          "unit": "U/L",
+          "ref": "100-220",
+          "flag": "H"
+        },
+        {
+          "test": "Haptoglobin",
+          "value": "Undetectable (<10)",
+          "unit": "mg/dL",
+          "ref": "30-200",
+          "flag": "L"
+        },
+        {
+          "test": "Reticulocyte count",
+          "value": "18.2",
+          "unit": "%",
+          "ref": "0.5-2.0 (appropriate response)",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "02/20/2024",
-      "study": "CT CHEST ABDOMEN PELVIS WITH CONTRAST",
-      "accession": "IMG-2024-02201",
-      "status": "FINAL",
-      "orderedBy": "Dr. Priya Patel, MD (Hematology)",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "49F CLL staging — evaluate lymphadenopathy and organomegaly.",
-      "technique": "CT chest, abdomen, and pelvis with IV contrast.",
-      "findings": "Chest: Bilateral axillary lymphadenopathy (largest 1.5 cm). No mediastinal or hilar adenopathy. Lungs clear. Heart normal size.\\n\\nAbdomen: Spleen mildly enlarged at 13.5 cm. Liver normal size and attenuation. No mesenteric or retroperitoneal adenopathy >1 cm. Kidneys unremarkable.\\n\\nPelvis: Bilateral inguinal lymphadenopathy (largest 1.2 cm). No pelvic mass.",
-      "impression": "1. Mild splenomegaly.\\n2. Scattered bilateral axillary and inguinal lymphadenopathy — consistent with known CLL.\\n3. No bulky disease or high tumor burden by imaging.",
-      "dictated": "02/20/2024 13:15",
-      "verified": "02/20/2024 15:40"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -323,7 +207,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "04/2023",
       "site": "Left deltoid IM",
       "lot": "PV23-114",
@@ -333,7 +217,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -378,12 +262,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None on file — discussed"
+      "None on file \u2014 discussed"
     ]
   ],
   "meta": {
     "caseId": "autoimmune-hemolytic-anemia",
-    "diagnosis": "Warm Autoimmune Hemolytic Anemia (CLL-Associated)",
+    "diagnosis": "Warm Autoimmune Hemolytic Anemia (Warm AIHA \u2014 CLL-Associated)",
     "acuity": 2,
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
@@ -434,7 +318,7 @@ window.EMR_DATA = {
       "Neurologic assessment for signs of severe anemia"
     ],
     "examFindings": {
-      "General appearance and vital signs assessment": "Appears fatigued and mildly distressed, notable pallor. BP 136/82, HR 104, RR 20, Temp 99.4°F, SpO2 96% on room air",
+      "General appearance and vital signs assessment": "Appears fatigued and mildly distressed, notable pallor. BP 136/82, HR 104, RR 20, Temp 99.4\u00b0F, SpO2 96% on room air",
       "Conjunctival and scleral examination for icterus": "Marked conjunctival pallor bilaterally, obvious scleral icterus present",
       "Cardiovascular examination including heart rate and murmurs": "Tachycardic at 104 bpm, regular rhythm, II/VI systolic flow murmur at LUSB, no gallops or rubs",
       "Pulmonary examination for signs of heart failure": "Clear to auscultation bilaterally, no crackles, wheezes, or signs of fluid overload",
@@ -445,13 +329,12 @@ window.EMR_DATA = {
       "Neurologic assessment for signs of severe anemia": "Alert and oriented, mild difficulty with concentration, no focal deficits, normal gait when not short of breath"
     },
     "ddxTargets": [
-      "Warm Autoimmune Hemolytic Anemia (CLL-Associated) (correct diagnosis)",
-      "CLL transformation to aggressive lymphoma (Richter syndrome)",
-      "Drug-induced hemolytic anemia",
-      "Acute leukemia or blast crisis",
-      "Sepsis with hemolysis",
-      "Hepatitis with anemia",
-      "Iron deficiency anemia with concurrent illness"
+      "Warm AIHA \u2014 CLL-associated (correct)",
+      "Cold agglutinin disease \u2014 IgM; DAT positive C3 only (not IgG); cold-triggered symptoms; different treatment",
+      "Microangiopathic hemolytic anemia (TMA) \u2014 DAT negative; schistocytes; thrombocytopenia",
+      "Drug-induced immune hemolysis \u2014 medication history; DAT positive; stop offending drug",
+      "Hemolytic transfusion reaction \u2014 post-transfusion; IgM ABO incompatibility",
+      "Sickle cell crisis \u2014 hemolysis + pain crisis; sickle prep positive; different mechanism"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known CLL diagnosis and attributing all symptoms to disease progression rather than considering secondary autoimmune complications",
@@ -461,7 +344,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before interviewing the patient, consider what complications can arise in CLL patients beyond disease progression. What does the combination of fatigue, dyspnea, and the husband's observation of pallor and yellow eyes suggest? Think about both hematologic and non-hematologic causes.",
       "phase5": "Now you have evidence of hemolysis - icterus, splenomegaly, and dark urine. Combined with the anemia symptoms in a CLL patient, what specific type of hemolytic process should you be thinking about? What test would definitively establish this diagnosis?",
-      "finalDebrief": "This case illustrates how CLL patients can develop secondary autoimmune complications, particularly warm autoimmune hemolytic anemia. The key was recognizing hemolysis signs (icterus, dark urine, splenomegaly) in the setting of severe anemia symptoms, rather than attributing everything to CLL progression. This emphasizes the importance of considering complications of the primary disease, not just progression of the disease itself."
+      "finalDebrief": "This case illustrates how CLL patients can develop secondary autoimmune complications, particularly warm autoimmune hemolytic anemia. The key was recognizing hemolysis signs (icterus, dark urine, splenomegaly) in the setting of severe anemia symptoms, rather than attributing everything to CLL progression. This emphasizes the importance of considering complications of the primary disease, not just progression of the disease itself.",
+      "final": "Diagnosis: warm AIHA, CLL-associated. Key learning: (1) Warm vs cold AIHA distinction: WARM (IgG, 37\u00b0C) = most common, DAT positive IgG \u00b1 C3, extravascular hemolysis (spleen), responds to steroids. COLD (IgM, cold temperatures) = DAT positive C3 only, intravascular hemolysis, avoid cold, chlorambucil/rituximab. The DAT result distinguishes them. (2) DAT (direct Coombs test): detects antibodies or complement coating the patient's RBCs. Positive IgG = warm AIHA. Positive C3 only = cold AIHA or PCH. Positive IgG + C3 = warm AIHA (as here). (3) Transfusion in warm AIHA: autoantibodies react with ALL donor RBCs (pan-reactive) \u2192 impossible to find compatible crossmatch. Blood bank provides 'least incompatible' units. Transfuse only if life-threatening anemia (Hgb <7 with symptoms) \u2014 transfused cells will also be hemolyzed. (4) CLL + AIHA: CLL produces dysfunctional B-cells that generate autoantibodies. Rituximab treats both conditions simultaneously \u2014 depletes malignant B-cells AND autoantibody-producing B-cells. (5) Steroid response monitoring: expect Hgb to rise within 1-3 weeks with steroids. Reticulocytosis (as here) indicates appropriate bone marrow response. LDH and haptoglobin normalize with treatment response."
     }
   }
 };

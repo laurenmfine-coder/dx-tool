@@ -1,6 +1,3 @@
-// Virtual EMR Case: Bacterial Meningitis
-// Variant: bacterial-meningitis | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Cigna PPO (parent plan)",
     "pcp": "Dr. Samuel Rivera, MD",
-    "pharmacy": "CVS Pharmacy — 3050 University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 3050 University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
     "address": "8271 E Roosevelt Rd, Chicago, IL 60607",
@@ -27,21 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Allergic Rhinitis — Perennial",
-      "icd": "J30.89",
-      "onset": "2010",
+      "problem": "Acute bacterial meningitis \u2014 presumed N. meningitidis",
+      "icd": "G00.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Managed with intranasal fluticasone PRN"
+      "notes": "Tyler Brooks, 19M \u2014 college dormitory resident, sudden onset headache, fever 40.1\u00b0C, neck stiffness, photophobia, non-blanching petechial rash. Classic meningococcal presentation."
+    },
+    {
+      "problem": "Petechial/purpuric rash \u2014 meningococcemia",
+      "icd": "A39.2",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Non-blanching petechiae and purpura = meningococcal bacteremia with DIC. Indicates systemic Neisseria meningitidis septicemia. Rapidly progressive \u2014 can develop in hours."
+    },
+    {
+      "problem": "Rapidly progressive \u2014 DIC and septic shock risk",
+      "icd": "A39.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Meningococcal disease can progress from well to death in <24 hours. The rash spreading + hypotension = Waterhouse-Friderichsen syndrome risk (bilateral adrenal hemorrhage)."
     }
   ],
   "medications": [
     {
-      "name": "Fluticasone Propionate 50mcg nasal spray BID PRN",
-      "sig": "Spray 2 sprays in each nostril once or twice daily as needed for nasal congestion",
-      "prescriber": "Dr. Rivera",
-      "start": "09/2022",
-      "refills": 3,
-      "status": "PRN"
+      "name": "Ceftriaxone 2g IV \u2014 IMMEDIATE, DO NOT DELAY FOR LP",
+      "sig": "Do not delay antibiotics for LP if the patient is deteriorating or has contraindications to LP (elevated ICP, focal neuro deficits, coagulopathy). Give antibiotics immediately, then LP if safe.",
+      "prescriber": "Emergency/Infectious Disease",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
+    },
+    {
+      "name": "Dexamethasone 0.15mg/kg IV \u2014 BEFORE or WITH first antibiotic dose",
+      "sig": "Reduces neuroinflammation, decreases hearing loss (particularly in S. pneumoniae). Give before or with first dose of antibiotics \u2014 no benefit if given after. Continue 4 days.",
+      "prescriber": "Emergency/Infectious Disease",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
+    },
+    {
+      "name": "Public health notification \u2014 contact prophylaxis",
+      "sig": "N. meningitidis is notifiable. Close contacts (household, dormitory, healthcare workers with face exposure) require ciprofloxacin 500mg x1 or rifampin prophylaxis within 24 hours of exposure.",
+      "prescriber": "Public Health",
+      "start": "2024",
+      "refills": 0,
+      "status": "Initiated \u2014 PH notification"
     }
   ],
   "allergies": [
@@ -59,7 +86,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "170 lbs",
       "ht": "5'10\"",
@@ -71,7 +98,7 @@ window.EMR_DATA = {
       "bp": "116/70",
       "hr": 66,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "168 lbs",
       "ht": "5'10\"",
@@ -85,8 +112,8 @@ window.EMR_DATA = {
       "date": "01/10/2024",
       "type": "Student Health",
       "provider": "Dr. Karen Mills, MD",
-      "cc": "URI symptoms — sore throat, congestion x 4 days",
-      "hpi": "20-year-old male college student presents with 4 days of sore throat, nasal congestion, and mild cough. Low-grade temp 99.5°F at home. Rapid strep negative. No rash, stiff neck, or headache. Roommate had similar symptoms.",
+      "cc": "URI symptoms \u2014 sore throat, congestion x 4 days",
+      "hpi": "20-year-old male college student presents with 4 days of sore throat, nasal congestion, and mild cough. Low-grade temp 99.5\u00b0F at home. Rapid strep negative. No rash, stiff neck, or headache. Roommate had similar symptoms.",
       "exam": "General: NAD. HEENT: Mild pharyngeal erythema without exudate, TMs clear, nasal mucosa edematous. Neck: Supple, no LAD. Lungs: CTAB.",
       "assessment": "1. Viral URI",
       "plan": "1. Supportive care: rest, fluids, acetaminophen PRN\n2. Return if worsening or not improving in 7-10 days"
@@ -97,61 +124,63 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Samuel Rivera, MD",
       "cc": "Pre-semester sports physical",
-      "hpi": "20-year-old male for intramural sports clearance. No complaints. Healthy. Lives in dormitory. Immunizations up to date including meningococcal ACWY (2022). No meningococcal B vaccine received — discussed and declined by patient at that time.",
+      "hpi": "20-year-old male for intramural sports clearance. No complaints. Healthy. Lives in dormitory. Immunizations up to date including meningococcal ACWY (2022). No meningococcal B vaccine received \u2014 discussed and declined by patient at that time.",
       "exam": "General: Athletic male, NAD. CV: RRR, no murmurs. Lungs: CTAB. MSK: Full ROM. Neuro: A&O x3, intact.",
-      "assessment": "1. Sports clearance — healthy\n2. Meningococcal B vaccine — discussed again; patient deferred",
-      "plan": "1. Cleared for sports\n2. Strongly recommended MenB vaccine — dormitory living is a risk factor\n3. RTC PRN"
+      "assessment": "1. Sports clearance \u2014 healthy\n2. Meningococcal B vaccine \u2014 discussed again; patient deferred",
+      "plan": "1. Cleared for sports\n2. Strongly recommended MenB vaccine \u2014 dormitory living is a risk factor\n3. RTC PRN"
     }
   ],
   "labs": [
     {
-      "date": "08/12/2024",
-      "time": "10:00",
-      "orderedBy": "Dr. Samuel Rivera, MD",
-      "collected": "08/12/2024 09:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-081218",
-      "status": "Final",
-      "specimenType": "Serum",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Bacterial Meningitis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15.4",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "45.2",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CSF WBC",
+          "value": "4800",
+          "unit": "cells/\u03bcL (PMN predominant 92%)",
+          "ref": "0-5",
+          "flag": "H"
+        },
+        {
+          "test": "CSF glucose",
+          "value": "18",
+          "unit": "mg/dL",
+          "ref": "40-70; CSF:serum ratio <0.4 = bacterial",
+          "flag": "L"
+        },
+        {
+          "test": "CSF protein",
+          "value": "380",
+          "unit": "mg/dL",
+          "ref": "15-45",
+          "flag": "H"
+        },
+        {
+          "test": "CSF Gram stain",
+          "value": "Gram-negative diplococci",
+          "unit": "",
+          "ref": "No organisms",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures",
+          "value": "Pending \u2014 drawn before antibiotics",
+          "unit": "",
+          "ref": "No growth",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "CT Head Non-Contrast (pre-LP)",
+      "findings": "No midline shift. No herniation. No mass. Normal ventricles.",
+      "impression": "No contraindication to lumbar puncture. Proceed with LP."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Meningococcal ACWY (Menactra)",
@@ -178,21 +207,21 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2016",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     },
     {
       "vaccine": "MMR (2/2)",
       "date": "2009",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -205,7 +234,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "College student (junior) — lives in dormitory"
+      "College student (junior) \u2014 lives in dormitory"
     ],
     [
       "Marital",
@@ -221,7 +250,7 @@ window.EMR_DATA = {
     ],
     [
       "Drugs",
-      "Marijuana — occasional"
+      "Marijuana \u2014 occasional"
     ],
     [
       "Exercise",
@@ -229,7 +258,7 @@ window.EMR_DATA = {
     ],
     [
       "Housing",
-      "University dormitory — shared room with 1 roommate"
+      "University dormitory \u2014 shared room with 1 roommate"
     ],
     [
       "Safety",
@@ -242,7 +271,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "bacterial-meningitis",
-    "diagnosis": "Acute Bacterial Meningitis (Neisseria meningitidis Serogroup B)",
+    "diagnosis": "Acute Bacterial Meningitis \u2014 Neisseria meningitidis",
     "acuity": 1,
     "presentation": "Fever/Sepsis",
     "category": "infectious"
@@ -302,17 +331,15 @@ window.EMR_DATA = {
       "Mental status examination": "Alert but confused, difficulty with concentration and orientation to time, follows commands but appears lethargic",
       "Cranial nerve examination": "Cranial nerves II-XII grossly intact, mild photophobia noted",
       "Deep tendon reflexes": "Hyperreflexia noted in bilateral upper and lower extremities",
-      "Temperature and vital signs assessment": "Current temperature 102.8°F, tachycardic at 110 bpm, blood pressure 108/65",
+      "Temperature and vital signs assessment": "Current temperature 102.8\u00b0F, tachycardic at 110 bpm, blood pressure 108/65",
       "Lymph node palpation": "Mild cervical lymphadenopathy, tender to palpation"
     },
     "ddxTargets": [
-      "Acute Bacterial Meningitis (Neisseria meningitidis Serogroup B) (correct diagnosis)",
-      "Viral meningitis",
-      "Subarachnoid hemorrhage",
-      "Bacterial endocarditis with septic emboli",
-      "Meningococcemia with shock",
-      "Viral upper respiratory infection with severe headache",
-      "Migraine with associated viral illness"
+      "Acute bacterial meningitis \u2014 N. meningitidis (correct)",
+      "Viral meningitis \u2014 lymphocytic pleocytosis; normal glucose; less toxic; gram stain negative; enterovirus most common",
+      "Subarachnoid hemorrhage \u2014 thunderclap headache; bloody CSF; xanthochromia; CT may show blood",
+      "Herpes encephalitis \u2014 temporal lobe involvement on MRI; temporal CSF pleocytosis; treat with acyclovir empirically",
+      "Meningococcal meningitis vs meningococcemia \u2014 distinction: meningitis = CSF infected; meningococcemia = bloodstream; can coexist"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on initial viral URI presentation and missing progression to bacterial meningitis, especially given patient's initial attribution to roommate's illness",
@@ -322,7 +349,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possibilities for this young man's presentation. Before interviewing him, consider: What specific historical elements would help you differentiate between viral and bacterial causes? What questions about his living situation and symptom progression will be most crucial?",
       "phase5": "Now that you've completed your history and physical, let's think through your findings systematically. What do the positive meningeal signs tell you? How does the petechial rash change your differential diagnosis? What is the most concerning diagnosis you need to rule out immediately?",
-      "finalDebrief": "This case demonstrates how bacterial meningitis can initially present like a common viral illness, particularly in college students. The key turning points were recognizing the severity of headache, positive meningeal signs, and especially the petechial rash. How might your approach change if you saw this patient on day 1 versus day 4 of illness?"
+      "finalDebrief": "This case demonstrates how bacterial meningitis can initially present like a common viral illness, particularly in college students. The key turning points were recognizing the severity of headache, positive meningeal signs, and especially the petechial rash. How might your approach change if you saw this patient on day 1 versus day 4 of illness?",
+      "final": "Diagnosis: acute bacterial meningitis, meningococcal. Key learning: (1) Classic triad: fever + headache + neck stiffness. Only 44% have all three. Add photophobia, phonophobia, altered consciousness, petechiae. Non-blanching petechial rash in a febrile patient = meningococcemia until proven otherwise \u2014 give ceftriaxone immediately even before any workup. (2) Do NOT delay antibiotics for LP: if CT is required first (focal deficits, immunocompromised, papilledema, GCS <13, new seizure, age >60), draw blood cultures and give antibiotics IMMEDIATELY, then get CT, then LP. Each 1-hour delay in antibiotics increases mortality significantly. (3) CSF pattern: bacterial = low glucose (<40mg/dL or CSF:serum <0.4), elevated protein (>100mg/dL), polymorphonuclear pleocytosis (>1000 WBC, PMN dominant), positive Gram stain (60-90% sensitivity). (4) Dexamethasone: reduces neuroinflammation and hearing loss, particularly for S. pneumoniae. Give before or with first antibiotic dose \u2014 benefit lost if given afterward. If not pneumococcal, can stop after 4 days. (5) Contact prophylaxis: ciprofloxacin 500mg \u00d7 1 dose or rifampin for household and close contacts within 24 hours of exposure. Healthcare workers only if direct mucosal exposure (resuscitation, intubation without mask)."
     }
   }
 };

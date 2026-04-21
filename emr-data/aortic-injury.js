@@ -1,6 +1,3 @@
-// Virtual EMR Case: Blunt Traumatic Aortic Injury
-// Variant: aortic-injury | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "United Healthcare PPO",
     "pcp": "Dr. Angela Morales, MD",
-    "pharmacy": "CVS Pharmacy — 2201 S University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2201 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Hispanic",
     "address": "1781 Birch Ln, Richmond, VA 23220",
@@ -26,43 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "No significant past medical history",
-      "icd": "Z03.89",
-      "onset": "2025",
+      "problem": "Blunt traumatic aortic injury \u2014 Grade II intimal tear",
+      "icd": "S35.00XA",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Healthy prior to trauma"
+      "notes": "Kevin Park, 34M \u2014 high-speed MVA, unrestrained. CXR: widened mediastinum, left apical cap. CT angiography: intimal tear at aortic isthmus (ligamentum arteriosum). Hemodynamically stable."
     },
     {
-      "problem": "Seasonal Allergic Rhinitis",
-      "icd": "J30.2",
-      "onset": "2015",
+      "problem": "Associated injuries \u2014 polytrauma screen required",
+      "icd": "S35.00XA",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Spring pollen"
+      "notes": "Blunt aortic injury rarely occurs in isolation. Concomitant injuries: rib fractures, pulmonary contusion, pneumothorax, cardiac contusion (ECG, troponin). 90% of blunt aortic injuries occur at the isthmus."
     },
     {
-      "problem": "Vitamin D Deficiency",
-      "icd": "E55.9",
-      "onset": "2023",
-      "status": "Resolved",
-      "notes": "Completed supplementation course"
+      "problem": "Hemodynamic stability \u2014 grade determines urgency",
+      "icd": "S35.00XA",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Grade I = intimal tear (medical management). Grade II = intimal tear with hematoma. Grade III = partial tear (pseudoaneurysm). Grade IV = rupture (emergent)."
     }
   ],
   "medications": [
     {
-      "name": "Cetirizine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily as needed for allergies",
-      "prescriber": "Dr. Morales",
-      "start": "03/2022",
-      "refills": 5,
-      "status": "PRN"
+      "name": "Esmolol IV \u2014 HR <60, SBP <120",
+      "sig": "Anti-impulse therapy reduces dP/dt and wall stress to prevent propagation. Same principle as aortic dissection. Strict HR and BP targets until definitive repair or observation confirms stability.",
+      "prescriber": "Trauma Surgery/Vascular",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 ICU"
     },
     {
-      "name": "Ibuprofen 400mg PRN",
-      "sig": "Take 1 tablet by mouth every 6-8 hours as needed for pain",
-      "prescriber": "Dr. Morales",
-      "start": "01/2024",
-      "refills": 2,
-      "status": "PRN"
+      "name": "TEVAR \u2014 thoracic endovascular aortic repair (planned)",
+      "sig": "Grade II-III injuries that are stable can be repaired semi-urgently (within 24-72h). TEVAR has replaced open repair for most blunt aortic injuries.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Scheduled \u2014 24h"
+    },
+    {
+      "name": "Pain management + ICU monitoring",
+      "sig": "ICU admission with arterial line for continuous BP monitoring. Serial CT angiography if conservative management chosen for Grade I.",
+      "prescriber": "Trauma Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 ICU"
     }
   ],
   "allergies": [
@@ -80,7 +85,7 @@ window.EMR_DATA = {
       "bp": "124/78",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "185 lbs",
       "ht": "5'11\"",
@@ -92,7 +97,7 @@ window.EMR_DATA = {
       "bp": "120/76",
       "hr": 68,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "183 lbs",
       "ht": "5'11\"",
@@ -104,7 +109,7 @@ window.EMR_DATA = {
       "bp": "118/74",
       "hr": 70,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "98%",
       "wt": "180 lbs",
       "ht": "5'11\"",
@@ -121,7 +126,7 @@ window.EMR_DATA = {
       "cc": "Annual physical exam",
       "hpi": "33-year-old male presenting for routine annual wellness exam. No active complaints. Reports regular exercise including cycling and weight training. Denies chest pain, shortness of breath, or recent illness.",
       "exam": "General: Well-appearing male in NAD. HEENT: PERRL, EOMI, oropharynx clear. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, NT/ND. Extremities: No edema. Neuro: A&O x3, cranial nerves intact.",
-      "assessment": "1. Annual wellness exam — healthy male, no acute issues",
+      "assessment": "1. Annual wellness exam \u2014 healthy male, no acute issues",
       "plan": "1. Age-appropriate screening current\n2. Continue exercise regimen\n3. RTC 1 year or PRN"
     },
     {
@@ -132,182 +137,59 @@ window.EMR_DATA = {
       "cc": "Follow-up: Vitamin D deficiency",
       "hpi": "33-year-old male follow-up after 12-week vitamin D supplementation course. Reports compliance with 50,000 IU weekly regimen. No musculoskeletal complaints. Feeling well overall.",
       "exam": "General: NAD. Vitals: WNL. MSK: Full ROM all extremities, no tenderness.",
-      "assessment": "1. Vitamin D deficiency — resolved, levels normalized",
+      "assessment": "1. Vitamin D deficiency \u2014 resolved, levels normalized",
       "plan": "1. Discontinue high-dose supplementation\n2. OTC vitamin D3 2,000 IU daily for maintenance\n3. Recheck level at next annual"
     }
   ],
   "labs": [
     {
-      "date": "01/10/2025",
-      "time": "09:15",
-      "orderedBy": "Dr. Angela Morales, MD",
-      "collected": "01/10/2025 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-041289",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (12 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Blunt Aortic Injury",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "88",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "22",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "20",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "11.2",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "45.1",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.18",
+          "unit": "ng/mL",
+          "ref": "<0.04 (cardiac contusion)",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "188",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": ""
-            },
-            {
-              "test": "LDL-C",
-              "value": "110",
-              "unit": "mg/dL",
-              "range": "<130",
-              "flag": ""
-            },
-            {
-              "test": "HDL-C",
-              "value": "52",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": ""
-            },
-            {
-              "test": "Triglycerides",
-              "value": "130",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": ""
-            }
-          ]
+          "test": "CXR findings",
+          "value": "Widened mediastinum >8cm, left apical pleural cap",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "BP right arm",
+          "value": "138/82",
+          "unit": "mmHg",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "BP left arm",
+          "value": "104/68",
+          "unit": "mmHg",
+          "ref": "Differential >20mmHg = aortic injury",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "01/10/2025",
-      "study": "CHEST XR PA AND LATERAL",
-      "accession": "IMG-2025-01038",
-      "status": "FINAL",
-      "orderedBy": "Dr. Angela Morales, MD",
-      "readBy": "Dr. Lisa Tran, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "33M annual physical. No acute complaints.",
-      "technique": "PA and lateral views, upright, full inspiration.",
-      "findings": "Heart: Normal size and silhouette.\\n\\nMediastinum: Normal width. No mediastinal widening.\\n\\nLungs: Clear bilaterally. No focal consolidation, pleural effusion, or pneumothorax.\\n\\nBones: No acute osseous abnormality.",
-      "impression": "1. Normal chest radiograph.\\n2. No acute cardiopulmonary process.",
-      "dictated": "01/10/2025 11:30",
-      "verified": "01/10/2025 14:05"
+      "date": "04/2024",
+      "study": "CT Angiogram Chest",
+      "findings": "Intimal tear at aortic isthmus (distal to left subclavian artery). Small periaortic hematoma. No free extravasation. Mediastinal hematoma. No other aortic injury. Left pulmonary contusion.",
+      "impression": "Grade II blunt traumatic aortic injury at aortic isthmus. Anti-impulse therapy and semi-urgent TEVAR."
     }
   ],
   "immunizations": [
@@ -329,14 +211,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "01/2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Hepatitis B (Recombivax)",
       "date": "2009",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -361,7 +243,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — 2-3 beers/week"
+      "Social \u2014 2-3 beers/week"
     ],
     [
       "Drugs",
@@ -381,12 +263,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed"
+      "None \u2014 not discussed"
     ]
   ],
   "meta": {
     "caseId": "aortic-injury",
-    "diagnosis": "Blunt Traumatic Aortic Injury",
+    "diagnosis": "Blunt Traumatic Aortic Injury (Grade II \u2014 Intimal Tear)",
     "acuity": 1,
     "presentation": "Trauma",
     "category": "trauma"
@@ -450,13 +332,11 @@ window.EMR_DATA = {
       "Evaluation for signs of shock": "Mild tachycardia, cool extremities, delayed capillary refill suggesting early shock"
     },
     "ddxTargets": [
-      "Blunt Traumatic Aortic Injury (correct diagnosis)",
-      "Myocardial contusion",
-      "Hemothorax/pneumothorax",
-      "Aortic dissection",
-      "Cardiac tamponade",
-      "Pulmonary contusion",
-      "Rib fractures with pneumothorax"
+      "Blunt traumatic aortic injury \u2014 Grade II (correct)",
+      "Traumatic aortic rupture (Grade IV) \u2014 free extravasation on CT; hemodynamically unstable; emergent repair",
+      "Mediastinal hematoma without aortic injury \u2014 CXR widening from venous bleeding; CT distinguishes",
+      "Cardiac contusion \u2014 troponin elevation here is from cardiac contusion; coexists with aortic injury",
+      "Aortic dissection (spontaneous) \u2014 mechanism; age; CT distinguishes intimal tear vs dissection flap"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on more common chest pain causes like myocardial contusion or rib fractures, missing the subtle signs of aortic injury such as pulse differentials",
@@ -466,7 +346,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This is a trauma patient with chest pain - what are your immediate priorities in assessment? Think about the mechanism of injury and what life-threatening conditions you need to rule out first. What specific physical exam findings would help you differentiate between the various causes of traumatic chest pain?",
       "phase5": "You've identified some concerning findings including pulse differentials and a new murmur in a trauma patient. How do these findings fit together? What does the blood pressure difference between arms tell you, and what imaging would you want next? Consider the mechanism of high-speed deceleration injury.",
-      "finalDebrief": "Blunt traumatic aortic injury is a classic result of rapid deceleration trauma. The key clues were the mechanism, pulse differentials between arms, new murmur, and early shock signs. This case highlights why systematic evaluation of pulses and blood pressures in both arms is crucial in major trauma. What made this challenging was the initial presentation could mimic more common conditions, but the constellation of vascular findings pointed to this life-threatening diagnosis requiring immediate surgical consultation."
+      "finalDebrief": "Blunt traumatic aortic injury is a classic result of rapid deceleration trauma. The key clues were the mechanism, pulse differentials between arms, new murmur, and early shock signs. This case highlights why systematic evaluation of pulses and blood pressures in both arms is crucial in major trauma. What made this challenging was the initial presentation could mimic more common conditions, but the constellation of vascular findings pointed to this life-threatening diagnosis requiring immediate surgical consultation.",
+      "final": "Diagnosis: blunt traumatic aortic injury. Key learning: (1) Mechanism: rapid deceleration injury causes shear stress at fixed aortic points \u2014 the isthmus (ligamentum arteriosum, 90% of cases), the aortic root, or the diaphragmatic hiatus. Classic scenario: high-speed MVA, unrestrained driver. (2) CXR signs: widened mediastinum (>8cm at aortic knob) is the most sensitive finding. Others: left apical pleural cap, obliteration of aortic knob, tracheal deviation to right, left hemothorax. A normal CXR does NOT exclude blunt aortic injury in a high-mechanism trauma. (3) BP differential: upper extremity differential >20mmHg (right > left) in blunt chest trauma = aortic injury until proven otherwise. The isthmus injury can partially occlude the left subclavian outflow. (4) Grading and management: Grade I (intimal tear) = anti-impulse therapy \u00b1 observation. Grade II (intimal + hematoma) = semi-urgent TEVAR. Grade III (pseudoaneurysm) = urgent TEVAR. Grade IV (free rupture) = emergent repair. (5) Anti-impulse therapy (esmolol): same as aortic dissection \u2014 reduce HR <60 and SBP <120 to minimize wall stress until definitive repair."
     }
   }
 };

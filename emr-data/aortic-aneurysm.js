@@ -1,6 +1,3 @@
-// Virtual EMR Case: Aortic Aneurysm (Symptomatic AAA)
-// Variant: aortic-aneurysm | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part A/B with BlueCross BlueShield Supplement",
     "pcp": "Dr. David Tanaka, MD",
-    "pharmacy": "Publix Pharmacy — 4651 SW 64th Ave, Riverside, FL",
+    "pharmacy": "Publix Pharmacy \u2014 4651 SW 64th Ave, Riverside, FL",
     "language": "English",
     "race": "White",
     "address": "4828 N Kedzie Blvd, Richmond, VA 23225",
@@ -26,96 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Abdominal Aortic Aneurysm",
+      "problem": "Symptomatic AAA \u2014 urgent surgical evaluation",
       "icd": "I71.4",
-      "onset": "2021",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Infrarenal AAA; 5.2 cm on last CTA (09/2025); growth rate 0.4 cm/year; vascular surgery consultation — EVAR planned"
+      "notes": "Harold Stevens, 72M \u2014 known 5.2cm AAA on surveillance. Now new onset pulsatile abdominal pain radiating to back. Hemodynamically stable. CT: 5.8cm AAA, no rupture, but new periaortic stranding = symptomatic."
     },
     {
-      "problem": "Hypertension",
+      "problem": "Hypertension \u2014 major AAA risk factor",
       "icd": "I10",
-      "onset": "2002",
+      "onset": "2012",
       "status": "Active",
-      "notes": "Controlled on dual therapy"
+      "notes": "Poorly controlled SBP 162/90. BP control critical \u2014 target SBP <120 to slow expansion."
     },
     {
-      "problem": "Coronary Artery Disease",
-      "icd": "I25.10",
-      "onset": "2015",
+      "problem": "Tobacco use \u2014 50 pack-year history",
+      "icd": "F17.210",
+      "onset": "1972",
       "status": "Active",
-      "notes": "PCI with DES to LAD (2015); stress test 2024 negative for ischemia"
-    },
-    {
-      "problem": "Peripheral Artery Disease",
-      "icd": "I73.9",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "ABI 0.72 left, 0.78 right; claudication at 2 blocks"
-    },
-    {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2005",
-      "status": "Active",
-      "notes": ""
-    },
-    {
-      "problem": "Tobacco Use Disorder, Former",
-      "icd": "Z87.891",
-      "onset": "1970",
-      "status": "Resolved",
-      "notes": "Quit 2016; 45 pack-year history"
+      "notes": "Smoking is the strongest modifiable risk factor for AAA formation and expansion. Each year of smoking increases risk."
     }
   ],
   "medications": [
     {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "06/2015",
-      "refills": 5,
+      "name": "Urgent vascular surgery consultation",
+      "sig": "Symptomatic AAA (new pain, tenderness) is a surgical emergency \u2014 repair indicated regardless of size. 50% of symptomatic AAAs rupture within 24-48 hours without repair.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "URGENT"
+    },
+    {
+      "name": "IV access x2 large bore + type and cross 6 units pRBC",
+      "sig": "Prepare for emergent surgical repair. Rupture can occur at any moment. Blood bank notification.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Tanaka",
-      "start": "04/2003",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 80mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Singh",
-      "start": "06/2015",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "06/2015",
-      "refills": 6,
-      "status": "Active"
-    },
-    {
-      "name": "Clopidogrel 75mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "06/2015",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Cilostazol 100mg BID",
-      "sig": "Take 1 tablet by mouth twice daily 30 minutes before or 2 hours after meals",
-      "prescriber": "Dr. Martinez",
-      "start": "08/2020",
-      "refills": 3,
-      "status": "Active"
+      "name": "Beta-blocker \u2014 metoprolol IV for BP/HR control",
+      "sig": "Reduce dP/dt. Target HR <60 and SBP <120 to reduce wall stress while awaiting OR.",
+      "prescriber": "Vascular Surgery/ICU",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV"
     }
   ],
   "allergies": [
@@ -133,7 +85,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": 64,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "174 lbs",
       "ht": "5'9\"",
@@ -145,7 +97,7 @@ window.EMR_DATA = {
       "bp": "142/86",
       "hr": 66,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "176 lbs",
       "ht": "5'9\"",
@@ -157,7 +109,7 @@ window.EMR_DATA = {
       "bp": "136/80",
       "hr": 62,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "178 lbs",
       "ht": "5'9\"",
@@ -169,7 +121,7 @@ window.EMR_DATA = {
       "bp": "140/84",
       "hr": 66,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "176 lbs",
       "ht": "5'9\"",
@@ -184,9 +136,9 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Luis Martinez, MD (Vascular Surgery)",
       "cc": "AAA surveillance; preoperative evaluation",
-      "hpi": "73-year-old male with known infrarenal AAA (5.2 cm, 09/2025) presenting for preoperative evaluation for elective EVAR. Reports new onset dull lower back pain over past 3 weeks — intermittent, not positional, radiates to left flank. Denies trauma. Reports increased fatigue. AAA growth rate 0.4 cm/year; meets criteria for repair. PAD stable — claudication at 2 blocks. CAD stable — no angina. Stress test (2024) negative.",
+      "hpi": "73-year-old male with known infrarenal AAA (5.2 cm, 09/2025) presenting for preoperative evaluation for elective EVAR. Reports new onset dull lower back pain over past 3 weeks \u2014 intermittent, not positional, radiates to left flank. Denies trauma. Reports increased fatigue. AAA growth rate 0.4 cm/year; meets criteria for repair. PAD stable \u2014 claudication at 2 blocks. CAD stable \u2014 no angina. Stress test (2024) negative.",
       "exam": "General: NAD. CV: RRR, no murmurs. Abdomen: Pulsatile mass palpable periumbilical region, non-tender. Peripheral pulses: Diminished bilateral dorsalis pedis. ABI: 0.72 left, 0.78 right. Neuro: Grossly intact.",
-      "assessment": "1. AAA 5.2 cm — meets criteria for EVAR; new back pain concerning for symptomatic expansion\n2. PAD — stable\n3. CAD — stable; cardiac clearance needed\n4. New back pain — warrants urgent repeat imaging",
+      "assessment": "1. AAA 5.2 cm \u2014 meets criteria for EVAR; new back pain concerning for symptomatic expansion\n2. PAD \u2014 stable\n3. CAD \u2014 stable; cardiac clearance needed\n4. New back pain \u2014 warrants urgent repeat imaging",
       "plan": "1. Urgent CTA abdomen/pelvis to reassess AAA size and morphology\n2. If stable, proceed with EVAR scheduling within 2-4 weeks\n3. If expansion or concerning features, emergent repair\n4. Cardiac clearance from Dr. Singh\n5. Premedication protocol for contrast allergy\n6. Continue all medications through surgery"
     },
     {
@@ -195,10 +147,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Luis Martinez, MD (Vascular Surgery)",
       "cc": "AAA surveillance",
-      "hpi": "73-year-old male for routine AAA surveillance. CTA today shows infrarenal AAA at 5.2 cm, increased from 4.8 cm (03/2025). Growth rate exceeds 0.5 cm in 6 months. No symptoms — no back pain, no abdominal pain, hemodynamically stable. Decision made to offer elective EVAR.",
+      "hpi": "73-year-old male for routine AAA surveillance. CTA today shows infrarenal AAA at 5.2 cm, increased from 4.8 cm (03/2025). Growth rate exceeds 0.5 cm in 6 months. No symptoms \u2014 no back pain, no abdominal pain, hemodynamically stable. Decision made to offer elective EVAR.",
       "exam": "General: NAD. Abdomen: Pulsatile mass, non-tender. Peripheral pulses: Diminished bilaterally.",
-      "assessment": "1. Infrarenal AAA 5.2 cm — rapid growth; recommend EVAR\n2. PAD — stable",
-      "plan": "1. Discuss EVAR risks/benefits — patient agrees to proceed\n2. Schedule preop workup\n3. RTC 6 weeks for preop evaluation"
+      "assessment": "1. Infrarenal AAA 5.2 cm \u2014 rapid growth; recommend EVAR\n2. PAD \u2014 stable",
+      "plan": "1. Discuss EVAR risks/benefits \u2014 patient agrees to proceed\n2. Schedule preop workup\n3. RTC 6 weeks for preop evaluation"
     },
     {
       "id": "V003",
@@ -206,163 +158,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. David Tanaka, MD",
       "cc": "Chronic disease follow-up",
-      "hpi": "73-year-old male for routine follow-up. BP controlled. CAD stable on medical therapy. PAD symptoms stable — claudication at 2 blocks, improved with cilostazol. AAA under surveillance. No new complaints. Former smoker — quit 9 years ago. Lipids at goal.",
+      "hpi": "73-year-old male for routine follow-up. BP controlled. CAD stable on medical therapy. PAD symptoms stable \u2014 claudication at 2 blocks, improved with cilostazol. AAA under surveillance. No new complaints. Former smoker \u2014 quit 9 years ago. Lipids at goal.",
       "exam": "General: NAD. CV: RRR. Lungs: CTAB. Abdomen: Soft; pulsatile mass noted. Extremities: Diminished pedal pulses.",
-      "assessment": "1. HTN — controlled\n2. CAD — stable\n3. PAD — stable on cilostazol\n4. AAA — under vascular surgery surveillance",
+      "assessment": "1. HTN \u2014 controlled\n2. CAD \u2014 stable\n3. PAD \u2014 stable on cilostazol\n4. AAA \u2014 under vascular surgery surveillance",
       "plan": "1. Continue all medications\n2. Labs: BMP, CBC, lipid panel\n3. Vascular surgery follow-up per protocol\n4. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "01/06/2026",
-      "time": "08:45",
-      "orderedBy": "Dr. Luis Martinez, MD",
-      "collected": "01/06/2026 08:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-010635",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Symptomatic AAA",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "96",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "20",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.2",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "13.2",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "38.0-50.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "192",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
         },
         {
-          "name": "COAGULATION",
-          "results": [
-            {
-              "test": "PT",
-              "value": "12.4",
-              "unit": "sec",
-              "range": "11.0-13.5",
-              "flag": ""
-            },
-            {
-              "test": "INR",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.8-1.1",
-              "flag": ""
-            },
-            {
-              "test": "PTT",
-              "value": "30",
-              "unit": "sec",
-              "range": "25-35",
-              "flag": ""
-            }
-          ]
+          "test": "PT/INR",
+          "value": "1.1",
+          "unit": "",
+          "ref": "<1.2",
+          "flag": ""
+        },
+        {
+          "test": "Type and Screen",
+          "value": "O positive \u2014 crossmatch 6 units",
+          "unit": "",
+          "ref": "Done",
+          "flag": ""
+        },
+        {
+          "test": "BP",
+          "value": "162/90",
+          "unit": "mmHg",
+          "ref": "Target SBP <120",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "09/22/2025",
-      "study": "CT ANGIOGRAM ABDOMEN AND PELVIS (AORTA PROTOCOL)",
-      "accession": "IMG-2025-09225",
-      "status": "FINAL",
-      "orderedBy": "Dr. Luis Martinez, MD",
-      "readBy": "Dr. Elena Suarez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "73M with known AAA, surveillance. Premedicated for contrast allergy.",
-      "technique": "CT angiogram of the abdomen and pelvis with IV contrast, arterial and delayed phases. Premedication: prednisone 50mg PO at 13h, 7h, and 1h prior + diphenhydramine 50mg IV 1h prior.",
-      "findings": "Infrarenal abdominal aorta: Fusiform aneurysm measuring 5.2 cm in maximal AP diameter (increased from 4.8 cm on 03/2025). Begins 2.5 cm below the lowest renal artery. Length approximately 7 cm. Infrarenal neck 2.0 cm, diameter 24 mm — suitable for EVAR.\\n\\nMural thrombus: Eccentric, up to 1.5 cm thickness along the anterior wall.\\n\\nIliac arteries: Right common iliac 1.6 cm (mildly ectatic). Left common iliac 1.4 cm (normal). No iliac aneurysm.\\n\\nRenal arteries: Patent bilaterally.\\n\\nSMA/celiac: Patent.\\n\\nNo retroperitoneal hematoma or contained leak.",
-      "impression": "1. Infrarenal AAA measuring 5.2 cm — increased from 4.8 cm (6-month interval). Growth rate exceeds expected, concerning for instability.\\n2. Infrarenal neck anatomy suitable for EVAR.\\n3. No evidence of rupture or contained leak.\\n4. Eccentric mural thrombus.\\n5. Mild right common iliac ectasia.",
-      "dictated": "09/22/2025 14:30",
-      "verified": "09/22/2025 16:50"
+      "date": "04/2024",
+      "study": "CT Angiogram Abdomen/Pelvis",
+      "findings": "Infrarenal AAA 5.8cm maximum diameter (was 5.2cm 6 months ago). Periaortic stranding and new inflammatory changes. No free rupture. No retroperitoneal hematoma. Bilateral iliac arteries patent.",
+      "impression": "Symptomatic AAA with rapid expansion (6mm in 6 months). Urgent surgical repair indicated."
     }
   ],
   "immunizations": [
@@ -419,7 +269,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — quit 2016; 45 pack-year history"
+      "Former smoker \u2014 quit 2016; 45 pack-year history"
     ],
     [
       "Alcohol",
@@ -443,7 +293,7 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "POLST on file — Full Code; HCP: wife Maria DiMaggio"
+      "POLST on file \u2014 Full Code; HCP: wife Maria DiMaggio"
     ]
   ],
   "meta": {
@@ -512,13 +362,11 @@ window.EMR_DATA = {
       "Abdominal bruits assessment": "Prominent systolic bruit audible over epigastrium, extending toward left flank"
     },
     "ddxTargets": [
-      "Symptomatic Abdominal Aortic Aneurysm (correct diagnosis)",
-      "Lumbar muscle strain/mechanical back pain",
-      "Nephrolithiasis",
-      "Ruptured abdominal aortic aneurysm",
-      "Acute aortic dissection",
-      "Lumbar disc herniation with radiculopathy",
-      "Retroperitoneal hemorrhage"
+      "Symptomatic AAA \u2014 urgent repair indicated (correct)",
+      "Ruptured AAA \u2014 no free blood on CT; hemodynamically stable; but symptomatic AAA is the pre-rupture state",
+      "Renal colic \u2014 lateral flank pain; no pulsatile mass; CT distinguishes",
+      "Acute aortic dissection \u2014 different CT pattern; Type B would show dissection flap; no flap here",
+      "Lumbar radiculopathy \u2014 can cause back pain; but pulsatile mass and CT findings are definitive"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'back pain' and focusing solely on musculoskeletal causes while missing the vascular emergency, especially given patient's known AAA history",
@@ -528,7 +376,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "What key risk factors and historical elements make this case particularly concerning? Given his known AAA and family history, what specific questions will help you differentiate between mechanical back pain and vascular causes?",
       "phase5": "You've identified some important findings on examination. What is the significance of the palpable pulsatile mass combined with his symptoms and risk factors? How does this change your differential diagnosis prioritization?",
-      "finalDebrief": "This case illustrates how AAA can present as back pain, mimicking musculoskeletal conditions. The combination of his known AAA, family history, risk factors, and key exam findings of pulsatile mass with bruit should have elevated vascular causes to the top of your differential. What red flags in the history and physical should prompt urgent vascular imaging in similar cases?"
+      "finalDebrief": "This case illustrates how AAA can present as back pain, mimicking musculoskeletal conditions. The combination of his known AAA, family history, risk factors, and key exam findings of pulsatile mass with bruit should have elevated vascular causes to the top of your differential. What red flags in the history and physical should prompt urgent vascular imaging in similar cases?",
+      "final": "Diagnosis: symptomatic AAA. Key learning: (1) AAA surveillance thresholds: <4cm = annual ultrasound. 4-5.4cm = every 6 months. \u22655.5cm = elective repair (or 5.0cm in women). Symptomatic = repair regardless of size. Rapid expansion (>0.5cm in 6 months or >1cm/year) = early repair. (2) Symptomatic AAA is a pre-rupture emergency: new abdominal/back pain + pulsatile mass + known AAA = symptomatic until proven otherwise. 50% rupture within 24-48 hours without repair. Stable hemodynamics do not exclude impending rupture. (3) Ruptured AAA classic triad: hypotension + pulsatile abdominal mass + back/flank pain. Mortality >80% for free rupture. The 'permissive hypotension' strategy (target SBP 50-80) is used for unstable ruptured AAA to avoid dislodging the retroperitoneal tamponade before the OR. (4) EVAR vs open repair: endovascular repair (EVAR) has lower 30-day mortality but higher reintervention rate. Open repair more durable. Patient anatomy determines eligibility. (5) Risk factors: male sex (6:1), age >65, smoking (strongest modifiable), hypertension, family history. Screening: one-time ultrasound in males 65-75 who have ever smoked."
     }
   }
 };

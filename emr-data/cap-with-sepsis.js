@@ -1,6 +1,3 @@
-// Virtual EMR Case: Community-Acquired Pneumonia with Sepsis
-// Variant: cap-with-sepsis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part B with AARP Supplemental",
     "pcp": "Dr. Elena Vasquez, MD",
-    "pharmacy": "Publix Pharmacy — 1500 N University Dr, Coral Springs, FL",
+    "pharmacy": "Publix Pharmacy \u2014 1500 N University Dr, Coral Springs, FL",
     "language": "English",
     "race": "White",
     "address": "502 Peachtree Rd, Pittsburgh, PA 15202",
@@ -27,120 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "COPD — GOLD Stage II (Moderate)",
-      "icd": "J44.1",
-      "onset": "2015",
+      "problem": "CAP with sepsis \u2014 severe, PORT class IV",
+      "icd": "J18.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "FEV1 58% predicted; on LABA/ICS inhaler; 1 exacerbation requiring hospitalization 2023"
+      "notes": "Robert Williams, 68M \u2014 3 days fever, productive cough, dyspnea. HR 118, BP 96/62, RR 28, T 39.4, SpO2 88% on room air. Sepsis criteria met: suspected infection + \u22652 SIRS criteria + organ dysfunction."
     },
     {
-      "problem": "Coronary Artery Disease — Post-CABG",
-      "icd": "I25.10",
-      "onset": "2017",
+      "problem": "Sepsis \u2014 hemodynamic compromise",
+      "icd": "A41.3",
+      "onset": "2024",
       "status": "Active",
-      "notes": "3-vessel CABG 2017; on aspirin, statin, metoprolol; EF 50% on last echo"
+      "notes": "MAP <65 mmHg despite initial 500mL NS. Lactate 3.8 mmol/L. Meets sepsis-3 criteria. ICU-level care required."
     },
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.9",
-      "onset": "2008",
+      "problem": "Hypoxemic respiratory failure \u2014 HFNC or intubation threshold",
+      "icd": "J96.01",
+      "onset": "2024",
       "status": "Active",
-      "notes": "A1c 7.2%; on metformin and glipizide"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2002",
-      "status": "Active",
-      "notes": "On lisinopril and metoprolol"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "eGFR 52; multifactorial — DM, HTN"
+      "notes": "SpO2 88% on 15L NRB. Consider high-flow nasal cannula (HFNC) as bridge. Intubation if no improvement or deterioration."
     }
   ],
   "medications": [
     {
-      "name": "Fluticasone-Salmeterol (Advair Diskus) 250/50 BID",
-      "sig": "Inhale 1 puff twice daily; rinse mouth after use",
-      "prescriber": "Dr. Vasquez",
-      "start": "06/2016",
-      "refills": 3,
-      "status": "Active"
+      "name": "Ceftriaxone 1g IV q24h + azithromycin 500mg IV q24h",
+      "sig": "IDSA CAP guidelines: beta-lactam (ceftriaxone) + macrolide (azithromycin) for hospitalized CAP. Covers typical (S. pneumoniae) and atypical organisms (Legionella, Mycoplasma). Levofloxacin 750mg daily is monotherapy alternative.",
+      "prescriber": "Pulmonology/Infectious Disease",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV"
     },
     {
-      "name": "Tiotropium (Spiriva HandiHaler) 18mcg daily",
-      "sig": "Inhale 1 capsule via HandiHaler daily",
-      "prescriber": "Dr. Vasquez",
-      "start": "06/2016",
-      "refills": 3,
-      "status": "Active"
+      "name": "IV fluid resuscitation \u2014 30mL/kg crystalloid initial bolus",
+      "sig": "Surviving Sepsis Campaign: 30mL/kg (total 2.1L for 70kg patient) within first 3 hours. Reassess volume status after bolus \u2014 avoid excess fluid causing pulmonary edema in bilateral CAP.",
+      "prescriber": "Medicine/Critical Care",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 2L given"
     },
     {
-      "name": "Albuterol HFA 90mcg PRN",
-      "sig": "Inhale 2 puffs every 4-6 hours as needed for shortness of breath",
-      "prescriber": "Dr. Vasquez",
-      "start": "01/2016",
-      "refills": 3,
-      "status": "PRN"
-    },
-    {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Vasquez",
-      "start": "06/2017",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Vasquez",
-      "start": "03/2008",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Vasquez",
-      "start": "06/2017",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 40mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Vasquez",
-      "start": "06/2017",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Vasquez",
-      "start": "04/2009",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Glipizide 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily before meals",
-      "prescriber": "Dr. Vasquez",
-      "start": "01/2020",
-      "refills": 3,
-      "status": "Active"
+      "name": "Norepinephrine \u2014 if MAP <65 after 2L fluid",
+      "sig": "First-line vasopressor for septic shock (Surviving Sepsis Campaign). Target MAP \u226565 mmHg.",
+      "prescriber": "Medicine/Critical Care",
+      "start": "2024",
+      "refills": 0,
+      "status": "Initiating \u2014 MAP 62 post-fluids"
     }
   ],
   "allergies": [
     {
       "allergen": "Sulfa drugs (Trimethoprim-Sulfamethoxazole)",
       "type": "Drug",
-      "reaction": "Rash — maculopapular, diffuse",
+      "reaction": "Rash \u2014 maculopapular, diffuse",
       "severity": "Moderate",
       "verified": "Yes"
     }
@@ -151,7 +86,7 @@ window.EMR_DATA = {
       "bp": "128/74",
       "hr": 68,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "94%",
       "wt": "178 lbs",
       "ht": "5'11\"",
@@ -163,7 +98,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 70,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "93%",
       "wt": "180 lbs",
       "ht": "5'11\"",
@@ -178,121 +113,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Elena Vasquez, MD",
       "cc": "Follow-up: COPD, DM2, CKD, post-CABG",
-      "hpi": "74-year-old male with COPD GOLD II, post-CABG, DM2, CKD 3a for follow-up. COPD stable — using inhalers as directed. No exacerbations since hospitalization 2023. A1c 7.2% — stable. Kidney function stable. Quit smoking 2015. Reports mild dyspnea on exertion with stair climbing. No chest pain, palpitations, or edema.",
+      "hpi": "74-year-old male with COPD GOLD II, post-CABG, DM2, CKD 3a for follow-up. COPD stable \u2014 using inhalers as directed. No exacerbations since hospitalization 2023. A1c 7.2% \u2014 stable. Kidney function stable. Quit smoking 2015. Reports mild dyspnea on exertion with stair climbing. No chest pain, palpitations, or edema.",
       "exam": "General: Thin, NAD. Lungs: Diminished breath sounds bilateral bases, mild expiratory wheezing. CV: RRR, median sternotomy scar well-healed. Abdomen: Soft, NT. Extremities: No edema.",
-      "assessment": "1. COPD — stable on current regimen\n2. CAD post-CABG — stable\n3. T2DM — at goal\n4. CKD 3a — stable\n5. HTN — controlled",
-      "plan": "1. Continue all medications\n2. Pulmonary rehab — patient declined again\n3. Flu and COVID vaccines given today\n4. Annual PFTs scheduled\n5. RTC 6 months or PRN for exacerbation"
+      "assessment": "1. COPD \u2014 stable on current regimen\n2. CAD post-CABG \u2014 stable\n3. T2DM \u2014 at goal\n4. CKD 3a \u2014 stable\n5. HTN \u2014 controlled",
+      "plan": "1. Continue all medications\n2. Pulmonary rehab \u2014 patient declined again\n3. Flu and COVID vaccines given today\n4. Annual PFTs scheduled\n5. RTC 6 months or PRN for exacerbation"
     }
   ],
   "labs": [
     {
-      "date": "11/15/2024",
-      "time": "09:00",
-      "orderedBy": "Dr. Elena Vasquez, MD",
-      "collected": "11/15/2024 08:20",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-111515",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "CAP/Sepsis Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "39.4",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "210",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Lactate",
+          "value": "3.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "118",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "24",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "52",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            }
-          ]
+          "test": "WBC",
+          "value": "24.6",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "7.2",
-              "unit": "%",
-              "range": "<5.7 normal",
-              "flag": "H"
-            }
-          ]
+          "test": "Procalcitonin",
+          "value": "18.4",
+          "unit": "ng/mL",
+          "ref": "<0.25 (bacterial infection likely)",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures x2",
+          "value": "Pending \u2014 drawn before antibiotics",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Urine Legionella antigen",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "05/08/2024",
-      "study": "CHEST XR PA AND LATERAL",
-      "accession": "IMG-2024-05081",
-      "status": "FINAL",
-      "orderedBy": "Dr. Elena Vasquez, MD",
-      "readBy": "Dr. Lisa Moreno, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "74M COPD, post-CABG — annual screening.",
-      "technique": "PA and lateral views, upright.",
-      "findings": "Heart: Enlarged cardiac silhouette (cardiothoracic ratio 0.56). Median sternotomy wires intact.\\n\\nLungs: Hyperinflated. Bilateral apical blebs. No consolidation, effusion, or pneumothorax. Flattened diaphragms.\\n\\nMediastinum: Aortic calcifications.",
-      "impression": "1. COPD — hyperinflation with bilateral apical blebs.\\n2. Cardiomegaly — stable.\\n3. No acute process.",
-      "dictated": "05/08/2024 13:20",
-      "verified": "05/08/2024 15:00"
+      "date": "04/2024",
+      "study": "Chest X-Ray",
+      "findings": "Dense right lower lobe consolidation with air bronchograms. No effusion. No pneumothorax. Left lung clear.",
+      "impression": "Right lower lobe pneumonia consistent with CAP. No empyema."
     }
   ],
   "immunizations": [
@@ -311,7 +186,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "04/2023",
       "site": "Left deltoid IM",
       "lot": "PV23-112",
@@ -328,7 +203,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -349,7 +224,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — 40 pack-years; quit 2015"
+      "Former smoker \u2014 40 pack-years; quit 2015"
     ],
     [
       "Alcohol",
@@ -373,12 +248,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Living will on file; HCP: wife Diane Higgins; DNR/DNI discussed but NOT elected — Full code"
+      "Living will on file; HCP: wife Diane Higgins; DNR/DNI discussed but NOT elected \u2014 Full code"
     ]
   ],
   "meta": {
     "caseId": "cap-with-sepsis",
-    "diagnosis": "Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae, CURB-65 Score 3)",
+    "diagnosis": "Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae)",
     "acuity": 2,
     "presentation": "Fever/Sepsis",
     "category": "infectious"
@@ -430,7 +305,7 @@ window.EMR_DATA = {
     ],
     "examFindings": {
       "General appearance and mental status": "Ill-appearing elderly male in mild respiratory distress, alert but appears fatigued and mildly confused about date",
-      "Vital signs including orthostatics": "BP 102/58 (orthostatic drop), HR 98, RR 24, Temp 101.8°F, SpO2 88% on room air",
+      "Vital signs including orthostatics": "BP 102/58 (orthostatic drop), HR 98, RR 24, Temp 101.8\u00b0F, SpO2 88% on room air",
       "Pulmonary examination including percussion": "Dullness to percussion over right lower lobe, decreased breath sounds and bronchial breathing right base, inspiratory crackles right lower lobe",
       "Cardiac examination": "Tachycardic regular rhythm, no murmurs, rubs, or gallops, normal S1/S2",
       "Lymph node examination": "No palpable lymphadenopathy",
@@ -440,13 +315,12 @@ window.EMR_DATA = {
       "Skin examination": "Warm and dry, no rashes or lesions, mild pallor"
     },
     "ddxTargets": [
-      "Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae, CURB-65 Score 3) (correct diagnosis)",
-      "COPD Exacerbation with bacterial superinfection",
-      "Healthcare-associated pneumonia",
-      "Pulmonary embolism with pneumonia",
-      "Acute myocardial infarction",
-      "Sepsis from urinary tract infection",
-      "Congestive heart failure exacerbation"
+      "CAP with sepsis \u2014 S. pneumoniae (correct)",
+      "Aspiration pneumonia \u2014 alcoholism, dysphagia, poor dentition; dependent segments; different flora coverage",
+      "Legionella pneumonia \u2014 Legionella antigen negative; atypical features (GI, neurologic); no response to beta-lactam alone",
+      "Hospital-acquired pneumonia \u2014 onset >48h after admission; broader Gram-negative coverage needed",
+      "PE with infarction \u2014 pleuritic pain; wedge-shaped opacity; CTA distinguishes",
+      "ARDS \u2014 bilateral infiltrates; different mechanism; CAP can trigger ARDS"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on COPD exacerbation given patient's history, missing signs of pneumonia and sepsis",
@@ -456,7 +330,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given this patient's presentation, what specific historical elements would help you distinguish between a COPD exacerbation and pneumonia? How might his multiple comorbidities affect your assessment?",
       "phase5": "Now that you've gathered your history and exam findings, let's think about the clinical picture. What combination of findings suggests this goes beyond a simple COPD exacerbation? Consider his vital signs, mental status, and physical findings - what scoring system might help you assess severity?",
-      "finalDebrief": "This case demonstrates how pneumonia in elderly patients with COPD can present with sepsis. The CURB-65 score of 3 indicated high risk requiring hospitalization. Notice how the initial presentation could easily be mistaken for COPD exacerbation, but the fever, purulent sputum, focal exam findings, and septic physiology pointed to bacterial pneumonia. What would have happened if we anchored on COPD alone?"
+      "finalDebrief": "This case demonstrates how pneumonia in elderly patients with COPD can present with sepsis. The CURB-65 score of 3 indicated high risk requiring hospitalization. Notice how the initial presentation could easily be mistaken for COPD exacerbation, but the fever, purulent sputum, focal exam findings, and septic physiology pointed to bacterial pneumonia. What would have happened if we anchored on COPD alone?",
+      "final": "Diagnosis: CAP with sepsis. Key learning: (1) CAP severity scoring: PORT/PSI (pneumonia severity index) \u2014 5 classes; Class IV-V = hospitalize, consider ICU. CURB-65: confusion + urea >7 + RR >30 + BP <90/60 + age \u226565; score \u22653 = severe. This patient: CURB-65 = 4 (age, BP, RR, O2). (2) Empiric antibiotic selection: outpatient (healthy): amoxicillin or doxycycline. Hospitalized non-severe: beta-lactam + macrolide (or respiratory fluoroquinolone). Hospitalized severe/ICU: beta-lactam + macrolide (or azithromycin) \u2014 dual coverage for atypical organisms reduces mortality. (3) Sepsis bundles (1-hour): draw blood cultures, give antibiotics, measure lactate, give 30mL/kg crystalloid if lactate >4 or hypotensive, vasopressor if MAP <65 after fluids. Time to antibiotics is the most impactful metric. (4) S. pneumoniae remains the most common bacterial cause of CAP. Gram-positive diplococcus on Gram stain. Pneumococcal urinary antigen test is rapid and specific. (5) Procalcitonin: elevated in bacterial infection, suppressed in viral pneumonia. Useful for antibiotic stewardship \u2014 guides discontinuation when normalizing. Not useful for initial antibiotic decision in severe CAP."
     }
   }
 };

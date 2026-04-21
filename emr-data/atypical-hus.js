@@ -1,6 +1,3 @@
-// Virtual EMR Case: Atypical Hemolytic Uremic Syndrome
-// Variant: atypical-hus | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Jennifer Morales, MD",
-    "pharmacy": "Walgreens — 4700 Coconut Creek Pkwy, Coconut Creek, FL",
+    "pharmacy": "Walgreens \u2014 4700 Coconut Creek Pkwy, Coconut Creek, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
     "address": "5395 Larkspur Ln, Milwaukee, WI 53209",
@@ -26,97 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Systemic Lupus Erythematosus",
-      "icd": "M32.10",
-      "onset": "2018",
+      "problem": "Atypical HUS \u2014 complement-mediated thrombotic microangiopathy",
+      "icd": "D59.3",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Diagnosed by rheumatology; ANA+, anti-dsDNA+; predominantly articular and cutaneous manifestations; on hydroxychloroquine and low-dose prednisone"
+      "notes": "Emma Larson, 28F \u2014 microangiopathic hemolytic anemia (Hgb 7.2, schistocytes on smear), thrombocytopenia (platelets 42), AKI (Cr 4.8), no Shiga toxin. Complement activation pathway dysregulation."
     },
     {
-      "problem": "Lupus Nephritis, Class III",
-      "icd": "M32.14",
-      "onset": "2021",
+      "problem": "AKI \u2014 severe, may require dialysis",
+      "icd": "N17.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Renal biopsy 2021; treated with mycophenolate; stable proteinuria"
+      "notes": "Creatinine 4.8, oliguria <0.3mL/kg/hr. Renal involvement from complement-mediated thrombotic microangiopathy of renal microvasculature."
     },
     {
-      "problem": "Antiphospholipid Antibodies — Positive",
-      "icd": "D68.61",
-      "onset": "2019",
+      "problem": "Microangiopathic hemolytic anemia \u2014 active hemolysis",
+      "icd": "D59.3",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Positive lupus anticoagulant and anticardiolipin IgG; no thrombotic events to date; on low-dose aspirin"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "Likely secondary to lupus nephritis"
-    },
-    {
-      "problem": "Vitamin D Deficiency",
-      "icd": "E55.9",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "On supplementation"
+      "notes": "Hgb 7.2, LDH 2800, haptoglobin undetectable, schistocytes 4% on peripheral smear. Mechanical hemolysis from fibrin strand cutting RBCs in thrombosed microvasculature."
     }
   ],
   "medications": [
     {
-      "name": "Hydroxychloroquine 200mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with food",
-      "prescriber": "Dr. Santiago (Rheumatology)",
-      "start": "06/2018",
-      "refills": 3,
-      "status": "Active"
+      "name": "Eculizumab (Soliris) \u2014 anti-C5 complement inhibitor",
+      "sig": "First-line for aHUS. Blocks terminal complement activation (C5a + C5b-9 MAC). Start as soon as diagnosis suspected \u2014 do not wait for genetic confirmation. Life-changing treatment.",
+      "prescriber": "Hematology/Nephrology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Urgent \u2014 initiate"
     },
     {
-      "name": "Mycophenolate Mofetil 1000mg BID",
-      "sig": "Take 2 capsules by mouth twice daily on empty stomach",
-      "prescriber": "Dr. Santiago (Rheumatology)",
-      "start": "09/2021",
-      "refills": 2,
-      "status": "Active"
+      "name": "Meningococcal vaccine + prophylactic penicillin",
+      "sig": "Eculizumab blocks C5 \u2192 impairs killing of Neisseria meningitidis. Vaccinate against meningococcal disease (MenACWY + MenB) before or at start of eculizumab. Prophylactic penicillin V 250mg BID.",
+      "prescriber": "Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Initiated \u2014 pre-eculizumab"
     },
     {
-      "name": "Prednisone 5mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning with food",
-      "prescriber": "Dr. Santiago (Rheumatology)",
-      "start": "01/2022",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Losartan 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Morales",
-      "start": "11/2021",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Santiago (Rheumatology)",
-      "start": "04/2019",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Cholecalciferol 2000 IU daily",
-      "sig": "Take 1 capsule by mouth daily with food",
-      "prescriber": "Dr. Morales",
-      "start": "03/2020",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Calcium Carbonate 600mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Morales",
-      "start": "01/2022",
-      "refills": 5,
-      "status": "Active"
+      "name": "Dialysis \u2014 for refractory AKI",
+      "sig": "Indications: uremia, hyperkalemia, acidosis, volume overload. Dialysis supports but does not treat aHUS \u2014 eculizumab is the disease treatment.",
+      "prescriber": "Nephrology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Likely needed"
     }
   ],
   "allergies": [
@@ -134,7 +85,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 98,
       "rr": 18,
-      "temp": "99.2°F",
+      "temp": "99.2\u00b0F",
       "spo2": "97%",
       "wt": "142 lbs",
       "ht": "5'5\"",
@@ -146,7 +97,7 @@ window.EMR_DATA = {
       "bp": "132/82",
       "hr": 76,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "140 lbs",
       "ht": "5'5\"",
@@ -158,7 +109,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
@@ -175,7 +126,7 @@ window.EMR_DATA = {
       "cc": "Fatigue, dark urine, decreased urine output x 3 days",
       "hpi": "34-year-old female with SLE and lupus nephritis presents with 3 days of worsening fatigue, cola-colored urine, and decreased urine output. Reports mild headache and nausea without vomiting. Noted new bruising on arms and legs without trauma. Had URI symptoms 1 week ago that self-resolved. Currently on mycophenolate, hydroxychloroquine, and prednisone. No recent medication changes or non-compliance. Denies fever, joint pain, or rash flare. BP elevated at 148/92.",
       "exam": "General: Fatigued-appearing, pale. HEENT: Pale conjunctivae, scleral icterus noted. Neck: No LAD. CV: Tachycardic, RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, mild diffuse tenderness, no rebound/guarding. Extremities: Scattered ecchymoses bilateral upper and lower extremities; trace pedal edema. Skin: No malar rash, no discoid lesions. Neuro: A&O x3.",
-      "assessment": "1. Acute anemia with jaundice and thrombocytopenia — concern for thrombotic microangiopathy (TTP/HUS) vs lupus flare with MAHA\n2. AKI on CKD — elevated creatinine, dark urine\n3. Hypertension — acutely worsened\n4. Requires emergent lab workup and likely transfer to ED",
+      "assessment": "1. Acute anemia with jaundice and thrombocytopenia \u2014 concern for thrombotic microangiopathy (TTP/HUS) vs lupus flare with MAHA\n2. AKI on CKD \u2014 elevated creatinine, dark urine\n3. Hypertension \u2014 acutely worsened\n4. Requires emergent lab workup and likely transfer to ED",
       "plan": "1. STAT CBC, BMP, LDH, haptoglobin, peripheral smear, reticulocyte count, coagulation studies, urinalysis\n2. Transfer to ED for admission if TMA confirmed\n3. Hold mycophenolate pending workup\n4. IV fluids cautiously (concern for fluid overload with AKI)\n5. Notify rheumatology and nephrology"
     },
     {
@@ -184,163 +135,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Jennifer Morales, MD",
       "cc": "Follow-up: SLE, lupus nephritis, HTN",
-      "hpi": "34-year-old female for chronic disease follow-up. SLE clinically quiescent — no arthritis, rash, or oral ulcers. Nephritis stable per most recent labs (Cr 1.1, protein/creatinine ratio 0.6). Compliant with all medications. Tolerating mycophenolate without GI side effects. BP improved. Annual ophthalmology screening for hydroxychloroquine current.",
+      "hpi": "34-year-old female for chronic disease follow-up. SLE clinically quiescent \u2014 no arthritis, rash, or oral ulcers. Nephritis stable per most recent labs (Cr 1.1, protein/creatinine ratio 0.6). Compliant with all medications. Tolerating mycophenolate without GI side effects. BP improved. Annual ophthalmology screening for hydroxychloroquine current.",
       "exam": "General: NAD, well-appearing. HEENT: No malar rash, no oral ulcers. Neck: No LAD. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT. MSK: No joint swelling or tenderness. Extremities: No edema. Skin: No active rash.",
-      "assessment": "1. SLE — clinically stable, low disease activity\n2. Lupus nephritis — stable on mycophenolate\n3. HTN — improved on losartan\n4. APL antibodies — on ASA, no thrombotic events",
+      "assessment": "1. SLE \u2014 clinically stable, low disease activity\n2. Lupus nephritis \u2014 stable on mycophenolate\n3. HTN \u2014 improved on losartan\n4. APL antibodies \u2014 on ASA, no thrombotic events",
       "plan": "1. Continue current regimen\n2. Labs: CBC, BMP, C3/C4, anti-dsDNA, urine protein/creatinine\n3. Rheumatology follow-up in 3 months\n4. Nephrology annual visit\n5. RTC 3-4 months"
     }
   ],
   "labs": [
     {
-      "date": "10/15/2024",
-      "time": "09:20",
-      "orderedBy": "Dr. Jennifer Morales, MD",
-      "collected": "10/15/2024 08:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-101520",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA), Urine",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "TMA/aHUS Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "5.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "37.0",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "198",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "7.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "86",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            }
-          ]
+          "test": "Platelets",
+          "value": "42",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": "L"
         },
         {
-          "name": "COMPLEMENT AND AUTOIMMUNE MARKERS",
-          "results": [
-            {
-              "test": "C3",
-              "value": "82",
-              "unit": "mg/dL",
-              "range": "90-180",
-              "flag": "L"
-            },
-            {
-              "test": "C4",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Anti-dsDNA Ab",
-              "value": "45",
-              "unit": "IU/mL",
-              "range": "<30",
-              "flag": "H"
-            },
-            {
-              "test": "ESR",
-              "value": "28",
-              "unit": "mm/hr",
-              "range": "0-20",
-              "flag": "H"
-            }
-          ]
+          "test": "Creatinine",
+          "value": "4.8",
+          "unit": "mg/dL",
+          "ref": "0.5-1.1",
+          "flag": "H"
         },
         {
-          "name": "URINE PROTEIN/CREATININE RATIO",
-          "results": [
-            {
-              "test": "Urine Protein/Creatinine",
-              "value": "0.6",
-              "unit": "mg/mg",
-              "range": "<0.2",
-              "flag": "H"
-            }
-          ]
+          "test": "Shiga toxin (stool)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative (rules out typical HUS)",
+          "flag": ""
+        },
+        {
+          "test": "ADAMTS13 activity",
+          "value": "62%",
+          "unit": "",
+          "ref": ">10% (rules out TTP)",
+          "flag": ""
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "06/20/2024",
-      "study": "RENAL ULTRASOUND",
-      "accession": "IMG-2024-06201",
-      "status": "FINAL",
-      "orderedBy": "Dr. Jennifer Morales, MD",
-      "readBy": "Dr. Lisa Moreno, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "34F lupus nephritis, CKD monitoring.",
-      "technique": "Grayscale and color Doppler ultrasound of both kidneys and bladder.",
-      "findings": "Right kidney: 10.8 cm, normal echogenicity, no hydronephrosis or calculi. Cortical thickness preserved.\\n\\nLeft kidney: 10.5 cm, normal echogenicity, no hydronephrosis or calculi. Cortical thickness preserved.\\n\\nBladder: Normal, no abnormality.\\n\\nRenal Doppler: Normal resistive indices bilaterally (RI 0.62 right, 0.64 left).",
-      "impression": "1. Normal renal ultrasound bilaterally.\\n2. No evidence of obstruction, calculi, or chronic parenchymal changes.",
-      "dictated": "06/20/2024 11:40",
-      "verified": "06/20/2024 14:10"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -357,7 +201,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "06/2022",
       "site": "Left deltoid IM",
       "lot": "PV22-215",
@@ -367,19 +211,19 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2010",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
   "familyHistory": [
-    "Mother: SLE, Sjögren syndrome, alive at 60",
+    "Mother: SLE, Sj\u00f6gren syndrome, alive at 60",
     "Father: HTN, T2DM, alive at 64",
     "Sister: Hypothyroidism (autoimmune), age 30",
     "Maternal aunt: SLE with ESRD, deceased at 55"
@@ -387,7 +231,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Marketing manager — office work"
+      "Marketing manager \u2014 office work"
     ],
     [
       "Marital",
@@ -399,7 +243,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Rare — avoids due to medications"
+      "Rare \u2014 avoids due to medications"
     ],
     [
       "Drugs",
@@ -424,7 +268,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "atypical-hus",
-    "diagnosis": "Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE)",
+    "diagnosis": "Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA)",
     "acuity": 2,
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
@@ -460,7 +304,7 @@ window.EMR_DATA = {
       "history": "I've never had symptoms exactly like this before. My lupus has been pretty well controlled on my current medications, though I did have some kidney involvement a couple years ago.",
       "medications": "Hydroxychloroquine 200mg BID; Mycophenolate Mofetil 1000mg BID; Prednisone 5mg daily; Losartan 50mg daily; Aspirin 81mg daily; Cholecalciferol 2000 IU daily; Calcium Carbonate 600mg BID",
       "allergies": "Trimethoprim-Sulfamethoxazole",
-      "family": "My mother has lupus and Sjögren's syndrome, so autoimmune diseases run in our family. My father has high blood pressure and diabetes.",
+      "family": "My mother has lupus and Sj\u00f6gren's syndrome, so autoimmune diseases run in our family. My father has high blood pressure and diabetes.",
       "social": "I work as a marketing manager, mostly office work. I'm married with no children. I don't smoke, rarely drink alcohol because of my medications, and I don't use any recreational drugs."
     },
     "examManeuvers": [
@@ -488,13 +332,11 @@ window.EMR_DATA = {
       "Assessment for pallor and jaundice": "Notable pallor of conjunctiva and nail beds, mild scleral icterus"
     },
     "ddxTargets": [
-      "Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE) (correct diagnosis)",
-      "Thrombotic Thrombocytopenic Purpura (TTP)",
-      "Lupus Nephritis Flare",
-      "Acute Glomerulonephritis",
-      "Drug-Induced Hemolytic Anemia",
-      "Autoimmune Hemolytic Anemia",
-      "Acute Kidney Injury from Dehydration"
+      "Atypical HUS \u2014 complement-mediated (correct)",
+      "TTP \u2014 ADAMTS13 <10%; microangiopathy + thrombocytopenia but different mechanism; treat with plasma exchange",
+      "Typical (STEC) HUS \u2014 Shiga toxin positive; E. coli O157:H7; bloody diarrhea; supportive care",
+      "DIC \u2014 underlying trigger; low fibrinogen; prolonged PT/PTT; coagulation panel distinguishes",
+      "Malignant hypertension with TMA \u2014 BP severely elevated; different mechanism; BP treatment"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on lupus nephritis flare given her established SLE history, potentially missing the thrombotic microangiopathy component that requires urgent plasma exchange",
@@ -504,7 +346,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient with established SLE presents with a concerning triad of symptoms. What specific laboratory studies would help you differentiate between the various causes of hemolysis and thrombocytopenia in lupus patients? Consider both lupus-related complications and thrombotic microangiopathies.",
       "phase5": "You've identified signs consistent with hemolysis, thrombocytopenia, and kidney injury in a lupus patient. How do you differentiate between a lupus nephritis flare, TTP, and complement-mediated atypical HUS? What urgent interventions might be needed while awaiting confirmatory studies?",
-      "finalDebrief": "This case illustrates how complement-mediated thrombotic microangiopathy can present in SLE patients, requiring recognition of the classic triad plus understanding of complement pathway involvement. How did your differential evolve from considering simple lupus flare to recognizing this hematologic emergency requiring plasma exchange?"
+      "finalDebrief": "This case illustrates how complement-mediated thrombotic microangiopathy can present in SLE patients, requiring recognition of the classic triad plus understanding of complement pathway involvement. How did your differential evolve from considering simple lupus flare to recognizing this hematologic emergency requiring plasma exchange?",
+      "final": "Diagnosis: atypical HUS (complement-mediated TMA). Key learning: (1) TMA triad: microangiopathic hemolytic anemia (MAHA) + thrombocytopenia + organ dysfunction (often renal). The diagnosis is TMA first, then differentiate the cause. (2) TMA differential: TTP = ADAMTS13 <10% \u2192 plasma exchange. Typical HUS = STEC infection (Shiga toxin) \u2192 supportive care (no antibiotics \u2014 lyse bacteria and release more toxin). aHUS = complement dysregulation + negative ADAMTS13/Shiga toxin \u2192 eculizumab. (3) ADAMTS13 rules: <10% = TTP (treat with plasma exchange). >10% = TTP excluded. This patient's ADAMTS13 62% = not TTP. (4) Eculizumab (anti-C5): revolutionized aHUS treatment. Before eculizumab, most patients progressed to ESRD. Now 70-80% achieve complete TMA response. Must vaccinate against N. meningitidis before starting \u2014 terminal complement blockade dramatically increases meningococcal risk. (5) aHUS genetics: 50-60% have identifiable complement gene mutations (CFH, CFI, MCP, C3, CFB). Genetic testing guides prognosis and treatment duration."
     }
   }
 };
