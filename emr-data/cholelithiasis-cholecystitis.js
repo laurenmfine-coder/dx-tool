@@ -27,27 +27,27 @@ window.EMR_DATA = {
       "icd": "K80.42",
       "onset": "2024",
       "status": "Active",
-      "notes": "Patricia Monroe, 56F \u2014 RUQ pain, fever 38.8\u00b0C, Murphy sign positive, jaundice. ALT 180, direct bilirubin 3.2, CBD 12mm dilated on ultrasound \u2014 CBD stone plus cholecystitis."
+      "notes": "Patricia Monroe, 56F \u2014 RUQ pain, fever 38.8\u00b0C, Murphy sign positive, jaundice. ALT 180, direct bilirubin 3.2, CBD 12mm dilated with echogenic material \u2014 CBD stone in addition to cholecystitis."
     },
     {
       "problem": "Choledocholithiasis \u2014 ERCP indicated before cholecystectomy",
       "icd": "K80.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "CBD stone causing biliary obstruction. ERCP with stone extraction required before or during cholecystectomy."
+      "notes": "CBD stone causing biliary obstruction. Risk of ascending cholangitis. ERCP with stone extraction required before or during cholecystectomy."
     },
     {
-      "problem": "Ascending cholangitis screen \u2014 Charcot triad",
+      "problem": "Ascending cholangitis risk \u2014 Charcot triad screen",
       "icd": "K83.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "Fever + jaundice + RUQ pain = Charcot triad. Monitor closely for septic cholangitis (Reynolds pentad)."
+      "notes": "Fever + jaundice + RUQ pain = Charcot triad. Reynolds pentad adds hypotension + AMS = septic cholangitis. Monitor closely for deterioration."
     }
   ],
   "medications": [
     {
       "name": "Piperacillin-tazobactam 3.375g IV q6h",
-      "sig": "Empiric biliary coverage for gram-negative organisms.",
+      "sig": "Empiric biliary coverage. Gram-negative enteric organisms dominant in biliary infection.",
       "prescriber": "Surgery/GI",
       "start": "2024",
       "refills": 0,
@@ -55,15 +55,15 @@ window.EMR_DATA = {
     },
     {
       "name": "ERCP with sphincterotomy and stone extraction \u2014 within 24h",
-      "sig": "CBD stone must be cleared before laparoscopic cholecystectomy. ERCP first, then same-admission cholecystectomy.",
+      "sig": "CBD stone must be cleared before laparoscopic cholecystectomy. ERCP first if cholangitis present. Then laparoscopic cholecystectomy same admission or within 2 weeks.",
       "prescriber": "GI/Surgery",
       "start": "2024",
       "refills": 0,
       "status": "Scheduled"
     },
     {
-      "name": "Laparoscopic cholecystectomy \u2014 after ERCP",
-      "sig": "After CBD cleared, proceed with laparoscopic cholecystectomy same admission.",
+      "name": "Laparoscopic cholecystectomy \u2014 after ERCP clearance",
+      "sig": "After CBD cleared by ERCP, proceed with laparoscopic cholecystectomy. Early same-admission cholecystectomy preferred.",
       "prescriber": "Surgery",
       "start": "2024",
       "refills": 0,
@@ -187,8 +187,8 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "04/2024",
-      "study": "RUQ Ultrasound",
-      "findings": "Gallstones, wall thickening 6mm, pericholecystic fluid, Murphy sign positive. CBD 12mm with echogenic material consistent with stone.",
+      "study": "Right Upper Quadrant Ultrasound",
+      "findings": "Gallstones, gallbladder wall 6mm, pericholecystic fluid, Murphy sign positive. CBD 12mm dilated with echogenic material consistent with stone. No intrahepatic ductal dilation.",
       "impression": "Acute cholecystitis with CBD stone and biliary obstruction. ERCP indicated."
     }
   ],
@@ -333,9 +333,9 @@ window.EMR_DATA = {
     },
     "ddxTargets": [
       "Acute cholecystitis with choledocholithiasis (correct)",
-      "Cholecystitis without CBD stone \u2014 bilirubin/ALP pattern + CBD dilation distinguishes",
-      "Ascending cholangitis \u2014 Charcot triad present; treat same; ERCP emergent if septic",
-      "Gallstone pancreatitis \u2014 lipase normal here; ALT >150 suggests gallstone trigger"
+      "Cholecystitis without CBD stone \u2014 ALT/bilirubin pattern + CBD dilation distinguishes",
+      "Ascending cholangitis (Charcot triad) \u2014 fever + jaundice + RUQ pain present; same initial treatment",
+      "Gallstone pancreatitis \u2014 lipase normal here; ALT >150 would suggest gallstone trigger"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known gallstones and missing the CBD stone component and developing cholangitis, or focusing only on cholecystitis without recognizing biliary obstruction",
@@ -346,7 +346,7 @@ window.EMR_DATA = {
       "phase2": "Before you interview the patient, consider what additional information would help you differentiate between uncomplicated cholecystitis and more serious biliary complications. What specific questions about the character and evolution of her symptoms might be most revealing given her known gallstone history?",
       "phase5": "Now that you've completed your history and physical, let's think through what you've found. You have a patient with known gallstones who presents with Charcot's triad. How does this change your assessment of urgency, and what does the presence of jaundice tell you about the location of the problem?",
       "finalDebrief": "This case illustrates the progression from asymptomatic cholelithiasis to acute cholecystitis with choledocholithiasis. Notice how the patient's sickle cell trait predisposed her to pigmented stones, and her decision to defer elective surgery led to this emergency presentation. The presence of Charcot's triad indicated ascending cholangitis requiring urgent decompression. What clues in the history and physical examination helped distinguish this from uncomplicated cholecystitis?",
-      "final": "Diagnosis: acute cholecystitis with choledocholithiasis. Key learning: (1) CBD stone detection: elevated direct bilirubin + ALP/GGT + dilated CBD on ultrasound. ALT >150 in cholecystitis strongly suggests gallstone cause. CBD >8mm warrants MRCP or ERCP. (2) Management sequence: confirm CBD stone \u2192 ERCP first \u2192 then laparoscopic cholecystectomy (same admission preferred). Cholecystectomy without clearing CBD = retained CBD stone. (3) Ascending cholangitis: Charcot triad = fever + RUQ pain + jaundice. Reynolds pentad adds hypotension and altered consciousness = septic cholangitis = emergent ERCP within hours. (4) ERCP complications: post-ERCP pancreatitis most common (2-3%). Success rate >90% for CBD stone extraction. (5) Gallstone pancreatitis rule: ALT >150 in acute pancreatitis = gallstone etiology (95% specific). ERCP only if concurrent cholangitis \u2014 not for uncomplicated gallstone pancreatitis."
+      "final": "Diagnosis: acute cholecystitis with choledocholithiasis. Key learning: (1) When to suspect CBD stone: elevated direct bilirubin + elevated ALP/GGT + dilated CBD on ultrasound. ALT >150 in acute cholecystitis strongly suggests gallstone etiology. CBD >8mm (or >6mm without cholecystectomy) warrants MRCP or ERCP. (2) Management sequence: CBD stone confirmed \u2192 ERCP first \u2192 then laparoscopic cholecystectomy same admission if feasible. Performing cholecystectomy first without clearing the CBD = retained CBD stone = ongoing obstruction and cholangitis risk. (3) Ascending cholangitis: Charcot triad = fever + RUQ pain + jaundice. Reynolds pentad adds hypotension and AMS = septic cholangitis = emergent ERCP. (4) ERCP success >90% for CBD stone extraction. Complications: post-ERCP pancreatitis (2-3%), bleeding, perforation. (5) Gallstone pancreatitis: ERCP indicated within 24h only if concurrent cholangitis \u2014 NOT for uncomplicated gallstone pancreatitis (wait for inflammation to settle)."
     }
   }
 };

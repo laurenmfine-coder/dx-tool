@@ -24,47 +24,47 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Complete (third-degree) AV block \u2014 young adult",
+      "problem": "Complete (third-degree) AV block \u2014 symptomatic, young adult",
       "icd": "I44.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "Jennifer Kim, 35F \u2014 syncope while jogging. ECG: AV dissociation, ventricular rate 38, wide QRS escape. Young patient \u2014 reversible causes mandatory workup."
+      "notes": "Jennifer Kim, 35F \u2014 syncope while jogging. ECG: AV dissociation, ventricular rate 38. Young patient with complete heart block \u2014 reversible causes mandatory workup."
     },
     {
-      "problem": "Lyme carditis \u2014 most common reversible cause in young adults",
+      "problem": "Lyme carditis \u2014 most common reversible cause in young patient",
       "icd": "A69.20",
       "onset": "2024",
       "status": "Active",
-      "notes": "Hiked in Connecticut last month, rash 2 weeks ago (erythema migrans). Lyme serology pending. Endemic area + tick exposure + rash = strong suspicion."
+      "notes": "Hiked in Connecticut last month. Erythema migrans rash 2 weeks ago. Lyme serology positive. Lyme carditis is the most common reversible cause of complete AV block in young adults in endemic areas."
     },
     {
-      "problem": "Hemodynamic instability \u2014 transcutaneous pacing bridge",
+      "problem": "Do NOT implant permanent pacemaker \u2014 reversible cause suspected",
       "icd": "I44.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "Rate 38, near-syncope. Transcutaneous pacing while etiology determined. Do NOT implant permanent pacemaker until reversible causes excluded."
+      "notes": "Permanent pacemaker contraindicated until Lyme serology returns and antibiotic trial given. Most Lyme AV block resolves with antibiotics within 1-6 weeks."
     }
   ],
   "medications": [
     {
       "name": "Transcutaneous pacing \u2014 bridge to diagnosis",
-      "sig": "Temporary support at rate 60 bpm. Sedation required (uncomfortable). Confirms capture.",
-      "prescriber": "Cardiology/Emergency",
+      "sig": "Temporary hemodynamic support while etiology determined. Rate 60 bpm. Sedation required.",
+      "prescriber": "Cardiology",
       "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "IV ceftriaxone 2g daily x 14 days \u2014 if Lyme confirmed",
-      "sig": "Hospitalized Lyme carditis with high-degree AV block: IV ceftriaxone then oral doxycycline to complete 21 days. AV block resolves within 1-6 weeks of antibiotics.",
-      "prescriber": "Cardiology/ID",
+      "name": "Ceftriaxone 2g IV daily x 14 days \u2014 Lyme carditis with high-degree block",
+      "sig": "IV ceftriaxone for hospitalized Lyme carditis with high-degree block. Then oral doxycycline to complete 21 days. Most AV block resolves within 1-6 weeks.",
+      "prescriber": "Cardiology/Infectious Disease",
       "start": "2024",
       "refills": 0,
-      "status": "Pending serology"
+      "status": "Initiated after serology confirmed"
     },
     {
-      "name": "HOLD permanent pacemaker \u2014 reversible cause first",
-      "sig": "Lyme carditis AV block is completely reversible. Premature PPM implantation = unnecessary permanent device. Hold until antibiotic trial complete.",
+      "name": "Hold permanent pacemaker \u2014 Lyme AV block is reversible",
+      "sig": "Do NOT implant PPM until Lyme antibiotic trial complete. Lyme carditis resolves completely. Premature PPM = unnecessary permanent device.",
       "prescriber": "Cardiology",
       "start": "2024",
       "refills": 0,
@@ -174,8 +174,8 @@ window.EMR_DATA = {
           "flag": "H"
         },
         {
-          "test": "Lyme Western blot",
-          "value": "Positive \u2014 IgM bands (23kDa, 39kDa, 41kDa)",
+          "test": "Lyme Western blot (confirmatory)",
+          "value": "Positive \u2014 IgM bands",
           "unit": "",
           "ref": "Negative",
           "flag": "H"
@@ -362,8 +362,7 @@ window.EMR_DATA = {
       "Lyme carditis \u2014 complete heart block (correct)",
       "Degenerative conduction disease \u2014 older patient; no Lyme exposure; PPM indicated",
       "Sarcoid heart disease \u2014 bilateral hilar adenopathy; ACE level; cardiac MRI",
-      "Myocarditis \u2014 troponin elevated here (Lyme myocarditis component)",
-      "Medication toxicity \u2014 digoxin, beta-blockers, CCBs; review medication list"
+      "Myocarditis from other cause \u2014 troponin elevated; cardiac MRI; viral serology"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the obvious bradycardia and missing the underlying complete heart block, or focusing solely on aortic stenosis without recognizing the conduction disease component requiring urgent intervention",
@@ -374,7 +373,7 @@ window.EMR_DATA = {
       "phase2": "Good start on your differential. I see you're thinking about cardiac causes for her presentation. Given her age, known cardiac history, and the combination of symptoms, what specific aspects of the cardiac conduction system might you want to explore? How might her severe aortic stenosis interact with potential rhythm disorders?",
       "phase5": "Excellent work gathering the history and physical findings. You've identified bradycardia, signs of heart failure, and severe aortic stenosis. Now, looking at that heart rate of 34 with her symptoms - what does this constellation tell you about her conduction system? How does this change your management priorities?",
       "finalDebrief": "This case illustrates the importance of recognizing complete heart block in elderly patients with structural heart disease. Notice how the combination of severe aortic stenosis with degenerative conduction disease created a perfect storm - the stenosis limited cardiac output while the heart block prevented compensatory tachycardia. The family history of both aortic stenosis and pacemaker placement was a crucial clue. This patient needs urgent pacemaker placement before any consideration of valve intervention.",
-      "final": "Diagnosis: Lyme carditis with complete heart block. Key learning: (1) Lyme carditis is completely reversible with antibiotics \u2014 the critical point. In complete heart block in patient <50 from endemic area: always ask about Lyme exposure, tick bite, erythema migrans rash. (2) Two-tier Lyme testing: ELISA first \u2192 if positive, Western blot confirmation. IgM = early. IgG = later/persistent. Do not diagnose on ELISA alone. (3) Treatment prevents PPM: antibiotics resolve AV block within 1-6 weeks in most cases. High-degree block = IV ceftriaxone inpatient. Lower-degree = oral doxycycline outpatient with monitoring. (4) Other reversible causes of complete heart block: medications (digoxin, beta-blockers, CCBs), hyperkalemia, myocarditis, sarcoidosis, Chagas disease, hypothyroidism. Always exclude before PPM. (5) PPM indication: complete heart block NOT from reversible cause, or reversible cause not resolving after appropriate treatment. For Lyme: if AV block persists >3-4 weeks of antibiotics, reassess for PPM."
+      "final": "Diagnosis: Lyme carditis with complete heart block. Key learning: (1) Lyme carditis mimics degenerative complete heart block but is COMPLETELY REVERSIBLE with antibiotics \u2014 the single most important distinction. Always consider Lyme in complete heart block in patients <50 from endemic areas (northeastern US, upper Midwest, Europe) during tick season. (2) Lyme two-tier testing: ELISA first \u2192 if positive, Western blot. IgM (early). A positive ELISA alone is not diagnostic \u2014 Western blot must confirm. (3) Treatment prevents PPM: high-degree block (3rd degree or PR >300ms) = IV ceftriaxone inpatient. Lower-degree block = oral doxycycline outpatient with telemetry monitoring. Most resolve within 1-6 weeks. (4) Other reversible causes of complete heart block: medications (digoxin, beta-blockers, CCBs), hyperkalemia, viral myocarditis, sarcoidosis, Chagas disease, hypothyroidism. Always exclude before PPM. (5) If AV block persists beyond 3-4 weeks of antibiotics \u2192 reassess for permanent pacemaker."
     }
   }
 };

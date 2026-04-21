@@ -447,43 +447,51 @@ window.EMR_DATA = {
       "icd": "J44.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "Frank Morrison, 68M \u2014 GOLD stage III COPD, 60-pack-year smoking. Acute dyspnea, pursed-lip breathing, accessory muscle use, SpO2 84%, pH 7.28, pCO2 68mmHg. Type 2 respiratory failure."
+      "notes": "Frank Morrison, 68M \u2014 GOLD stage III COPD, 60-pack-year history. Acute dyspnea, pursed-lip breathing, accessory muscle use, SpO2 84% on room air, pH 7.28, pCO2 72. Non-invasive ventilation indicated."
     },
     {
-      "problem": "Hypercapnia \u2014 BiPAP/NIV indicated",
+      "problem": "Hypercapnia with acidosis \u2014 BiPAP indication",
+      "icd": "J96.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "pH 7.28 with elevated pCO2 72 = acute hypercapnic respiratory failure. NIV (BiPAP) reduces intubation rate, ICU stay, and mortality. First-line before intubation."
+    },
+    {
+      "problem": "Infection trigger \u2014 sputum purulence, fever",
       "icd": "J44.1",
       "onset": "2024",
       "status": "Active",
-      "notes": "pH 7.28, pCO2 68. NIV (BiPAP) is indicated for acute COPD with pH <7.35 and pCO2 >45. Reduces intubation rate, ICU admission, and mortality."
-    },
-    {
-      "problem": "Infection precipitant \u2014 antibiotic coverage",
-      "icd": "J44.1",
-      "onset": "2024",
-      "status": "Active",
-      "notes": "Purulent sputum, fever 38.2\u00b0C. Bacterial infection is the most common precipitant of AECOPD. Azithromycin + amoxicillin-clavulanate coverage."
+      "notes": "Yellow-green sputum, low-grade fever 38.1\u00b0C. Bacterial exacerbation most likely. Antibiotic therapy indicated for purulent sputum + increased dyspnea."
     }
   ],
   "medications": [
     {
-      "name": "BiPAP (IPAP 14/EPAP 6) \u2014 non-invasive ventilation",
-      "sig": "NIV first-line for AECOPD with pH <7.35 and pCO2 >45. Reduces intubation by 50%, ICU admission, and mortality. Target pH >7.35 within 1-2 hours.",
-      "prescriber": "Pulmonology/Critical Care",
+      "name": "BiPAP (IPAP 12-14, EPAP 4-6) \u2014 immediate",
+      "sig": "NIV is first-line for hypercapnic COPD exacerbation (pH <7.35 with elevated pCO2). Target: pH improvement within 1-2 hours. Failure to improve \u2192 intubation.",
+      "prescriber": "Pulmonology/Emergency",
       "start": "2024",
       "refills": 0,
       "status": "IMMEDIATE"
     },
     {
-      "name": "Salbutamol + ipratropium nebulized q20min x 3 then q4h",
-      "sig": "Combined SABA + SAMA bronchodilation. Back-to-back during exacerbation.",
+      "name": "Albuterol + ipratropium nebulized \u2014 back-to-back x3 then q4h",
+      "sig": "Combination bronchodilation via beta-agonist + anticholinergic. Continuous nebulization initially in severe exacerbation.",
       "prescriber": "Pulmonology",
       "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Prednisone 40mg daily x 5 days + azithromycin 500mg daily x 5 days",
-      "sig": "Systemic steroids reduce treatment failure and shorten hospitalization. Antibiotics for AECOPD with purulent sputum or fever (Anthonisen criteria).",
+      "name": "Methylprednisolone 125mg IV then prednisone 40mg x5 days",
+      "sig": "Systemic steroids reduce treatment failure rate in COPD exacerbation. 5 days as effective as longer courses (REDUCE trial).",
+      "prescriber": "Pulmonology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Azithromycin 500mg daily x5 days \u2014 bacterial exacerbation",
+      "sig": "Covers atypical organisms (Mycoplasma, Chlamydophila). For purulent sputum indicating bacterial exacerbation.",
       "prescriber": "Pulmonology",
       "start": "2024",
       "refills": 0,
@@ -493,7 +501,7 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "04/2024",
-      "panel": "AECOPD/Respiratory Failure",
+      "panel": "COPD Exacerbation Assessment",
       "results": [
         {
           "test": "ABG \u2014 pH",
@@ -504,30 +512,30 @@ window.EMR_DATA = {
         },
         {
           "test": "ABG \u2014 pCO2",
-          "value": "68",
+          "value": "72",
           "unit": "mmHg",
           "ref": "35-45",
           "flag": "H"
         },
         {
-          "test": "ABG \u2014 pO2",
-          "value": "52",
-          "unit": "mmHg",
-          "ref": "\u226580",
+          "test": "SpO2",
+          "value": "84",
+          "unit": "% room air",
+          "ref": "\u226595%",
           "flag": "L"
         },
         {
-          "test": "SpO2 on 2L NC",
-          "value": "88",
-          "unit": "%",
-          "ref": "88-92% target in COPD",
-          "flag": ""
+          "test": "PEFR",
+          "value": "35",
+          "unit": "% predicted",
+          "ref": ">50% = mild",
+          "flag": "L"
         },
         {
-          "test": "WBC",
-          "value": "14.6",
-          "unit": "K/\u03bcL",
-          "ref": "4.5-11",
+          "test": "Procalcitonin",
+          "value": "1.2",
+          "unit": "ng/mL",
+          "ref": "<0.25 = bacterial likely",
           "flag": "H"
         }
       ]
@@ -537,20 +545,20 @@ window.EMR_DATA = {
     {
       "date": "04/2024",
       "study": "Chest X-Ray",
-      "findings": "Hyperinflation, flattened diaphragms, increased AP diameter \u2014 chronic COPD changes. Right lower lobe infiltrate. No pneumothorax. No pleural effusion.",
-      "impression": "Chronic COPD with acute RLL infiltrate \u2014 AECOPD with infectious precipitant."
+      "findings": "Hyperinflation, flattened diaphragms. No new consolidation. No pneumothorax. No effusion.",
+      "impression": "Hyperinflation consistent with COPD. No pneumonia. No pneumothorax."
     }
   ],
   "guided": {
     "ddxTargets": [
-      "AECOPD with hypercapnic failure \u2014 NIV indicated (correct)",
-      "Acute severe asthma \u2014 younger; no smoking history; different spirometry; responds better to bronchodilators",
-      "Pneumothorax \u2014 sudden onset; absent breath sounds; CXR confirms; decompress immediately",
-      "Congestive heart failure \u2014 BNP elevated; bilateral infiltrates; orthopnea; different pattern",
-      "PE \u2014 acute pleuritic pain; hypoxia out of proportion; CTA PE"
+      "Acute COPD exacerbation \u2014 hypercapnic respiratory failure (correct)",
+      "Acute severe asthma \u2014 younger patient; no emphysema on CXR; reversible obstruction; different management",
+      "Pneumonia with COPD \u2014 consolidation on CXR; antibiotic choice differs; can coexist",
+      "Pulmonary embolism \u2014 tachycardia; pleuritic pain; normal PEFR; V/Q mismatch",
+      "CHF exacerbation \u2014 bilateral crackles; BNP elevated; different CXR pattern"
     ],
     "coachPrompts": {
-      "final": "Diagnosis: AECOPD with hypercapnic respiratory failure \u2014 NIV indicated. Key learning: (1) NIV indications in AECOPD: pH <7.35 with pCO2 >45 = NIV indicated. NIV reduces intubation rate by 50%, reduces ICU admission, reduces mortality. The most important intervention after bronchodilators. (2) Oxygen target in COPD: 88-92% SpO2 (NOT 95-100%). Excessive oxygen in COPD can worsen hypercapnia via Haldane effect (oxyhemoglobin release of CO2) and loss of hypoxic drive. Titrate O2 carefully \u2014 target SpO2 88-92%. (3) NIV failure criteria \u2192 intubate: pH worsening after 1-2 hours of NIV, cannot protect airway, copious secretions, hemodynamic instability. If NIV fails \u2192 intubate immediately. (4) Steroids in AECOPD: prednisone 40mg x 5 days = equivalent to longer courses (REDUCE trial). Reduces treatment failure and length of stay. (5) Antibiotics in AECOPD: Anthonisen criteria \u2014 purulent sputum + increased dyspnea + increased sputum volume = all three present = antibiotics reduce mortality. One criterion alone = less clear benefit. Coverage: azithromycin or amoxicillin-clavulanate for outpatient/mild; fluoroquinolone for hospitalized."
+      "final": "Diagnosis: acute COPD exacerbation with hypercapnic respiratory failure. Key learning: (1) NIV (BiPAP) indications in COPD exacerbation: pH <7.35 + elevated pCO2 (hypercapnic respiratory failure). NIV reduces intubation rate by 65%, ICU mortality by 50%, hospital stay. First-line before intubation if no contraindications (AMS, inability to protect airway, hemodynamic instability, facial trauma). (2) Oxygen target: 88-92% SpO2 in COPD exacerbation \u2014 higher oxygen suppresses hypoxic drive in chronic CO2 retainers \u2192 worsens hypercapnia. Do NOT target normal SpO2 in COPD. (3) Steroid duration: 5 days as effective as 14 days (REDUCE trial). No benefit to prolonged courses. Oral prednisone 40mg x5 days. (4) Antibiotic indications in COPD exacerbation (Winnipeg criteria): increased dyspnea + increased sputum volume + sputum purulence = all 3 present \u2192 antibiotics. 2 of 3 with purulence \u2192 antibiotics. (5) NIV failure \u2192 intubation: if pH not improving after 1-2 hours of BiPAP, or patient tiring/agitated/deteriorating \u2192 intubate. Intubation in COPD carries risk of auto-PEEP \u2014 use low respiratory rate, low PEEP, allow full exhalation."
     }
   }
 };

@@ -23,51 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Bacterial keratitis \u2014 contact lens-related, Pseudomonas suspected",
+      "problem": "Bacterial keratitis \u2014 contact lens related, Pseudomonas suspected",
       "icd": "H16.009",
       "onset": "2024",
       "status": "Active",
-      "notes": "Jason Park, 24M \u2014 contact lens wearer (extended wear). 2-day severe right eye pain, photophobia, decreased vision, purulent discharge. Slit lamp: central corneal ulcer 3mm, hypopyon (layering white cells in anterior chamber). Emergency ophthalmology."
+      "notes": "Michael Chen, 24M \u2014 extended-wear contact lens user. Acute severe eye pain, photophobia, decreased vision, mucopurulent discharge. Slit lamp: central corneal ulcer 3mm with dense stromal infiltrate and hypopyon."
     },
     {
-      "problem": "Hypopyon \u2014 severe anterior chamber inflammation",
+      "problem": "Hypopyon \u2014 sterile or infectious anterior chamber reaction",
       "icd": "H16.009",
       "onset": "2024",
       "status": "Active",
-      "notes": "Hypopyon (white layering of inflammatory cells in anterior chamber) indicates severe infection with significant anterior chamber reaction. Poor prognostic sign for corneal scar."
+      "notes": "Hypopyon (layering of WBCs in anterior chamber) indicates severe inflammatory response. In keratitis context with ulcer = infectious until proven otherwise. Aggressive topical antibiotic therapy required."
     },
     {
-      "problem": "Contact lens complication \u2014 extended wear highest risk",
+      "problem": "Vision-threatening emergency \u2014 central ulcer location",
       "icd": "H16.009",
       "onset": "2024",
       "status": "Active",
-      "notes": "Extended wear contact lenses (overnight wear) increase risk 10-15x vs daily wear. Pseudomonas aeruginosa is the most common pathogen in contact lens keratitis \u2014 can cause rapidly progressive corneal destruction."
+      "notes": "Central corneal ulcer risks permanent corneal scarring, perforation, and vision loss. Ophthalmology emergency \u2014 same-day evaluation mandatory."
     }
   ],
   "medications": [
     {
-      "name": "Ciprofloxacin 0.3% ophthalmic drops \u2014 q1h initially",
-      "sig": "Fluoroquinolone first-line for bacterial keratitis. Load: q15min x 6 doses first hour, then q30min x 6h, then q1h. Adjust to q4h as clinical improvement.",
+      "name": "Ciprofloxacin 0.3% ophthalmic drops \u2014 q1h initially (day), q2h (night)",
+      "sig": "Fluoroquinolone covers Pseudomonas (most common contact lens pathogen) and gram-positive organisms. Start immediately. Loading: 2 drops q15min x4 doses, then q1h. Pseudomonas can perforate the cornea within 24-48 hours if untreated.",
       "prescriber": "Ophthalmology",
       "start": "2024",
       "refills": 0,
-      "status": "Active \u2014 q1h"
+      "status": "Active \u2014 hourly dosing"
     },
     {
-      "name": "Discontinue contact lenses immediately \u2014 forever this eye",
-      "sig": "Remove all contact lenses immediately. Do not reinsert until fully healed and ophthalmology clears. Extended wear should be permanently discontinued.",
+      "name": "STOP contact lens wear immediately",
+      "sig": "Remove contact lens. Do not reinsert any lens until infection fully resolved and cleared by ophthalmology. Contact lens case and solution also discarded.",
       "prescriber": "Ophthalmology",
       "start": "2024",
       "refills": 0,
-      "status": "Discontinued"
+      "status": "Done"
     },
     {
-      "name": "Corneal scraping for culture \u2014 before starting antibiotics",
-      "sig": "Corneal scraping of ulcer edge for Gram stain and culture. Guides antibiotic therapy. Must be done before antibiotics \u2014 sensitivity drops rapidly after treatment started.",
+      "name": "Corneal scraping for culture and Gram stain \u2014 before antibiotics if possible",
+      "sig": "Scraping of ulcer base with spatula \u2192 plated directly onto blood agar, chocolate agar, and Sabouraud's. Identifies organism and guides antibiotic therapy. If unavailable urgently, start empiric antibiotics and scrape within 24h.",
       "prescriber": "Ophthalmology",
       "start": "2024",
       "refills": 0,
-      "status": "Done \u2014 before antibiotics"
+      "status": "Done \u2014 results pending"
     }
   ],
   "allergies": [
@@ -151,42 +151,42 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "04/2024",
-      "panel": "Bacterial Keratitis",
+      "panel": "Keratitis Assessment",
       "results": [
         {
-          "test": "Slit lamp \u2014 ulcer size",
-          "value": "3mm central corneal ulcer with dense stromal infiltrate",
-          "unit": "",
-          "ref": "No ulcer",
-          "flag": "H"
-        },
-        {
-          "test": "Hypopyon",
-          "value": "Present \u2014 2mm layering",
-          "unit": "",
-          "ref": "Absent",
-          "flag": "H"
-        },
-        {
-          "test": "Visual acuity right",
-          "value": "20/400",
+          "test": "Visual acuity right eye",
+          "value": "20/200",
           "unit": "",
           "ref": "20/20",
           "flag": "H"
         },
         {
-          "test": "Corneal scraping \u2014 Gram stain",
-          "value": "Gram-negative rods \u2014 Pseudomonas suspected",
+          "test": "Slit lamp \u2014 ulcer size",
+          "value": "Central corneal ulcer 3mm, dense stromal infiltrate, hypopyon 1mm",
+          "unit": "",
+          "ref": "Clear cornea",
+          "flag": "H"
+        },
+        {
+          "test": "Corneal scraping Gram stain",
+          "value": "Gram-negative rods (Pseudomonas suspected)",
           "unit": "",
           "ref": "No organisms",
           "flag": "H"
         },
         {
-          "test": "IOP right",
-          "value": "14",
+          "test": "Intraocular pressure",
+          "value": "8",
           "unit": "mmHg",
-          "ref": "10-21",
-          "flag": ""
+          "ref": "10-21 (low = corneal perforation risk)",
+          "flag": "L"
+        },
+        {
+          "test": "Contact lens wear pattern",
+          "value": "Extended-wear (overnight) for 2 weeks continuously",
+          "unit": "",
+          "ref": "Daily removal required",
+          "flag": "H"
         }
       ]
     }
@@ -268,7 +268,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "corneal-abrasionkeratitis",
-    "diagnosis": "Contact Lens-Related Bacterial Keratitis \u2014 Pseudomonas",
+    "diagnosis": "Contact Lens-Related Bacterial Keratitis (Pseudomonas Suspected)",
     "acuity": 3,
     "presentation": "Eye Emergency",
     "category": "ophthalmologic"
@@ -332,11 +332,11 @@ window.EMR_DATA = {
       "Fundoscopic examination": "Left eye normal, right eye view obscured by corneal opacity"
     },
     "ddxTargets": [
-      "Bacterial keratitis \u2014 Pseudomonas (contact lens) (correct)",
-      "Acanthamoeba keratitis \u2014 contact lens wearer + fresh water exposure; ring infiltrate; severe pain out of proportion; propamidine treatment",
-      "Herpes simplex keratitis \u2014 dendritic ulcer on fluorescein; no hypopyon initially; acyclovir ophthalmic",
-      "Fungal keratitis \u2014 trauma with vegetable matter; feathery infiltrate; voriconazole",
-      "Corneal abrasion \u2014 no infiltrate; no hypopyon; superficial; heals quickly with antibiotic drops"
+      "Bacterial keratitis \u2014 Pseudomonas (correct)",
+      "Acanthamoeba keratitis \u2014 contact lens use; ring infiltrate; resistant to standard antibiotics; very painful; PHMB treatment",
+      "Fungal keratitis \u2014 post-trauma with plant material; feathery infiltrate; slower onset; natamycin treatment",
+      "Herpes simplex keratitis \u2014 dendritic ulcer on fluorescein staining; recurrent; antiviral treatment",
+      "Corneal abrasion \u2014 pain + tearing; no infiltrate; no hypopyon; heals with patching"
     ],
     "biasFlags": {
       "anchoring": "Student may anchor on the patient's history of allergic conjunctivitis and initially dismiss this as a more severe allergic reaction, missing the infectious component",
@@ -347,7 +347,7 @@ window.EMR_DATA = {
       "phase2": "You've identified this as an eye emergency in a contact lens wearer. What specific historical details will help you distinguish between mechanical irritation, infectious keratitis, and other contact lens complications? Consider what questions might reveal high-risk behaviors.",
       "phase5": "Your exam findings show corneal involvement with epithelial defect and stromal changes in a contact lens overwear patient. How does this constellation of findings help narrow your differential? What makes this particularly concerning for Pseudomonas infection?",
       "finalDebrief": "This case highlights how contact lens overwear, especially sleeping in lenses, creates an ideal environment for Pseudomonas keratitis. The rapid onset, severe pain, and central corneal involvement were key distinguishing features from simple irritation or viral causes. How did the patient's risk factors and clinical presentation guide your diagnostic reasoning?",
-      "final": "Diagnosis: contact lens-related bacterial keratitis, Pseudomonas. Key learning: (1) Bacterial keratitis vs corneal abrasion: corneal abrasion = superficial defect, no stromal infiltrate, heals quickly. Bacterial keratitis = stromal infiltrate (white opacity), hypopyon, severe pain, progressive. The presence of a stromal infiltrate is the key finding. (2) Pseudomonas keratitis in contact lens wearers: Pseudomonas aeruginosa produces proteases that cause rapid corneal melting (keratolysis). Can progress from small ulcer to corneal perforation in 24-48 hours if untreated. Extended wear lenses have the highest risk. (3) Fluoroquinolone loading dose: ciprofloxacin 0.3% or moxifloxacin 0.5% ophthalmic \u2014 intensive loading (q15min initially) to achieve therapeutic concentrations in corneal stroma. Concentration-dependent killing. (4) Culture before antibiotics: corneal scraping for Gram stain and culture must be performed before antibiotics \u2014 sensitivity drops rapidly. Ophthalmology performs this under slit lamp with blade or spatula. (5) Hypopyon: sterile layering of inflammatory cells, not pus. Indicates severe anterior chamber reaction. In bacterial keratitis, hypopyon is reactive (bacteria usually NOT in anterior chamber). Resolves with treatment. If bacteria are IN the anterior chamber \u2192 endophthalmitis (worse prognosis, requires vitrectomy)."
+      "final": "Diagnosis: bacterial keratitis from contact lens use (Pseudomonas suspected). Key learning: (1) Contact lens and Pseudomonas: extended overnight wear of contact lenses is the strongest risk factor for Pseudomonas aeruginosa keratitis. Pseudomonas has proteases that can perforate the cornea within 24-48 hours \u2014 this is an ophthalmological emergency. The longer the contact lens wear without removal, the higher the risk. (2) Empiric treatment: topical fluoroquinolone (ciprofloxacin or moxifloxacin) covers Pseudomonas. Fortified antibiotics (tobramycin + cefazolin) for severe cases. Hourly instillation initially. (3) Corneal scraping is diagnostic: perform before antibiotics if possible \u2014 spatula scraping of ulcer base \u2192 Gram stain + culture. Identifies organism and sensitivities. Directly plated onto media in clinic. (4) Acanthamoeba distinction: contact lens + severe pain + ring-shaped infiltrate = think Acanthamoeba (resistant to standard antibiotics, requires PHMB). (5) Hypopyon: does NOT indicate endophthalmitis or require anterior chamber tap in keratitis \u2014 it is a sterile inflammatory response to the corneal infection. Resolves with treatment of the keratitis."
     }
   }
 };

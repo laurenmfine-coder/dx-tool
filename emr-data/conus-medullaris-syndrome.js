@@ -34,28 +34,28 @@ window.EMR_DATA = {
       "icd": "G99.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "T12-L1 injury = mixed UMN + LMN: hyperreflexia + flaccid paralysis, saddle anesthesia, bladder/bowel dysfunction. Distinguishes from cauda equina (pure LMN) and thoracic cord (pure UMN)."
+      "notes": "Conus (T12-L1): mixed UMN (hyperreflexia) + LMN (flaccid paralysis), saddle anesthesia, bladder/bowel dysfunction. Distinguishes from cauda equina (pure LMN) and thoracic cord (pure UMN)."
     },
     {
-      "problem": "Urinary retention \u2014 bladder from conus",
+      "problem": "Urinary retention \u2014 catheterize immediately",
       "icd": "R33.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "Conus controls bladder via S2-S4. Detrusor areflexia \u2192 urinary retention. Immediate catheterization."
+      "notes": "Conus controls bladder via S2-S4. Conus lesion \u2192 detrusor areflexia \u2192 retention. Catheterization prevents bladder overdistension injury."
     }
   ],
   "medications": [
     {
-      "name": "Dexamethasone 10mg IV then 4mg q6h \u2014 IMMEDIATE",
-      "sig": "Reduces spinal cord edema. Start immediately on clinical suspicion \u2014 before MRI if deficits present. Every hour of untreated compression = permanent neurological loss.",
+      "name": "Dexamethasone 10mg IV bolus then 4mg q6h \u2014 IMMEDIATE",
+      "sig": "Start immediately on clinical suspicion \u2014 before MRI if deficits present. Every hour of untreated compression = permanent neurological loss.",
       "prescriber": "Oncology/Neurosurgery",
       "start": "2024",
       "refills": 0,
       "status": "IMMEDIATE"
     },
     {
-      "name": "Emergent spinal irradiation \u2014 within 24h",
-      "sig": "Radiation first-line for most metastatic cord compression. Start within 24 hours. Surgery first for radioresistant tumors or mechanical instability.",
+      "name": "Radiation oncology \u2014 emergent spinal irradiation within 24h",
+      "sig": "Radiation is first-line for most metastatic epidural cord compression. Radioresistant tumors or mechanical instability \u2192 surgery first then radiation.",
       "prescriber": "Radiation Oncology",
       "start": "2024",
       "refills": 0,
@@ -63,7 +63,7 @@ window.EMR_DATA = {
     },
     {
       "name": "Urinary catheterization \u2014 immediate",
-      "sig": "Foley for urinary retention. Prevent bladder overdistension injury.",
+      "sig": "Foley catheter for urinary retention. Prevents bladder injury.",
       "prescriber": "Oncology",
       "start": "2024",
       "refills": 0,
@@ -160,7 +160,7 @@ window.EMR_DATA = {
       "results": [
         {
           "test": "Lower extremity strength",
-          "value": "3/5 bilateral hip flexors; 2/5 ankle dorsiflexion",
+          "value": "3/5 bilateral hip flexors; 2/5 bilateral ankle",
           "unit": "",
           "ref": "5/5",
           "flag": "H"
@@ -174,7 +174,7 @@ window.EMR_DATA = {
         },
         {
           "test": "Bulbocavernosus reflex",
-          "value": "Absent (conus S3-4)",
+          "value": "Absent \u2014 S3-4 conus involvement",
           "unit": "",
           "ref": "Present",
           "flag": "H"
@@ -200,8 +200,8 @@ window.EMR_DATA = {
     {
       "date": "04/2024",
       "study": "MRI Thoracolumbar Spine with Gadolinium",
-      "findings": "T12-L1 epidural metastasis with cord compression at conus medullaris. Pathological T12 fracture. Signal change within conus.",
-      "impression": "Metastatic epidural spinal cord compression at conus. Dexamethasone + radiation oncology urgently."
+      "findings": "T12-L1 epidural metastasis with cord compression at conus medullaris. Pathological T12 fracture. Signal change within conus (edema).",
+      "impression": "Metastatic epidural cord compression at conus. Oncological emergency. Dexamethasone + urgent radiation."
     }
   ],
   "immunizations": [
@@ -287,7 +287,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "conus-medullaris-syndrome",
-    "diagnosis": "Conus Medullaris Syndrome \u2014 Metastatic Epidural Spinal Cord Compression",
+    "diagnosis": "Conus Medullaris Syndrome \u2014 Metastatic Epidural Cord Compression",
     "acuity": 2,
     "presentation": "Back Pain",
     "category": "oncologic"
@@ -352,9 +352,9 @@ window.EMR_DATA = {
     },
     "ddxTargets": [
       "Metastatic epidural cord compression at conus (correct)",
-      "Cauda equina syndrome \u2014 L2 and below; pure LMN; different level",
+      "Cauda equina syndrome \u2014 below L1; pure LMN; different level",
       "Transverse myelitis \u2014 inflammatory; CSF pleocytosis; no mass",
-      "Epidural abscess \u2014 fever; elevated inflammatory markers; drainage required"
+      "Epidural abscess \u2014 fever; elevated WBC/ESR; drainage required"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'chronic cancer pain progression' and missing acute neurologic emergency requiring immediate intervention",
@@ -365,7 +365,7 @@ window.EMR_DATA = {
       "phase2": "Good start on your differential. Given this patient's oncologic history and the acute change in his pain pattern, what specific neurologic emergencies should you be most concerned about? What key symptoms would help you differentiate between conus medullaris and cauda equina syndromes?",
       "phase5": "Excellent history and physical exam. You've identified several concerning neurologic findings including saddle anesthesia, decreased sphincter tone, and bilateral lower extremity weakness. How do these findings help narrow your differential? What is the most likely anatomical location of this patient's pathology based on the pattern of deficits?",
       "finalDebrief": "This case demonstrates the importance of recognizing conus medullaris syndrome as an oncologic emergency. The key clinical clues were the acute worsening of pain in a patient with known spinal metastases, combined with saddle anesthesia, bowel/bladder dysfunction, and bilateral lower extremity weakness. Early recognition and emergent MRI with immediate neurosurgical consultation are critical for optimal outcomes.",
-      "final": "Diagnosis: metastatic epidural cord compression at conus medullaris. Key learning: (1) Spinal cord level localization: cervical/thoracic = UMN (spasticity, hyperreflexia, upgoing plantar). Conus medullaris (T12-L1) = MIXED UMN + LMN + saddle anesthesia + bladder/bowel. Cauda equina (below L1) = pure LMN, flaccid, areflexic, saddle anesthesia. (2) This is an oncological emergency: dexamethasone immediately (before MRI if deficits present), then emergent MRI, then radiation. Every hour = more permanent loss. (3) MRI entire spine: 30% of patients have multiple compression sites. Always image full spine. (4) Dexamethasone dose: 10mg IV bolus then 4mg q6h. Higher doses cause more side effects without benefit. (5) Surgery indication: radioresistant tumor, mechanical instability, unknown primary needing tissue diagnosis, neurological deterioration during radiation. Surgery + radiation superior to radiation alone (ASTRO trial)."
+      "final": "Diagnosis: metastatic epidural cord compression at conus medullaris. Key learning: (1) Spinal levels: cervical/thoracic = UMN (spasticity, hyperreflexia). Conus (T12-L1) = MIXED UMN + LMN (hyperreflexia + flaccid, saddle anesthesia, bladder/bowel). Cauda equina (below L1) = pure LMN (flaccid, areflexic, saddle anesthesia). (2) True oncological emergency: every hour untreated = additional permanent deficit. Dexamethasone immediately (before MRI if deficits present), then urgent MRI, then radiation. (3) MRI entire spine: plain films and CT miss soft tissue epidural disease. MRI whole spine \u2014 30% have multiple compression sites. (4) Dexamethasone dose: 10mg IV bolus then 4mg q6h is standard. Higher doses show more complications without clear benefit. (5) Surgery indications: radioresistant tumor, mechanical instability, unknown primary needing tissue, neurological deterioration during radiation. ASTRO trial: surgery + radiation superior to radiation alone."
     }
   }
 };

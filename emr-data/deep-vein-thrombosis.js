@@ -23,51 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Acute proximal DVT \u2014 left femoral vein, unprovoked",
-      "icd": "I82.4Y1",
+      "problem": "Proximal DVT \u2014 left femoral and popliteal veins",
+      "icd": "I82.402",
       "onset": "2024",
       "status": "Active",
-      "notes": "Maria Chen, 38F \u2014 2-week left leg swelling, pain, erythema. No recent travel, surgery, or immobilization. Wells score 3 (high). Duplex ultrasound: left femoral vein DVT extending to popliteal. Unprovoked = requires 3-6 months anticoagulation minimum."
+      "notes": "Sandra Williams, 58F \u2014 recent 14-hour flight, left leg swelling, pain, and erythema for 3 days. Duplex ultrasound: non-compressible left femoral and popliteal veins with echogenic thrombus. Wells score 3 = high probability."
     },
     {
-      "problem": "Unprovoked DVT \u2014 malignancy and thrombophilia workup",
-      "icd": "I82.4Y1",
+      "problem": "Provoked DVT \u2014 prolonged immobility (flight)",
+      "icd": "I82.402",
       "onset": "2024",
       "status": "Active",
-      "notes": "Unprovoked DVT in a patient <50 warrants age-appropriate cancer screening (breast, colorectal, cervical) and consideration of thrombophilia testing. Factor V Leiden most common inherited thrombophilia."
+      "notes": "Clear provokable risk factor (travel immobility). Provoked DVT has lower recurrence risk than unprovoked \u2014 anticoagulation duration typically 3 months."
     },
     {
-      "problem": "PE risk \u2014 proximal DVT has 50% PE rate without treatment",
-      "icd": "I82.4Y1",
+      "problem": "PE risk \u2014 proximal DVT carries significant PE risk",
+      "icd": "I82.402",
       "onset": "2024",
       "status": "Active",
-      "notes": "Proximal DVT (above popliteal) has 50% risk of PE without anticoagulation. Isolated distal DVT (calf) has lower PE risk \u2014 anticoagulate based on symptoms and extension risk."
+      "notes": "Proximal DVT (above popliteal fossa) carries ~50% risk of symptomatic PE if untreated. Anticoagulation prevents further embolization."
     }
   ],
   "medications": [
     {
-      "name": "Apixaban 10mg BID x 7 days then 5mg BID x 3-6 months",
-      "sig": "DOAC is first-line for VTE treatment (AMPLIFY trial). No need for bridging heparin. Reduces stroke, PE, and VTE recurrence. Preferred over warfarin (no INR monitoring, fewer interactions).",
-      "prescriber": "Medicine/Hematology",
+      "name": "Rivaroxaban 15mg BID x21 days then 20mg daily",
+      "sig": "DOAC first-line for DVT treatment. Rivaroxaban: fixed-dose oral, no monitoring, non-inferior to LMWH/warfarin (EINSTEIN trial). 3-month total duration for provoked DVT.",
+      "prescriber": "Medicine",
       "start": "2024",
-      "refills": 3,
+      "refills": 1,
       "status": "Active"
     },
     {
-      "name": "Compression stockings \u2014 left leg",
-      "sig": "Graduated compression stockings reduce post-thrombotic syndrome (PTS) risk. Wear for at least 2 years after proximal DVT.",
+      "name": "Compression stockings 30-40mmHg \u2014 graduated",
+      "sig": "Reduces post-thrombotic syndrome (PTS) risk. Improves symptoms. Start after acute phase. Wear for minimum 2 years.",
+      "prescriber": "Medicine/Vascular",
+      "start": "2024",
+      "refills": 0,
+      "status": "Prescribed"
+    },
+    {
+      "name": "Ambulation \u2014 encouraged immediately",
+      "sig": "Early ambulation with anticoagulation is SAFE and reduces pain and swelling. Bed rest does NOT prevent PE in anticoagulated patients and worsens outcomes.",
       "prescriber": "Medicine",
       "start": "2024",
       "refills": 0,
-      "status": "Active"
-    },
-    {
-      "name": "Thrombophilia workup \u2014 defer until off anticoagulation",
-      "sig": "Test after completing anticoagulation (results affected by active anticoagulation). Factor V Leiden, prothrombin G20210A, protein C/S, antithrombin III, antiphospholipid antibodies.",
-      "prescriber": "Hematology",
-      "start": "2024",
-      "refills": 0,
-      "status": "Deferred 3-6 months"
+      "status": "Active \u2014 ambulate"
     }
   ],
   "allergies": [
@@ -121,41 +121,41 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "04/2024",
-      "panel": "DVT/PE Workup",
+      "panel": "DVT Assessment",
       "results": [
         {
           "test": "D-dimer",
-          "value": "4.8",
-          "unit": "\u03bcg/mL",
-          "ref": "<0.5",
+          "value": "3.8",
+          "unit": "mg/L",
+          "ref": "<0.5 (elevated \u2014 supports DVT)",
+          "flag": "H"
+        },
+        {
+          "test": "Wells Score",
+          "value": "3 (high probability)",
+          "unit": "",
+          "ref": "0-1 = low; 2 = moderate; \u22653 = high",
           "flag": "H"
         },
         {
           "test": "CBC \u2014 platelet count",
-          "value": "228",
+          "value": "224",
           "unit": "K/\u03bcL",
-          "ref": "150-400 (baseline for anticoagulation)",
+          "ref": "150-400",
           "flag": ""
         },
         {
           "test": "Creatinine",
           "value": "0.9",
           "unit": "mg/dL",
-          "ref": "0.5-1.1 (renal function for DOAC dosing)",
+          "ref": "0.5-1.1 (for DOAC dosing)",
           "flag": ""
         },
         {
-          "test": "Beta-hCG",
-          "value": "Negative",
+          "test": "Provokable risk factor screen",
+          "value": "14-hour flight 3 days before symptom onset",
           "unit": "",
-          "ref": "Negative",
-          "flag": ""
-        },
-        {
-          "test": "Wells DVT Score",
-          "value": "3 \u2014 high probability",
-          "unit": "",
-          "ref": "\u22653 = high probability",
+          "ref": "",
           "flag": "H"
         }
       ]
@@ -164,9 +164,9 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "04/2024",
-      "study": "Lower Extremity Venous Duplex Ultrasound",
-      "findings": "Non-compressible left femoral vein extending to popliteal vein. No flow on Doppler. Right lower extremity normal. No Baker cyst.",
-      "impression": "Acute left femoral-popliteal DVT. Anticoagulation indicated."
+      "study": "Lower Extremity Duplex Ultrasound",
+      "findings": "Non-compressible left common femoral and popliteal veins. Echogenic thrombus visible. No flow on Doppler in involved segments. Right leg normal.",
+      "impression": "Acute proximal left DVT involving femoral and popliteal veins."
     }
   ],
   "immunizations": [
@@ -245,7 +245,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "deep-vein-thrombosis",
-    "diagnosis": "Acute Proximal DVT \u2014 Left Femoral Vein, Unprovoked",
+    "diagnosis": "Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (Provoked by Immobility)",
     "acuity": 3,
     "presentation": "Musculoskeletal Emergency",
     "category": "vascular"
@@ -309,11 +309,11 @@ window.EMR_DATA = {
       "Basic cardiopulmonary examination": "Heart rate regular, lungs clear to auscultation bilaterally, no signs of pulmonary embolism"
     },
     "ddxTargets": [
-      "Proximal DVT \u2014 unprovoked (correct)",
-      "Cellulitis \u2014 unilateral erythema but no clot on ultrasound; non-compressibility distinguishes",
-      "Ruptured Baker cyst \u2014 posterior knee pain; ultrasound shows cyst rupture; mimic DVT",
-      "Superficial thrombophlebitis \u2014 palpable cord; superficial vein; limited PE risk; NSAIDs",
-      "Lymphedema \u2014 bilateral; pitting; no D-dimer elevation; chronic onset"
+      "Proximal DVT \u2014 left femoral vein (correct)",
+      "Cellulitis \u2014 erythema + warmth; no DVT on duplex; no travel history",
+      "Baker's cyst rupture \u2014 posterior knee swelling; ultrasound shows cyst rupture; no venous thrombosis",
+      "Superficial thrombophlebitis \u2014 palpable cord along vein; duplex shows superficial vein; different management",
+      "Muscle strain/hematoma \u2014 trauma history; ultrasound shows muscle not vein"
     ],
     "biasFlags": {
       "anchoring": "May anchor on musculoskeletal injury given chief complaint category rather than considering vascular emergency given multiple thrombotic risk factors",
@@ -324,7 +324,7 @@ window.EMR_DATA = {
       "phase2": "Good start on your differential. Before you interview the patient, what specific risk factors for venous thromboembolism should you be thinking about given what you know about this 44-year-old woman? How might her medications and recent activities influence your questioning?",
       "phase5": "Now that you've completed your history and physical, let's think about risk stratification. What scoring system could help you here, and what are the key clinical features you've identified that point toward your leading diagnosis? What would be your next immediate step?",
       "finalDebrief": "This case highlights the importance of recognizing provoked DVT in patients with multiple risk factors. How did the combination of oral contraceptives, obesity, prolonged travel, and family history influence the clinical presentation? What does this teach us about managing patients on estrogen-containing contraceptives?",
-      "final": "Diagnosis: acute proximal DVT, unprovoked. Key learning: (1) Wells DVT score: each criterion = 1 point (+2 for active cancer; +1 for paralysis, recent plaster/cast; +1 for recently bedridden >3 days or surgery within 12 weeks; +1 for localized tenderness; +1 for entire leg swollen; +1 for calf swelling >3cm vs contralateral; +1 for pitting edema; +1 for collateral superficial veins; -2 for alternative diagnosis at least as likely). \u22653 = high probability. (2) D-dimer: highly sensitive but non-specific. Negative D-dimer in low-pretest probability = excludes DVT (NPV >99%). Elevated D-dimer with high probability = confirm with ultrasound, not add more tests. (3) DOAC vs warfarin for DVT: DOACs (apixaban, rivaroxaban) are preferred \u2014 noninferior, no INR monitoring, fewer interactions, lower bleeding risk. Warfarin still used in antiphospholipid syndrome (target INR 2-3 or 3-4 depending on risk). (4) Duration of anticoagulation: provoked (surgery, trauma, immobilization) = 3 months. Unprovoked = minimum 3-6 months, consider indefinite if high recurrence risk (male, proximal, no reversible risk factor). (5) Post-thrombotic syndrome: complication of DVT from venous hypertension \u2192 chronic leg pain, edema, skin changes, ulceration. Compression stockings for \u22652 years after proximal DVT reduce PTS risk."
+      "final": "Diagnosis: acute proximal DVT, provoked. Key learning: (1) Wells DVT score: active cancer (1), paralysis/immobilization (1), bedridden >3 days or major surgery <12 weeks (1), localized tenderness along deep veins (1), entire leg swollen (1), calf swelling >3cm (1), pitting edema (1), collateral superficial veins (1), prior DVT (1), alternative diagnosis as likely as DVT (-2). Score \u22652 = duplex ultrasound. Score <2 + negative D-dimer = DVT excluded. (2) Proximal vs distal DVT: proximal (popliteal and above) = treat with anticoagulation. Isolated distal (calf) = can observe with serial ultrasound OR treat \u2014 depends on symptoms and risk factors. (3) DOAC advantages: fixed oral dosing, no monitoring, similar efficacy to LMWH/warfarin (EINSTEIN, AMPLIFY trials). Avoid DOACs in severe renal failure (eGFR <15-30) and antiphospholipid syndrome (use warfarin). (4) Duration: provoked (reversible risk factor like immobility, surgery, estrogen) \u2192 3 months. Unprovoked \u2192 3-6 months minimum, consider indefinite based on bleeding risk. Recurrent unprovoked \u2192 indefinite anticoagulation. (5) Post-thrombotic syndrome (PTS): chronic leg pain, swelling, skin changes after DVT from valve damage. Compression stockings for \u22652 years reduce PTS incidence."
     }
   }
 };

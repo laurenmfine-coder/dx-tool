@@ -23,51 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Eastern coral snake envenomation \u2014 neurotoxic",
+      "problem": "Eastern coral snake envenomation \u2014 delayed neurotoxicity",
       "icd": "T63.021A",
       "onset": "2024",
       "status": "Active",
-      "notes": "Tyler Brooks, 22M \u2014 hiked in Florida, small puncture wounds on hand from red/yellow/black banded snake. Currently asymptomatic \u2014 2 hours post-bite. Coral snake venom acts by irreversible acetylcholine receptor blockade \u2192 delayed neurotoxicity."
+      "notes": "Tyler Brooks, 22M \u2014 bitten on right hand by eastern coral snake (red-yellow-black banding) while hiking in Florida. Initially minimal local symptoms. Now 6 hours later: ptosis, dysphagia, diplopia \u2014 onset of neurotoxicity."
     },
     {
-      "problem": "Delayed onset \u2014 12-24 hour symptom-free period",
+      "problem": "Progressive neuromuscular blockade \u2014 respiratory failure risk",
       "icd": "T63.021A",
       "onset": "2024",
       "status": "Active",
-      "notes": "Classic: initial minimal local symptoms, then delayed bulbar palsy, ptosis, dysphagia, respiratory failure onset 12-24 hours after bite. Asymptomatic now does NOT mean safe."
+      "notes": "Coral snake venom contains neurotoxins (phospholipase A2) that block presynaptic neuromuscular junction \u2192 progressive flaccid paralysis. Respiratory failure can occur 12-24 hours post-bite. Intubation may be needed."
     },
     {
-      "problem": "Antivenom \u2014 give early, not wait for symptoms",
+      "problem": "Antivenom availability \u2014 North American coral snake antivenom scarce",
       "icd": "T63.021A",
       "onset": "2024",
       "status": "Active",
-      "notes": "NORTH AMERICAN CORAL SNAKE ANTIVENOM: give as soon as envenomation confirmed. Once neurotoxicity begins, antivenom is LESS effective (irreversible receptor binding). Do not wait for symptoms."
+      "notes": "North American coral snake antivenom (Wyeth) production discontinued. Limited supply. Contact Poison Control (1-800-222-1222) and Florida Poison Control for antivenom availability."
     }
   ],
   "medications": [
     {
-      "name": "North American Coral Snake Antivenom \u2014 3-5 vials IV immediately",
-      "sig": "Give as soon as coral snake bite confirmed \u2014 do not wait for symptoms. Neurotoxicity is irreversible once it begins. Coral snake antivenom works by neutralizing free venom, not bound venom. Early is critical.",
+      "name": "North American coral snake antivenom \u2014 give early, before symptoms progress",
+      "sig": "Antivenom is most effective if given BEFORE respiratory failure. Once paralysis progresses, antivenom may not reverse established neuromuscular blockade. Contact Poison Control for antivenom location. Give 3-5 vials IV.",
       "prescriber": "Emergency/Toxicology",
       "start": "2024",
       "refills": 0,
-      "status": "IMMEDIATE"
+      "status": "Locating antivenom \u2014 Poison Control contacted"
     },
     {
-      "name": "ICU admission x 24 hours minimum \u2014 respiratory monitoring",
-      "sig": "All confirmed or suspected coral snake bites require ICU admission for 24h minimum. Respiratory failure can be sudden. Intubate early if bulbar symptoms develop.",
-      "prescriber": "Emergency/Toxicology",
+      "name": "Intubation \u2014 anticipate, have ready",
+      "sig": "Progressive ptosis + dysphagia + diplopia = neuromuscular blockade progressing. Respiratory failure may follow in hours. Prepare for RSI. Succinylcholine safe (not snake-bite specific contraindication).",
+      "prescriber": "Emergency/ICU",
       "start": "2024",
       "refills": 0,
-      "status": "ICU admission"
+      "status": "Prepared \u2014 intubation likely"
     },
     {
-      "name": "Avoid neostigmine \u2014 not effective",
-      "sig": "Unlike pit viper envenomation, neostigmine does NOT reverse coral snake neurotoxicity (irreversible alpha-neurotoxin binding). Antivenom is the only treatment.",
-      "prescriber": "Toxicology",
+      "name": "Poison Control 1-800-222-1222 \u2014 call immediately",
+      "sig": "Expert guidance on antivenom availability and dosing. Florida Poison Control has regional expertise in coral snake envenomation.",
+      "prescriber": "Emergency",
       "start": "2024",
       "refills": 0,
-      "status": "Avoid"
+      "status": "Called"
     }
   ],
   "allergies": [
@@ -144,41 +144,41 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "04/2024",
-      "panel": "Coral Snake Envenomation",
+      "panel": "Envenomation Assessment",
       "results": [
         {
-          "test": "CBC/BMP",
-          "value": "Normal \u2014 no coagulopathy (unlike pit vipers)",
+          "test": "Neurological exam \u2014 ptosis",
+          "value": "Bilateral ptosis \u2014 2mm palpebral aperture",
           "unit": "",
-          "ref": "Coral snake = neurotoxic, not hemotoxic",
+          "ref": "Normal lid height",
+          "flag": "H"
+        },
+        {
+          "test": "Gag reflex",
+          "value": "Diminished",
+          "unit": "",
+          "ref": "Present",
+          "flag": "H"
+        },
+        {
+          "test": "Grip strength",
+          "value": "3/5 bilateral",
+          "unit": "",
+          "ref": "5/5",
+          "flag": "H"
+        },
+        {
+          "test": "SpO2",
+          "value": "97",
+          "unit": "% room air (monitor closely)",
+          "ref": "\u226595%",
           "flag": ""
         },
         {
-          "test": "PT/INR",
-          "value": "1.0",
+          "test": "Coagulation (PT/PTT/fibrinogen)",
+          "value": "Normal \u2014 coral snake venom NOT coagulopathic",
           "unit": "",
-          "ref": "Normal \u2014 no coagulopathy",
-          "flag": ""
-        },
-        {
-          "test": "CK",
-          "value": "Normal",
-          "unit": "U/L",
-          "ref": "No rhabdomyolysis initially",
-          "flag": ""
-        },
-        {
-          "test": "Ptosis assessment",
-          "value": "None currently \u2014 2h post-bite",
-          "unit": "",
-          "ref": "Onset 12-24h",
-          "flag": ""
-        },
-        {
-          "test": "Negative pressure ventilation capacity",
-          "value": "Normal FVC \u2014 baseline",
-          "unit": "",
-          "ref": "Monitor q2-4h for decline",
+          "ref": "Normal",
           "flag": ""
         }
       ]
@@ -261,7 +261,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "coral-snake-envenomation",
-    "diagnosis": "Eastern Coral Snake Envenomation \u2014 Delayed Neurotoxicity",
+    "diagnosis": "Eastern Coral Snake Envenomation \u2014 Delayed Neurological Toxicity",
     "acuity": 2,
     "presentation": "Environmental Emergency",
     "category": "toxicologic"
@@ -325,11 +325,11 @@ window.EMR_DATA = {
       "Cerebellar function testing": "Finger-to-nose intact but limited by weakness, gait unsteady due to lower extremity weakness"
     },
     "ddxTargets": [
-      "Eastern coral snake envenomation \u2014 neurotoxic (correct)",
-      "Pit viper (rattlesnake, copperhead) \u2014 hemotoxic; local tissue destruction; coagulopathy; no delayed neurotoxicity; different antivenom",
-      "Non-venomous snake bite \u2014 no coral snake markings; symptomatic management",
-      "Myasthenia gravis crisis \u2014 not from snake bite; acetylcholine receptor antibodies",
-      "Botulism \u2014 descending paralysis; food history; not traumatic inoculation"
+      "Eastern coral snake envenomation (correct)",
+      "Pit viper (rattlesnake) envenomation \u2014 significant local tissue destruction; coagulopathy; different venom profile",
+      "Myasthenia gravis crisis \u2014 ptosis + diplopia; but no snake bite history; pyridostigmine test",
+      "Botulism \u2014 descending paralysis; foodborne or wound; no bite history",
+      "Organophosphate poisoning \u2014 cholinergic toxidrome (miosis, secretions, bradycardia); different mechanism"
     ],
     "biasFlags": {
       "anchoring": "Initial presentation of 'routine checkup feeling great' may anchor on benign conditions, missing the delayed onset of envenomation symptoms that can occur hours after coral snake bites",
@@ -340,7 +340,7 @@ window.EMR_DATA = {
       "phase2": "This patient initially presented for a routine visit but now has concerning neurological symptoms. What key historical details will help you differentiate between toxic, infectious, autoimmune, and other causes of acute neuromuscular weakness? Consider his occupation and geographic location.",
       "phase5": "You've identified a bite pattern and progressive neurological symptoms. How does the timeline, geographic location, and specific pattern of weakness help narrow your differential? What makes coral snake envenomation unique compared to other snake bites, and what's your most urgent concern?",
       "finalDebrief": "Coral snake envenomation presents uniquely with delayed onset neurological symptoms and minimal local reaction, unlike pit vipers. The classic 'red touches yellow' coral snake has potent neurotoxic venom causing descending paralysis. Early recognition is critical as antivenom is most effective when given promptly, and respiratory failure can develop rapidly.",
-      "final": "Diagnosis: Eastern coral snake envenomation. Key learning: (1) Coral snake identification: 'Red on yellow, kill a fellow; red on black, friend of Jack' \u2014 the coral snake has red touching yellow bands (Eastern US). Scarlet king snake (harmless) has red touching black. This mnemonic applies to North American snakes only. (2) Mechanism: coral snake venom contains post-synaptic alpha-neurotoxins that IRREVERSIBLY block acetylcholine receptors at the neuromuscular junction. This is why antivenom must be given early \u2014 once the toxin is bound, it cannot be displaced. (3) Delayed neurotoxicity: the symptom-free window of 12-24 hours is deceptive. Ptosis is usually the first symptom, followed by diplopia, dysphagia, dysarthria, then respiratory failure. Asymptomatic does NOT mean safe. (4) Antivenom timing: give North American Coral Snake Antivenom as soon as envenomation is confirmed \u2014 do not wait for symptoms. North American coral snake antivenom (Wyeth) has been discontinued; limited supply. Alternative: Tiger snake antivenom (Australian) has been used. (5) Unlike pit viper bites: coral snake envenomation causes NO significant local tissue destruction, NO coagulopathy, NO hemotoxicity. The only concern is neurotoxicity and respiratory failure. ICU for 24h minimum."
+      "final": "Diagnosis: eastern coral snake envenomation. Key learning: (1) Coral snake identification: 'red touches yellow = kill a fellow; red touches black = friend of Jack.' Eastern coral snake (red-yellow-black) is neurotoxic. Scarlet king snake (red-black-yellow) is harmless. The rhyme applies only to North American coral snakes. (2) Delayed neurotoxicity: coral snake venom causes presynaptic neuromuscular blockade. Initial symptoms may be minimal (no swelling, no pain). Neurotoxicity onset 1-13 hours post-bite. Once established, paralysis may be irreversible even with antivenom \u2014 treat prophylactically before respiratory failure. (3) Antivenom timing: most effective BEFORE respiratory failure develops. Do not wait for severe symptoms. Give antivenom to any confirmed coral snake bite even without symptoms. (4) No coagulopathy: coral snake venom is purely neurotoxic (unlike crotalid/pit vipers which cause coagulopathy, hemotoxicity, and local necrosis). Normal PT/PTT/fibrinogen. (5) Antivenom scarcity: Wyeth discontinued North American coral snake antivenom production. Contact Poison Control immediately for current availability. Supportive care (mechanical ventilation) is the backup \u2014 patients can recover fully with ventilatory support alone."
     }
   }
 };

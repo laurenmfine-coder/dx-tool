@@ -24,47 +24,47 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary CNS lymphoma \u2014 periventricular butterfly pattern",
+      "problem": "Primary CNS lymphoma \u2014 periventricular, immunocompetent",
       "icd": "C85.20",
       "onset": "2024",
       "status": "Active",
-      "notes": "Elizabeth Park, 68F \u2014 immunocompetent. Progressive confusion, personality change, right arm weakness. MRI: periventricular butterfly-pattern homogeneous enhancing mass crossing corpus callosum."
+      "notes": "Elizabeth Park, 68F \u2014 immunocompetent. 6-week progressive confusion, personality change, right arm weakness. MRI: periventricular butterfly-pattern enhancing mass crossing corpus callosum. Homogeneous enhancement."
     },
     {
-      "problem": "Dramatic steroid response \u2014 diagnostic trap",
+      "problem": "Steroids will destroy diagnostic tissue \u2014 hold until biopsy",
       "icd": "C85.20",
       "onset": "2024",
       "status": "Active",
-      "notes": "PCNSL melts with corticosteroids. Steroids before biopsy = non-diagnostic biopsy. Withhold steroids until tissue obtained."
+      "notes": "PCNSL characteristically melts with corticosteroids. Dexamethasone causes temporary improvement or disappearance of lesions. Must obtain biopsy BEFORE steroids."
     },
     {
-      "problem": "Biopsy required \u2014 tissue diagnosis mandatory",
+      "problem": "Stereotactic biopsy \u2014 tissue diagnosis mandatory",
       "icd": "C85.20",
       "onset": "2024",
       "status": "Active",
-      "notes": "Stereotactic biopsy before any steroids. High yield >90% in PCNSL."
+      "notes": "High diagnostic yield >90%. CT-guided or MRI-guided. Hold steroids 7-10 days before biopsy if possible."
     }
   ],
   "medications": [
     {
       "name": "HOLD steroids until biopsy obtained",
-      "sig": "PCNSL is steroid-sensitive \u2014 lymphoma cells lyse \u2192 non-diagnostic biopsy. Only use dexamethasone if life-threatening herniation.",
+      "sig": "PCNSL responds dramatically to dexamethasone \u2192 lymphoma cells lyse \u2192 non-diagnostic biopsy. Only use steroids for life-threatening herniation.",
       "prescriber": "Neurosurgery/Neuro-oncology",
       "start": "2024",
       "refills": 0,
       "status": "HOLD"
     },
     {
-      "name": "High-dose methotrexate \u22653.5g/m\u00b2 \u2014 post-biopsy",
-      "sig": "Backbone of PCNSL treatment. Penetrates BBB at high doses. Combined with rituximab and cytarabine consolidation. CR in 35-60%.",
+      "name": "High-dose methotrexate \u2014 post-biopsy first-line",
+      "sig": "High-dose MTX \u22653.5g/m\u00b2 penetrates BBB at high doses. Combined with rituximab. MTX-based regimens achieve CR in 35-60%.",
       "prescriber": "Neuro-oncology",
       "start": "2024",
       "refills": 0,
       "status": "Post-biopsy"
     },
     {
-      "name": "Stereotactic biopsy \u2014 before steroids",
-      "sig": "MRI-guided biopsy. Diagnostic yield >90%. Avoid steroids 7-10 days before biopsy if possible.",
+      "name": "Stereotactic brain biopsy \u2014 urgently",
+      "sig": "Before any steroids. High diagnostic yield. CT or MRI guided. Minimally invasive.",
       "prescriber": "Neurosurgery",
       "start": "2024",
       "refills": 0,
@@ -163,7 +163,7 @@ window.EMR_DATA = {
         },
         {
           "test": "CSF EBV PCR",
-          "value": "Negative",
+          "value": "Negative (positive = AIDS-related PCNSL)",
           "unit": "",
           "ref": "Negative",
           "flag": ""
@@ -189,8 +189,8 @@ window.EMR_DATA = {
     {
       "date": "04/2024",
       "study": "MRI Brain with Gadolinium",
-      "findings": "Periventricular homogeneous enhancing mass (4.2cm) crossing corpus callosum \u2014 butterfly pattern. Restricted diffusion on DWI. No ring enhancement.",
-      "impression": "Periventricular butterfly-pattern lesion highly characteristic of PCNSL. Biopsy before steroids."
+      "findings": "Periventricular homogeneous enhancing mass (4.2cm) crossing corpus callosum \u2014 butterfly pattern. Restricted diffusion on DWI. No ring enhancement. Surrounding edema.",
+      "impression": "Periventricular butterfly-pattern lesion highly characteristic of PCNSL. Stereotactic biopsy before steroids."
     }
   ],
   "immunizations": [
@@ -277,7 +277,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "cns-lymphoma",
-    "diagnosis": "Primary CNS Lymphoma \u2014 Periventricular, Immunocompetent",
+    "diagnosis": "Primary CNS Lymphoma (PCNSL) \u2014 Periventricular Butterfly Pattern",
     "acuity": 2,
     "presentation": "Seizure",
     "category": "oncologic"
@@ -341,11 +341,10 @@ window.EMR_DATA = {
       "Lymph node examination": "No palpable lymphadenopathy in cervical, axillary, or inguinal regions."
     },
     "ddxTargets": [
-      "Primary CNS lymphoma (correct)",
-      "GBM \u2014 butterfly pattern can occur; heterogeneous ring enhancement more typical",
-      "CNS toxoplasmosis \u2014 ring-enhancing; CD4 <200; IgG positive; AIDS",
-      "Tumefactive MS \u2014 young patient; open ring sign; oligoclonal bands",
-      "Brain metastasis \u2014 known primary; multiple lesions more common"
+      "Primary CNS lymphoma (correct \u2014 biopsy confirms)",
+      "GBM \u2014 butterfly pattern can occur; heterogeneous ring enhancement more typical; necrosis",
+      "CNS toxoplasmosis \u2014 ring-enhancing not homogeneous; CD4 <200; IgG positive; AIDS",
+      "Tumefactive MS \u2014 young patient; incomplete ring (open ring sign); oligoclonal bands"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'normal aging' explanation for cognitive symptoms, especially given family history of Alzheimer's, while missing the immunosuppression context",
@@ -356,7 +355,7 @@ window.EMR_DATA = {
       "phase2": "Good start on your differential. I notice you've included both common and serious causes of new-onset seizure in a 70-year-old. Before you interview the patient, think about what specific risk factors this patient might have that could guide your questioning. What do you know about his medical history that might be relevant?",
       "phase5": "Excellent history and physical exam. You've identified some concerning focal neurological findings and cognitive changes in an immunosuppressed patient. Given his medication regimen and the pattern of symptoms, what does this constellation suggest to you? How does his immunosuppression change your thinking about the most likely diagnoses?",
       "finalDebrief": "This case highlights the importance of considering medication-induced immunosuppression as a major risk factor. Primary CNS lymphoma, while rare in the general population, has a much higher incidence in immunosuppressed patients like those on methotrexate. The bilateral periventricular location and butterfly pattern across the corpus callosum are classic imaging findings. How did your differential evolve as you gathered more information about his immunosuppression and focal findings?",
-      "final": "Diagnosis: primary CNS lymphoma. Key learning: (1) PCNSL classic MRI: periventricular, corpus callosum (butterfly), HOMOGENEOUS enhancement (not ring-enhancing), restricted diffusion. 90% DLBCL. Median age 65. (2) The steroid trap: dexamethasone causes lymphoma cell lysis \u2192 lesion shrinks or disappears \u2192 biopsy non-diagnostic. Rule: no steroids before biopsy unless herniation. (3) AIDS vs immunocompetent PCNSL: AIDS = EBV-driven, CD4 <50, responds to ART. Immunocompetent = EBV-negative, requires high-dose MTX-based chemotherapy. (4) High-dose MTX rationale: MTX at \u22653.5g/m\u00b2 penetrates BBB. Low-dose does not. Leucovorin rescue 24h after MTX is mandatory. (5) Whole-body staging with PET-CT to rule out systemic lymphoma. Vitreoretinal involvement in 15-25% \u2014 ophthalmology slit-lamp exam."
+      "final": "Diagnosis: primary CNS lymphoma. Key learning: (1) PCNSL classic MRI: periventricular, corpus callosum butterfly pattern, HOMOGENEOUS enhancement (not ring), restricted diffusion. 90% diffuse large B-cell lymphoma. Rare in immunocompetent (median age 65). (2) The steroid trap: PCNSL is steroid-sensitive \u2014 dexamethasone causes temporary lysis of lymphoma cells \u2192 lesion shrinks or disappears. Rule: do NOT give steroids until biopsy obtained, unless herniation. Even one dose of steroids can make the biopsy non-diagnostic. (3) AIDS vs immunocompetent PCNSL: AIDS = EBV-driven, CD4 <50, may respond to ART. Immunocompetent = EBV-negative, requires chemotherapy. (4) High-dose MTX rationale: standard-dose MTX does NOT penetrate BBB. Doses \u22653.5g/m\u00b2 achieve CNS concentrations. Leucovorin rescue mandatory 24h after MTX. (5) Whole-body staging with PET-CT to rule out systemic lymphoma. Vitreoretinal involvement in 15-25% \u2014 ophthalmology slit-lamp exam."
     }
   }
 };

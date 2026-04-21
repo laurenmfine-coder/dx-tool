@@ -27,43 +27,43 @@ window.EMR_DATA = {
       "icd": "T39.091A",
       "onset": "2024",
       "status": "Active",
-      "notes": "Helen Foster, 82F \u2014 confusion, tinnitus, hyperventilation, metabolic acidosis. On aspirin 325mg daily + bismuth subsalicylate multiple times daily. Salicylate level 48mg/dL."
+      "notes": "Helen Foster, 82F \u2014 confusion, tinnitus, hyperventilation, metabolic acidosis. On aspirin 325mg daily + bismuth subsalicylate (Pepto-Bismol) multiple times daily. Salicylate level 48mg/dL."
     },
     {
-      "problem": "Mixed acid-base \u2014 respiratory alkalosis + metabolic acidosis",
+      "problem": "Mixed acid-base \u2014 respiratory alkalosis + high anion gap metabolic acidosis",
       "icd": "E87.2",
       "onset": "2024",
       "status": "Active",
       "notes": "Salicylate stimulates respiratory center \u2192 respiratory alkalosis. Uncouples oxidative phosphorylation \u2192 metabolic acidosis. Mixed pattern is pathognomonic."
     },
     {
-      "problem": "CNS effects \u2014 confusion and tinnitus",
+      "problem": "CNS effects \u2014 tinnitus, confusion, agitation",
       "icd": "T39.091A",
       "onset": "2024",
       "status": "Active",
-      "notes": "CNS salicylate penetration. Elderly patients develop CNS toxicity at lower levels than acute overdose."
+      "notes": "Elderly patients develop CNS symptoms at lower serum levels than acute overdose. Tinnitus is a classic early sign."
     }
   ],
   "medications": [
     {
       "name": "Stop all salicylate sources immediately",
-      "sig": "Aspirin + bismuth subsalicylate both discontinued. Review ALL medications for hidden salicylate.",
+      "sig": "Aspirin + bismuth subsalicylate discontinued. Review ALL medications for hidden salicylate.",
       "prescriber": "Medicine/Toxicology",
       "start": "2024",
       "refills": 0,
-      "status": "STOP"
+      "status": "STOP all"
     },
     {
       "name": "IV sodium bicarbonate \u2014 urine alkalinization",
-      "sig": "Target urine pH 7.5-8.0. Alkalinized urine traps ionized salicylate \u2192 prevents tubular reabsorption \u2192 enhances elimination.",
+      "sig": "Target urine pH 7.5-8.0. Alkalinized urine traps ionized salicylate \u2192 prevents reabsorption \u2192 enhances elimination. Also corrects metabolic acidosis.",
       "prescriber": "Medicine/Toxicology",
       "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "Active \u2014 IV bicarb infusion"
     },
     {
-      "name": "Hemodialysis \u2014 if level >40mg/dL with symptoms",
-      "sig": "Lower threshold in chronic toxicity. Indications: AKI, altered mental status, pulmonary edema, refractory acidosis.",
+      "name": "Hemodialysis \u2014 if level >40mg/dL with symptoms in chronic toxicity",
+      "sig": "Chronic toxicity threshold for dialysis is lower than acute. Level 48 with confusion = nephrology consult for dialysis.",
       "prescriber": "Nephrology/Toxicology",
       "start": "2024",
       "refills": 0,
@@ -168,14 +168,14 @@ window.EMR_DATA = {
           "flag": "H"
         },
         {
-          "test": "ABG \u2014 pCO2",
+          "test": "pCO2",
           "value": "28",
           "unit": "mmHg",
           "ref": "35-45",
           "flag": "L"
         },
         {
-          "test": "Bicarbonate",
+          "test": "Bicarb",
           "value": "18",
           "unit": "mEq/L",
           "ref": "22-26",
@@ -344,8 +344,8 @@ window.EMR_DATA = {
     "ddxTargets": [
       "Chronic salicylate toxicity (correct)",
       "Sepsis \u2014 mixed acid-base; but salicylate level diagnostic",
-      "Methanol/ethylene glycol \u2014 elevated osmolar gap; different history",
-      "SIADH \u2014 hyponatremia but not the mixed acid-base pattern"
+      "Acute salicylate overdose \u2014 Done nomogram does NOT apply to chronic toxicity",
+      "Methanol/ethylene glycol \u2014 osmolar gap; different history"
     ],
     "biasFlags": {
       "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Chronic Salicylate Toxicity, carefully consider the full differential including must-not-miss conditions.",
@@ -356,7 +356,7 @@ window.EMR_DATA = {
       "phase2": "You've reviewed Dorothy Whitfield's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
       "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
       "finalDebrief": "The diagnosis is Chronic Salicylate Toxicity (Occult \u2014 Elderly Patient Self-Medicating OTC Aspirin 650-975mg TID for OA Pain with CKD 3b Impairing Clearance, on Apixaban, Presenting with Tinnitus, Confusion, Tachypnea, and Mixed Acid-Base Disturbance). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
-      "final": "Diagnosis: chronic salicylate toxicity. Key learning: (1) Chronic vs acute toxicity: chronic is more dangerous at lower levels, CNS symptoms prominent, levels 30-60mg/dL, elderly most vulnerable. The Done nomogram does NOT apply to chronic toxicity. (2) Classic mixed acid-base: salicylate stimulates respiratory center \u2192 respiratory alkalosis (low pCO2). Uncouples oxidative phosphorylation \u2192 lactic + metabolic acidosis. Mixed respiratory alkalosis + metabolic acidosis = highly characteristic. (3) Occult sources in elderly: bismuth subsalicylate (Pepto-Bismol), oil of wintergreen, topical salicylates. Always check in elderly with unexplained toxicity. (4) Urine alkalinization: NaHCO3 targets urine pH 7.5-8.0. Ionized salicylate at alkaline pH cannot cross tubular membrane \u2192 ion trapping \u2192 enhanced elimination. (5) Dialysis in chronic toxicity: lower threshold than acute. Level >40 with symptoms, AKI, CNS change, pulmonary edema = dialysis indication. Dialysis removes salicylate AND corrects acid-base."
+      "final": "Diagnosis: chronic salicylate toxicity. Key learning: (1) Chronic vs acute salicylate toxicity: chronic = more dangerous at lower levels, CNS symptoms prominent (tinnitus, confusion, agitation), elderly most vulnerable, Done nomogram does NOT apply. (2) Classic mixed acid-base: salicylate stimulates respiratory center \u2192 primary respiratory alkalosis (low pCO2). Uncouples oxidative phosphorylation \u2192 lactic acidosis \u2192 high anion gap metabolic acidosis. This mixed pattern is highly characteristic. (3) Occult salicylate sources in elderly: aspirin, bismuth subsalicylate (Pepto-Bismol), oil of wintergreen, salicylate-containing topicals. Always check bismuth subsalicylate in unexplained elderly toxicity. (4) Urine alkalinization: sodium bicarbonate to target urine pH 7.5-8.0 enhances renal elimination via ion trapping. Ionized salicylate at alkaline pH cannot cross tubular membrane. (5) Dialysis in chronic toxicity: level >40mg/dL with CNS symptoms, AKI, pulmonary edema, or refractory acidosis. Threshold is lower than acute toxicity."
     }
   }
 };

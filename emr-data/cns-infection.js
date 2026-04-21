@@ -24,51 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "CNS toxoplasmosis \u2014 AIDS-defining, CD4 82",
+      "problem": "CNS toxoplasmosis \u2014 AIDS-defining illness",
       "icd": "B58.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "Marcus Johnson, 38M \u2014 known HIV, not on ART, CD4 82, VL 180,000. New seizure, left hemiparesis, headache. MRI: multiple ring-enhancing lesions. Toxoplasma IgG positive."
+      "notes": "Marcus Johnson, 38M \u2014 known HIV, not on ART (CD4 82, VL 180,000). New seizure, left hemiparesis. MRI: multiple ring-enhancing lesions with edema. Toxoplasma IgG positive."
     },
     {
-      "problem": "Multiple ring-enhancing lesions \u2014 toxoplasmosis vs PCNSL",
+      "problem": "Multiple ring-enhancing lesions \u2014 toxo vs CNS lymphoma",
       "icd": "B58.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "Treat toxo empirically first. No improvement at 10-14 days \u2192 biopsy for PCNSL. Toxo far more common with CD4 <200 and Toxo IgG positive."
+      "notes": "Treat empirically for toxo first. If no response in 10-14 days \u2192 biopsy for PCNSL. Toxo is far more common when CD4 <200 and IgG positive."
     },
     {
-      "problem": "Not on ART \u2014 IRIS risk on starting treatment",
+      "problem": "IRIS risk \u2014 defer ART 2-3 weeks",
       "icd": "B20",
       "onset": "2024",
       "status": "Active",
-      "notes": "Defer ART 2-3 weeks to avoid IRIS (immune reconstitution inflammatory syndrome causing paradoxical intracranial worsening)."
+      "notes": "Starting ART during active CNS OI \u2192 IRIS \u2192 paradoxical intracranial inflammation \u2192 herniation. Wait 2-3 weeks of toxo treatment before ART."
     }
   ],
   "medications": [
     {
       "name": "Pyrimethamine 200mg loading then 50mg daily + sulfadiazine 1.5g q6h",
-      "sig": "First-line for CNS toxoplasmosis. Duration: 6 weeks acute then lifelong suppressive therapy while CD4 <200.",
+      "sig": "Gold standard for CNS toxoplasmosis. Duration: acute 6 weeks, then lifelong suppressive therapy while CD4 <200.",
       "prescriber": "Infectious Disease",
       "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Leucovorin 10-20mg daily \u2014 mandatory with pyrimethamine",
-      "sig": "Pyrimethamine inhibits DHFR \u2192 myelosuppression. Leucovorin bypasses inhibition. ALWAYS give with pyrimethamine.",
+      "name": "Leucovorin 10-20mg daily \u2014 ALWAYS with pyrimethamine",
+      "sig": "Prevents pyrimethamine-induced bone marrow suppression. Never give pyrimethamine without leucovorin.",
       "prescriber": "Infectious Disease",
       "start": "2024",
       "refills": 3,
       "status": "Active"
     },
     {
-      "name": "ART \u2014 defer 2-3 weeks to avoid IRIS",
-      "sig": "Immediate ART with active CNS OI \u2192 IRIS \u2192 paradoxical intracranial inflammation \u2192 herniation.",
+      "name": "ART \u2014 defer 2-3 weeks",
+      "sig": "Prevents IRIS-related intracranial herniation in CNS OI. Start ART 2-3 weeks into toxo treatment.",
       "prescriber": "Infectious Disease",
       "start": "2024",
       "refills": 0,
-      "status": "Deferred 2-3 weeks"
+      "status": "Planned \u2014 deferral"
     }
   ],
   "allergies": [
@@ -170,14 +170,14 @@ window.EMR_DATA = {
         },
         {
           "test": "Toxoplasma IgM",
-          "value": "Negative (reactivation, not primary)",
+          "value": "Negative (reactivation)",
           "unit": "",
           "ref": "Negative",
           "flag": ""
         },
         {
           "test": "CSF EBV PCR",
-          "value": "Negative (positive suggests PCNSL)",
+          "value": "Negative (positive = PCNSL)",
           "unit": "",
           "ref": "Negative",
           "flag": ""
@@ -189,8 +189,8 @@ window.EMR_DATA = {
     {
       "date": "04/2024",
       "study": "MRI Brain with Gadolinium",
-      "findings": "Multiple ring-enhancing lesions (4): right basal ganglia 2.8cm, bilateral frontal lobe lesions. Eccentric target sign. Surrounding vasogenic edema.",
-      "impression": "Multiple ring-enhancing lesions in AIDS \u2014 CNS toxoplasmosis most likely. Empiric treatment indicated."
+      "findings": "Multiple ring-enhancing lesions: largest in right basal ganglia (2.8cm), bilateral frontal. Surrounding edema. Eccentric target sign on basal ganglia lesion.",
+      "impression": "Multiple ring-enhancing lesions in AIDS patient \u2014 CNS toxoplasmosis most likely. Empiric treatment."
     }
   ],
   "immunizations": [
@@ -269,7 +269,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "cns-infection",
-    "diagnosis": "CNS Toxoplasmosis \u2014 AIDS with CD4 82",
+    "diagnosis": "CNS Toxoplasmosis \u2014 AIDS (CD4 82)",
     "acuity": 2,
     "presentation": "Seizure",
     "category": "infectious"
@@ -333,11 +333,10 @@ window.EMR_DATA = {
       "Skin examination for lesions": "No obvious Kaposi's sarcoma lesions. Skin appears normal without opportunistic infection signs."
     },
     "ddxTargets": [
-      "CNS toxoplasmosis (correct \u2014 treat empirically)",
-      "Primary CNS lymphoma \u2014 EBV+ in CSF; single periventricular lesion; biopsy if toxo fails at 10-14 days",
-      "Cryptococcal meningitis \u2014 meningitic pattern; India ink; crypto antigen",
-      "Bacterial brain abscess \u2014 toxo IgG positive makes toxo more likely",
-      "Tuberculoma \u2014 endemic exposure; AFB culture"
+      "CNS toxoplasmosis \u2014 empiric treatment first (correct)",
+      "Primary CNS lymphoma \u2014 EBV+ in CSF; single periventricular; responds dramatically to steroids; biopsy if toxo fails",
+      "Bacterial brain abscess \u2014 fever, restricted DWI; no AIDS history here",
+      "Cryptococcal meningitis \u2014 meningitic pattern; India ink; crypto antigen"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on HIV status and assuming any CNS symptoms are HIV-related without considering the specific CD4 count and opportunistic infection risks",
@@ -348,7 +347,7 @@ window.EMR_DATA = {
       "phase2": "Good start on your differential. Given that this is a 33-year-old with HIV presenting with new-onset seizures, what specific aspects of his HIV history would be most important to explore? What does his current immune status tell you about the types of opportunistic infections he might be at risk for?",
       "phase5": "You've gathered good information about his seizures and HIV history. His medication adherence issues and the focal neurological symptoms are concerning. Given his likely low CD4 count based on the medication non-adherence, what CNS opportunistic infections should be highest on your differential? What imaging would be most helpful here?",
       "finalDebrief": "This case highlights the importance of considering opportunistic CNS infections in AIDS patients with low CD4 counts. The combination of new-onset seizures, headaches, and mild fever in someone with likely poor HIV control should immediately raise concern for toxoplasmosis, CNS lymphoma, or other opportunistic infections. The key learning point is that neurological symptoms in immunocompromised patients require urgent evaluation and empiric treatment while awaiting definitive diagnosis.",
-      "final": "Diagnosis: CNS toxoplasmosis in AIDS. Key learning: (1) Empiric treatment rule: HIV, CD4 <200, Toxoplasma IgG positive, multiple ring-enhancing lesions \u2192 treat empirically for toxoplasmosis first without biopsy. Clinical and radiological improvement at 10-14 days confirms toxo. No improvement \u2192 biopsy for PCNSL. (2) Toxo IgG negative: if seronegative, toxo very unlikely (<3%) \u2192 proceed to biopsy sooner. (3) PCNSL distinction: single periventricular lesion, EBV+ in CSF (85% sensitive), responds dramatically to dexamethasone, CD4 typically <50. (4) IRIS timing: treat OI 2-3 weeks before starting ART. Exception protocols for TB meningitis, cryptococcal meningitis, PML. (5) Suppressive therapy: after 6 weeks acute treatment, lifelong pyrimethamine + sulfadiazine until CD4 >200 for \u22656 months on ART. TMP-SMX primary prophylaxis for CD4 <200 covers both PCP and toxo."
+      "final": "Diagnosis: CNS toxoplasmosis in AIDS. Key learning: (1) Empiric treatment rule: HIV patient with CD4 <200 + Toxo IgG positive + multiple ring-enhancing lesions \u2192 treat empirically for toxoplasmosis without biopsy. If clinical/radiological improvement at 10-14 days \u2192 confirmed. No improvement \u2192 biopsy for PCNSL. (2) Toxo IgG negative: if IgG negative, toxoplasmosis unlikely \u2192 biopsy sooner, consider PCNSL. (3) PCNSL characteristics: single periventricular lesion, EBV+ in CSF, responds dramatically to dexamethasone (may disappear before biopsy), CD4 typically <50. (4) IRIS timing: treating OI for 2-3 weeks before starting ART prevents IRIS-related intracranial herniation. Exception for some OIs \u2014 consult ID. (5) Suppressive therapy: after 6 weeks acute treatment, lifelong pyrimethamine + sulfadiazine until CD4 >200 for \u22656 months on ART."
     }
   }
 };

@@ -28,27 +28,27 @@ window.EMR_DATA = {
       "icd": "G43.409",
       "onset": "2024",
       "status": "Active",
-      "notes": "Rachel Kim, 28F \u2014 3rd episode over 2 years. Right throbbing headache with left arm and leg weakness developing over 20 minutes, resolving completely within 2 hours. MRI normal. No family history."
+      "notes": "Rachel Kim, 28F \u2014 3rd episode over 2 years. Right throbbing headache with left arm and leg weakness over 20 minutes, resolving completely within 2 hours. MRI normal. No family history."
     },
     {
-      "problem": "Stroke mimicry \u2014 mandatory workup each episode",
+      "problem": "Stroke exclusion mandatory each episode",
       "icd": "G43.409",
       "onset": "2024",
       "status": "Active",
-      "notes": "Every episode requires acute stroke exclusion. MRI DWI is the key test. New neurological deficit = treat as stroke until imaging clears."
+      "notes": "Every hemiplegic migraine episode requires MRI DWI to exclude acute ischemia. Never diagnose hemiplegic migraine without imaging."
     },
     {
-      "problem": "Triptan/ergotamine contraindication",
+      "problem": "Triptans and ergotamines contraindicated",
       "icd": "G43.409",
       "onset": "2024",
       "status": "Active",
-      "notes": "Triptans and ergotamines contraindicated in hemiplegic migraine \u2014 theoretical vasoconstriction risk. Use antiemetics + NSAIDs."
+      "notes": "Avoid vasoconstrictors in hemiplegic migraine \u2014 theoretical risk of cerebral vasoconstriction in setting of motor aura."
     }
   ],
   "medications": [
     {
       "name": "Prochlorperazine 10mg IV \u2014 acute attack",
-      "sig": "IV dopamine antagonist effective for migraine. Avoid triptans and ergotamines in hemiplegic migraine.",
+      "sig": "IV antiemetic (dopamine antagonist) effective for migraine. Avoid triptans and ergotamines.",
       "prescriber": "Neurology/Emergency",
       "start": "2024",
       "refills": 0,
@@ -56,7 +56,7 @@ window.EMR_DATA = {
     },
     {
       "name": "Ketorolac 30mg IV + IV hydration",
-      "sig": "IV NSAID adjunct. Hydration improves headache regardless of status.",
+      "sig": "IV NSAID adjunct. IV hydration improves headache.",
       "prescriber": "Emergency",
       "start": "2024",
       "refills": 0,
@@ -64,7 +64,7 @@ window.EMR_DATA = {
     },
     {
       "name": "Verapamil 240mg daily \u2014 preventive",
-      "sig": "Calcium channel blockade is first-line preventive for hemiplegic migraine. Avoid beta-blockers.",
+      "sig": "Calcium channel blockade first-line preventive for hemiplegic migraine. Avoid propranolol.",
       "prescriber": "Neurology",
       "start": "2024",
       "refills": 3,
@@ -181,7 +181,7 @@ window.EMR_DATA = {
           "test": "MRI DWI",
           "value": "No restricted diffusion \u2014 no acute ischemia",
           "unit": "",
-          "ref": "No stroke",
+          "ref": "Normal",
           "flag": ""
         },
         {
@@ -192,10 +192,10 @@ window.EMR_DATA = {
           "flag": ""
         },
         {
-          "test": "CADASIL screen (NOTCH3)",
-          "value": "Negative",
+          "test": "ESR/CRP",
+          "value": "Normal",
           "unit": "",
-          "ref": "Negative",
+          "ref": "Normal",
           "flag": ""
         },
         {
@@ -203,13 +203,6 @@ window.EMR_DATA = {
           "value": "Negative",
           "unit": "",
           "ref": "Negative",
-          "flag": ""
-        },
-        {
-          "test": "ESR/CRP",
-          "value": "Normal",
-          "unit": "",
-          "ref": "Normal",
           "flag": ""
         }
       ]
@@ -219,8 +212,8 @@ window.EMR_DATA = {
     {
       "date": "04/2024",
       "study": "MRI Brain with DWI and MRA",
-      "findings": "No restricted diffusion. No enhancing lesions. No white matter lesions. Normal MRA.",
-      "impression": "Normal MRI brain. No acute ischemia. No structural cause."
+      "findings": "No restricted diffusion. No enhancing lesions. Normal MRA. Normal cerebral architecture.",
+      "impression": "Normal MRI. No acute ischemia. No structural cause."
     }
   ],
   "immunizations": [
@@ -299,7 +292,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "complex-migraine",
-    "diagnosis": "Sporadic Hemiplegic Migraine \u2014 After Stroke Exclusion",
+    "diagnosis": "Sporadic Hemiplegic Migraine",
     "acuity": 2,
     "presentation": "Altered Mental Status",
     "category": "neurologic"
@@ -363,11 +356,10 @@ window.EMR_DATA = {
       "Cardiovascular examination including cardiac auscultation": "Regular rate and rhythm, soft mid-systolic click consistent with known mitral valve prolapse, no murmurs"
     },
     "ddxTargets": [
-      "Sporadic hemiplegic migraine (correct \u2014 after stroke excluded)",
-      "Acute ischemic stroke \u2014 DWI negative excludes acute ischemia",
-      "TIA \u2014 fully resolved; but slow spreading aura distinguishes from sudden TIA",
-      "Focal seizure with Todd paralysis \u2014 EEG abnormality; seizure activity",
-      "CADASIL \u2014 white matter lesions; NOTCH3 mutation; subcortical infarcts"
+      "Sporadic hemiplegic migraine (after stroke excluded \u2014 correct)",
+      "Acute ischemic stroke \u2014 DWI negative excludes; critical exclusion",
+      "TIA \u2014 no DWI changes; symptoms fully resolved; slow spread of aura distinguishes from stroke",
+      "Focal seizure with Todd paralysis \u2014 EEG abnormality; postictal confusion"
     ],
     "biasFlags": {
       "anchoring": "Young healthy female with known migraine history may anchor thinking to 'just migraines' and miss the complexity of hemiplegic migraine requiring workup",
@@ -378,7 +370,7 @@ window.EMR_DATA = {
       "phase2": "You've identified some key differentials for acute weakness. What specific historical features would help you distinguish between a vascular event, seizure disorder, and a complex migraine? What questions about the temporal pattern and associated symptoms will be most crucial?",
       "phase5": "The normal interictal exam is important - what does this tell you about vascular causes? Given the patient's age, stereotyped episodes, and migraine history, how has your differential evolved? What workup would you want before making a definitive diagnosis?",
       "finalDebrief": "This case highlights sporadic hemiplegic migraine, a rare but important migraine variant that can mimic stroke. Notice how the family history, stereotyped nature of episodes, and complete interictal recovery pointed toward migraine. What red flags would have made you more concerned for stroke, and how do the diagnostic criteria for hemiplegic migraine help distinguish it from other causes of transient weakness?",
-      "final": "Diagnosis: sporadic hemiplegic migraine. Key learning: (1) Hemiplegic migraine = migraine with MOTOR aura. Diagnosis of exclusion \u2014 every episode must exclude stroke. Aura spreads SLOWLY over 20-30 minutes (unlike sudden stroke onset) but DWI MRI is still mandatory. (2) Familial vs sporadic: familial = autosomal dominant, gene mutations (CACNA1A, ATP1A2, SCN1A). Sporadic = no family history, same clinical presentation. (3) Triptan contraindication: avoid triptans and ergotamines \u2014 theoretical vasoconstriction risk during possible reduced cerebral perfusion. Use IV prochlorperazine + ketorolac instead. (4) Cortical spreading depression: the pathophysiology \u2014 wave of neuronal depolarization followed by suppression spreading at 2-3mm/min across cortex. Explains the slow spread of symptoms. (5) Preventive: verapamil first-line. Valproate and topiramate also used. Avoid propranolol (theoretical worsening in hemiplegic migraine)."
+      "final": "Diagnosis: sporadic hemiplegic migraine. Key learning: (1) Hemiplegic migraine = migraine with motor aura (hemiparesis/hemiplegia). Diagnosis of exclusion \u2014 every episode must exclude stroke with MRI DWI. The aura spreads slowly (over 20-30 min) unlike sudden-onset stroke, but this distinction alone is NOT safe \u2014 imaging is mandatory. (2) Familial vs sporadic: familial hemiplegic migraine has autosomal dominant inheritance (CACNA1A, ATP1A2, SCN1A gene mutations). Sporadic = same presentation, no family history. (3) Triptan/ergotamine contraindication: vasoconstriction during motor aura = theoretical stroke risk. Most neurologists avoid triptans in hemiplegic migraine. Use IV prochlorperazine + ketorolac. (4) Cortical spreading depression: hemiplegic migraine is caused by cortical spreading depression \u2014 a wave of neuronal depolarization spreading at 2-3mm/min. Explains the SLOW progression of symptoms over minutes. (5) Preventive: verapamil first-line (reduces cortical spreading depression). Avoid propranolol in hemiplegic migraine. Valproate and topiramate also effective."
     }
   }
 };

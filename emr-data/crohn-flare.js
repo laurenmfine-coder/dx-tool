@@ -25,50 +25,50 @@ window.EMR_DATA = {
   "problems": [
     {
       "problem": "Crohn's disease flare \u2014 moderate-severe (HBI 12)",
-      "icd": "K50.10",
+      "icd": "K50.90",
       "onset": "2024",
       "status": "Active",
-      "notes": "Sophia Martinez, 32F \u2014 known Crohn's ileocolitis, on azathioprine. 3-week worsening abdominal pain, 8+ loose stools daily, 10 lb weight loss, CRP 84. HBI 12 = moderate-severe. Failed outpatient prednisone taper."
+      "notes": "Amanda Garcia, 32F \u2014 known Crohn's disease (terminal ileum) diagnosed 5 years ago. 3-week history crampy RLQ pain, 8 loose stools/day, low-grade fever, 8 lb weight loss. Harvey-Bradshaw Index 12 = moderate-severe."
     },
     {
-      "problem": "Steroid-dependent \u2014 escalation to biologic indicated",
-      "icd": "K50.10",
+      "problem": "Ileal stricture \u2014 obstructive symptoms",
+      "icd": "K50.012",
       "onset": "2024",
       "status": "Active",
-      "notes": "Third prednisone course in 12 months. Steroid-dependent disease = indication for biologic therapy. Continuing steroids \u2192 steroid toxicity without disease modification."
+      "notes": "Post-inflammatory stricture terminal ileum on CT. Intermittent obstruction with eating. Stricture may require endoscopic dilation or resection if medically refractory."
     },
     {
-      "problem": "Abscess/fistula exclusion \u2014 complication screening",
-      "icd": "K50.10",
+      "problem": "Biologic therapy assessment \u2014 inadequate response to current therapy",
+      "icd": "K50.90",
       "onset": "2024",
       "status": "Active",
-      "notes": "Crohn's complications: abscess (CT-guided drainage before steroids if present), fistula (perianal exam), stricture. CT enterography to exclude before immunosuppression intensification."
+      "notes": "Currently on azathioprine monotherapy. Moderate-severe flare despite immunomodulator = step up to biologic therapy (anti-TNF or vedolizumab or ustekinumab)."
     }
   ],
   "medications": [
     {
-      "name": "IV methylprednisolone 40-60mg daily \u2014 induction",
-      "sig": "For hospitalized moderate-severe Crohn's flare failing oral steroids. IV steroids for induction of remission only \u2014 not maintenance.",
-      "prescriber": "GI/Gastroenterology",
-      "start": "2024",
-      "refills": 0,
-      "status": "Active"
-    },
-    {
-      "name": "Infliximab (Remicade) or vedolizumab \u2014 biologic initiation",
-      "sig": "Anti-TNF (infliximab) or gut-selective (vedolizumab) for steroid-dependent/refractory Crohn's. Initiate during hospitalization after excluding infection (TB screen, HBV, HIV). Accelerated induction (0, 2, 6 weeks).",
+      "name": "Prednisone 40mg daily x8 weeks taper \u2014 induction",
+      "sig": "Systemic steroids for acute flare induction. NOT used for maintenance (steroid dependency = step-up therapy needed). Taper over 8-12 weeks.",
       "prescriber": "Gastroenterology",
       "start": "2024",
       "refills": 0,
-      "status": "Initiating"
+      "status": "Active \u2014 induction"
     },
     {
-      "name": "Hold azathioprine during acute infection/flare assessment",
-      "sig": "Thiopurines are slow (3-6 months) and inadequate as monotherapy for moderate-severe disease. Combination with anti-TNF reduces immunogenicity.",
+      "name": "Adalimumab (Humira) \u2014 biologic step-up therapy",
+      "sig": "Anti-TNF for moderate-severe Crohn's failing immunomodulator. Adalimumab or infliximab. Screen for TB (TST/IGRA) and Hep B before starting. Effective for luminal and fistulizing disease.",
       "prescriber": "Gastroenterology",
       "start": "2024",
       "refills": 0,
-      "status": "Review \u2014 hold if infection"
+      "status": "Initiating \u2014 screening complete"
+    },
+    {
+      "name": "MR enterography \u2014 evaluate stricture",
+      "sig": "Best modality for Crohn's small bowel evaluation. Assesses stricture length, inflammatory vs fibrotic component, penetrating disease, abscesses. Guides decision for endoscopic vs surgical management.",
+      "prescriber": "Gastroenterology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Ordered"
     }
   ],
   "allergies": [
@@ -179,37 +179,37 @@ window.EMR_DATA = {
       "results": [
         {
           "test": "CRP",
-          "value": "84",
+          "value": "48",
           "unit": "mg/L",
           "ref": "<10",
           "flag": "H"
         },
         {
           "test": "ESR",
-          "value": "68",
+          "value": "64",
           "unit": "mm/hr",
           "ref": "<20",
           "flag": "H"
         },
         {
           "test": "Fecal calprotectin",
-          "value": "1840",
+          "value": "1800",
           "unit": "\u03bcg/g",
-          "ref": "<50 (active IBD >250)",
+          "ref": "<50 normal; >250 = IBD active",
           "flag": "H"
-        },
-        {
-          "test": "Stool C. diff",
-          "value": "Negative",
-          "unit": "",
-          "ref": "Negative (always check before immunosuppression)",
-          "flag": ""
         },
         {
           "test": "Albumin",
           "value": "2.9",
           "unit": "g/dL",
           "ref": "3.5-5.0",
+          "flag": "L"
+        },
+        {
+          "test": "Hemoglobin",
+          "value": "10.2",
+          "unit": "g/dL",
+          "ref": "12-16",
           "flag": "L"
         }
       ]
@@ -218,9 +218,9 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "04/2024",
-      "study": "CT Enterography",
-      "findings": "Wall thickening terminal ileum and ascending colon. Increased mural enhancement. Mesenteric fat stranding (creeping fat). No abscess. No free air. No stricture causing obstruction.",
-      "impression": "Active Crohn's ileocolitis. No complications. Biologic initiation appropriate."
+      "study": "CT Abdomen/Pelvis with Contrast",
+      "findings": "Terminal ileal wall thickening 12mm with surrounding fat stranding. Segment of stricturing 8cm. Small pre-stenotic dilation. No abscess, no perforation, no fistula.",
+      "impression": "Active Crohn's disease with terminal ileal stricture. No penetrating complications. Step-up therapy indicated."
     }
   ],
   "immunizations": [
@@ -306,7 +306,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "crohn-flare",
-    "diagnosis": "Crohn's Disease Flare \u2014 Moderate-Severe, Steroid-Dependent",
+    "diagnosis": "Crohn's Disease Flare \u2014 Moderate-Severe with Stricture",
     "acuity": 3,
     "presentation": "Abdominal Pain",
     "category": "gastrointestinal"
@@ -370,11 +370,11 @@ window.EMR_DATA = {
       "Assessment for extraintestinal manifestations": "No current arthritis, skin lesions, or ocular findings; appears mildly pale consistent with known iron deficiency"
     },
     "ddxTargets": [
-      "Crohn's disease flare \u2014 moderate-severe (correct)",
-      "Infectious colitis \u2014 C. diff negative; no recent antibiotics; but always test before immunosuppression",
-      "Intestinal lymphoma \u2014 risk in Crohn's especially with thiopurines; CT enterography helps",
-      "UC flare \u2014 Crohn's typically ileal/ileocolonic; skip lesions; transmural; rectal sparing",
-      "Bowel obstruction from stricture \u2014 CT shows no stricture here; obstructive symptoms absent"
+      "Crohn's disease flare with stricture (correct)",
+      "Ulcerative colitis \u2014 continuous mucosal involvement from rectum; no small bowel; different pattern",
+      "Ileocecal tuberculosis \u2014 endemic exposure; TB testing; similar CT appearance",
+      "Appendicitis \u2014 acute onset; RLQ tenderness; no known Crohn's history",
+      "Irritable bowel syndrome \u2014 no elevated inflammatory markers; no structural changes; functional diagnosis"
     ],
     "biasFlags": {
       "anchoring": "Don't anchor solely on the known Crohn's diagnosis - consider that new symptoms could represent complications like perforation, abscess, or even unrelated conditions like appendicitis",
@@ -385,7 +385,7 @@ window.EMR_DATA = {
       "phase2": "You've identified several reasonable possibilities for abdominal pain in a young woman. As you interview Isabella, pay particular attention to the timeline, character of symptoms, and any historical clues. What specific historical elements would help you differentiate between inflammatory conditions, infectious causes, and surgical emergencies?",
       "phase5": "Now that you've gathered your history and physical findings, consider how Isabella's known medical history fits with her current presentation. What findings support inflammatory bowel disease versus other causes? Are there any red flags that might suggest complications or require urgent intervention?",
       "finalDebrief": "This case illustrates how chronic conditions can present with acute exacerbations that mimic other diseases. Isabella's presentation was classic for a Crohn's flare with ileocecal involvement, but notice how the differential included both related complications and unrelated conditions like appendicitis. The key distinguishing features were the gradual onset, bloody diarrhea, known IBD history, and examination findings consistent with terminal ileal inflammation rather than isolated appendiceal involvement.",
-      "final": "Diagnosis: Crohn's disease flare, moderate-severe, steroid-dependent. Key learning: (1) Crohn's vs UC: Crohn's = transmural, any GI tract from mouth to anus, skip lesions, ileal/ileocolonic most common, perianal disease, fistulas/abscesses, smoking worsens. UC = mucosal, continuous from rectum proximally, no skip lesions, rectal involvement almost always. (2) Disease activity scoring: Harvey-Bradshaw Index (HBI) \u2014 stool frequency, abdominal pain, general wellbeing, complications. HBI >8 = moderate-severe. CRP + fecal calprotectin correlate with endoscopic activity. (3) Steroid-dependent definition: \u22652 steroid courses in 12 months or inability to taper below prednisolone 10mg = steroid-dependent = indication for biologic therapy. Steroids should never be maintenance therapy in IBD. (4) Before biologic initiation: TB screening (IGRA), HBV (reactivation risk), HIV, varicella immunity, pneumococcal vaccine. Exclude active infection \u2014 giving anti-TNF during active TB = fatal reactivation. (5) Anti-TNF vs vedolizumab: infliximab (anti-TNF) = faster onset, systemic immunosuppression, effective for extraintestinal manifestations. Vedolizumab (anti-\u03b14\u03b27 integrin) = gut-selective, slower onset, safer in elderly/vulnerable patients."
+      "final": "Diagnosis: Crohn's disease flare, moderate-severe. Key learning: (1) Crohn's vs UC distinction: Crohn's = transmural, skip lesions, small bowel involvement, perianal disease, fistulas, strictures, non-caseating granulomas. UC = continuous, mucosal only, rectum \u2192 proximal colon, no small bowel, no fistulas, pseudopolyps. Backwash ileitis (terminal ileum) can occur in severe UC but is not true small bowel Crohn's. (2) Disease severity scoring: Harvey-Bradshaw Index (HBI) for Crohn's \u2014 general well-being + abdominal pain + stools/day + abdominal mass + complications. Score >9 = severe. Endoscopic activity does not always correlate with clinical activity. (3) Inflammatory vs fibrotic stricture: CT/MR enterography can estimate the ratio of active inflammation to fibrous stricture. Inflammatory stricture \u2192 responds to medical therapy. Fibrotic stricture \u2192 endoscopic balloon dilation or surgical resection. (4) Biologic selection: anti-TNF (infliximab, adalimumab) for moderate-severe Crohn's. Vedolizumab (gut-selective) for patients where systemic immunosuppression is a concern. Ustekinumab (IL-12/23 blockade) for anti-TNF failure. Screen for TB and hepatitis B before ALL biologics. (5) Fecal calprotectin: excellent biomarker for IBD activity and mucosal healing. >250\u03bcg/g = active inflammation. <50 = mucosal healing. Useful for monitoring treatment response without repeated colonoscopy."
     }
   }
 };
