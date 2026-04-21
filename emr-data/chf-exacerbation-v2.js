@@ -1,6 +1,3 @@
-// Virtual EMR Case: CHF Exacerbation
-// Variant: chf-exacerbation | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B + AARP Supplement",
     "pcp": "Dr. William Grant, MD",
-    "pharmacy": "Walgreens — 4600 Sheridan St, Hollywood, FL",
+    "pharmacy": "Walgreens \u2014 4600 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "Black or African American",
     "address": "1092 Sycamore Dr, Baltimore, MD 21214",
@@ -27,112 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Heart Failure with Reduced Ejection Fraction (HFrEF)",
-      "icd": "I50.22",
-      "onset": "2018",
+      "problem": "Acute decompensated HFrEF \u2014 volume overload",
+      "icd": "I50.21",
+      "onset": "2024",
       "status": "Active",
-      "notes": "EF 30%. Non-ischemic dilated cardiomyopathy. NYHA Class III."
+      "notes": "Margaret Wilson, 68F \u2014 known HFrEF (EF 30%), 5-day history progressive dyspnea, orthopnea, paroxysmal nocturnal dyspnea, 8 lb weight gain. Bilateral crackles, JVP 16cm, bilateral pitting edema."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "1998",
+      "problem": "Precipitant \u2014 medication non-adherence and dietary indiscretion",
+      "icd": "I50.21",
+      "onset": "2024",
       "status": "Active",
-      "notes": ""
+      "notes": "Admits stopping furosemide 2 weeks ago and high dietary sodium intake. Medication non-adherence is the most common precipitant of HF decompensation."
     },
     {
-      "problem": "Atrial Fibrillation, Paroxysmal",
-      "icd": "I48.0",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "CHA2DS2-VASc 5"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "A1c 7.2%"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3b",
-      "icd": "N18.32",
+      "problem": "EF 30% \u2014 HFrEF with appropriate GDMT",
+      "icd": "I50.21",
       "onset": "2020",
       "status": "Active",
-      "notes": "Baseline Cr 1.6-1.8. Cardiorenal syndrome."
-    },
-    {
-      "problem": "Obstructive Sleep Apnea",
-      "icd": "G47.33",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "CPAP 10 cm H2O. Reports poor compliance."
+      "notes": "On appropriate guideline-directed medical therapy: ACE inhibitor, beta-blocker, MRA, SGLT2 inhibitor. Volume overload despite GDMT."
     }
   ],
   "medications": [
     {
-      "name": "Sacubitril-Valsartan (Entresto) 49-51mg BID",
-      "sig": "Take 1 tablet by mouth twice daily",
-      "prescriber": "Dr. Grant",
-      "start": "06/2019",
+      "name": "Furosemide 80mg IV \u2014 IV diuresis (1-2x home oral dose)",
+      "sig": "IV furosemide provides superior and more reliable diuresis than oral in acute decompensation (impaired gut absorption from bowel edema). Initial dose = 1-2x home oral dose. Target urine output 0.5-1mL/kg/hr. DOSE trial: continuous vs bolus equivalent.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV bolus"
+    },
+    {
+      "name": "Continue GDMT: ACE inhibitor, beta-blocker, MRA, SGLT2i",
+      "sig": "Continue all guideline-directed therapies through hospitalization unless hemodynamically unstable. Do NOT stop beta-blockers in stable ADHF \u2014 associated with higher mortality if stopped. SGLT2 inhibitors reduce HF hospitalization.",
+      "prescriber": "Cardiology",
+      "start": "2024",
       "refills": 3,
-      "status": "Active"
+      "status": "Continued"
     },
     {
-      "name": "Carvedilol 12.5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with food",
-      "prescriber": "Dr. Grant",
-      "start": "09/2018",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Furosemide 80mg BID",
-      "sig": "Take 1 tablet by mouth twice daily",
-      "prescriber": "Dr. Grant",
-      "start": "04/2020",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Spironolactone 25mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Grant",
-      "start": "01/2020",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Apixaban 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily",
-      "prescriber": "Dr. Grant",
-      "start": "08/2019",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Empagliflozin 10mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Grant",
-      "start": "03/2023",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Grant",
-      "start": "11/2010",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Potassium Chloride 20mEq daily",
-      "sig": "Take 1 packet dissolved in water daily",
-      "prescriber": "Dr. Grant",
-      "start": "04/2020",
-      "refills": 3,
-      "status": "Active"
+      "name": "Daily weights \u2014 discharge criterion: net negative 0.5-1kg/day",
+      "sig": "Daily morning weights track diuretic response. Discharge when at dry weight, tolerating oral medications, on stable diuretic regimen, patient educated on daily weights and symptom monitoring.",
+      "prescriber": "Cardiology/Nursing",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active monitoring"
     }
   ],
   "allergies": [
@@ -157,7 +93,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 94,
       "rr": 22,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "90%",
       "wt": "192 lbs",
       "ht": "5'6\"",
@@ -169,7 +105,7 @@ window.EMR_DATA = {
       "bp": "132/82",
       "hr": 78,
       "rr": 18,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "94%",
       "wt": "178 lbs",
       "ht": "5'6\"",
@@ -181,7 +117,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": 76,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "95%",
       "wt": "176 lbs",
       "ht": "5'6\"",
@@ -193,7 +129,7 @@ window.EMR_DATA = {
       "bp": "136/86",
       "hr": 82,
       "rr": 18,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "93%",
       "wt": "180 lbs",
       "ht": "5'6\"",
@@ -210,7 +146,7 @@ window.EMR_DATA = {
       "cc": "Weight gain, worsening dyspnea, leg swelling",
       "hpi": "Mrs. Carter presents with 1 week of progressive dyspnea, now present at rest. Reports 14-lb weight gain over 3 weeks (178 to 192 lbs). Two-pillow orthopnea (baseline one pillow). Woke up gasping for air twice last night (PND). Bilateral lower extremity swelling to mid-calf. Admits she ran out of furosemide 10 days ago and did not refill due to transportation issues. Also ate high-sodium foods over the holidays. Denies chest pain, fever, or cough.",
       "exam": "Moderate respiratory distress at rest. JVP elevated to 12 cm. Lungs: bilateral crackles to mid-lung fields. CV: irregularly irregular (afib), S3 gallop present, II/VI systolic murmur at apex (mitral regurgitation). Abdomen: mildly distended, hepatomegaly 3 cm below costal margin. Ext: 3+ bilateral pitting edema to knees.",
-      "assessment": "1. Acute decompensated HFrEF (NYHA IV) — triggered by medication nonadherence + dietary indiscretion\n2. Afib with uncontrolled rate\n3. Volume overload with pulmonary congestion\n4. CKD 3b — monitor during diuresis",
+      "assessment": "1. Acute decompensated HFrEF (NYHA IV) \u2014 triggered by medication nonadherence + dietary indiscretion\n2. Afib with uncontrolled rate\n3. Volume overload with pulmonary congestion\n4. CKD 3b \u2014 monitor during diuresis",
       "plan": "1. Direct to ED for IV diuresis, telemetry monitoring\n2. Anticipate IV furosemide 80mg bolus, then drip vs. BID dosing\n3. Daily weights, strict I&O, 1.5L fluid restriction, low-sodium diet\n4. Cardiology consult for medication optimization\n5. Social work referral for medication access and transportation"
     },
     {
@@ -219,128 +155,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. William Grant, MD",
       "cc": "HF and DM follow-up",
-      "hpi": "Routine follow-up. Reports stable symptoms at NYHA Class III. One-pillow orthopnea, no PND. Walking to kitchen and bathroom without significant dyspnea. Medication compliant. Weight stable at 178 lbs. CPAP compliance poor — uses 3-4 nights per week.",
+      "hpi": "Routine follow-up. Reports stable symptoms at NYHA Class III. One-pillow orthopnea, no PND. Walking to kitchen and bathroom without significant dyspnea. Medication compliant. Weight stable at 178 lbs. CPAP compliance poor \u2014 uses 3-4 nights per week.",
       "exam": "Comfortable at rest. JVP 8 cm. Lungs: bibasilar crackles, mild. CV: irregularly irregular, S3 present, no new murmurs. Ext: trace bilateral ankle edema.",
-      "assessment": "1. HFrEF — NYHA III, compensated\n2. DM — A1c 7.2%, at goal\n3. Afib — rate controlled\n4. OSA — suboptimal CPAP compliance",
+      "assessment": "1. HFrEF \u2014 NYHA III, compensated\n2. DM \u2014 A1c 7.2%, at goal\n3. Afib \u2014 rate controlled\n4. OSA \u2014 suboptimal CPAP compliance",
       "plan": "1. Continue current HF regimen\n2. Reinforce CPAP use every night\n3. A1c recheck in 6 months\n4. Renal function check in 3 months"
     }
   ],
   "labs": [
     {
-      "date": "01/13/2025",
-      "time": "08:30 AM",
-      "orderedBy": "Dr. Grant",
-      "collected": "01/13/2025 08:45 AM",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-085423",
-      "status": "Final",
-      "specimenType": "Serum/Plasma",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "ADHF Assessment",
+      "results": [
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "148",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "38",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.1",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "28",
-              "unit": "mL/min/1.73m2",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "132",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "5.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "96",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": "L"
-            },
-            {
-              "test": "CO2",
-              "value": "22",
-              "unit": "mEq/L",
-              "range": "21-31",
-              "flag": ""
-            }
-          ]
+          "test": "BNP",
+          "value": "1840",
+          "unit": "pg/mL",
+          "ref": "<100 (elevated = volume overload)",
+          "flag": "H"
         },
         {
-          "name": "BNP",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "1840",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.6",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3 (cardiorenal)",
+          "flag": "H"
         },
         {
-          "name": "TROPONIN",
-          "results": [
-            {
-              "test": "Troponin I, High Sensitivity",
-              "value": "0.018",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": ""
-            }
-          ]
+          "test": "Sodium",
+          "value": "132",
+          "unit": "mEq/L",
+          "ref": "136-145 (dilutional)",
+          "flag": "L"
+        },
+        {
+          "test": "Troponin",
+          "value": "0.06",
+          "unit": "ng/mL",
+          "ref": "<0.04 (demand ischemia vs new ACS)",
+          "flag": "H"
+        },
+        {
+          "test": "Chest X-Ray",
+          "value": "Bilateral interstitial edema, Kerley B lines, cardiomegaly, small bilateral effusions",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "07/08/2024",
-      "study": "ECHOCARDIOGRAM, TRANSTHORACIC",
-      "accession": "IMG-2024-29174",
-      "status": "FINAL",
-      "orderedBy": "Dr. William Grant, MD",
-      "readBy": "Dr. Karen Liu, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "HFrEF, annual surveillance",
-      "technique": "Complete 2D, M-mode, and Doppler echocardiogram.",
-      "findings": "LV: Severely dilated. EF 30% by biplane Simpson method. Global hypokinesis. LV end-diastolic diameter 6.4 cm. Diastolic dysfunction Grade 3 (restrictive pattern). LA: Severely dilated (5.2 cm). RV: Mildly dilated, TAPSE 1.5 cm (borderline reduced). Valves: Moderate mitral regurgitation (functional). Mild tricuspid regurgitation. Estimated RVSP 48 mmHg (elevated). Small pericardial effusion, not hemodynamically significant.",
-      "impression": "1. Severely reduced LV systolic function, EF 30% — unchanged from prior.\n2. Severe LV and LA dilation. Global hypokinesis.\n3. Moderate functional mitral regurgitation.\n4. Elevated RVSP suggesting pulmonary hypertension.\n5. Small pericardial effusion.",
-      "dictated": "07/08/2024 11:00 AM",
-      "verified": "07/08/2024 02:15 PM"
+      "date": "04/2024",
+      "study": "Echocardiogram",
+      "findings": "EF 28% (previously 30% \u2014 stable). Dilated LV. Moderate MR. Elevated E/e' ratio (22) \u2014 elevated LV filling pressures. No new wall motion abnormalities.",
+      "impression": "Decompensated HFrEF. No new ischemia. Elevated filling pressures consistent with volume overload."
     }
   ],
   "immunizations": [
@@ -403,7 +272,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Very limited — walks within home. Gets dyspneic with any exertion beyond ADLs."
+      "Very limited \u2014 walks within home. Gets dyspneic with any exertion beyond ADLs."
     ],
     [
       "Housing",
@@ -419,8 +288,8 @@ window.EMR_DATA = {
     ]
   ],
   "meta": {
-    "caseId": "chf-exacerbation",
-    "diagnosis": "Acute Decompensated Heart Failure (HFrEF Exacerbation)",
+    "caseId": "chf-exacerbation-v2",
+    "diagnosis": "Acute Decompensated Heart Failure (HFrEF) \u2014 Exacerbation",
     "acuity": 3,
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
@@ -484,13 +353,11 @@ window.EMR_DATA = {
       "Weight measurement and comparison to baseline": "Current weight 14 pounds above documented dry weight from last clinic visit"
     },
     "ddxTargets": [
-      "Acute Decompensated Heart Failure (HFrEF Exacerbation) (correct diagnosis)",
-      "Pneumonia with secondary heart failure exacerbation",
-      "Pulmonary embolism",
-      "Acute coronary syndrome",
-      "Acute kidney injury with fluid retention",
-      "Medication non-compliance",
-      "COPD exacerbation"
+      "Acute decompensated HFrEF \u2014 volume overload (correct)",
+      "New ACS triggering decompensation \u2014 troponin 0.06 is mildly elevated but E/e' pattern + known HF + no new wall motion; demand ischemia",
+      "Pulmonary embolism \u2014 acute dyspnea + right heart strain; BNP can elevate in PE; no signs of RV failure on echo",
+      "COPD exacerbation \u2014 bronchospasm; smoking history; different spirometry; can coexist",
+      "Cardiac tamponade \u2014 JVP elevated but pulsus paradoxus; effusion on echo; different pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of immediately anchoring on heart failure given known history without considering acute precipitants like PE, ACS, or pneumonia that could trigger decompensation",
@@ -500,7 +367,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified heart failure exacerbation in your differential, which makes sense given her history. Before you interview the patient, what specific precipitating factors should you explore that might have triggered this decompensation? Also, what life-threatening conditions could present similarly in a 77-year-old with cardiovascular risk factors?",
       "phase5": "Your examination findings strongly support volume overload. Now let's think systematically - you have clear evidence of heart failure exacerbation, but what are the common precipitants you should investigate? Consider the triad of medication compliance, dietary indiscretion, and intercurrent illness. What diagnostic studies would help you both confirm the diagnosis and identify any triggers?",
-      "finalDebrief": "This case illustrates how acute decompensated heart failure often presents with a classic constellation of symptoms. Notice how your differential evolved from considering various causes of dyspnea to recognizing the volume overload picture. The key teaching points are recognizing the signs of right heart failure, understanding precipitants of decompensation, and the importance of investigating triggers even when the primary diagnosis seems obvious."
+      "finalDebrief": "This case illustrates how acute decompensated heart failure often presents with a classic constellation of symptoms. Notice how your differential evolved from considering various causes of dyspnea to recognizing the volume overload picture. The key teaching points are recognizing the signs of right heart failure, understanding precipitants of decompensation, and the importance of investigating triggers even when the primary diagnosis seems obvious.",
+      "final": "Diagnosis: acute decompensated HFrEF, volume overload. Key learning: (1) Precipitants of HF decompensation (FAILURES mnemonic): Forgot medication/non-adherence (most common), Arrhythmia (new AF), Ischemia/infarction, Lifestyle (sodium/fluid), Uncontrolled hypertension, Renal failure, Embolism, anemia, and Stenosis (valvular). Identify and treat the precipitant. (2) IV vs oral diuretics: IV furosemide preferred in ADHF due to impaired gut absorption from bowel edema. IV is 2x as potent as oral. Start at 1-2x the home oral dose. DOSE trial showed no significant difference between low-dose and high-dose, bolus vs continuous \u2014 titrate to response. (3) Continue beta-blockers in stable ADHF: stopping beta-blockers in hospitalized HF patients is associated with worse in-hospital outcomes. Only hold if hemodynamically unstable (hypotension, cardiogenic shock). (4) BNP-guided therapy: BNP >1000 at discharge is associated with higher 30-day readmission. Target BNP <500 before discharge if possible. (5) GDMT in HFrEF: four pillars \u2014 ACE inhibitor/ARNi (sacubitril-valsartan preferred over ACE for symptomatic HFrEF), beta-blocker (carvedilol, metoprolol succinate, bisoprolol), MRA (spironolactone/eplerenone), SGLT2 inhibitor (dapagliflozin/empagliflozin). All four reduce mortality and HF hospitalization."
     }
   }
 };

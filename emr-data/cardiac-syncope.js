@@ -9,7 +9,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part B with Medigap Plan N",
     "pcp": "Dr. Catherine Brennan, MD",
-    "pharmacy": "Publix Pharmacy — 2200 S University Dr, Riverside, FL",
+    "pharmacy": "Publix Pharmacy \u2014 2200 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White",
     "address": "5580 NE 18th Ave, Fort Lauderdale, FL 33308",
@@ -23,80 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Severe Aortic Stenosis — Calcific/Degenerative",
+      "problem": "Exertional syncope \u2014 severe aortic stenosis",
       "icd": "I35.0",
-      "onset": "2023",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Bicuspid aortic valve; AVA 0.8 cm²; mean gradient 48 mmHg (echo 10/2025); symptomatic — exertional dyspnea, now syncope; TAVR evaluation in progress"
+      "notes": "Arthur Livingston, 79M \u2014 syncope while walking upstairs. No prodrome, no tongue biting, rapid return to consciousness. Echo: severe AS (AVA 0.7cm\u00b2, peak gradient 78mmHg, mean gradient 52mmHg). This is the classic AS triad: angina, syncope, or heart failure."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "1998",
+      "problem": "Severe aortic stenosis \u2014 valve replacement candidacy assessment",
+      "icd": "I35.0",
+      "onset": "2022",
       "status": "Active",
-      "notes": "On low-dose amlodipine; careful BP management given AS — avoid overreduction"
+      "notes": "AVA 0.7cm\u00b2 (severe = <1.0cm\u00b2). Symptomatic severe AS has median survival <2 years without valve replacement. Exertional syncope = surgical urgency."
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2004",
+      "problem": "Aortic stenosis triad \u2014 syncope is middle stage",
+      "icd": "I35.0",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On rosuvastatin"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "eGFR 54; hypertensive nephrosclerosis"
-    },
-    {
-      "problem": "Bicuspid Aortic Valve",
-      "icd": "Q23.1",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "Incidental finding; progressive stenosis over 15 years; now severe"
-    },
-    {
-      "problem": "Gout",
-      "icd": "M10.9",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "On allopurinol; well controlled; last flare 2024"
+      "notes": "Classic AS symptom progression: angina (5yr survival) \u2192 syncope (3yr survival) \u2192 heart failure (1-2yr survival). Syncope marks critical threshold."
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 2.5mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "06/2020",
-      "refills": 5,
-      "status": "Active"
+      "name": "Urgent cardiology referral \u2014 TAVR or SAVR assessment",
+      "sig": "Symptomatic severe AS with exertional syncope = urgent valve replacement. Transcatheter (TAVR) vs surgical (SAVR) decision based on surgical risk score (STS score). High surgical risk \u2192 TAVR. Low-moderate risk \u2192 either.",
+      "prescriber": "Cardiology/Cardiac Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "URGENT"
     },
     {
-      "name": "Rosuvastatin 10mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Brennan",
-      "start": "03/2005",
-      "refills": 5,
-      "status": "Active"
+      "name": "Avoid vasodilators and diuretics \u2014 hemodynamic dependency",
+      "sig": "AS patients are preload-dependent and have fixed cardiac output. Vasodilators (nitrates, ACE inhibitors) and over-diuresis \u2192 profound hypotension. Handle all medications carefully.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 medication restriction"
     },
     {
-      "name": "Allopurinol 200mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "08/2017",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "01/2010",
-      "refills": 11,
-      "status": "Active"
+      "name": "Beta-blockers with caution \u2014 do not reduce heart rate excessively",
+      "sig": "AS patients compensate with tachycardia. Over-slowing the heart rate reduces cardiac output further in severe AS. Use beta-blockers only if essential (AF) and with great caution.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Caution"
     }
   ],
   "allergies": [
@@ -114,7 +85,7 @@ window.EMR_DATA = {
       "bp": "104/72",
       "hr": 58,
       "rr": 18,
-      "temp": "97.8°F",
+      "temp": "97.8\u00b0F",
       "spo2": "96%",
       "wt": "178 lbs",
       "ht": "5'11\"",
@@ -126,7 +97,7 @@ window.EMR_DATA = {
       "bp": "128/74",
       "hr": 64,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "97%",
       "wt": "180 lbs",
       "ht": "5'11\"",
@@ -138,7 +109,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 68,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "182 lbs",
       "ht": "5'11\"",
@@ -153,10 +124,10 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Anil Patel, MD (Cardiology)",
       "cc": "Aortic stenosis surveillance, worsening symptoms",
-      "hpi": "79M with known severe AS (bicuspid valve) presents for interval echocardiogram and symptom assessment. Reports progressive exertional dyspnea over past 6 months — now dyspneic walking half a block (previously 2 blocks). Had one episode of near-syncope 2 weeks ago while climbing stairs — felt lightheaded, grayed out briefly, grabbed railing. No full LOC. No chest pain with exertion. No PND or orthopnea. Reports fatigue limiting daily activities.",
+      "hpi": "79M with known severe AS (bicuspid valve) presents for interval echocardiogram and symptom assessment. Reports progressive exertional dyspnea over past 6 months \u2014 now dyspneic walking half a block (previously 2 blocks). Had one episode of near-syncope 2 weeks ago while climbing stairs \u2014 felt lightheaded, grayed out briefly, grabbed railing. No full LOC. No chest pain with exertion. No PND or orthopnea. Reports fatigue limiting daily activities.",
       "exam": "NAD at rest. CV: Pulsus parvus et tardus; harsh 4/6 crescendo-decrescendo systolic murmur at RUSB radiating to carotids; S2 diminished; S4 present. Lungs: CTAB. Ext: No edema. Neuro: A&O x3, gait steady with cane.",
-      "assessment": "1. Severe AS — now symptomatic (dyspnea + near-syncope); AVA 0.8 cm², mean gradient 48\n2. Warrants urgent intervention — TAVR evaluation",
-      "plan": "1. STAT TAVR workup: CT angiography chest/abdomen/pelvis, coronary angiography, carotid duplex, PFTs\n2. Heart team conference scheduled\n3. Strict fall precautions — no exertion beyond tolerance\n4. Hold amlodipine if SBP <110\n5. Avoid vasodilators, volume depletion\n6. Return 2 weeks with workup results"
+      "assessment": "1. Severe AS \u2014 now symptomatic (dyspnea + near-syncope); AVA 0.8 cm\u00b2, mean gradient 48\n2. Warrants urgent intervention \u2014 TAVR evaluation",
+      "plan": "1. STAT TAVR workup: CT angiography chest/abdomen/pelvis, coronary angiography, carotid duplex, PFTs\n2. Heart team conference scheduled\n3. Strict fall precautions \u2014 no exertion beyond tolerance\n4. Hold amlodipine if SBP <110\n5. Avoid vasodilators, volume depletion\n6. Return 2 weeks with workup results"
     },
     {
       "id": "V002",
@@ -164,142 +135,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Catherine Brennan, MD",
       "cc": "Routine follow-up, CKD, gout management",
-      "hpi": "78M with severe AS (under cardiology surveillance), CKD 3a, gout presents for routine follow-up. Reports mild exertional dyspnea — can walk 2 blocks. Gout well controlled on allopurinol. eGFR stable at 54. No chest pain.",
+      "hpi": "78M with severe AS (under cardiology surveillance), CKD 3a, gout presents for routine follow-up. Reports mild exertional dyspnea \u2014 can walk 2 blocks. Gout well controlled on allopurinol. eGFR stable at 54. No chest pain.",
       "exam": "NAD. CV: Harsh systolic murmur RUSB, 3-4/6, radiating to carotids. Lungs: CTAB. Ext: No edema.",
-      "assessment": "1. Severe AS — symptomatic per cardiology; TAVR evaluation planned\n2. CKD 3a — stable\n3. Gout — controlled",
+      "assessment": "1. Severe AS \u2014 symptomatic per cardiology; TAVR evaluation planned\n2. CKD 3a \u2014 stable\n3. Gout \u2014 controlled",
       "plan": "1. Continue current medications\n2. Labs: CMP, CBC, uric acid\n3. Follow-up with cardiology for TAVR evaluation\n4. Return 3 months"
     }
   ],
   "labs": [
     {
-      "date": "10/14/2025",
-      "time": "08:30",
-      "orderedBy": "Dr. Patel",
-      "collected": "10/14/2025 08:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-851440",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Severe AS Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "96",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "54",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Echocardiography \u2014 AVA",
+          "value": "0.7",
+          "unit": "cm\u00b2 (severe <1.0cm\u00b2)",
+          "ref": ">2.0 normal",
+          "flag": "H"
         },
         {
-          "name": "BNP",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "482",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Peak aortic gradient",
+          "value": "78",
+          "unit": "mmHg",
+          "ref": "<20 normal; >64 = very severe",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.8",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "188",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "LVEF",
+          "value": "55",
+          "unit": "% (preserved \u2014 not yet decompensated)",
+          "ref": "\u226555%",
+          "flag": ""
+        },
+        {
+          "test": "BNP",
+          "value": "680",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "STS surgical risk score",
+          "value": "5.2%",
+          "unit": "(intermediate surgical risk)",
+          "ref": "",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "10/14/2025",
-      "study": "ECHOCARDIOGRAM — TRANSTHORACIC",
-      "accession": "IMG-2025-101444",
-      "status": "FINAL",
-      "orderedBy": "Dr. Patel",
-      "readBy": "Dr. Anil Patel, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "Known severe AS — interval assessment, worsening symptoms",
-      "technique": "Complete 2D and Doppler echocardiogram with tissue Doppler imaging.",
-      "findings": "Aortic valve: Bicuspid (raphe-type, R-L fusion). Severely calcified and restricted. Peak velocity 4.6 m/s, mean gradient 48 mmHg, AVA 0.8 cm² by continuity equation. Severe aortic stenosis.\n\nLeft ventricle: Normal cavity size. Concentric LVH (septal wall 1.4 cm). EF 55% (preserved). No regional wall motion abnormalities. Grade I diastolic dysfunction.\n\nMitral valve: Mild annular calcification. Trace mitral regurgitation.\n\nRight ventricle: Normal size and function. TAPSE 2.2 cm.\n\nAortic root: 3.8 cm (mildly dilated — consistent with bicuspid aortic valve).\n\nNo pericardial effusion.",
-      "impression": "1. Severe aortic stenosis (bicuspid valve) — AVA 0.8 cm², mean gradient 48 mmHg. Progressed from prior (AVA 1.0 cm², 03/2024).\n2. Concentric LVH — pressure overload.\n3. Preserved LVEF 55%.\n4. Mildly dilated aortic root (3.8 cm) — monitor for aortopathy.",
-      "dictated": "10/14/2025 11:00",
-      "verified": "10/14/2025 13:30"
+      "date": "04/2024",
+      "study": "Transthoracic Echocardiogram",
+      "findings": "Tricuspid aortic valve with severe calcification and restriction. AVA 0.7cm\u00b2 by continuity equation. Peak/mean gradients 78/52mmHg. LVEF 55%. Concentric LVH. Mild mitral regurgitation.",
+      "impression": "Severe calcific aortic stenosis. Symptomatic \u2014 exertional syncope. Valve replacement indicated."
     }
   ],
   "immunizations": [
@@ -379,11 +269,11 @@ window.EMR_DATA = {
     ],
     [
       "Housing",
-      "Two-story home with wife; bedroom on second floor — considering bedroom relocation to first floor"
+      "Two-story home with wife; bedroom on second floor \u2014 considering bedroom relocation to first floor"
     ],
     [
       "Safety",
-      "Fall risk — uses cane; handrails on all stairs; no rugs; no firearms"
+      "Fall risk \u2014 uses cane; handrails on all stairs; no rugs; no firearms"
     ],
     [
       "Advance Directive",
@@ -392,7 +282,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "cardiac-syncope",
-    "diagnosis": "Cardiac Syncope (Exertional Syncope Secondary to Severe Aortic Stenosis — Bicuspid Valve, AVA 0.8 cm², Pending TAVR Evaluation)",
+    "diagnosis": "Cardiac Syncope \u2014 Exertional Syncope from Severe Aortic Stenosis",
     "acuity": 2,
     "presentation": "Syncope",
     "category": "cardiovascular"
@@ -454,13 +344,12 @@ window.EMR_DATA = {
       "Assessment for hepatojugular reflux": "Negative hepatojugular reflux, liver not enlarged"
     },
     "ddxTargets": [
-      "Cardiac Syncope (Exertional Syncope Secondary to Severe Aortic Stenosis — Bicuspid Valve, AVA 0.8 cm², Pending TAVR Evaluation) (correct diagnosis)",
-      "Hypertrophic Cardiomyopathy with Outflow Obstruction",
-      "Vasovagal Syncope",
-      "Complete Heart Block or High-Grade AV Block",
-      "Ventricular Tachycardia/Sudden Cardiac Death",
-      "Orthostatic Hypotension",
-      "Pulmonary Embolism"
+      "Cardiac syncope from severe AS (correct)",
+      "Vasovagal syncope \u2014 prodrome (nausea, diaphoresis); situational trigger; not exertional; not this patient",
+      "Arrhythmic syncope (complete heart block, VT) \u2014 ECG; Holter; no warning; could coexist with AS",
+      "Orthostatic hypotension \u2014 position-related; tilt table test; not exertional",
+      "Hypertrophic obstructive cardiomyopathy (HOCM) \u2014 young athlete; dynamic obstruction; different echo pattern",
+      "Pulmonary hypertension with exertional syncope \u2014 RV failure; echo shows elevated RVSP"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the patient's age and assuming syncope is simply due to orthostatic hypotension or medication effects, missing the critical cardiac etiology",
@@ -470,7 +359,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This elderly gentleman presents with syncope. Before you interview him, consider: What are the most concerning causes of syncope in his age group? How will you differentiate between cardiac, neurologic, and vasovagal etiologies? What red flags would indicate immediate life-threatening conditions?",
       "phase5": "You've identified classic findings of severe aortic stenosis in a patient with exertional syncope. What does this constellation of findings tell you about disease progression and urgency? How does the family history of bicuspid valve disease and the physical exam findings change your risk stratification?",
-      "finalDebrief": "This case illustrates exertional syncope as a cardinal symptom of severe aortic stenosis - one of the classic triad indicating need for valve intervention. The combination of known bicuspid valve, family history, classic murmur with delayed carotid upstrokes, and exertional symptoms represents a surgical emergency. How did your differential evolve as you gathered more data about the exertional nature and cardiac findings?"
+      "finalDebrief": "This case illustrates exertional syncope as a cardinal symptom of severe aortic stenosis - one of the classic triad indicating need for valve intervention. The combination of known bicuspid valve, family history, classic murmur with delayed carotid upstrokes, and exertional symptoms represents a surgical emergency. How did your differential evolve as you gathered more data about the exertional nature and cardiac findings?",
+      "final": "Diagnosis: exertional syncope from severe aortic stenosis. Key learning: (1) The AS triad and prognosis: angina (5-year median survival without repair), exertional syncope (3-year survival), heart failure (1-2 year survival). Once symptoms develop, urgent valve replacement is indicated \u2014 the natural history of symptomatic severe AS is rapidly progressive. (2) Exertional syncope mechanism: fixed cardiac output + vasodilation with exercise \u2192 cerebral hypoperfusion. The stenotic valve cannot increase flow to match demand \u2192 drop in BP \u2192 loss of consciousness. (3) Severe AS definitions (echo): AVA <1.0cm\u00b2 + peak gradient >40mmHg + mean gradient >40mmHg + jet velocity >4 m/s. 'Very severe' if Vmax >5 m/s or mean gradient >60mmHg. (4) TAVR vs SAVR: high surgical risk (STS >8%) \u2192 TAVR. Intermediate risk (STS 4-8%) \u2192 TAVR preferred for most. Low risk \u2192 both acceptable, younger patients (SAVR if very young for durability). (5) Hemodynamic precautions in severe AS: preload-dependent (avoid diuretics and vasodilators). Fixed cardiac output (cannot increase with demand). Relative tachycardia compensatory (avoid excessive beta-blockade). AF very poorly tolerated \u2014 loss of atrial kick reduces SV dramatically."
     }
   }
 };

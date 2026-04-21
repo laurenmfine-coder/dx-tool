@@ -1,6 +1,3 @@
-// Virtual EMR Case: Bilateral Lumbar Radiculopathy
-// Variant: bilateral-lumbar-radiculopathy | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "United Healthcare PPO",
     "pcp": "Dr. Sandra Morales, MD",
-    "pharmacy": "Walgreens — 3501 Broward Blvd, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 3501 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
     "address": "6325 Clover St, Minneapolis, MN 55407",
@@ -26,96 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Lumbar Spondylosis with Bilateral Radiculopathy",
-      "icd": "M47.27",
-      "onset": "2022",
+      "problem": "Bilateral L5 radiculopathy with progressive left foot drop",
+      "icd": "M54.41",
+      "onset": "2024",
       "status": "Active",
-      "notes": "L4-L5, L5-S1 disc herniations with bilateral foraminal stenosis; worse on left"
+      "notes": "Thomas Green, 58M \u2014 6-week history worsening back pain with bilateral leg radiation, left worse than right. New left foot drop (cannot dorsiflex). EHL weakness. L4-5 central disc herniation on MRI compressing bilateral L5 nerve roots."
     },
     {
-      "problem": "Lumbar Spinal Stenosis",
-      "icd": "M48.06",
-      "onset": "2023",
+      "problem": "Progressive neurological deficit \u2014 surgical urgency assessment",
+      "icd": "M51.16",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Moderate central stenosis L4-L5; neurogenic claudication"
+      "notes": "Foot drop is a motor deficit. Progressive motor deficits from disc herniation warrant urgent neurosurgical evaluation. Cauda equina syndrome must be actively excluded."
     },
     {
-      "problem": "Obesity Class II",
-      "icd": "E66.01",
-      "onset": "2015",
+      "problem": "Cauda equina screen \u2014 saddle anesthesia and bladder function",
+      "icd": "G83.4",
+      "onset": "2024",
       "status": "Active",
-      "notes": "BMI 37.2; significant contributor to spinal loading"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "HbA1c 7.8%"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2012",
-      "status": "Active",
-      "notes": ""
-    },
-    {
-      "problem": "Osteoarthritis, Bilateral Knees",
-      "icd": "M17.0",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "Limits mobility and contributes to weight gain"
+      "notes": "Cauda equina syndrome (CES) = bilateral radiculopathy + saddle anesthesia + bladder/bowel dysfunction = surgical emergency. Ask specifically about urinary retention, incontinence, saddle numbness."
     }
   ],
   "medications": [
     {
-      "name": "Gabapentin 600mg TID",
-      "sig": "Take 600 mg by mouth three times daily",
-      "prescriber": "Dr. Larson",
-      "start": "04/2023",
-      "refills": 3,
+      "name": "Urgent neurosurgical consultation \u2014 progressive motor deficit",
+      "sig": "Progressive foot drop + bilateral radiculopathy = urgent neurosurgery referral. L4-5 microdiscectomy indicated for progressive motor deficit not responding to conservative management.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "URGENT"
+    },
+    {
+      "name": "Dexamethasone 10mg IV \u2014 acute neurological compression",
+      "sig": "Reduces periradicular edema in setting of acute neurological deficit. Bridge to surgical decompression.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Duloxetine 60mg daily",
-      "sig": "Take 1 capsule by mouth daily in the morning",
-      "prescriber": "Dr. Morales",
-      "start": "08/2023",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Meloxicam 15mg daily",
-      "sig": "Take 1 tablet by mouth daily with food",
-      "prescriber": "Dr. Morales",
-      "start": "03/2022",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Morales",
-      "start": "08/2017",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Morales",
-      "start": "06/2013",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Acetaminophen 500mg q6h PRN",
-      "sig": "Take 1-2 tablets by mouth every 6 hours as needed for pain; max 3000mg/day",
-      "prescriber": "Dr. Morales",
-      "start": "03/2022",
-      "refills": 3,
-      "status": "PRN"
+      "name": "PT/PT referral \u2014 foot drop management, AFO fitting",
+      "sig": "Ankle-foot orthosis (AFO) for foot drop while awaiting surgery. PT for gait training and fall prevention.",
+      "prescriber": "Neurosurgery/PM&R",
+      "start": "2024",
+      "refills": 0,
+      "status": "Referral placed"
     }
   ],
   "allergies": [
@@ -140,7 +92,7 @@ window.EMR_DATA = {
       "bp": "142/88",
       "hr": 82,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "224 lbs",
       "ht": "5'4\"",
@@ -152,7 +104,7 @@ window.EMR_DATA = {
       "bp": "138/86",
       "hr": 78,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "98%",
       "wt": "218 lbs",
       "ht": "5'4\"",
@@ -164,7 +116,7 @@ window.EMR_DATA = {
       "bp": "136/84",
       "hr": 76,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "216 lbs",
       "ht": "5'4\"",
@@ -176,7 +128,7 @@ window.EMR_DATA = {
       "bp": "140/86",
       "hr": 80,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "214 lbs",
       "ht": "5'4\"",
@@ -191,10 +143,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Sandra Morales, MD",
       "cc": "Worsening bilateral leg pain and numbness; back pain",
-      "hpi": "56-year-old female with known lumbar spondylosis and bilateral radiculopathy presenting with worsening bilateral lower extremity radiating pain and numbness over past 6 weeks. Pain follows L5 distribution bilaterally — lateral calf and dorsum of foot. Left worse than right. Reports neurogenic claudication — can walk only 1 block before needing to rest. Leaning forward on shopping cart improves symptoms. Bilateral foot numbness worsening. Reports difficulty lifting left foot when climbing stairs. No bowel or bladder dysfunction. No saddle anesthesia. Last epidural steroid injection (09/2025) provided only 3 weeks of relief vs prior 3 months.",
-      "exam": "General: Obese female in mild discomfort. Spine: Tenderness L4-S1 paraspinal bilaterally. Limited lumbar flexion/extension. Neuro: Motor: 4/5 left EHL (extensor hallucis longus), 4/5 left tibialis anterior; 4+/5 right EHL. Sensation: Diminished L5 dermatome bilaterally, left > right. DTRs: Achilles 1+ bilaterally (diminished), patellar 2+ bilaterally. SLR: Positive left at 40°, positive right at 55°. Gait: Antalgic; mild left foot drop noted.",
-      "assessment": "1. Bilateral L5 radiculopathy — progressive; left foot drop developing; diminishing response to injections\n2. Lumbar spinal stenosis — neurogenic claudication worsening\n3. Consider surgical referral given progressive motor deficit",
-      "plan": "1. STAT MRI lumbar spine to reassess\n2. Urgent neurosurgery referral given progressive motor deficit (left foot drop)\n3. Continue gabapentin, duloxetine\n4. Physical therapy referral — aquatic therapy given weight bearing limitations\n5. Weight management counseling\n6. RTC 2 weeks post-imaging"
+      "hpi": "56-year-old female with known lumbar spondylosis and bilateral radiculopathy presenting with worsening bilateral lower extremity radiating pain and numbness over past 6 weeks. Pain follows L5 distribution bilaterally \u2014 lateral calf and dorsum of foot. Left worse than right. Reports neurogenic claudication \u2014 can walk only 1 block before needing to rest. Leaning forward on shopping cart improves symptoms. Bilateral foot numbness worsening. Reports difficulty lifting left foot when climbing stairs. No bowel or bladder dysfunction. No saddle anesthesia. Last epidural steroid injection (09/2025) provided only 3 weeks of relief vs prior 3 months.",
+      "exam": "General: Obese female in mild discomfort. Spine: Tenderness L4-S1 paraspinal bilaterally. Limited lumbar flexion/extension. Neuro: Motor: 4/5 left EHL (extensor hallucis longus), 4/5 left tibialis anterior; 4+/5 right EHL. Sensation: Diminished L5 dermatome bilaterally, left > right. DTRs: Achilles 1+ bilaterally (diminished), patellar 2+ bilaterally. SLR: Positive left at 40\u00b0, positive right at 55\u00b0. Gait: Antalgic; mild left foot drop noted.",
+      "assessment": "1. Bilateral L5 radiculopathy \u2014 progressive; left foot drop developing; diminishing response to injections\n2. Lumbar spinal stenosis \u2014 neurogenic claudication worsening\n3. Consider surgical referral given progressive motor deficit",
+      "plan": "1. STAT MRI lumbar spine to reassess\n2. Urgent neurosurgery referral given progressive motor deficit (left foot drop)\n3. Continue gabapentin, duloxetine\n4. Physical therapy referral \u2014 aquatic therapy given weight bearing limitations\n5. Weight management counseling\n6. RTC 2 weeks post-imaging"
     },
     {
       "id": "V002",
@@ -202,128 +154,61 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Eric Larson, MD (Neurology)",
       "cc": "Bilateral radiculopathy follow-up; EMG results review",
-      "hpi": "56-year-old female with bilateral lumbar radiculopathy for EMG/NCS results review. EMG confirms bilateral L5 radiculopathy — active denervation left L5, chronic changes right L5. NCS shows mild bilateral peroneal nerve conduction delay. Reports ongoing bilateral leg pain (6/10) despite gabapentin and duloxetine. Epidural injections providing decreasing benefit.",
+      "hpi": "56-year-old female with bilateral lumbar radiculopathy for EMG/NCS results review. EMG confirms bilateral L5 radiculopathy \u2014 active denervation left L5, chronic changes right L5. NCS shows mild bilateral peroneal nerve conduction delay. Reports ongoing bilateral leg pain (6/10) despite gabapentin and duloxetine. Epidural injections providing decreasing benefit.",
       "exam": "General: NAD. Neuro: Motor: 4+/5 left EHL, 5/5 right. Sensation: Diminished L5 bilaterally. Gait: Mildly antalgic.",
-      "assessment": "1. Bilateral L5 radiculopathy — EMG-confirmed; active denervation left\n2. Consider surgical consultation if progressive",
-      "plan": "1. Continue gabapentin 600mg TID, duloxetine 60mg\n2. Epidural steroid injection #3 (09/2025)\n3. Monitor for progressive weakness — surgical threshold: foot drop\n4. RTC 4 months"
+      "assessment": "1. Bilateral L5 radiculopathy \u2014 EMG-confirmed; active denervation left\n2. Consider surgical consultation if progressive",
+      "plan": "1. Continue gabapentin 600mg TID, duloxetine 60mg\n2. Epidural steroid injection #3 (09/2025)\n3. Monitor for progressive weakness \u2014 surgical threshold: foot drop\n4. RTC 4 months"
     }
   ],
   "labs": [
     {
-      "date": "01/22/2026",
-      "time": "09:15",
-      "orderedBy": "Dr. Sandra Morales, MD",
-      "collected": "01/22/2026 08:40",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-012252",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Radiculopathy Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "162",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            }
-          ]
+          "test": "Left EHL strength",
+          "value": "2/5 (able to contract but cannot move against gravity)",
+          "unit": "",
+          "ref": "5/5",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "7.8",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            }
-          ]
+          "test": "Left ankle dorsiflexion",
+          "value": "1/5 \u2014 foot drop",
+          "unit": "",
+          "ref": "5/5",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "12.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "38.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "264",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Saddle sensation",
+          "value": "Intact \u2014 no perianal numbness",
+          "unit": "",
+          "ref": "Intact \u2014 CES excluded",
+          "flag": ""
+        },
+        {
+          "test": "Bladder function",
+          "value": "No urinary retention \u2014 post-void residual 40mL",
+          "unit": "",
+          "ref": "<50mL \u2014 normal",
+          "flag": ""
+        },
+        {
+          "test": "MRI L-spine",
+          "value": "L4-5 central disc herniation compressing bilateral L5 nerve roots",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "08/10/2024",
-      "study": "MRI LUMBAR SPINE WITHOUT CONTRAST",
-      "accession": "IMG-2024-08102",
-      "status": "FINAL",
-      "orderedBy": "Dr. Eric Larson, MD",
-      "readBy": "Dr. David Rosenberg, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "56F with bilateral lower extremity radiculopathy. Evaluate lumbar spine.",
-      "technique": "MRI lumbar spine without contrast. Sagittal T1, T2, STIR; Axial T2.",
-      "findings": "L3-L4: Mild disc bulge. Mild bilateral facet hypertrophy. No significant stenosis.\\n\\nL4-L5: Broad-based disc herniation with bilateral foraminal extension, left > right. Moderate central stenosis with AP canal diameter 8 mm. Moderate left and mild right foraminal stenosis. Left L5 nerve root compression.\\n\\nL5-S1: Left paracentral disc herniation with left foraminal stenosis. Left S1 nerve root impingement. Mild right foraminal narrowing.\\n\\nConus medullaris: Normal position, terminating at L1-L2.\\n\\nCauda equina: No compression.",
-      "impression": "1. L4-L5 broad-based herniation with moderate central stenosis and bilateral foraminal stenosis (left > right) — left L5 nerve root compression.\\n2. L5-S1 left paracentral herniation with left foraminal stenosis and left S1 nerve root impingement.\\n3. No cauda equina compression.\\n4. Normal conus medullaris.",
-      "dictated": "08/10/2024 15:20",
-      "verified": "08/10/2024 17:40"
+      "date": "04/2024",
+      "study": "MRI Lumbar Spine without Contrast",
+      "findings": "Large central L4-5 disc herniation with bilateral foraminal extension. Compression of bilateral L5 nerve roots. No epidural abscess or hematoma. Mild L3-4 degenerative changes.",
+      "impression": "L4-5 central disc herniation with bilateral L5 nerve root compression. Urgent neurosurgical evaluation for progressive foot drop."
     }
   ],
   "immunizations": [
@@ -345,7 +230,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
@@ -400,7 +285,7 @@ window.EMR_DATA = {
     ],
     [
       "Safety",
-      "Denies IPV; fall risk — uses handrail on stairs"
+      "Denies IPV; fall risk \u2014 uses handrail on stairs"
     ],
     [
       "Advance Directive",
@@ -409,7 +294,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "bilateral-lumbar-radiculopathy",
-    "diagnosis": "Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop)",
+    "diagnosis": "Bilateral Lumbar Radiculopathy \u2014 L5 with Progressive Foot Drop (Cauda Equina Risk)",
     "acuity": 3,
     "presentation": "Back Pain",
     "category": "neurologic"
@@ -473,13 +358,12 @@ window.EMR_DATA = {
       "Lumbar extension test": "Reproduces bilateral lower extremity symptoms, worse with extension"
     },
     "ddxTargets": [
-      "Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop) (correct diagnosis)",
-      "Lumbar Spinal Stenosis with Neurogenic Claudication",
-      "L5-S1 Disc Herniation with Nerve Root Compression",
-      "Cauda Equina Syndrome",
-      "Spinal Epidural Abscess",
-      "Peripheral Neuropathy (Diabetic)",
-      "Piriformis Syndrome"
+      "Bilateral L5 radiculopathy from central disc herniation (correct)",
+      "Cauda equina syndrome \u2014 bladder/bowel dysfunction + saddle anesthesia absent here; must actively screen",
+      "Spinal epidural abscess \u2014 fever, elevated ESR/CRP; MRI enhancement; different mechanism",
+      "Lumbar stenosis \u2014 bilateral neurogenic claudication; older patient; multilevel; different MRI pattern",
+      "Peripheral neuropathy \u2014 stocking-glove distribution; EMG distinguishes from radiculopathy",
+      "L4 radiculopathy \u2014 knee extension weakness; patellar reflex; different dermatomal pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known diabetes and attributing symptoms to diabetic neuropathy rather than structural spine pathology",
@@ -489,7 +373,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your initial differential diagnosis, what key historical features would help you distinguish between mechanical back pain and neurologic compromise? What red flags should you specifically ask about given this presentation?",
       "phase5": "Based on your history and physical exam findings, what do the bilateral symptoms with asymmetric foot drop tell you about the anatomical level and urgency? How does this change your diagnostic thinking and next steps?",
-      "finalDebrief": "Let's trace how this case evolved from your initial DDx. The key was recognizing that bilateral radiculopathy with progressive foot drop represents significant neurologic compromise requiring urgent imaging and possible surgical consultation, not just medical management of chronic back pain. What clinical features distinguished this from diabetic neuropathy or simple mechanical back pain?"
+      "finalDebrief": "Let's trace how this case evolved from your initial DDx. The key was recognizing that bilateral radiculopathy with progressive foot drop represents significant neurologic compromise requiring urgent imaging and possible surgical consultation, not just medical management of chronic back pain. What clinical features distinguished this from diabetic neuropathy or simple mechanical back pain?",
+      "final": "Diagnosis: bilateral L5 radiculopathy with foot drop. Key learning: (1) Cauda equina syndrome (CES) is the surgical emergency to always rule out in bilateral radiculopathy. The classic triad: bilateral radiculopathy + saddle anesthesia (perianal, perineal numbness) + bladder/bowel dysfunction. Urinary retention is the most common early finding. Any one of these features = emergent MRI and surgical decompression within 24-48 hours. (2) L5 dermatome vs L4: L5 = dorsum of foot, first web space, great toe; EHL weakness (great toe extension); foot drop. L4 = medial leg and foot; quadriceps weakness; knee extension; patellar reflex. (3) Foot drop urgency: progressive motor deficit (not just pain) changes the surgical indication from elective to urgent. Pain alone can often be managed conservatively 6-8 weeks. Motor deficits cannot wait. (4) The straight leg raise test: positive when reproduction of radicular pain (not just back pain) below the knee at <60\u00b0 of hip flexion = highly sensitive for L4-5 or L5-S1 disc herniation. Crossed straight leg raise (contralateral leg) is highly specific for large central herniations. (5) Prognosis for foot drop: best recovery occurs with decompression within 24-48 hours of onset. Prolonged compression \u2192 axonal injury \u2192 incomplete recovery. Time is nerve."
     }
   }
 };

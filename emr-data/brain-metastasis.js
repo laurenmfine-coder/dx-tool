@@ -1,6 +1,3 @@
-// Virtual EMR Case: Brain Metastasis
-// Variant: brain-metastasis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Aetna PPO",
     "pcp": "Dr. Michael Torres, MD",
-    "pharmacy": "Walgreens — 2700 E Oakland Park Blvd, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 2700 E Oakland Park Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian",
     "address": "4047 Walnut Dr, Memphis, TN 38114",
@@ -27,96 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Non-Small Cell Lung Cancer — Stage IIIA (Adenocarcinoma)",
-      "icd": "C34.11",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Diagnosed 09/2023; RUL mass 3.8 cm with mediastinal LN involvement; EGFR negative, ALK negative, PD-L1 60%; treated with concurrent chemo-radiation (carboplatin/pemetrexed + RT) followed by durvalumab maintenance; partial response on last scan (08/2024)"
-    },
-    {
-      "problem": "Brain Metastasis — New Diagnosis",
+      "problem": "Multiple brain metastases \u2014 NSCLC origin, 3 lesions",
       "icd": "C79.31",
-      "onset": "2025",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Current presentation — new-onset seizure; CT shows brain lesions"
+      "notes": "Richard Thompson, 66M \u2014 heavy smoker, newly diagnosed NSCLC stage IV (2 months ago). New generalized tonic-clonic seizure. MRI: 3 enhancing lesions \u2014 right frontal (2.1cm), left cerebellar (1.4cm), right temporal (0.9cm)."
     },
     {
-      "problem": "COPD — Moderate",
-      "icd": "J44.1",
-      "onset": "2018",
+      "problem": "New-onset seizure \u2014 from right frontal metastasis",
+      "icd": "G40.119",
+      "onset": "2024",
       "status": "Active",
-      "notes": "FEV1 58% predicted; 35 pack-year smoking history; on tiotropium and albuterol PRN; quit smoking at diagnosis"
+      "notes": "Focal onset (right frontal lobe irritation) with secondary generalization. Post-ictal confusion on presentation. Load antiepileptic."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2010",
+      "problem": "NSCLC \u2014 EGFR/ALK/ROS1 mutation status critical",
+      "icd": "C34.10",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On lisinopril; well-controlled"
-    },
-    {
-      "problem": "Osteoporosis",
-      "icd": "M81.0",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "T-score -2.6; on denosumab"
+      "notes": "Molecular profiling determines systemic treatment. EGFR-mutated NSCLC: osimertinib crosses BBB and treats both systemic and brain disease. ALK-rearranged: alectinib has excellent CNS penetration."
     }
   ],
   "medications": [
     {
-      "name": "Durvalumab 10mg/kg IV q2 weeks",
-      "sig": "Administered IV every 2 weeks at infusion center (maintenance immunotherapy)",
-      "prescriber": "Dr. Singh (Oncology)",
-      "start": "02/2024",
-      "refills": 0,
-      "status": "Active — last infusion 02/10/2025"
+      "name": "Levetiracetam 1g IV loading \u2192 500mg BID maintenance",
+      "sig": "Antiepileptic for seizure from brain metastasis. Levetiracetam preferred \u2014 no CYP450 drug interactions with chemotherapy or targeted agents.",
+      "prescriber": "Neurology/Oncology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active \u2014 loaded"
     },
     {
-      "name": "Tiotropium (Spiriva) 18mcg inhaled daily",
-      "sig": "Inhale 1 capsule daily via HandiHaler device",
-      "prescriber": "Dr. Torres",
-      "start": "05/2019",
-      "refills": 3,
+      "name": "Dexamethasone 10mg IV then 4mg q6h",
+      "sig": "Reduces vasogenic edema around multiple lesions. Symptom relief within 24-48h.",
+      "prescriber": "Neurology/Oncology",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Albuterol MDI 90mcg 2 puffs Q4-6h PRN",
-      "sig": "Inhale 2 puffs every 4-6 hours as needed for shortness of breath",
-      "prescriber": "Dr. Torres",
-      "start": "05/2019",
-      "refills": 3,
-      "status": "PRN"
-    },
-    {
-      "name": "Lisinopril 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Torres",
-      "start": "03/2011",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Denosumab (Prolia) 60mg SC q6 months",
-      "sig": "Inject 60mg subcutaneously every 6 months",
-      "prescriber": "Dr. Torres",
-      "start": "06/2020",
+      "name": "Whole brain radiation therapy vs SRS \u2014 multidisciplinary decision",
+      "sig": "3 lesions: SRS preferred if lesions accessible and PS good. WBRT for extensive disease or leptomeningeal involvement. If EGFR+: osimertinib as systemic treatment also has intracranial activity.",
+      "prescriber": "Radiation/Medical Oncology",
+      "start": "2024",
       "refills": 0,
-      "status": "Active — last dose 12/2024"
-    },
-    {
-      "name": "Ondansetron 4mg Q8h PRN",
-      "sig": "Take 1 tablet by mouth every 8 hours as needed for nausea",
-      "prescriber": "Dr. Singh (Oncology)",
-      "start": "10/2023",
-      "refills": 2,
-      "status": "PRN"
+      "status": "Planning \u2014 MDT"
     }
   ],
   "allergies": [
     {
       "allergen": "Penicillin",
       "type": "Drug",
-      "reaction": "Anaphylaxis (age 20 — throat swelling, hypotension)",
+      "reaction": "Anaphylaxis (age 20 \u2014 throat swelling, hypotension)",
       "severity": "Severe",
       "verified": "Yes"
     },
@@ -134,7 +93,7 @@ window.EMR_DATA = {
       "bp": "168/98",
       "hr": 102,
       "rr": 20,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "94%",
       "wt": "132 lbs",
       "ht": "5'6\"",
@@ -146,7 +105,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": 76,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "95%",
       "wt": "134 lbs",
       "ht": "5'6\"",
@@ -158,7 +117,7 @@ window.EMR_DATA = {
       "bp": "124/74",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "138 lbs",
       "ht": "5'6\"",
@@ -173,9 +132,9 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Amrit Singh, MD (Oncology)",
       "cc": "Durvalumab infusion #24; routine surveillance",
-      "hpi": "62-year-old female with NSCLC stage IIIA on durvalumab maintenance presenting for scheduled infusion. Reports feeling generally well. Mild persistent cough but unchanged from baseline COPD. Denies hemoptysis, dyspnea at rest, bone pain, neurologic symptoms. Weight stable. Appetite fair. No infusion reactions. Recent CT chest (01/2025) shows continued partial response — primary tumor decreased to 2.1 cm from initial 3.8 cm. No new lesions on chest imaging.",
+      "hpi": "62-year-old female with NSCLC stage IIIA on durvalumab maintenance presenting for scheduled infusion. Reports feeling generally well. Mild persistent cough but unchanged from baseline COPD. Denies hemoptysis, dyspnea at rest, bone pain, neurologic symptoms. Weight stable. Appetite fair. No infusion reactions. Recent CT chest (01/2025) shows continued partial response \u2014 primary tumor decreased to 2.1 cm from initial 3.8 cm. No new lesions on chest imaging.",
       "exam": "General: Well-appearing, thin female. Lungs: Diminished breath sounds at right base (baseline post-radiation). CV: RRR. Abdomen: Soft, NT. Neuro: A&O x3, cranial nerves intact, no focal deficits. ECOG PS: 1.",
-      "assessment": "1. NSCLC stage IIIA — continued partial response on durvalumab\n2. COPD — stable\n3. No adverse immune-related events",
+      "assessment": "1. NSCLC stage IIIA \u2014 continued partial response on durvalumab\n2. COPD \u2014 stable\n3. No adverse immune-related events",
       "plan": "1. Durvalumab infusion administered\n2. Next CT chest/abd/pelvis due 04/2025\n3. Brain MRI due 04/2025 (routine q6-month surveillance)\n4. Continue current regimen\n5. RTC 2 weeks for next infusion"
     },
     {
@@ -183,192 +142,67 @@ window.EMR_DATA = {
       "date": "08/14/2024",
       "type": "Specialist",
       "provider": "Dr. Amrit Singh, MD (Oncology)",
-      "cc": "Restaging CT review — partial response",
+      "cc": "Restaging CT review \u2014 partial response",
       "hpi": "62-year-old with NSCLC presenting for restaging review. CT chest (08/2024): RUL mass decreased to 2.4 cm (from 3.8 cm at diagnosis). No new pulmonary lesions. Mediastinal LN stable to decreased. Brain MRI (08/2024): No intracranial metastases. Liver, adrenals: No metastases. Patient feeling well. Working part-time. Minimal treatment side effects.",
       "exam": "General: Well-appearing. Lungs: Diminished at R base. Neuro: Intact. ECOG: 1.",
-      "assessment": "1. NSCLC — partial response per RECIST criteria\n2. Brain MRI negative for metastases (08/2024)\n3. Tolerating durvalumab well",
+      "assessment": "1. NSCLC \u2014 partial response per RECIST criteria\n2. Brain MRI negative for metastases (08/2024)\n3. Tolerating durvalumab well",
       "plan": "1. Continue durvalumab maintenance\n2. Repeat imaging in 3 months\n3. Continue surveillance schedule"
     }
   ],
   "labs": [
     {
-      "date": "02/22/2025",
-      "time": "16:20",
-      "orderedBy": "Dr. Kevin Tran, MD (ED)",
-      "collected": "02/22/2025 16:05",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-098714",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Brain Metastasis/NSCLC Workup",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "118",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "132",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "24",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "20",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            }
-          ]
+          "test": "EGFR mutation status",
+          "value": "Exon 19 deletion \u2014 POSITIVE",
+          "unit": "",
+          "ref": "Wild-type",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT (CBC)",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "34.2",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelets",
-              "value": "212",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "ALK rearrangement",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         },
         {
-          "name": "COAGULATION STUDIES",
-          "results": [
-            {
-              "test": "PT",
-              "value": "12.2",
-              "unit": "sec",
-              "range": "11.0-14.0",
-              "flag": ""
-            },
-            {
-              "test": "INR",
-              "value": "1.0",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": ""
-            }
-          ]
+          "test": "PD-L1 expression",
+          "value": "30%",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Performance status (ECOG)",
+          "value": "1",
+          "unit": "",
+          "ref": "0 = fully active",
+          "flag": ""
+        },
+        {
+          "test": "Post-ictal glucose",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Rule out hypoglycemia",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "02/22/2025",
-      "study": "CT HEAD WITH AND WITHOUT CONTRAST",
-      "accession": "IMG-2025-09891",
-      "status": "FINAL",
-      "orderedBy": "Dr. Kevin Tran, MD",
-      "readBy": "Dr. Angela Reyes, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "62-year-old with known NSCLC, new-onset GTC seizure — concern for brain metastases",
-      "technique": "Axial CT images obtained without and with IV contrast.",
-      "findings": "LEFT FRONTAL LOBE: A ring-enhancing lesion measuring 2.8 x 2.4 cm is present in the left frontal lobe with surrounding vasogenic edema. Mass effect causes 4 mm rightward midline shift. The lesion has irregular enhancing rim with central hypodensity.\n\nRIGHT PARIETAL LOBE: A second smaller enhancing lesion measuring 1.2 x 1.0 cm is identified in the right parietal convexity with minimal surrounding edema.\n\nLEFT CEREBELLAR HEMISPHERE: A third enhancing lesion measuring 0.8 cm is noted in the left cerebellar hemisphere.\n\nVENTRICLES: Mild compression of the left lateral ventricle from frontal mass. No hydrocephalus.\n\nOTHER: No hemorrhage. No herniation.",
-      "impression": "1. THREE BRAIN METASTASES: dominant left frontal (2.8 cm) with significant edema and 4 mm midline shift, right parietal (1.2 cm), and left cerebellar (0.8 cm)\n2. New findings since brain MRI 08/2024 (which was negative)\n3. Known NSCLC — likely source\n4. MRI brain with contrast recommended for surgical/radiation planning\n5. Dexamethasone for cerebral edema and neurosurgery/radiation oncology consultation recommended",
-      "dictated": "02/22/2025 17:00",
-      "verified": "02/22/2025 17:08"
-    },
-    {
-      "date": "01/15/2025",
-      "study": "CT CHEST WITH CONTRAST — SURVEILLANCE",
-      "accession": "IMG-2025-07218",
-      "status": "FINAL",
-      "orderedBy": "Dr. Amrit Singh, MD",
-      "readBy": "Dr. Robert Nash, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "NSCLC on durvalumab maintenance — routine surveillance",
-      "technique": "CT of the chest with IV contrast.",
-      "findings": "RIGHT UPPER LOBE: The known primary mass has decreased further, now measuring 2.1 x 1.8 cm (previously 2.4 x 2.2 cm in 08/2024). Mild post-radiation fibrotic changes in the RUL.\n\nMEDIASTINUM: Previously enlarged subcarinal lymph node now measures 1.0 cm (previously 1.4 cm). No new lymphadenopathy.\n\nLUNGS: No new pulmonary nodules. Mild bilateral emphysematous changes. Small right pleural effusion (unchanged).\n\nADRENALS: Normal bilaterally.\n\nBONES: No suspicious osseous lesions.",
-      "impression": "1. Continued partial response — primary RUL mass decreased\n2. Decreased mediastinal lymphadenopathy\n3. No evidence of thoracic progression\n4. Stable small right pleural effusion",
-      "dictated": "01/15/2025 14:20",
-      "verified": "01/15/2025 14:32"
+      "date": "04/2024",
+      "study": "MRI Brain with Gadolinium",
+      "findings": "Three enhancing lesions: right frontal 2.1cm (with surrounding edema), left cerebellar 1.4cm, right temporal 0.9cm. No leptomeningeal enhancement. Midline shift 5mm from right frontal lesion.",
+      "impression": "Multiple brain metastases, pattern consistent with hematogenous spread. Primary unknown by imaging \u2014 NSCLC consistent with clinical context."
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (High-Dose — Fluzone)",
+      "vaccine": "Influenza (High-Dose \u2014 Fluzone)",
       "date": "10/2024",
       "site": "Left deltoid IM",
       "lot": "FH828R",
@@ -382,7 +216,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "01/2024",
       "site": "Left deltoid IM",
       "lot": "PV841K",
@@ -404,9 +238,9 @@ window.EMR_DATA = {
     }
   ],
   "familyHistory": [
-    "Mother (age 86): Hypertension, osteoarthritis — alive and well",
-    "Father: Deceased at age 71 — lung cancer (small cell), 50 pack-year smoker",
-    "Sister (age 58): Breast cancer — stage I, treated with lumpectomy/radiation 2021, NED",
+    "Mother (age 86): Hypertension, osteoarthritis \u2014 alive and well",
+    "Father: Deceased at age 71 \u2014 lung cancer (small cell), 50 pack-year smoker",
+    "Sister (age 58): Breast cancer \u2014 stage I, treated with lumpectomy/radiation 2021, NED",
     "Brother (age 65): COPD, hypertension",
     "Strong family history of tobacco-related malignancy"
   ],
@@ -421,11 +255,11 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — 35 pack-years (1 PPD x 35 years); quit 09/2023 at diagnosis"
+      "Former smoker \u2014 35 pack-years (1 PPD x 35 years); quit 09/2023 at diagnosis"
     ],
     [
       "Alcohol",
-      "Social — 1-2 glasses wine per week"
+      "Social \u2014 1-2 glasses wine per week"
     ],
     [
       "Drugs",
@@ -445,12 +279,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Yes — full code; healthcare proxy: husband (David Lawson)"
+      "Yes \u2014 full code; healthcare proxy: husband (David Lawson)"
     ]
   ],
   "meta": {
     "caseId": "brain-metastasis",
-    "diagnosis": "Brain Metastases (3 Lesions) from NSCLC with New-Onset Seizure — Left Frontal Dominant Lesion with Midline Shift",
+    "diagnosis": "Brain Metastases \u2014 Multiple Lesions from NSCLC with New-Onset Seizure",
     "acuity": 2,
     "presentation": "Seizure",
     "category": "oncologic"
@@ -514,13 +348,12 @@ window.EMR_DATA = {
       "Speech and language assessment": "Mild expressive aphasia with word-finding difficulties. Comprehension intact."
     },
     "ddxTargets": [
-      "Brain Metastases (3 Lesions) from NSCLC with New-Onset Seizure — Left Frontal Dominant Lesion with Midline Shift",
-      "Primary brain tumor (glioblastoma)",
-      "Stroke (ischemic or hemorrhagic)",
-      "Meningitis or encephalitis",
-      "Hypoglycemia or other metabolic encephalopathy",
-      "Drug toxicity or withdrawal seizure",
-      "Hypertensive encephalopathy"
+      "Multiple brain metastases \u2014 NSCLC (correct)",
+      "Primary CNS lymphoma \u2014 periventricular; immunocompromised; single lesion more common; responds dramatically to steroids",
+      "GBM with satellite lesions \u2014 irregular enhancement; mass effect dominant; no known primary",
+      "Brain abscesses (multiple) \u2014 fever; restricted DWI; source of infection",
+      "Demyelinating disease (MS) \u2014 younger patient; periventricular; Dawson fingers on MRI; no enhancement pattern like met",
+      "Toxoplasmosis \u2014 HIV; CD4 <200; ring-enhancing; responds to pyrimethamine/sulfadiazine empirically"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known cancer diagnosis and missing other acute causes of seizure like stroke or infection",
@@ -530,7 +363,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given that this is a new-onset seizure in a 62-year-old with known lung cancer, what specific features in your history and physical exam will help you distinguish between metastatic disease and other serious intracranial processes?",
       "phase5": "Now that you've identified focal neurological deficits and signs of increased intracranial pressure, how does this change your differential? What's the most likely explanation for a new seizure with these findings in a patient with known NSCLC?",
-      "finalDebrief": "This case demonstrates how new neurological symptoms in cancer patients require urgent evaluation. The combination of new-onset seizure, focal deficits, and signs of increased ICP in a patient with NSCLC strongly suggests brain metastases. Notice how the initial presentation could have been attributed to various causes, but the focal findings and known primary malignancy guided us to the correct diagnosis."
+      "finalDebrief": "This case demonstrates how new neurological symptoms in cancer patients require urgent evaluation. The combination of new-onset seizure, focal deficits, and signs of increased ICP in a patient with NSCLC strongly suggests brain metastases. Notice how the initial presentation could have been attributed to various causes, but the focal findings and known primary malignancy guided us to the correct diagnosis.",
+      "final": "Diagnosis: multiple brain metastases from NSCLC (EGFR-mutated). Key learning: (1) EGFR-mutated NSCLC and osimertinib: this is the most important molecular finding here. Osimertinib (3rd-generation EGFR TKI) penetrates the BBB and has demonstrated intracranial response rates >80%. For EGFR+ NSCLC with brain metastases, osimertinib is preferred first-line systemic therapy AND treats the brain disease simultaneously \u2014 may allow deferral of radiation. (2) New-onset seizure workup: always obtain glucose immediately. Post-ictal confusion is normal and temporary. Load antiepileptic. Get MRI (not CT) for suspected brain metastasis \u2014 superior sensitivity. (3) Multiple brain metastases treatment: \u22644 discrete lesions, good PS \u2192 SRS to all lesions (avoids WBRT cognitive toxicity). >4 lesions or leptomeningeal \u2192 WBRT. WBRT causes cognitive decline \u2014 the QUARTZ trial showed no survival benefit of WBRT over supportive care in poor-PS NSCLC. (4) Molecular profiling in NSCLC stage IV: EGFR exon 19/21 (osimertinib), ALK rearrangement (alectinib, brigatinib), ROS1, BRAF V600E, MET exon 14, RET, KRAS G12C \u2014 each has a targeted therapy. Reflexive next-generation sequencing at diagnosis. (5) Antiepileptic choice: levetiracetam preferred over phenytoin/valproate in oncology patients \u2014 no CYP450 interactions with chemotherapy."
     }
   }
 };

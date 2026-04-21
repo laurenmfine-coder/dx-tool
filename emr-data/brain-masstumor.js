@@ -1,6 +1,3 @@
-// Virtual EMR Case: Brain Mass/Tumor
-// Variant: brain-masstumor | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B with Aetna Supplement",
     "pcp": "Dr. Kenneth Rhodes, MD",
-    "pharmacy": "Publix Pharmacy — 1500 N Pine Island Rd, Plantation, FL",
+    "pharmacy": "Publix Pharmacy \u2014 1500 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "White",
     "address": "7445 N Western Ave, Memphis, TN 38104",
@@ -26,81 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Breast Cancer, Left, Status Post Mastectomy",
-      "icd": "Z85.3",
-      "onset": "2017",
-      "status": "Resolved",
-      "notes": "Stage IIA ER+/PR+/HER2- IDC; left mastectomy 2017; adjuvant chemo (TC x4) + radiation; completed tamoxifen 5 years; surveillance NED until now"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2005",
-      "status": "Active",
-      "notes": "Well controlled on amlodipine"
-    },
-    {
-      "problem": "Osteoporosis",
-      "icd": "M81.0",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "T-score -2.9 lumbar spine; worsened on tamoxifen; on denosumab"
-    },
-    {
-      "problem": "Hypothyroidism",
-      "icd": "E03.9",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "On levothyroxine; TSH stable"
-    },
-    {
-      "problem": "New-Onset Headaches",
-      "icd": "R51.9",
+      "problem": "Brain metastasis \u2014 right parietal lobe, metastatic breast cancer",
+      "icd": "C79.31",
       "onset": "2024",
       "status": "Active",
-      "notes": "Progressive morning headaches x 3 months; worsening; concerning for intracranial pathology"
+      "notes": "Susan Chen, 52F \u2014 known HER2-positive breast cancer stage III, completed chemotherapy 18 months ago. New progressive right parietal headache, left arm numbness, visual changes. MRI: 3.2cm enhancing mass right parietal lobe with significant edema."
+    },
+    {
+      "problem": "Vasogenic edema \u2014 significant mass effect",
+      "icd": "G93.6",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Large surrounding edema causing midline shift 7mm. Steroid therapy is the most effective immediate intervention for vasogenic edema."
+    },
+    {
+      "problem": "Seizure risk \u2014 cortical location",
+      "icd": "G40.909",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Parietal cortex involvement. Prophylactic antiepileptic consideration."
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Rhodes",
-      "start": "01/2006",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Levothyroxine 75mcg daily",
-      "sig": "Take 1 tablet by mouth once daily on empty stomach 30 minutes before breakfast",
-      "prescriber": "Dr. Rhodes",
-      "start": "03/2010",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Denosumab (Prolia) 60mg SC q6months",
-      "sig": "Inject 60 mg subcutaneously every 6 months — administered in office",
-      "prescriber": "Dr. Rhodes",
-      "start": "06/2020",
+      "name": "Dexamethasone 10mg IV loading then 4mg q6h",
+      "sig": "Most effective treatment for vasogenic edema from brain metastasis. Improves symptoms within 24-48 hours. Taper after definitive treatment (radiation/surgery).",
+      "prescriber": "Neurosurgery/Oncology",
+      "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Calcium-Vitamin D 600mg/400IU BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Rhodes",
-      "start": "06/2020",
-      "refills": 5,
-      "status": "Active"
+      "name": "Stereotactic radiosurgery (SRS) \u2014 Gamma Knife/CyberKnife",
+      "sig": "1-3 brain metastases, good PS, controlled systemic disease \u2192 SRS. Single fraction high-dose radiation. Preserves cognition vs WBRT.",
+      "prescriber": "Radiation Oncology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Planned"
     },
     {
-      "name": "Acetaminophen 1000mg TID PRN",
-      "sig": "Take 2 tablets (500mg each) by mouth three times daily as needed for headache",
-      "prescriber": "Dr. Rhodes",
-      "start": "11/2024",
-      "refills": 1,
-      "status": "PRN"
+      "name": "Levetiracetam 500mg BID \u2014 antiepileptic prophylaxis",
+      "sig": "Cortical metastasis \u2192 seizure risk. Levetiracetam preferred (no CYP450 interactions with chemotherapy).",
+      "prescriber": "Neurology/Oncology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -118,7 +85,7 @@ window.EMR_DATA = {
       "bp": "148/86",
       "hr": 72,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "142 lbs",
       "ht": "5'4\"",
@@ -130,7 +97,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 68,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "98%",
       "wt": "146 lbs",
       "ht": "5'4\"",
@@ -142,7 +109,7 @@ window.EMR_DATA = {
       "bp": "130/76",
       "hr": 70,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "148 lbs",
       "ht": "5'4\"",
@@ -157,186 +124,72 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Kenneth Rhodes, MD",
       "cc": "Worsening headaches x 3 months; unintentional weight loss; new right-hand weakness",
-      "hpi": "77-year-old female with history of breast cancer (Stage IIA, left mastectomy 2017, completed adjuvant therapy 2022, NED on surveillance) presenting with progressive morning headaches x 3 months. Headaches are worst upon waking, described as pressure-like, diffuse, associated with nausea. Initially intermittent but now daily. Acetaminophen provides partial relief. Son reports patient has been 'not herself' — word-finding difficulty, forgetting appointments, new right-hand clumsiness when writing. Unintentional 4 lb weight loss over 3 months. No seizures. No visual changes.",
+      "hpi": "77-year-old female with history of breast cancer (Stage IIA, left mastectomy 2017, completed adjuvant therapy 2022, NED on surveillance) presenting with progressive morning headaches x 3 months. Headaches are worst upon waking, described as pressure-like, diffuse, associated with nausea. Initially intermittent but now daily. Acetaminophen provides partial relief. Son reports patient has been 'not herself' \u2014 word-finding difficulty, forgetting appointments, new right-hand clumsiness when writing. Unintentional 4 lb weight loss over 3 months. No seizures. No visual changes.",
       "exam": "General: Thin elderly female, appears fatigued. Neuro: A&O x3 but slow responses. Mild right pronator drift. Grip strength 4/5 right, 5/5 left. Difficulty with serial 7s. Word-finding pauses. Gait: Mildly unsteady. CN II-XII grossly intact. DTRs 3+ bilateral upper extremities. Fundoscopic: Bilateral papilledema.",
-      "assessment": "1. Progressive headaches with papilledema, right-sided weakness, and cognitive decline — HIGHLY CONCERNING for intracranial mass lesion\n2. History of breast cancer — brain metastasis must be ruled out urgently\n3. Unintentional weight loss — 4 lbs in 3 months",
-      "plan": "1. URGENT MRI brain with and without contrast — ordered STAT\n2. If mass identified → URGENT neurosurgery and oncology referral\n3. Dexamethasone 4mg QID started today for vasogenic edema/elevated ICP\n4. Seizure precautions reviewed with family\n5. Hold further workup pending MRI results\n6. Son present — understands urgency"
+      "assessment": "1. Progressive headaches with papilledema, right-sided weakness, and cognitive decline \u2014 HIGHLY CONCERNING for intracranial mass lesion\n2. History of breast cancer \u2014 brain metastasis must be ruled out urgently\n3. Unintentional weight loss \u2014 4 lbs in 3 months",
+      "plan": "1. URGENT MRI brain with and without contrast \u2014 ordered STAT\n2. If mass identified \u2192 URGENT neurosurgery and oncology referral\n3. Dexamethasone 4mg QID started today for vasogenic edema/elevated ICP\n4. Seizure precautions reviewed with family\n5. Hold further workup pending MRI results\n6. Son present \u2014 understands urgency"
     },
     {
       "id": "V002",
       "date": "07/10/2024",
       "type": "Specialist",
       "provider": "Dr. Patricia Grant, MD (Oncology)",
-      "cc": "Annual breast cancer surveillance — 7 years post-diagnosis",
+      "cc": "Annual breast cancer surveillance \u2014 7 years post-diagnosis",
       "hpi": "76-year-old female with ER+/PR+/HER2- Stage IIA left breast cancer (mastectomy 2017, TC x4, radiation, tamoxifen x 5 years completed 2022) for annual surveillance. No new symptoms. No breast complaints. Mammogram of right breast WNL. Tumor markers CEA and CA 27-29 WNL. No bone pain, no cough, no headaches at that time. Clinically NED.",
       "exam": "General: NAD. Chest wall: Left mastectomy site healed, no nodules. Right breast: No masses. Axillae: No lymphadenopathy. Neuro: Grossly intact.",
-      "assessment": "1. Breast cancer surveillance — NED at 7 years\n2. Continue annual surveillance",
+      "assessment": "1. Breast cancer surveillance \u2014 NED at 7 years\n2. Continue annual surveillance",
       "plan": "1. Annual mammogram right breast\n2. Tumor markers in 6 months\n3. Continue denosumab for osteoporosis (cancer treatment-related)\n4. RTC 1 year"
     }
   ],
   "labs": [
     {
-      "date": "01/08/2025",
-      "time": "09:30",
-      "orderedBy": "Dr. Kenneth Rhodes, MD",
-      "collected": "01/08/2025 09:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-417820",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Brain Metastasis Workup",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "38",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "34",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "142",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            }
-          ]
+          "test": "HER2 status",
+          "value": "3+ (positive) \u2014 IHC",
+          "unit": "",
+          "ref": "0-1+ = negative",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "35.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "312",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CT chest/abdomen/pelvis",
+          "value": "No new systemic metastases \u2014 stable primary site",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         },
         {
-          "name": "TUMOR MARKERS",
-          "results": [
-            {
-              "test": "CA 27-29",
-              "value": "48",
-              "unit": "U/mL",
-              "range": "<38",
-              "flag": "H"
-            },
-            {
-              "test": "CEA",
-              "value": "6.2",
-              "unit": "ng/mL",
-              "range": "<3.0",
-              "flag": "H"
-            }
-          ]
+          "test": "CEA",
+          "value": "28",
+          "unit": "ng/mL",
+          "ref": "<3",
+          "flag": "H"
         },
         {
-          "name": "THYROID FUNCTION",
-          "results": [
-            {
-              "test": "TSH",
-              "value": "2.8",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            }
-          ]
+          "test": "Performance status (ECOG)",
+          "value": "1 \u2014 ambulatory, restricted strenuous activity",
+          "unit": "",
+          "ref": "0 = fully active",
+          "flag": ""
+        },
+        {
+          "test": "Neurological exam \u2014 left arm",
+          "value": "Reduced cortical sensation; mild left arm weakness 4/5",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "07/2024",
-      "study": "MAMMOGRAM RIGHT BREAST — SCREENING",
-      "accession": "IMG-2024-41782",
-      "status": "FINAL",
-      "orderedBy": "Dr. Patricia Grant, MD (Oncology)",
-      "readBy": "Dr. Lisa Nakamura, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "76F with history of left breast cancer s/p mastectomy 2017. Annual screening right breast.",
-      "technique": "Digital mammography, CC and MLO views, right breast.",
-      "findings": "Right breast: Heterogeneously dense. No suspicious masses, calcifications, or architectural distortion.\\n\\nLeft: Mastectomy site — no imaging performed.",
-      "impression": "1. BI-RADS 1 — Negative. No mammographic evidence of malignancy, right breast.\\n2. Continue annual screening.",
-      "dictated": "07/12/2024 10:00",
-      "verified": "07/12/2024 14:00"
+      "date": "04/2024",
+      "study": "MRI Brain with and without Contrast",
+      "findings": "3.2cm enhancing mass right parietal lobe with surrounding vasogenic edema. Midline shift 7mm. No leptomeningeal enhancement. No other enhancing lesions.",
+      "impression": "Solitary brain metastasis, right parietal lobe. Consistent with known breast cancer primary. Neurosurgical and radiation oncology consultation."
     }
   ],
   "immunizations": [
@@ -355,32 +208,32 @@ window.EMR_DATA = {
       "mfr": "Moderna"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "2023",
       "site": "Right deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Pfizer"
     },
     {
       "vaccine": "Shingrix (2/2)",
       "date": "2020",
       "site": "Right deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Tdap (Adacel)",
       "date": "2018",
       "site": "Right deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     }
   ],
   "familyHistory": [
     "Mother: Breast cancer (age 64), deceased at 78 (CHF)",
     "Father: Lung cancer, deceased at 70",
-    "Sister: Breast cancer (age 58), alive at 72 — BRCA negative",
-    "Daughter: Healthy, age 50 — BRCA testing negative"
+    "Sister: Breast cancer (age 58), alive at 72 \u2014 BRCA negative",
+    "Daughter: Healthy, age 50 \u2014 BRCA testing negative"
   ],
   "socialHistory": [
     [
@@ -389,7 +242,7 @@ window.EMR_DATA = {
     ],
     [
       "Marital",
-      "Widowed — husband deceased 2019 (MI)"
+      "Widowed \u2014 husband deceased 2019 (MI)"
     ],
     [
       "Tobacco",
@@ -397,7 +250,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Rare — glass of wine at holidays"
+      "Rare \u2014 glass of wine at holidays"
     ],
     [
       "Drugs",
@@ -417,12 +270,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Yes — healthcare proxy: son Thomas Whitfield; full code"
+      "Yes \u2014 healthcare proxy: son Thomas Whitfield; full code"
     ]
   ],
   "meta": {
     "caseId": "brain-masstumor",
-    "diagnosis": "Brain Mass/Tumor (Metastatic Breast Cancer)",
+    "diagnosis": "Brain Mass \u2014 Metastatic Breast Cancer",
     "acuity": 2,
     "presentation": "Geriatric Emergency",
     "category": "neurological"
@@ -486,13 +339,12 @@ window.EMR_DATA = {
       "Neck stiffness assessment": "No nuchal rigidity, full range of motion without pain"
     },
     "ddxTargets": [
-      "Brain Mass/Tumor (Metastatic Breast Cancer) (correct diagnosis)",
-      "Primary brain tumor (glioblastoma)",
-      "Tension-type headache with medication overuse",
-      "Meningitis",
-      "Subarachnoid hemorrhage",
-      "Migraine with aura",
-      "Temporal arteritis"
+      "Brain metastasis \u2014 breast cancer (correct)",
+      "Primary brain tumor (glioblastoma) \u2014 no known primary; single ring-enhancing in older adult; biopsy distinguishes",
+      "Brain abscess \u2014 fever; restricted DWI; pyogenic source; no cancer history",
+      "Radiation necrosis \u2014 prior radiation to brain; imaging overlap with metastasis; MR perfusion/PET distinguish",
+      "Lymphoma \u2014 periventricular; responds dramatically to steroids; AIDS or immunosuppression",
+      "Cavernous malformation \u2014 blood products; hemosiderin ring on T2*; no enhancement typically"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'typical' tension headaches in elderly patients or assuming headaches are medication-related, missing the critical morning pattern and associated neurological signs",
@@ -502,7 +354,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possible causes for Mrs. Whitfield's headaches. Before you interview her, think about what specific historical features would help you distinguish between primary headache disorders and secondary causes. What aspects of her past medical history might be particularly relevant to her current presentation?",
       "phase5": "Now that you've completed your history and physical exam, let's discuss what you've found. The combination of morning headaches, nausea, and your physical exam findings should point you toward a specific category of pathology. How do these findings change your differential diagnosis, and what's your next step?",
-      "finalDebrief": "This case illustrates the importance of considering a patient's oncologic history when evaluating new neurological symptoms. Mrs. Whitfield's morning headaches with nausea, combined with papilledema and focal neurological signs, created a classic presentation for increased intracranial pressure from brain metastases. How did recognizing the pattern of secondary headache features help narrow your differential from your initial assessment?"
+      "finalDebrief": "This case illustrates the importance of considering a patient's oncologic history when evaluating new neurological symptoms. Mrs. Whitfield's morning headaches with nausea, combined with papilledema and focal neurological signs, created a classic presentation for increased intracranial pressure from brain metastases. How did recognizing the pattern of secondary headache features help narrow your differential from your initial assessment?",
+      "final": "Diagnosis: brain metastasis from breast cancer. Key learning: (1) Most common primary cancers causing brain metastases (in order): lung (most common overall), breast (most common in women with brain mets), melanoma (highest rate per patient), renal cell, colorectal. Breast cancer mets tend to be larger, better circumscribed, and more responsive to local therapy than lung. (2) Vasogenic edema treatment: dexamethasone reduces vascular permeability around tumor \u2192 reduces edema. Effect within 24-48 hours. Does NOT treat the tumor \u2014 only the edema. Taper after definitive treatment. (3) Treatment strategy for limited brain metastases (1-3): stereotactic radiosurgery (SRS) preferred over whole brain radiation therapy (WBRT) for \u22643-4 lesions with good PS and controlled systemic disease. SRS preserves neurocognition. WBRT causes cognitive decline \u2014 reserved for extensive/leptomeningeal disease. (4) Surgery indication: single large metastasis causing significant mass effect + accessible location + good systemic control \u2192 surgical resection followed by SRS to cavity. (5) HER2+ breast cancer and lapatinib/tucatinib: newer HER2-targeted agents cross the BBB better than trastuzumab \u2014 increasingly used for HER2+ brain metastases."
     }
   }
 };

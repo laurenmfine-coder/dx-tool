@@ -1,6 +1,3 @@
-// Virtual EMR Case: Scrotal Cellulitis
-// Variant: cellulitis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "BlueCross BlueShield FL HMO",
     "pcp": "Dr. David Rosenberg, MD",
-    "pharmacy": "CVS Pharmacy — 4700 N Pine Island Rd, Sunrise, FL",
+    "pharmacy": "CVS Pharmacy \u2014 4700 N Pine Island Rd, Sunrise, FL",
     "language": "English",
     "race": "White",
     "address": "8842 Larkspur Ln, Denver, CO 80211",
@@ -26,104 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2012",
+      "problem": "Scrotal erythema and swelling \u2014 Fournier gangrene must be excluded",
+      "icd": "L03.818",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Last A1c 8.8%; suboptimal control"
+      "notes": "James Taylor, 58M \u2014 diabetic, 3 days scrotal pain, erythema, and swelling. Fever 38.8\u00b0C. Question: is this simple cellulitis or Fournier gangrene (necrotizing fasciitis of perineum)?"
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2010",
+      "problem": "Diabetes mellitus \u2014 major risk factor for Fournier gangrene",
+      "icd": "E11.9",
+      "onset": "2015",
       "status": "Active",
-      "notes": "On dual therapy"
+      "notes": "DM is the most common predisposing condition for Fournier gangrene. Impaired immune function and vascular disease allow rapidly progressive infection."
     },
     {
-      "problem": "Obesity, Class II",
-      "icd": "E66.01",
-      "onset": "2008",
+      "problem": "Risk stratification \u2014 Laboratory Risk Indicator for Necrotizing Fasciitis (LRINEC) score",
+      "icd": "M72.6",
+      "onset": "2024",
       "status": "Active",
-      "notes": "BMI 37.4"
-    },
-    {
-      "problem": "Peripheral Neuropathy, Diabetic",
-      "icd": "E11.42",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "Bilateral feet; on gabapentin"
-    },
-    {
-      "problem": "Recurrent Skin Infections",
-      "icd": "L08.9",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "Multiple episodes cellulitis/abscess; MRSA-positive wound culture 2022"
-    },
-    {
-      "problem": "Benign Prostatic Hyperplasia",
-      "icd": "N40.0",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Mild LUTS; on tamsulosin"
+      "notes": "LRINEC \u22656 = high risk for necrotizing fasciitis. Parameters: CRP, WBC, hemoglobin, sodium, creatinine, glucose."
     }
   ],
   "medications": [
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Rosenberg",
-      "start": "05/2013",
-      "refills": 3,
-      "status": "Active"
+      "name": "Urgent surgical consultation \u2014 if Fournier features present",
+      "sig": "Fournier gangrene requires emergent surgical debridement within hours of diagnosis. Mortality 20-40% even with treatment. If any suspicion: OR NOW, not after 'watching.'",
+      "prescriber": "Surgery/Urology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Consulted"
     },
     {
-      "name": "Glipizide 10mg BID",
-      "sig": "Take 1 tablet by mouth twice daily before meals",
-      "prescriber": "Dr. Rosenberg",
-      "start": "01/2020",
-      "refills": 2,
-      "status": "Active"
+      "name": "Cefazolin 1g IV q8h \u2014 if simple cellulitis confirmed",
+      "sig": "For non-necrotizing cellulitis: anti-staph/strep coverage. Upgrade to broad-spectrum if progression or Fournier features emerge.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Pending surgical assessment"
     },
     {
-      "name": "Lisinopril 40mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Rosenberg",
-      "start": "03/2012",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Rosenberg",
-      "start": "06/2018",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Gabapentin 300mg TID",
-      "sig": "Take 1 capsule by mouth three times daily",
-      "prescriber": "Dr. Rosenberg",
-      "start": "09/2020",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Tamsulosin 0.4mg QHS",
-      "sig": "Take 1 capsule by mouth at bedtime",
-      "prescriber": "Dr. Chen",
-      "start": "05/2023",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Mupirocin 2% ointment",
-      "sig": "Apply to nares twice daily x 5 days each month for MRSA decolonization",
-      "prescriber": "Dr. Rosenberg",
-      "start": "11/2022",
-      "refills": 3,
-      "status": "Active"
+      "name": "Broad-spectrum antibiotics if Fournier suspected",
+      "sig": "Vancomycin + piperacillin-tazobactam + metronidazole \u2014 polymicrobial coverage for Fournier. IV antibiotics are adjunct to surgery, NOT primary treatment.",
+      "prescriber": "Surgery/Infectious Disease",
+      "start": "2024",
+      "refills": 0,
+      "status": "Ready \u2014 if FG suspected"
     }
   ],
   "allergies": [
@@ -141,7 +85,7 @@ window.EMR_DATA = {
       "bp": "144/88",
       "hr": 82,
       "rr": 16,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "97%",
       "wt": "260 lbs",
       "ht": "5'10\"",
@@ -153,7 +97,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 78,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "258 lbs",
       "ht": "5'10\"",
@@ -165,7 +109,7 @@ window.EMR_DATA = {
       "bp": "150/94",
       "hr": 80,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "262 lbs",
       "ht": "5'10\"",
@@ -180,9 +124,9 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. David Rosenberg, MD",
       "cc": "Follow-up: T2DM, HTN, recurrent skin infections",
-      "hpi": "55-year-old male with poorly controlled T2DM, HTN, and history of recurrent MRSA skin infections presenting for routine follow-up. A1c today 8.8% (up from 8.2%). Reports occasional numbness and burning in feet. Skin — no active infections currently. Admits to poor dietary compliance and minimal exercise. BPH symptoms stable on tamsulosin.",
+      "hpi": "55-year-old male with poorly controlled T2DM, HTN, and history of recurrent MRSA skin infections presenting for routine follow-up. A1c today 8.8% (up from 8.2%). Reports occasional numbness and burning in feet. Skin \u2014 no active infections currently. Admits to poor dietary compliance and minimal exercise. BPH symptoms stable on tamsulosin.",
       "exam": "General: Obese male in NAD. HEENT: PERRL. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Obese, soft, NT/ND. Skin: Healed scar left thigh from prior I&D. No active lesions. Extremities: Bilateral lower extremity pitting edema 1+. Neuro: Decreased sensation bilateral feet to mid-shin (monofilament testing).",
-      "assessment": "1. T2DM — worsening control, A1c 8.8%\n2. HTN — above goal\n3. Diabetic peripheral neuropathy — stable symptoms\n4. Recurrent MRSA skin infections — no active infection; decolonization ongoing\n5. BPH — stable on tamsulosin",
+      "assessment": "1. T2DM \u2014 worsening control, A1c 8.8%\n2. HTN \u2014 above goal\n3. Diabetic peripheral neuropathy \u2014 stable symptoms\n4. Recurrent MRSA skin infections \u2014 no active infection; decolonization ongoing\n5. BPH \u2014 stable on tamsulosin",
       "plan": "1. Add Semaglutide 0.25mg SQ weekly; titrate per protocol\n2. Add HCTZ 12.5mg daily to HTN regimen\n3. Continue gabapentin; podiatry referral for diabetic foot exam\n4. Continue MRSA decolonization protocol\n5. Diabetic educator referral\n6. RTC 3 months"
     },
     {
@@ -192,161 +136,62 @@ window.EMR_DATA = {
       "provider": "Dr. Alan Brooks, MD",
       "cc": "Painful boil right groin x 3 days",
       "hpi": "55-year-old diabetic male with history of recurrent MRSA infections presenting with a painful, swollen area in the right inguinal fold x 3 days. Reports warmth, redness, and purulent drainage since this morning. Low-grade fever at home. No urinary symptoms.",
-      "exam": "General: Mild distress from pain. Skin: Right inguinal fold — 4x3 cm fluctuant, erythematous abscess with surrounding cellulitis. Purulent drainage expressed. No crepitus.",
-      "assessment": "1. Right inguinal abscess — likely MRSA given history",
-      "plan": "1. I&D performed; wound culture sent\n2. Trimethoprim-sulfamethoxazole DS 1 tab BID x 10 days (penicillin allergy)\n3. Wound packing; follow-up 48 hours for repack\n4. Return precautions: worsening redness, fever >101°F, spreading cellulitis"
+      "exam": "General: Mild distress from pain. Skin: Right inguinal fold \u2014 4x3 cm fluctuant, erythematous abscess with surrounding cellulitis. Purulent drainage expressed. No crepitus.",
+      "assessment": "1. Right inguinal abscess \u2014 likely MRSA given history",
+      "plan": "1. I&D performed; wound culture sent\n2. Trimethoprim-sulfamethoxazole DS 1 tab BID x 10 days (penicillin allergy)\n3. Wound packing; follow-up 48 hours for repack\n4. Return precautions: worsening redness, fever >101\u00b0F, spreading cellulitis"
     }
   ],
   "labs": [
     {
-      "date": "01/06/2025",
-      "time": "08:30",
-      "orderedBy": "Dr. David Rosenberg, MD",
-      "collected": "01/06/2025 07:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-010637",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (12 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Fournier/Cellulitis Risk Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "198",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.3",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "eGFR",
-              "value": "62",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "137",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.0",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "42",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "35",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "16.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "8.8",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            },
-            {
-              "test": "Est. Avg Glucose (eAG)",
-              "value": "206",
-              "unit": "mg/dL",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "142",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "9.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.5",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "278",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.8",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "132",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "LRINEC score",
+          "value": "7 (high risk \u2014 >6 = necrotizing fasciitis likely)",
+          "unit": "",
+          "ref": "<6 = low risk",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "04/2024",
+      "study": "CT Pelvis with Contrast",
+      "findings": "Scrotal wall thickening and edema. Small amount of gas tracking along fascial planes of perineum and scrotum \u2014 pathognomonic for necrotizing fasciitis. No abscess. No free perforation.",
+      "impression": "Gas in fascial planes consistent with Fournier gangrene (necrotizing fasciitis). Emergent surgical debridement indicated."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -366,7 +211,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2016",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
@@ -401,7 +246,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former — 10 pack-years; quit 2010"
+      "Former \u2014 10 pack-years; quit 2010"
     ],
     [
       "Alcohol",
@@ -413,7 +258,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Minimal — sedentary lifestyle"
+      "Minimal \u2014 sedentary lifestyle"
     ],
     [
       "Housing",
@@ -425,12 +270,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — discussed"
+      "None \u2014 discussed"
     ]
   ],
   "meta": {
     "caseId": "cellulitis",
-    "diagnosis": "Scrotal Cellulitis",
+    "diagnosis": "Scrotal Cellulitis vs Fournier Gangrene \u2014 Necrotizing Fasciitis Screen",
     "acuity": 3,
     "presentation": "Urologic Emergency",
     "category": "urologic"
@@ -487,20 +332,18 @@ window.EMR_DATA = {
       "Assessment for lymphadenopathy in inguinal regions": "Mild bilateral inguinal lymphadenopathy with small, tender lymph nodes palpable.",
       "Testicular examination and cremasteric reflex": "Both testes are normal in size, shape, and position. Cremasteric reflex is intact bilaterally. No testicular tenderness.",
       "Abdominal examination": "Soft, non-tender, non-distended. No masses or organomegaly. Normal bowel sounds.",
-      "Assessment of vital signs including temperature": "Temperature 98.8°F, BP 144/88, HR 82, SpO2 97%. Patient appears mildly uncomfortable but not toxic.",
+      "Assessment of vital signs including temperature": "Temperature 98.8\u00b0F, BP 144/88, HR 82, SpO2 97%. Patient appears mildly uncomfortable but not toxic.",
       "Inspection for other areas of skin infection": "No other obvious areas of active skin infection. Some evidence of prior diabetic skin changes on lower extremities.",
       "Urethral meatus examination": "Normal appearance, no discharge, no erythema or swelling.",
       "Assessment of scrotal elevation (negative Prehn's sign)": "Elevating the scrotum does not provide significant pain relief, helping to rule out epididymitis.",
       "Transillumination test": "No transillumination of scrotal contents, ruling out hydrocele or other fluid collections."
     },
     "ddxTargets": [
-      "Scrotal Cellulitis (correct diagnosis)",
-      "Epididymitis",
-      "Orchitis",
-      "Testicular Torsion",
-      "Fournier's Gangrene",
-      "Scrotal Abscess",
-      "Incarcerated Inguinal Hernia"
+      "Fournier gangrene \u2014 necrotizing fasciitis (correct \u2014 gas on CT clinches it)",
+      "Simple scrotal cellulitis \u2014 no gas on CT; LRINEC <6; no fascial plane involvement",
+      "Epididymo-orchitis \u2014 testicular tenderness; scrotal Doppler increased flow; systemic toxicity less",
+      "Scrotal abscess \u2014 fluctuant; loculated on ultrasound; I&D sufficient",
+      "Incarcerated inguinal hernia \u2014 bowel palpable; no fever; different examination"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on diabetes routine visit and missing the acute urologic emergency, or focusing only on diabetic complications rather than the presenting scrotal symptoms",
@@ -510,7 +353,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This 55-year-old diabetic male presents with scrotal pain and erythema. What are your thoughts about the most concerning diagnoses you need to rule out first, particularly given his diabetes and immunocompromised state? How will your history help you differentiate between testicular pathology versus skin and soft tissue infection?",
       "phase5": "Based on your history and physical examination findings, how do the physical exam findings help you narrow your differential diagnosis? What specific features help you distinguish cellulitis from more serious conditions like Fournier's gangrene or testicular pathology? What additional risk factors does this patient have?",
-      "finalDebrief": "This case demonstrates scrotal cellulitis in a diabetic patient. Notice how the key differentiating features were the superficial skin involvement, absence of deep testicular tenderness, negative Prehn's sign, and lack of systemic toxicity. The patient's diabetes puts him at higher risk for skin and soft tissue infections and potentially more serious complications like necrotizing fasciitis, making prompt recognition and treatment crucial."
+      "finalDebrief": "This case demonstrates scrotal cellulitis in a diabetic patient. Notice how the key differentiating features were the superficial skin involvement, absence of deep testicular tenderness, negative Prehn's sign, and lack of systemic toxicity. The patient's diabetes puts him at higher risk for skin and soft tissue infections and potentially more serious complications like necrotizing fasciitis, making prompt recognition and treatment crucial.",
+      "final": "Diagnosis: Fournier gangrene (necrotizing fasciitis of perineum). Key learning: (1) Fournier gangrene is necrotizing fasciitis of the perineum and external genitalia \u2014 polymicrobial (aerobic + anaerobic synergy), rapidly progressive, requires emergent surgical debridement. Risk factors: DM (most common), alcoholism, immunocompromised, trauma, perineal surgery. (2) Gas in fascial planes on CT is pathognomonic: CT pelvis with contrast is the study of choice to detect gas tracking along fascial planes. Absence of gas does NOT exclude early Fournier \u2014 do not be falsely reassured. (3) LRINEC score: CRP >150 (4pts) + WBC >15 (1pt) + Hgb <13.5 (1pt) + sodium <135 (2pts) + Cr >1.6 (2pts) + glucose >180 (1pt). Score \u22656 = high risk for necrotizing fasciitis. Useful but not definitive \u2014 clinical judgment predominates. (4) The 'surgical look' rule: if Fournier is suspected and CT is equivocal, take to OR for examination under anesthesia. The finger test \u2014 blunt dissection with finger, no resistance of tissues = necrotizing fasciitis. A negative look (simple cellulitis) costs 30 minutes of OR time. A missed Fournier costs a life. (5) Treatment: aggressive surgical debridement \u00b1 diverting colostomy + broad-spectrum antibiotics + hyperbaric oxygen (adjunct, not primary). Mortality 20-40%; wounds often require multiple debridements."
     }
   }
 };

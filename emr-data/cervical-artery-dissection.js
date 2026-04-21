@@ -1,6 +1,3 @@
-// Virtual EMR Case: Cervical Artery Dissection
-// Variant: cervical-artery-dissection | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Natasha Williams, MD",
-    "pharmacy": "CVS Pharmacy — 4800 S Pine Island Rd, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 4800 S Pine Island Rd, Riverside, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
     "address": "9601 E Roosevelt Rd, Milwaukee, WI 53209",
@@ -27,66 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Migraine without Aura",
-      "icd": "G43.009",
-      "onset": "2010",
+      "problem": "Internal carotid artery dissection \u2014 ischemic stroke risk",
+      "icd": "I72.0",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Episodic, 2-3/month; managed with sumatriptan PRN"
+      "notes": "Ashley Wong, 34F \u2014 neck pain onset during chiropractic neck manipulation 2 days ago. Now right-sided headache, left arm weakness, left-sided facial droop. CTA: right ICA dissection with intramural hematoma."
     },
     {
-      "problem": "Ehlers-Danlos Syndrome, Hypermobility Type",
-      "icd": "Q79.6",
-      "onset": "2014",
+      "problem": "Stroke risk \u2014 thrombus at dissection site can embolize",
+      "icd": "I63.031",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Diagnosed by rheumatology; joint hypermobility, recurrent subluxations; connective tissue disorder — risk factor for arterial dissection"
+      "notes": "ICA dissection causes ischemic stroke via two mechanisms: intraluminal thrombus formation at dissection site that embolizes distally, and direct luminal narrowing causing hypoperfusion. Anticoagulation or antiplatelet prevents further stroke."
     },
     {
-      "problem": "Temporomandibular Joint Disorder",
-      "icd": "M26.60",
-      "onset": "2019",
+      "problem": "Horner syndrome \u2014 sympathetic chain disruption",
+      "icd": "G90.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Associated with EDS; uses night guard"
-    },
-    {
-      "problem": "Anxiety Disorder, Generalized",
-      "icd": "F41.1",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "Well-controlled on SSRI"
+      "notes": "Ptosis + miosis + anhidrosis = Horner syndrome from ICA dissection disrupting pericarotid sympathetic plexus. Classic accompanying finding."
     }
   ],
   "medications": [
     {
-      "name": "Sumatriptan 50mg PRN",
-      "sig": "Take 1 tablet by mouth at onset of migraine; may repeat once after 2 hours; max 200mg/24hr",
-      "prescriber": "Dr. Williams",
-      "start": "03/2015",
-      "refills": 2,
-      "status": "PRN"
+      "name": "Anticoagulation (heparin) OR antiplatelet \u2014 debated, use antiplatelet",
+      "sig": "CADISS trial showed no significant difference between anticoagulation and antiplatelet for cervical artery dissection. Current practice: antiplatelet (aspirin 325mg) preferred unless large thrombus or very high stroke risk. Avoid heparin if hemorrhagic transformation.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Aspirin 325mg initiated"
     },
     {
-      "name": "Escitalopram 10mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Williams",
-      "start": "08/2016",
-      "refills": 5,
+      "name": "Blood pressure control \u2014 target SBP <140",
+      "sig": "Hypertension worsens dissection propagation and increases stroke risk. Avoid vasodilators \u2014 maintain cerebral perfusion pressure especially in setting of stroke.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Ibuprofen 400mg PRN",
-      "sig": "Take 1 tablet by mouth every 6 hours as needed for pain",
-      "prescriber": "Dr. Williams",
-      "start": "01/2020",
-      "refills": 3,
-      "status": "PRN"
-    },
-    {
-      "name": "Oral Contraceptive (Norethindrone 0.35mg daily)",
-      "sig": "Take 1 tablet by mouth daily at same time each day",
-      "prescriber": "Dr. Williams",
-      "start": "05/2021",
-      "refills": 6,
-      "status": "Active"
+      "name": "Avoid further neck manipulation \u2014 patient education",
+      "sig": "Chiropractic manipulation and ICA/VA dissection: the relationship is debated (causation vs coincidence), but avoidance of further manipulation is standard recommendation during dissection healing.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Counseled"
     }
   ],
   "allergies": [
@@ -111,7 +93,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'7\"",
@@ -123,7 +105,7 @@ window.EMR_DATA = {
       "bp": "114/70",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "136 lbs",
       "ht": "5'7\"",
@@ -135,7 +117,7 @@ window.EMR_DATA = {
       "bp": "122/76",
       "hr": 66,
       "rr": 14,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "98%",
       "wt": "140 lbs",
       "ht": "5'7\"",
@@ -152,7 +134,7 @@ window.EMR_DATA = {
       "cc": "Medication refills, neck pain after chiropractic visit",
       "hpi": "38-year-old female presents for routine medication refills. Also reports new right-sided neck pain that began 3 days after a chiropractic cervical manipulation last week. Describes it as a dull ache radiating behind the right ear. No headache currently. No neurologic symptoms. History of EDS with joint hypermobility.",
       "exam": "General: Well-appearing, NAD. HEENT: PERRL, EOMI, no Horner syndrome. Neck: Mild TTP right SCM and posterior cervical region; full ROM but reports discomfort with right rotation. CV: RRR, no bruits. Neuro: A&O x3, CN II-XII intact, strength 5/5 all extremities, sensation intact.",
-      "assessment": "1. Right-sided neck pain — post-chiropractic manipulation; likely musculoskeletal\n2. Migraine — stable\n3. GAD — stable on escitalopram\n4. EDS — counseled regarding cervical manipulation risks",
+      "assessment": "1. Right-sided neck pain \u2014 post-chiropractic manipulation; likely musculoskeletal\n2. Migraine \u2014 stable\n3. GAD \u2014 stable on escitalopram\n4. EDS \u2014 counseled regarding cervical manipulation risks",
       "plan": "1. Ibuprofen PRN; warm compresses; avoid further cervical manipulation\n2. Continue sumatriptan PRN\n3. Continue escitalopram\n4. RTC 6 months or PRN; return if headache develops, vision changes, or neurologic symptoms"
     },
     {
@@ -161,184 +143,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Natasha Williams, MD",
       "cc": "Annual wellness exam",
-      "hpi": "38-year-old female for annual exam. Migraines occurring 2-3x/month, manageable with sumatriptan. Anxiety well-controlled. EDS — no new subluxations. Exercising regularly with Pilates. No new complaints.",
+      "hpi": "38-year-old female for annual exam. Migraines occurring 2-3x/month, manageable with sumatriptan. Anxiety well-controlled. EDS \u2014 no new subluxations. Exercising regularly with Pilates. No new complaints.",
       "exam": "General: NAD, well-nourished female. HEENT: WNL. Neck: Supple, no LAD. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT. MSK: Joint hypermobility noted at MCPs, elbows, knees (Beighton 7/9). Skin: Velvety texture, no bruising.",
-      "assessment": "1. Annual wellness exam\n2. Migraine — stable frequency\n3. EDS — stable, no acute subluxations\n4. GAD — well-controlled",
+      "assessment": "1. Annual wellness exam\n2. Migraine \u2014 stable frequency\n3. EDS \u2014 stable, no acute subluxations\n4. GAD \u2014 well-controlled",
       "plan": "1. Continue current medications\n2. Age-appropriate screening current\n3. Discussed EDS precautions: avoid high-impact exercise, cervical manipulation\n4. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "08/20/2024",
-      "time": "08:45",
-      "orderedBy": "Dr. Natasha Williams, MD",
-      "collected": "08/20/2024 08:10",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-082015",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Cervical Artery Dissection",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "82",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "141",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "18",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "20",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "Hypercoagulable screen",
+          "value": "Pending \u2014 factor V Leiden, prothrombin mutation, protein C/S, antiphospholipid",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "39.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "238",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "ESR/CRP",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal \u2014 no vasculitis",
+          "flag": ""
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "188",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": ""
-            },
-            {
-              "test": "LDL Cholesterol",
-              "value": "112",
-              "unit": "mg/dL",
-              "range": "<100 optimal",
-              "flag": "H"
-            },
-            {
-              "test": "HDL Cholesterol",
-              "value": "62",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": ""
-            },
-            {
-              "test": "Triglycerides",
-              "value": "70",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": ""
-            }
-          ]
+          "test": "MRI brain DWI",
+          "value": "Small acute infarct right MCA territory",
+          "unit": "",
+          "ref": "No acute ischemia = normal",
+          "flag": "H"
+        },
+        {
+          "test": "Pupil exam",
+          "value": "Right: 4mm. Left: 2mm, ptosis \u2014 right Horner syndrome (ipsilateral to dissection)",
+          "unit": "",
+          "ref": "Equal pupils",
+          "flag": "H"
+        },
+        {
+          "test": "CTA neck",
+          "value": "Right ICA dissection with intramural hematoma, string sign \u2014 70% stenosis",
+          "unit": "",
+          "ref": "Normal lumen",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "03/15/2024",
-      "study": "MRI BRAIN WITHOUT CONTRAST",
-      "accession": "IMG-2024-03151",
-      "status": "FINAL",
-      "orderedBy": "Dr. Natasha Williams, MD",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "38F migraine without aura, increasing frequency — r/o structural lesion.",
-      "technique": "Multiplanar MRI of the brain without gadolinium contrast. Sequences: T1, T2, FLAIR, DWI, GRE.",
-      "findings": "Brain parenchyma: Normal signal intensity throughout. No restricted diffusion. No mass, midline shift, or hydrocephalus.\\n\\nWhite matter: Few scattered T2/FLAIR hyperintensities in the subcortical white matter, nonspecific, likely related to migraine.\\n\\nVentricular system: Normal in size and configuration.\\n\\nExtra-axial spaces: No subdural or epidural collection.\\n\\nPosterior fossa: Normal cerebellum and brainstem.\\n\\nNote: Intracranial vasculature not evaluated on this non-contrast study.",
-      "impression": "1. Normal MRI brain.\\n2. Nonspecific white matter foci, likely migraine-related.\\n3. No structural cause for headaches identified.",
-      "dictated": "03/15/2024 11:30",
-      "verified": "03/15/2024 14:05"
+      "date": "04/2024",
+      "study": "CTA Head and Neck",
+      "findings": "Right internal carotid artery dissection beginning at C2-C3, with intramural hematoma and 'string sign' (70% luminal narrowing). Small filling defect consistent with intraluminal thrombus. MRI brain: small right MCA territory acute infarct on DWI.",
+      "impression": "Right ICA dissection with ischemic stroke. Antiplatelet therapy and neurology follow-up."
     }
   ],
   "immunizations": [
@@ -360,14 +219,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2008",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -412,12 +271,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — discussed"
+      "None \u2014 discussed"
     ]
   ],
   "meta": {
     "caseId": "cervical-artery-dissection",
-    "diagnosis": "Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome)",
+    "diagnosis": "Internal Carotid Artery Dissection \u2014 Post-Chiropractic Manipulation",
     "acuity": 2,
     "presentation": "Headache",
     "category": "neurologic"
@@ -481,13 +340,12 @@ window.EMR_DATA = {
       "Assessment of joint hypermobility (Beighton score)": "Beighton score 7/9, consistent with known Ehlers-Danlos syndrome hypermobility type"
     },
     "ddxTargets": [
-      "Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome) (correct diagnosis)",
-      "Cervical strain/sprain from chiropractic manipulation",
-      "Migraine variant or atypical migraine",
-      "Vertebral artery dissection",
-      "Acute stroke or TIA",
-      "Tension-type headache",
-      "Temporomandibular joint dysfunction exacerbation"
+      "ICA dissection \u2014 post-manipulation (correct)",
+      "Atherosclerotic carotid stenosis \u2014 older patient; no trauma/manipulation; calcified plaque on CTA; different pattern",
+      "Hypertensive stroke \u2014 no dissection on CTA; no neck pain or Horner",
+      "Spontaneous dissection from connective tissue disorder \u2014 Marfan, Ehlers-Danlos; screen for underlying CTD in young patients",
+      "Vertebral artery dissection \u2014 posterior circulation symptoms (vertigo, ataxia, dysphagia); Wallenberg syndrome",
+      "Carotid web \u2014 thin shelf of tissue; different CTA appearance; embolic strokes in young women"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on migraine history and dismissing this as another headache variant, missing the critical timing relationship to chiropractic manipulation in a patient with connective tissue disorder",
@@ -497,7 +355,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several reasonable possibilities for headache and neck pain. Given this patient's presentation, what specific risk factors might make certain diagnoses more or less likely? Think about the timing of symptom onset and any predisposing conditions this patient might have.",
       "phase5": "You've gathered good history and physical exam data. The subtle carotid bruit is an important finding. In a patient with Ehlers-Danlos syndrome who recently had cervical manipulation, what vascular complications should you be most concerned about? How might the connective tissue disorder affect your differential diagnosis?",
-      "finalDebrief": "This case highlights the importance of recognizing high-risk patients for arterial dissection. The combination of Ehlers-Danlos syndrome (connective tissue fragility) and recent neck manipulation created the perfect storm for carotid dissection. The subtle presentation without obvious stroke symptoms can make this diagnosis challenging, but the timing, character of pain, and subtle carotid bruit were key clues. How has your approach to post-manipulation complaints evolved after seeing this case?"
+      "finalDebrief": "This case highlights the importance of recognizing high-risk patients for arterial dissection. The combination of Ehlers-Danlos syndrome (connective tissue fragility) and recent neck manipulation created the perfect storm for carotid dissection. The subtle presentation without obvious stroke symptoms can make this diagnosis challenging, but the timing, character of pain, and subtle carotid bruit were key clues. How has your approach to post-manipulation complaints evolved after seeing this case?",
+      "final": "Diagnosis: internal carotid artery dissection. Key learning: (1) Cervical artery dissection (CAD) is a leading cause of stroke in patients under 45 years old. ICA dissection (anterior circulation) vs vertebral artery dissection (posterior circulation \u2014 Wallenberg syndrome). The classic history: neck pain or headache preceding stroke symptoms, often with a precipitating event (trauma, manipulation, Valsalva). (2) Horner syndrome: ipsilateral ptosis + miosis + anhidrosis from disruption of the pericarotid sympathetic plexus. Classic accompanying finding in ICA dissection \u2014 localizes the lesion. (3) CTA findings: intramural hematoma (crescent-shaped wall thickening), 'string sign' (long segment narrowing), double lumen, flame-shaped occlusion. CTA/MRA of the neck are the imaging of choice. (4) Antiplatelet vs anticoagulation (CADISS trial): no significant difference in outcomes. Antiplatelet (aspirin) is now the preferred initial treatment for most CAD. Reserve anticoagulation for high thrombus burden or recurrent embolism. (5) Prognosis: most cervical artery dissections heal spontaneously within 3-6 months. Antithrombotic therapy continued for 3-6 months then reassess imaging. Underlying connective tissue disorders (Marfan, Ehlers-Danlos, FMD) should be considered in young patients with spontaneous dissection."
     }
   }
 };

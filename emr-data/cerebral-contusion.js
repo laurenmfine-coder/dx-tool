@@ -1,6 +1,3 @@
-// Virtual EMR Case: Cerebral Contusion
-// Variant: cerebral-contusion | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "BlueCross BlueShield FL PPO",
     "pcp": "Dr. Karen Phillips, MD",
-    "pharmacy": "Walgreens — 4001 SW 64th Ave, Riverside, FL",
+    "pharmacy": "Walgreens \u2014 4001 SW 64th Ave, Riverside, FL",
     "language": "English",
     "race": "African American",
     "address": "4451 Magnolia Blvd, Detroit, MI 48227",
@@ -26,81 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2018",
+      "problem": "Cerebral contusion \u2014 right frontal and temporal",
+      "icd": "S06.310A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Intermittently noncompliant with medication"
+      "notes": "Michael Brown, 35M \u2014 restrained driver in MVA, airbag deployed. GCS 13 on arrival (confused, eyes open to voice). CT: right frontal and temporal contusions, small traumatic SAH in right sylvian fissure."
     },
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2020",
+      "problem": "Traumatic subarachnoid hemorrhage \u2014 small volume",
+      "icd": "S06.6X2A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Suboptimal control, last A1c 8.1%"
+      "notes": "Traumatic SAH in right sylvian fissure \u2014 distinct from aneurysmal SAH. Monitor for cerebral vasospasm (less common than aneurysmal but can occur)."
     },
     {
-      "problem": "Obesity, Class I",
-      "icd": "E66.01",
-      "onset": "2017",
+      "problem": "Contusion expansion risk \u2014 6-hour CT critical",
+      "icd": "S06.310A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "BMI 32.5"
-    },
-    {
-      "problem": "Obstructive Sleep Apnea",
-      "icd": "G47.33",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "Uses CPAP intermittently"
-    },
-    {
-      "problem": "Tobacco Use Disorder",
-      "icd": "F17.210",
-      "onset": "2000",
-      "status": "Active",
-      "notes": "1 PPD x 25 years; multiple quit attempts"
+      "notes": "Contusions can expand significantly in the first 24-48 hours. Repeat CT at 6 hours and again at 24 hours mandatory. Any neurological deterioration = immediate CT."
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Phillips",
-      "start": "06/2019",
-      "refills": 3,
-      "status": "Active"
+      "name": "Neurosurgery consultation \u2014 monitoring and escalation plan",
+      "sig": "GCS 13, contusions: admit to neurosurgical ICU or step-down. Serial neurological exams q1h. Repeat CT at 6h. Clear plan for ICP monitoring if deterioration.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 ICU monitoring"
     },
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Phillips",
-      "start": "04/2021",
-      "refills": 2,
-      "status": "Active"
+      "name": "Levetiracetam 500mg BID \u2014 post-traumatic seizure prophylaxis",
+      "sig": "Early post-traumatic seizures (within 7 days) occur in 10-15% of moderate-severe TBI. Levetiracetam x 7 days reduces early seizures. Not indicated beyond 7 days \u2014 does not prevent late epilepsy.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 7-day course"
     },
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Phillips",
-      "start": "08/2020",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 20mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Phillips",
-      "start": "01/2021",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Phillips",
-      "start": "01/2021",
-      "refills": 5,
-      "status": "Active"
+      "name": "Reverse anticoagulation if present \u2014 urgent",
+      "sig": "Any anticoagulation must be reversed urgently in traumatic brain injury. Warfarin: PCC + vitamin K. DOACs: specific reversal agents (idarucizumab for dabigatran, andexanet alfa for Factor Xa inhibitors).",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "N/A \u2014 not anticoagulated"
     }
   ],
   "allergies": [
@@ -118,7 +85,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 82,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "234 lbs",
       "ht": "6'0\"",
@@ -130,7 +97,7 @@ window.EMR_DATA = {
       "bp": "152/96",
       "hr": 78,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "95%",
       "wt": "238 lbs",
       "ht": "6'0\"",
@@ -142,7 +109,7 @@ window.EMR_DATA = {
       "bp": "144/88",
       "hr": 80,
       "rr": 16,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "96%",
       "wt": "240 lbs",
       "ht": "6'0\"",
@@ -154,7 +121,7 @@ window.EMR_DATA = {
       "bp": "156/98",
       "hr": 84,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "236 lbs",
       "ht": "6'0\"",
@@ -171,8 +138,8 @@ window.EMR_DATA = {
       "cc": "Follow-up: HTN, T2DM, tobacco cessation",
       "hpi": "45-year-old male presenting for chronic disease management. BP remains above goal despite dual antihypertensive therapy; admits to missing amlodipine intermittently. A1c obtained today 8.1% (up from 7.6%). Continues to smoke 1 PPD. Declined Chantix again. Reports occasional headaches and daytime somnolence; admits to not wearing CPAP most nights.",
       "exam": "General: Obese male in NAD. HEENT: PERRL, EOMI, fundoscopic exam without hemorrhages or papilledema. CV: RRR, no murmurs. Lungs: Scattered rhonchi bilaterally, clear with cough. Abdomen: Obese, soft, NT/ND. Extremities: Trace bilateral ankle edema. Neuro: A&O x3, cranial nerves intact.",
-      "assessment": "1. Hypertension — suboptimally controlled, medication nonadherence\n2. Type 2 Diabetes Mellitus — worsening control, A1c 8.1%\n3. Tobacco use disorder — ongoing, 25 pack-year history\n4. Obstructive sleep apnea — CPAP nonadherent",
-      "plan": "1. Emphasize medication adherence; continue amlodipine 10mg and lisinopril 20mg\n2. Increase metformin to 1000mg BID; consider adding GLP-1 RA at next visit if A1c not improved\n3. Tobacco cessation counseling; offered NRT patch — declined\n4. Sleep study follow-up with pulmonology; reinforce CPAP use\n5. RTC 3 months"
+      "assessment": "1. Hypertension \u2014 suboptimally controlled, medication nonadherence\n2. Type 2 Diabetes Mellitus \u2014 worsening control, A1c 8.1%\n3. Tobacco use disorder \u2014 ongoing, 25 pack-year history\n4. Obstructive sleep apnea \u2014 CPAP nonadherent",
+      "plan": "1. Emphasize medication adherence; continue amlodipine 10mg and lisinopril 20mg\n2. Increase metformin to 1000mg BID; consider adding GLP-1 RA at next visit if A1c not improved\n3. Tobacco cessation counseling; offered NRT patch \u2014 declined\n4. Sleep study follow-up with pulmonology; reinforce CPAP use\n5. RTC 3 months"
     },
     {
       "id": "V002",
@@ -182,168 +149,59 @@ window.EMR_DATA = {
       "cc": "Routine follow-up",
       "hpi": "45-year-old male for chronic disease management. Reports he feels generally well but admits to poor dietary habits and limited exercise. A1c was 7.6%. BP elevated in clinic. Denies chest pain, dyspnea, or visual changes.",
       "exam": "General: NAD. Vitals: BP elevated. CV: RRR. Lungs: Diminished at bases bilaterally. Abdomen: Soft. Neuro: Intact.",
-      "assessment": "1. Hypertension — inadequately controlled\n2. T2DM — A1c 7.6%, above goal\n3. Obesity — stable",
+      "assessment": "1. Hypertension \u2014 inadequately controlled\n2. T2DM \u2014 A1c 7.6%, above goal\n3. Obesity \u2014 stable",
       "plan": "1. Continue current medications\n2. Dietary counseling, referral to nutritionist\n3. RTC 4 months"
     }
   ],
   "labs": [
     {
-      "date": "01/20/2025",
-      "time": "08:45",
-      "orderedBy": "Dr. Karen Phillips, MD",
-      "collected": "01/20/2025 08:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-052874",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "TBI Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "158",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.5",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "101",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "38",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "32",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "GCS",
+          "value": "13 (E3V4M6)",
+          "unit": "",
+          "ref": "15 = normal",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "8.1",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            },
-            {
-              "test": "Est. Avg Glucose (eAG)",
-              "value": "186",
-              "unit": "mg/dL",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "<1.2 \u2014 not anticoagulated",
+          "flag": ""
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "44.0",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "262",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Platelet count",
+          "value": "224",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        },
+        {
+          "test": "Blood alcohol level",
+          "value": "0.12",
+          "unit": "g/dL",
+          "ref": "0 (legal limit 0.08)",
+          "flag": "H"
+        },
+        {
+          "test": "Glucose",
+          "value": "148",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "09/20/2023",
-      "study": "CHEST XR PA AND LATERAL",
-      "accession": "IMG-2023-09201",
-      "status": "FINAL",
-      "orderedBy": "Dr. Karen Phillips, MD",
-      "readBy": "Dr. Samuel Ortiz, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "45M smoker, chronic cough evaluation.",
-      "technique": "PA and lateral views, upright, full inspiration.",
-      "findings": "Heart: Mildly enlarged cardiac silhouette.\\n\\nMediastinum: Normal contours.\\n\\nLungs: Hyperinflated. No focal consolidation or mass. No pleural effusion or pneumothorax.\\n\\nBones: No acute fracture. Mild degenerative changes thoracic spine.",
-      "impression": "1. Mild cardiomegaly.\\n2. Hyperinflated lungs suggesting chronic obstructive changes.\\n3. No acute pulmonary disease.",
-      "dictated": "09/20/2023 14:20",
-      "verified": "09/20/2023 16:45"
+      "date": "04/2024",
+      "study": "CT Head Non-Contrast",
+      "findings": "Right frontal and right temporal cortical contusions (heterogeneous hyperdense foci). Small traumatic SAH in right sylvian fissure. No midline shift. No epidural or subdural hematoma. No herniation.",
+      "impression": "Cerebral contusions with traumatic SAH. Neurosurgical admission for monitoring. Repeat CT in 6 hours."
     }
   ],
   "immunizations": [
@@ -365,14 +223,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
       "vaccine": "Hepatitis B (Engerix-B)",
       "date": "1998",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -405,7 +263,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Minimal — reports walking at work"
+      "Minimal \u2014 reports walking at work"
     ],
     [
       "Housing",
@@ -417,12 +275,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed"
+      "None \u2014 not discussed"
     ]
   ],
   "meta": {
     "caseId": "cerebral-contusion",
-    "diagnosis": "Cerebral Contusion",
+    "diagnosis": "Cerebral Contusion with Traumatic Subarachnoid Hemorrhage",
     "acuity": 2,
     "presentation": "Trauma",
     "category": "trauma"
@@ -486,13 +344,11 @@ window.EMR_DATA = {
       "Inspection of head and scalp for trauma": "Tender right temporal area with small abrasion and mild swelling, no active bleeding"
     },
     "ddxTargets": [
-      "Cerebral Contusion (correct diagnosis)",
-      "Traumatic subarachnoid hemorrhage",
-      "Epidural hematoma",
-      "Subdural hematoma",
-      "Diffuse axonal injury",
-      "Post-concussion syndrome",
-      "Tension headache with trauma history"
+      "Cerebral contusion with traumatic SAH (correct)",
+      "Epidural hematoma \u2014 biconvex hyperdense collection; lucid interval; arterial (MMA) source; different management",
+      "Subdural hematoma \u2014 crescent-shaped collection; venous source; bridging veins; different demographics",
+      "Diffuse axonal injury \u2014 CT often normal or microhemorrhages; MRI shows white matter injury; severe GCS depression",
+      "Aneurysmal SAH \u2014 no trauma; thunderclap headache; cistern blood on CT; CTA for aneurysm"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's chronic medical conditions (hypertension, diabetes) and attributing symptoms to medication non-compliance rather than acute trauma",
@@ -502,7 +358,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some concerning possibilities. Before interviewing the patient, what key historical elements would help you differentiate between these diagnoses? Consider the mechanism of injury and timeline - what specific questions about the trauma itself would be most important?",
       "phase5": "Based on your history and physical exam, you have a patient with head trauma and neurological symptoms. Walk me through your clinical reasoning - what findings support traumatic brain injury versus other causes? What's your biggest concern for this patient right now?",
-      "finalDebrief": "This case highlights the importance of trauma history in headache evaluation. Notice how the mechanism (fall onto concrete), timing (acute onset), associated symptoms (confusion, nausea), and focal findings (right temporal tenderness, mild dysmetria) all pointed toward cerebral contusion. What would have happened if you anchored on his chronic conditions instead of the acute trauma presentation?"
+      "finalDebrief": "This case highlights the importance of trauma history in headache evaluation. Notice how the mechanism (fall onto concrete), timing (acute onset), associated symptoms (confusion, nausea), and focal findings (right temporal tenderness, mild dysmetria) all pointed toward cerebral contusion. What would have happened if you anchored on his chronic conditions instead of the acute trauma presentation?",
+      "final": "Diagnosis: cerebral contusion with traumatic SAH. Key learning: (1) GCS interpretation: Eye (1-4) + Verbal (1-5) + Motor (1-6) = 3-15. Mild TBI = GCS 13-15. Moderate = 9-12. Severe = \u22648 (intubate). This patient GCS 13 = mild-moderate TBI with CT findings. (2) Contusion expansion: cortical contusions are dynamic \u2014 the 'blossoming contusion' phenomenon occurs in 30-40% within 24 hours. A small contusion can double in size. This is why serial CT is mandatory. Any neurological deterioration = immediate CT. (3) Coagulopathy in TBI: anticoagulated patients with ANY intracranial blood = reverse immediately. Warfarin: PCC 4F + vitamin K. Target INR <1.4. DOACs: specific reversal agents. Platelets <100,000 with TBI = platelet transfusion. (4) Early post-traumatic seizure prophylaxis: levetiracetam x 7 days reduces early seizures. Does NOT prevent late post-traumatic epilepsy. After 7 days, stop unless seizure occurs. (5) Hyperglycemia worsens TBI outcomes: glucose 140-180 is the target. Avoid both hyperglycemia (worsens neuronal injury) and hypoglycemia (cerebral ischemia)."
     }
   }
 };
