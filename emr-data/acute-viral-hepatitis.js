@@ -1,10 +1,7 @@
-// Virtual EMR Case: Acute Viral Hepatitis (Hepatitis A — Foodborne Outbreak)
-// Variant: acute-viral-hepatitis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
-    "name": "Rafael Guzmán",
+    "name": "Rafael Guzm\u00e1n",
     "patientHPI": "I'm here for my regular checkup - I've been working hard on eating better and getting to the gym more often, and I'm down four pounds since my last visit. The medication you gave me for my blood sugar isn't bothering my stomach anymore, which is great.",
     "dob": "04/18/1990",
     "age": 35,
@@ -13,56 +10,64 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Aetna PPO (employer)",
     "pcp": "Dr. Patricia Morales, MD",
-    "pharmacy": "CVS Pharmacy — 3201 N University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 3201 N University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Mexican American)",
     "address": "7951 N Western Ave, Pittsburgh, PA 15210",
     "phone": "(954) 555-3318",
     "email": "r.guzman90@email.com",
     "emergencyContact": {
-      "name": "Maria Guzmán (Wife)",
+      "name": "Maria Guzm\u00e1n (Wife)",
       "phone": "(954) 555-3334"
     }
   },
   "problems": [
     {
-      "problem": "Obesity, BMI 32.4",
-      "icd": "E66.01",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "Class I obesity"
-    },
-    {
-      "problem": "Nonalcoholic Fatty Liver Disease (NAFLD)",
-      "icd": "K76.0",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Hepatic steatosis on US (2023); mildly elevated ALT baseline 48-55; advised weight loss and dietary changes"
-    },
-    {
-      "problem": "Prediabetes",
-      "icd": "R73.03",
+      "problem": "Acute hepatitis A \u2014 icteric phase",
+      "icd": "B15.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "A1c 6.0; on metformin 500mg BID for insulin resistance and NAFLD benefit"
+      "notes": "Marco Rodriguez, 34M \u2014 restaurant worker, ate raw oysters 4 weeks ago. Now jaundice, dark urine, RUQ discomfort, fatigue. ALT 2400, AST 1800, bilirubin 8.2."
+    },
+    {
+      "problem": "Occupational exposure \u2014 food service worker",
+      "icd": "Z57.5",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Unvaccinated food handler. HAV spreads via fecal-oral route. Public health notification required \u2014 coworkers and patrons may need post-exposure prophylaxis."
+    },
+    {
+      "problem": "Coagulopathy monitoring \u2014 fulminant hepatitis risk",
+      "icd": "B15.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "PT/INR 1.3 \u2014 borderline. Monitor closely. PT elevation signals hepatic synthetic dysfunction \u2192 risk of fulminant hepatitis."
     }
   ],
   "medications": [
     {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Morales",
-      "start": "03/2024",
-      "refills": 5,
+      "name": "Supportive care \u2014 IV hydration, antiemetics",
+      "sig": "No antiviral therapy for HAV. Treatment is supportive. Maintain hydration and nutrition. Avoid hepatotoxic drugs (acetaminophen, alcohol, NSAIDs).",
+      "prescriber": "Medicine/GI",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Vitamin D3 2000 IU daily",
-      "sig": "Take 1 capsule by mouth once daily",
-      "prescriber": "Dr. Morales",
-      "start": "06/2023",
-      "refills": 11,
-      "status": "Active"
+      "name": "Avoid all hepatotoxins \u2014 alcohol, acetaminophen, NSAIDs",
+      "sig": "Injured hepatocytes are vulnerable to further damage. Reinforce with patient \u2014 even standard doses of acetaminophen can cause harm during acute hepatitis.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 counseling"
+    },
+    {
+      "name": "HAV post-exposure prophylaxis for contacts",
+      "sig": "Contacts within 2 weeks of exposure: HAV vaccine (preferred, age <40) or IGIM. Notify public health department for contact tracing.",
+      "prescriber": "Public Health",
+      "start": "2024",
+      "refills": 0,
+      "status": "Initiated \u2014 PH notification"
     }
   ],
   "allergies": [
@@ -80,7 +85,7 @@ window.EMR_DATA = {
       "bp": "118/74",
       "hr": 88,
       "rr": 18,
-      "temp": "101.2°F",
+      "temp": "101.2\u00b0F",
       "spo2": "98%",
       "wt": "208 lbs",
       "ht": "5'9\"",
@@ -92,7 +97,7 @@ window.EMR_DATA = {
       "bp": "126/82",
       "hr": 74,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "216 lbs",
       "ht": "5'9\"",
@@ -104,7 +109,7 @@ window.EMR_DATA = {
       "bp": "128/80",
       "hr": 72,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "220 lbs",
       "ht": "5'9\"",
@@ -119,10 +124,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Patricia Morales, MD",
       "cc": "Follow-up NAFLD, prediabetes, weight management",
-      "hpi": "35M with NAFLD and prediabetes presents for 6-month follow-up. Weight down 4 lbs (220 to 216). A1c 6.0 — stable. ALT 52 (baseline elevated). Metformin tolerated without GI side effects. Reports trying to exercise more and reduce refined carbohydrates. No abdominal pain, jaundice, or GI symptoms.",
+      "hpi": "35M with NAFLD and prediabetes presents for 6-month follow-up. Weight down 4 lbs (220 to 216). A1c 6.0 \u2014 stable. ALT 52 (baseline elevated). Metformin tolerated without GI side effects. Reports trying to exercise more and reduce refined carbohydrates. No abdominal pain, jaundice, or GI symptoms.",
       "exam": "Obese male, NAD. Abdomen: Soft, obese, no hepatomegaly on exam, NT. Skin: No jaundice, no spider angiomata.",
-      "assessment": "1. NAFLD — stable; ALT mildly elevated at baseline\n2. Prediabetes — A1c 6.0, stable on metformin\n3. Obesity — slight improvement, continue lifestyle modifications",
-      "plan": "1. Continue metformin 500mg BID\n2. Repeat hepatic panel in 6 months\n3. FibroScan if ALT trends up\n4. Nutritional counseling referral\n5. Hepatitis A vaccination discussed — patient will schedule (NOT yet received)\n6. Return 6 months"
+      "assessment": "1. NAFLD \u2014 stable; ALT mildly elevated at baseline\n2. Prediabetes \u2014 A1c 6.0, stable on metformin\n3. Obesity \u2014 slight improvement, continue lifestyle modifications",
+      "plan": "1. Continue metformin 500mg BID\n2. Repeat hepatic panel in 6 months\n3. FibroScan if ALT trends up\n4. Nutritional counseling referral\n5. Hepatitis A vaccination discussed \u2014 patient will schedule (NOT yet received)\n6. Return 6 months"
     },
     {
       "id": "V002",
@@ -132,133 +137,59 @@ window.EMR_DATA = {
       "cc": "Routine follow-up, labs review",
       "hpi": "34M presents for routine follow-up. Labs from 02/2025: A1c 6.1, ALT 55, AST 38, lipid panel with TG 198. Weight 220. No complaints.",
       "exam": "Obese male. Abdomen: Soft, NT. Skin: No jaundice.",
-      "assessment": "1. NAFLD — ALT stable at baseline elevation\n2. Prediabetes — A1c 6.1\n3. Hypertriglyceridemia",
+      "assessment": "1. NAFLD \u2014 ALT stable at baseline elevation\n2. Prediabetes \u2014 A1c 6.1\n3. Hypertriglyceridemia",
       "plan": "1. Continue metformin\n2. Dietary counseling for TG reduction\n3. Return 6 months"
     }
   ],
   "labs": [
     {
-      "date": "08/14/2025",
-      "time": "09:00",
-      "orderedBy": "Dr. Morales",
-      "collected": "08/14/2025 09:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-800814",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Acute Hepatitis Workup",
+      "results": [
         {
-          "name": "HEPATIC PANEL",
-          "results": [
-            {
-              "test": "ALT",
-              "value": "52",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST",
-              "value": "36",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "ALP",
-              "value": "78",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Direct Bilirubin",
-              "value": "0.2",
-              "unit": "mg/dL",
-              "range": "0.0-0.3",
-              "flag": ""
-            },
-            {
-              "test": "Albumin",
-              "value": "4.2",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": ""
-            }
-          ]
+          "test": "ALT",
+          "value": "2400",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1C",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "6.0",
-              "unit": "%",
-              "range": "<5.7",
-              "flag": "H"
-            }
-          ]
+          "test": "AST",
+          "value": "1800",
+          "unit": "U/L",
+          "ref": "10-40",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "210",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL",
-              "value": "128",
-              "unit": "mg/dL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "HDL",
-              "value": "38",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "188",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "Total bilirubin",
+          "value": "8.2",
+          "unit": "mg/dL",
+          "ref": "0.2-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "HAV IgM antibody",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "PT/INR",
+          "value": "1.3",
+          "unit": "",
+          "ref": "<1.2",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "04/2023",
-      "study": "ULTRASOUND ABDOMEN — RIGHT UPPER QUADRANT",
-      "accession": "IMG-2023-40418",
-      "status": "FINAL",
-      "orderedBy": "Dr. Morales",
-      "readBy": "Dr. Alan Wu, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "Elevated ALT — evaluate liver",
-      "technique": "Real-time ultrasound of the right upper quadrant and liver.",
-      "findings": "Liver: Diffusely hyperechoic parenchyma consistent with hepatic steatosis (moderate). Smooth hepatic contour. No focal hepatic lesions. Liver size: 17.2 cm (mildly enlarged).\n\nGallbladder: Normal wall thickness. No gallstones. No pericholecystic fluid. Murphy sign not assessed (not in acute setting).\n\nCommon bile duct: 4 mm (normal).\n\nPortal vein: Patent with normal hepatopetal flow.\n\nRight kidney: Normal.",
-      "impression": "1. Moderate hepatic steatosis consistent with NAFLD.\n2. Mild hepatomegaly (17.2 cm).\n3. No focal hepatic lesion.\n4. Normal gallbladder.",
-      "dictated": "04/18/2023 14:00",
-      "verified": "04/18/2023 16:00"
+      "date": "04/2024",
+      "study": "Right Upper Quadrant Ultrasound",
+      "findings": "Hepatomegaly. Increased hepatic echogenicity. No biliary dilation. No focal lesions. Normal spleen.",
+      "impression": "Hepatomegaly consistent with acute hepatitis. No obstructive cause."
     }
   ],
   "immunizations": [
@@ -292,7 +223,7 @@ window.EMR_DATA = {
     }
   ],
   "familyHistory": [
-    "Father: T2DM, NAFLD → NASH cirrhosis (diagnosed age 58), alive at 66",
+    "Father: T2DM, NAFLD \u2192 NASH cirrhosis (diagnosed age 58), alive at 66",
     "Mother: Obesity, HTN, alive at 64",
     "Brother: Healthy, alive at 32",
     "Sister: PCOS, obesity, alive at 30"
@@ -332,12 +263,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed"
+      "None \u2014 not discussed"
     ]
   ],
   "meta": {
     "caseId": "acute-viral-hepatitis",
-    "diagnosis": "Acute Hepatitis A (Foodborne — Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD, Presenting with Jaundice, Transaminitis >2000, and Coagulopathy)",
+    "diagnosis": "Acute Hepatitis A \u2014 Foodborne, Occupational Shellfish Exposure",
     "acuity": 3,
     "presentation": "Toxicologic Emergency",
     "category": "gastrointestinal"
@@ -401,13 +332,12 @@ window.EMR_DATA = {
       "Neurological assessment for asterixis or confusion": "No asterixis, alert and oriented x3"
     },
     "ddxTargets": [
-      "Acute Hepatitis A (Foodborne — Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD, Presenting with Jaundice, Transaminitis >2000, and Coagulopathy) (correct diagnosis)",
-      "Acute Hepatitis B infection",
-      "Drug-induced liver injury (DILI)",
-      "Acute Hepatitis E infection",
-      "Acetaminophen toxicity",
-      "Acute cholangitis",
-      "Autoimmune hepatitis"
+      "Acute hepatitis A \u2014 icteric phase (correct)",
+      "Acute hepatitis E \u2014 fecal-oral, similar presentation; common in developing countries; HEV serology distinguishes",
+      "Toxic hepatitis \u2014 drug or alcohol; history and toxicology distinguish; similar aminotransferase elevation",
+      "Acute hepatitis B \u2014 HBsAg, HBcAb-IgM; sexual/parenteral exposure history",
+      "Biliary obstruction \u2014 alkaline phosphatase-dominant pattern; CBD stone on ultrasound",
+      "Autoimmune hepatitis \u2014 ANA, ASMA; typically chronic presentation"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known NAFLD and dismissing acute symptoms as progression of chronic disease rather than recognizing acute viral hepatitis superimposed on baseline liver disease",
@@ -417,7 +347,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient presents with jaundice and constitutional symptoms. Given his occupational exposure and the pattern of presentation, what specific exposures and risk factors should you explore? Consider both infectious and toxic etiologies in someone with baseline liver disease.",
       "phase5": "You've identified significant hepatomegaly, jaundice, and RUQ tenderness in a restaurant worker with shellfish exposure. How does his occupational history and vaccination status influence your differential? What laboratory studies would help distinguish between viral hepatitides?",
-      "finalDebrief": "This case demonstrates how occupational exposures can lead to serious infectious diseases, especially in unvaccinated individuals. The key was recognizing that acute symptoms in someone with chronic liver disease warranted investigation for acute causes rather than attributing everything to NAFLD progression. How did the patient's work environment and the specific pattern of illness guide your diagnostic thinking?"
+      "finalDebrief": "This case demonstrates how occupational exposures can lead to serious infectious diseases, especially in unvaccinated individuals. The key was recognizing that acute symptoms in someone with chronic liver disease warranted investigation for acute causes rather than attributing everything to NAFLD progression. How did the patient's work environment and the specific pattern of illness guide your diagnostic thinking?",
+      "final": "Diagnosis: acute hepatitis A. Key learning: (1) HAV transmission: fecal-oral route \u2014 contaminated food/water, person-to-person. Classic vehicles: raw shellfish (oysters, clams concentrate HAV), raw produce, contaminated water. Incubation 15-50 days (average 28 days). (2) Clinical phases: prodrome (fatigue, nausea, anorexia, RUQ discomfort) \u2192 icteric phase (jaundice, dark urine, pale stools, pruritus) \u2192 recovery. Self-limited in immunocompetent patients. No chronic carrier state. (3) Diagnosis: HAV IgM = acute infection (positive during acute illness and for ~6 months). HAV IgG = prior infection or vaccination. (4) Fulminant hepatitis risk factors: age >50, underlying liver disease, hepatitis C coinfection, immunosuppression. Monitor PT/INR \u2014 rising INR signals hepatic synthetic failure \u2192 transplant evaluation. (5) Public health obligations: HAV is a notifiable disease. Food handlers require public health notification, work exclusion until non-infectious (1 week after jaundice onset), and contact tracing. Post-exposure prophylaxis (vaccine or IGIM) within 2 weeks of exposure."
     }
   }
 };

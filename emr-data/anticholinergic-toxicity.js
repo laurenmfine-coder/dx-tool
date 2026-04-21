@@ -1,6 +1,3 @@
-// Virtual EMR Case: Anticholinergic Toxicity
-// Variant: anticholinergic-toxicity | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -11,9 +8,9 @@ window.EMR_DATA = {
     "sex": "Male",
     "mrn": "RDX-2025-71842",
     "pronouns": "He/Him",
-    "insurance": "BlueCross BlueShield FL — HMO",
+    "insurance": "BlueCross BlueShield FL \u2014 HMO",
     "pcp": "Dr. James Whitfield, MD",
-    "pharmacy": "CVS Pharmacy — 3100 S University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 3100 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White/Caucasian",
     "address": "5881 Peachtree Rd, Denver, CO 80212",
@@ -27,74 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Schizophrenia — Paranoid Type",
-      "icd": "F20.0",
-      "onset": "2020",
+      "problem": "Anticholinergic toxidrome \u2014 polypharmacy-induced",
+      "icd": "T44.3X1A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Diagnosed at age 22; multiple medication trials; currently on olanzapine + benztropine; partially adherent; 2 prior psychiatric hospitalizations"
+      "notes": "Eleanor Hayes, 78F \u2014 admitted for urinary retention, confusion, tachycardia. On oxybutynin (OAB), diphenhydramine (sleep), amitriptyline (pain), promethazine (nausea). Cumulative anticholinergic burden toxic."
     },
     {
-      "problem": "Insomnia",
-      "icd": "G47.00",
-      "onset": "2021",
+      "problem": "Urinary retention \u2014 from anticholinergic bladder effect",
+      "icd": "R33.9",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Uses OTC diphenhydramine frequently; has been counseled to limit use"
+      "notes": "Bladder detrusor inhibition from anticholinergic medications \u2192 urinary retention. Catheterization provides immediate relief."
     },
     {
-      "problem": "Obesity",
-      "icd": "E66.01",
-      "onset": "2022",
+      "problem": "Delirium \u2014 anticholinergic CNS effects",
+      "icd": "F05",
+      "onset": "2024",
       "status": "Active",
-      "notes": "BMI 34; weight gain attributed to olanzapine; diet/exercise counseling given"
-    },
-    {
-      "problem": "Constipation — Chronic",
-      "icd": "K59.00",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Likely medication-related (olanzapine, benztropine, diphenhydramine); on docusate/senna"
+      "notes": "Confusion, agitation, visual hallucinations. Central anticholinergic syndrome from blood-brain barrier penetration (especially diphenhydramine and amitriptyline)."
     }
   ],
   "medications": [
     {
-      "name": "Olanzapine 20mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Patel (Psychiatry)",
-      "start": "06/2023",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Benztropine 2mg BID",
-      "sig": "Take 1 tablet by mouth twice daily for EPS prevention",
-      "prescriber": "Dr. Patel (Psychiatry)",
-      "start": "07/2023",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Diphenhydramine 50mg QHS PRN",
-      "sig": "Take 1-2 capsules by mouth at bedtime as needed for insomnia",
-      "prescriber": "OTC — self-prescribed",
-      "start": "2022",
+      "name": "Discontinue all anticholinergic medications \u2014 IMMEDIATE",
+      "sig": "Remove ALL offending agents: oxybutynin, diphenhydramine, amitriptyline, promethazine. The cumulative burden is toxic. Safer alternatives for each indication exist.",
+      "prescriber": "Medicine/Geriatrics",
+      "start": "STOP",
       "refills": 0,
-      "status": "Active — patient taking 100-150mg nightly (exceeding recommended dose)"
+      "status": "DISCONTINUED"
     },
     {
-      "name": "Docusate Sodium 100mg BID",
-      "sig": "Take 1 capsule by mouth twice daily",
-      "prescriber": "Dr. Whitfield",
-      "start": "01/2024",
-      "refills": 2,
-      "status": "Active"
+      "name": "Physostigmine 1-2mg IV slow push \u2014 for severe toxidrome",
+      "sig": "Reversible acetylcholinesterase inhibitor \u2014 crosses BBB, reverses central anticholinergic effects. Use for life-threatening delirium, seizures, severe hyperthermia. Not routine \u2014 have atropine available.",
+      "prescriber": "Medicine/Toxicology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Available \u2014 severe cases"
     },
     {
-      "name": "Senna 8.6mg QHS PRN",
-      "sig": "Take 1-2 tablets by mouth at bedtime as needed for constipation",
-      "prescriber": "Dr. Whitfield",
-      "start": "01/2024",
-      "refills": 2,
-      "status": "PRN"
+      "name": "Urinary catheterization \u2014 immediate relief",
+      "sig": "Straight catheter or Foley for urinary retention. Residual volume >300mL confirms retention.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Done \u2014 450mL residual"
     }
   ],
   "allergies": [
@@ -112,7 +86,7 @@ window.EMR_DATA = {
       "bp": "148/92",
       "hr": 128,
       "rr": 20,
-      "temp": "101.4°F",
+      "temp": "101.4\u00b0F",
       "spo2": "97%",
       "wt": "242 lbs",
       "ht": "5'11\"",
@@ -124,7 +98,7 @@ window.EMR_DATA = {
       "bp": "132/84",
       "hr": 82,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "238 lbs",
       "ht": "5'11\"",
@@ -136,7 +110,7 @@ window.EMR_DATA = {
       "bp": "128/80",
       "hr": 78,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "230 lbs",
       "ht": "5'11\"",
@@ -151,323 +125,67 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. James Whitfield, MD",
       "cc": "Follow-up: chronic constipation, weight management, medication check",
-      "hpi": "26-year-old male with schizophrenia presenting for routine follow-up. Reports worsening constipation — no BM in 4 days despite docusate and senna. Continues taking diphenhydramine 'a lot' for sleep — admits to 3 capsules (150mg) most nights. Has not seen psychiatrist in 2 months. States he takes olanzapine and benztropine 'most of the time.' No auditory hallucinations currently. Sleep poor despite diphenhydramine. Weight up 8 lbs since last visit.",
+      "hpi": "26-year-old male with schizophrenia presenting for routine follow-up. Reports worsening constipation \u2014 no BM in 4 days despite docusate and senna. Continues taking diphenhydramine 'a lot' for sleep \u2014 admits to 3 capsules (150mg) most nights. Has not seen psychiatrist in 2 months. States he takes olanzapine and benztropine 'most of the time.' No auditory hallucinations currently. Sleep poor despite diphenhydramine. Weight up 8 lbs since last visit.",
       "exam": "General: Overweight male, flat affect, poor eye contact but cooperative. HEENT: Pupils 5mm, sluggish reaction (likely anticholinergic effect). CV: RRR, no murmur. Lungs: CTA. Abdomen: Mildly distended, decreased bowel sounds, nontender. Skin: Dry. Psych: Alert, oriented, linear thought process, no overt psychosis, flat affect.",
-      "assessment": "1. Chronic constipation — worsening; likely multifactorial (olanzapine + benztropine + diphenhydramine — cumulative anticholinergic burden)\n2. Excessive OTC diphenhydramine use — 100-150mg nightly\n3. Schizophrenia — stable on current regimen, needs psychiatry follow-up\n4. Obesity — progressive weight gain on olanzapine",
-      "plan": "1. Added MiraLAX 17g daily for constipation\n2. STRONGLY counseled to reduce diphenhydramine — maximum 50mg/night; discussed trazodone alternative with psychiatry\n3. Contacted Dr. Patel's office to schedule follow-up\n4. Metabolic screening: fasting glucose, lipid panel ordered\n5. RTC 3 months"
+      "assessment": "1. Chronic constipation \u2014 worsening; likely multifactorial (olanzapine + benztropine + diphenhydramine \u2014 cumulative anticholinergic burden)\n2. Excessive OTC diphenhydramine use \u2014 100-150mg nightly\n3. Schizophrenia \u2014 stable on current regimen, needs psychiatry follow-up\n4. Obesity \u2014 progressive weight gain on olanzapine",
+      "plan": "1. Added MiraLAX 17g daily for constipation\n2. STRONGLY counseled to reduce diphenhydramine \u2014 maximum 50mg/night; discussed trazodone alternative with psychiatry\n3. Contacted Dr. Patel's office to schedule follow-up\n4. Metabolic screening: fasting glucose, lipid panel ordered\n5. RTC 3 months"
     },
     {
       "id": "V002",
       "date": "08/20/2024",
       "type": "Specialist",
       "provider": "Dr. Anita Patel, MD (Psychiatry)",
-      "cc": "Medication management — schizophrenia",
-      "hpi": "26-year-old male with paranoid schizophrenia established on olanzapine 20mg QHS + benztropine 2mg BID. Reports improved positive symptoms — no auditory hallucinations or paranoid ideation in 2 months. Sleep still poor — using diphenhydramine. Denies suicidal or homicidal ideation. Living independently in apartment. Working part-time at warehouse.",
+      "cc": "Medication management \u2014 schizophrenia",
+      "hpi": "26-year-old male with paranoid schizophrenia established on olanzapine 20mg QHS + benztropine 2mg BID. Reports improved positive symptoms \u2014 no auditory hallucinations or paranoid ideation in 2 months. Sleep still poor \u2014 using diphenhydramine. Denies suicidal or homicidal ideation. Living independently in apartment. Working part-time at warehouse.",
       "exam": "Psych: Casually dressed, hygiene adequate. Speech: normal rate and volume. Mood: 'okay.' Affect: blunted. Thought process: linear, goal-directed. No AH/VH. No paranoid ideation. No suicidal/homicidal ideation. Insight: fair. Judgment: fair.",
-      "assessment": "1. Schizophrenia — paranoid type; positive symptoms well-controlled on olanzapine 20mg\n2. Insomnia — persistent; diphenhydramine use concerning for anticholinergic load\n3. EPS prophylaxis with benztropine — no current EPS noted; could consider tapering",
-      "plan": "1. Continue olanzapine 20mg QHS\n2. Continue benztropine 2mg BID — discussed taper trial at next visit\n3. Consider trazodone 50mg QHS for insomnia to replace diphenhydramine\n4. Patient declined trazodone change at this time\n5. Metabolic monitoring per APA guidelines\n6. RTC 3 months"
+      "assessment": "1. Schizophrenia \u2014 paranoid type; positive symptoms well-controlled on olanzapine 20mg\n2. Insomnia \u2014 persistent; diphenhydramine use concerning for anticholinergic load\n3. EPS prophylaxis with benztropine \u2014 no current EPS noted; could consider tapering",
+      "plan": "1. Continue olanzapine 20mg QHS\n2. Continue benztropine 2mg BID \u2014 discussed taper trial at next visit\n3. Consider trazodone 50mg QHS for insomnia to replace diphenhydramine\n4. Patient declined trazodone change at this time\n5. Metabolic monitoring per APA guidelines\n6. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "02/21/2025",
-      "time": "19:12",
-      "orderedBy": "Dr. Kevin Tran, MD (ED)",
-      "collected": "02/21/2025 18:55",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-096218",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA), Urine",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Anticholinergic Toxidrome",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "Sodium",
-              "value": "146",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "H"
-            },
-            {
-              "test": "Potassium",
-              "value": "3.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "108",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": "H"
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "38",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "42",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            }
-          ]
+          "test": "Heart rate",
+          "value": "118",
+          "unit": "bpm",
+          "ref": "60-100",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT (CBC)",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "11.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "46.8",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "224",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Temperature",
+          "value": "38.3",
+          "unit": "\u00b0C",
+          "ref": "36.5-37.5",
+          "flag": "H"
         },
         {
-          "name": "CREATINE KINASE",
-          "results": [
-            {
-              "test": "CK Total",
-              "value": "280",
-              "unit": "U/L",
-              "range": "30-200",
-              "flag": "H"
-            }
-          ]
+          "test": "Post-void residual (catheterization)",
+          "value": "450",
+          "unit": "mL",
+          "ref": "<50 mL",
+          "flag": "H"
         },
         {
-          "name": "URINALYSIS",
-          "results": [
-            {
-              "test": "Specific Gravity",
-              "value": "1.028",
-              "unit": "",
-              "range": "1.005-1.030",
-              "flag": ""
-            },
-            {
-              "test": "pH",
-              "value": "5.5",
-              "unit": "",
-              "range": "5.0-8.0",
-              "flag": ""
-            },
-            {
-              "test": "Ketones",
-              "value": "Trace",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "WBC",
-              "value": "0-2",
-              "unit": "/HPF",
-              "range": "0-5",
-              "flag": ""
-            },
-            {
-              "test": "Bacteria",
-              "value": "None",
-              "unit": "",
-              "range": "None",
-              "flag": ""
-            }
-          ]
+          "test": "Anticholinergic Drug Scale (ADS) score",
+          "value": "9 (4 medications \u00d7 high burden)",
+          "unit": "",
+          "ref": "0-3 = low risk",
+          "flag": "H"
         },
         {
-          "name": "URINE DRUG SCREEN",
-          "results": [
-            {
-              "test": "Amphetamines",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "Benzodiazepines",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "Cocaine",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "Opiates",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "THC",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "PCP",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "date": "11/18/2024",
-      "time": "09:00",
-      "orderedBy": "Dr. James Whitfield, MD",
-      "collected": "11/18/2024 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-187412",
-      "status": "Final",
-      "specimenType": "Serum",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
-        {
-          "name": "METABOLIC SCREENING (FASTING)",
-          "results": [
-            {
-              "test": "Fasting Glucose",
-              "value": "108",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "HbA1c",
-              "value": "5.9",
-              "unit": "%",
-              "range": "4.0-5.6",
-              "flag": "H"
-            },
-            {
-              "test": "Total Cholesterol",
-              "value": "224",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "HDL",
-              "value": "36",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "230",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "ECG",
+          "value": "Sinus tachycardia, QTc 470ms",
+          "unit": "",
+          "ref": "QTc <450ms",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "02/21/2025",
-      "study": "CT HEAD WITHOUT CONTRAST",
-      "accession": "IMG-2025-09482",
-      "status": "FINAL",
-      "orderedBy": "Dr. Kevin Tran, MD",
-      "readBy": "Dr. Angela Reyes, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "26-year-old male with acute confusion, agitation, tachycardia, mydriasis — r/o intracranial pathology",
-      "technique": "Non-contrast axial CT images of the head obtained.",
-      "findings": "BRAIN PARENCHYMA: No acute intracranial hemorrhage, mass, or midline shift. Normal gray-white matter differentiation. No acute territorial infarction.\n\nVENTRICLES: Normal size and configuration. No hydrocephalus.\n\nEXTRA-AXIAL SPACES: No subdural or epidural collection.\n\nBONY STRUCTURES: No fracture.",
-      "impression": "1. No acute intracranial pathology\n2. Clinical presentation (mydriasis, tachycardia, agitation, dry skin, urinary retention) more consistent with anticholinergic toxidrome — correlate clinically",
-      "dictated": "02/21/2025 19:30",
-      "verified": "02/21/2025 19:38"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Fluarix Quadrivalent)",
@@ -493,7 +211,7 @@ window.EMR_DATA = {
   ],
   "familyHistory": [
     "Mother (age 54): Major depressive disorder, hypothyroidism",
-    "Father (age 56): Alcohol use disorder — in recovery x 10 years; hypertension",
+    "Father (age 56): Alcohol use disorder \u2014 in recovery x 10 years; hypertension",
     "Maternal aunt (age 48): Bipolar disorder type I",
     "Paternal grandfather (age 82): Dementia, CAD",
     "Brother (age 29): No psychiatric history; healthy"
@@ -509,19 +227,19 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Cigarettes — 0.5 PPD x 4 years"
+      "Cigarettes \u2014 0.5 PPD x 4 years"
     ],
     [
       "Alcohol",
-      "Occasional — 2-3 beers on weekends"
+      "Occasional \u2014 2-3 beers on weekends"
     ],
     [
       "Drugs",
-      "Cannabis — 3-4x/week for sleep; denies other substances"
+      "Cannabis \u2014 3-4x/week for sleep; denies other substances"
     ],
     [
       "Exercise",
-      "Minimal — sedentary lifestyle"
+      "Minimal \u2014 sedentary lifestyle"
     ],
     [
       "Housing",
@@ -538,7 +256,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "anticholinergic-toxicity",
-    "diagnosis": "Anticholinergic Toxidrome — Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine)",
+    "diagnosis": "Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden",
     "acuity": 2,
     "presentation": "Psychiatric Emergency",
     "category": "toxicologic"
@@ -597,18 +315,16 @@ window.EMR_DATA = {
       "Neurological examination for tremor and rigidity": "Mild tremor present, decreased muscle tone, hyperreflexia in lower extremities",
       "Abdominal examination": "Distended abdomen with decreased bowel sounds, consistent with ileus",
       "Mucous membrane examination": "Mucous membranes are notably dry with decreased salivation",
-      "Temperature assessment": "Elevated temperature 101.4°F with hot, dry skin",
+      "Temperature assessment": "Elevated temperature 101.4\u00b0F with hot, dry skin",
       "Blood pressure and heart rate monitoring": "Hypertensive at 148/92 with persistent tachycardia at 128 bpm",
       "Assessment for urinary retention": "Palpable bladder distension with patient reporting difficulty urinating"
     },
     "ddxTargets": [
-      "Anticholinergic Toxidrome — Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine) (correct diagnosis)",
-      "Neuroleptic Malignant Syndrome",
-      "Acute psychotic episode or schizophrenia exacerbation",
-      "Serotonin syndrome",
-      "Sepsis or systemic infection",
-      "Sympathomimetic toxidrome",
-      "Heat stroke or hyperthermia"
+      "Anticholinergic toxidrome \u2014 cumulative burden (correct)",
+      "Sepsis with delirium \u2014 fever + tachycardia could suggest; but medication list and dry skin/urinary retention pattern",
+      "Serotonin syndrome \u2014 hyperreflexia, clonus, diaphoresis; NOT dry skin; different toxidrome",
+      "Neuroleptic malignant syndrome \u2014 severe rigidity, hyperthermia; recent antipsychotic; different",
+      "Delirium from other cause \u2014 UTI, hypoxia, metabolic; but medication list is the key finding here"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on psychiatric history and assuming symptoms are related to schizophrenia exacerbation rather than medication toxicity",
@@ -618,7 +334,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Consider the constellation of symptoms Derek is presenting with - altered mental status, hyperthermia, and autonomic instability. What medication-related causes should you explore given his psychiatric medication regimen?",
       "phase5": "You've identified classic anticholinergic findings - hot, dry skin, dilated pupils, altered mental status, and urinary retention. How does Derek's medication history, particularly his self-reported increase in diphenhydramine use, fit with these examination findings?",
-      "finalDebrief": "This case illustrates anticholinergic toxidrome from cumulative medication effects. Derek's combination of prescribed anticholinergics (benztropine, olanzapine) plus self-medication with excessive diphenhydramine created a perfect storm. Remember the anticholinergic mnemonic: 'blind as a bat, mad as a hatter, red as a beet, hot as a hare, dry as a bone.' How will you counsel patients about over-the-counter medication interactions?"
+      "finalDebrief": "This case illustrates anticholinergic toxidrome from cumulative medication effects. Derek's combination of prescribed anticholinergics (benztropine, olanzapine) plus self-medication with excessive diphenhydramine created a perfect storm. Remember the anticholinergic mnemonic: 'blind as a bat, mad as a hatter, red as a beet, hot as a hare, dry as a bone.' How will you counsel patients about over-the-counter medication interactions?",
+      "final": "Diagnosis: anticholinergic toxidrome from cumulative drug burden. Key learning: (1) Anticholinergic mnemonic: 'Hot as a hare, blind as a bat, dry as a bone, red as a beet, mad as a hatter, full as a flask.' Hot (hyperthermia), blind (mydriasis), dry (dry skin, dry mouth, decreased secretions), red (flushing), mad (delirium, agitation), full (urinary retention). (2) Cumulative anticholinergic burden: single medications at therapeutic doses may not cause toxidrome; multiple medications with anticholinergic properties combined can cause severe toxicity. Beers Criteria lists medications to avoid in elderly \u2014 diphenhydramine, oxybutynin, amitriptyline, and promethazine are all high on this list. (3) Anticholinergic vs cholinergic toxidrome distinction: anticholinergic = dry skin, urinary retention, no secretions. Cholinergic (organophosphate) = SLUDGE (salivation, lacrimation, urination, defecation, GI distress, emesis) + diaphoresis. (4) Physostigmine: reverses central and peripheral anticholinergic effects. Reserved for severe cases \u2014 seizures, severe agitation, hemodynamic compromise. Have atropine at bedside (physostigmine can cause cholinergic crisis if overdosed). (5) QTc prolongation: amitriptyline and many antipsychotics prolong QTc via sodium channel blockade \u2014 monitor ECG and avoid other QTc-prolonging agents."
     }
   }
 };

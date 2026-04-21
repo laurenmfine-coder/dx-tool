@@ -1,6 +1,3 @@
-// Virtual EMR Case: Alcoholic Ketoacidosis
-// Variant: alcoholic-ketoacidosis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicaid",
     "pcp": "Dr. Anthony Reyes, MD",
-    "pharmacy": "CVS Pharmacy — 2800 N Federal Hwy, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2800 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
     "address": "9505 S Halsted St, Minneapolis, MN 55407",
@@ -27,95 +24,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Alcohol Use Disorder, Severe",
-      "icd": "F10.20",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "Multiple detox admissions; 2 prior episodes of alcoholic ketoacidosis; last rehab 2024 — relapsed after 3 months"
-    },
-    {
-      "problem": "Alcoholic Liver Disease",
-      "icd": "K70.10",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "Hepatic steatosis with mildly elevated LFTs; no cirrhosis on last imaging"
-    },
-    {
-      "problem": "Chronic Pancreatitis",
-      "icd": "K86.1",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "Alcohol-related; recurrent episodes of acute-on-chronic pancreatitis"
-    },
-    {
-      "problem": "Malnutrition, Moderate",
-      "icd": "E44.0",
+      "problem": "Alcoholic ketoacidosis \u2014 high anion gap metabolic acidosis",
+      "icd": "E15",
       "onset": "2024",
       "status": "Active",
-      "notes": "BMI 18.2; poor oral intake during drinking binges"
+      "notes": "Danny Walsh, 38M \u2014 chronic heavy alcohol use, stopped drinking 24h ago after 2 days of vomiting. Now confused, tachycardic, diffuse abdominal pain. AG 24, pH 7.22, ketones strongly positive, glucose 68."
     },
     {
-      "problem": "Major Depressive Disorder",
-      "icd": "F33.1",
-      "onset": "2016",
+      "problem": "Hypoglycemia 68 \u2014 impaired gluconeogenesis",
+      "icd": "E16.0",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Medication noncompliance"
+      "notes": "Alcohol inhibits gluconeogenesis. Low glycogen stores from poor nutrition. Glucose may be low or normal in AKA (unlike DKA where glucose is elevated)."
     },
     {
-      "problem": "Gastritis, Chronic",
-      "icd": "K29.50",
-      "onset": "2018",
+      "problem": "Thiamine deficiency \u2014 Wernicke risk",
+      "icd": "E51.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Alcohol-related"
+      "notes": "Give thiamine before dextrose \u2014 essential in all alcoholic patients."
     }
   ],
   "medications": [
     {
-      "name": "Thiamine 100mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "06/2022",
-      "refills": 5,
-      "status": "Active"
+      "name": "Thiamine 500mg IV \u2014 BEFORE dextrose",
+      "sig": "Mandatory. Glucose before thiamine in thiamine-depleted patient \u2192 Wernicke encephalopathy.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
     },
     {
-      "name": "Folic Acid 1mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "06/2022",
-      "refills": 5,
-      "status": "Active"
+      "name": "D5 normal saline \u2014 dextrose + volume",
+      "sig": "Glucose corrects hypoglycemia and suppresses lipolysis \u2192 reduces ketone production. Volume corrects dehydration. Do NOT use insulin (not DKA \u2014 insulin not indicated and dangerous).",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV infusion"
     },
     {
-      "name": "Multivitamin daily",
-      "sig": "Take 1 tablet by mouth daily with food",
-      "prescriber": "Dr. Reyes",
-      "start": "06/2022",
-      "refills": 6,
-      "status": "Active"
-    },
-    {
-      "name": "Omeprazole 20mg daily",
-      "sig": "Take 1 capsule by mouth daily before breakfast",
-      "prescriber": "Dr. Reyes",
-      "start": "04/2019",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Sertraline 100mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Reyes",
-      "start": "08/2020",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Pancrelipase 10,000 units with meals",
-      "sig": "Take 1 capsule by mouth with each meal and snack",
-      "prescriber": "Dr. Patel",
-      "start": "03/2023",
-      "refills": 3,
+      "name": "Antiemetics \u2014 ondansetron 4mg IV",
+      "sig": "Control vomiting to allow resumption of oral intake. Continued vomiting perpetuates the cycle.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -123,7 +75,7 @@ window.EMR_DATA = {
     {
       "allergen": "Disulfiram",
       "type": "Drug",
-      "reaction": "Hepatotoxicity — LFTs tripled during trial",
+      "reaction": "Hepatotoxicity \u2014 LFTs tripled during trial",
       "severity": "Severe",
       "verified": "Yes"
     }
@@ -134,7 +86,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 76,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "98%",
       "wt": "135 lbs",
       "ht": "5'10\"",
@@ -146,7 +98,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": 82,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "97%",
       "wt": "130 lbs",
       "ht": "5'10\"",
@@ -158,7 +110,7 @@ window.EMR_DATA = {
       "bp": "104/62",
       "hr": 112,
       "rr": 24,
-      "temp": "97.8°F",
+      "temp": "97.8\u00b0F",
       "spo2": "97%",
       "wt": "126 lbs",
       "ht": "5'10\"",
@@ -170,7 +122,7 @@ window.EMR_DATA = {
       "bp": "108/66",
       "hr": 106,
       "rr": 22,
-      "temp": "98.0°F",
+      "temp": "98.0\u00b0F",
       "spo2": "98%",
       "wt": "128 lbs",
       "ht": "5'10\"",
@@ -187,8 +139,8 @@ window.EMR_DATA = {
       "cc": "Follow-up: alcohol use disorder, depression, chronic pancreatitis",
       "hpi": "46-year-old male presenting for follow-up. Reports he has been sober for approximately 6 weeks after relapse in October 2025. Attending AA meetings 3x/week. Appetite improved, gaining weight slowly. Reports compliance with thiamine and folic acid. Sertraline restarted after period of noncompliance. Mood improving. Mild intermittent epigastric pain, controlled with pancrelipase and omeprazole. No nausea or vomiting currently.",
       "exam": "General: Thin, cachectic-appearing male, NAD. HEENT: Sclera anicteric. Mild glossitis. CV: RRR, tachycardic at 76. Lungs: CTAB. Abdomen: Soft, mild epigastric tenderness, no hepatomegaly. Extremities: No edema. Neuro: A&O x3, mild bilateral hand tremor at rest.",
-      "assessment": "1. Severe AUD — currently 6 weeks sober; attending AA\n2. Chronic pancreatitis — stable, on enzyme replacement\n3. Malnutrition — weight improving\n4. MDD — restarted sertraline\n5. Alcoholic liver disease — stable",
-      "plan": "1. Continue thiamine, folic acid, multivitamin\n2. Naltrexone 50mg daily discussed — patient agrees to trial\n3. Continue sertraline; assess in 4 weeks\n4. Lab work: CMP, CBC, lipase, magnesium, phosphorus\n5. Substance abuse counselor follow-up\n6. RTC 4 weeks"
+      "assessment": "1. Severe AUD \u2014 currently 6 weeks sober; attending AA\n2. Chronic pancreatitis \u2014 stable, on enzyme replacement\n3. Malnutrition \u2014 weight improving\n4. MDD \u2014 restarted sertraline\n5. Alcoholic liver disease \u2014 stable",
+      "plan": "1. Continue thiamine, folic acid, multivitamin\n2. Naltrexone 50mg daily discussed \u2014 patient agrees to trial\n3. Continue sertraline; assess in 4 weeks\n4. Lab work: CMP, CBC, lipase, magnesium, phosphorus\n5. Substance abuse counselor follow-up\n6. RTC 4 weeks"
     },
     {
       "id": "V002",
@@ -198,7 +150,7 @@ window.EMR_DATA = {
       "cc": "Nausea, vomiting, abdominal pain, confusion x 2 days",
       "hpi": "46-year-old male with history of severe AUD and chronic pancreatitis brought in by brother. Reports 5-day alcohol binge (vodka, approximately 1 fifth/day) followed by 2 days of intractable vomiting, inability to tolerate food or liquids, and diffuse abdominal pain. Brother reports patient became progressively confused and was found lying on the floor this morning, disoriented. Last known drink was approximately 36 hours ago. Prior history of AKA (2024).",
       "exam": "General: Cachectic, ill-appearing, malodorous. Diaphoretic. HEENT: Dry mucous membranes, sclera anicteric. CV: Tachycardic, regular. Lungs: Kussmaul respirations, CTAB. Abdomen: Diffuse tenderness, especially epigastric, no rebound. Neuro: Lethargic but arousable, oriented to name only. No focal deficits. Asterixis absent.",
-      "assessment": "1. Alcoholic ketoacidosis — classic presentation: binge → cessation → vomiting → starvation → AMS\n2. Dehydration with electrolyte derangement\n3. Acute-on-chronic pancreatitis — possible trigger\n4. Alcohol withdrawal risk — CIWA monitoring",
+      "assessment": "1. Alcoholic ketoacidosis \u2014 classic presentation: binge \u2192 cessation \u2192 vomiting \u2192 starvation \u2192 AMS\n2. Dehydration with electrolyte derangement\n3. Acute-on-chronic pancreatitis \u2014 possible trigger\n4. Alcohol withdrawal risk \u2014 CIWA monitoring",
       "plan": "1. IV D5NS at 250 mL/hr; add dextrose to prevent hypoglycemia\n2. IV thiamine 500mg before glucose administration\n3. Replace K+, Mg2+, phosphorus\n4. IV ondansetron 4mg q6h PRN\n5. CIWA protocol; lorazepam PRN per protocol\n6. NPO; reassess diet when vomiting resolves\n7. Admit to medicine floor"
     },
     {
@@ -209,205 +161,54 @@ window.EMR_DATA = {
       "cc": "Post-rehab follow-up; medication management",
       "hpi": "46-year-old male presenting 2 months after completing 30-day inpatient rehabilitation. Reports 3 months of sobriety. Attending outpatient group therapy weekly. Appetite improving. Mood better on sertraline. Mild ongoing epigastric discomfort controlled with enzyme supplementation. Denies cravings currently but acknowledges triggers (work stress, isolation).",
       "exam": "General: Thin but improved from prior. NAD. HEENT: No jaundice. CV: RRR. Lungs: CTAB. Abdomen: Soft, mild epigastric tenderness. Neuro: A&O x3, no tremor.",
-      "assessment": "1. AUD — 3 months sober post-rehab\n2. Chronic pancreatitis — stable\n3. MDD — improved on sertraline\n4. Malnutrition — slowly improving",
-      "plan": "1. Continue current medications\n2. Discussed naltrexone — patient defers\n3. Continue outpatient counseling\n4. Nutritional supplementation ongoing\n5. RTC 3 months"
+      "assessment": "1. AUD \u2014 3 months sober post-rehab\n2. Chronic pancreatitis \u2014 stable\n3. MDD \u2014 improved on sertraline\n4. Malnutrition \u2014 slowly improving",
+      "plan": "1. Continue current medications\n2. Discussed naltrexone \u2014 patient defers\n3. Continue outpatient counseling\n4. Nutritional supplementation ongoing\n5. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "01/05/2026",
-      "time": "09:20",
-      "orderedBy": "Dr. Anthony Reyes, MD",
-      "collected": "01/05/2026 08:50",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-010537",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "AKA Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "78",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "12",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "8.6",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "Albumin",
-              "value": "3.2",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": "L"
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "48",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "62",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "88",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            }
-          ]
+          "test": "pH (venous)",
+          "value": "7.22",
+          "unit": "",
+          "ref": "7.32-7.42",
+          "flag": "L"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "5.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "35.4",
-              "unit": "%",
-              "range": "38.0-50.0",
-              "flag": "L"
-            },
-            {
-              "test": "MCV",
-              "value": "104.2",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "H"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "142",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "Anion gap",
+          "value": "24",
+          "unit": "mEq/L",
+          "ref": "8-12",
+          "flag": "H"
         },
         {
-          "name": "ADDITIONAL",
-          "results": [
-            {
-              "test": "Magnesium",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "1.7-2.2",
-              "flag": "L"
-            },
-            {
-              "test": "Phosphorus",
-              "value": "2.4",
-              "unit": "mg/dL",
-              "range": "2.5-4.5",
-              "flag": "L"
-            },
-            {
-              "test": "Lipase",
-              "value": "42",
-              "unit": "U/L",
-              "range": "0-60",
-              "flag": ""
-            },
-            {
-              "test": "GGT",
-              "value": "128",
-              "unit": "U/L",
-              "range": "0-65",
-              "flag": "H"
-            }
-          ]
+          "test": "Glucose",
+          "value": "68",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "L"
+        },
+        {
+          "test": "Beta-hydroxybutyrate",
+          "value": "Strongly positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "2.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "09/10/2024",
-      "study": "CT ABDOMEN AND PELVIS WITH CONTRAST",
-      "accession": "IMG-2024-09106",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Park, MD (ED)",
-      "readBy": "Dr. Elena Suarez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "46M with AUD, abdominal pain, vomiting. R/O pancreatitis, obstruction.",
-      "technique": "MDCT of the abdomen and pelvis with IV contrast.",
-      "findings": "Pancreas: Diffuse parenchymal atrophy with scattered calcifications in the pancreatic head and body consistent with chronic pancreatitis. No peripancreatic fluid collection or necrosis to suggest acute-on-chronic pancreatitis. Main pancreatic duct mildly dilated at 4 mm.\\n\\nLiver: Diffuse hepatic steatosis. No focal hepatic lesion. No ascites.\\n\\nSpleen: Normal size.\\n\\nBowel: No obstruction or wall thickening.\\n\\nKidneys: Normal bilaterally.",
-      "impression": "1. Chronic pancreatitis with parenchymal calcifications and mild ductal dilation — no acute component.\\n2. Hepatic steatosis.\\n3. No bowel obstruction.",
-      "dictated": "09/10/2024 16:42",
-      "verified": "09/10/2024 18:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -427,21 +228,21 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
       "vaccine": "Hepatitis A (Havrix) (2/2)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Hepatitis B (Engerix-B) (3/3)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -462,11 +263,11 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Current smoker — 1 PPD x 20 years (20 pack-year)"
+      "Current smoker \u2014 1 PPD x 20 years (20 pack-year)"
     ],
     [
       "Alcohol",
-      "Severe AUD — binge pattern; vodka primarily; currently 6 weeks sober"
+      "Severe AUD \u2014 binge pattern; vodka primarily; currently 6 weeks sober"
     ],
     [
       "Drugs",
@@ -491,7 +292,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "alcoholic-ketoacidosis",
-    "diagnosis": "Alcoholic Ketoacidosis",
+    "diagnosis": "Alcoholic Ketoacidosis (AKA)",
     "acuity": 2,
     "presentation": "Altered Mental Status",
     "category": "metabolic"
@@ -555,13 +356,11 @@ window.EMR_DATA = {
       "Orthostatic vital signs": "Mild orthostatic changes: lying 132/78 HR 76, standing 128/82 HR 84"
     },
     "ddxTargets": [
-      "Alcoholic Ketoacidosis (correct diagnosis)",
-      "Diabetic Ketoacidosis",
-      "Acute alcohol withdrawal",
-      "Sepsis with altered mental status",
-      "Acute myocardial infarction",
-      "Starvation ketosis",
-      "Hepatic encephalopathy"
+      "Alcoholic ketoacidosis (correct)",
+      "DKA \u2014 glucose elevated (not low/normal); type 1 or 2 diabetes history; insulin deficiency",
+      "Starvation ketosis \u2014 ketonemia without acidosis; milder; no alcohol history",
+      "Lactic acidosis \u2014 lactate elevated here but not dominant; sepsis, metformin, cyanide",
+      "Methanol/ethylene glycol poisoning \u2014 osmolar gap elevated; specific toxicology screen"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on alcohol withdrawal given his history of AUD and recent sobriety, potentially missing the metabolic ketoacidosis component",
@@ -571,7 +370,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at this 46-year-old man with altered mental status and a significant alcohol history, what metabolic complications might you be concerned about in someone who recently stopped drinking? Consider both the direct effects of alcohol cessation and the metabolic consequences of poor nutrition.",
       "phase5": "You've identified a patient with altered mental status, mild dehydration, and compensatory hyperventilation. Given his alcohol history and recent poor oral intake, what specific laboratory studies would help you differentiate between the various causes of metabolic acidosis?",
-      "finalDebrief": "This case illustrates how alcoholic ketoacidosis can present similarly to diabetic ketoacidosis but occurs in non-diabetic patients with alcohol use disorder. The key differentiators include the absence of significant hyperglycemia, the association with recent cessation of alcohol and poor oral intake, and the presence of ketosis with anion gap acidosis. How did your differential diagnosis evolve as you gathered more information about his recent sobriety and nutritional status?"
+      "finalDebrief": "This case illustrates how alcoholic ketoacidosis can present similarly to diabetic ketoacidosis but occurs in non-diabetic patients with alcohol use disorder. The key differentiators include the absence of significant hyperglycemia, the association with recent cessation of alcohol and poor oral intake, and the presence of ketosis with anion gap acidosis. How did your differential diagnosis evolve as you gathered more information about his recent sobriety and nutritional status?",
+      "final": "Diagnosis: alcoholic ketoacidosis. Key learning: (1) AKA mechanism: alcohol inhibits gluconeogenesis + poor oral intake \u2192 glycogen depletion \u2192 lipolysis \u2192 free fatty acid oxidation \u2192 ketone production (predominantly beta-hydroxybutyrate). The NADH/NAD+ ratio shift from alcohol metabolism drives the process. (2) AKA vs DKA: key distinction is glucose. AKA = low or normal glucose. DKA = elevated glucose. Both have anion gap metabolic acidosis and ketonemia. AKA does NOT require insulin \u2014 giving insulin in AKA risks worsening hypoglycemia. (3) Beta-hydroxybutyrate dominates over acetoacetate in AKA (due to high NADH). Standard urine/serum ketone tests detect acetoacetate \u2014 may UNDERESTIMATE ketone burden in AKA. Serum beta-hydroxybutyrate is the correct test. (4) Treatment: thiamine THEN dextrose (corrects hypoglycemia and suppresses lipolysis), volume resuscitation, antiemetics, electrolyte repletion (Mg, K, phosphate \u2014 all depleted in alcoholics). Ketosis resolves within 12-24h with treatment. (5) Wernicke rule: thiamine 500mg IV BEFORE any glucose in every alcoholic patient, every time."
     }
   }
 };

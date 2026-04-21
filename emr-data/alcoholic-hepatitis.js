@@ -1,6 +1,3 @@
-// Virtual EMR Case: Alcoholic Hepatitis (Severe — Maddrey DF >32)
-// Variant: alcoholic-hepatitis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicaid (Florida)",
     "pcp": "Dr. Catherine Brennan, MD",
-    "pharmacy": "Walgreens — 1620 S Federal Hwy, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 1620 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White (Irish American)",
     "address": "7824 Larkspur Ln, Albuquerque, NM 87104",
@@ -26,87 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Alcohol Use Disorder — Severe",
-      "icd": "F10.20",
-      "onset": "2008",
-      "status": "Active",
-      "notes": "Drinking 1 pint vodka + 6-8 beers daily x 15+ years; 2 prior attempts at rehab (2018, 2021) — relapsed within weeks; CAGE 4/4; AUDIT-C 12; liver biopsy 2023 showed steatohepatitis with early fibrosis (F2)"
-    },
-    {
-      "problem": "Alcohol-Related Liver Disease — Steatohepatitis with Fibrosis",
+      "problem": "Severe alcoholic hepatitis \u2014 MDF 52",
       "icd": "K70.10",
-      "onset": "2020",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Elevated GGT chronically (300-500+); AST:ALT ratio consistently >2; FibroScan 2023: 12.8 kPa (F3); liver biopsy confirmed F2-F3 fibrosis with active steatohepatitis; referred to hepatology — missed 2 appointments"
+      "notes": "James O'Brien, 48M \u2014 20-year heavy alcohol use, drinking until 2 weeks ago. Jaundice, hepatic encephalopathy grade II, tender hepatomegaly. MDF 52 (>32 = severe, 30-day mortality >50% without treatment)."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2014",
+      "problem": "Hepatic encephalopathy \u2014 grade II",
+      "icd": "K72.00",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On lisinopril; poorly controlled when drinking heavily"
+      "notes": "Asterixis present. Oriented to person and place but not time. Ammonia 94. Precipitated by GI bleed? Infection? Constipation?"
     },
     {
-      "problem": "Chronic Pancreatitis",
-      "icd": "K86.1",
-      "onset": "2022",
+      "problem": "Infection risk \u2014 spontaneous bacterial peritonitis, pneumonia",
+      "icd": "K70.10",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Alcohol-related; 2 prior episodes of acute pancreatitis (2019, 2022); on pancrelipase; reports chronic epigastric pain"
-    },
-    {
-      "problem": "Major Depressive Disorder — Recurrent",
-      "icd": "F33.1",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "On sertraline; comorbid with AUD; non-adherent with therapy"
-    },
-    {
-      "problem": "Malnutrition — Moderate",
-      "icd": "E44.0",
-      "onset": "2025",
-      "status": "Active",
-      "notes": "BMI 19.8; poor oral intake; calories from alcohol; low albumin (2.8-3.0)"
+      "notes": "Alcoholic hepatitis \u2192 immunosuppression. Screen for SBP (diagnostic paracentesis if ascites), UTI, pneumonia before starting steroids."
     }
   ],
   "medications": [
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "06/2015",
-      "refills": 3,
-      "status": "Active"
+      "name": "Prednisolone 40mg daily x 28 days \u2014 if no contraindications",
+      "sig": "Steroids improve 28-day survival in severe AH (MDF >32). Contraindications: active infection, GI bleeding, HBV/HCV coinfection (reactivation risk), renal failure. Lille score at day 7 predicts response.",
+      "prescriber": "Hepatology/GI",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 after infection ruled out"
     },
     {
-      "name": "Sertraline 100mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "09/2017",
-      "refills": 2,
-      "status": "Active"
+      "name": "Pentoxifylline 400mg TID \u2014 if steroids contraindicated",
+      "sig": "Anti-TNF mechanism. Reduces hepatorenal syndrome risk. Used when steroids contraindicated. Less evidence than steroids but safer profile.",
+      "prescriber": "Hepatology/GI",
+      "start": "2024",
+      "refills": 1,
+      "status": "Alternative"
     },
     {
-      "name": "Pancrelipase (Creon) 36,000 units TID",
-      "sig": "Take 1 capsule by mouth with each meal",
-      "prescriber": "Dr. Brennan",
-      "start": "08/2022",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Thiamine 100mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "01/2020",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Folic Acid 1mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Brennan",
-      "start": "01/2020",
-      "refills": 5,
+      "name": "Lactulose 30mL TID \u2014 hepatic encephalopathy",
+      "sig": "Reduces ammonia production. Titrate to 2-3 soft stools per day. Rifaximin 550mg BID can be added for refractory encephalopathy.",
+      "prescriber": "Hepatology",
+      "start": "2024",
+      "refills": 1,
       "status": "Active"
     }
   ],
@@ -114,7 +74,7 @@ window.EMR_DATA = {
     {
       "allergen": "Disulfiram",
       "type": "Drug",
-      "reaction": "Severe hepatotoxicity — ALT/AST >500 during prior trial (2018)",
+      "reaction": "Severe hepatotoxicity \u2014 ALT/AST >500 during prior trial (2018)",
       "severity": "Severe",
       "verified": "Yes"
     }
@@ -125,7 +85,7 @@ window.EMR_DATA = {
       "bp": "102/62",
       "hr": 108,
       "rr": 20,
-      "temp": "100.8°F",
+      "temp": "100.8\u00b0F",
       "spo2": "96%",
       "wt": "148 lbs",
       "ht": "5'11\"",
@@ -137,7 +97,7 @@ window.EMR_DATA = {
       "bp": "138/88",
       "hr": 92,
       "rr": 18,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "154 lbs",
       "ht": "5'11\"",
@@ -149,7 +109,7 @@ window.EMR_DATA = {
       "bp": "142/90",
       "hr": 86,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "158 lbs",
       "ht": "5'11\"",
@@ -164,10 +124,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Catherine Brennan, MD",
       "cc": "Follow-up liver disease, depression, alcohol use",
-      "hpi": "56M with severe AUD, alcohol-related liver disease (F2-F3 fibrosis), chronic pancreatitis presents for follow-up. Admits continued heavy drinking — 'about a pint and some beers a day.' Reports increased epigastric pain, poor appetite, eating only 1 meal daily. Weight down 4 lbs. Missed hepatology appointment again. Depression worsening — feels hopeless. Denies suicidal ideation. Notes darkening of urine over past 2 weeks and reports 'looking yellow' per brother.",
-      "exam": "Cachectic, icteric male. Skin: Scleral icterus present. Mild jaundice of skin. Spider angiomata x3 on anterior chest. Palmar erythema bilateral. Abdomen: Firm, tender RUQ and epigastrium. Liver palpable 4 cm below costal margin, firm. No ascites (no shifting dullness). Ext: Trace pretibial edema. Neuro: Mild asterixis — questionable.",
-      "assessment": "1. Alcohol-related liver disease — worsening; jaundice new; concern for progression to cirrhosis\n2. Severe AUD — ongoing heavy use despite counseling\n3. Chronic pancreatitis — chronic pain; malabsorption\n4. Malnutrition — ongoing weight loss, poor intake\n5. Depression — worsening",
-      "plan": "1. STAT labs: Hepatic panel, CBC, INR, albumin, GGT\n2. Re-refer hepatology — URGENT\n3. Discussed rehab again — patient ambivalent\n4. Increase nutritional supplementation\n5. Sertraline continues; therapy re-referral\n6. Return 2 weeks; ED if worsening jaundice, confusion, or GI bleeding"
+      "hpi": "56M with severe AUD, alcohol-related liver disease (F2-F3 fibrosis), chronic pancreatitis presents for follow-up. Admits continued heavy drinking \u2014 'about a pint and some beers a day.' Reports increased epigastric pain, poor appetite, eating only 1 meal daily. Weight down 4 lbs. Missed hepatology appointment again. Depression worsening \u2014 feels hopeless. Denies suicidal ideation. Notes darkening of urine over past 2 weeks and reports 'looking yellow' per brother.",
+      "exam": "Cachectic, icteric male. Skin: Scleral icterus present. Mild jaundice of skin. Spider angiomata x3 on anterior chest. Palmar erythema bilateral. Abdomen: Firm, tender RUQ and epigastrium. Liver palpable 4 cm below costal margin, firm. No ascites (no shifting dullness). Ext: Trace pretibial edema. Neuro: Mild asterixis \u2014 questionable.",
+      "assessment": "1. Alcohol-related liver disease \u2014 worsening; jaundice new; concern for progression to cirrhosis\n2. Severe AUD \u2014 ongoing heavy use despite counseling\n3. Chronic pancreatitis \u2014 chronic pain; malabsorption\n4. Malnutrition \u2014 ongoing weight loss, poor intake\n5. Depression \u2014 worsening",
+      "plan": "1. STAT labs: Hepatic panel, CBC, INR, albumin, GGT\n2. Re-refer hepatology \u2014 URGENT\n3. Discussed rehab again \u2014 patient ambivalent\n4. Increase nutritional supplementation\n5. Sertraline continues; therapy re-referral\n6. Return 2 weeks; ED if worsening jaundice, confusion, or GI bleeding"
     },
     {
       "id": "V002",
@@ -175,149 +135,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Catherine Brennan, MD",
       "cc": "Routine follow-up, medication refills",
-      "hpi": "55M presents for routine follow-up. Reports cutting back on drinking 'a little bit' — now 'about a fifth every 2 days and some beers.' Chronic epigastric pain managed with pancrelipase. No jaundice. Appetite poor. Depression stable on sertraline.",
+      "hpi": "55M presents for routine follow-up. Reports cutting back on drinking 'a little bit' \u2014 now 'about a fifth every 2 days and some beers.' Chronic epigastric pain managed with pancrelipase. No jaundice. Appetite poor. Depression stable on sertraline.",
       "exam": "Thin male. No jaundice. Abdomen: Mild epigastric tenderness. Liver edge palpable 3 cm below costal margin.",
-      "assessment": "1. AUD — reports minor reduction but still heavy\n2. Liver disease — stable\n3. Chronic pancreatitis — stable",
+      "assessment": "1. AUD \u2014 reports minor reduction but still heavy\n2. Liver disease \u2014 stable\n3. Chronic pancreatitis \u2014 stable",
       "plan": "1. Continue medications\n2. Motivational interviewing re: alcohol cessation\n3. Labs in 3 months\n4. Hepatology f/u reminder"
     }
   ],
   "labs": [
     {
-      "date": "10/08/2025",
-      "time": "10:00",
-      "orderedBy": "Dr. Brennan",
-      "collected": "10/08/2025 10:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-851008",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Severe Alcoholic Hepatitis",
+      "results": [
         {
-          "name": "HEPATIC PANEL",
-          "results": [
-            {
-              "test": "AST",
-              "value": "186",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "ALT",
-              "value": "68",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "ALP",
-              "value": "210",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": "H"
-            },
-            {
-              "test": "GGT",
-              "value": "528",
-              "unit": "U/L",
-              "range": "9-48",
-              "flag": "H"
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "6.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Direct Bilirubin",
-              "value": "4.2",
-              "unit": "mg/dL",
-              "range": "0.0-0.3",
-              "flag": "H"
-            },
-            {
-              "test": "Albumin",
-              "value": "2.8",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": "L"
-            }
-          ]
+          "test": "Maddrey Discriminant Function",
+          "value": "52",
+          "unit": "",
+          "ref": "<32 = mild/moderate; >32 = severe",
+          "flag": "H"
         },
         {
-          "name": "COAGULATION",
-          "results": [
-            {
-              "test": "INR",
-              "value": "1.8",
-              "unit": "",
-              "range": "0.8-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "PT",
-              "value": "21.2",
-              "unit": "sec",
-              "range": "11.0-13.5",
-              "flag": "H"
-            }
-          ]
+          "test": "AST:ALT ratio",
+          "value": "2.8:1",
+          "unit": "",
+          "ref": ">2:1 = alcoholic hepatitis",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "14.8",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "MCV",
-              "value": "108",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "H"
-            },
-            {
-              "test": "Platelets",
-              "value": "98",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "Total bilirubin",
+          "value": "18.4",
+          "unit": "mg/dL",
+          "ref": "0.2-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "PT/INR",
+          "value": "2.1",
+          "unit": "",
+          "ref": "<1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Ammonia",
+          "value": "94",
+          "unit": "\u03bcmol/L",
+          "ref": "<35",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "10/2025",
-      "study": "ULTRASOUND ABDOMEN — RIGHT UPPER QUADRANT",
-      "accession": "IMG-2025-101222",
-      "status": "FINAL",
-      "orderedBy": "Dr. Brennan",
-      "readBy": "Dr. Alan Wu, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "Worsening jaundice, elevated bilirubin — evaluate for biliary obstruction vs hepatocellular",
-      "technique": "Real-time ultrasound of the right upper quadrant and liver.",
-      "findings": "Liver: Coarsened echotexture with increased echogenicity suggesting steatosis and/or fibrosis. Liver measures 18.4 cm (hepatomegaly). No focal hepatic lesions. No intrahepatic biliary dilation.\n\nGallbladder: Normal wall thickness. No cholelithiasis. No pericholecystic fluid.\n\nCommon bile duct: 5 mm (normal). No extrahepatic biliary obstruction.\n\nPortal vein: Patent, 13 mm (upper limit normal). Flow hepatopetal.\n\nSpleen: 14.2 cm (borderline splenomegaly).\n\nAscites: Small amount of free fluid in Morison pouch and pelvis.",
-      "impression": "1. Hepatomegaly (18.4 cm) with coarsened echotexture — consistent with chronic liver disease.\n2. No biliary obstruction — jaundice is hepatocellular in etiology.\n3. Small-volume ascites.\n4. Borderline splenomegaly — early portal hypertension.\n5. No focal hepatic lesion.",
-      "dictated": "10/12/2025 11:00",
-      "verified": "10/12/2025 13:30"
+      "date": "04/2024",
+      "study": "Right Upper Quadrant Ultrasound",
+      "findings": "Hepatomegaly with increased echogenicity consistent with fatty infiltration. Moderate ascites. No focal lesions. Normal bile ducts.",
+      "impression": "Hepatomegaly with ascites. Pattern consistent with alcoholic liver disease."
     }
   ],
   "immunizations": [
@@ -336,7 +208,7 @@ window.EMR_DATA = {
       "mfr": "Moderna"
     },
     {
-      "vaccine": "Hepatitis A+B (Twinrix) — Series Complete",
+      "vaccine": "Hepatitis A+B (Twinrix) \u2014 Series Complete",
       "date": "2020",
       "site": "Right deltoid IM",
       "lot": "TW20-310",
@@ -374,11 +246,11 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Current — 1 PPD x 30 years (30 pack-years)"
+      "Current \u2014 1 PPD x 30 years (30 pack-years)"
     ],
     [
       "Alcohol",
-      "Active heavy use — approximately 1 pint vodka + 6-8 beers daily x 15+ years"
+      "Active heavy use \u2014 approximately 1 pint vodka + 6-8 beers daily x 15+ years"
     ],
     [
       "Drugs",
@@ -386,7 +258,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "None — deconditioned"
+      "None \u2014 deconditioned"
     ],
     [
       "Housing",
@@ -398,12 +270,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — not discussed; brother is informal next of kin"
+      "None \u2014 not discussed; brother is informal next of kin"
     ]
   ],
   "meta": {
     "caseId": "alcoholic-hepatitis",
-    "diagnosis": "Severe Alcoholic Hepatitis (Maddrey Discriminant Function >32, AST:ALT >2:1, Leukocytosis, Coagulopathy, Jaundice — Prednisolone Candidate Pending LILLE Score)",
+    "diagnosis": "Severe Alcoholic Hepatitis (Maddrey Discriminant Function >32)",
     "acuity": 2,
     "presentation": "Toxicologic Emergency",
     "category": "gastrointestinal"
@@ -467,13 +339,11 @@ window.EMR_DATA = {
       "Lower extremity edema assessment": "1+ pitting edema bilateral lower extremities to mid-shin"
     },
     "ddxTargets": [
-      "Severe Alcoholic Hepatitis (Maddrey Discriminant Function >32, AST:ALT >2:1, Leukocytosis, Coagulopathy, Jaundice — Prednisolone Candidate Pending LILLE Score) (correct diagnosis)",
-      "Acute on chronic liver failure with decompensated cirrhosis",
-      "Drug-induced liver injury with acute hepatitis",
-      "Acute cholangitis with biliary obstruction",
-      "Hepatic encephalopathy with metabolic decompensation",
-      "Acute pancreatitis with secondary hepatitis",
-      "Viral hepatitis superimposed on chronic liver disease"
+      "Severe alcoholic hepatitis \u2014 MDF 52 (correct)",
+      "Autoimmune hepatitis \u2014 ANA, ASMA; responds to steroids but different patient profile and lab pattern",
+      "Acute hepatitis B \u2014 HBsAg; important to rule out before steroids (reactivation risk)",
+      "Acute-on-chronic liver failure \u2014 can coexist; alcoholic hepatitis is a common precipitant",
+      "Drug-induced liver injury \u2014 medication history; AST:ALT pattern can be similar"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on chronic alcohol use and missing acute decompensation requiring immediate intervention, or focusing only on addiction rather than severe hepatitis",
@@ -483,7 +353,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. This patient has multiple concerning features - what specific aspects of his presentation worry you most about acute decompensation? What key historical points will help you distinguish between chronic stable disease versus acute severe alcoholic hepatitis?",
       "phase5": "You've identified significant findings consistent with acute liver dysfunction. Given his Maddrey discriminant function calculation and clinical presentation, what specific scoring systems should you consider? How will your management differ if this is severe alcoholic hepatitis versus decompensated cirrhosis?",
-      "finalDebrief": "This case highlights severe alcoholic hepatitis with Maddrey DF >32, requiring consideration of corticosteroid therapy. Notice how the AST:ALT ratio >2:1, leukocytosis, and coagulopathy with jaundice created the classic constellation. The key was recognizing this as an acute process requiring immediate scoring and potential intervention, not just chronic liver disease."
+      "finalDebrief": "This case highlights severe alcoholic hepatitis with Maddrey DF >32, requiring consideration of corticosteroid therapy. Notice how the AST:ALT ratio >2:1, leukocytosis, and coagulopathy with jaundice created the classic constellation. The key was recognizing this as an acute process requiring immediate scoring and potential intervention, not just chronic liver disease.",
+      "final": "Diagnosis: severe alcoholic hepatitis. Key learning: (1) Maddrey Discriminant Function (MDF) = 4.6 \u00d7 (PT - control PT) + total bilirubin. MDF >32 = severe, 30-day mortality 30-50% without treatment. MELD >20 is an alternative severity marker. (2) AST:ALT ratio >2:1 is characteristic of alcoholic hepatitis \u2014 alcohol injures mitochondria \u2192 preferential AST release. ALT rarely exceeds 300 in alcoholic hepatitis. (3) Steroids in severe AH: prednisolone 40mg/day \u00d7 28 days improves 28-day survival. Must rule out: active infection (SBP, UTI, pneumonia), GI bleeding, renal failure, HBV coinfection. Lille score at day 7: if bilirubin not decreasing \u2192 non-responder \u2192 stop steroids. (4) Hepatic encephalopathy management: identify and treat precipitants (infection, GI bleed, constipation, medications). Lactulose + rifaximin. Avoid benzodiazepines and sedatives. (5) Prognosis: 90-day mortality for severe AH is 30-50%. Transplant evaluation controversial in acute AH \u2014 most centers require 6 months sobriety."
     }
   }
 };

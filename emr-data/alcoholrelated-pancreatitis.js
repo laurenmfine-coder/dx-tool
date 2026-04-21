@@ -1,6 +1,3 @@
-// Virtual EMR Case: Alcohol-Related Pancreatitis
-// Variant: alcoholrelated-pancreatitis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicaid",
     "pcp": "Dr. Anita Sharma, MD",
-    "pharmacy": "Walgreens — 5801 Johnson St, Hollywood, FL",
+    "pharmacy": "Walgreens \u2014 5801 Johnson St, Hollywood, FL",
     "language": "English",
     "race": "Black/African American",
     "address": "6769 Chestnut Rd, Pittsburgh, PA 15206",
@@ -26,81 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Alcohol Use Disorder, Severe",
+      "problem": "Acute pancreatitis \u2014 alcohol-related, moderately severe",
+      "icd": "K85.20",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Sean Murphy, 38M \u2014 10-year heavy alcohol use, 3rd episode. Severe epigastric pain radiating to back, lipase 3200, SIRS criteria met (HR 114, WBC 16, temp 38.2). BISAP score 2."
+    },
+    {
+      "problem": "SIRS \u2014 early systemic inflammatory response",
+      "icd": "R65.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Two or more SIRS criteria = moderate-severe. Organ failure assessment crucial in first 24-48h."
+    },
+    {
+      "problem": "Alcohol use disorder \u2014 driving recurrent pancreatitis",
       "icd": "F10.20",
-      "onset": "2010",
+      "onset": "2019",
       "status": "Active",
-      "notes": "Heavy daily use ~1 pint liquor + beer daily; prior detox x2; no sustained sobriety"
-    },
-    {
-      "problem": "Chronic Pancreatitis",
-      "icd": "K86.1",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "2 prior episodes acute pancreatitis (2019, 2021); now chronic changes on imaging"
-    },
-    {
-      "problem": "Tobacco Use Disorder",
-      "icd": "F17.210",
-      "onset": "2000",
-      "status": "Active",
-      "notes": "1 PPD x 24 years"
-    },
-    {
-      "problem": "Gastroesophageal Reflux Disease",
-      "icd": "K21.0",
-      "onset": "2017",
-      "status": "Active",
-      "notes": "On PPI"
-    },
-    {
-      "problem": "Nutritional Deficiency",
-      "icd": "E63.9",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "Folate and thiamine deficiency; supplemented"
+      "notes": "Three episodes in 3 years. Each episode causes permanent pancreatic damage. Progression to chronic pancreatitis and exocrine/endocrine insufficiency is inevitable with continued drinking."
     }
   ],
   "medications": [
     {
-      "name": "Omeprazole 40mg daily",
-      "sig": "Take 1 capsule by mouth once daily 30 minutes before breakfast",
-      "prescriber": "Dr. Sharma",
-      "start": "03/2018",
-      "refills": 3,
-      "status": "Active"
+      "name": "Lactated Ringer's 250-500mL/hr \u2014 aggressive early hydration",
+      "sig": "LR superior to normal saline (reduces SIRS, acidosis \u2014 WATERFALL trial). Goal-directed: target BUN decrease, urine output 0.5-1mL/kg/hr. Avoid over-resuscitation \u2192 abdominal compartment syndrome.",
+      "prescriber": "Medicine/Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 LR at 300mL/hr"
     },
     {
-      "name": "Pancrelipase (Creon) 36,000 units TID",
-      "sig": "Take 1 capsule by mouth with each meal; do not crush or chew",
-      "prescriber": "Dr. Sharma",
-      "start": "09/2022",
+      "name": "Early enteral nutrition \u2014 within 24-48h if tolerated",
+      "sig": "Nasojejunal tube feeds maintain gut barrier, reduce bacterial translocation, reduce infected necrosis risk. Superior to NPO + TPN. Low-fat diet if tolerating PO.",
+      "prescriber": "Medicine/Nutrition",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 low fat diet tolerated"
+    },
+    {
+      "name": "Alcohol cessation counseling + naltrexone",
+      "sig": "Further alcohol use guarantees progression to chronic pancreatitis, exocrine insufficiency (steatorrhea), and pancreatic diabetes. Naltrexone reduces craving. Addiction referral.",
+      "prescriber": "Medicine/Addiction",
+      "start": "2024",
       "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Folic acid 1mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Sharma",
-      "start": "06/2022",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Thiamine 100mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Sharma",
-      "start": "06/2022",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Multivitamin daily",
-      "sig": "Take 1 tablet by mouth once daily with food",
-      "prescriber": "Dr. Sharma",
-      "start": "06/2022",
-      "refills": 5,
-      "status": "Active"
+      "status": "Initiated"
     }
   ],
   "allergies": [
@@ -118,7 +85,7 @@ window.EMR_DATA = {
       "bp": "136/88",
       "hr": 92,
       "rr": 18,
-      "temp": "99.0°F",
+      "temp": "99.0\u00b0F",
       "spo2": "96%",
       "wt": "158 lbs",
       "ht": "5'11\"",
@@ -130,7 +97,7 @@ window.EMR_DATA = {
       "bp": "128/82",
       "hr": 84,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "164 lbs",
       "ht": "5'11\"",
@@ -142,7 +109,7 @@ window.EMR_DATA = {
       "bp": "130/84",
       "hr": 86,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "168 lbs",
       "ht": "5'11\"",
@@ -157,10 +124,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Anita Sharma, MD",
       "cc": "Follow-up chronic pancreatitis; alcohol counseling; weight loss",
-      "hpi": "46-year-old male with chronic pancreatitis and severe alcohol use disorder for follow-up. Admits to continued heavy drinking — approximately 1 pint vodka and 6 beers daily. Reports intermittent epigastric pain, worse after eating, radiating to back. Using Creon with meals but reports steatorrhea still occurring. Lost 6 lbs in 6 months — BMI now 22. Reports increased pain in past 2 weeks. Denies hematemesis. Counseled extensively on alcohol cessation — patient expressed interest in treatment but has not followed through.",
-      "exam": "General: Thin male, appears older than stated age. HEENT: Mild scleral icterus noted. CV: Tachycardic (HR 92), regular. Lungs: CTAB. Abdomen: Epigastric tenderness to palpation, no rebound, no guarding. Hepatomegaly — liver edge palpable 3 cm below costal margin. Spider angiomata on chest. Palmar erythema noted.",
-      "assessment": "1. Chronic pancreatitis — worsening symptoms; weight loss; exocrine insufficiency despite PERT\n2. Alcohol use disorder, severe — active heavy drinking; progressive organ damage\n3. Malnutrition — progressive weight loss; concern for pancreatic malabsorption\n4. Hepatomegaly with stigmata of chronic liver disease — scleral icterus, spider angiomata, palmar erythema\n5. GERD — controlled",
-      "plan": "1. Labs: CMP with hepatic panel, CBC, lipase, amylase, GGT, prealbumin, vitamins\n2. CT abdomen ordered to assess chronic pancreatitis changes and rule out pseudocyst\n3. Increase Creon to 72,000 units/meal if tolerated\n4. STRONG counseling: continuing alcohol use will lead to irreversible organ damage; offered addiction medicine referral\n5. High-calorie, low-fat diet; small frequent meals\n6. If worsening pain, fever, or vomiting → ED immediately"
+      "hpi": "46-year-old male with chronic pancreatitis and severe alcohol use disorder for follow-up. Admits to continued heavy drinking \u2014 approximately 1 pint vodka and 6 beers daily. Reports intermittent epigastric pain, worse after eating, radiating to back. Using Creon with meals but reports steatorrhea still occurring. Lost 6 lbs in 6 months \u2014 BMI now 22. Reports increased pain in past 2 weeks. Denies hematemesis. Counseled extensively on alcohol cessation \u2014 patient expressed interest in treatment but has not followed through.",
+      "exam": "General: Thin male, appears older than stated age. HEENT: Mild scleral icterus noted. CV: Tachycardic (HR 92), regular. Lungs: CTAB. Abdomen: Epigastric tenderness to palpation, no rebound, no guarding. Hepatomegaly \u2014 liver edge palpable 3 cm below costal margin. Spider angiomata on chest. Palmar erythema noted.",
+      "assessment": "1. Chronic pancreatitis \u2014 worsening symptoms; weight loss; exocrine insufficiency despite PERT\n2. Alcohol use disorder, severe \u2014 active heavy drinking; progressive organ damage\n3. Malnutrition \u2014 progressive weight loss; concern for pancreatic malabsorption\n4. Hepatomegaly with stigmata of chronic liver disease \u2014 scleral icterus, spider angiomata, palmar erythema\n5. GERD \u2014 controlled",
+      "plan": "1. Labs: CMP with hepatic panel, CBC, lipase, amylase, GGT, prealbumin, vitamins\n2. CT abdomen ordered to assess chronic pancreatitis changes and rule out pseudocyst\n3. Increase Creon to 72,000 units/meal if tolerated\n4. STRONG counseling: continuing alcohol use will lead to irreversible organ damage; offered addiction medicine referral\n5. High-calorie, low-fat diet; small frequent meals\n6. If worsening pain, fever, or vomiting \u2192 ED immediately"
     },
     {
       "id": "V002",
@@ -170,201 +137,59 @@ window.EMR_DATA = {
       "cc": "Chronic pancreatitis management; nutritional follow-up",
       "hpi": "46-year-old male for routine follow-up. Acknowledges continued alcohol use though reports 'cutting back' to 4-5 beers daily (likely underreporting). Creon helping somewhat with steatorrhea. Weight stable. Intermittent epigastric pain. No acute episodes since last visit.",
       "exam": "Abdomen: Mild epigastric tenderness. No masses. Liver edge not appreciated today.",
-      "assessment": "1. Chronic pancreatitis — stable\n2. Alcohol use disorder — persistent",
+      "assessment": "1. Chronic pancreatitis \u2014 stable\n2. Alcohol use disorder \u2014 persistent",
       "plan": "1. Continue Creon, thiamine, folate, MVI\n2. Repeat nutritional labs in 6 months\n3. Addiction counseling re-offered"
     }
   ],
   "labs": [
     {
-      "date": "01/08/2025",
-      "time": "10:00",
-      "orderedBy": "Dr. Anita Sharma, MD",
-      "collected": "01/08/2025 09:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-473810",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Acute Pancreatitis Severity",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "108",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "12",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "134",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "3.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Direct Bilirubin",
-              "value": "0.6",
-              "unit": "mg/dL",
-              "range": "0-0.3",
-              "flag": "H"
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "68",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "112",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "148",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": "H"
-            },
-            {
-              "test": "Albumin",
-              "value": "3.0",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": "L"
-            }
-          ]
+          "test": "Lipase",
+          "value": "3200",
+          "unit": "U/L",
+          "ref": "10-140",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "35.4",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": "L"
-            },
-            {
-              "test": "MCV",
-              "value": "104",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "H"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "118",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            }
-          ]
+          "test": "CRP (48h)",
+          "value": "220",
+          "unit": "mg/L",
+          "ref": "<10 (peaks 48-72h)",
+          "flag": "H"
         },
         {
-          "name": "PANCREATIC ENZYMES",
-          "results": [
-            {
-              "test": "Lipase",
-              "value": "82",
-              "unit": "U/L",
-              "range": "0-160",
-              "flag": ""
-            },
-            {
-              "test": "Amylase",
-              "value": "48",
-              "unit": "U/L",
-              "range": "28-100",
-              "flag": ""
-            }
-          ]
+          "test": "BUN",
+          "value": "22",
+          "unit": "mg/dL",
+          "ref": "7-20",
+          "flag": "H"
         },
         {
-          "name": "ADDITIONAL",
-          "results": [
-            {
-              "test": "GGT",
-              "value": "286",
-              "unit": "U/L",
-              "range": "0-65",
-              "flag": "H"
-            },
-            {
-              "test": "Prealbumin",
-              "value": "12",
-              "unit": "mg/dL",
-              "range": "18-45",
-              "flag": "L"
-            }
-          ]
+          "test": "Triglycerides",
+          "value": "280",
+          "unit": "mg/dL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "ALT",
+          "value": "38",
+          "unit": "U/L",
+          "ref": "7-56 (not elevated = not gallstone AP)",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "11/2021",
-      "study": "CT ABDOMEN AND PELVIS WITH CONTRAST",
-      "accession": "IMG-2021-47381",
-      "status": "FINAL",
-      "orderedBy": "Dr. Anita Sharma, MD",
-      "readBy": "Dr. Robert Anderson, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Urgent",
-      "clinical": "43M with 2nd episode acute pancreatitis. Heavy alcohol use. Evaluate for complications.",
-      "technique": "CT abdomen and pelvis with IV contrast, portal venous phase.",
-      "findings": "Pancreas: Diffusely enlarged with peripancreatic fat stranding and fluid tracking along the left anterior pararenal space. Pancreatic parenchyma enhances heterogeneously with early calcifications in the pancreatic head and body — consistent with chronic pancreatitis superimposed acute inflammation. No discrete necrosis. No pseudocyst.\\n\\nLiver: Mildly enlarged with diffuse steatosis.\\n\\nGallbladder: Normal. No gallstones.\\n\\nSpleen: Normal.\\n\\nKidneys: Normal.",
-      "impression": "1. Acute-on-chronic pancreatitis — peripancreatic inflammation without necrosis or pseudocyst.\\n2. Early pancreatic calcifications — chronic pancreatitis.\\n3. Hepatic steatosis.",
-      "dictated": "11/15/2021 14:00",
-      "verified": "11/15/2021 16:30"
+      "date": "04/2024",
+      "study": "CT Abdomen/Pelvis with Contrast",
+      "findings": "Pancreatic edema and peripancreatic stranding. No pancreatic necrosis. No fluid collections. CTSI score 4 (moderate).",
+      "impression": "Moderate acute pancreatitis. No necrosis. Interstitial edematous pancreatitis."
     }
   ],
   "immunizations": [
@@ -386,21 +211,21 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2020",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
-      "vaccine": "Hepatitis A — Series complete",
+      "vaccine": "Hepatitis A \u2014 Series complete",
       "date": "2022",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
-      "vaccine": "Hepatitis B — Series complete",
+      "vaccine": "Hepatitis B \u2014 Series complete",
       "date": "2022",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -413,19 +238,19 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Unemployed; former warehouse worker — lost job due to absenteeism"
+      "Unemployed; former warehouse worker \u2014 lost job due to absenteeism"
     ],
     [
       "Marital",
-      "Divorced — 2020"
+      "Divorced \u2014 2020"
     ],
     [
       "Tobacco",
-      "Current smoker — 1 PPD x 24 years (24 pack-years)"
+      "Current smoker \u2014 1 PPD x 24 years (24 pack-years)"
     ],
     [
       "Alcohol",
-      "Heavy daily use — approximately 1 pint vodka + 6 beers daily x 15+ years; prior detox x2 without sustained sobriety"
+      "Heavy daily use \u2014 approximately 1 pint vodka + 6 beers daily x 15+ years; prior detox x2 without sustained sobriety"
     ],
     [
       "Drugs",
@@ -511,16 +336,14 @@ window.EMR_DATA = {
       "Bowel sounds auscultation": "Hypoactive bowel sounds in all quadrants",
       "Costovertebral angle tenderness": "No costovertebral angle tenderness bilaterally",
       "General appearance and distress level": "Patient appears uncomfortable, restless, leaning forward in obvious distress",
-      "Vital signs assessment": "BP 136/88 suggests mild hypertension, HR 92 regular, low-grade fever at 99.0°F, SpO2 96% on room air"
+      "Vital signs assessment": "BP 136/88 suggests mild hypertension, HR 92 regular, low-grade fever at 99.0\u00b0F, SpO2 96% on room air"
     },
     "ddxTargets": [
-      "Alcohol-Related Acute Pancreatitis (correct diagnosis)",
-      "Acute cholangitis",
-      "Peptic ulcer disease with perforation",
-      "Myocardial infarction",
-      "Mesenteric ischemia",
-      "Acute cholecystitis",
-      "Gastritis/GERD exacerbation"
+      "Alcohol-related acute pancreatitis (correct)",
+      "Gallstone pancreatitis \u2014 ALT >150 U/L suggests biliary; ALT normal here; ultrasound no CBD stone",
+      "Hypertriglyceridemia pancreatitis \u2014 TG 280 here is elevated but below 1000 threshold for TG-induced AP; contributing factor",
+      "Idiopathic pancreatitis \u2014 alcohol history is clear here",
+      "Peptic ulcer disease with perforation \u2014 free air on CT; different presentation"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known chronic pancreatitis and missing acute complications or alternative diagnoses requiring immediate intervention",
@@ -530,7 +353,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview this patient, consider his complex medical history. What key historical elements will help you distinguish between an acute exacerbation of his chronic condition versus a new acute process? How might his ongoing alcohol use complicate your assessment?",
       "phase5": "You've gathered substantial information about this patient's presentation. His pain characteristics and examination findings are quite specific. What does the combination of epigastric pain radiating to the back, along with his risk factors, suggest? How do you differentiate this from other causes of severe abdominal pain?",
-      "finalDebrief": "This case demonstrates classic acute pancreatitis in the setting of chronic alcohol use. Notice how the pain characteristics - epigastric with back radiation, worse with eating, better leaning forward - were key diagnostic clues. The patient's risk factors and chronic pancreatitis history supported this diagnosis, but you still needed to rule out complications and other serious causes of abdominal pain."
+      "finalDebrief": "This case demonstrates classic acute pancreatitis in the setting of chronic alcohol use. Notice how the pain characteristics - epigastric with back radiation, worse with eating, better leaning forward - were key diagnostic clues. The patient's risk factors and chronic pancreatitis history supported this diagnosis, but you still needed to rule out complications and other serious causes of abdominal pain.",
+      "final": "Diagnosis: alcohol-related acute pancreatitis. Key learning: (1) Alcohol is the second most common cause of acute pancreatitis after gallstones (20-30% of cases). Mechanism: alcohol causes premature intracellular activation of trypsinogen \u2192 autodigestion. (2) Severity scoring: Revised Atlanta (organ failure duration), BISAP (BUN >25, impaired mental status, SIRS, age >60, pleural effusion \u2014 score 0-5), CTSI. Persistent organ failure (>48h) = severe. Transient organ failure or local complications = moderately severe. (3) Fluid choice: LR is superior to NS in acute pancreatitis \u2014 reduces SIRS and acidosis. WATERFALL trial confirmed this. Goal-directed fluid therapy is better than fixed rates. (4) Early EN rule: enteral nutrition within 24-48h reduces infected necrosis, ICU complications, and mortality. The old 'NPO + bowel rest' is harmful in moderately severe and severe AP. (5) Antibiotic rule: prophylactic antibiotics do NOT prevent infected necrosis (three RCTs failed). Only use antibiotics when infected necrosis confirmed by CT (gas in necrosis) or FNA."
     }
   }
 };

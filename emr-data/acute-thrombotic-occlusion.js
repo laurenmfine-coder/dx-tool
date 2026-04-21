@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Thrombotic Arterial Occlusion
-// Variant: acute-thrombotic-occlusion | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Humana Gold Plus HMO",
     "pcp": "Dr. Maria Santos, MD",
-    "pharmacy": "Walgreens — 801 S Federal Hwy, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 801 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
     "address": "3358 Poplar Ave, San Antonio, TX 78211",
@@ -27,112 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Peripheral Arterial Disease, Bilateral",
-      "icd": "I70.219",
+      "problem": "Acute popliteal artery thrombosis \u2014 Rutherford IIa",
+      "icd": "I74.3",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Walter Davis, 71M \u2014 known PAD, prior claudication. Woke with cold right foot, weak pulses, paresthesias but no paralysis. Rutherford IIa \u2014 marginally threatened."
+    },
+    {
+      "problem": "Popliteal artery aneurysm \u2014 thrombotic source",
+      "icd": "I72.4",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "20% of acute limb ischemia from PAD has popliteal aneurysm as culprit \u2014 mural thrombus embolizes distally. Must be surgically excluded once limb salvaged."
+    },
+    {
+      "problem": "Peripheral arterial disease \u2014 right lower extremity",
+      "icd": "I70.221",
       "onset": "2019",
       "status": "Active",
-      "notes": "Right SFA angioplasty 2022; ABI 0.6 right, 0.65 left; progressive claudication"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2008",
-      "status": "Active",
-      "notes": "A1c 8.4%; on insulin"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2003",
-      "status": "Active",
-      "notes": "On triple therapy"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "eGFR 55; diabetic nephropathy"
-    },
-    {
-      "problem": "Tobacco Use Disorder, in remission",
-      "icd": "F17.211",
-      "onset": "1980",
-      "status": "Active",
-      "notes": "35 pack-year history; quit 2020"
-    },
-    {
-      "problem": "Diabetic Peripheral Neuropathy",
-      "icd": "E11.42",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "Bilateral feet; on pregabalin"
+      "notes": "Claudication at 1 block baseline. ABI 0.55. Atherosclerotic disease throughout the lower extremity arterial tree."
     }
   ],
   "medications": [
     {
-      "name": "Insulin Glargine 28 units QHS",
-      "sig": "Inject 28 units subcutaneously at bedtime",
-      "prescriber": "Dr. Santos",
-      "start": "06/2019",
-      "refills": 3,
+      "name": "Heparin UFH \u2014 anticoagulation",
+      "sig": "Prevents propagation. Start immediately once diagnosis established.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Santos",
-      "start": "01/2009",
-      "refills": 4,
-      "status": "Active"
+      "name": "Catheter-directed thrombolysis \u2014 intra-arterial tPA",
+      "sig": "Rutherford IIa without motor deficit \u2192 CDT appropriate. Infuse tPA directly into clot for 12-24h.",
+      "prescriber": "Vascular Surgery/IR",
+      "start": "2024",
+      "refills": 0,
+      "status": "CDT procedure"
     },
     {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Santos",
-      "start": "01/2019",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Clopidogrel 75mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Shah",
-      "start": "11/2022",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 80mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Santos",
-      "start": "01/2015",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 40mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Santos",
-      "start": "06/2005",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Santos",
-      "start": "01/2012",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Pregabalin 75mg BID",
-      "sig": "Take 1 capsule by mouth twice daily",
-      "prescriber": "Dr. Santos",
-      "start": "03/2019",
-      "refills": 3,
-      "status": "Active"
+      "name": "Surgical popliteal aneurysm exclusion \u2014 after limb salvaged",
+      "sig": "Popliteal aneurysm must be surgically excluded (bypass graft + ligation) to prevent recurrent thromboembolism.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Planned \u2014 after CDT"
     }
   ],
   "allergies": [
@@ -150,7 +86,7 @@ window.EMR_DATA = {
       "bp": "148/88",
       "hr": 78,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "198 lbs",
       "ht": "5'10\"",
@@ -162,7 +98,7 @@ window.EMR_DATA = {
       "bp": "144/86",
       "hr": 76,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "200 lbs",
       "ht": "5'10\"",
@@ -174,7 +110,7 @@ window.EMR_DATA = {
       "bp": "140/82",
       "hr": 74,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "202 lbs",
       "ht": "5'10\"",
@@ -189,10 +125,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Maria Santos, MD",
       "cc": "Follow-up: PAD, T2DM, CKD, neuropathy",
-      "hpi": "64-year-old male with severe PAD (s/p right SFA angioplasty 2022), poorly controlled T2DM, CKD 3a, and diabetic neuropathy. Claudication worsening — right calf pain at less than 1/2 block, improved from prior intervention but regressing. Denies rest pain currently. Right foot sometimes feels colder than left. A1c 8.4% despite insulin glargine 28 units and metformin. Reports variable adherence to dietary plan. Neuropathy symptoms bilateral — tingling and numbness in feet. No foot ulcers.",
+      "hpi": "64-year-old male with severe PAD (s/p right SFA angioplasty 2022), poorly controlled T2DM, CKD 3a, and diabetic neuropathy. Claudication worsening \u2014 right calf pain at less than 1/2 block, improved from prior intervention but regressing. Denies rest pain currently. Right foot sometimes feels colder than left. A1c 8.4% despite insulin glargine 28 units and metformin. Reports variable adherence to dietary plan. Neuropathy symptoms bilateral \u2014 tingling and numbness in feet. No foot ulcers.",
       "exam": "General: Overweight male in NAD. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, NT. Extremities: Right foot cooler than left; dorsalis pedis pulse dopplerable only (right), 1+ (left); posterior tibial absent bilaterally. Skin: Shiny, hairless bilateral lower legs. No ulcers. Neuro: Decreased monofilament sensation bilateral feet to mid-shin.",
-      "assessment": "1. PAD — worsening claudication right > left; concern for restenosis post-angioplasty\n2. T2DM — suboptimal control, A1c 8.4%\n3. CKD 3a — stable\n4. Diabetic neuropathy — stable\n5. Tobacco cessation — maintained since 2020",
-      "plan": "1. Vascular surgery referral for reassessment — possible reintervention right SFA\n2. Increase insulin glargine to 32 units; dietary counseling\n3. Continue DAPT and statin\n4. Podiatry follow-up for neuropathy and foot exam\n5. Labs: CMP, A1c, UA with micro-albumin\n6. RTC 3 months"
+      "assessment": "1. PAD \u2014 worsening claudication right > left; concern for restenosis post-angioplasty\n2. T2DM \u2014 suboptimal control, A1c 8.4%\n3. CKD 3a \u2014 stable\n4. Diabetic neuropathy \u2014 stable\n5. Tobacco cessation \u2014 maintained since 2020",
+      "plan": "1. Vascular surgery referral for reassessment \u2014 possible reintervention right SFA\n2. Increase insulin glargine to 32 units; dietary counseling\n3. Continue DAPT and statin\n4. Podiatry follow-up for neuropathy and foot exam\n5. Labs: CMP, A1c, UA with micro-albumin\n6. RTC 3 months"
     },
     {
       "id": "V002",
@@ -202,161 +138,52 @@ window.EMR_DATA = {
       "cc": "Chronic disease management",
       "hpi": "64-year-old male for routine follow-up. PAD stable with claudication at 1 block. A1c 8.0%. CKD stable. No foot ulcers. Reports maintaining tobacco abstinence.",
       "exam": "General: NAD. CV: RRR. Extremities: Diminished bilateral DP pulses. Skin: No ulcers. Neuro: Decreased sensation bilateral feet.",
-      "assessment": "1. Chronic conditions — stable\n2. PAD — monitoring",
+      "assessment": "1. Chronic conditions \u2014 stable\n2. PAD \u2014 monitoring",
       "plan": "1. Continue current medications\n2. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "01/06/2025",
-      "time": "08:45",
-      "orderedBy": "Dr. Maria Santos, MD",
-      "collected": "01/06/2025 08:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-010648",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA), Urine",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "ALI Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "168",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "26",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "55",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "23",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "28",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "24",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "ABI right (acute)",
+          "value": "0.22",
+          "unit": "",
+          "ref": "0.9-1.3 (was 0.55 baseline)",
+          "flag": "L"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "8.4",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            },
-            {
-              "test": "Est. Avg Glucose (eAG)",
-              "value": "194",
-              "unit": "mg/dL",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "CK",
+          "value": "680",
+          "unit": "U/L",
+          "ref": "<200",
+          "flag": "H"
         },
         {
-          "name": "URINE MICROALBUMIN",
-          "results": [
-            {
-              "test": "Microalbumin, Urine",
-              "value": "85",
-              "unit": "mg/L",
-              "range": "<30",
-              "flag": "H"
-            },
-            {
-              "test": "Albumin/Creatinine Ratio",
-              "value": "120",
-              "unit": "mg/g",
-              "range": "<30",
-              "flag": "H"
-            }
-          ]
+          "test": "Popliteal Duplex (bedside)",
+          "value": "Aneurysm 2.8cm right popliteal with intraluminal thrombus",
+          "unit": "",
+          "ref": "No aneurysm",
+          "flag": "H"
+        },
+        {
+          "test": "Motor deficit",
+          "value": "None \u2014 plantar flexion and dorsiflexion intact",
+          "unit": "",
+          "ref": "Intact",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "07/15/2024",
-      "study": "ARTERIAL DUPLEX BILATERAL LOWER EXTREMITIES",
-      "accession": "IMG-2024-07151",
-      "status": "FINAL",
-      "orderedBy": "Dr. Neha Shah, MD (Vascular Surgery)",
-      "readBy": "Dr. Lisa Tran, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "64M PAD s/p right SFA PTA 2022. Reassess patency.",
-      "technique": "Bilateral lower extremity arterial duplex ultrasound with segmental pressures and ABI.",
-      "findings": "Right lower extremity: SFA stent site — mild intimal hyperplasia with 50-60% in-stent restenosis (PSV ratio 3.5). Popliteal patent. Monophasic waveforms at the ankle.\\n\\nLeft lower extremity: Moderate SFA stenosis (PSV ratio 2.8). Popliteal patent. Monophasic waveforms distally.\\n\\nABI: Right 0.60, Left 0.65.",
-      "impression": "1. Moderate in-stent restenosis right SFA (50-60%).\\n2. Moderate native SFA stenosis left.\\n3. ABI 0.60 right, 0.65 left — worsened from prior (0.72/0.75).",
-      "dictated": "07/15/2024 16:00",
-      "verified": "07/16/2024 09:30"
+      "date": "04/2024",
+      "study": "CT Angiogram \u2014 Right Lower Extremity",
+      "findings": "Right popliteal artery aneurysm 2.8cm with intraluminal thrombus. Occlusion of below-knee trifurcation vessels. Preserved femoral vessels. Moderate atherosclerosis throughout.",
+      "impression": "Popliteal artery aneurysm with acute thrombosis of below-knee run-off vessels. Rutherford IIa."
     }
   ],
   "immunizations": [
@@ -413,11 +240,11 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former — 35 pack-years (1.5 PPD x ~23 years); quit 2020"
+      "Former \u2014 35 pack-years (1.5 PPD x ~23 years); quit 2020"
     ],
     [
       "Alcohol",
-      "Rare — 1-2 drinks/month"
+      "Rare \u2014 1-2 drinks/month"
     ],
     [
       "Drugs",
@@ -437,12 +264,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Health care proxy — wife Janet; Full code"
+      "Health care proxy \u2014 wife Janet; Full code"
     ]
   ],
   "meta": {
     "caseId": "acute-thrombotic-occlusion",
-    "diagnosis": "Acute Thrombotic Arterial Occlusion",
+    "diagnosis": "Acute Popliteal Artery Thrombosis from Popliteal Artery Aneurysm \u2014 Rutherford IIa",
     "acuity": 2,
     "presentation": "Vascular Emergency",
     "category": "vascular"
@@ -506,13 +333,10 @@ window.EMR_DATA = {
       "Inspection for ulcerations or tissue breakdown": "No open ulcerations present; early tissue changes noted on right great toe"
     },
     "ddxTargets": [
-      "Acute Thrombotic Arterial Occlusion (correct diagnosis)",
-      "Acute arterial embolism",
-      "Critical limb ischemia progression",
-      "Acute limb-threatening ischemia",
-      "Acute coronary syndrome with peripheral manifestation",
-      "Deep vein thrombosis",
-      "Diabetic peripheral neuropathy exacerbation"
+      "Acute popliteal thrombosis from aneurysm \u2014 Rutherford IIa (correct)",
+      "Acute cardioembolic embolism \u2014 no AFib or cardiac source; atherosclerotic CTA pattern",
+      "DVT \u2014 venous, no ABI change, Homan sign different presentation",
+      "Peripheral arterial disease worsening \u2014 ABI drop from 0.55 to 0.22 = acute event, not gradual progression"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on chronic PAD and dismissing acute thrombotic event as progression of known disease",
@@ -522,7 +346,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview Mr. Hawkins, consider his risk factors and current presentation. What specific historical details would help you differentiate between chronic PAD progression versus an acute arterial event? Think about the timeline and what 'red flags' you'd want to explore.",
       "phase5": "Now that you've completed your assessment, reflect on your physical exam findings, particularly the pulse examination and ABI results. How do these findings, combined with his symptom timeline, help narrow your differential diagnosis? What's the urgency level here?",
-      "finalDebrief": "This case illustrates acute-on-chronic arterial disease - a challenging scenario where new symptoms in a patient with known PAD represent acute thrombotic occlusion. The key differentiating factors were the acute worsening timeline, absent distal pulses, and critically low ABI. How did your thinking evolve from chronic PAD management to recognizing this vascular emergency?"
+      "finalDebrief": "This case illustrates acute-on-chronic arterial disease - a challenging scenario where new symptoms in a patient with known PAD represent acute thrombotic occlusion. The key differentiating factors were the acute worsening timeline, absent distal pulses, and critically low ABI. How did your thinking evolve from chronic PAD management to recognizing this vascular emergency?",
+      "final": "Diagnosis: acute popliteal artery thrombosis from popliteal aneurysm. Key learning: (1) Popliteal artery aneurysm is the most common peripheral aneurysm and the most dangerous \u2014 25% of untreated popliteal aneurysms cause limb-threatening ischemia from thrombosis or embolization. Always look for popliteal aneurysm in acute limb ischemia. (2) Rutherford classification: IIa (marginally threatened) = paresthesias but NO paralysis, Doppler signals present. IIb (immediately threatened) = motor deficit. IIa \u2192 CDT appropriate. IIb \u2192 emergent surgery. (3) CDT rationale: in Rutherford IIa without motor deficit, CDT lysed over 12-24h opens distal run-off vessels and improves the surgical field for subsequent bypass. TOPAS trial showed similar outcomes to surgery with lower amputation rate. (4) Popliteal aneurysm management: after limb salvage, the aneurysm MUST be surgically excluded (bypass graft + proximal/distal ligation). Simply treating the acute thrombosis without excluding the aneurysm \u2192 near-certain recurrence. (5) Bilateral disease: 50% of popliteal aneurysms are bilateral \u2014 always image the contralateral limb."
     }
   }
 };

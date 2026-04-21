@@ -1,6 +1,3 @@
-// Virtual EMR Case: Anxiety/Panic Attack
-// Variant: anxiety-panic-attack | Acuity: ESI-4
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Aetna PPO",
     "pcp": "Dr. Rachel Kim, MD",
-    "pharmacy": "Walgreens — 3100 Broward Blvd, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens \u2014 3100 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic or Latino",
     "address": "2354 S Halsted St, Milwaukee, WI 53209",
@@ -27,66 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Panic Disorder",
+      "problem": "Panic attack \u2014 acute presentation, must rule out medical causes",
       "icd": "F41.0",
-      "onset": "2021",
+      "onset": "2024",
       "status": "Active",
-      "notes": "3-4 episodes per month, worse with work stress"
+      "notes": "Jennifer Kim, 26F \u2014 sudden onset palpitations, chest tightness, shortness of breath, dizziness, perioral numbness, fear of dying. No cardiac history. Must rule out PE, ACS, dysrhythmia before psychiatric diagnosis."
     },
     {
-      "problem": "Generalized Anxiety Disorder",
-      "icd": "F41.1",
-      "onset": "2019",
+      "problem": "Hyperventilation-induced hypocapnia \u2014 respiratory alkalosis",
+      "icd": "R06.4",
+      "onset": "2024",
       "status": "Active",
-      "notes": ""
+      "notes": "Anxiety \u2192 hyperventilation \u2192 CO2 loss \u2192 respiratory alkalosis \u2192 hypocalcemia (ionized) \u2192 paresthesias, carpopedal spasm, dizziness. A self-reinforcing cycle."
     },
     {
-      "problem": "Iron Deficiency Anemia",
-      "icd": "D50.9",
+      "problem": "Panic disorder \u2014 recurrent attacks affecting function",
+      "icd": "F41.0",
       "onset": "2023",
       "status": "Active",
-      "notes": "Heavy menses contributing factor"
-    },
-    {
-      "problem": "Mitral Valve Prolapse",
-      "icd": "I34.1",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "Mild, incidental on echo. No regurgitation."
+      "notes": "Third episode in 2 months. Avoidance behavior developing. Referral for CBT and consideration of SSRI treatment."
     }
   ],
   "medications": [
     {
-      "name": "Escitalopram 10mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Kim",
-      "start": "05/2021",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Ferrous Sulfate 325mg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach with vitamin C",
-      "prescriber": "Dr. Kim",
-      "start": "08/2023",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Lorazepam 0.5mg PRN",
-      "sig": "Take 1 tablet by mouth as needed for severe panic attacks, max 2 per day",
-      "prescriber": "Dr. Kim",
-      "start": "01/2022",
+      "name": "Lorazepam 0.5-1mg PO/SL \u2014 acute episode",
+      "sig": "Benzodiazepine for acute panic attack. Short-term only \u2014 risk of dependence with chronic use. Cognitive-behavioral therapy is the definitive treatment.",
+      "prescriber": "Emergency/Psychiatry",
+      "start": "2024",
       "refills": 0,
-      "status": "PRN"
+      "status": "PRN acute"
     },
     {
-      "name": "Norethindrone-Ethinyl Estradiol (Junel 1/20)",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Kim",
-      "start": "09/2023",
-      "refills": 11,
-      "status": "Active"
+      "name": "Controlled breathing \u2014 rebreathing technique",
+      "sig": "Breathe through pursed lips or into cupped hands. Restores CO2, corrects respiratory alkalosis, breaks the hyperventilation cycle. First-line non-pharmacologic.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "Taught"
+    },
+    {
+      "name": "Sertraline 25mg daily \u2014 titrate to 50-200mg",
+      "sig": "SSRI first-line for panic disorder. Start low to avoid initial activation/anxiety. Full effect 4-6 weeks.",
+      "prescriber": "Psychiatry",
+      "start": "2024",
+      "refills": 3,
+      "status": "Initiating"
     }
   ],
   "allergies": [
@@ -104,7 +86,7 @@ window.EMR_DATA = {
       "bp": "112/70",
       "hr": 78,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "128 lbs",
       "ht": "5'4\"",
@@ -116,7 +98,7 @@ window.EMR_DATA = {
       "bp": "118/74",
       "hr": 82,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "126 lbs",
       "ht": "5'4\"",
@@ -128,7 +110,7 @@ window.EMR_DATA = {
       "bp": "108/66",
       "hr": 74,
       "rr": 14,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "100%",
       "wt": "125 lbs",
       "ht": "5'4\"",
@@ -145,8 +127,8 @@ window.EMR_DATA = {
       "cc": "Anxiety follow-up, increasing panic attacks",
       "hpi": "Ms. Delgado reports increased frequency of panic attacks over the past 2 months, now 3-4 per week (previously 3-4 per month). Episodes include sudden onset chest tightness, feeling of air hunger, tingling in hands and around mouth, racing heart, and sense of impending doom lasting 10-20 minutes. Triggers include work deadlines and crowded spaces. Denies suicidal ideation. Using lorazepam 2-3 times per week.",
       "exam": "Anxious-appearing young woman. Vitals normal. Lungs: CTA. CV: RRR, mid-systolic click (known MVP), no murmur. Neuro: intact. No tremor.",
-      "assessment": "1. Panic disorder — worsening, increased frequency\n2. GAD — contributing to panic escalation\n3. Iron deficiency anemia — improving on supplementation",
-      "plan": "1. Increase escitalopram to 15mg daily (discussed titration)\n2. CBT referral for panic disorder — patient agreeable\n3. Continue lorazepam PRN but limit to 2x/week max\n4. Recheck CBC/ferritin in 3 months\n5. If no improvement in 6 weeks, consider adding buspirone"
+      "assessment": "1. Panic disorder \u2014 worsening, increased frequency\n2. GAD \u2014 contributing to panic escalation\n3. Iron deficiency anemia \u2014 improving on supplementation",
+      "plan": "1. Increase escitalopram to 15mg daily (discussed titration)\n2. CBT referral for panic disorder \u2014 patient agreeable\n3. Continue lorazepam PRN but limit to 2x/week max\n4. Recheck CBC/ferritin in 3 months\n5. If no improvement in 6 weeks, consider adding buspirone"
     },
     {
       "id": "V002",
@@ -162,136 +144,48 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "12/10/2024",
-      "time": "11:30 AM",
-      "orderedBy": "Dr. Kim",
-      "collected": "12/10/2024 11:45 AM",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-163718",
-      "status": "Final",
-      "specimenType": "Whole Blood / Serum",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Panic Attack Workup",
+      "results": [
         {
-          "name": "COMPLETE BLOOD COUNT",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "6.8",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "35.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "MCV",
-              "value": "78",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "L"
-            },
-            {
-              "test": "Platelets",
-              "value": "282",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "RDW",
-              "value": "15.8",
-              "unit": "%",
-              "range": "11.5-14.5",
-              "flag": "H"
-            }
-          ]
+          "test": "ECG",
+          "value": "Sinus tachycardia 112 bpm. No ST changes. No delta waves.",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         },
         {
-          "name": "IRON STUDIES",
-          "results": [
-            {
-              "test": "Ferritin",
-              "value": "18",
-              "unit": "ng/mL",
-              "range": "12-150",
-              "flag": ""
-            },
-            {
-              "test": "Iron",
-              "value": "48",
-              "unit": "mcg/dL",
-              "range": "60-170",
-              "flag": "L"
-            },
-            {
-              "test": "TIBC",
-              "value": "420",
-              "unit": "mcg/dL",
-              "range": "250-370",
-              "flag": "H"
-            },
-            {
-              "test": "Iron Saturation",
-              "value": "11",
-              "unit": "%",
-              "range": "20-50",
-              "flag": "L"
-            }
-          ]
+          "test": "D-dimer",
+          "value": "0.38",
+          "unit": "mg/L",
+          "ref": "<0.5",
+          "flag": ""
         },
         {
-          "name": "THYROID PANEL",
-          "results": [
-            {
-              "test": "TSH",
-              "value": "2.1",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            },
-            {
-              "test": "Free T4",
-              "value": "1.2",
-              "unit": "ng/dL",
-              "range": "0.8-1.8",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I",
+          "value": "<0.01",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": ""
+        },
+        {
+          "test": "TSH",
+          "value": "1.8",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "ABG \u2014 pH",
+          "value": "7.52",
+          "unit": "",
+          "ref": "7.35-7.45 (respiratory alkalosis)",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "06/02/2024",
-      "study": "CHEST X-RAY PORTABLE AP",
-      "accession": "IMG-2024-34912",
-      "status": "FINAL",
-      "orderedBy": "Dr. Thomas Mitchell, MD",
-      "readBy": "Dr. Robert Vasquez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "Chest pain, dyspnea, r/o pneumothorax vs. PE",
-      "technique": "Single AP portable chest radiograph.",
-      "findings": "Heart size normal. Lungs are clear bilaterally with no focal consolidation, effusion, or pneumothorax. Mediastinal contours are normal. No acute osseous abnormality.",
-      "impression": "1. No acute cardiopulmonary abnormality.",
-      "dictated": "06/02/2024 09:45 PM",
-      "verified": "06/02/2024 10:30 PM"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Fluarix Quadrivalent)",
@@ -337,7 +231,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — wine 2-3 glasses on weekends"
+      "Social \u2014 wine 2-3 glasses on weekends"
     ],
     [
       "Drugs",
@@ -362,7 +256,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "anxiety-panic-attack",
-    "diagnosis": "Panic Attack with Hyperventilation",
+    "diagnosis": "Panic Attack with Hyperventilation Syndrome",
     "acuity": 4,
     "presentation": "Shortness of Breath",
     "category": "psychiatric"
@@ -420,17 +314,16 @@ window.EMR_DATA = {
       "Neurological examination focusing on cranial nerves": "Cranial nerves II-XII grossly intact, no focal neurological deficits",
       "Assessment for signs of hyperventilation": "Patient demonstrates rapid, shallow breathing pattern when describing episodes, no current carpopedal spasm",
       "Extremity examination for cyanosis or edema": "No cyanosis, clubbing, or edema noted, capillary refill less than 2 seconds",
-      "Vital signs assessment": "BP 112/70, HR 78 and regular, RR 16, SpO2 99% on room air, temperature 98.4°F",
+      "Vital signs assessment": "BP 112/70, HR 78 and regular, RR 16, SpO2 99% on room air, temperature 98.4\u00b0F",
       "Cardiac auscultation in multiple positions": "Soft mid-systolic click heard best at apex, consistent with known mitral valve prolapse, no murmur"
     },
     "ddxTargets": [
-      "Panic Attack with Hyperventilation",
-      "Generalized Anxiety Disorder exacerbation",
-      "Hyperthyroidism",
-      "Myocardial Infarction",
-      "Pulmonary Embolism",
-      "Asthma exacerbation",
-      "Mitral valve prolapse with arrhythmia"
+      "Panic attack with hyperventilation (correct)",
+      "Pulmonary embolism \u2014 dyspnea + chest pain + tachycardia; D-dimer negative here = low risk (Wells score low)",
+      "Supraventricular tachycardia \u2014 episodic palpitations; ECG during episode distinguishes; sinus tachycardia here",
+      "Hyperthyroidism \u2014 anxiety, palpitations, weight loss; TSH normal",
+      "Pheochromocytoma \u2014 episodic hypertension + palpitations + diaphoresis; rare; 24h urine catecholamines if recurrent",
+      "ACS \u2014 troponin negative, ECG normal, young patient"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on psychiatric history and missing organic causes like hyperthyroidism, cardiac arrhythmias, or medication-induced symptoms",
@@ -440,7 +333,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possibilities for her shortness of breath. Given her psychiatric history, what additional questions would help you determine if this represents a worsening of her known condition versus a new organic process? Consider what might cause her symptoms to worsen recently.",
       "phase5": "Your history and physical exam findings are consistent with your leading diagnosis. How do the normal vital signs and physical exam help differentiate between your psychiatric and organic differentials? What aspects of the history are most supportive of panic disorder exacerbation?",
-      "finalDebrief": "This case highlights the importance of not dismissing symptoms in patients with known psychiatric conditions, while also recognizing when clinical presentation fits established patterns. How did the patient's description of symptom onset, triggers, and previous similar episodes support the diagnosis of panic attack with hyperventilation?"
+      "finalDebrief": "This case highlights the importance of not dismissing symptoms in patients with known psychiatric conditions, while also recognizing when clinical presentation fits established patterns. How did the patient's description of symptom onset, triggers, and previous similar episodes support the diagnosis of panic attack with hyperventilation?",
+      "final": "Diagnosis: panic attack with hyperventilation syndrome. Key learning: (1) Panic attack cannot be a primary diagnosis until medical causes are ruled out. The 'can't miss' diagnoses that mimic panic: PE (Wells criteria + D-dimer), SVT (ECG during episode), hyperthyroidism (TSH), hypoglycemia (glucose), pheochromocytoma (recurrent episodic hypertension), cocaine/stimulant use (UDS). (2) Hyperventilation physiology: anxiety \u2192 increased respiratory rate \u2192 CO2 loss \u2192 respiratory alkalosis (pH 7.52 as here) \u2192 decreased ionized calcium \u2192 perioral numbness, carpopedal spasm, tetany, dizziness. The symptoms reinforce anxiety \u2192 more hyperventilation \u2014 a viscous cycle. Correction: raise CO2 by breathing control. (3) DSM-5 panic disorder: recurrent unexpected panic attacks + \u22651 month of persistent concern about future attacks or maladaptive behavioral change. (4) Treatment: acute = benzodiazepine + breathing control. Long-term = CBT (first-line, addresses avoidance behavior) + SSRI (sertraline, escitalopram \u2014 prevent attacks). Combined CBT + SSRI superior to either alone. (5) Avoidance behavior is the most disabling consequence of panic disorder \u2014 CBT specifically targets this through systematic desensitization."
     }
   }
 };

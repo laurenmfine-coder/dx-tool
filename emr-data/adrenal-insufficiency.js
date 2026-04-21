@@ -1,6 +1,3 @@
-// Virtual EMR Case: Adrenal Insufficiency (Hyperkalemia Component)
-// Variant: adrenal-insufficiency | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Jennifer Adams, MD",
-    "pharmacy": "CVS Pharmacy — 2801 S University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2801 S University Dr, Riverside, FL",
     "language": "English, French",
     "race": "White/Caucasian (French-Canadian descent)",
     "address": "6033 Cedar Blvd, Albuquerque, NM 87103",
@@ -27,59 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary Adrenal Insufficiency (Addison Disease)",
-      "icd": "E27.1",
-      "onset": "2019",
+      "problem": "Acute adrenal crisis \u2014 life-threatening",
+      "icd": "E27.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Autoimmune etiology; positive 21-hydroxylase antibodies; on hydrocortisone + fludrocortisone; MISSED MEDICATIONS x 3 days during GI illness"
+      "notes": "Patricia Moore, 48F \u2014 known Addison's disease, missed hydrocortisone for 3 days during GI illness. BP 72/44, HR 124, Na 128, K 6.2, glucose 54. Classic crisis precipitated by physiologic stress without sick-day dose increase."
     },
     {
-      "problem": "Hashimoto Thyroiditis",
-      "icd": "E06.3",
-      "onset": "2016",
+      "problem": "Hyperkalemia 6.2 \u2014 from mineralocorticoid deficiency",
+      "icd": "E87.5",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Polyautoimmune syndrome — autoimmune thyroiditis + Addison disease; on levothyroxine"
+      "notes": "Lack of aldosterone \u2192 renal potassium retention \u2192 hyperkalemia. ECG monitoring required."
     },
     {
-      "problem": "Vitiligo",
-      "icd": "L80",
-      "onset": "2014",
+      "problem": "Hyponatremia 128 \u2014 from mineralocorticoid and glucocorticoid deficiency",
+      "icd": "E87.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Patches on hands, periorbital; part of autoimmune cluster"
+      "notes": "Mineralocorticoid deficiency \u2192 sodium wasting. Glucocorticoid deficiency impairs free water excretion."
     }
   ],
   "medications": [
     {
-      "name": "Hydrocortisone 15mg AM / 5mg PM",
-      "sig": "Take 15 mg by mouth in the morning and 5 mg in the afternoon (MISSED x 3 DAYS — vomiting, unable to keep pills down)",
-      "prescriber": "Dr. Martinez (Endocrinology)",
-      "start": "04/2019",
+      "name": "Hydrocortisone 100mg IV bolus \u2014 IMMEDIATELY",
+      "sig": "Do NOT wait for lab confirmation. Give empirically if clinical suspicion high. Hydrocortisone at stress doses has mineralocorticoid activity \u2014 covers both glucocorticoid and mineralocorticoid needs acutely.",
+      "prescriber": "Emergency/Endocrinology",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
+    },
+    {
+      "name": "Normal saline 1L IV bolus \u2014 IMMEDIATELY",
+      "sig": "Volume resuscitation. Use NS (not D5W) to correct hyponatremia and hypotension. Glucose also in IV fluid if hypoglycemic.",
+      "prescriber": "Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
+    },
+    {
+      "name": "Fludrocortisone 0.1mg daily \u2014 after stabilization",
+      "sig": "Mineralocorticoid replacement for ongoing management. Not needed acutely if hydrocortisone dose is sufficient (>50mg has mineralocorticoid effect).",
+      "prescriber": "Endocrinology",
+      "start": "2024",
       "refills": 3,
-      "status": "Active — MISSED DUE TO VOMITING"
-    },
-    {
-      "name": "Fludrocortisone 0.1mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Martinez (Endocrinology)",
-      "start": "04/2019",
-      "refills": 3,
-      "status": "Active — MISSED x 3 DAYS"
-    },
-    {
-      "name": "Levothyroxine 88mcg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach, 30 min before food",
-      "prescriber": "Dr. Adams",
-      "start": "09/2016",
-      "refills": 4,
-      "status": "Active — MISSED x 3 DAYS"
-    },
-    {
-      "name": "Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM — Emergency Kit",
-      "sig": "Inject 100 mg intramuscularly in emergency if unable to take oral hydrocortisone and symptomatic — DID NOT SELF-ADMINISTER (kit expired)",
-      "prescriber": "Dr. Martinez (Endocrinology)",
-      "start": "04/2019",
-      "refills": 1,
-      "status": "Active — EMERGENCY KIT EXPIRED"
+      "status": "Resuming \u2014 after stabilization"
     }
   ],
   "allergies": [
@@ -97,7 +86,7 @@ window.EMR_DATA = {
       "bp": "78/48",
       "hr": 112,
       "rr": 22,
-      "temp": "97.2°F",
+      "temp": "97.2\u00b0F",
       "spo2": "96%",
       "wt": "128 lbs",
       "ht": "5'5\"",
@@ -109,7 +98,7 @@ window.EMR_DATA = {
       "bp": "108/68",
       "hr": 74,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "134 lbs",
       "ht": "5'5\"",
@@ -121,7 +110,7 @@ window.EMR_DATA = {
       "bp": "112/72",
       "hr": 70,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "136 lbs",
       "ht": "5'5\"",
@@ -136,10 +125,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Jennifer Adams, MD",
       "cc": "Follow-up: Addison disease, Hashimoto thyroiditis, vitiligo",
-      "hpi": "56-year-old female with polyautoimmune syndrome presenting for routine follow-up. Reports stable on hydrocortisone/fludrocortisone regimen. No adrenal crises since last visit. Energy level adequate. TSH stable on levothyroxine 88mcg. Vitiligo stable. Reports she has NOT renewed her emergency Solu-Cortef injection kit — it expired 3 months ago. Has medical alert bracelet but does not always wear it.",
+      "hpi": "56-year-old female with polyautoimmune syndrome presenting for routine follow-up. Reports stable on hydrocortisone/fludrocortisone regimen. No adrenal crises since last visit. Energy level adequate. TSH stable on levothyroxine 88mcg. Vitiligo stable. Reports she has NOT renewed her emergency Solu-Cortef injection kit \u2014 it expired 3 months ago. Has medical alert bracelet but does not always wear it.",
       "exam": "General: Thin female, well-appearing. HEENT: Depigmented patches periorbital. CV: RRR, no murmur. Lungs: CTA. Abdomen: Soft, NT. Skin: Vitiligo patches on dorsal hands, periorbital areas; hyperpigmentation of palmar creases and buccal mucosa (Addison). Neuro: A&O x3.",
-      "assessment": "1. Primary adrenal insufficiency — stable; EMERGENCY KIT EXPIRED\n2. Hashimoto thyroiditis — stable on levothyroxine\n3. Vitiligo — stable",
-      "plan": "1. Continue hydrocortisone 15/5mg and fludrocortisone 0.1mg\n2. RENEW Solu-Cortef emergency injection kit — prescription sent\n3. Stress-dose education reviewed again: double hydrocortisone for fever/illness; IM injection if vomiting\n4. Labs: AM cortisol, ACTH, renin, electrolytes, TSH\n5. STRONGLY advised to wear medical alert bracelet consistently\n6. RTC 6 months"
+      "assessment": "1. Primary adrenal insufficiency \u2014 stable; EMERGENCY KIT EXPIRED\n2. Hashimoto thyroiditis \u2014 stable on levothyroxine\n3. Vitiligo \u2014 stable",
+      "plan": "1. Continue hydrocortisone 15/5mg and fludrocortisone 0.1mg\n2. RENEW Solu-Cortef emergency injection kit \u2014 prescription sent\n3. Stress-dose education reviewed again: double hydrocortisone for fever/illness; IM injection if vomiting\n4. Labs: AM cortisol, ACTH, renin, electrolytes, TSH\n5. STRONGLY advised to wear medical alert bracelet consistently\n6. RTC 6 months"
     },
     {
       "id": "V002",
@@ -147,196 +136,56 @@ window.EMR_DATA = {
       "type": "Specialist",
       "provider": "Dr. Luis Martinez, MD (Endocrinology)",
       "cc": "Annual Addison disease management",
-      "hpi": "56-year-old female with Addison disease and Hashimoto thyroiditis for annual endocrine follow-up. Stable on replacement doses. No adrenal crises this year. Tolerating hydrocortisone well. Fludrocortisone dose appears adequate — no orthostatic symptoms, no salt craving. Husband aware of sick-day rules and emergency injection technique.",
+      "hpi": "56-year-old female with Addison disease and Hashimoto thyroiditis for annual endocrine follow-up. Stable on replacement doses. No adrenal crises this year. Tolerating hydrocortisone well. Fludrocortisone dose appears adequate \u2014 no orthostatic symptoms, no salt craving. Husband aware of sick-day rules and emergency injection technique.",
       "exam": "General: Thin but well. HEENT: Vitiligo periorbital. CV: RRR, no orthostatic changes today. Abdomen: Soft. Skin: Buccal and palmar hyperpigmentation stable. No edema.",
-      "assessment": "1. Primary adrenal insufficiency — well-controlled on current doses\n2. Hashimoto thyroiditis — euthyroid\n3. Autoimmune polyglandular syndrome type 2",
+      "assessment": "1. Primary adrenal insufficiency \u2014 well-controlled on current doses\n2. Hashimoto thyroiditis \u2014 euthyroid\n3. Autoimmune polyglandular syndrome type 2",
       "plan": "1. Continue current doses\n2. Annual screening: fasting glucose (screen for autoimmune DM), anti-parietal cell antibodies (pernicious anemia screen)\n3. Emergency kit reviewed with patient and husband\n4. RTC 12 months"
     }
   ],
   "labs": [
     {
-      "date": "02/24/2025",
-      "time": "06:42",
-      "orderedBy": "Dr. Kevin Tran, MD (ED)",
-      "collected": "02/24/2025 06:25",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-103218",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Adrenal Crisis",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "52",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "L"
-            },
-            {
-              "test": "BUN",
-              "value": "32",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "Sodium",
-              "value": "124",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "6.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "92",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": "L"
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "18",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": "L"
-            },
-            {
-              "test": "Calcium",
-              "value": "10.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Sodium",
+          "value": "128",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
         },
         {
-          "name": "COMPLETE BLOOD COUNT (CBC)",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "3.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "43.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "198",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "12",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Potassium",
+          "value": "6.2",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": "H"
         },
         {
-          "name": "CORTISOL AND ACTH",
-          "results": [
-            {
-              "test": "Random Cortisol",
-              "value": "1.2",
-              "unit": "µg/dL",
-              "range": "6.0-18.0 (AM)",
-              "flag": "L"
-            },
-            {
-              "test": "ACTH",
-              "value": "892",
-              "unit": "pg/mL",
-              "range": "7-63",
-              "flag": "H"
-            }
-          ]
+          "test": "Glucose",
+          "value": "54",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "L"
         },
         {
-          "name": "THYROID FUNCTION",
-          "results": [
-            {
-              "test": "TSH",
-              "value": "8.4",
-              "unit": "mIU/L",
-              "range": "0.5-4.5",
-              "flag": "H"
-            },
-            {
-              "test": "Free T4",
-              "value": "0.6",
-              "unit": "ng/dL",
-              "range": "0.8-1.8",
-              "flag": "L"
-            }
-          ]
+          "test": "Cortisol (random \u2014 do not delay treatment)",
+          "value": "2.1",
+          "unit": "\u03bcg/dL",
+          "ref": "Morning >18 \u03bcg/dL",
+          "flag": "L"
         },
         {
-          "name": "LACTIC ACID",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "ACTH",
+          "value": "<5",
+          "unit": "pg/mL",
+          "ref": "10-60 (low = secondary/central)",
+          "flag": "L"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "02/24/2025",
-      "study": "CHEST X-RAY — PA AND LATERAL",
-      "accession": "IMG-2025-10281",
-      "status": "FINAL",
-      "orderedBy": "Dr. Kevin Tran, MD",
-      "readBy": "Dr. Angela Reyes, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "56-year-old with hypotension, tachycardia, known Addison disease — r/o infection precipitant",
-      "technique": "PA and lateral chest radiographs.",
-      "findings": "LUNGS: Clear bilaterally. No consolidation or effusion.\n\nHEART: Small cardiac silhouette (microcardia) — may be related to volume depletion and/or chronic adrenal insufficiency.\n\nOTHER: No pneumothorax.",
-      "impression": "1. Small cardiac silhouette — correlate with volume status\n2. No acute cardiopulmonary process",
-      "dictated": "02/24/2025 07:00",
-      "verified": "02/24/2025 07:08"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Fluarix Quadrivalent)",
@@ -371,12 +220,12 @@ window.EMR_DATA = {
     "Mother (age 82): Hashimoto thyroiditis, pernicious anemia",
     "Father (age 84): Type 2 Diabetes, CAD",
     "Sister (age 53): Graves disease, vitiligo",
-    "Strong family history of autoimmune disorders — polyautoimmune clustering"
+    "Strong family history of autoimmune disorders \u2014 polyautoimmune clustering"
   ],
   "socialHistory": [
     [
       "Occupation",
-      "Freelance translator (French/English) — works from home"
+      "Freelance translator (French/English) \u2014 works from home"
     ],
     [
       "Marital",
@@ -388,7 +237,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Rare — occasional glass of wine"
+      "Rare \u2014 occasional glass of wine"
     ],
     [
       "Drugs",
@@ -413,7 +262,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "adrenal-insufficiency",
-    "diagnosis": "Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia — Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement",
+    "diagnosis": "Acute Adrenal Crisis (Addisonian Crisis) with Hyperkalemia",
     "acuity": 2,
     "presentation": "Renal / Electrolyte Emergency",
     "category": "endocrine"
@@ -447,7 +296,7 @@ window.EMR_DATA = {
       "associated": "I've been having nausea and vomiting for the past few days, some diarrhea, terrible stomach cramps, and I'm craving salt like crazy. I've been dizzy and my heart feels like it's racing.",
       "denies": "No chest pain, no trouble breathing at rest, no fever that I know of, no headaches, no vision changes.",
       "history": "I had something similar about 3 years ago when I had the flu and ended up in the hospital. They said I needed to increase my medications when I'm sick, but I've been feeling so awful I keep forgetting doses.",
-      "medications": "Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM — Emergency Kit",
+      "medications": "Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM \u2014 Emergency Kit",
       "allergies": "Prednisone",
       "family": "My mother has Hashimoto's thyroiditis and pernicious anemia. My father has diabetes and heart disease. My sister has Graves' disease and vitiligo like me.",
       "social": "I'm a freelance translator working from home, married for 28 years. My husband Philippe knows about my condition and the emergency injection. I don't smoke, rarely drink alcohol, no drugs."
@@ -475,13 +324,11 @@ window.EMR_DATA = {
       "Inspection of palmar creases and buccal mucosa": "Dark pigmentation visible in palmar creases and along gum line"
     },
     "ddxTargets": [
-      "Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia — Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement (correct diagnosis)",
-      "Gastroenteritis with severe dehydration",
-      "Sepsis with distributive shock",
-      "Diabetic ketoacidosis",
-      "Acute myocardial infarction with cardiogenic shock",
-      "Medication non-compliance in chronic adrenal insufficiency",
-      "Thyroid storm"
+      "Acute adrenal crisis \u2014 primary adrenal insufficiency (correct)",
+      "Septic shock \u2014 similar hemodynamics; but cortisol critically low; adrenal crisis can present identically",
+      "Hypovolemic shock \u2014 no classic electrolyte pattern; no known adrenal disease",
+      "Secondary adrenal insufficiency \u2014 ACTH low (as here); pituitary/hypothalamic cause; no hyperkalemia (aldosterone intact)",
+      "Hypoglycemia alone \u2014 glucose low but does not explain BP, sodium, potassium pattern"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the patient's downplaying of symptoms and missing the life-threatening nature of adrenal crisis in a known Addison's patient",
@@ -491,7 +338,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some concerning differentials. This patient has known Addison's disease - what specific questions about her medication adherence and recent stressors would be most critical? What red flags in adrenal insufficiency should you be listening for?",
       "phase5": "Given her known adrenal insufficiency, hypotension, and recent GI illness, what is the most likely diagnosis? What immediate interventions does this patient need, and what lab abnormalities would you expect to see?",
-      "finalDebrief": "This case illustrates how patients with adrenal insufficiency can rapidly decompensate during stress. The key learning points are recognizing adrenal crisis, understanding sick-day rules, and the importance of immediate IV steroids before lab confirmation. How did your differential evolve as you gathered more information about her missed medications and recent illness?"
+      "finalDebrief": "This case illustrates how patients with adrenal insufficiency can rapidly decompensate during stress. The key learning points are recognizing adrenal crisis, understanding sick-day rules, and the importance of immediate IV steroids before lab confirmation. How did your differential evolve as you gathered more information about her missed medications and recent illness?",
+      "final": "Diagnosis: acute adrenal crisis. Key learning: (1) Treat first, test later. Never delay hydrocortisone while waiting for cortisol levels \u2014 a patient in adrenal crisis can die within hours. If diagnosis is uncertain, a random cortisol <18 \u03bcg/dL during stress is highly suggestive; <3 \u03bcg/dL is diagnostic. (2) Classic electrolyte triad: hyponatremia + hyperkalemia + hypoglycemia. This pattern in a hypotensive patient = adrenal crisis until proven otherwise. Primary adrenal insufficiency (Addison's): all three present (mineralocorticoid + glucocorticoid deficiency). Secondary adrenal insufficiency: no hyperkalemia (aldosterone intact, only glucocorticoid deficient). (3) Precipitating stressors: illness, surgery, trauma, or simply missing doses during GI illness when absorption is impaired. The 'sick-day rule': double or triple maintenance hydrocortisone dose during illness. (4) Hydrocortisone 100mg IV provides both glucocorticoid AND mineralocorticoid coverage acutely \u2014 fludrocortisone is not needed emergently. (5) After stabilization: identify and treat the precipitating cause, educate on sick-day rules, provide a steroid emergency card and injectable hydrocortisone kit for home."
     }
   }
 };

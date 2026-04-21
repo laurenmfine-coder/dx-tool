@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Superior Mesenteric Artery Embolism
-// Variant: acute-sma-embolism | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B + Aetna Medicare Supplement",
     "pcp": "Dr. William Carter, MD",
-    "pharmacy": "Publix Pharmacy — 4000 N State Road 7, Lauderdale Lakes, FL",
+    "pharmacy": "Publix Pharmacy \u2014 4000 N State Road 7, Lauderdale Lakes, FL",
     "language": "English",
     "race": "African American",
     "address": "8388 Daisy Ave, Memphis, TN 38107",
@@ -27,112 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Atrial Fibrillation, Persistent",
-      "icd": "I48.1",
-      "onset": "2017",
+      "problem": "Acute SMA embolism \u2014 mesenteric ischemia",
+      "icd": "K55.011",
+      "onset": "2024",
       "status": "Active",
-      "notes": "CHA₂DS₂-VASc 6; on apixaban — recently hospitalized for GI bleed, anticoagulation held x 2 weeks"
+      "notes": "Charles Kim, 72M \u2014 known AFib, not anticoagulated. Sudden severe periumbilical pain 4h ago, out of proportion to exam, nausea, vomiting, elevated lactate. AFib source most likely."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "1998",
-      "status": "Active",
-      "notes": "On triple therapy"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2006",
-      "status": "Active",
-      "notes": "A1c 7.8%"
-    },
-    {
-      "problem": "Heart Failure with Preserved EF (HFpEF)",
-      "icd": "I50.32",
+      "problem": "Atrial fibrillation \u2014 cardioembolic source",
+      "icd": "I48.0",
       "onset": "2019",
       "status": "Active",
-      "notes": "LVEF 50-55%; NYHA Class II"
+      "notes": "CHA2DS2-VASc 5. On aspirin only \u2014 subtherapeutic. Embolus from left atrial thrombus."
     },
     {
-      "problem": "Chronic Kidney Disease, Stage 3b",
-      "icd": "N18.32",
-      "onset": "2020",
+      "problem": "Pain out of proportion to exam \u2014 cardinal sign",
+      "icd": "K55.011",
+      "onset": "2024",
       "status": "Active",
-      "notes": "eGFR 38"
-    },
-    {
-      "problem": "Upper GI Hemorrhage, recent",
-      "icd": "K92.0",
-      "onset": "2025",
-      "status": "Active",
-      "notes": "Admitted 01/2025 for melena — EGD showed gastric erosions; anticoagulation held"
+      "notes": "Hallmark of mesenteric ischemia. Peritonitis appears LATE when bowel necrosis has occurred."
     }
   ],
   "medications": [
     {
-      "name": "Apixaban 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily — CURRENTLY HELD per GI",
-      "prescriber": "Dr. Thomas",
-      "start": "06/2017",
-      "refills": 3,
-      "status": "Discontinued"
+      "name": "Heparin UFH 80 units/kg bolus + infusion \u2014 IMMEDIATE",
+      "sig": "Prevents clot propagation. Start before imaging if diagnosis suspected \u2014 every minute counts.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "IMMEDIATE"
     },
     {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Thomas",
-      "start": "06/2017",
-      "refills": 4,
-      "status": "Active"
+      "name": "Emergent CT angiography abdomen \u2014 STAT",
+      "sig": "CTA with arterial phase is the diagnostic test of choice. Confirms SMA occlusion and guides intervention.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Ordered STAT"
     },
     {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Carter",
-      "start": "03/2005",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Losartan 100mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Carter",
-      "start": "08/2010",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Chlorthalidone 12.5mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Carter",
-      "start": "01/2015",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Carter",
-      "start": "01/2007",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Pantoprazole 40mg BID",
-      "sig": "Take 1 tablet by mouth twice daily before meals",
-      "prescriber": "Dr. Singh",
-      "start": "01/2025",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 40mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Carter",
-      "start": "06/2010",
-      "refills": 5,
-      "status": "Active"
+      "name": "Surgical embolectomy OR catheter-directed thrombolysis",
+      "sig": "Embolic SMA: surgical embolectomy preferred if bowel viable. CDT if partial occlusion without peritoneal signs. Peritonitis = laparotomy + bowel resection.",
+      "prescriber": "Vascular Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Decision pending imaging"
     }
   ],
   "allergies": [
@@ -150,7 +86,7 @@ window.EMR_DATA = {
       "bp": "146/84",
       "hr": 88,
       "rr": 18,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "95%",
       "wt": "178 lbs",
       "ht": "5'5\"",
@@ -162,7 +98,7 @@ window.EMR_DATA = {
       "bp": "140/80",
       "hr": 84,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "180 lbs",
       "ht": "5'5\"",
@@ -174,7 +110,7 @@ window.EMR_DATA = {
       "bp": "138/78",
       "hr": 80,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "182 lbs",
       "ht": "5'5\"",
@@ -189,9 +125,9 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. William Carter, MD",
       "cc": "Post-hospitalization follow-up: GI bleed; anticoagulation management",
-      "hpi": "76-year-old female presenting 2 weeks after hospital discharge for upper GI hemorrhage (gastric erosions). Apixaban held during hospitalization and not yet restarted per GI recommendation — plan to reassess in 2 more weeks. Melena resolved. Currently on high-dose PPI BID. Patient expresses concern about being off anticoagulation given her AFib history. No recurrent GI bleeding. Reports vague postprandial abdominal discomfort since discharge, attributed to dietary changes. No chest pain, dyspnea worse than baseline, or neurologic symptoms.",
+      "hpi": "76-year-old female presenting 2 weeks after hospital discharge for upper GI hemorrhage (gastric erosions). Apixaban held during hospitalization and not yet restarted per GI recommendation \u2014 plan to reassess in 2 more weeks. Melena resolved. Currently on high-dose PPI BID. Patient expresses concern about being off anticoagulation given her AFib history. No recurrent GI bleeding. Reports vague postprandial abdominal discomfort since discharge, attributed to dietary changes. No chest pain, dyspnea worse than baseline, or neurologic symptoms.",
       "exam": "General: Elderly female, appears fatigued, NAD. CV: Irregularly irregular, rate 88; no murmurs. JVP normal. Lungs: CTAB, no crackles. Abdomen: Soft, mild diffuse tenderness without rebound or guarding. No hepatomegaly. Rectal: Heme-negative brown stool. Extremities: No edema. Neuro: A&O x3, no focal deficits.",
-      "assessment": "1. Recent upper GI hemorrhage — resolving; anticoagulation held\n2. AFib — off anticoagulation x 2 weeks; embolic risk discussion\n3. HFpEF — stable\n4. CKD 3b — stable\n5. Postprandial abdominal discomfort — likely dietary/post-bleed; monitor",
+      "assessment": "1. Recent upper GI hemorrhage \u2014 resolving; anticoagulation held\n2. AFib \u2014 off anticoagulation x 2 weeks; embolic risk discussion\n3. HFpEF \u2014 stable\n4. CKD 3b \u2014 stable\n5. Postprandial abdominal discomfort \u2014 likely dietary/post-bleed; monitor",
       "plan": "1. Continue pantoprazole 40mg BID\n2. GI follow-up in 2 weeks to reassess anticoagulation restart\n3. Discussed embolic risk vs. bleeding risk with patient and family\n4. Continue metoprolol for rate control\n5. Recheck CBC and BMP today\n6. Bland diet; advance slowly\n7. RTC 2 weeks or sooner if symptoms worsen"
     },
     {
@@ -200,158 +136,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. William Carter, MD",
       "cc": "Chronic disease management",
-      "hpi": "76-year-old female for routine follow-up. AFib rate controlled on metoprolol and apixaban. HFpEF stable — NYHA II. T2DM — A1c 7.8%. CKD 3b — eGFR 38, stable. No new complaints. Compliance with all medications.",
+      "hpi": "76-year-old female for routine follow-up. AFib rate controlled on metoprolol and apixaban. HFpEF stable \u2014 NYHA II. T2DM \u2014 A1c 7.8%. CKD 3b \u2014 eGFR 38, stable. No new complaints. Compliance with all medications.",
       "exam": "General: NAD. CV: Irregularly irregular. Lungs: CTAB. Abdomen: Soft, NT. Extremities: Trace edema.",
-      "assessment": "1. AFib — rate controlled, on anticoagulation\n2. Chronic conditions — stable",
+      "assessment": "1. AFib \u2014 rate controlled, on anticoagulation\n2. Chronic conditions \u2014 stable",
       "plan": "1. Continue all medications\n2. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "01/28/2025",
-      "time": "10:00",
-      "orderedBy": "Dr. William Carter, MD",
-      "collected": "01/28/2025 09:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-012856",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Mesenteric Ischemia",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "34",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "36",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.9",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "21",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": "L"
-            },
-            {
-              "test": "Calcium",
-              "value": "8.8",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "20",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "24",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            }
-          ]
+          "test": "Lactate",
+          "value": "4.2",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "9.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "29.4",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "225",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "22.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "D-dimer",
+          "value": "5200",
+          "unit": "ng/mL",
+          "ref": "<500",
+          "flag": "H"
+        },
+        {
+          "test": "Phosphate",
+          "value": "5.8",
+          "unit": "mg/dL",
+          "ref": "2.5-4.5",
+          "flag": "H"
+        },
+        {
+          "test": "ECG",
+          "value": "Atrial fibrillation \u2014 irregular, HR 104",
+          "unit": "",
+          "ref": "NSR",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "01/10/2025",
-      "study": "EGD (ESOPHAGOGASTRODUODENOSCOPY)",
-      "accession": "IMG-2025-01101",
-      "status": "FINAL",
-      "orderedBy": "Dr. Priya Singh, MD (Gastroenterology)",
-      "readBy": "Dr. Priya Singh, MD (Gastroenterology)",
-      "facility": "ReasonDx Medical Center Endoscopy",
-      "priority": "STAT",
-      "clinical": "76F melena, anemia, on anticoagulation. Evaluate upper GI source.",
-      "technique": "Upper endoscopy with standard diagnostic gastroscope.",
-      "findings": "Esophagus: Normal mucosa, no varices.\\n\\nStomach: Multiple antral erosions with adherent clot (Forrest IIb). No active bleeding. Gastric mucosa diffusely erythematous.\\n\\nDuodenum: Normal D1 and D2 mucosa.\\n\\nInterventions: Erosions treated with epinephrine injection and bipolar cautery to largest lesion.",
-      "impression": "1. Gastric antral erosions with stigmata of recent hemorrhage.\\n2. No variceal disease.\\n3. Hemostasis achieved.",
-      "dictated": "01/10/2025 16:00",
-      "verified": "01/10/2025 18:30"
+      "date": "04/2024",
+      "study": "CT Angiogram Abdomen \u2014 Arterial Phase",
+      "findings": "Filling defect in SMA approximately 6cm from origin \u2014 acute embolus. Small bowel loops showing early ischemic changes. No free air, no pneumatosis yet.",
+      "impression": "Acute SMA embolism with early small bowel ischemia. No perforation. Emergent surgical consultation."
     }
   ],
   "immunizations": [
@@ -412,7 +251,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "None — lifelong abstainer"
+      "None \u2014 lifelong abstainer"
     ],
     [
       "Drugs",
@@ -428,16 +267,16 @@ window.EMR_DATA = {
     ],
     [
       "Safety",
-      "Denies IPV; fall risk — uses cane; home safety assessment done"
+      "Denies IPV; fall risk \u2014 uses cane; home safety assessment done"
     ],
     [
       "Advance Directive",
-      "Living will and HCP on file — daughter Brenda designated; Full code"
+      "Living will and HCP on file \u2014 daughter Brenda designated; Full code"
     ]
   ],
   "meta": {
     "caseId": "acute-sma-embolism",
-    "diagnosis": "Acute Superior Mesenteric Artery Embolism",
+    "diagnosis": "Acute Superior Mesenteric Artery Embolism \u2014 Mesenteric Ischemia",
     "acuity": 1,
     "presentation": "Vascular Emergency",
     "category": "vascular"
@@ -498,16 +337,14 @@ window.EMR_DATA = {
       "Rectal examination": "No gross blood, empty rectal vault, guaiac test pending",
       "Assessment of peripheral pulses": "Peripheral pulses palpable but diminished, no obvious peripheral emboli",
       "Cardiac auscultation": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs",
-      "Vital signs assessment": "BP 146/84, HR 88 irregular, temp 98.2°F, SpO2 95%, patient appears uncomfortable"
+      "Vital signs assessment": "BP 146/84, HR 88 irregular, temp 98.2\u00b0F, SpO2 95%, patient appears uncomfortable"
     },
     "ddxTargets": [
-      "Acute Superior Mesenteric Artery Embolism (correct diagnosis)",
-      "Acute mesenteric ischemia (thrombotic)",
-      "Small bowel obstruction",
-      "Acute mesenteric venous thrombosis",
-      "Ruptured abdominal aortic aneurysm",
-      "Acute pancreatitis",
-      "Peptic ulcer disease with complications"
+      "Acute SMA embolism \u2014 mesenteric ischemia (correct)",
+      "SMA thrombosis \u2014 atherosclerotic disease on CTA; gradual history of food fear; different from acute embolism",
+      "Non-occlusive mesenteric ischemia \u2014 low-flow state; no filling defect on CTA",
+      "Acute pancreatitis \u2014 lipase elevated; no SMA filling defect",
+      "Perforated peptic ulcer \u2014 free air on CT; peritoneal signs"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on recent GI bleeding history and focusing only on peptic ulcer complications while missing acute mesenteric ischemia",
@@ -517,7 +354,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This 76-year-old patient has multiple cardiovascular risk factors and was recently off anticoagulation. As you prepare to interview her, what high-risk vascular conditions should you keep in mind given her cardiac history and current presentation?",
       "phase5": "You've identified severe abdominal pain with hypoactive bowel sounds in a patient with atrial fibrillation who recently stopped anticoagulation. What does the combination of her cardiac rhythm, recent medication changes, and current presentation suggest about potential embolic complications?",
-      "finalDebrief": "This case illustrates how a patient's medication history and underlying cardiac conditions create windows of vulnerability. Dorothy's recent discontinuation of anticoagulation for GI bleeding created the perfect setup for arterial embolism. How did the constellation of atrial fibrillation, severe abdominal pain, and hypoactive bowel sounds point toward mesenteric ischemia rather than more common abdominal pathology?"
+      "finalDebrief": "This case illustrates how a patient's medication history and underlying cardiac conditions create windows of vulnerability. Dorothy's recent discontinuation of anticoagulation for GI bleeding created the perfect setup for arterial embolism. How did the constellation of atrial fibrillation, severe abdominal pain, and hypoactive bowel sounds point toward mesenteric ischemia rather than more common abdominal pathology?",
+      "final": "Diagnosis: acute SMA embolism. Key learning: (1) Cardinal sign: pain out of proportion to physical exam. Peritoneal signs are LATE \u2014 they appear when bowel necrosis and perforation have already occurred. Severe abdominal pain with a soft abdomen = mesenteric ischemia until proven otherwise. (2) Lactate is a late and non-specific marker \u2014 normal lactate does NOT rule out early mesenteric ischemia. Phosphate elevation reflects ischemic cell death and is also a late marker. (3) CTA arterial phase: filling defect in SMA (embolic) vs irregular vessel wall without discrete cutoff (thrombotic). Embolic occlusion usually at the first jejunal branch. (4) Time is bowel: bowel tolerates warm ischemia for approximately 6-12 hours before irreversible necrosis. From symptom onset to revascularization is the key metric. (5) Embolic vs thrombotic management: embolic \u2192 surgical embolectomy (fast, definitive). Thrombotic \u2192 endovascular stenting \u00b1 CDT. Non-occlusive (NOMI) \u2192 treat underlying low-flow state + papaverine infusion."
     }
   }
 };
