@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudette Jean-Pierre",
-  "patientHPI": "I had a dental cleaning about three weeks ago, and now my left knee where I had the replacement surgery two years ago is starting to feel warm and a bit achy, which is weird because it's been fine since the surgery.",
+    "patientHPI": "I had a dental cleaning about three weeks ago, and now my left knee where I had the replacement surgery two years ago is starting to feel warm and a bit achy, which is weird because it's been fine since the surgery.",
     "dob": "05/30/1958",
     "age": 66,
     "sex": "Female",
@@ -174,26 +174,86 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "37.0", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "218", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "5.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.0",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "218",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEPATIC / METABOLIC",
           "results": [
-            { "test": "ALT (SGPT)", "value": "24", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "ESR", "value": "18", "unit": "mm/hr", "range": "0-30", "flag": "" },
-            { "test": "CRP", "value": "0.4", "unit": "mg/dL", "range": "<0.5", "flag": "" }
+            {
+              "test": "ALT (SGPT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "ESR",
+              "value": "18",
+              "unit": "mm/hr",
+              "range": "0-30",
+              "flag": ""
+            },
+            {
+              "test": "CRP",
+              "value": "0.4",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.0", "unit": "%", "range": "<5.7 normal", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.0",
+              "unit": "%",
+              "range": "<5.7 normal",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -261,19 +321,46 @@ window.EMR_DATA = {
     "Family history significant for autoimmune disease"
   ],
   "socialHistory": [
-    ["Occupation", "Retired home health aide"],
-    ["Marital", "Widowed (husband deceased 2019); lives alone; son nearby"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 20 min daily; chair yoga"],
-    ["Housing", "Single-story duplex; lives alone"],
-    ["Safety", "Denies IPV; no firearms; medic alert bracelet (penicillin allergy)"],
-    ["Advance Directive", "Health care proxy: son Jean-Marc Jean-Pierre; Full code"]
+    [
+      "Occupation",
+      "Retired home health aide"
+    ],
+    [
+      "Marital",
+      "Widowed (husband deceased 2019); lives alone; son nearby"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 20 min daily; chair yoga"
+    ],
+    [
+      "Housing",
+      "Single-story duplex; lives alone"
+    ],
+    [
+      "Safety",
+      "Denies IPV; no firearms; medic alert bracelet (penicillin allergy)"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: son Jean-Marc Jean-Pierre; Full code"
+    ]
   ],
   "meta": {
     "caseId": "septic-arthritis-v2",
-    "diagnosis": "Prosthetic Joint Infection — Left Knee TKA (Staphylococcus aureus, Hematogenous Seeding Post-Dental Procedure in Immunosuppressed Host)",
+    "diagnosis": "Prosthetic Joint Infection (Left Knee TKA, S. aureus, Post-Dental Hematogenous)",
     "acuity": 2,
     "presentation": "Musculoskeletal Emergency",
     "category": "infectious"
@@ -282,73 +369,74 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Claudette Jean-Pierre is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did musculoskeletal emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did musculoskeletal emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I had a dental cleaning about three weeks ago, and now my left knee where I had .'",
-        "character": "'It's musculoskeletal emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Prosthetic Joint Infection \u2014 Left Knee TKA.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Methotrexate 15mg PO weekly (Mondays); Folic Acid 1mg daily (except Mondays); Hydroxychloroquine 200mg BID; Metformin 1000mg BID; Lisinopril 20mg daily; Alendronate 70mg weekly (Fridays).'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Mother: RA, HTN, deceased at 80  Father: T2DM, stroke, deceased at 72  Sister: Lupus (SLE), alive at 63",
-        "social": "Occupation: Retired home health aide  Marital: Widowed (husband deceased 2019); lives alone; son nearby  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I had a dental cleaning about three weeks ago, and now my left knee where I had .'",
+      "character": "'It's musculoskeletal emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Prosthetic Joint Infection — Left Knee TKA.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Methotrexate 15mg PO weekly (Mondays); Folic Acid 1mg daily (except Mondays); Hydroxychloroquine 200mg BID; Metformin 1000mg BID; Lisinopril 20mg daily; Alendronate 70mg weekly (Fridays).'",
+      "allergies": "'My allergies are Penicillin.'",
+      "family": "Mother: RA, HTN, deceased at 80  Father: T2DM, stroke, deceased at 72  Sister: Lupus (SLE), alive at 63",
+      "social": "Occupation: Retired home health aide  Marital: Widowed (husband deceased 2019); lives alone; son nearby  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and toxicity",
+      "Vital signs with temperature",
+      "Skin for rash, lesions, or signs of infection",
+      "Lymph node palpation",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Source-specific examination"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Prosthetic Joint Infection \u2014 Left Knee TKA. Document specifically what you observe."
+      "General appearance and toxicity": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Vital signs with temperature": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Lymph node palpation": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe.",
+      "Source-specific examination": "Clinical finding consistent with Prosthetic Joint Infection — Left Knee TKA. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Prosthetic Joint Infection \u2014 Left Knee TKA (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Prosthetic Joint Infection — Left Knee TKA (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Prosthetic Joint Infection \u2014 Left Knee TKA, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Prosthetic Joint Infection \u2014 Left Knee TKA, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Prosthetic Joint Infection \u2014 Left Knee TKA based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Prosthetic Joint Infection — Left Knee TKA, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Prosthetic Joint Infection — Left Knee TKA, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Prosthetic Joint Infection — Left Knee TKA based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Claudette Jean-Pierre's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Prosthetic Joint Infection \u2014 Left Knee TKA (Staphylococcus aureus, Hematogenous Seeding Post-Dental Procedure in Immunosuppressed Host). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Claudette Jean-Pierre's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Prosthetic Joint Infection — Left Knee TKA (Staphylococcus aureus, Hematogenous Seeding Post-Dental Procedure in Immunosuppressed Host). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: prosthetic joint infection (PJI) of left knee total knee arthroplasty, S. aureus, hematogenous seeding after dental procedure in an immunosuppressed host. Key learning: (1) Prosthetic joint infection is a devastating complication of joint replacement with lifetime risk of 1-2% for primary joint arthroplasty and higher for revisions, elderly, diabetes, obesity, RA, immunosuppression, and prior PJI. Classification by time of onset: (a) Early (<3 months post-op) — usually perioperative contamination, more virulent organisms (S. aureus, gram-negatives). (b) Delayed (3-24 months) — indolent, usually less virulent (coagulase-negative staphylococci, Cutibacterium acnes). (c) Late (>24 months) — hematogenous seeding from distant infection (dental procedures, skin infections, bacteremia). (2) Presentation and diagnostic criteria. Classic signs — persistent pain, joint warmth, swelling, erythema, fever — variable in delayed/late infections. MSIS (Musculoskeletal Infection Society) diagnostic criteria combine major criteria (sinus tract communicating with joint, two positive cultures with identical organism) and minor criteria (elevated ESR/CRP, elevated synovial WBC or PMN%, positive single culture, histologic inflammation). Workup: ESR, CRP, synovial fluid aspiration (WBC count, differential, Gram stain, culture including extended incubation for slow-growing organisms, synovial alpha-defensin if available — highly specific). Imaging: X-rays for hardware position, loosening, osteolysis; nuclear medicine (tagged WBC or FDG-PET) for complex cases; MRI limited by hardware artifact. (3) Microbiology and dental source. S. aureus is the most common PJI organism overall. Late hematogenous PJI after dental procedures has been debated — antibiotic prophylaxis before dental procedures is now recommended selectively (AAOS 2012 guidelines) for patients with recent joint replacement (<2 years), immunocompromised state, prior PJI, diabetes with A1c >7, and other risk factors — decision shared between orthopedic surgeon, patient, and dentist. Oral streptococci and anaerobes are typical after dental procedures; S. aureus hematogenous seeding comes from skin or other sources. (4) Management. Surgical strategy depends on duration of infection, hardware status, and patient factors: (a) Debridement, antibiotics, implant retention (DAIR) — for acute PJI (<3 months post-op or <3 weeks of symptoms hematogenously), stable implant, susceptible organisms. Higher recurrence than exchange. (b) Two-stage exchange arthroplasty — gold standard for most chronic PJI. Stage 1: remove hardware, debride, place antibiotic-loaded cement spacer; 6+ weeks of IV antibiotics. Stage 2: reimplant after infection cleared. (c) One-stage exchange — selected cases with favorable organism and soft tissue. (d) Arthrodesis or amputation for salvage of limb-threatening recurrent infections. Antibiotic therapy: organism-directed, prolonged (6 weeks IV typically, followed by oral suppression in some cases). Biofilm-active agents for staphylococci (rifampin combined with other agents; rifampin never used as monotherapy due to resistance). Multidisciplinary care: infectious disease, orthopedics, microbiology, primary care. (5) Classic pitfalls: (a) aspirating a joint and sending only for crystal analysis without culture — always send for Gram stain, culture, and WBC in any suspected joint infection. (b) Treating presumed PJI with antibiotics alone — biofilm on prosthetic material requires surgical source control; antibiotics alone rarely cure established PJI. (c) Giving prophylactic antibiotics for dental procedures reflexively — now selective based on risk factors. (d) Not obtaining sufficient tissue cultures at revision surgery — at least 3-5 intraoperative cultures with extended incubation improve yield for slow-growing organisms like Cutibacterium. (e) Forgetting to address modifiable risks before elective joint replacement: weight, A1c, smoking, dental disease — improves PJI risk long-term."
     }
-}
+  }
 };

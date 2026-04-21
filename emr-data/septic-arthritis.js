@@ -29,22 +29,50 @@ window.EMR_DATA = {
       }
     },
     "allergies": [
-      { "allergen": "NKDA", "reaction": "", "severity": "", "type": "" }
+      {
+        "allergen": "NKDA",
+        "reaction": "",
+        "severity": "",
+        "type": ""
+      }
     ],
     "immunizations": [
-      { "name": "Influenza", "date": "10/2025", "lot": "FL-25", "site": "Left Deltoid" }
+      {
+        "name": "Influenza",
+        "date": "10/2025",
+        "lot": "FL-25",
+        "site": "Left Deltoid"
+      }
     ],
     "familyHistory": [
       "Father: gout, hypertension",
       "Mother: Type 2 Diabetes"
     ],
     "socialHistory": [
-      ["Living", "Lives with spouse"],
-      ["Alcohol", "Heavy — 8-12 beers per day (major gout risk factor and immunosuppressant)"],
-      ["Smoking", "Current — 30 pack-year history"],
-      ["Work", "Retired — former construction worker"],
-      ["Recent procedure", "Right knee cortisone injection 10 days ago at pain clinic"],
-      ["Skin", "Psoriasis plaques bilateral elbows and knees — possible portal of entry for bacteria"]
+      [
+        "Living",
+        "Lives with spouse"
+      ],
+      [
+        "Alcohol",
+        "Heavy — 8-12 beers per day (major gout risk factor and immunosuppressant)"
+      ],
+      [
+        "Smoking",
+        "Current — 30 pack-year history"
+      ],
+      [
+        "Work",
+        "Retired — former construction worker"
+      ],
+      [
+        "Recent procedure",
+        "Right knee cortisone injection 10 days ago at pain clinic"
+      ],
+      [
+        "Skin",
+        "Psoriasis plaques bilateral elbows and knees — possible portal of entry for bacteria"
+      ]
     ]
   },
   "encounters": {
@@ -54,20 +82,91 @@ window.EMR_DATA = {
         "diagnosis": "Septic Arthritis — Right Knee (Staphylococcus aureus)"
       },
       "problems": [
-        { "id": "prob-1", "description": "Septic arthritis right knee — WBC joint fluid 92,000 with 94% PMNs, GPC clusters on Gram stain. Risk factors: cortisone injection 10 days ago, DM2, alcohol use, psoriatic skin lesions.", "status": "Active", "onset": "Acute", "icd10": "M00.861" },
-        { "id": "prob-2", "description": "Fever 38.8°C with systemic inflammatory response — may progress to sepsis", "status": "Active", "onset": "Acute", "icd10": "R50.9" },
-        { "id": "prob-3", "description": "Gout — known h/o, taking allopurinol. Crystal arthropathy is in differential but joint fluid Gram stain positive — BOTH can coexist", "status": "Chronic", "onset": "Chronic", "icd10": "M10.062" },
-        { "id": "prob-4", "description": "Type 2 Diabetes — HbA1c 9.2% (poorly controlled) — immunosuppression predisposes to infection", "status": "Chronic", "onset": "Chronic", "icd10": "E11.9" },
-        { "id": "prob-5", "description": "Psoriasis — plaques bilateral elbows/knees — potential bacterial portal of entry", "status": "Chronic", "onset": "Chronic", "icd10": "L40.0" }
+        {
+          "id": "prob-1",
+          "description": "Septic arthritis right knee — WBC joint fluid 92,000 with 94% PMNs, GPC clusters on Gram stain. Risk factors: cortisone injection 10 days ago, DM2, alcohol use, psoriatic skin lesions.",
+          "status": "Active",
+          "onset": "Acute",
+          "icd10": "M00.861"
+        },
+        {
+          "id": "prob-2",
+          "description": "Fever 38.8°C with systemic inflammatory response — may progress to sepsis",
+          "status": "Active",
+          "onset": "Acute",
+          "icd10": "R50.9"
+        },
+        {
+          "id": "prob-3",
+          "description": "Gout — known h/o, taking allopurinol. Crystal arthropathy is in differential but joint fluid Gram stain positive — BOTH can coexist",
+          "status": "Chronic",
+          "onset": "Chronic",
+          "icd10": "M10.062"
+        },
+        {
+          "id": "prob-4",
+          "description": "Type 2 Diabetes — HbA1c 9.2% (poorly controlled) — immunosuppression predisposes to infection",
+          "status": "Chronic",
+          "onset": "Chronic",
+          "icd10": "E11.9"
+        },
+        {
+          "id": "prob-5",
+          "description": "Psoriasis — plaques bilateral elbows/knees — potential bacterial portal of entry",
+          "status": "Chronic",
+          "onset": "Chronic",
+          "icd10": "L40.0"
+        }
       ],
       "medications": [
-        { "id": "med-1", "name": "Allopurinol", "dose": "300mg", "route": "PO", "frequency": "Daily", "status": "Active", "prescriber": "Dr. Maria Gonzalez, MD" },
-        { "id": "med-2", "name": "Metformin", "dose": "1000mg", "route": "PO", "frequency": "BID", "status": "Active", "prescriber": "Dr. Maria Gonzalez, MD" },
-        { "id": "med-3", "name": "Lisinopril", "dose": "10mg", "route": "PO", "frequency": "Daily", "status": "Active", "prescriber": "Dr. Maria Gonzalez, MD" },
-        { "id": "med-4", "name": "Triamcinolone acetonide", "dose": "40mg", "route": "Intra-articular", "frequency": "Given 10 days ago — one-time injection", "status": "Completed — RISK FACTOR for septic arthritis", "prescriber": "Pain Clinic" }
+        {
+          "id": "med-1",
+          "name": "Allopurinol",
+          "dose": "300mg",
+          "route": "PO",
+          "frequency": "Daily",
+          "status": "Active",
+          "prescriber": "Dr. Maria Gonzalez, MD"
+        },
+        {
+          "id": "med-2",
+          "name": "Metformin",
+          "dose": "1000mg",
+          "route": "PO",
+          "frequency": "BID",
+          "status": "Active",
+          "prescriber": "Dr. Maria Gonzalez, MD"
+        },
+        {
+          "id": "med-3",
+          "name": "Lisinopril",
+          "dose": "10mg",
+          "route": "PO",
+          "frequency": "Daily",
+          "status": "Active",
+          "prescriber": "Dr. Maria Gonzalez, MD"
+        },
+        {
+          "id": "med-4",
+          "name": "Triamcinolone acetonide",
+          "dose": "40mg",
+          "route": "Intra-articular",
+          "frequency": "Given 10 days ago — one-time injection",
+          "status": "Completed — RISK FACTOR for septic arthritis",
+          "prescriber": "Pain Clinic"
+        }
       ],
       "vitals": [
-        { "date": "03/15/2026", "time": "13:00", "bp": "148/92", "hr": "108", "rr": "20", "temp": "38.8°C", "spo2": "97%", "pain": "9/10" }
+        {
+          "date": "03/15/2026",
+          "time": "13:00",
+          "bp": "148/92",
+          "hr": "108",
+          "rr": "20",
+          "temp": "38.8°C",
+          "spo2": "97%",
+          "pain": "9/10"
+        }
       ],
       "visits": [
         {
@@ -96,39 +195,147 @@ window.EMR_DATA = {
             {
               "name": "CBC WITH DIFFERENTIAL",
               "results": [
-                { "test": "WBC", "value": "22.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-                { "test": "Neutrophils", "value": "91", "unit": "%", "range": "45-75", "flag": "H" },
-                { "test": "Bands", "value": "8", "unit": "%", "range": "0-6", "flag": "H" },
-                { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" }
+                {
+                  "test": "WBC",
+                  "value": "22.4",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": "H"
+                },
+                {
+                  "test": "Neutrophils",
+                  "value": "91",
+                  "unit": "%",
+                  "range": "45-75",
+                  "flag": "H"
+                },
+                {
+                  "test": "Bands",
+                  "value": "8",
+                  "unit": "%",
+                  "range": "0-6",
+                  "flag": "H"
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "12.8",
+                  "unit": "g/dL",
+                  "range": "13.5-17.5",
+                  "flag": "L"
+                }
               ]
             },
             {
               "name": "INFLAMMATORY MARKERS",
               "results": [
-                { "test": "CRP", "value": "218", "unit": "mg/L", "range": "<10", "flag": "H" },
-                { "test": "ESR", "value": "88", "unit": "mm/hr", "range": "<20", "flag": "H" },
-                { "test": "Procalcitonin", "value": "2.1", "unit": "ng/mL", "range": "<0.25", "flag": "H" },
-                { "test": "Uric Acid", "value": "9.8", "unit": "mg/dL", "range": "3.5-7.2", "flag": "H" }
+                {
+                  "test": "CRP",
+                  "value": "218",
+                  "unit": "mg/L",
+                  "range": "<10",
+                  "flag": "H"
+                },
+                {
+                  "test": "ESR",
+                  "value": "88",
+                  "unit": "mm/hr",
+                  "range": "<20",
+                  "flag": "H"
+                },
+                {
+                  "test": "Procalcitonin",
+                  "value": "2.1",
+                  "unit": "ng/mL",
+                  "range": "<0.25",
+                  "flag": "H"
+                },
+                {
+                  "test": "Uric Acid",
+                  "value": "9.8",
+                  "unit": "mg/dL",
+                  "range": "3.5-7.2",
+                  "flag": "H"
+                }
               ]
             },
             {
               "name": "SYNOVIAL FLUID ANALYSIS — RIGHT KNEE",
               "results": [
-                { "test": "Appearance", "value": "Turbid, yellow", "unit": "", "range": "Clear, straw", "flag": "H" },
-                { "test": "WBC (synovial)", "value": "92,000", "unit": "cells/µL", "range": "<200 normal; >50,000 → septic until proven otherwise", "flag": "H" },
-                { "test": "PMN differential", "value": "94%", "unit": "", "range": "<25%", "flag": "H" },
-                { "test": "Gram Stain", "value": "Gram-positive cocci in clusters — consistent with Staphylococcus", "unit": "", "range": "No organisms", "flag": "H" },
-                { "test": "Culture", "value": "Pending 24-48h", "unit": "", "range": "No growth", "flag": "" },
-                { "test": "Monosodium Urate Crystals", "value": "Present — STRONGLY NEGATIVE birefringent needles", "unit": "", "range": "Absent", "flag": "H" },
-                { "test": "Crystal Interpretation", "value": "Gout crystals PRESENT but does NOT exclude septic arthritis — both can coexist", "unit": "", "range": "", "flag": "H" }
+                {
+                  "test": "Appearance",
+                  "value": "Turbid, yellow",
+                  "unit": "",
+                  "range": "Clear, straw",
+                  "flag": "H"
+                },
+                {
+                  "test": "WBC (synovial)",
+                  "value": "92,000",
+                  "unit": "cells/µL",
+                  "range": "<200 normal; >50,000 → septic until proven otherwise",
+                  "flag": "H"
+                },
+                {
+                  "test": "PMN differential",
+                  "value": "94%",
+                  "unit": "",
+                  "range": "<25%",
+                  "flag": "H"
+                },
+                {
+                  "test": "Gram Stain",
+                  "value": "Gram-positive cocci in clusters — consistent with Staphylococcus",
+                  "unit": "",
+                  "range": "No organisms",
+                  "flag": "H"
+                },
+                {
+                  "test": "Culture",
+                  "value": "Pending 24-48h",
+                  "unit": "",
+                  "range": "No growth",
+                  "flag": ""
+                },
+                {
+                  "test": "Monosodium Urate Crystals",
+                  "value": "Present — STRONGLY NEGATIVE birefringent needles",
+                  "unit": "",
+                  "range": "Absent",
+                  "flag": "H"
+                },
+                {
+                  "test": "Crystal Interpretation",
+                  "value": "Gout crystals PRESENT but does NOT exclude septic arthritis — both can coexist",
+                  "unit": "",
+                  "range": "",
+                  "flag": "H"
+                }
               ]
             },
             {
               "name": "METABOLIC",
               "results": [
-                { "test": "Glucose", "value": "224", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-                { "test": "HbA1c", "value": "9.2", "unit": "%", "range": "<5.7", "flag": "H" },
-                { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" }
+                {
+                  "test": "Glucose",
+                  "value": "224",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": "H"
+                },
+                {
+                  "test": "HbA1c",
+                  "value": "9.2",
+                  "unit": "%",
+                  "range": "<5.7",
+                  "flag": "H"
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "1.1",
+                  "unit": "mg/dL",
+                  "range": "0.7-1.3",
+                  "flag": ""
+                }
               ]
             }
           ]
@@ -153,17 +360,68 @@ window.EMR_DATA = {
         "diagnosis": "Septic Arthritis Right Knee — S. aureus (MSSA) — Post-Arthroscopic Washout"
       },
       "problems": [
-        { "id": "prob-1", "description": "Septic arthritis right knee — S. aureus (MSSA) confirmed on culture. Post-arthroscopic washout yesterday. Transitioning to nafcillin (MSSA confirmed — vancomycin inferior to beta-lactam for MSSA).", "status": "Active", "onset": "Acute", "icd10": "M00.861" },
-        { "id": "prob-2", "description": "Concurrent gout flare — crystals confirmed on synovial fluid. Both conditions present. Managing gout AFTER infection controlled.", "status": "Active", "onset": "Acute", "icd10": "M10.062" },
-        { "id": "prob-3", "description": "DM2 — hyperglycemia worsening with infection. Insulin sliding scale started.", "status": "Active", "onset": "Chronic", "icd10": "E11.9" }
+        {
+          "id": "prob-1",
+          "description": "Septic arthritis right knee — S. aureus (MSSA) confirmed on culture. Post-arthroscopic washout yesterday. Transitioning to nafcillin (MSSA confirmed — vancomycin inferior to beta-lactam for MSSA).",
+          "status": "Active",
+          "onset": "Acute",
+          "icd10": "M00.861"
+        },
+        {
+          "id": "prob-2",
+          "description": "Concurrent gout flare — crystals confirmed on synovial fluid. Both conditions present. Managing gout AFTER infection controlled.",
+          "status": "Active",
+          "onset": "Acute",
+          "icd10": "M10.062"
+        },
+        {
+          "id": "prob-3",
+          "description": "DM2 — hyperglycemia worsening with infection. Insulin sliding scale started.",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": "E11.9"
+        }
       ],
       "medications": [
-        { "id": "med-1", "name": "Nafcillin", "dose": "2g IV", "route": "IV", "frequency": "Q4H — MSSA confirmed, superior to vancomycin", "status": "Active — switched from vancomycin", "prescriber": "Dr. ID Attending" },
-        { "id": "med-2", "name": "Insulin Lispro", "dose": "Per sliding scale", "route": "SQ", "frequency": "With meals + Q6H correction", "status": "Active", "prescriber": "Dr. Medicine Attending" },
-        { "id": "med-3", "name": "Colchicine", "dose": "0.6mg", "route": "PO", "frequency": "BID — started after infection controlled, for gout component", "status": "Active — started day 2", "prescriber": "Dr. Medicine Attending" }
+        {
+          "id": "med-1",
+          "name": "Nafcillin",
+          "dose": "2g IV",
+          "route": "IV",
+          "frequency": "Q4H — MSSA confirmed, superior to vancomycin",
+          "status": "Active — switched from vancomycin",
+          "prescriber": "Dr. ID Attending"
+        },
+        {
+          "id": "med-2",
+          "name": "Insulin Lispro",
+          "dose": "Per sliding scale",
+          "route": "SQ",
+          "frequency": "With meals + Q6H correction",
+          "status": "Active",
+          "prescriber": "Dr. Medicine Attending"
+        },
+        {
+          "id": "med-3",
+          "name": "Colchicine",
+          "dose": "0.6mg",
+          "route": "PO",
+          "frequency": "BID — started after infection controlled, for gout component",
+          "status": "Active — started day 2",
+          "prescriber": "Dr. Medicine Attending"
+        }
       ],
       "vitals": [
-        { "date": "03/16/2026", "time": "06:00", "bp": "138/86", "hr": "88", "rr": "16", "temp": "37.6°C", "spo2": "98%", "pain": "5/10" }
+        {
+          "date": "03/16/2026",
+          "time": "06:00",
+          "bp": "138/86",
+          "hr": "88",
+          "rr": "16",
+          "temp": "37.6°C",
+          "spo2": "98%",
+          "pain": "5/10"
+        }
       ],
       "visits": [
         {
@@ -192,22 +450,58 @@ window.EMR_DATA = {
             {
               "name": "CBC WITH DIFFERENTIAL — TREND",
               "results": [
-                { "test": "WBC", "value": "18.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-                { "test": "Neutrophils", "value": "82", "unit": "%", "range": "45-75", "flag": "H" }
+                {
+                  "test": "WBC",
+                  "value": "18.2",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": "H"
+                },
+                {
+                  "test": "Neutrophils",
+                  "value": "82",
+                  "unit": "%",
+                  "range": "45-75",
+                  "flag": "H"
+                }
               ]
             },
             {
               "name": "SYNOVIAL FLUID CULTURE — FINAL",
               "results": [
-                { "test": "Culture Result", "value": "Staphylococcus aureus — MSSA (methicillin-susceptible)", "unit": "", "range": "No growth", "flag": "H" },
-                { "test": "Susceptibilities", "value": "Susceptible: nafcillin, clindamycin, TMP-SMX, doxycycline. Resistant: None.", "unit": "", "range": "", "flag": "" }
+                {
+                  "test": "Culture Result",
+                  "value": "Staphylococcus aureus — MSSA (methicillin-susceptible)",
+                  "unit": "",
+                  "range": "No growth",
+                  "flag": "H"
+                },
+                {
+                  "test": "Susceptibilities",
+                  "value": "Susceptible: nafcillin, clindamycin, TMP-SMX, doxycycline. Resistant: None.",
+                  "unit": "",
+                  "range": "",
+                  "flag": ""
+                }
               ]
             },
             {
               "name": "INFLAMMATORY MARKERS — TREND",
               "results": [
-                { "test": "CRP", "value": "148", "unit": "mg/L", "range": "<10", "flag": "H" },
-                { "test": "ESR", "value": "72", "unit": "mm/hr", "range": "<20", "flag": "H" }
+                {
+                  "test": "CRP",
+                  "value": "148",
+                  "unit": "mg/L",
+                  "range": "<10",
+                  "flag": "H"
+                },
+                {
+                  "test": "ESR",
+                  "value": "72",
+                  "unit": "mm/hr",
+                  "range": "<20",
+                  "flag": "H"
+                }
               ]
             }
           ]
@@ -226,7 +520,13 @@ window.EMR_DATA = {
       "doi": "",
       "url": "https://www.ncbi.nlm.nih.gov/books/NBK470202/",
       "openAccess": true,
-      "validates": ["Diagnostic criteria", "Synovial fluid interpretation (WBC >50,000)", "Coexistence with crystal arthropathy", "Antibiotic selection (nafcillin for MSSA)", "Surgical washout indications"]
+      "validates": [
+        "Diagnostic criteria",
+        "Synovial fluid interpretation (WBC >50,000)",
+        "Coexistence with crystal arthropathy",
+        "Antibiotic selection (nafcillin for MSSA)",
+        "Surgical washout indications"
+      ]
     },
     {
       "id": "StatPearls-Gout",
@@ -237,7 +537,20 @@ window.EMR_DATA = {
       "doi": "",
       "url": "https://www.ncbi.nlm.nih.gov/books/NBK546606/",
       "openAccess": true,
-      "validates": ["Gout vs septic arthritis differentiation", "Crystal arthropathy coexistence with infection", "Management of gout flare during active infection"]
+      "validates": [
+        "Gout vs septic arthritis differentiation",
+        "Crystal arthropathy coexistence with infection",
+        "Management of gout flare during active infection"
+      ]
     }
-  ]
+  ],
+  "meta": {
+    "diagnosis": "Septic Arthritis",
+    "caseId": "septic-arthritis"
+  },
+  "guided": {
+    "coachPrompts": {
+      "final": "Diagnosis: native joint septic arthritis — a musculoskeletal emergency. Key learning: (1) Septic arthritis is infection within the joint space that destroys cartilage rapidly — irreversible joint damage begins within hours. Mortality is 10-15%, and permanent functional disability occurs in 30-50% of survivors. Risk factors: age >80, prior joint disease (RA, gout, OA), diabetes, immunosuppression, IV drug use, recent joint injection or surgery, skin infection, bacteremia, sickle cell disease (Salmonella), and prosthetic joint (separate entity — see PJI case). (2) Microbiology: Staphylococcus aureus (40-50%, most common in all adult groups), streptococci, Neisseria gonorrhoeae (young sexually active adults — classic triad of migratory polyarthritis, tenosynovitis, and pustular skin lesions), gram-negatives (elderly, immunocompromised, IVDU), and less commonly fungi, mycobacteria (tuberculous arthritis — chronic monoarthritis), and Lyme (large joint, often knee, subacute). (3) Presentation: acute monoarthritis (typical) with pain, swelling, warmth, erythema, and often inability to bear weight or move the joint. Knee is the most common joint (>50%), followed by hip, shoulder, ankle, and wrist. Fever in only 50-60% — absence does not rule out septic arthritis. Polyarticular septic arthritis in 10-20%, especially in rheumatoid patients (may be mistaken for RA flare). Hip infection in infants and elderly can present subtly — limp, refusal to bear weight, or isolated irritability. (4) Diagnosis — arthrocentesis is mandatory and URGENT. Synovial fluid analysis: (a) WBC >50,000/uL with PMN predominance (>75%) strongly suggests infection; WBC 2,000-50,000 inflammatory/crystal; <2,000 noninflammatory. (b) Gram stain — positive in ~50% with S. aureus, lower with other organisms. (c) Culture — positive in 70-90%, may be lower with prior antibiotics. (d) Crystal analysis — gout and pseudogout can coexist with infection, so identification of crystals does not exclude sepsis. Blood cultures positive in 25-50% of cases. Imaging: X-rays baseline (usually normal early, may show effusion); ultrasound identifies effusion and guides aspiration; MRI for deeper joints (hip) and osteomyelitis assessment. (5) Management. (a) Empiric IV antibiotics AFTER aspiration and cultures: vancomycin (MRSA coverage) PLUS anti-pseudomonal beta-lactam (ceftriaxone for most adults; cefepime or piperacillin-tazobactam for elderly/immunocompromised/gram-negative risk). Add ceftriaxone for suspected gonococcal arthritis in young adults (also treats syphilis, often co-infection). Tailor to culture results; narrow as appropriate. Duration: typically 4-6 weeks (oral transition after 2 weeks of IV if improving and susceptible organism). (b) URGENT JOINT DRAINAGE is essential: - Repeated large-volume arthrocenteses (daily or more) for easily accessible joints (knee), ensuring complete aspiration. - Arthroscopic washout for most knees, shoulders. - Open surgical drainage for hip (surgical emergency — cannot be adequately drained by aspiration), poor response to aspiration, or loculated fluid. Orthopedic consultation immediately. (c) Supportive: analgesia, joint rest initially then early mobilization to prevent stiffness, physical therapy once infection controlled. Classic pitfalls: (a) giving antibiotics before joint aspiration — clouds cultures; aspirate first, then treat empirically. (b) Attributing joint pain to flare of known RA, gout, or OA without considering superimposed infection — arthrocenteze any new severe presentation. (c) Missing disseminated gonococcal infection — young adult with migratory polyarthritis, tenosynovitis, and pustular skin lesions; treat broadly for GC plus chlamydia. (d) Under-draining — antibiotics alone rarely adequate; source control with drainage is as important. (e) Not addressing the seeding source: bacteremia from line, endocarditis, skin infection."
+    }
+  }
 };

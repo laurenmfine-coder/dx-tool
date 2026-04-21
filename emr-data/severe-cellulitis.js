@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Darnell Washington",
-  "patientHPI": "I've been doing really well with my medications and keeping up with all my appointments, but yesterday I noticed this red, swollen area on my leg that's getting bigger and more painful. It feels hot to the touch and I'm starting to feel feverish and tired.",
+    "patientHPI": "I've been doing really well with my medications and keeping up with all my appointments, but yesterday I noticed this red, swollen area on my leg that's getting bigger and more painful. It feels hot to the touch and I'm starting to feel feverish and tired.",
     "dob": "11/08/1985",
     "age": 40,
     "sex": "Male",
@@ -166,36 +166,126 @@ window.EMR_DATA = {
         {
           "name": "HIV MONITORING",
           "results": [
-            { "test": "CD4 Count", "value": "620", "unit": "cells/uL", "range": "500-1500", "flag": "" },
-            { "test": "CD4 %", "value": "34", "unit": "%", "range": "30-60", "flag": "" },
-            { "test": "HIV-1 RNA (Viral Load)", "value": "<20", "unit": "copies/mL", "range": "<20", "flag": "" }
+            {
+              "test": "CD4 Count",
+              "value": "620",
+              "unit": "cells/uL",
+              "range": "500-1500",
+              "flag": ""
+            },
+            {
+              "test": "CD4 %",
+              "value": "34",
+              "unit": "%",
+              "range": "30-60",
+              "flag": ""
+            },
+            {
+              "test": "HIV-1 RNA (Viral Load)",
+              "value": "<20",
+              "unit": "copies/mL",
+              "range": "<20",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEPATITIS B PANEL",
           "results": [
-            { "test": "HBV DNA", "value": "<10", "unit": "IU/mL", "range": "<10", "flag": "" },
-            { "test": "HBeAg", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Anti-HBe", "value": "Positive", "unit": "", "range": "", "flag": "" }
+            {
+              "test": "HBV DNA",
+              "value": "<10",
+              "unit": "IU/mL",
+              "range": "<10",
+              "flag": ""
+            },
+            {
+              "test": "HBeAg",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Anti-HBe",
+              "value": "Positive",
+              "unit": "",
+              "range": "",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "90", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "ALT", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "90",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "ALT",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.6", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "43.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "218", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.6",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "43.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "218",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -203,12 +293,48 @@ window.EMR_DATA = {
   ],
   "imaging": [],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-8334", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-1678", "mfr": "Moderna" },
-    { "vaccine": "Tdap", "date": "09/2021", "site": "Left deltoid IM", "lot": "TD21-580", "mfr": "GSK" },
-    { "vaccine": "Hepatitis A (Series Complete)", "date": "2016", "site": "Right deltoid IM", "lot": "HA16-220", "mfr": "Merck" },
-    { "vaccine": "Pneumovax 23", "date": "06/2023", "site": "Left deltoid IM", "lot": "PV23-504", "mfr": "Merck" },
-    { "vaccine": "Prevnar 20", "date": "03/2023", "site": "Left deltoid IM", "lot": "PV20-484", "mfr": "Pfizer" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-8334",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-1678",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "09/2021",
+      "site": "Left deltoid IM",
+      "lot": "TD21-580",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Hepatitis A (Series Complete)",
+      "date": "2016",
+      "site": "Right deltoid IM",
+      "lot": "HA16-220",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Pneumovax 23",
+      "date": "06/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV23-504",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "03/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV20-484",
+      "mfr": "Pfizer"
+    }
   ],
   "familyHistory": [
     "Mother: T2DM, HTN, alive at 62",
@@ -217,19 +343,46 @@ window.EMR_DATA = {
     "Brother: Sickle cell trait, alive at 38"
   ],
   "socialHistory": [
-    ["Occupation", "Landscape maintenance worker — outdoor labor; frequent minor cuts and scrapes"],
-    ["Marital", "Single; in committed relationship"],
-    ["Tobacco", "Former — 5 pack-years; quit 2018"],
-    ["Alcohol", "Social — 2-3 drinks on weekends"],
-    ["Drugs", "Denies current use; remote marijuana use"],
-    ["Exercise", "Physical job provides exercise; plays basketball recreationally"],
-    ["Housing", "Apartment; lives alone; girlfriend visits frequently"],
-    ["Safety", "Denies IPV; seatbelt; no firearms; wears work gloves inconsistently"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Landscape maintenance worker — outdoor labor; frequent minor cuts and scrapes"
+    ],
+    [
+      "Marital",
+      "Single; in committed relationship"
+    ],
+    [
+      "Tobacco",
+      "Former — 5 pack-years; quit 2018"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies current use; remote marijuana use"
+    ],
+    [
+      "Exercise",
+      "Physical job provides exercise; plays basketball recreationally"
+    ],
+    [
+      "Housing",
+      "Apartment; lives alone; girlfriend visits frequently"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms; wears work gloves inconsistently"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "severe-cellulitis",
-    "diagnosis": "Severe Cellulitis with Abscess Formation (Right Lower Extremity — Suspected MRSA, Post-Occupational Skin Trauma in HIV-Positive Patient with Prior MRSA SSTI History)",
+    "diagnosis": "Severe Cellulitis with Abscess — Suspected MRSA in HIV-Positive Patient",
     "acuity": 3,
     "presentation": "Skin / Soft Tissue Emergency",
     "category": "infectious"
@@ -238,73 +391,74 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Darnell Washington appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did skin / soft tissue emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did skin / soft tissue emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been doing really well with my medications and keeping up with all my appoi.'",
-        "character": "'It's skin / soft tissue emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Severe Cellulitis with Abscess Formation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Bictegravir/Emtricitabine/Tenofovir Alafenamide (Biktarvy) 1 tab daily; Lisinopril 10mg daily; Multivitamin daily.'",
-        "allergies": "'My allergies are Abacavir.'",
-        "family": "Mother: T2DM, HTN, alive at 62  Father: HTN, prostate cancer at 60, alive at 66  Sister: Healthy, alive at 42",
-        "social": "Occupation: Landscape maintenance worker \u2014 outdoor labor; frequent minor cuts and scrapes  Marital: Single; in committed relationship  Tobacco: Former \u2014 5 pack-years; quit 2018  Alcohol: Social \u2014 2-3 drinks on weekends  Drugs: Denies current use; remote marijuana use"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been doing really well with my medications and keeping up with all my appoi.'",
+      "character": "'It's skin / soft tissue emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Severe Cellulitis with Abscess Formation.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Bictegravir/Emtricitabine/Tenofovir Alafenamide (Biktarvy) 1 tab daily; Lisinopril 10mg daily; Multivitamin daily.'",
+      "allergies": "'My allergies are Abacavir.'",
+      "family": "Mother: T2DM, HTN, alive at 62  Father: HTN, prostate cancer at 60, alive at 66  Sister: Healthy, alive at 42",
+      "social": "Occupation: Landscape maintenance worker — outdoor labor; frequent minor cuts and scrapes  Marital: Single; in committed relationship  Tobacco: Former — 5 pack-years; quit 2018  Alcohol: Social — 2-3 drinks on weekends  Drugs: Denies current use; remote marijuana use"
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and toxicity",
+      "Vital signs with temperature",
+      "Skin for rash, lesions, or signs of infection",
+      "Lymph node palpation",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Source-specific examination"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe."
+      "General appearance and toxicity": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Vital signs with temperature": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Lymph node palpation": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe.",
+      "Source-specific examination": "Clinical finding consistent with Severe Cellulitis with Abscess Formation. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Severe Cellulitis with Abscess Formation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Severe Cellulitis with Abscess Formation (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Cellulitis with Abscess Formation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Severe Cellulitis with Abscess Formation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Severe Cellulitis with Abscess Formation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Cellulitis with Abscess Formation, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Severe Cellulitis with Abscess Formation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Severe Cellulitis with Abscess Formation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Darnell Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Severe Cellulitis with Abscess Formation (Right Lower Extremity \u2014 Suspected MRSA, Post-Occupational Skin Trauma in HIV-Positive Patient with Prior MRSA SSTI History). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Darnell Washington's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Severe Cellulitis with Abscess Formation (Right Lower Extremity — Suspected MRSA, Post-Occupational Skin Trauma in HIV-Positive Patient with Prior MRSA SSTI History). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: severe cellulitis with abscess formation of the right lower extremity, suspected MRSA, in an HIV-positive patient with prior MRSA history, post-occupational skin trauma. Key learning: (1) Skin and soft tissue infections (SSTIs) span a severity spectrum — from uncomplicated cellulitis to necrotizing fasciitis. IDSA classification: (a) purulent SSTI (abscess, furuncle, carbuncle) — usually staphylococcal; (b) non-purulent SSTI (cellulitis, erysipelas, deeper infections) — usually streptococcal; (c) mild, moderate, severe based on systemic features. Severe SSTI: systemic inflammatory response (fever, tachycardia, hypotension, leukocytosis), failed outpatient therapy, immunocompromised host, or features of necrotizing infection. (2) Microbiology. Cellulitis (non-purulent): beta-hemolytic streptococci (groups A, B, C, G) dominant; S. aureus (MSSA and MRSA) next. Abscess/purulent: S. aureus predominates — community-acquired MRSA (CA-MRSA) now accounts for 50-70% of purulent SSTIs in many US regions. Special scenarios: water exposure (Vibrio vulnificus with cirrhosis/immunosuppression, Aeromonas with freshwater, Mycobacterium marinum), animal bites (Pasteurella multocida from cats/dogs, Capnocytophaga), human bites (Eikenella, oral anaerobes), diabetics (polymicrobial including gram-negatives and anaerobes). (3) Workup. Mild SSTI: clinical diagnosis, no labs typically. Moderate-severe: CBC, BMP, CRP, lactate, blood cultures (positive in only 5-10% of cellulitis — higher in severe/bacteremic). Imaging: ultrasound (highly useful for differentiating cellulitis from abscess at the bedside), CT for deep tissue involvement or suspected necrotizing infection. Wound/abscess cultures when fluid can be obtained — drives targeted therapy. Specific considerations in HIV: CD4 count (determines risk of opportunistic pathogens), viral load (adherence, resistance), and review of ART regimen and drug interactions with antibiotics. (4) Management. Abscess (purulent): INCISION AND DRAINAGE is the primary treatment; antibiotics are adjunctive. For most small uncomplicated abscesses in immunocompetent patients, I&D alone is adequate. Antibiotics for I&D + abscess indications: fever, systemic symptoms, immunocompromise, large size (>2 cm), multiple abscesses, comorbidities, poor wound care access, or failed prior treatment. Empiric antibiotic selection: (a) Mild purulent SSTI (outpatient): TMP-SMX OR doxycycline (both cover MRSA); clindamycin (community resistance rising — check local antibiogram). (b) Non-purulent cellulitis (outpatient): cephalexin, dicloxacillin, or amoxicillin-clavulanate (cover streptococci and MSSA). (c) Moderate (inpatient): IV cefazolin, oxacillin, or ceftriaxone. Add vancomycin for MRSA risk. (d) Severe or immunocompromised: IV vancomycin PLUS broad-spectrum gram-negative/anaerobic coverage (piperacillin-tazobactam, cefepime). Adjust based on cultures and clinical response. Duration: uncomplicated 5-7 days; prolonged for deeper/complicated/severe, guided by clinical response. (5) Special considerations in HIV. Increased risk of bacterial SSTI, recurrence, and less common pathogens (especially in advanced HIV/AIDS with CD4 <200). Consider bartonella (bacillary angiomatosis — purple papules, often in advanced HIV), mycobacterial (including atypical), and fungal (histoplasmosis, cryptococcus) infections in atypical or refractory cases. Optimize ART — well-controlled HIV has near-normal infection risk profile. Decolonization strategies for recurrent MRSA: chlorhexidine baths (daily for 5-7 days), nasal mupirocin, environmental cleaning, household member screening. Classic pitfalls: (a) missing necrotizing fasciitis in severe SSTI — pain out of proportion, systemic toxicity, crepitus, bullae, skin necrosis — emergent surgical consult. (b) Treating abscess with antibiotics alone without I&D. (c) Not covering MRSA empirically in purulent SSTI or when risk factors present. (d) Missing other skin disease mimicking cellulitis: DVT, stasis dermatitis (bilateral, chronic), lipodermatosclerosis, erythema migrans, gout, contact dermatitis, eosinophilic cellulitis — clinical features and response to therapy clarify. (e) Forgetting wound care and tetanus in occupational injuries."
     }
-}
+  }
 };

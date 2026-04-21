@@ -254,48 +254,210 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "218", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "38", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "2.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "36", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "5.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "19", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "8.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "34", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "218",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "38",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "36",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "19",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "8.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "34",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "9.8", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "232", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "9.8",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "232",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "14.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "84", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Bands", "value": "8", "unit": "%", "range": "0-5", "flag": "H" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "37.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "184", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "14.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "84",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "8",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "184",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Cloudy, dark yellow", "unit": "", "range": "Clear, yellow", "flag": "H" },
-            { "test": "Specific Gravity", "value": "1.028", "unit": "", "range": "1.005-1.030", "flag": "" },
-            { "test": "pH", "value": "6.0", "unit": "", "range": "4.5-8.0", "flag": "" },
-            { "test": "Leukocyte Esterase", "value": "3+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Nitrite", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "WBC", "value": ">50", "unit": "/HPF", "range": "0-5", "flag": "H" },
-            { "test": "Bacteria", "value": "Many", "unit": "", "range": "None", "flag": "H" },
-            { "test": "Glucose (urine)", "value": "3+", "unit": "", "range": "Negative", "flag": "H" }
+            {
+              "test": "Color",
+              "value": "Cloudy, dark yellow",
+              "unit": "",
+              "range": "Clear, yellow",
+              "flag": "H"
+            },
+            {
+              "test": "Specific Gravity",
+              "value": "1.028",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            },
+            {
+              "test": "pH",
+              "value": "6.0",
+              "unit": "",
+              "range": "4.5-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Leukocyte Esterase",
+              "value": "3+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Nitrite",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "WBC",
+              "value": ">50",
+              "unit": "/HPF",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Bacteria",
+              "value": "Many",
+              "unit": "",
+              "range": "None",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose (urine)",
+              "value": "3+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -370,19 +532,46 @@ window.EMR_DATA = {
     "Sister: Hypertension, alive at 66"
   ],
   "socialHistory": [
-    ["Occupation", "Retired bus driver"],
-    ["Marital", "Married — 42 years"],
-    ["Tobacco", "Former smoker — quit 2010; 20 pack-year history"],
-    ["Alcohol", "Rare — 1-2 beers on special occasions"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited by claudication; walks short distances with rest breaks"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "DPOA — wife Claudette Baptiste; full code"]
+    [
+      "Occupation",
+      "Retired bus driver"
+    ],
+    [
+      "Marital",
+      "Married — 42 years"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2010; 20 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "Rare — 1-2 beers on special occasions"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited by claudication; walks short distances with rest breaks"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "DPOA — wife Claudette Baptiste; full code"
+    ]
   ],
   "meta": {
     "caseId": "sepsisseptic-shock",
-    "diagnosis": "Sepsis / Septic Shock (Urinary Source in Uncontrolled Diabetic with BPH/CKD)",
+    "diagnosis": "Septic Shock (Urinary Source) in Uncontrolled Diabetes with BPH/CKD",
     "acuity": 1,
     "presentation": "Endocrine Emergency",
     "category": "infectious"
@@ -391,75 +580,76 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Reginald is visibly confused and disoriented, answering questions with short, fragmented sentences. His wife speaks for him frequently. He appears diaphoretic, flushed, and is struggling to maintain eye contact. Despite his confusion, he becomes agitated when asked about pain.",
     "interviewQuestions": [
-        "Tell me what's been going on. When did you start feeling sick?",
-        "Do you have any pain right now? Where?",
-        "Have you had a fever? Chills or shaking?",
-        "Any burning with urination? Going more often than usual?",
-        "How long have you been confused \u2014 when did your wife notice?",
-        "Have you been drinking fluids? Eating?",
-        "Any nausea, vomiting, or diarrhea?",
-        "Has your blood sugar been higher than usual?",
-        "Are you taking all your medications?",
-        "Any recent hospitalizations or procedures?",
-        "Any skin wounds, dental work, or infections recently?",
-        "Any cough, shortness of breath, or chest pain?"
+      "Tell me what's been going on. When did you start feeling sick?",
+      "Do you have any pain right now? Where?",
+      "Have you had a fever? Chills or shaking?",
+      "Any burning with urination? Going more often than usual?",
+      "How long have you been confused — when did your wife notice?",
+      "Have you been drinking fluids? Eating?",
+      "Any nausea, vomiting, or diarrhea?",
+      "Has your blood sugar been higher than usual?",
+      "Are you taking all your medications?",
+      "Any recent hospitalizations or procedures?",
+      "Any skin wounds, dental work, or infections recently?",
+      "Any cough, shortness of breath, or chest pain?"
     ],
     "patientResponses": {
-        "default": "Reginald looks at his wife. 'I don't... I'm not sure. Margaret, what did they ask?'",
-        "onset": "'Started maybe... two days ago? Burning when I go to the bathroom. Then I started feeling real bad yesterday.' Wife adds: 'He had a fever last night \u2014 102. This morning I couldn't wake him up right.'",
-        "character": "'It burns when I go. And my lower belly hurts. And I'm just... I feel awful all over.'",
-        "location": "'Down low. In the belly. And it hurts to pee.'",
-        "severity": "'Eight out of ten. Maybe nine. I've never felt this bad.'",
-        "aggravating": "'Moving makes it worse. Trying to walk to the bathroom.'",
-        "relieving": "'Nothing's helping. Tylenol didn't do anything.'",
-        "associated": "'I've been sweating a lot. Chills earlier. I threw up this morning. I'm very thirsty but too tired to drink much.'",
-        "denies": "'No cough. No chest pain. No rash.' Wife: 'His legs look a little puffy but that's been going on a while.'",
-        "history": "'I get UTIs sometimes. Because of my prostate. But never this bad. Never with the confusion.'",
-        "medications": "'Metformin \u2014 twice a day for the diabetes. Lisinopril for blood pressure. The tamsulosin for my prostate. And amlodipine.' Wife confirms: 'He takes them every morning. He was good about it.'",
-        "allergies": "'Sulfa drugs. I break out in a rash. They put it in my chart.'",
-        "family": "'My brother had diabetes too. Passed from kidney failure. My father had heart problems.'",
-        "social": "'I'm retired. Used to be a postal worker. I live with Margaret. I don't smoke. Maybe a beer on weekends. I try to walk but with my knees it's hard.'"
+      "default": "Reginald looks at his wife. 'I don't... I'm not sure. Margaret, what did they ask?'",
+      "onset": "'Started maybe... two days ago? Burning when I go to the bathroom. Then I started feeling real bad yesterday.' Wife adds: 'He had a fever last night — 102. This morning I couldn't wake him up right.'",
+      "character": "'It burns when I go. And my lower belly hurts. And I'm just... I feel awful all over.'",
+      "location": "'Down low. In the belly. And it hurts to pee.'",
+      "severity": "'Eight out of ten. Maybe nine. I've never felt this bad.'",
+      "aggravating": "'Moving makes it worse. Trying to walk to the bathroom.'",
+      "relieving": "'Nothing's helping. Tylenol didn't do anything.'",
+      "associated": "'I've been sweating a lot. Chills earlier. I threw up this morning. I'm very thirsty but too tired to drink much.'",
+      "denies": "'No cough. No chest pain. No rash.' Wife: 'His legs look a little puffy but that's been going on a while.'",
+      "history": "'I get UTIs sometimes. Because of my prostate. But never this bad. Never with the confusion.'",
+      "medications": "'Metformin — twice a day for the diabetes. Lisinopril for blood pressure. The tamsulosin for my prostate. And amlodipine.' Wife confirms: 'He takes them every morning. He was good about it.'",
+      "allergies": "'Sulfa drugs. I break out in a rash. They put it in my chart.'",
+      "family": "'My brother had diabetes too. Passed from kidney failure. My father had heart problems.'",
+      "social": "'I'm retired. Used to be a postal worker. I live with Margaret. I don't smoke. Maybe a beer on weekends. I try to walk but with my knees it's hard.'"
     },
     "examManeuvers": [
-        "General appearance and mental status",
-        "Vital signs review",
-        "Skin assessment \u2014 temperature, color, capillary refill",
-        "Cardiovascular \u2014 auscultation and pulse assessment",
-        "Pulmonary \u2014 auscultation",
-        "Abdominal \u2014 palpation with focus on suprapubic and CVA tenderness",
-        "CVA percussion (costovertebral angle tenderness)",
-        "Extremities \u2014 edema and perfusion",
-        "Neurological \u2014 orientation, Glasgow Coma Scale"
+      "General appearance and mental status",
+      "Vital signs review",
+      "Skin assessment — temperature, color, capillary refill",
+      "Cardiovascular — auscultation and pulse assessment",
+      "Pulmonary — auscultation",
+      "Abdominal — palpation with focus on suprapubic and CVA tenderness",
+      "CVA percussion (costovertebral angle tenderness)",
+      "Extremities — edema and perfusion",
+      "Neurological — orientation, Glasgow Coma Scale"
     ],
     "examFindings": {
-        "General appearance and mental status": "Elderly male appearing acutely ill. Alert but disoriented to time and situation. Answers questions slowly with prompting. Diaphoretic. GCS 13 (E4V4M5).",
-        "Vital signs review": "BP 88/54 mmHg (MAP 65), HR 118 bpm (regular), RR 24/min, Temp 38.8\u00b0C (101.8\u00b0F), SpO2 94% on room air. Orthostatic hypotension confirmed.",
-        "Skin assessment \u2014 temperature, color, capillary refill": "Skin warm and flushed. Capillary refill 3 seconds. Mild diaphoresis. No petechiae or purpura. No rash.",
-        "Cardiovascular \u2014 auscultation and pulse assessment": "Tachycardic, regular rhythm. S1 S2 present. No murmurs. Peripheral pulses diminished bilaterally. JVP not elevated.",
-        "Pulmonary \u2014 auscultation": "Clear to auscultation bilaterally. No wheezes or crackles. Tachypneic.",
-        "Abdominal \u2014 palpation with focus on suprapubic and CVA tenderness": "Soft, mildly distended. Suprapubic tenderness on palpation \u2014 moderate, guarding absent. No rebound. Bowel sounds hypoactive.",
-        "CVA percussion (costovertebral angle tenderness)": "Positive right CVA tenderness on percussion. Negative on left.",
-        "Extremities \u2014 edema and perfusion": "Mild bilateral pitting edema to ankles (1+). Extremities cool distally. Mottling at knees bilaterally.",
-        "Neurological \u2014 orientation, Glasgow Coma Scale": "Alert, oriented to person only. Disoriented to time and place. PERRL. No focal deficits. GCS 13."
+      "General appearance and mental status": "Elderly male appearing acutely ill. Alert but disoriented to time and situation. Answers questions slowly with prompting. Diaphoretic. GCS 13 (E4V4M5).",
+      "Vital signs review": "BP 88/54 mmHg (MAP 65), HR 118 bpm (regular), RR 24/min, Temp 38.8°C (101.8°F), SpO2 94% on room air. Orthostatic hypotension confirmed.",
+      "Skin assessment — temperature, color, capillary refill": "Skin warm and flushed. Capillary refill 3 seconds. Mild diaphoresis. No petechiae or purpura. No rash.",
+      "Cardiovascular — auscultation and pulse assessment": "Tachycardic, regular rhythm. S1 S2 present. No murmurs. Peripheral pulses diminished bilaterally. JVP not elevated.",
+      "Pulmonary — auscultation": "Clear to auscultation bilaterally. No wheezes or crackles. Tachypneic.",
+      "Abdominal — palpation with focus on suprapubic and CVA tenderness": "Soft, mildly distended. Suprapubic tenderness on palpation — moderate, guarding absent. No rebound. Bowel sounds hypoactive.",
+      "CVA percussion (costovertebral angle tenderness)": "Positive right CVA tenderness on percussion. Negative on left.",
+      "Extremities — edema and perfusion": "Mild bilateral pitting edema to ankles (1+). Extremities cool distally. Mottling at knees bilaterally.",
+      "Neurological — orientation, Glasgow Coma Scale": "Alert, oriented to person only. Disoriented to time and place. PERRL. No focal deficits. GCS 13."
     },
     "ddxTargets": [
-        "Sepsis / Septic Shock (Urinary Source)",
-        "Urosepsis with underlying UTI / Pyelonephritis",
-        "Diabetic Ketoacidosis (DKA)",
-        "Hypovolemic Shock (dehydration from poor PO intake)",
-        "Meningitis / Encephalitis",
-        "Ischemic Stroke / Metabolic Encephalopathy",
-        "Acute Kidney Injury (uremic encephalopathy)"
+      "Sepsis / Septic Shock (Urinary Source)",
+      "Urosepsis with underlying UTI / Pyelonephritis",
+      "Diabetic Ketoacidosis (DKA)",
+      "Hypovolemic Shock (dehydration from poor PO intake)",
+      "Meningitis / Encephalitis",
+      "Ischemic Stroke / Metabolic Encephalopathy",
+      "Acute Kidney Injury (uremic encephalopathy)"
     ],
     "biasFlags": {
-        "anchoring": "If the student immediately anchors on 'UTI' based on urinary symptoms and fails to recognize the hemodynamic instability and organ dysfunction criteria for septic shock, they may underestimate acuity and delay resuscitation.",
-        "prematureClosure": "Students may stop the workup after identifying a urinary source and miss concurrent bacteremia, metastatic infection, or an alternative source (pneumonia, SBP) in an immunocompromised diabetic.",
-        "availabilityBias": "Students familiar with simple UTI may default to oral antibiotics and discharge, missing the sepsis diagnosis. The hypotension and altered mental status must trigger a systemic framing."
+      "anchoring": "If the student immediately anchors on 'UTI' based on urinary symptoms and fails to recognize the hemodynamic instability and organ dysfunction criteria for septic shock, they may underestimate acuity and delay resuscitation.",
+      "prematureClosure": "Students may stop the workup after identifying a urinary source and miss concurrent bacteremia, metastatic infection, or an alternative source (pneumonia, SBP) in an immunocompromised diabetic.",
+      "availabilityBias": "Students familiar with simple UTI may default to oral antibiotics and discharge, missing the sepsis diagnosis. The hypotension and altered mental status must trigger a systemic framing."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed the chart. Reginald has HTN, DM2, BPH, and CKD. He presents with fever and urinary symptoms. Before you talk to him \u2014 what are the three most life-threatening diagnoses you need to keep on your list? What in the chart raises your concern about systemic illness beyond a simple UTI?",
-        "phase5": "You've examined Reginald. BP 88/54, HR 118, temp 38.8, confused. Positive CVA tenderness and suprapubic tenderness. Where does this fit on the sepsis continuum? What are your immediate resuscitation priorities before you even have lab results?",
-        "finalDebrief": "The diagnosis is Sepsis / Septic Shock from a urinary source. How did your differential evolve? Did you have septic shock on your initial list? At what point did the picture click? What would have happened if you treated this as a simple UTI and discharged him?"
+      "phase2": "You've reviewed the chart. Reginald has HTN, DM2, BPH, and CKD. He presents with fever and urinary symptoms. Before you talk to him — what are the three most life-threatening diagnoses you need to keep on your list? What in the chart raises your concern about systemic illness beyond a simple UTI?",
+      "phase5": "You've examined Reginald. BP 88/54, HR 118, temp 38.8, confused. Positive CVA tenderness and suprapubic tenderness. Where does this fit on the sepsis continuum? What are your immediate resuscitation priorities before you even have lab results?",
+      "finalDebrief": "The diagnosis is Sepsis / Septic Shock from a urinary source. How did your differential evolve? Did you have septic shock on your initial list? At what point did the picture click? What would have happened if you treated this as a simple UTI and discharged him?",
+      "final": "Diagnosis: septic shock from urinary source in a patient with uncontrolled diabetes, benign prostatic hyperplasia, and chronic kidney disease. Key learning: (1) Sepsis is defined as life-threatening organ dysfunction from a dysregulated host response to infection. Septic shock is sepsis with circulatory, cellular, and metabolic dysfunction sufficient to substantially increase mortality — clinically: persistent hypotension requiring vasopressors to maintain MAP >=65 AND serum lactate >2 mmol/L despite adequate volume resuscitation. Sepsis-3 (2016) eliminated SIRS criteria in favor of SOFA score; qSOFA (respiratory rate >=22, altered mentation, SBP <=100) was a bedside screen but is no longer recommended for diagnosis. (2) Surviving Sepsis Campaign HOUR-1 BUNDLE (implement as quickly as possible, within the first hour): (a) Measure lactate. Remeasure if initial >2 mmol/L. (b) Obtain blood cultures BEFORE antibiotics when feasible — x2 sets from separate sites. (c) Administer broad-spectrum antibiotics within 1 hour of recognition. (d) Begin rapid administration of 30 mL/kg of IV crystalloid for hypotension or lactate >=4 mmol/L. (e) Apply vasopressors if patient remains hypotensive after fluids to maintain MAP >=65. Reassess volume status and tissue perfusion dynamically (pulse pressure variation, passive leg raise, lactate trend, urine output, mental status, capillary refill, bedside ultrasound of IVC and cardiac function). (3) Empiric antibiotic selection depends on suspected source and patient factors. Urinary source + severe illness: piperacillin-tazobactam OR ceftriaxone (add anti-MRSA like vancomycin only for risk factors); carbapenem (meropenem) for suspected ESBL organisms based on prior cultures or local epidemiology. Adjust based on culture susceptibilities and de-escalate as soon as possible (typically within 24-72 hours of obtaining sensitivities). Source control is as important as antibiotics: decompress obstruction (ureteral stent, percutaneous nephrostomy), drain abscess, remove infected hardware, debride necrotic tissue — within 6-12 hours of diagnosis when indicated. (4) Vasopressor and adjunctive therapy. First-line: norepinephrine (titrate to MAP >=65). Add vasopressin at moderate doses (0.03 units/min) for synergy and norepinephrine-sparing effect. Add epinephrine for refractory shock. Hydrocortisone 200 mg/day (divided or continuous infusion) for septic shock on escalating vasopressors — reduces vasopressor duration and may improve outcomes. Avoid dopamine (increased arrhythmia risk). Target sugars 140-180 mg/dL (NICE-SUGAR), restrictive transfusion Hgb threshold 7 g/dL (unless active ischemia), lung-protective ventilation if intubated. (5) Comorbid considerations. Diabetes: hyperglycemia worsens immune function and outcomes — insulin titration to target range. BPH: urinary obstruction contributes to infection; relief may be needed (Foley catheter, alpha-blocker). CKD: medications need dose adjustment, avoid nephrotoxins (aminoglycoside if alternative exists, contrast dye when possible), and dialysis may be needed for refractory acidosis or volume overload. Classic pitfalls: (a) inadequate fluid resuscitation — some patients need far more than 30 mL/kg; dynamic assessment guides. (b) Delayed antibiotics — every hour delay increases mortality in septic shock. (c) Missing source control — the best antibiotics fail without drainage/decompression. (d) Over-resuscitating with crystalloid causing pulmonary edema — transition to vasopressors and albumin when adequate preload is achieved. (e) Using dopamine as first-line vasopressor — higher arrhythmia rate. (f) Not discussing goals of care in a patient with multiple comorbidities and poor baseline functional status — septic shock outcomes correlate with baseline status."
     }
-}
+  }
 };
