@@ -183,9 +183,9 @@ function getCaseForToday() {
 // Rotates through 4 subject line formats to avoid inbox fatigue
 const SUBJECT_TEMPLATES = [
   c => `Your Weekly Case: ${c.title} — ReasonDx`,
-  c => `${c.title} 🩺`,
-  c => `New case ready: ${c.title}`,
-  c => `ReasonDx: ${c.title}`,
+  c => `New case ready — ReasonDx 🩺`,
+  c => `This week's clinical reasoning case`,
+  c => `Your case is waiting — ReasonDx`,
 ];
 
 function getSubject(caseData, sendIndex) {
