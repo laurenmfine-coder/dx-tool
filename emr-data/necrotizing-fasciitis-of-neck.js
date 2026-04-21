@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Williams",
-  "patientHPI": "I came in for my regular diabetes check-up, and I know my blood sugar numbers aren't good - I haven't been great about taking my medications or watching what I eat. For the past couple weeks, I've also had this really bad pain on the right side of my jaw, especially when I drink something hot or cold. I can see there's a bad tooth back there, but I haven't been to the dentist in years.",
+    "patientHPI": "I came in for my regular diabetes check-up, and I know my blood sugar numbers aren't good - I haven't been great about taking my medications or watching what I eat. For the past couple weeks, I've also had this really bad pain on the right side of my jaw, especially when I drink something hot or cold. I can see there's a bad tooth back there, but I haven't been to the dentist in years.",
     "dob": "07/20/1963",
     "age": 61,
     "sex": "Male",
@@ -211,32 +211,128 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "248", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "24", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "23", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.1", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "48", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "52", "unit": "U/L", "range": "10-40", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "248",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "24",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "23",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.1",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "48",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "52",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "10.2", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "246", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "10.2",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "246",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "9.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "39.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "268", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "9.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "268",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -304,15 +400,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 56"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed; formerly construction worker"],
-    ["Marital", "Divorced"],
-    ["Tobacco", "Current smoker — 1 PPD x 43 years (43 pack-years)"],
-    ["Alcohol", "Heavy use — 6-8 beers daily; CAGE 3/4"],
-    ["Drugs", "Denies current use; remote history of cocaine use in 20s"],
-    ["Exercise", "Sedentary"],
-    ["Housing", "Lives alone in rented apartment"],
-    ["Safety", "Denies IPV; limited social support"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Unemployed; formerly construction worker"
+    ],
+    [
+      "Marital",
+      "Divorced"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 43 years (43 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "Heavy use — 6-8 beers daily; CAGE 3/4"
+    ],
+    [
+      "Drugs",
+      "Denies current use; remote history of cocaine use in 20s"
+    ],
+    [
+      "Exercise",
+      "Sedentary"
+    ],
+    [
+      "Housing",
+      "Lives alone in rented apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; limited social support"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "necrotizing-fasciitis-of-neck",
@@ -325,73 +448,74 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Harold Williams appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did ent / airway emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did ent / airway emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I came in for my regular diabetes check-up, and I know my blood sugar numbers ar.'",
-        "character": "'It's ent / airway emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Cervical Necrotizing Fasciitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Gabapentin 300mg TID.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: T2DM, hypertension, deceased at 68 (stroke)  Father: Alcohol use disorder, deceased at 55 (liver cirrhosis)  Brother: T2DM, alive at 58",
-        "social": "Occupation: Unemployed; formerly construction worker  Marital: Divorced  Tobacco: Current smoker \u2014 1 PPD x 43 years (43 pack-years)  Alcohol: Heavy use \u2014 6-8 beers daily; CAGE 3/4  Drugs: Denies current use; remote history of cocaine use in 20s"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I came in for my regular diabetes check-up, and I know my blood sugar numbers ar.'",
+      "character": "'It's ent / airway emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Cervical Necrotizing Fasciitis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Gabapentin 300mg TID.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Mother: T2DM, hypertension, deceased at 68 (stroke)  Father: Alcohol use disorder, deceased at 55 (liver cirrhosis)  Brother: T2DM, alive at 58",
+      "social": "Occupation: Unemployed; formerly construction worker  Marital: Divorced  Tobacco: Current smoker — 1 PPD x 43 years (43 pack-years)  Alcohol: Heavy use — 6-8 beers daily; CAGE 3/4  Drugs: Denies current use; remote history of cocaine use in 20s"
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and toxicity",
+      "Vital signs with temperature",
+      "Skin for rash, lesions, or signs of infection",
+      "Lymph node palpation",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Source-specific examination"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe."
+      "General appearance and toxicity": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Vital signs with temperature": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Lymph node palpation": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe.",
+      "Source-specific examination": "Clinical finding consistent with Cervical Necrotizing Fasciitis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Cervical Necrotizing Fasciitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Cervical Necrotizing Fasciitis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cervical Necrotizing Fasciitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Cervical Necrotizing Fasciitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Cervical Necrotizing Fasciitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cervical Necrotizing Fasciitis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Cervical Necrotizing Fasciitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Cervical Necrotizing Fasciitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Williams's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Cervical Necrotizing Fasciitis (Odontogenic Source). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Harold Williams's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Cervical Necrotizing Fasciitis (Odontogenic Source). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: cervical necrotizing fasciitis from an odontogenic source, potentially progressing to descending mediastinitis. Key learning: (1) Cervical necrotizing fasciitis (CNF) is a rare but rapidly lethal infection that spreads along the fascial planes of the neck. Odontogenic sources (especially mandibular molar infections) are the most common etiology, with Ludwig's angina (bilateral submandibular space infection) as a related entity. The danger is extension along the retropharyngeal, pretracheal, and carotid spaces down into the mediastinum (descending necrotizing mediastinitis, DNM) — which carries mortality up to 40% even with aggressive management. Other sources: peritonsillar abscess, salivary gland infection, penetrating trauma, IV drug use in the neck, and postsurgical infections. Microbiology is polymicrobial: viridans streptococci, Streptococcus anginosus group, anaerobes (Prevotella, Fusobacterium, Bacteroides), Peptostreptococcus, and sometimes MRSA. (2) Presentation: rapidly progressive neck swelling and pain often out of proportion to exam findings, fever, dysphagia, odynophagia, trismus (inability to fully open the mouth), dysphonia, drooling, and toxic appearance. Classic 'hard signs' of necrotizing fasciitis — crepitus, skin necrosis, bullae, anesthesia over the involved area — are LATE findings; early CNF often presents as what looks like cellulitis with disproportionate pain. Systemic signs: tachycardia, hypotension, leukocytosis, elevated CRP, elevated lactate, and clinical deterioration despite initial antibiotic therapy. (3) Workup. CT neck and chest with IV contrast is the imaging study of choice — identifies abscesses, gas in tissues (pathognomonic for necrotizing infection but not always present), fascial involvement, vessel involvement, and mediastinal extension. Do not delay CT for a patient with airway concerns — secure the airway first (early awake fiberoptic intubation, surgical airway as backup). Labs: CBC, CMP, lactate, blood cultures, coagulation studies, type and crossmatch, and LRINEC score (though less validated in cervical NF than extremity NF). (4) Management is emergent multidisciplinary: (a) SURGICAL exploration and debridement — lifesaving, cannot be delayed for more imaging or 'trial of antibiotics.' Serial operative washouts are expected every 24-48 hours until margins are clean. (b) Broad-spectrum antibiotics empirically: carbapenem (meropenem or imipenem) OR piperacillin-tazobactam PLUS clindamycin (suppresses toxin production and bacterial ribosomal activity) PLUS vancomycin or linezolid for MRSA coverage. Modify based on cultures. (c) Airway management — early definitive airway, often tracheostomy. (d) ICU care with aggressive resuscitation, goal-directed therapy, and monitoring for mediastinitis (chest CT, often mediastinal drainage by thoracic surgery via thoracotomy or VATS). (e) Dental extraction of source tooth when stable. (f) Hyperbaric oxygen is used in some centers as adjunct but does not replace surgery. (5) Classic pitfalls: (a) under-recognizing the severity because the skin looks relatively intact — 'pain out of proportion' in the neck demands CT and surgical consultation. (b) Delaying surgery for antibiotics to work — surgical debridement is the definitive treatment. (c) Not imaging the chest — descending mediastinitis has a narrow treatment window; CT chest must be part of initial workup. (d) Inadequate airway planning leading to emergency cricothyroidotomy in a distorted, edematous neck — always have the most experienced available airway operator manage these cases, with surgical backup in the room. (e) Missing immune and metabolic risk factors: poorly controlled diabetes, immunosuppression, chronic alcoholism — optimize during treatment and address long-term."
     }
-}
+  }
 };
