@@ -6,6 +6,7 @@
 <script src="/js/rdx-supabase.js"></script>
 <script src="/js/rdx-analytics-tracker.js"></script>
 <script src="/js/rdx-save-resume.js"></script>
+<script src="/js/rdx-share.js"></script>
 <script src="/js/rdx-mobile-gate.js"></script>
 <script src="/js/rdx-data-consent.js"></script>
 <script src="emr-data/case-tokens.js"></script>
@@ -4355,6 +4356,33 @@ function submitDoc(){
     // Switch to AI Feedback tab so student sees results immediately
     setTimeout(function() {
       switchTab('autofeedback');
+      // Render share panel after student sees AI feedback (peak satisfaction moment)
+      setTimeout(function() {
+        try {
+          if (window.RDXShare && window.RDXShare.renderPostCaseSharePanel) {
+            var shareSlot = document.getElementById('rdx-virtual-emr-share-slot');
+            if (!shareSlot) {
+              shareSlot = document.createElement('div');
+              shareSlot.id = 'rdx-virtual-emr-share-slot';
+              shareSlot.style.cssText = 'max-width:900px;margin:16px auto;padding:0 16px;';
+              var main = document.querySelector('main') || document.querySelector('.content') || document.body;
+              main.appendChild(shareSlot);
+            }
+            if (!shareSlot.querySelector('.rdx-share-panel')) {
+              var caseTitle = (window.PATIENT && PATIENT.chiefComplaint)
+                ? PATIENT.chiefComplaint
+                : (window.CASE_ID || 'this case');
+              window.RDXShare.renderPostCaseSharePanel({
+                caseSlug: window.CASE_ID || null,
+                caseTitle: caseTitle,
+                container: shareSlot,
+              });
+            }
+          }
+        } catch (shareErr) {
+          if (window.console) console.warn('[Virtual EMR] Share panel failed (non-fatal):', shareErr);
+        }
+      }, 3500);  // after the tab has settled and AI feedback has started rendering
     }, 800);
   }, 400);
 }

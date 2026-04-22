@@ -4455,13 +4455,27 @@ if (window.P && window.P.EventBus) {
 
 <script>
 function rdxShowEmailOptinModal() {
-  // Only show for guests (not logged in) and only once
-  if (localStorage.getItem('rdx-email-optin-seen')) return;
+  // Don't show if user has an account
   try {
     var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
     if (u && u.email) return; // Already has account
   } catch(e) {}
-  localStorage.setItem('rdx-email-optin-seen', '1');
+
+  // Don't show if user submitted an email before
+  if (localStorage.getItem('rdx-email-optin-submitted')) return;
+
+  // Throttling: show on 1st completion, then re-ask every 4 more completions
+  // (i.e., after case 1, 5, 9, 13...). Max 4 asks total.
+  var asks = parseInt(localStorage.getItem('rdx-email-optin-asks') || '0', 10);
+  if (asks >= 4) return; // cap nagging
+
+  var simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0', 10);
+  // Trigger pattern: case 1 (first ever), then every 4 cases after a dismissal
+  var lastShownAt = parseInt(localStorage.getItem('rdx-email-optin-last-shown-at') || '0', 10);
+  if (lastShownAt > 0 && (simCount - lastShownAt) < 4) return;
+
+  localStorage.setItem('rdx-email-optin-asks', String(asks + 1));
+  localStorage.setItem('rdx-email-optin-last-shown-at', String(simCount));
   var modal = document.getElementById('rdx-email-optin-modal');
   if (modal) { modal.style.display = 'flex'; }
 }
@@ -4480,8 +4494,9 @@ function rdxSubmitEmailOptin() {
     headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY },
     body: JSON.stringify({ email: email, source: 'sim_completion', subscribed_at: new Date().toISOString() })
   }).catch(function(){});
-  // Store locally
+  // Store locally + flag as submitted so we never ask again
   try { localStorage.setItem('reasondx-user', JSON.stringify({ email: email, name: email.split('@')[0] })); } catch(e) {}
+  try { localStorage.setItem('rdx-email-optin-submitted', '1'); } catch(e) {}
   // Show success state
   var modal = document.getElementById('rdx-email-optin-modal');
   if (modal) {

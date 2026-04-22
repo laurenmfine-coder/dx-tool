@@ -391,7 +391,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   (function() {
     var simCount = 0;
     try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
-    if (simCount >= 5) {
+    // Show invite card after first completed case (peak enthusiasm moment)
+    if (simCount >= 1) {
       var card = document.getElementById('rdx-invite-card');
       if (card) card.style.display = 'block';
     }
