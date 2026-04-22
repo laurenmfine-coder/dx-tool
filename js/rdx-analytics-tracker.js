@@ -27,7 +27,20 @@ if (typeof window.RDX === 'undefined') {
 var _startTime = Date.now();
 var _currentPage = window.location.pathname.split('/').pop() || 'index.html';
 var _setting = new URLSearchParams(window.location.search).get('setting');
-var _caseId = new URLSearchParams(window.location.search).get('case');
+
+// Resolve case ID from either ?case=<slug> (legacy) or ?cx=<token> (new format).
+// The cx token maps back to a slug via window.RDX_CASE_TOKENS if loaded.
+var _caseId = (function() {
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('case');
+  if (slug) return slug;
+  var token = params.get('cx');
+  if (token && window.RDX_CASE_TOKENS && window.RDX_CASE_TOKENS.tokenToSlug) {
+    return window.RDX_CASE_TOKENS.tokenToSlug[token] || token;
+  }
+  return token || null;  // fall back to raw token if map unavailable
+})();
+
 var _tracked = {};  // prevent duplicate events
 
 function log(msg) {
