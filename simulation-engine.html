@@ -598,11 +598,15 @@ function startStudy() {
       document.title = caseData.presentation.chiefComplaint + ' — Simulation | ReasonDx';
     }
 
-    // First-time users: show a brief orientation system message
+    // First-time users: show a brief orientation system message + rich welcome card
     var simCount = 0;
     try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
     if (simCount === 0) {
       addMessage('system', '🩺 Welcome to ReasonDx. You\'re about to work through a simulated patient encounter. Play the role of the medical student — Dr. Patel will guide you. Type your answers naturally, as you would on rounds.');
+      // Show the rich welcome preview card (first case only)
+      setTimeout(function() {
+        try { rdxShowFirstCasePreview(); } catch (e) {}
+      }, 400);
     }
     const p = caseData.presentation;
     let opening;
@@ -1453,6 +1457,16 @@ function enterPhase(phase) {
   if (_phaseMessages[phase] && phase > 1) {
     setTimeout(function() { addMessage('system', _phaseMessages[phase]); }, 200);
   }
+
+  // Quick-mode: after the user completes phase 4 (Revised Differential) and
+  // is entering phase 5, offer to wrap up early with their teaching debrief.
+  // They've done the core reasoning arc — initial ddx, history, revised ddx.
+  try {
+    if (phase === 5 && sessionStorage.getItem('rdx-quick-mode') === '1' && !sessionStorage.getItem('rdx-quick-mode-prompted')) {
+      sessionStorage.setItem('rdx-quick-mode-prompted', '1');
+      setTimeout(function() { rdxShowQuickModeFinishPrompt(); }, 800);
+    }
+  } catch (e) {}
 
   if (phase === PHASES.HISTORY_TAKING) {
     document.getElementById('historyCard').style.display = 'block';
@@ -2711,12 +2725,22 @@ function updatePhaseUI() {
     document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
     var mpl = document.getElementById('mobilePhaseLabel'); if(mpl) mpl.textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
     var mtl = document.getElementById('mobileTurnLabel'); if(mtl) mtl.textContent = 'Turn ' + state.turnCount;
+    // Estimate time remaining: ~2 min per remaining phase (conservative)
+    var _phasesLeft = Math.max(0, 9 - state.currentPhase);
+    var _minsLeft = _phasesLeft * 2;
+    var _timeText = _minsLeft > 0 ? ('~' + _minsLeft + ' min to debrief') : 'Final phase';
     tracker.innerHTML = `
       <div style="margin-bottom:6px;font-size:11px;color:var(--text-muted)">${label}</div>
       <div style="background:rgba(255,255,255,0.1);border-radius:999px;height:6px;overflow:hidden">
         <div style="background:var(--primary);height:100%;width:${pct}%;border-radius:999px;transition:width .4s ease"></div>
       </div>
-      <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:right">${pct}% complete</div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:4px;display:flex;justify-content:space-between">
+        <span>${pct}% complete</span>
+        <span>${_timeText}</span>
+      </div>
+      ${state.currentPhase >= 4 && state.currentPhase < 8 ? `
+        <button type="button" onclick="rdxFinishEarly()" style="margin-top:10px;width:100%;padding:7px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">Get my feedback now →</button>
+      ` : ''}
       <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.6);text-align:center;cursor:pointer" onclick="this.closest('.panel-card').querySelector('.phase-full-list').style.display='block';this.style.display='none'">Show all steps ▾</div>
       <div class="phase-full-list" style="display:none;margin-top:8px">
         ${Array.from({length:10},(_,i)=>{const n=i+1;const cls=n===state.currentPhase?'active':n<state.currentPhase?'complete':'';return `<div class="phase-item ${cls}"><div class="phase-dot"></div>${PHASE_LABELS[n]||'Complete'}</div>`;}).join('')}
@@ -4454,6 +4478,140 @@ if (window.P && window.P.EventBus) {
 </div>
 
 <script>
+/**
+ * rdxShowFirstCasePreview — rich welcome card shown before the FIRST case.
+ * Explains what's coming (phases, time, debrief), previews what the feedback
+ * will look like, and offers a "quick case" option (finish at phase 4).
+ */
+function rdxShowFirstCasePreview() {
+  if (document.getElementById('rdx-first-case-preview')) return;  // already shown
+  var chat = document.getElementById('chatMessages');
+  if (!chat) return;
+
+  var card = document.createElement('div');
+  card.id = 'rdx-first-case-preview';
+  card.style.cssText = [
+    'margin: 12px 16px',
+    'padding: 16px 18px',
+    'background: linear-gradient(135deg, #EBF5FB, #E8F8F5)',
+    'border: 1px solid #BEE3F8',
+    'border-radius: 12px',
+    'font-size: 13px',
+    'color: #1B4F72',
+    'line-height: 1.6',
+  ].join(';');
+
+  card.innerHTML = [
+    '<div style="font-weight:700;font-size:14px;margin-bottom:8px;color:#1B4F72">Here\'s what\'s coming</div>',
+    '<div style="color:#334155;font-size:13px;line-height:1.7;margin-bottom:12px">',
+    '  You\'ll work through a real patient encounter in <strong>~15 minutes</strong> — ',
+    '  building a differential, taking a history, ordering tests, and writing a plan. ',
+    '  At the end, you get a <strong>personalized teaching debrief</strong> on your reasoning pattern.',
+    '</div>',
+    '<div style="background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#475569">',
+    '  <div style="font-weight:600;color:#1B4F72;margin-bottom:4px">📋 Your debrief will look like this:</div>',
+    '  <div style="font-style:italic;color:#64748B;padding-left:8px;border-left:2px solid #BEE3F8">',
+    '    "Your differential was solid initially, but you anchored on the first diagnosis. ',
+    '    When the ECG changed, you didn\'t fully update your probability estimates. ',
+    '    Here\'s what to practice for next time..."',
+    '  </div>',
+    '</div>',
+    '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px">',
+    '  <span style="color:#64748B">Short on time?</span>',
+    '  <button type="button" onclick="rdxEnableQuickMode(this)" style="padding:5px 12px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Enable quick case (~7 min)</button>',
+    '  <button type="button" onclick="document.getElementById(\'rdx-first-case-preview\').remove()" style="padding:5px 10px;background:none;color:#64748B;border:none;font-size:12px;cursor:pointer;font-family:inherit;margin-left:auto">Got it →</button>',
+    '</div>',
+    '<div id="rdx-quick-mode-note" style="display:none;margin-top:10px;padding:8px 10px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:6px;font-size:12px;color:#15803D">',
+    '  ✓ Quick mode enabled. You\'ll get your debrief after 4 phases instead of 8.',
+    '</div>',
+  ].join('');
+
+  chat.appendChild(card);
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function rdxEnableQuickMode(btn) {
+  try { sessionStorage.setItem('rdx-quick-mode', '1'); } catch (e) {}
+  var note = document.getElementById('rdx-quick-mode-note');
+  if (note) note.style.display = 'block';
+  if (btn) {
+    btn.textContent = '✓ Quick mode on';
+    btn.style.background = '#16a34a';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#16a34a';
+    btn.disabled = true;
+  }
+  if (window.gtag) {
+    gtag('event', 'quick_mode_enabled', { case_id: (window.state && state.caseId) || null });
+  }
+}
+
+/**
+ * rdxShowQuickModeFinishPrompt — non-blocking prompt when quick-mode users
+ * reach phase 5. Appears as an inline card (not a modal) so users can
+ * choose to continue the full case or wrap up.
+ */
+function rdxShowQuickModeFinishPrompt() {
+  if (document.getElementById('rdx-quick-finish-prompt')) return;
+  var chat = document.getElementById('chatMessages');
+  if (!chat) return;
+
+  var card = document.createElement('div');
+  card.id = 'rdx-quick-finish-prompt';
+  card.style.cssText = [
+    'margin: 10px 16px',
+    'padding: 14px 16px',
+    'background: linear-gradient(135deg, #FEF3C7, #FDE68A)',
+    'border: 1px solid #F59E0B',
+    'border-radius: 10px',
+    'font-size: 13px',
+    'color: #78350F',
+    'line-height: 1.55',
+  ].join(';');
+
+  card.innerHTML = [
+    '<div style="font-weight:700;margin-bottom:4px">You\'re at the halfway mark</div>',
+    '<div style="color:#78350F;margin-bottom:10px">You\'ve done the core reasoning work — initial differential, history, revised differential. Want to get your feedback now, or keep going through physical exam, labs, and management?</div>',
+    '<div style="display:flex;gap:8px;flex-wrap:wrap">',
+    '  <button type="button" onclick="rdxFinishEarly();document.getElementById(\'rdx-quick-finish-prompt\').remove()" style="padding:7px 14px;background:#D97706;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">Get my feedback now</button>',
+    '  <button type="button" onclick="document.getElementById(\'rdx-quick-finish-prompt\').remove()" style="padding:7px 14px;background:#fff;color:#78350F;border:1px solid #F59E0B;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Keep going</button>',
+    '</div>',
+  ].join('');
+
+  chat.appendChild(card);
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function rdxFinishEarly() {
+  if (!state || state.currentPhase >= PHASES.COMPLETE) return;
+
+  var confirmMsg = "Skip to your teaching debrief now?\n\n" +
+    "You'll get personalized feedback based on what you've done so far. " +
+    "You can always try this case again later.";
+  if (!confirm(confirmMsg)) return;
+
+  if (window.gtag) {
+    gtag('event', 'case_finish_early', {
+      case_id: state.caseId,
+      phase_at_exit: state.currentPhase,
+      phase_label: PHASE_LABELS[state.currentPhase]
+    });
+  }
+
+  // Jump to phase 10 (COMPLETE), which triggers debrief generation
+  state.currentPhase = PHASES.COMPLETE;
+  addMessage('system', '⚡ Wrapping up early — generating your feedback based on what you\'ve done so far...');
+
+  // Trigger the same flow normal completion uses
+  if (typeof handlePhaseTransition === 'function') {
+    try { handlePhaseTransition(PHASES.COMPLETE); } catch(e) {}
+  }
+  // Fallback: re-render to pick up the new phase
+  if (typeof render === 'function') {
+    try { render(); } catch(e) {}
+  }
+}
+
 function rdxShowEmailOptinModal() {
   // Don't show if user has an account
   try {
