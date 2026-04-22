@@ -44,7 +44,7 @@ window.RDXEmailCapture = (function() {
           </form>
           
           <p class="rdx-email-disclaimer">
-            Free to use. No credit card required.
+            Free to use. No credit card required. <a href="/auth/privacy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">How we use your data</a>
           </p>
           
           <div class="rdx-modal-footer">

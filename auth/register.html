@@ -2,6 +2,8 @@
 <html data-theme="light" lang="en">
 <head>
 <script src="/js/rdx-config.js"></script>
+<script src="/js/rdx-mobile-gate.js"></script>
+<script src="/js/rdx-data-consent.js"></script>
 
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Create Account | ReasonDx</title>
@@ -101,6 +103,12 @@ body{background:var(--bg);font-family:var(--ft);min-height:100vh;display:flex;al
       <label>Program Code <span style="font-weight:400;text-transform:none">(optional — from your PD)</span></label>
       <input type="text" id="programCode" placeholder="e.g., REF-AI2026">
     </div>
+    <div class="form-group" style="margin-bottom:20px">
+      <label style="display:flex;align-items:flex-start;gap:10px;text-transform:none;letter-spacing:normal;font-size:13px;font-weight:400;color:#475569;line-height:1.5;cursor:pointer">
+        <input type="checkbox" id="consentCheckbox" required style="margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:#2874A6">
+        <span>I have read and agree to the <a href="privacy.html" target="_blank" rel="noopener" style="color:#2874A6;font-weight:600">Privacy &amp; Data Practices</a> and <a href="terms.html" target="_blank" rel="noopener" style="color:#2874A6;font-weight:600">Terms of Service</a>. I understand that ReasonDx analyzes my responses to provide reasoning feedback.</span>
+      </label>
+    </div>
     <button type="submit" class="btn-primary" id="registerBtn">Create Account</button>
   </form>
 
@@ -129,6 +137,11 @@ function showSuccess(msg) {
 }
 
 async function signInGoogle() {
+  if (!document.getElementById('consentCheckbox').checked) {
+    showError('Please read and agree to the Privacy & Terms before continuing.');
+    document.getElementById('consentCheckbox').focus();
+    return;
+  }
   const btn = document.getElementById('btnGoogle');
   btn.disabled = true;
   btn.textContent = 'Redirecting to Google…';
@@ -187,6 +200,19 @@ async function handleRegister(e) {
     showError(result.error.message);
     btn.disabled = false; btn.textContent = 'Create Account';
   } else {
+    // Record identified consent — ties registration to acknowledgment
+    try {
+      if (window.RDXDataConsent && window.RDXDataConsent.recordIdentifiedConsent) {
+        window.RDXDataConsent.recordIdentifiedConsent({
+          email: email,
+          source: 'registration',
+          userId: (result.data && result.data.user && result.data.user.id) || null,
+        });
+      }
+    } catch (consentErr) {
+      console.warn('[Register] Identified consent log failed (non-fatal):', consentErr);
+    }
+
     showSuccess('Account created! Check your email to confirm, then sign in.');
     document.getElementById('registerForm').style.display = 'none';
     if (window.RDX_ProfessionOnboardingModal) {

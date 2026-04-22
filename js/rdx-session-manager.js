@@ -113,6 +113,16 @@ window.RDXSessionManager = (function() {
     // Store email locally
     localStorage.setItem(STORAGE_KEYS.USER_EMAIL, email);
     
+    // Retroactively link anonymous consent acknowledgment to this email.
+    // Best-effort, non-blocking — failure doesn't affect the capture flow.
+    try {
+      if (window.RDXDataConsent && window.RDXDataConsent.linkExistingConsent) {
+        window.RDXDataConsent.linkExistingConsent(email);
+      }
+    } catch (consentErr) {
+      // silent — consent linking is best-effort
+    }
+    
     // Send to Supabase
     try {
       const { data, error } = await supabase

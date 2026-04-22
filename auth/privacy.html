@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/rdx-config.js"></script>
+<script src="/js/rdx-mobile-gate.js"></script>
 <meta name="theme-color" content="#1f5f8b">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
@@ -13,55 +15,196 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../mobile.css">
-<title>Privacy Policy | ReasonDx</title>
-<meta name="description" content="ReasonDx privacy policy — how we handle your data.">
+<title>Privacy & Data Practices | ReasonDx</title>
+<meta name="description" content="How ReasonDx collects, uses, and protects your data — including what we analyze from your reasoning sessions and how we handle research.">
 <style>
-:root{--blue:#2874A6;--font:'IBM Plex Sans',-apple-system,sans-serif}
+:root{--blue:#2874A6;--blue-dark:#1B4F72;--font:'IBM Plex Sans',-apple-system,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:#f8fafc;color:#1e293b;line-height:1.7}
-.container{max-width:720px;margin:0 auto;padding:60px 24px}
-h1{font-size:32px;font-weight:700;margin-bottom:8px}
-.updated{font-size:13px;color:#64748b;margin-bottom:32px}
-h2{font-size:20px;font-weight:700;margin-top:32px;margin-bottom:8px;color:#1B4F72}
-p{font-size:15px;margin-bottom:16px;color:#374151}
-a{color:var(--blue)}
-.back{display:inline-block;margin-bottom:24px;font-size:13px;color:var(--blue);text-decoration:none;font-weight:600}
-
-/* Dark mode */
-[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] .card,[data-theme="dark"] .container{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] input,[data-theme="dark"] select{background:#1e293b;color:#e2e8f0;border-color:#334155}
-[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3{color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] p{color:var(--rdx-text-secondary,#94a3b8)}
-[data-theme="dark"] .subtitle,[data-theme="dark"] .plan-price,[data-theme="dark"] .switch{color:var(--rdx-text-muted,#64748b)}
-[data-theme="dark"] label{color:#94a3b8}
-[data-theme="dark"] .plan{border-color:#334155;background:#1e293b}
-[data-theme="dark"] .plan.active,[data-theme="dark"] .plan:hover{background:rgba(40,116,166,.15);border-color:#5ba3cc}
-[data-theme="dark"] .legal{color:#475569}
-[data-theme="dark"] .badge{background:rgba(217,119,6,.15)}
+.container{max-width:760px;margin:0 auto;padding:60px 24px 80px}
+h1{font-size:34px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em}
+.updated{font-size:13px;color:#64748b;margin-bottom:12px}
+.intro{font-size:16px;color:#475569;margin-bottom:32px;padding:18px 20px;background:#eef5fb;border-left:3px solid var(--blue);border-radius:6px}
+h2{font-size:22px;font-weight:700;margin-top:40px;margin-bottom:12px;color:var(--blue-dark);letter-spacing:-0.01em}
+h3{font-size:17px;font-weight:600;margin-top:22px;margin-bottom:8px;color:#1e293b}
+p{font-size:15px;margin-bottom:14px;color:#374151}
+ul{margin:0 0 16px 22px}
+li{font-size:15px;margin-bottom:8px;color:#374151}
+a{color:var(--blue);text-decoration:underline}
+a:hover{color:var(--blue-dark)}
+.back{display:inline-block;margin-bottom:20px;font-size:13px;color:var(--blue);text-decoration:none;font-weight:600}
+.back:hover{text-decoration:underline}
+.toc{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:18px 22px;margin-bottom:36px}
+.toc-label{font-size:12px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.toc ol{margin-left:18px}
+.toc li{font-size:14px;margin-bottom:4px}
+.toc a{color:#374151;text-decoration:none}
+.toc a:hover{color:var(--blue);text-decoration:underline}
+.callout{background:#fffbeb;border:1px solid #fde68a;border-left:3px solid #d97706;border-radius:6px;padding:16px 20px;margin:16px 0}
+.callout strong{color:#78350f}
+.contact-box{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:20px 24px;margin-top:24px}
+.contact-box h3{margin-top:0}
+.footer-meta{margin-top:48px;padding-top:24px;border-top:1px solid #e2e8f0;font-size:13px;color:#94a3b8}
+.footer-meta a{color:#64748b}
+[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+[data-theme="dark"] .container{color:#e2e8f0}
+[data-theme="dark"] h1,[data-theme="dark"] h3{color:#e2e8f0}
+[data-theme="dark"] h2{color:#5ba3cc}
+[data-theme="dark"] p,[data-theme="dark"] li{color:#cbd5e1}
+[data-theme="dark"] .intro{background:rgba(40,116,166,.12);color:#cbd5e1}
+[data-theme="dark"] .toc,[data-theme="dark"] .contact-box{background:#1e293b;border-color:#334155}
+[data-theme="dark"] .toc a{color:#cbd5e1}
+[data-theme="dark"] .callout{background:rgba(217,119,6,.12);border-color:#d97706}
+[data-theme="dark"] .callout strong{color:#fbbf24}
 [data-theme="dark"] .back{color:#5ba3cc}
+[data-theme="dark"] .footer-meta{border-color:#334155;color:#64748b}
 </style>
 </head>
 <body>
 <noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<div id="main-content"></div>
+
 <div class="container">
   <a href="../index.html" class="back">← Back to ReasonDx</a>
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: March 2026</p>
-  <h2>Information We Collect</h2>
-  <p>ReasonDx collects basic account information (name, email, institution) and learning analytics data (case completion, quiz scores, time on task) to personalize your educational experience.</p>
-  <h2>How We Use Your Data</h2>
-  <p>Your data is used exclusively to deliver and improve the educational platform. We do not sell personal information to third parties. Aggregated, anonymized analytics may be used for educational research.</p>
-  <h2>Data Storage & Security</h2>
-  <p>Data is stored securely using industry-standard encryption. Learning progress is stored locally in your browser and optionally synced to our servers if you create an account.</p>
-  <h2>Your Rights</h2>
-  <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us at <a href="mailto:reasondxeducation@gmail.com">reasondxeducation@gmail.com</a>.</p>
-  <h2>Contact</h2>
-  <p>Questions about this policy? Email <a href="mailto:reasondxeducation@gmail.com">reasondxeducation@gmail.com</a>.</p>
-  <p style="margin-top:40px;font-size:12px;color:#94a3b8">© 2025–2026 ReasonDx. All rights reserved.</p>
+  <div id="main-content"></div>
+
+  <h1>Privacy & Data Practices</h1>
+  <p class="updated">Last updated: April 2026</p>
+
+  <div class="intro">
+    ReasonDx is a clinical reasoning education platform. To help you learn — and to make the platform better — we collect information about how you interact with it. This page explains what we collect, how we use it, and the choices you have. We've tried to write this in plain English.
+  </div>
+
+  <div class="toc">
+    <div class="toc-label">On this page</div>
+    <ol>
+      <li><a href="#what-we-collect">What we collect</a></li>
+      <li><a href="#reasoning-analysis">How we analyze your reasoning</a></li>
+      <li><a href="#how-we-use">How we use your data</a></li>
+      <li><a href="#research">Research and platform improvement</a></li>
+      <li><a href="#third-parties">Third parties</a></li>
+      <li><a href="#retention">How long we keep data</a></li>
+      <li><a href="#your-choices">Your choices and rights</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#contact">Contact us</a></li>
+    </ol>
+  </div>
+
+  <h2 id="what-we-collect">1. What we collect</h2>
+
+  <h3>Account information</h3>
+  <p>If you create an account or give us your email, we store your email address, any name or institution you provide, your profession profile (medical student, resident, pharmacy student, etc.), and any cohort or program you've been invited to.</p>
+
+  <h3>Learning activity</h3>
+  <p>As you work through the platform, we record which cases you start and finish, how long you spend in each phase of a case, the answers you select, the questions you ask the AI attending, and which reasoning tools you use (fingerprint analysis, bias analysis, differential builder, and others).</p>
+
+  <h3>Free-text responses</h3>
+  <p>When you type responses to the AI attending, questions during patient interviews, or reasoning explanations, we store the text of those responses alongside the rest of your case data. The next section explains what we do with that text.</p>
+
+  <h3>Session and technical data</h3>
+  <p>We record an anonymous session ID, the pages you visit, the approximate time you spend on each page, your browser and device type, your general geographic region (from IP address — not precise location), and referrer information if you arrived from another site.</p>
+
+  <h2 id="reasoning-analysis">2. How we analyze your reasoning</h2>
+
+  <p>This is the section most platforms don't explain clearly. ReasonDx analyzes patterns in your reasoning to give you feedback and help you improve. We think you should know exactly what that means.</p>
+
+  <h3>Passive linguistic analysis</h3>
+  <p>When you type free-text responses, we automatically analyze them for:</p>
+  <ul>
+    <li><strong>Hedging and confidence language</strong> — words like "might," "probably," "definitely," which we use to estimate how confident you are in your reasoning.</li>
+    <li><strong>Question type</strong> — whether your questions to the AI attending are open-ended, closed, leading, or clarifying.</li>
+    <li><strong>Response latency</strong> — how quickly you reply, which we use as one signal of cognitive load.</li>
+    <li><strong>Empathy and rapport signals</strong> — communication patterns in how you talk to simulated patients.</li>
+    <li><strong>Emotional tone</strong> — the affective content of your language (calm, concerned, alarmed), which research suggests can influence diagnostic accuracy.</li>
+    <li><strong>Cue utilization</strong> — whether you followed up on clinical cues the patient mentioned.</li>
+  </ul>
+
+  <h3>Bias detection</h3>
+  <p>We look for patterns in your decisions that research has linked to common cognitive biases in clinical reasoning — anchoring, premature closure, availability bias, confirmation bias, framing effects, and base rate neglect. Our feedback is meant as a learning tool, not a clinical judgment about you.</p>
+
+  <h3>Clinical reasoning fingerprint</h3>
+  <p>Across multiple cases, we build a picture of your reasoning patterns — where you tend to pause, which diagnostic frameworks you favor, how your accuracy varies across types of cases, and how your confidence tracks with correctness. This is what powers the fingerprint analysis you can view on your dashboard.</p>
+
+  <div class="callout">
+    <strong>Plain version:</strong> when you write answers to the AI attending, we don't just store the text — we analyze it for signals about how you're thinking. That's the core of what makes ReasonDx work as an education platform, but it's also the thing most likely to surprise you, so we want to be upfront about it.
+  </div>
+
+  <h2 id="how-we-use">3. How we use your data</h2>
+  <ul>
+    <li><strong>To deliver the platform</strong> — saving your progress, showing your dashboard, giving you personalized feedback.</li>
+    <li><strong>To improve the platform</strong> — seeing which cases are working, where students get stuck, which features are used, and fixing problems.</li>
+    <li><strong>To send you relevant messages</strong> — if you've given us your email, we may send occasional platform updates, reminders, or educational content. You can unsubscribe anytime.</li>
+    <li><strong>To support institutions you're affiliated with</strong> — if you join a program or cohort, we share aggregate performance summaries with that program's faculty (not individual reasoning text unless explicitly part of a coursework submission).</li>
+  </ul>
+  <p>We do <strong>not</strong> sell your personal information. We do not share identifiable learning data with advertisers.</p>
+
+  <h2 id="research">4. Research and platform improvement</h2>
+  <p>ReasonDx is an education platform, and we also intend to contribute to the field of clinical reasoning education through research. We distinguish between two types of research use, and they're handled very differently:</p>
+
+  <h3>General platform improvement (covered by this notice)</h3>
+  <p>We may analyze aggregated, de-identified patterns from platform use to improve how the platform works — which case types need better scaffolding, which reasoning tools actually help, how different professions learn. This is covered by your agreement to these terms.</p>
+
+  <h3>Formal research studies (separate consent required)</h3>
+  <p>If we want to use your data in a formal research study intended for publication, that requires a separate process: Institutional Review Board (IRB) approval of the specific study, and a separate consent form that you would sign explicitly for that study. Your decision to use ReasonDx does not enroll you in any research study. If you're ever approached about a formal study, it will be clearly labeled as such and will require its own, specific consent — which you're free to decline without affecting your use of the platform.</p>
+
+  <div class="callout">
+    <strong>In short:</strong> general platform improvement happens under this notice; any formal research study will come with its own explicit consent form.
+  </div>
+
+  <h2 id="third-parties">5. Third parties</h2>
+  <p>We use a small number of third-party services to run ReasonDx:</p>
+  <ul>
+    <li><strong>Supabase</strong> — stores your account data and learning activity.</li>
+    <li><strong>Cloudflare</strong> — hosts our backend functions and workers, including email delivery and the AI attending infrastructure.</li>
+    <li><strong>Anthropic</strong> — provides the AI model that powers the AI attending. Your free-text responses are sent to Anthropic's API to generate replies. Anthropic does not use data sent through the API to train its models by default; see <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic's privacy policy</a>.</li>
+    <li><strong>Google Analytics</strong> — aggregate traffic analytics. You can opt out via browser settings or a Google Analytics opt-out extension.</li>
+    <li><strong>Loops</strong> — email delivery for platform messages, if you've given us your email.</li>
+    <li><strong>Stripe</strong> — payment processing for paid plans, if applicable. We do not see or store your full payment card details.</li>
+    <li><strong>Vercel</strong> — website hosting and edge delivery.</li>
+  </ul>
+  <p>Each of these providers has their own privacy policy. We only share with them what's needed for them to do their job.</p>
+
+  <h2 id="retention">6. How long we keep data</h2>
+  <p>We keep your account and learning data for as long as your account is active, and for a reasonable period after — typically up to 2 years — to support longitudinal feedback and account recovery. You can request earlier deletion at any time (see your rights below). Aggregated, de-identified analytics may be kept longer because they can no longer be traced to you.</p>
+
+  <h2 id="your-choices">7. Your choices and rights</h2>
+
+  <h3>Using ReasonDx without an account</h3>
+  <p>You can browse cases and use many features without creating an account. In that case, we only have anonymous session data (no email, no name) stored locally in your browser and associated with an anonymous session ID on our servers.</p>
+
+  <h3>Requesting your data</h3>
+  <p>You can ask us for a copy of the data we hold about you. We'll send it to you in a portable format within a reasonable time.</p>
+
+  <h3>Requesting deletion</h3>
+  <p>You can ask us to delete your account and associated data. We'll honor the request, with two caveats: (1) we may retain aggregated, de-identified data that can no longer be linked to you, and (2) if you're part of a formal research study with its own consent, that study's data handling is governed by its specific IRB protocol.</p>
+
+  <h3>Correcting your information</h3>
+  <p>You can update your profile details directly in your account settings, or ask us to make corrections.</p>
+
+  <h3>Opting out of optional communications</h3>
+  <p>Every email we send you includes an unsubscribe link. Unsubscribing from platform messages doesn't delete your account.</p>
+
+  <h3>If you're in the EU/UK or California</h3>
+  <p>You have specific rights under GDPR (EU/UK) and the CCPA (California). We honor these rights globally as a matter of policy — data access, deletion, correction, and portability are available to all users regardless of location. Contact us to exercise them.</p>
+
+  <h2 id="security">8. Security</h2>
+  <p>We use industry-standard security practices — encrypted connections (HTTPS/TLS), encrypted-at-rest databases, access controls on our backend, and regular review of our infrastructure. No system is perfectly secure, and we'll notify affected users if a breach involving personal data ever occurs.</p>
+
+  <h2 id="contact">9. Contact us</h2>
+  <div class="contact-box">
+    <h3>Questions, requests, or concerns</h3>
+    <p>Email <a href="mailto:reasondxeducation@gmail.com">reasondxeducation@gmail.com</a> for anything related to your data — requesting a copy, correction, deletion, or just a question about how something works. We aim to respond within 10 business days.</p>
+    <p style="margin-bottom:0">Founder: Lauren Fine, MD &middot; ReasonDx</p>
+  </div>
+
+  <h2>Changes to this policy</h2>
+  <p>If we materially change how we handle your data, we'll update this page and note the change at the top. For significant changes affecting existing users, we'll notify you before the change takes effect.</p>
+
+  <p class="footer-meta">
+    This page describes practices for ReasonDx as of the date above. For our terms of service, see <a href="terms.html">Terms of Service</a>. © 2025–2026 ReasonDx. All rights reserved.
+  </p>
 </div>
+
 <script src="../js/rdx-nav.js"></script>
 <script src="../js/rdx-help-widget.js"></script>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{})</script>
