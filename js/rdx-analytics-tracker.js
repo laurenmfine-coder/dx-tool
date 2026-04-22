@@ -431,34 +431,37 @@ function trackSessionEnd() {
 // INITIALIZE ALL INSTRUMENTS
 // ═══════════════════════════════════════
 function init() {
-  // Wait for auth to resolve before tracking
+  // Flag to prevent double-instrumentation when auth event fires after
+  // anonymous instrumentation already started.
+  var _instrumented = false;
+  function runAll() {
+    if (_instrumented) return;
+    _instrumented = true;
+    trackPageView();
+    instrumentEMR();
+    instrumentTrackBoard();
+    instrumentCRT();
+    instrumentConsult();
+    instrumentProcedureLab();
+    instrumentPathway();
+    trackSessionEnd();
+  }
+
+  // Wait for auth to resolve before tracking (authenticated users)
   document.addEventListener('rdx:auth', function(e) {
     if (e.detail.user) {
       log('Auth resolved, starting instrumentation for ' + _currentPage);
-      trackPageView();
-      instrumentEMR();
-      instrumentTrackBoard();
-      instrumentCRT();
-      instrumentConsult();
-      instrumentProcedureLab();
-      instrumentPathway();
-      trackSessionEnd();
+      runAll();
     }
   });
 
-  // Also try immediately in case auth already resolved
+  // Also try immediately — covers BOTH authenticated (if already logged in)
+  // AND anonymous users (majority of traffic). This is the critical path
+  // that was missing: previously this fired only for authenticated users.
   setTimeout(function() {
-    if (window.RDX && RDX.getProfile()) {
-      log('Late init: auth already resolved');
-      trackPageView();
-      instrumentEMR();
-      instrumentTrackBoard();
-      instrumentCRT();
-      instrumentConsult();
-      instrumentProcedureLab();
-      instrumentPathway();
-      trackSessionEnd();
-    }
+    if (_instrumented) return;
+    log('Immediate init — anonymous or pre-authenticated path');
+    runAll();
   }, 2000);
 }
 
