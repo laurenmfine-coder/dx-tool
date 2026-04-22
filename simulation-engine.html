@@ -4,6 +4,8 @@
 <script src="/js/rdx-config.js"></script>
 <script src="/js/rdx-mobile-gate.js"></script>
 <script src="/js/rdx-data-consent.js"></script>
+<script src="/emr-data/case-tokens.js"></script>
+<script src="/js/rdx-share.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1836,6 +1838,28 @@ function enterPhase(phase) {
     AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData, ragContext)
               .then(function(debrief) {
                 addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
+                // Post-case share panel — appears after debrief renders
+                try {
+                  if (window.RDXShare && window.RDXShare.renderPostCaseSharePanel) {
+                    setTimeout(function() {
+                      var chat = document.getElementById('chatContainer') || document.getElementById('chat-container') || document.querySelector('.chat-container');
+                      if (chat) {
+                        var wrap = document.createElement('div');
+                        wrap.style.cssText = 'padding:0 16px;';
+                        chat.appendChild(wrap);
+                        window.RDXShare.renderPostCaseSharePanel({
+                          caseSlug: state.caseId,
+                          caseTitle: (caseData && caseData.presentation && caseData.presentation.chiefComplaint) || 'this case',
+                          container: wrap,
+                        });
+                        // scroll share panel into view after brief delay
+                        setTimeout(function() { try { wrap.scrollIntoView({behavior:'smooth', block:'center'}); } catch(e) {} }, 400);
+                      }
+                    }, 1200);
+                  }
+                } catch (shareErr) {
+                  if (window.console) console.warn('[Simulation] Post-case share panel failed (non-fatal):', shareErr);
+                }
               // Study mode: append labeled bias feedback
               if (studyMode && _caseEntry && _caseEntry.biasTarget) {
                 var biasLabels = {

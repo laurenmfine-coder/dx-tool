@@ -4,6 +4,8 @@
 <script src="/js/rdx-config.js"></script>
 <script src="/js/rdx-mobile-gate.js"></script>
 <script src="/js/rdx-data-consent.js"></script>
+<script src="/emr-data/case-tokens.js"></script>
+<script src="/js/rdx-share.js"></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
@@ -366,16 +368,22 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   })();
   </script>
 
-  <!-- Invite a classmate card -->
+  <!-- Invite a classmate card — upgraded to use real referral code + counter -->
   <div id="rdx-invite-card" style="display:none;background:linear-gradient(135deg,#EBF5FB,#E8F8F5);border:1px solid #BEE3F8;border-radius:16px;padding:20px 28px;margin:0 auto 24px;max-width:900px;width:100%">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-      <div>
-        <div style="font-size:14px;font-weight:700;color:#1B4F72;margin-bottom:4px">🎓 Invite a classmate</div>
-        <div style="font-size:13px;color:#475569">ReasonDx is free. Share it with your study group — it works for medicine, nursing, pharmacy, PT, OT, and more.</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div style="flex:1;min-width:260px">
+        <div style="font-size:14px;font-weight:700;color:#1B4F72;margin-bottom:4px">🎓 Share ReasonDx with a colleague</div>
+        <div style="font-size:13px;color:#475569;line-height:1.5">ReasonDx is free. It works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry, and more.</div>
+        <div id="rdx-invite-stats" style="margin-top:10px;font-size:12px;color:#64748b"></div>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="rdxCopyInviteLink()" id="rdx-invite-copy-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit" aria-label="Copy referral invite link">Copy invite link</button>
-        <a href="mailto:?subject=Free clinical reasoning practice&body=I've been using ReasonDx for clinical reasoning practice and thought you might find it useful. It\'s free and works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry and more.%0A%0Ahttps://reasondx.com" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Email a friend →</a>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <div id="rdx-invite-code-row" style="display:none;font-size:12px;color:#64748b;font-family:ui-monospace,Menlo,monospace;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:4px 10px">
+          Your code: <strong id="rdx-invite-code" style="color:#1B4F72"></strong>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button onclick="rdxCopyInviteLink()" id="rdx-invite-copy-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit" aria-label="Copy referral invite link">Copy invite link</button>
+          <button onclick="rdxOpenEmailInvite()" id="rdx-invite-email-btn" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Email a colleague →</button>
+        </div>
       </div>
     </div>
   </div>
@@ -387,15 +395,69 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       var card = document.getElementById('rdx-invite-card');
       if (card) card.style.display = 'block';
     }
+    // Populate real referral code + counter when available
+    setTimeout(function() {
+      try {
+        if (window.RDX && window.RDX.referrals && window.RDX.referrals.stats) {
+          window.RDX.referrals.stats().then(function(stats) {
+            if (!stats) return;
+            var code = stats.code || null;
+            var totalReferred = stats.totalReferred || 0;
+            if (code) {
+              var codeEl = document.getElementById('rdx-invite-code');
+              var rowEl = document.getElementById('rdx-invite-code-row');
+              if (codeEl) codeEl.textContent = code;
+              if (rowEl) rowEl.style.display = 'inline-block';
+            }
+            var statsEl = document.getElementById('rdx-invite-stats');
+            if (statsEl && totalReferred > 0) {
+              statsEl.textContent = totalReferred + ' classmate' + (totalReferred === 1 ? ' has' : 's have') + ' joined using your code — thank you!';
+            }
+            // Always show the card once authenticated (even with <5 sims) so users can start sharing
+            var card = document.getElementById('rdx-invite-card');
+            if (card && code) card.style.display = 'block';
+          });
+        }
+      } catch (e) {}
+    }, 1200);
   })();
+
+  function rdxGetInviteUrl() {
+    // Prefer RDXShare utility if loaded
+    if (window.RDXShare && window.RDXShare.getReferralShareUrl) {
+      // Async path handled below; return sync fallback
+    }
+    var code = document.getElementById('rdx-invite-code');
+    var codeText = code && code.textContent ? code.textContent.trim() : '';
+    var base = (location && location.origin) || 'https://reasondx.com';
+    return codeText ? (base + '/?ref=' + encodeURIComponent(codeText)) : base;
+  }
+
   function rdxCopyInviteLink() {
-    var url = 'https://reasondx.com';
-    try {
-      navigator.clipboard.writeText(url).then(function() {
-        var btn = document.getElementById('rdx-invite-copy-btn');
-        if (btn) { btn.textContent = '✓ Copied!'; setTimeout(function(){ btn.textContent = 'Copy invite link'; }, 2000); }
-      });
-    } catch(e) {}
+    var url = rdxGetInviteUrl();
+    var btn = document.getElementById('rdx-invite-copy-btn');
+    var copyFn = (window.RDXShare && window.RDXShare.copyToClipboard)
+      ? window.RDXShare.copyToClipboard
+      : function(t) { return navigator.clipboard.writeText(t); };
+    copyFn(url).then(function() {
+      if (btn) { btn.textContent = '✓ Copied!'; setTimeout(function(){ btn.textContent = 'Copy invite link'; }, 2000); }
+      if (window.RDXShare && window.RDXShare.logShare) {
+        window.RDXShare.logShare({ channel: 'referral_copy', context: 'dashboard' });
+      }
+    }).catch(function() {});
+  }
+
+  function rdxOpenEmailInvite() {
+    var url = rdxGetInviteUrl();
+    var subject = encodeURIComponent('Free clinical reasoning practice — thought you might like this');
+    var body = encodeURIComponent(
+      "I've been using ReasonDx for clinical reasoning practice and thought you might find it useful. " +
+      "It's free, works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry and more — and you can start practicing cases in a few minutes without signing up.\n\n" + url
+    );
+    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+    if (window.RDXShare && window.RDXShare.logShare) {
+      window.RDXShare.logShare({ channel: 'referral_email', context: 'dashboard' });
+    }
   }
   </script>
 
