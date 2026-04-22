@@ -18,20 +18,23 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
 (function() {
 'use strict';
 
-// Wait for RDX to be available. It may load asynchronously via the
-// Supabase SDK onload callback, so we poll briefly before giving up.
+// Wait for RDX to be available AND supabase client to be initialized.
+// The Supabase SDK may load asynchronously, so we poll briefly.
 function startTracker() {
-  if (typeof window.RDX === 'undefined' || !window.RDX.track) {
+  var rdxReady = typeof window.RDX !== 'undefined'
+    && window.RDX.track
+    && window.RDX.ready === true;
+
+  if (!rdxReady) {
     if (startTracker._attempts === undefined) startTracker._attempts = 0;
     startTracker._attempts++;
-    if (startTracker._attempts > 40) {  // 40 * 150ms = 6 seconds
-      console.warn('[Tracker] RDX not loaded after 6s. Analytics tracking disabled.');
+    if (startTracker._attempts > 60) {  // 60 * 150ms = 9 seconds
+      console.warn('[Tracker] RDX never became ready after 9s. Analytics tracking disabled.');
       return;
     }
     setTimeout(startTracker, 150);
     return;
   }
-  // RDX is ready — run the main tracker body below
   _init();
 }
 
