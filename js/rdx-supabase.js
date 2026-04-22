@@ -170,10 +170,10 @@ function isPD() {
 // CASE ATTEMPT TRACKING
 // ═══════════════════════════════════════
 async function startCaseAttempt(caseId, opts) {
-  try {  if (!supabase || !currentUser) return fallbackStore('case_start', caseId, opts);
+  try {  if (!supabase) return fallbackStore('case_start', caseId, opts);
 
   var row = {
-    user_id: currentUser.id,
+    user_id: currentUser ? currentUser.id : null,
     case_id: caseId,
     setting: (opts && opts.setting) || null,
     tool: (opts && opts.tool) || 'virtual-emr',
@@ -314,10 +314,10 @@ async function advanceCRTStage(attemptId, stageNum, stageData) {
 // CONSULT TRACKING
 // ═══════════════════════════════════════
 async function startConsult(caseId, specialist) {
-  if (!supabase || !currentUser) return fallbackStore('consult_start', caseId, specialist);
+  if (!supabase) return fallbackStore('consult_start', caseId, specialist);
 
   var result = await supabase.from('consult_attempts').insert({
-    user_id: currentUser.id,
+    user_id: currentUser ? currentUser.id : null,
     case_id: caseId,
     specialist: specialist
   }).select().single();
@@ -364,10 +364,10 @@ async function completeConsult(consultId, rubricScores) {
 // PROCEDURE TRACKING
 // ═══════════════════════════════════════
 async function logProcedure(type, data) {
-  if (!supabase || !currentUser) return fallbackStore('procedure', type, data);
+  if (!supabase) return fallbackStore('procedure', type, data);
 
   return await supabase.from('procedure_attempts').insert({
-    user_id: currentUser.id,
+    user_id: currentUser ? currentUser.id : null,
     procedure_type: type,
     score: data.score || null,
     time_seconds: data.timeSeconds || null,
@@ -415,10 +415,10 @@ async function getMilestones(userId) {
 // ANALYTICS EVENTS
 // ═══════════════════════════════════════
 async function trackEvent(eventType, attemptId, eventData) {
-  if (!supabase || !currentUser) return fallbackStore('event', eventType, eventData);
+  if (!supabase) return fallbackStore('event', eventType, eventData);
 
   return await supabase.from('analytics_events').upsert({
-    user_id: currentUser.id,
+    user_id: currentUser ? currentUser.id : null,
     attempt_id: attemptId || null,
     event_type: eventType,
     event_data: eventData || {}
