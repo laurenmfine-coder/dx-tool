@@ -180,12 +180,15 @@ function getCaseForToday() {
 }
 
 // ── SUBJECT LINES ────────────────────────────────────────────────────────────
-// Rotates through 4 subject line formats to avoid inbox fatigue
+// Rotates through 4 subject formats to avoid inbox fatigue AND prevent Gmail
+// from threading weekly emails together (which causes middle-truncation with
+// "..." expanders). Every subject includes the unique case title so Gmail
+// sees each email as distinct.
 const SUBJECT_TEMPLATES = [
-  c => `Your Weekly Case: ${c.title} — ReasonDx`,
-  c => `New case ready — ReasonDx 🩺`,
-  c => `This week's clinical reasoning case`,
-  c => `Your case is waiting — ReasonDx`,
+  c => `Your weekly case: ${c.title}`,
+  c => `New case — ${c.title}`,
+  c => `This week: ${c.title}`,
+  c => `${c.title} — a case for you`,
 ];
 
 function getSubject(caseData, sendIndex) {
@@ -225,7 +228,7 @@ function buildWeeklyEmail(user, caseData) {
         </td>
         <td style="vertical-align:top">
           <p style="font-family:Georgia,serif;font-size:17px;color:#0d2b3e;margin:0 0 10px">Hi ${firstName},</p>
-          <p style="font-size:14px;color:#3d4f61;line-height:1.75;margin:0">I built ReasonDx because I wanted the clinical reasoning tool I wished I'd had in training. Every case here was written and tested by me, designed around how clinicians actually think at the bedside. Glad you're here — let's work through this week's case together.</p>
+          <p style="font-size:14px;color:#3d4f61;line-height:1.75;margin:0">I built ReasonDx because I wanted the clinical reasoning tool I wished I'd had in training. Every case is designed around how clinicians actually think at the bedside — the messy, iterative process of real diagnosis. Glad you're here.</p>
         </td>
       </tr>
     </table>
@@ -424,9 +427,17 @@ async function runWeeklySend(env) {
   const SUPABASE_KEY  = env.SUPABASE_ANON_KEY;
 
   const caseData    = getCaseForToday();
-  const sendIndex   = Math.floor((Date.now() - new Date('2026-01-05').getTime()) / (7 * 24 * 60 * 60 * 1000)) * 2;
-  const subject     = getSubject(caseData, sendIndex);
-  const subscribers = await getWeeklySubscribers(SUPABASE_KEY);
+  // Use the same Mon/Thu counter as getCaseForToday so subject rotation
+  // actually cycles through all 4 templates across Mon/Thu sends.
+  // Previous bug: sendIndex = weekNumber * 2 produced only even values,
+  // so only subjects 0 and 2 ever appeared.
+  const EPOCH          = new Date('2026-01-05T00:00:00Z').getTime();
+  const daysSinceEpoch = Math.floor((Date.now() - EPOCH) / (24 * 60 * 60 * 1000));
+  const weekNumber     = Math.floor(daysSinceEpoch / 7);
+  const dayOfWeek      = new Date().getUTCDay(); // 1=Mon, 4=Thu
+  const sendIndex      = weekNumber * 2 + (dayOfWeek === 4 ? 1 : 0);
+  const subject        = getSubject(caseData, sendIndex);
+  const subscribers    = await getWeeklySubscribers(SUPABASE_KEY);
 
   console.log(`Weekly send: "${caseData.title}" (cx=${caseData.token}) → ${subscribers.length} subscribers`);
 
