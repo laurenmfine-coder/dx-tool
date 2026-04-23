@@ -365,17 +365,29 @@ function buildWeeklyEmail(user, caseData) {
 }
 
 // ── EMAIL SEND ───────────────────────────────────────────────────────────────
+// Returns { ok: boolean, status?: number, data?: any, error?: string }
+// instead of a bare boolean, so callers can inspect what went wrong.
 async function sendEmail(to, subject, html, resendKey) {
   try {
+    if (!resendKey) {
+      return { ok: false, error: 'RESEND_API_KEY is missing or empty in env' };
+    }
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ from: FROM_EMAIL, reply_to: REPLY_TO, to, subject, html })
     });
-    const data = await res.json();
-    if (!res.ok) { console.error(`Send failed to ${to}:`, data); return false; }
-    return true;
-  } catch(e) { console.error(`Error sending to ${to}:`, e); return false; }
+    let data = null;
+    try { data = await res.json(); } catch (_) { data = await res.text().catch(() => null); }
+    if (!res.ok) {
+      console.error(`Send failed to ${to}:`, data);
+      return { ok: false, status: res.status, data, error: `Resend responded ${res.status}` };
+    }
+    return { ok: true, status: res.status, data };
+  } catch (e) {
+    console.error(`Error sending to ${to}:`, e);
+    return { ok: false, error: String(e?.message || e), stack: e?.stack };
+  }
 }
 
 // ── FETCH SUBSCRIBERS ────────────────────────────────────────────────────────
@@ -406,8 +418,8 @@ async function runWeeklySend(env) {
   for (const user of subscribers) {
     if (!user.email) continue;
     const html    = buildWeeklyEmail(user, caseData);
-    const success = await sendEmail(user.email, subject, html, RESEND_KEY);
-    if (success) sent++; else failed++;
+    const result  = await sendEmail(user.email, subject, html, RESEND_KEY);
+    if (result.ok) sent++; else failed++;
     await new Promise(r => setTimeout(r, 100)); // rate limiting
   }
 
@@ -422,22 +434,123 @@ export default {
     ctx.waitUntil(runWeeklySend(env));
   },
 
-  // HTTP trigger for testing — POST {"test_email": "you@example.com"}
+  // HTTP trigger — supports three modes:
+  //   GET or POST without body  → echoes help text (no-op)
+  //   GET|POST ?diag=1          → returns full diagnostic (env vars present, Supabase reachable,
+  //                                case resolution, template build) WITHOUT sending any email.
+  //                                Safe to run repeatedly.
+  //   POST with {test_email}    → sends a single test email to that address, returns detailed
+  //                                result. Wrapped in try/catch so any error shows in response body.
   async fetch(request, env) {
-    if (request.method !== 'POST') {
-      return new Response('POST {"test_email": "your@email.com"} to send a test', { status: 200 });
+    const url = new URL(request.url);
+    const step = { name: 'start' };
+    const diag = {
+      now: new Date().toISOString(),
+      method: request.method,
+      url: request.url,
+      env: {
+        RESEND_API_KEY: env?.RESEND_API_KEY ? `present (${String(env.RESEND_API_KEY).slice(0, 4)}…)` : 'MISSING',
+        SUPABASE_ANON_KEY: env?.SUPABASE_ANON_KEY ? `present (${String(env.SUPABASE_ANON_KEY).slice(0, 8)}…)` : 'MISSING',
+      },
+    };
+
+    // Wrap EVERYTHING in try/catch so the client always gets a JSON body (never error 1101)
+    try {
+      // Help text on GET
+      if (request.method === 'GET' && !url.searchParams.get('diag')) {
+        return json({
+          ok: true,
+          help: 'POST {"test_email":"you@domain.com"} to send a test; or GET ?diag=1 for a non-sending diagnostic.',
+          diag,
+        });
+      }
+
+      // ── Diagnostic mode (does not send email) ─────────────────────────────
+      if (url.searchParams.get('diag')) {
+        step.name = 'getCaseForToday';
+        const caseData = getCaseForToday();
+        diag.case = caseData ? { title: caseData.title, token: caseData.token, slug: caseData.slug } : null;
+
+        step.name = 'buildWeeklyEmail';
+        const html = buildWeeklyEmail({ email: 'test@example.com', full_name: 'Lauren Fine' }, caseData);
+        diag.htmlLength = html?.length || 0;
+
+        step.name = 'getSubject';
+        diag.subject = getSubject(caseData, 0);
+
+        // Probe Supabase view (doesn't write anything)
+        step.name = 'getWeeklySubscribers';
+        try {
+          const res = await fetch(
+            `${SUPABASE_URL}/rest/v1/weekly_email_eligible?select=email&limit=1`,
+            { headers: { 'apikey': env.SUPABASE_ANON_KEY || '', 'Authorization': `Bearer ${env.SUPABASE_ANON_KEY || ''}` } }
+          );
+          const text = await res.text();
+          diag.supabase = { status: res.status, ok: res.ok, body: text.slice(0, 500) };
+        } catch (e) {
+          diag.supabase = { error: String(e?.message || e) };
+        }
+
+        return json({ ok: true, mode: 'diag', diag });
+      }
+
+      // ── Test send mode ─────────────────────────────────────────────────────
+      if (request.method !== 'POST') {
+        return json({ ok: false, error: 'Use POST with {test_email:"..."} or GET ?diag=1', diag }, 405);
+      }
+
+      step.name = 'parseBody';
+      const body = await request.json().catch(() => ({}));
+      diag.bodyKeys = Object.keys(body);
+
+      if (body.test_email) {
+        step.name = 'getCaseForToday';
+        const caseData = getCaseForToday();
+        diag.case = caseData ? { title: caseData.title, token: caseData.token } : null;
+
+        step.name = 'buildWeeklyEmail';
+        const html = buildWeeklyEmail({ email: body.test_email, full_name: 'Lauren Fine' }, caseData);
+        diag.htmlLength = html?.length || 0;
+
+        step.name = 'getSubject';
+        const subject = getSubject(caseData, 0);
+        diag.subject = subject;
+
+        step.name = 'sendEmail';
+        const result = await sendEmail(body.test_email, `[TEST] ${subject}`, html, env.RESEND_API_KEY);
+        return json({
+          ok: !!result.ok,
+          mode: 'test_send',
+          to: body.test_email,
+          case: caseData?.title,
+          subject,
+          sendResult: result,
+          diag,
+        });
+      }
+
+      // ── Bulk send (same as cron) ───────────────────────────────────────────
+      step.name = 'runWeeklySend';
+      const result = await runWeeklySend(env);
+      return json({ ok: true, mode: 'bulk', result, diag });
+
+    } catch (err) {
+      // This is the catch that prevents error 1101 — any exception inside the handler
+      // lands here and gets returned as JSON so the caller can see exactly what failed.
+      return json({
+        ok: false,
+        failedAtStep: step.name,
+        error: String(err?.message || err),
+        stack: err?.stack,
+        diag,
+      }, 500);
     }
-    const body = await request.json().catch(() => ({}));
-    if (body.test_email) {
-      const caseData = getCaseForToday();
-      const html     = buildWeeklyEmail({ email: body.test_email, full_name: 'Lauren Fine' }, caseData);
-      const subject  = getSubject(caseData, 0);
-      const success  = await sendEmail(body.test_email, `[TEST] ${subject}`, html, env.RESEND_API_KEY);
-      return new Response(JSON.stringify({ success, case: caseData.title, subject }), {
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-    const result = await runWeeklySend(env);
-    return new Response(JSON.stringify(result), { headers: { 'Content-Type': 'application/json' } });
   }
 };
+
+function json(obj, status = 200) {
+  return new Response(JSON.stringify(obj, null, 2), {
+    status,
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
