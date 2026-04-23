@@ -216,10 +216,20 @@ function buildWeeklyEmail(user, caseData) {
     <p style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin:0">Clinical Reasoning Education</p>
   </div>
 
-  <!-- Greeting -->
+  <!-- Greeting with personal intro -->
   <div style="padding:44px 48px 0">
-    <p style="font-family:Georgia,serif;font-size:17px;color:#0d2b3e;margin:0 0 22px">Hi ${firstName},</p>
-    <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:0 0 20px">Your weekly case is ready.</p>
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%">
+      <tr>
+        <td style="vertical-align:top;width:88px;padding-right:18px">
+          <img src="https://www.reasondx.com/images/lauren-fine.jpg" alt="Lauren Fine" width="72" height="72" style="display:block;width:72px;height:72px;border-radius:50%;border:2px solid #e8ecf0;object-fit:cover">
+        </td>
+        <td style="vertical-align:top">
+          <p style="font-family:Georgia,serif;font-size:17px;color:#0d2b3e;margin:0 0 10px">Hi ${firstName},</p>
+          <p style="font-size:14px;color:#3d4f61;line-height:1.75;margin:0">I built ReasonDx because I wanted the clinical reasoning tool I wished I'd had in training. Every case here was written and tested by me, designed around how clinicians actually think at the bedside. Glad you're here — let's work through this week's case together.</p>
+        </td>
+      </tr>
+    </table>
+    <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:22px 0 20px">Your weekly case is ready.</p>
   </div>
 
   <!-- Divider -->
@@ -332,6 +342,13 @@ function buildWeeklyEmail(user, caseData) {
     <p style="font-size:15px;color:#3d4f61;line-height:1.85;margin:12px 0 0;font-family:Georgia,serif">See you next week.</p>
     <p style="font-family:Georgia,serif;font-size:16px;color:#0d2b3e;margin:20px 0 3px">Lauren Fine, MD</p>
     <p style="font-family:Georgia,serif;font-size:12px;color:#94a3b8;font-style:italic;margin:0">Founder, ReasonDx</p>
+  </div>
+
+  <!-- Beyond ReasonDx — personal links (small, unobtrusive) -->
+  <div style="padding:0 48px 28px">
+    <p style="font-family:Georgia,serif;font-size:12px;color:#64748b;font-style:italic;line-height:1.75;margin:0;text-align:center">
+      Beyond ReasonDx — I write <a href="https://permissiontochange.substack.com" style="color:#2874A6;text-decoration:none"><em>Permission to Change</em></a>, a Substack on career reinvention and finding your ikigai in medicine. My <a href="https://www.youtube.com/watch?v=sLYEH6-Mshw" style="color:#2874A6;text-decoration:none">TEDx talk</a> tells the story of leaving clinical practice for medical education.
+    </p>
   </div>
 
   <!-- Social share footer -->
