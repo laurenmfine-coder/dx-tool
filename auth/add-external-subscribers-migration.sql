@@ -1,17 +1,14 @@
 -- =====================================================================
 -- Migration: Add external_subscribers table and update weekly_email_eligible view
--- Purpose: Support email subscribers who signed up via Flodesk or other external forms
---          without requiring them to create Supabase auth accounts
 -- =====================================================================
 
--- 1. Create the external subscribers table
 CREATE TABLE IF NOT EXISTS external_subscribers (
   id          uuid          PRIMARY KEY DEFAULT gen_random_uuid(),
   email       text          NOT NULL UNIQUE,
   full_name   text,
-  source      text,                         -- e.g., 'flodesk', 'platform_signup'
-  segment     text,                         -- e.g., 'Beta Testers', 'Waitlist-General'
-  email_weekly_case  boolean DEFAULT TRUE,  -- opt-in for twice-weekly cases
+  source      text,
+  segment     text,
+  email_weekly_case  boolean DEFAULT TRUE,
   subscribed_at      timestamptz DEFAULT now(),
   unsubscribed_at    timestamptz,
   notes       text
@@ -21,11 +18,19 @@ CREATE INDEX IF NOT EXISTS idx_ext_subs_email_active
   ON external_subscribers(email)
   WHERE email_weekly_case = TRUE AND unsubscribed_at IS NULL;
 
--- 2. Update the weekly_email_eligible view to UNION both sources
+ALTER TABLE external_subscribers ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "No anon access to external_subscribers" ON external_subscribers;
+CREATE POLICY "No anon access to external_subscribers"
+  ON external_subscribers
+  FOR ALL
+  TO anon, authenticated
+  USING (false)
+  WITH CHECK (false);
+
 DROP VIEW IF EXISTS weekly_email_eligible;
 
 CREATE VIEW weekly_email_eligible AS
--- Internal users (signed up on platform)
 SELECT
   p.id::text                    AS id,
   u.email                       AS email,
@@ -43,10 +48,7 @@ JOIN auth.users u ON u.id = p.id
 WHERE p.email_weekly_case = TRUE
   AND u.email IS NOT NULL
   AND (p.last_active_at > now() - interval '90 days' OR p.total_cases_completed = 0)
-
 UNION ALL
-
--- External subscribers (Substack/waitlist)
 SELECT
   e.id::text                    AS id,
   e.email                       AS email,
@@ -60,8 +62,6 @@ FROM external_subscribers e
 WHERE e.email_weekly_case = TRUE
   AND e.unsubscribed_at IS NULL;
 
--- 3. Insert the Flodesk subscribers
--- (run this once; ON CONFLICT prevents duplicates if re-run)
 INSERT INTO external_subscribers (email, full_name, source, segment) VALUES
   ('mynvuu@gmail.com',                    'Mynvuu',                'flodesk', 'Waitlist-General'),
   ('elizabeth.prabhakar@brunel.ac.uk',    'Elizabeth Prabhakar',   'flodesk', 'Waitlist-General'),
@@ -92,7 +92,3 @@ INSERT INTO external_subscribers (email, full_name, source, segment) VALUES
   ('em.morganyoung@gmail.com',            'Emily Morgan-Young',    'flodesk', 'Beta Applicants'),
   ('jalpacp@gmail.com',                   'Jalpa',                 'flodesk', 'Beta Applicants')
 ON CONFLICT (email) DO NOTHING;
-
--- 4. Verify (optional — uncomment to check counts)
--- SELECT source, COUNT(*) FROM weekly_email_eligible GROUP BY source;
--- SELECT * FROM external_subscribers ORDER BY subscribed_at DESC;
