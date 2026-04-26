@@ -146,12 +146,64 @@ footer a{color:var(--slate-400);text-decoration:none;margin:0 12px}
   <section class="newsletter">
     <h2>Get New Articles in Your Inbox</h2>
     <p>Evidence-based clinical reasoning tips, case breakdowns, and study strategies — free, twice a month.</p>
-    <div class="newsletter-form">
-      <input type="email" placeholder="your@email.com">
-      <button onclick="alert('Thanks! We\'ll be in touch.')">Subscribe</button>
+    <form id="rdx-blog-form" onsubmit="rdxBlogSubscribe(event)" class="newsletter-form">
+      <input type="email" id="rdx-blog-email" placeholder="your@email.com" required>
+      <button type="submit" id="rdx-blog-btn">Subscribe</button>
+    </form>
+    <div id="rdx-blog-success" style="display:none;margin-top:16px;padding:12px 16px;background:#E8F8F5;border:1px solid #A7F3D0;border-radius:8px;color:#065F46;font-size:14px;font-weight:600;max-width:420px;margin-left:auto;margin-right:auto">
+      ✓ You're subscribed. Look for the next issue in your inbox.
+    </div>
+    <div id="rdx-blog-error" style="display:none;margin-top:16px;padding:12px 16px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;color:#991B1B;font-size:14px;max-width:420px;margin-left:auto;margin-right:auto">
+      Something went wrong. Email <a href="mailto:reasondxeducation@gmail.com" style="color:#991B1B;text-decoration:underline">reasondxeducation@gmail.com</a> and we'll add you manually.
     </div>
   </section>
 </div>
+
+<script>
+function rdxBlogSubscribe(e) {
+  e.preventDefault();
+  var btn = document.getElementById('rdx-blog-btn');
+  var emailInput = document.getElementById('rdx-blog-email');
+  var email = emailInput.value.trim().toLowerCase();
+  if (!email) return;
+
+  btn.textContent = 'Subscribing...';
+  btn.disabled = true;
+
+  var SUPA_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+  fetch(SUPA_URL + '/rest/v1/external_subscribers', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Prefer': 'resolution=merge-duplicates,return=minimal'
+    },
+    body: JSON.stringify({
+      email: email,
+      source: 'blog-newsletter',
+      segment: 'Blog Subscriber',
+      email_weekly_case: true
+    })
+  }).then(function(res) {
+    if (res.ok || res.status === 201 || res.status === 409) {
+      // 409 = already subscribed; treat as success
+      document.getElementById('rdx-blog-form').style.display = 'none';
+      document.getElementById('rdx-blog-error').style.display = 'none';
+      document.getElementById('rdx-blog-success').style.display = 'block';
+    } else {
+      throw new Error('Subscribe failed: ' + res.status);
+    }
+  }).catch(function(err) {
+    console.error('Blog subscribe error:', err);
+    btn.textContent = 'Subscribe';
+    btn.disabled = false;
+    document.getElementById('rdx-blog-error').style.display = 'block';
+  });
+}
+</script>
 
 <footer>
   <p>© 2026 ReasonDx &nbsp;|&nbsp;
