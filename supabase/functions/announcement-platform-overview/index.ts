@@ -158,11 +158,19 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 Deno.serve(async (req) => {
   let testEmail = null;
   let dryRun = false;
+  let extraEmails: Array<{email: string, full_name?: string}> = [];
+
   if (req.method === "POST") {
     try {
       const b = await req.json();
       testEmail = b?.test_email || null;
       dryRun = b?.dry_run === true;
+      // extra_emails: array of {email, full_name?} OR array of strings
+      if (Array.isArray(b?.extra_emails)) {
+        extraEmails = b.extra_emails.map((e: any) =>
+          typeof e === 'string' ? { email: e } : e
+        );
+      }
     } catch(e) {}
   }
 
@@ -172,15 +180,34 @@ Deno.serve(async (req) => {
   if (testEmail) {
     users = [{ email: testEmail, full_name: "Test User" }];
   } else {
-    // Use the same eligible users view as the weekly email — same audience
+    // Pull from weekly_email_eligible view
     const { data, error } = await supabase.from("weekly_email_eligible").select("*");
     if (error) return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     users = data || [];
+
+    // Append extra emails (e.g., Substack subscribers not yet in Supabase)
+    // Deduplicate by email (case-insensitive)
+    const existingEmails = new Set(users.map(u => u.email?.toLowerCase()));
+    for (const extra of extraEmails) {
+      if (extra.email && !existingEmails.has(extra.email.toLowerCase())) {
+        users.push({
+          email: extra.email,
+          full_name: extra.full_name || extra.email.split('@')[0]
+        });
+        existingEmails.add(extra.email.toLowerCase());
+      }
+    }
   }
 
   if (dryRun) {
     return new Response(
-      JSON.stringify({ dryRun: true, would_send: users.length, sample_recipients: users.slice(0, 5).map(u => u.email) }),
+      JSON.stringify({
+        dryRun: true,
+        would_send: users.length,
+        from_supabase: users.length - extraEmails.filter(e => e.email).length,
+        from_extra: extraEmails.length,
+        sample_recipients: users.slice(0, 8).map(u => u.email)
+      }),
       { headers: { "Content-Type": "application/json" } }
     );
   }
