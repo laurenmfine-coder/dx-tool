@@ -1,6 +1,6 @@
 // supabase/functions/weekly-case-email/index.ts
 // Weekly reasoning brief — three entry points (puzzle, case, module)
-// Content pools: 365 cases, 51 puzzles, 50 modules
+// Content pools: 500+ cases (368 in rotation pool from CRT), 51 puzzles, 50 modules
 // Sends twice weekly; rotation logic ensures different content on each send
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
@@ -156,7 +156,7 @@ function buildEmailHtml(user: any, weeklyCase: Case, weeklyPuzzle: Puzzle, weekl
         <table cellpadding="0" cellspacing="0" border="0" style="width:100%;font-size:13px;line-height:1.5">
           <tr>
             <td style="padding:6px 12px 6px 0;vertical-align:top;width:90px"><strong style="color:#0f172a">📋 Cases</strong><br><span style="color:#94a3b8;font-size:11px">5–15 min</span></td>
-            <td style="padding:6px 0;color:#475569;vertical-align:top">365+ full clinical simulations with staged information, differential reasoning, and structured debrief.</td>
+            <td style="padding:6px 0;color:#475569;vertical-align:top">500+ full clinical simulations with staged information, differential reasoning, and structured debrief.</td>
           </tr>
           <tr>
             <td style="padding:6px 12px 6px 0;vertical-align:top"><strong style="color:#0f172a">🧩 Puzzles</strong><br><span style="color:#94a3b8;font-size:11px">2 min</span></td>
@@ -214,7 +214,7 @@ function buildEmailHtml(user: any, weeklyCase: Case, weeklyPuzzle: Puzzle, weekl
         ${otherCasesHtml}
       </div>
       <p style="font-size:12px;color:#64748b;text-align:center;margin:14px 0 0">
-        These are just 3 of <strong>365+ cases</strong>. <a href="${browseUrl}" style="color:#2874a6;font-weight:600">Browse all →</a>
+        These are just 3 of <strong>500+ cases</strong>. <a href="${browseUrl}" style="color:#2874a6;font-weight:600">Browse all →</a>
       </p>
     </div>
 

@@ -54,7 +54,7 @@ function buildAnnouncementHtml(user: any): string {
         <span style="font-size:11px;color:#94a3b8;margin-left:auto">5–15 min each</span>
       </div>
       <p style="font-size:14px;color:#475569;line-height:1.65;margin:0 0 12px">
-        Over 365 full clinical simulations across every specialty — cardiology, neurology, pediatrics, surgery, psychiatry, and more. Each case unfolds in stages: you get the chief complaint, then build your differential, then order tests, then make decisions. The platform talks back as a virtual attending while you reason.
+        Over 500 full clinical simulations across every specialty — cardiology, neurology, pediatrics, surgery, psychiatry, and more. Each case unfolds in stages: you get the chief complaint, then build your differential, then order tests, then make decisions. The platform talks back as a virtual attending while you reason.
       </p>
       <a href="https://reasondx.com/browse.html?${utm('cases')}" style="display:inline-block;color:#2874a6;font-weight:600;font-size:14px;text-decoration:none">Browse all cases →</a>
     </div>
