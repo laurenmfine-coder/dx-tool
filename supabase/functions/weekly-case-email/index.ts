@@ -137,6 +137,34 @@ function buildEmailHtml(user: any, weeklyCase: Case, weeklyPuzzle: Puzzle, weekl
     <a href="https://reasondx.com/dashboard.html?${utm('dashboard')}" style="display:inline-block;color:rgba(255,255,255,0.85);text-decoration:none;font-size:12px;font-weight:600;padding:4px 10px;margin:0 2px">Dashboard</a>
   </div>
 
+  <!-- STATS BANNER — there is much more here -->
+  <div style="background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:24px 32px;text-align:center;border-bottom:3px solid #14517a">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:12px">There is so much more on ReasonDx</div>
+    <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto">
+      <tr>
+        <td style="padding:0 14px;text-align:center">
+          <div style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:#fff;line-height:1">500+</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:4px">Cases</div>
+        </td>
+        <td style="padding:0 14px;text-align:center;border-left:1px solid rgba(255,255,255,0.2)">
+          <div style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:#fff;line-height:1">51</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:4px">Puzzles</div>
+        </td>
+        <td style="padding:0 14px;text-align:center;border-left:1px solid rgba(255,255,255,0.2)">
+          <div style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:#fff;line-height:1">50</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:4px">Modules</div>
+        </td>
+        <td style="padding:0 14px;text-align:center;border-left:1px solid rgba(255,255,255,0.2)">
+          <div style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:#fff;line-height:1">∞</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:4px">CoachDx</div>
+        </td>
+      </tr>
+    </table>
+    <p style="font-size:13px;color:rgba(255,255,255,0.9);margin:14px 0 0;line-height:1.5">
+      We send a few featured items twice a week — but if you have time, <a href="${browseUrl}" style="color:#fff;font-weight:700;text-decoration:underline">explore the full library →</a>
+    </p>
+  </div>
+
   <div style="padding:36px 40px">
 
     <p style="font-size:16px;color:#1e293b;margin:0 0 8px">Hi ${firstName},</p>
@@ -146,8 +174,11 @@ function buildEmailHtml(user: any, weeklyCase: Case, weeklyPuzzle: Puzzle, weekl
     <!-- ORIENTATION — what is ReasonDx, what's on it -->
     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:22px 24px;margin-bottom:28px">
       <div style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2874a6;margin-bottom:10px">What is ReasonDx?</div>
+      <p style="font-size:14px;color:#334155;line-height:1.65;margin:0 0 14px">
+        ReasonDx is a <strong>clinical reasoning training platform</strong> — not a question bank. The goal is to build the <em>thinking process</em> behind diagnosis, not test recall.
+      </p>
       <p style="font-size:14px;color:#334155;line-height:1.65;margin:0 0 18px">
-        ReasonDx is a <strong>clinical reasoning training platform</strong> — not a question bank. The goal is to build the <em>thinking process</em> behind diagnosis, not test recall. Everything below is free, no account required.
+        These weekly emails feature a few items to get you started — but they are just a <em>taste</em> of the platform. The full library is yours to explore whenever you want, all free, no account required.
       </p>
 
       <div style="border-top:1px solid #e2e8f0;padding-top:16px">
@@ -174,7 +205,7 @@ function buildEmailHtml(user: any, weeklyCase: Case, weeklyPuzzle: Puzzle, weekl
       </div>
 
       <p style="font-size:12px;color:#64748b;margin:16px 0 0;text-align:center;font-style:italic">
-        Below: three featured this week. Pick whichever fits your time today.
+        Below: this week's featured picks. Pick whichever fits your time today.
       </p>
     </div>
 
