@@ -1,6 +1,6 @@
 -- =====================================================================
 -- Migration: Add external_subscribers table and update weekly_email_eligible view
--- Purpose: Support email subscribers who signed up via Substack/external forms
+-- Purpose: Support email subscribers who signed up via Flodesk or other external forms
 --          without requiring them to create Supabase auth accounts
 -- =====================================================================
 
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS external_subscribers (
   id          uuid          PRIMARY KEY DEFAULT gen_random_uuid(),
   email       text          NOT NULL UNIQUE,
   full_name   text,
-  source      text,                         -- e.g., 'substack', 'beta_waitlist'
+  source      text,                         -- e.g., 'flodesk', 'platform_signup'
   segment     text,                         -- e.g., 'Beta Testers', 'Waitlist-General'
   email_weekly_case  boolean DEFAULT TRUE,  -- opt-in for twice-weekly cases
   subscribed_at      timestamptz DEFAULT now(),
@@ -60,37 +60,37 @@ FROM external_subscribers e
 WHERE e.email_weekly_case = TRUE
   AND e.unsubscribed_at IS NULL;
 
--- 3. Insert the Substack subscribers
+-- 3. Insert the Flodesk subscribers
 -- (run this once; ON CONFLICT prevents duplicates if re-run)
 INSERT INTO external_subscribers (email, full_name, source, segment) VALUES
-  ('mynvuu@gmail.com',                    'Mynvuu',                'substack', 'Waitlist-General'),
-  ('elizabeth.prabhakar@brunel.ac.uk',    'Elizabeth Prabhakar',   'substack', 'Waitlist-General'),
-  ('azharud2@msu.edu',                    'Osman Azharudin',       'substack', 'Waitlist-General'),
-  ('chayab580@gmail.com',                 'Chaya',                 'substack', 'Waitlist-General'),
-  ('mccartney.holeman01@utrgv.edu',       'McCartney Holeman',     'substack', 'Beta Applicants'),
-  ('eluozodaniella@gmail.com',            'Daniella Eluozo',       'substack', 'Beta Applicants'),
-  ('laurenbrick1209@gmail.com',           'Lauren Brick',          'substack', 'Beta Testers'),
-  ('kishaninjmu2023@gmail.com',           'Kishani Ketheeswaran',  'substack', 'Waitlist-General'),
-  ('patriciamadel@yahoo.com',             'Patricia Madel',        'substack', 'Beta Applicants'),
-  ('janeharrington1@gmail.com',           'Jane Harrington',       'substack', 'Beta Applicants'),
-  ('leah.bush@pennmedicine.upenn.edu',    'Leah Bush',             'substack', 'Beta Testers'),
-  ('michaeladpas@gmail.com',              'Michaela',              'substack', 'Beta Applicants'),
-  ('afitzgerald@ksu.edu',                 'Amy Fitzgerald',        'substack', 'Beta Applicants'),
-  ('mm4229@nova.edu',                     'Mariapia',              'substack', 'Beta Applicants'),
-  ('mromer31@jhu.edu',                    'Marysol Romero',        'substack', 'Beta Applicants'),
-  ('okechukwuvictor5567@gmail.com',       'Victor Chukwuebuka',    'substack', 'Beta Applicants'),
-  ('hp616@mynsu.nova.edu',                'Hrishi',                'substack', 'Beta Testers'),
-  ('alanpatrus@yahoo.com',                'Alan Patrus',           'substack', 'Beta Applicants'),
-  ('chiomaemeka97@gmail.com',             'Chioma Emeka',          'substack', 'Beta Applicants'),
-  ('laurenmfine@gmail.com',               'Lauren',                'substack', 'Beta Applicants'),
-  ('macberry2@gmail.com',                 'Andi',                  'substack', 'Beta Applicants'),
-  ('kmotazedian@tulane.edu',              'Khashaiar Motazedian',  'substack', 'Beta Applicants'),
-  ('tina.on.earth@gmail.com',             'Tina Nguyen',           'substack', 'Beta Applicants'),
-  ('suzanneriskin@yahoo.com',             'Suzanne Riskin',        'substack', 'Beta Applicants'),
-  ('lawade523@gmail.com',                 'Lauren Wade',           'substack', 'Beta Applicants'),
-  ('as.dasher@outlook.com',               'Angel Dasher',          'substack', 'Beta Applicants'),
-  ('em.morganyoung@gmail.com',            'Emily Morgan-Young',    'substack', 'Beta Applicants'),
-  ('jalpacp@gmail.com',                   'Jalpa',                 'substack', 'Beta Applicants')
+  ('mynvuu@gmail.com',                    'Mynvuu',                'flodesk', 'Waitlist-General'),
+  ('elizabeth.prabhakar@brunel.ac.uk',    'Elizabeth Prabhakar',   'flodesk', 'Waitlist-General'),
+  ('azharud2@msu.edu',                    'Osman Azharudin',       'flodesk', 'Waitlist-General'),
+  ('chayab580@gmail.com',                 'Chaya',                 'flodesk', 'Waitlist-General'),
+  ('mccartney.holeman01@utrgv.edu',       'McCartney Holeman',     'flodesk', 'Beta Applicants'),
+  ('eluozodaniella@gmail.com',            'Daniella Eluozo',       'flodesk', 'Beta Applicants'),
+  ('laurenbrick1209@gmail.com',           'Lauren Brick',          'flodesk', 'Beta Testers'),
+  ('kishaninjmu2023@gmail.com',           'Kishani Ketheeswaran',  'flodesk', 'Waitlist-General'),
+  ('patriciamadel@yahoo.com',             'Patricia Madel',        'flodesk', 'Beta Applicants'),
+  ('janeharrington1@gmail.com',           'Jane Harrington',       'flodesk', 'Beta Applicants'),
+  ('leah.bush@pennmedicine.upenn.edu',    'Leah Bush',             'flodesk', 'Beta Testers'),
+  ('michaeladpas@gmail.com',              'Michaela',              'flodesk', 'Beta Applicants'),
+  ('afitzgerald@ksu.edu',                 'Amy Fitzgerald',        'flodesk', 'Beta Applicants'),
+  ('mm4229@nova.edu',                     'Mariapia',              'flodesk', 'Beta Applicants'),
+  ('mromer31@jhu.edu',                    'Marysol Romero',        'flodesk', 'Beta Applicants'),
+  ('okechukwuvictor5567@gmail.com',       'Victor Chukwuebuka',    'flodesk', 'Beta Applicants'),
+  ('hp616@mynsu.nova.edu',                'Hrishi',                'flodesk', 'Beta Testers'),
+  ('alanpatrus@yahoo.com',                'Alan Patrus',           'flodesk', 'Beta Applicants'),
+  ('chiomaemeka97@gmail.com',             'Chioma Emeka',          'flodesk', 'Beta Applicants'),
+  ('laurenmfine@gmail.com',               'Lauren',                'flodesk', 'Beta Applicants'),
+  ('macberry2@gmail.com',                 'Andi',                  'flodesk', 'Beta Applicants'),
+  ('kmotazedian@tulane.edu',              'Khashaiar Motazedian',  'flodesk', 'Beta Applicants'),
+  ('tina.on.earth@gmail.com',             'Tina Nguyen',           'flodesk', 'Beta Applicants'),
+  ('suzanneriskin@yahoo.com',             'Suzanne Riskin',        'flodesk', 'Beta Applicants'),
+  ('lawade523@gmail.com',                 'Lauren Wade',           'flodesk', 'Beta Applicants'),
+  ('as.dasher@outlook.com',               'Angel Dasher',          'flodesk', 'Beta Applicants'),
+  ('em.morganyoung@gmail.com',            'Emily Morgan-Young',    'flodesk', 'Beta Applicants'),
+  ('jalpacp@gmail.com',                   'Jalpa',                 'flodesk', 'Beta Applicants')
 ON CONFLICT (email) DO NOTHING;
 
 -- 4. Verify (optional — uncomment to check counts)
