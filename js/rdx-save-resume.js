@@ -15,7 +15,7 @@
  *
  * State source:
  *   Reads from localStorage 'rdx-active-session' and 'rdx-active-session-<caseId>'
- *   which simulation-engine.html auto-saves every 30 seconds. Phase 1 scope:
+ *   which virtual-emr.html auto-saves every 30 seconds. Phase 1 scope:
  *   we rely on the host page's existing auto-save system. Phase 2 can add
  *   deeper state capture.
  */

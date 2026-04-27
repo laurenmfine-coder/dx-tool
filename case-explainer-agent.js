@@ -1,6 +1,6 @@
 /**
  * case-explainer-agent.js
- * Post-simulation debrief synthesis — injected into simulation-engine.html
+ * Post-simulation debrief synthesis — injected into virtual-emr.html
  * 
  * After Dr. Patel's teaching debrief, this adds a second AI card:
  * "Your Learning Synthesis" — personalized 4-part narrative:
@@ -9,7 +9,7 @@
  *   3. One concept to cement
  *   4. Suggested next case
  * 
- * Include in simulation-engine.html after rdx-email-triggers.js
+ * Include in virtual-emr.html after rdx-email-triggers.js
  */
 
 (function(window) {
@@ -181,7 +181,7 @@
   }
 
   /**
-   * Main entry point — call this from simulation-engine.html after debrief
+   * Main entry point — call this from virtual-emr.html after debrief
    */
   window.CaseExplainerAgent = {
     run: function(opts) {

@@ -16,7 +16,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
  *    simulation state so the debrief and case recommender can use it.
  *
  * Usage:
- *   // At session end (called from simulation-engine.html COMPLETE phase):
+ *   // At session end (called from virtual-emr.html COMPLETE phase):
  *   await RDXFingerprint.store(state, caseData, reasoningGraph, confidenceScore);
  *
  *   // At session start (called from startStudy after state is initialized):

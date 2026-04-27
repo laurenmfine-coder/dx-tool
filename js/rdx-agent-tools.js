@@ -246,7 +246,7 @@ const AgentTools = {
 
   generateDebrief: async function(workerUrl, gaps, state, caseData, ragContext) {
     // ragContext is optional: { found: bool, contextBlock: string, sources: [] }
-    // Passed in from simulation-engine.html after GuidelinesRAG.retrieve() resolves.
+    // Passed in from virtual-emr.html after GuidelinesRAG.retrieve() resolves.
 
     // Build performance summary from state even if no case-specific gaps flagged
     var performanceSummary = '';

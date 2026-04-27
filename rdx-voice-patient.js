@@ -10,7 +10,7 @@
  *   - Interrupt button stops speech mid-sentence
  *   - Respects user preference (can be toggled off)
  *
- * Include in simulation-engine.html after other scripts.
+ * Include in virtual-emr.html after other scripts.
  * Inject after patient message: RDXVoicePatient.speak(text, patientScript)
  * Toggle OSCE mode:            RDXVoicePatient.setOSCEMode(true/false)
  */

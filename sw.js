@@ -4,7 +4,7 @@ const SHELL_ASSETS = [
   '/',
   '/browse.html',
   '/index.html',
-  '/simulation-engine.html',
+  '/virtual-emr.html',
   '/dashboard.html',
   '/js/nav-global.js',
   '/mobile.css',

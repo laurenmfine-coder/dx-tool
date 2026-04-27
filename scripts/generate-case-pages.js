@@ -186,7 +186,7 @@ function generatePage(id, c) {
   <div class="cta-box">
     <h2>Practice This Case</h2>
     <p>Work through the full clinical encounter with AI patient and attending. Free, no signup required.</p>
-    <a href="/simulation-engine.html?case=${encodeURIComponent(id)}" class="cta-btn">▶ Start Simulation</a>
+    <a href="/virtual-emr.html?case=${encodeURIComponent(id)}" class="cta-btn">▶ Start Simulation</a>
   </div>
 
   <div class="section">

@@ -26,7 +26,7 @@
  * NOTE: IRB amendment needed before LSCS data is used in publications.
  * The system collects data but the research use requires separate approval.
  *
- * USED BY: simulation-engine.html
+ * USED BY: virtual-emr.html
  */
 
 (function(window) {

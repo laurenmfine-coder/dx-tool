@@ -77,7 +77,7 @@
     btns.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center';
 
     var simLink = document.createElement('a');
-    simLink.href = '../simulation-engine.html?case=' + encodeURIComponent(rec.caseId);
+    simLink.href = '../virtual-emr.html?case=' + encodeURIComponent(rec.caseId);
     simLink.style.cssText = 'font-size:12px;font-weight:700;padding:7px 14px;background:#2874A6;color:#fff;border-radius:7px;text-decoration:none;white-space:nowrap';
     simLink.textContent = 'Simulate \u2014 ' + rec.caseLabel + ' \u2192';
 

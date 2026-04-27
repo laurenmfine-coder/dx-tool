@@ -283,7 +283,7 @@
       return {
         headline: 'Address your ' + modeLabel + ' from last session',
         reason: theory.reason || ('Last session showed ' + modeLabel + '. This targeted case challenges that specific pattern.'),
-        action: { label: 'Try Recommended Case', url: '/simulation-engine.html?case=' + encodeURIComponent(theory.nextCase.caseId) },
+        action: { label: 'Try Recommended Case', url: '/virtual-emr.html?case=' + encodeURIComponent(theory.nextCase.caseId) },
         secondaryAction: { label: 'View Portrait', url: '/cognitive-portrait.html' },
         urgency: 'high', source: 'rule'
       };

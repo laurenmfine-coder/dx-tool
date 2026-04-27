@@ -468,7 +468,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 
       var cta = document.getElementById('rdx-rec-cta');
       var difficulty = (stored.difficulty && stored.difficulty.difficulty) || 'standard';
-      var caseUrl = 'simulation-engine.html?case=' + encodeURIComponent(stored.nextCase.caseId);
+      var caseUrl = 'virtual-emr.html?case=' + encodeURIComponent(stored.nextCase.caseId);
       if (difficulty !== 'standard') caseUrl += '&difficulty=' + difficulty;
       cta.href = caseUrl;
 
@@ -512,7 +512,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
           }
         } catch(e) {}
       }
-      // rdx-active-session is the canonical key from simulation-engine.html
+      // rdx-active-session is the canonical key from virtual-emr.html
       if (saved && saved.caseId) {
         var chip = document.getElementById('rdx-resume-chip');
         if (!chip) return;
@@ -526,7 +526,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
             '<div style="font-size:11px;color:rgba(255,255,255,.5)">In progress' + phase + '</div></div>' +
           '</div>' +
           '<div style="display:flex;gap:8px">' +
-            '<a href="/simulation-engine.html?case=' + encodeURIComponent(saved.caseId) + '" style="padding:6px 14px;background:#2874A6;color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Continue →</a>' +
+            '<a href="/virtual-emr.html?case=' + encodeURIComponent(saved.caseId) + '" style="padding:6px 14px;background:#2874A6;color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Continue →</a>' +
             '<button onclick="document.getElementById(\'rdx-resume-chip\').style.display=\'none\'" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;padding:0 4px">×</button>' +
           '</div>' +
         '</div>';
@@ -720,7 +720,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
         
         <!-- Easy Case →
-        <a href="/simulation-engine.html?case=migraine" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'easy',case_id:'migraine'})" style="
+        <a href="/virtual-emr.html?case=migraine" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'easy',case_id:'migraine'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(134,239,172,0.3);
@@ -752,7 +752,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         </a>
         
         <!-- Medium Case -->
-        <a href="/simulation-engine.html?case=pericarditis-v1" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'medium',case_id:'pericarditis-v1'})" style="
+        <a href="/virtual-emr.html?case=pericarditis-v1" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'medium',case_id:'pericarditis-v1'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(251,191,36,0.3);
@@ -784,7 +784,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         </a>
         
         <!-- Hard Case -->
-        <a href="/simulation-engine.html?case=pe-v1" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'hard',case_id:'pe-v1'})" style="
+        <a href="/virtual-emr.html?case=pe-v1" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'hard',case_id:'pe-v1'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(251,113,133,0.3);
@@ -929,7 +929,7 @@ var SIM_FEATURED=[{id:'DYS-001',title:'Progressive dyspnea',sub:'6-week worsenin
   if (box && titleEl && subEl && linkEl) {
     titleEl.textContent = todayCase.title;
     subEl.textContent = todayCase.sub;
-    linkEl.href = '/simulation-engine.html?case=' + encodeURIComponent(todayCase.id);
+    linkEl.href = '/virtual-emr.html?case=' + encodeURIComponent(todayCase.id);
     // Add acuity badge and time estimate
     var _acuityColors = {1:'#EF4444',2:'#F59E0B',3:'#22C55E',4:'#3B82F6',5:'#8B5CF6'};
     var _timeEst = todayCase.acuity===1?'15-20 min':todayCase.acuity===2?'12-15 min':todayCase.acuity===3?'10-12 min':'7-10 min';
@@ -1268,7 +1268,7 @@ function launch(id){
     });
   }
   
-  if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='simulation-engine.html?case='+encodeURIComponent(id);else if(MODE==='practice'){var _tok=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[id]:null;window.location.href='virtual-emr.html?'+(_tok?'cx='+_tok:'case='+encodeURIComponent(id));}else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}
+  if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='virtual-emr.html?case='+encodeURIComponent(id);else if(MODE==='practice'){var _tok=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[id]:null;window.location.href='virtual-emr.html?'+(_tok?'cx='+_tok:'case='+encodeURIComponent(id));}else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}
 }
 
 function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
@@ -1306,7 +1306,7 @@ function startQuickCase() {
   var now = new Date();
   var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
   var todayCase = COTD_POOL[dayOfYear % COTD_POOL.length];
-  window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(todayCase);
+  window.location.href = 'virtual-emr.html?case=' + encodeURIComponent(todayCase);
 }
 </script>
 
@@ -1389,7 +1389,7 @@ function doSemanticSearch(q) {
       var ac = r.acuity === 1 ? '#ef4444' : r.acuity === 2 ? '#f59e0b' : '#22c55e';
       var card = document.createElement('div');
       card.style.cssText = 'background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:16px;cursor:pointer';
-      card.dataset.url = '/simulation-engine.html?case=' + encodeURIComponent(r.case_id);
+      card.dataset.url = '/virtual-emr.html?case=' + encodeURIComponent(r.case_id);
       card.addEventListener('click', function() { location.href = this.dataset.url; });
       card.onmouseover = function() { this.style.borderColor = '#2874A6'; };
       card.onmouseout  = function() { this.style.borderColor = '#e2e8f0'; };
@@ -1591,7 +1591,7 @@ function resumeSession() {
   }
   
   if (window._resumeCaseId) {
-    window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(window._resumeCaseId) + '&resume=true';
+    window.location.href = 'virtual-emr.html?case=' + encodeURIComponent(window._resumeCaseId) + '&resume=true';
   }
 }
 

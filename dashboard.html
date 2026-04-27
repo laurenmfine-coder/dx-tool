@@ -496,7 +496,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         var phaseName = s.phase ? 'Phase ' + s.phase : 'In progress';
         var dateStr = new Date(s.savedAt).toLocaleDateString(undefined,{month:'short',day:'numeric'});
         metaEl.textContent = phaseName + ' · Last active ' + dateStr;
-        btn.href = '/simulation-engine.html?case=' + encodeURIComponent(s.caseId) + '&resume=1';
+        btn.href = '/virtual-emr.html?case=' + encodeURIComponent(s.caseId) + '&resume=1';
         panel.style.display = 'block';
       } catch(e) {}
     }
@@ -612,7 +612,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
           var tag = overdue
             ? '<span style="font-size:11px;font-weight:700;color:#DC2626;background:#fef2f2;padding:2px 8px;border-radius:6px">Overdue</span>'
             : '<span style="font-size:11px;font-weight:700;color:#059669;background:#f0fdf4;padding:2px 8px;border-radius:6px">Due today</span>';
-          return '<a href="/simulation-engine.html?case=' + encodeURIComponent(c.caseId) + '&mode=review" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background=\'#f1f5f9\'" onmouseout="this.style.background=\'#f8fafc\'">' +
+          return '<a href="/virtual-emr.html?case=' + encodeURIComponent(c.caseId) + '&mode=review" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background=\'#f1f5f9\'" onmouseout="this.style.background=\'#f8fafc\'">' +
             '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:15px">🔁</span><span style="font-size:13px;font-weight:500">' + (c.caseName || c.caseId) + '</span></div>' +
             tag + '</a>';
         }).join('');
@@ -651,7 +651,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined, {month:'short',day:'numeric'}) : '';
         var label = h.caseName || h.caseId || 'Unknown case';
         var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#e8f8f5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
-        return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId || '') + '" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background=\'\2\'" onmouseout="this.style.background=\'\2\'">' +
+        return '<a href="/virtual-emr.html?case=' + encodeURIComponent(h.caseId || '') + '" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background=\'\2\'" onmouseout="this.style.background=\'\2\'">' +
           '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🩺</span><span style="font-size:13px;font-weight:500">' + label + '</span></div>' +
           '<div style="display:flex;align-items:center;gap:10px">' + score + '<span style="font-size:11px;color:#94a3b8">' + date + '</span></div>' +
         '</a>';
@@ -675,7 +675,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
   <!-- Suggested Quick Actions -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:0 0 48px;max-width:900px;margin-left:auto;margin-right:auto">
-    <a href="simulation-engine.html" class="rdx-quick-action" style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;cursor:pointer;transition:all .2s;text-decoration:none;display:block">
+    <a href="virtual-emr.html" class="rdx-quick-action" style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;cursor:pointer;transition:all .2s;text-decoration:none;display:block">
       <div style="font-size:36px;margin-bottom:12px">🩺</div>
       <div style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:6px">Start a Simulation</div>
       <div style="font-size:13px;color:#64748b;line-height:1.5">Full 10-phase AI patient encounter with reasoning feedback</div>
@@ -1244,7 +1244,7 @@ function _rdxRenderHistoryModal(history) {
   var rows = history.length ? history.map(function(h) {
     var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}) : '';
     var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#E8F8F5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
-    return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId||'') + '" onclick="var _m=document.getElementById(\'rdx-history-modal\');_m.remove();try{document.querySelector(\'[onclick*=rdxShowFullHistory]\').focus();}catch(e){}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;transition:background .15s" onmouseover="this.style.background=\'\2\'" onmouseout="this.style.background=\'\2\'">' +
+    return '<a href="/virtual-emr.html?case=' + encodeURIComponent(h.caseId||'') + '" onclick="var _m=document.getElementById(\'rdx-history-modal\');_m.remove();try{document.querySelector(\'[onclick*=rdxShowFullHistory]\').focus();}catch(e){}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;transition:background .15s" onmouseover="this.style.background=\'\2\'" onmouseout="this.style.background=\'\2\'">' +
       '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🩺</span><div><div style="font-size:13px;font-weight:600">' + (h.caseName||h.caseId||'Unknown') + '</div><div style="font-size:11px;color:#94A3B8">' + (h.turns||0) + ' turns · ' + date + '</div></div></div>' +
       '<div>' + score + '</div></a>';
   }).join('') : '<div style="text-align:center;padding:32px;color:#94A3B8">No cases completed yet</div>';

@@ -28,7 +28,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
  *  - Does concept mastery profile predict downstream diagnostic accuracy?
  *  - Which mechanisms are hardest for each profession? (cross-profession analysis)
  *
- * USED BY: All mechanism/*.html modules, dashboard.html, simulation-engine.html
+ * USED BY: All mechanism/*.html modules, dashboard.html, virtual-emr.html
  */
 
 (function(window) {

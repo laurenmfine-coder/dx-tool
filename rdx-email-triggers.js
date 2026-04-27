@@ -1,7 +1,7 @@
 /**
  * rdx-email-triggers.js
  * Client-side helper — fires events to rdx-email-worker after key user actions.
- * Include in simulation-engine.html and virtual-emr.html.
+ * Include in virtual-emr.html and virtual-emr.html.
  * 
  * Usage:
  *   RDXEmail.simCompleted({ email, firstName, caseId, diagnosis, specialty, acuity, ddxAccuracy, phasesCompleted, totalCompleted });

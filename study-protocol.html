@@ -100,7 +100,7 @@ function markComplete(caseId) {
 }
 
 function launchWave2Case(caseId) {
-  var url = 'simulation-engine.html?case='+encodeURIComponent(caseId)+'&mode=study&wave=2';
+  var url = 'virtual-emr.html?case='+encodeURIComponent(caseId)+'&mode=study&wave=2';
   var win = window.open(url,'_blank');
   window.addEventListener('message', function handler(e) {
     if (e.data && e.data.type==='rdx-case-complete' && e.data.caseId===caseId) {
@@ -112,7 +112,7 @@ function launchWave2Case(caseId) {
   });
 }
 function launchCase(caseId) {
-  var url = 'simulation-engine.html?case='+encodeURIComponent(caseId)+'&mode=study';
+  var url = 'virtual-emr.html?case='+encodeURIComponent(caseId)+'&mode=study';
   var win = window.open(url,'_blank');
   window.addEventListener('message', function handler(e) {
     if (e.data && e.data.type==='rdx-case-complete' && e.data.caseId===caseId) {

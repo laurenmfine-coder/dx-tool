@@ -20,7 +20,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
 (function() {
   'use strict';
 
-  // Don't run on simulation-engine.html or rad-study.html (they have their own flow)
+  // Don't run on virtual-emr.html or rad-study.html (they have their own flow)
   if (window.location.pathname.includes('simulation-engine') || window.location.pathname.includes('rad-study.html')) return;
   if (window.location.pathname.includes('rad-study-dashboard.html')) return;
 
