@@ -292,8 +292,9 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 
 Deno.serve(async (req) => {
   let testEmail = null;
+  let isResend = false;
   if (req.method === "POST") {
-    try { const b = await req.json(); testEmail = b?.test_email || null; } catch(e) {}
+    try { const b = await req.json(); testEmail = b?.test_email || null; isResend = !!b?.resend; } catch(e) {}
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
@@ -321,7 +322,9 @@ Deno.serve(async (req) => {
     const profession = user.profession_id || "all";
     const wc = getCaseForUser(profession, slot);
     const otherCases = getOtherCases(profession, slot, wc.id, 3);
-    const subject = `This week: ${weeklyPuzzle.title}`;
+    const subject = isResend
+      ? `[Updated link] This week: ${weeklyPuzzle.title}`
+      : `This week: ${weeklyPuzzle.title}`;
 
     const success = await sendEmail(
       user.email,
