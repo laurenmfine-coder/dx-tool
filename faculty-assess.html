@@ -216,7 +216,7 @@ window.addMs=function(){
   var code = null;
   var inp = document.createElement('div');
   inp.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:16px 20px;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:9999;min-width:320px';
-  inp.innerHTML = '<div style="font-size:13px;font-weight:700;color:#1E293B;margin-bottom:8px">Subcompetency code</div><input id="rdx-fa-code" placeholder="e.g. PC2, SBP3" style="width:100%;padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:14px;font-family:inherit;box-sizing:border-box"><div style="display:flex;gap:8px;margin-top:10px"><button onclick="rdxFaSave()" style="padding:7px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Add</button><button onclick="this.closest('div[style]').remove()" style="padding:7px 12px;background:#F1F5F9;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit">Cancel</button></div>';
+  inp.innerHTML = '<div style="font-size:13px;font-weight:700;color:#1E293B;margin-bottom:8px">Subcompetency code</div><input id="rdx-fa-code" placeholder="e.g. PC2, SBP3" style="width:100%;padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:14px;font-family:inherit;box-sizing:border-box"><div style="display:flex;gap:8px;margin-top:10px"><button onclick="rdxFaSave()" style="padding:7px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Add</button><button onclick="this.closest(\'div[style]\').remove()" style="padding:7px 12px;background:#F1F5F9;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit">Cancel</button></div>';
   document.body.appendChild(inp);
   document.getElementById('rdx-fa-code').focus();
   window._rdxFaCallback = function(c) { code = c; };
@@ -241,7 +241,8 @@ setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classL
 <script src="js/dx-user-bar.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script src="js/rdx-nav.js"></script>
-<script src="js/rdx-analytics-tracker.js">
+<script src="js/rdx-analytics-tracker.js"></script>
+<script>
 function rdxGenToast(msg){var t=document.createElement('div');t.style.cssText='position:fixed;top:80px;right:20px;z-index:9999;background:#1B4F72;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:300px';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
 
 function rdxFaSave() {

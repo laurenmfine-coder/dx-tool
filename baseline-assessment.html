@@ -1254,14 +1254,15 @@ function goToBrowse() {
   render();
 })();
 </script>
-<script src="/js/nav-global.js">
+<script src="/js/nav-global.js"></script>
+<script>
 function rdxBaselineTip() {
   var existing = document.getElementById('rdx-baseline-tip');
   if (existing) { existing.remove(); return; }
   var t = document.createElement('div');
   t.id = 'rdx-baseline-tip';
   t.style.cssText = 'position:fixed;top:80px;right:20px;background:#1B4F72;color:#fff;padding:16px 20px;border-radius:12px;font-size:13px;font-weight:400;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:320px;line-height:1.6';
-  t.innerHTML = '<strong style="display:block;margin-bottom:6px">About this assessment</strong>Measures your clinical reasoning across 8 dimensions using Script Concordance Testing (SCT). Takes ~8 minutes. There are no wrong answers — answer based on your current thinking.<div style="margin-top:10px"><button onclick="this.closest('#rdx-baseline-tip').remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px">Got it</button></div>';
+  t.innerHTML = '<strong style="display:block;margin-bottom:6px">About this assessment</strong>Measures your clinical reasoning across 8 dimensions using Script Concordance Testing (SCT). Takes ~8 minutes. There are no wrong answers — answer based on your current thinking.<div style="margin-top:10px"><button onclick="this.closest(\'#rdx-baseline-tip\').remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px">Got it</button></div>';
   document.body.appendChild(t);
   setTimeout(function(){ if(t.parentNode) t.remove(); }, 6000);
 }
