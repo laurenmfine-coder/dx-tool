@@ -265,6 +265,21 @@ if (lastDate && lastDate !== today) {
 
 // Pick today's puzzle — profession-aware selection
 (function() {
+  // First: honor ?puzzle=N if present and valid. PUZZLES[0].id === 1, so
+  // the URL number is 1-indexed and we subtract 1 for the array index.
+  // Used by the weekly email so each subscriber's link goes to a specific
+  // puzzle instead of whatever the daily hash happens to pick.
+  try {
+    var qsMatch = window.location.search.match(/[?&]puzzle=(\d+)/);
+    if (qsMatch) {
+      var qsId = parseInt(qsMatch[1], 10);
+      if (qsId >= 1 && qsId <= PUZZLES.length) {
+        currentIndex = qsId - 1;
+        return;
+      }
+    }
+  } catch(e) {}
+
   var profId = null;
   try {
     var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
