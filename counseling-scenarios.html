@@ -82,6 +82,7 @@ a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <!-- ── Minimal back-nav breadcrumb ── -->
@@ -261,7 +262,7 @@ function render(){
   // Scenario grid
   var gh='';
   SCENARIOS.forEach(function(s,i){
-    gh+='<div class="sc-card'+(i===scIdx?' on':'')+'" onclick="pickSc('+i+')">';
+    gh+='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="sc-card'+(i===scIdx?' on':'')+'" onclick="pickSc('+i+')">';
     gh+='<div class="ico">'+s.icon+'</div><div class="tt">'+e(s.title)+'</div><div class="ds">'+e(s.desc)+'</div>';
     gh+='<div class="tg">'+e(s.tag)+'</div></div>';
   });

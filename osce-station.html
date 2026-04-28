@@ -139,6 +139,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .start-btn{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
 .start-btn:hover{background:var(--blue-dk)}
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -501,7 +502,7 @@ function buildCheckItem(order, isCritical, isWrong) {
   var checked = checkedItems[order.id] ? 'checked' : '';
   var critBadge = isCritical ? '<span class="check-critical">Critical</span>' : '';
   var wrongStyle = isWrong ? 'style="border-color:#FEF3C7;background:#FFFBEB"' : '';
-  return `<div class="check-item ${checked}" ${wrongStyle} data-id="${escHtml(order.id)}" onclick="toggleCheck(this,'${escHtml(order.id)}',${isWrong ? 1 : 0})">
+  return `<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="check-item ${checked}" ${wrongStyle} data-id="${escHtml(order.id)}" onclick="toggleCheck(this,'${escHtml(order.id)}',${isWrong ? 1 : 0})">
     <div class="check-box">${checkedItems[order.id] ? '✓' : ''}</div>
     <div class="check-label">
       <strong>${escHtml(order.name || order.id)} ${critBadge}</strong>

@@ -142,6 +142,7 @@ button{font-family:var(--font)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <!-- ── Minimal back-nav breadcrumb ── -->
@@ -345,7 +346,7 @@ function renderMilestones(){
     var toolCnt = (MD.tools[code]||[]).length;
     var trend = lvl >= 4 ? '✅' : lvl >= 3 ? '📈' : lvl >= 2 ? '➡️' : '🔻';
 
-    html += '<div class="mt-row" onclick="showSubDetail(\''+code+'\')">';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mt-row" onclick="showSubDetail(\''+code+'\')">';
     html += '<div><div class="mt-sub-code">'+code+'</div><div class="mt-sub-name">'+esc(sc.short)+'</div><div class="mt-domain">'+esc(sc.domain)+'</div></div>';
     html += '<div class="mt-bar"><div class="mt-level-track"><div class="mt-level-fill" style="width:'+pct+'%;background:'+levelColor(lvl)+'"></div></div><div class="mt-level-num" style="color:'+levelColor(lvl)+'">'+lvl+'</div></div>';
     html += '<div class="mt-cases">'+caseCnt+'</div>';

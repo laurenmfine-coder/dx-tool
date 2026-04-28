@@ -199,6 +199,7 @@ a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:point
 @media(max-width:480px){.spec-grid{grid-template-columns:repeat(2,1fr)}.free-input-row{flex-direction:column}.send-btn{width:100%;justify-content:center}.chart-vitals{gap:4px}}
 </style>
 <script src="/js/nav-global.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <script>
@@ -411,7 +412,7 @@ function renderSpecGrid(){
   var grid=document.getElementById('specGrid');
   grid.innerHTML=Object.entries(SPECIALISTS).map(function(entry){
     var key=entry[0],s=entry[1];
-    return '<div class="spec-card" id="spec-'+key+'" onclick="selectSpec(\''+key+'\')" style="--spec-color:'+s.color+';--spec-bg:'+s.bgColor+'"><div class="spec-icon" style="background:'+s.bgColor+'">'+s.icon+'</div><div class="spec-name">'+escapeHtml(s.name)+'</div><div class="spec-sub">'+escapeHtml(s.title)+'</div></div>';
+    return '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="spec-card" id="spec-'+key+'" onclick="selectSpec(\''+key+'\')" style="--spec-color:'+s.color+';--spec-bg:'+s.bgColor+'"><div class="spec-icon" style="background:'+s.bgColor+'">'+s.icon+'</div><div class="spec-name">'+escapeHtml(s.name)+'</div><div class="spec-sub">'+escapeHtml(s.title)+'</div></div>';
   }).join('');
 }
 

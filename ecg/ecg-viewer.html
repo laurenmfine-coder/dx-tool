@@ -312,6 +312,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </style>
     <link rel="stylesheet" href="../css/dx-case-nav.css">
 <link rel="stylesheet" href="../css/rdx-theme.css">
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -674,7 +675,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         renderQuiz(pattern) {
             document.getElementById('quizQuestion').textContent = pattern.quiz.question;
             document.getElementById('quizOptions').innerHTML = pattern.quiz.options.map((opt, i) => `
-                <div class="quiz-option" onclick="ECGViewer.checkAnswer(${i})">${String.fromCharCode(65+i)}. ${opt}</div>
+                <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="quiz-option" onclick="ECGViewer.checkAnswer(${i})">${String.fromCharCode(65+i)}. ${opt}</div>
             `).join('');
             const oldExp = document.getElementById('quizExplanation');
             if (oldExp) oldExp.remove();
@@ -712,7 +713,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         
         renderPatternLibrary() {
             document.getElementById('patternGrid').innerHTML = Object.values(this.patterns).map(p => `
-                <div class="pattern-card" onclick="ECGViewer.loadPattern('${p.id}')">
+                <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="pattern-card" onclick="ECGViewer.loadPattern('${p.id}')">
                     <div class="pattern-name">${p.name}</div>
                     <div class="pattern-category">${p.category} • ${p.urgency}</div>
                 </div>
@@ -732,7 +733,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         filterPatterns(cat) {
             const filtered = cat === 'all' ? Object.values(this.patterns) : Object.values(this.patterns).filter(p => p.category === cat);
             document.getElementById('patternGrid').innerHTML = filtered.map(p => `
-                <div class="pattern-card" onclick="ECGViewer.loadPattern('${p.id}')">
+                <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="pattern-card" onclick="ECGViewer.loadPattern('${p.id}')">
                     <div class="pattern-name">${p.name}</div>
                     <div class="pattern-category">${p.category} • ${p.urgency}</div>
                 </div>

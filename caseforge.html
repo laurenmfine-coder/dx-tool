@@ -77,6 +77,7 @@ textarea{min-height:100px}
 .validation-item.suggestion{background:var(--rdx-blue-bg);color:var(--rdx-blue)}
 @media(max-width:600px){.row{flex-direction:column}.steps{flex-wrap:nowrap}.hero{padding:24px 20px}}
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
@@ -241,8 +242,8 @@ function render() {
 
 function renderHome() {
   var h = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">';
-  h += '<div class="mode-card" onclick="CF.startNew()"><div class="icon">✨</div><h4>Create New Case</h4><p>Build a custom EMR case from scratch or with AI assistance.</p></div>';
-  h += '<div class="mode-card" onclick="CF.showMyCases()"><div class="icon">📂</div><h4>My Cases (' + S.myCases.length + ')</h4><p>View, edit, and manage your custom cases.</p></div>';
+  h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card" onclick="CF.startNew()"><div class="icon">✨</div><h4>Create New Case</h4><p>Build a custom EMR case from scratch or with AI assistance.</p></div>';
+  h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card" onclick="CF.showMyCases()"><div class="icon">📂</div><h4>My Cases (' + S.myCases.length + ')</h4><p>View, edit, and manage your custom cases.</p></div>';
   h += '</div>';
 
   if (S.myCases.length > 0) {
@@ -261,8 +262,8 @@ function renderModeSelect() {
   var h = '<div style="margin-bottom:16px"><button class="btn btn-outline btn-sm" onclick="CF.goHome()">← Back</button></div>';
   h += '<h3 style="font-size:18px;font-weight:700;margin-bottom:16px">Choose Authoring Mode</h3>';
   h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">';
-  h += '<div class="mode-card' + (S.mode === 'structured' ? ' selected' : '') + '" onclick="CF.selectMode(\'structured\')"><div class="icon">📝</div><h4>Structured Builder</h4><p>Fill in each EMR section step by step. Best when you have specific data to enter.</p></div>';
-  h += '<div class="mode-card' + (S.mode === 'ai-assist' ? ' selected' : '') + '" onclick="CF.selectMode(\'ai-assist\')"><div class="icon">🤖</div><h4>AI-Assisted</h4><p>Paste clinical notes, an H&P, or a case description. AI converts it to a structured EMR case.</p></div>';
+  h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card' + (S.mode === 'structured' ? ' selected' : '') + '" onclick="CF.selectMode(\'structured\')"><div class="icon">📝</div><h4>Structured Builder</h4><p>Fill in each EMR section step by step. Best when you have specific data to enter.</p></div>';
+  h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card' + (S.mode === 'ai-assist' ? ' selected' : '') + '" onclick="CF.selectMode(\'ai-assist\')"><div class="icon">🤖</div><h4>AI-Assisted</h4><p>Paste clinical notes, an H&P, or a case description. AI converts it to a structured EMR case.</p></div>';
   h += '</div>';
   if (S.mode) {
     h += '<div style="margin-top:16px;text-align:center"><button class="btn btn-primary" onclick="CF.startBuilder()">Continue with ' + (S.mode === 'ai-assist' ? 'AI-Assisted' : 'Structured') + ' Builder →</button></div>';
@@ -303,7 +304,7 @@ function renderBuilder() {
   h += '<div class="steps">';
   STEPS.forEach(function(s, i){
     var cls = i === S.step ? 'active' : (i < S.step ? 'done' : '');
-    h += '<div class="step ' + cls + '" onclick="CF.goStep(' + i + ')"><span class="step-num">' + (i < S.step ? '✓' : (i+1)) + '</span>' + s.label + '</div>';
+    h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="step ' + cls + '" onclick="CF.goStep(' + i + ')"><span class="step-num">' + (i < S.step ? '✓' : (i+1)) + '</span>' + s.label + '</div>';
   });
   h += '</div>';
 

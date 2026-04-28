@@ -495,6 +495,7 @@ body {
   .featured-case { flex-direction: column; }
 }
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -552,7 +553,7 @@ body {
 <div class="main">
 
   <!-- FEATURED CASE -->
-  <div class="featured-case" id="featuredAnchor" onclick="window.open('genetics-demo-case.html','_blank')">
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="featured-case" id="featuredAnchor" onclick="window.open('genetics-demo-case.html','_blank')">
     <div>
       <div class="featured-tag">⭐ Featured Case · Now Playing</div>
       <div class="featured-title">The Child Who Keeps Falling</div>
@@ -561,7 +562,7 @@ body {
     <button class="featured-btn" onclick="window.location.href='/genetics/genetics-demo-case.html'">Launch →</button>
   </div>
 
-  <div class="featured-case" style="background:linear-gradient(135deg,#1a0a2e,#3b1a6b);margin-bottom:28px;cursor:pointer" onclick="window.location.href='/genetics/genetics-aadc-case.html'">
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="featured-case" style="background:linear-gradient(135deg,#1a0a2e,#3b1a6b);margin-bottom:28px;cursor:pointer" onclick="window.location.href='/genetics/genetics-aadc-case.html'">
     <div>
       <div class="featured-tag" style="color:#c084fc">⭐ New Case · AADC Deficiency</div>
       <div class="featured-title">The Baby Who Wouldn't Stop Rolling Her Eyes</div>
@@ -576,12 +577,12 @@ body {
     <a class="sec-link">Filter &amp; Sort ↓</a>
   </div>
   <div class="track-tabs">
-    <div class="track-tab active" onclick="filterTrack('all',this)">All Tracks</div>
-    <div class="track-tab" onclick="filterTrack('rare',this)">Rare Pediatric</div>
-    <div class="track-tab" onclick="filterTrack('primary',this)">Primary Care</div>
-    <div class="track-tab" onclick="filterTrack('ai',this)">Allergy / Immunology</div>
-    <div class="track-tab" onclick="filterTrack('cancer',this)">Cancer Genetics</div>
-    <div class="track-tab" onclick="filterTrack('pharma',this)">Pharmacogenomics</div>
+    <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="track-tab active" onclick="filterTrack('all',this)">All Tracks</div>
+    <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="track-tab" onclick="filterTrack('rare',this)">Rare Pediatric</div>
+    <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="track-tab" onclick="filterTrack('primary',this)">Primary Care</div>
+    <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="track-tab" onclick="filterTrack('ai',this)">Allergy / Immunology</div>
+    <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="track-tab" onclick="filterTrack('cancer',this)">Cancer Genetics</div>
+    <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="track-tab" onclick="filterTrack('pharma',this)">Pharmacogenomics</div>
   </div>
 
   <!-- CASE GRID -->
@@ -719,7 +720,7 @@ function renderGrid() {
     const isLocked = c.status === 'locked';
     const scoreBar = c.score > 0 ? `<div class="card-score-bar"><div class="card-score-fill" style="width:${c.score}%"></div></div>` : '';
     return `
-      <div class="case-card${isLocked?' locked':''}" style="animation-delay:${i*0.05}s" onclick="${isLocked?'':c.id===1?"window.open('genetics-demo-case.html','_blank')":"null"}">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="case-card${isLocked?' locked':''}" style="animation-delay:${i*0.05}s" onclick="${isLocked?'':c.id===1?"window.open('genetics-demo-case.html','_blank')":"null"}">
         <div class="card-top">
           ${isLocked?'<div class="card-lock-overlay">🔒</div>':''}
           <div class="card-category-pill" style="background:${c.color};color:${c.textColor}">${c.emoji} ${c.category}</div>

@@ -161,6 +161,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
   .mx-topic-list{grid-template-columns:1fr}
 }
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
   <a href="/browse.html" style="position:fixed;top:14px;left:20px;font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;z-index:100;background:rgba(255,255,255,.9);padding:4px 10px;border-radius:6px;border:1px solid #e2e8f0">← Cases</a>
@@ -1340,7 +1341,7 @@ function renderSystems() {
   h += '<div class="mx-systems-title">Choose a Body System</div><div class="mx-grid">';
   SYSTEMS.forEach(function(sys) {
     var p = getSysProgress(sys);
-    h += '<div class="mx-system-card" onclick="MX.selectSystem(\'' + sys.id + '\')">';
+    h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mx-system-card" onclick="MX.selectSystem(\'' + sys.id + '\')">';
     h += '<div class="mx-system-icon">' + esc(sys.icon) + '</div>';
     h += '<div class="mx-system-name">' + esc(sys.name) + '</div>';
     var tierLabel = p.done > 0 ? p.done + ' achieved' : (p.inProgress > 0 ? p.inProgress + ' in progress' : 'Not started');
@@ -1385,7 +1386,7 @@ function renderTopics() {
     var tierDef = MASTERY_TIERS[tier];
     var pr = state.progress[t.id];
     var tierClass = tier === 'mastered' ? ' mastered' : (tier === 'proficient' ? ' proficient' : (tier !== 'untouched' ? ' in-progress' : ''));
-    h += '<div class="mx-topic-card' + tierClass + '" onclick="MX.startSession(\'' + t.id + '\')">';
+    h += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mx-topic-card' + tierClass + '" onclick="MX.startSession(\'' + t.id + '\')">';
     h += '<div class="mx-topic-tier" style="color:' + tierDef.color + ';font-size:16px" title="' + tierDef.label + ': ' + tierDef.desc + '">' + tierDef.icon + '</div>';
     h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + (t.badge ? ' <span style="background:#2874A6;color:#fff;font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:5px">' + t.badge + '</span>' : '') + (t.refSheet ? ' <span style="background:#7C3AED;color:#fff;font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:4px">📚 Curated</span>' : '') + '</div>';
     h += '<div class="mx-topic-meta">' + esc(t.sub) + '</div>';

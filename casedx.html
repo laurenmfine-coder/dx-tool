@@ -151,6 +151,7 @@ a{color:inherit;text-decoration:none}
 .cc-reveal-answer { font-size: 13px; font-weight: 700; color: #1B4F72; }
 </style>
 <meta property="og:title" content="Case Library | ReasonDx">
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
@@ -180,7 +181,7 @@ a{color:inherit;text-decoration:none}
 
 <div class="today-wrap">
   <div class="section-eyebrow">Today's Featured Case</div>
-  <div class="today-card" id="todayCard" onclick="startToday()">
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="today-card" id="todayCard" onclick="startToday()">
     <div class="today-icon" id="todayIcon" style="font-size:24px;font-weight:700;color:#2874A6">Dx</div>
     <div class="today-meta">
       <div class="today-tag" id="todayTag">Loading…</div>
@@ -432,7 +433,7 @@ document.getElementById("todayIcon").textContent=td.icon;
 document.getElementById("todayTag").textContent=td.spec+" · Est. "+td.mins+" min";
 // Show presentation context but blur the actual diagnosis title
 document.getElementById("todayTitle").innerHTML =
-  '<span id="todayDxReveal" class="cc-reveal-box" style="display:inline-flex;" '
+  '<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" id="todayDxReveal" class="cc-reveal-box" style="display:inline-flex;" '
   + 'onclick="this.querySelector(\'.cc-reveal-answer\').style.display=\'inline\';this.querySelector(\'.cc-reveal-icon\').style.display=\'none\';this.querySelector(\'.cc-reveal-label\').style.display=\'none\';this.style.background=\'transparent\';this.style.border=\'none\';this.style.cursor=\'default\';this.onclick=null">'
   + '<span class="cc-reveal-icon" style="font-size:12px">Show</span><span class="cc-reveal-label">Reveal diagnosis</span>'
   + '<span class="cc-reveal-answer" style="display:none;font-weight:700">'+esc(td.title)+'</span>'
@@ -469,7 +470,7 @@ function render(){
       var ccLabel = g.presentation || 'Case';
       out += '<div class="ccard">'
         + '<div class="cc-spec">'+esc(ccLabel)+'</div>'
-        + '<div id="cctit-'+cid+'" class="cc-reveal-box" onclick="event.stopPropagation();revealDx(this,\''+cid+'\')">'
+        + '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" id="cctit-'+cid+'" class="cc-reveal-box" onclick="event.stopPropagation();revealDx(this,\''+cid+'\')">'
         + '<span class="cc-reveal-icon" style="font-size:12px">Show</span><span class="cc-reveal-label">Tap to reveal dx</span>'
         + '<div class="cc-reveal-answer" style="display:none">'+esc(cdx)+'</div>'
         + '</div>'
@@ -480,7 +481,7 @@ function render(){
     });
     out+='</div></div>';
   });
-  document.getElementById("casesWrap").innerHTML=out||'<div class="no-results"><span style="font-size:14px">Search</span><p>No cases match your filters. <a href="#" onclick="resetF();return false" style="color:#2874A6">Reset filters</a></p></div>';
+  document.getElementById("casesWrap").innerHTML=out||'<div class="no-results"><span style="font-size:14px">Search</span><p>No cases match your filters. <a role="button" tabindex="0" onkeydown="rdxKbClick(event)" href="#" onclick="resetF();return false" style="color:#2874A6">Reset filters</a></p></div>';
   document.getElementById("fstats").textContent=total+" case"+(total!==1?"s":"")+" shown";
 }
 function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));try{sessionStorage.removeItem('rdx-order-mode');}catch(e){}window.location.href=((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[id])?("virtual-emr.html?cx="+window.RDX_CASE_TOKENS.slugToToken[id]):("virtual-emr.html?case="+id));}

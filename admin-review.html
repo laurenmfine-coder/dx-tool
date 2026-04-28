@@ -125,6 +125,7 @@ mark.ann:hover{opacity:.75}
 .toast{position:fixed;bottom:24px;right:24px;background:#1E293B;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none;z-index:9999}
 .toast.show{opacity:1;transform:translateY(0)}
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -221,7 +222,7 @@ function renderSidebar(){
     var subs = db('subs-' + u.username) || [];
     var hasGrade = subs.some(function(s){ return db('feedback-'+u.username+'-'+(s.week||'')); });
     var active = STATE.selectedUid === u.username;
-    html += '<div class="student-card' + (active?' active':'') + '" onclick="selectStudent(' + JSON.stringify(u.username) + ')">';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="student-card' + (active?' active':'') + '" onclick="selectStudent(' + JSON.stringify(u.username) + ')">';
     html += '<div class="student-avatar">' + esc(initials(u.displayName||u.username)) + '</div>';
     html += '<div style="flex:1;min-width:0"><div class="student-name">' + esc(u.displayName||u.username) + '</div>';
     html += '<div class="student-meta">' + subs.length + ' submission' + (subs.length!==1?'s':'') + '</div></div>';
@@ -314,7 +315,7 @@ function renderMain(){
   html += '<div class="color-dots">';
   html += '<span style="font-size:11px;color:var(--muted)">Color:</span>';
   [['2874A6','Correct reasoning'],['059669','Exemplary'],['D97706','Consider this'],['DC2626','Significant gap']].forEach(function(c,i){
-    html += '<div class="color-dot' + (i===0?' sel':'') + '" style="background:#'+c[0]+(i===0?';border-color:#'+c[0]+';border-width:3px':'')+'" title="'+c[1]+'" onclick="setColor(this,\''+c[0]+'\')"></div>';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="color-dot' + (i===0?' sel':'') + '" style="background:#'+c[0]+(i===0?';border-color:#'+c[0]+';border-width:3px':'')+'" title="'+c[1]+'" onclick="setColor(this,\''+c[0]+'\')"></div>';
   });
   html += '</div>';
   html += '<div class="btn-row"><button class="btn btn-primary" onclick="saveAnn()">Save</button><button class="btn btn-outline" onclick="cancelAnn()">Cancel</button></div>';

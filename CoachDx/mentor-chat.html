@@ -158,6 +158,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
   <meta property="og:image" content="https://reasondx.com/icons/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
 <script src="/js/rdx-config.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -643,11 +644,11 @@ function renderPicker(topics, searchVal) {
     <div class="topic-group">
       <div class="group-label">${cat}</div>
       <div>${items.map(t => `
-        <span class="topic-chip ${currentTopic?.id === t.id ? 'selected' : ''}"
+        <span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="topic-chip ${currentTopic?.id === t.id ? 'selected' : ''}"
           onclick="startSession('${t.name}', true, '${t.id}')">
           <span class="chip-dot" style="background:${catColor(t.cat)}"></span>
           ${t.name}
-          <span onclick="event.stopPropagation();rdxCoachToggleBookmark('${t.id}','${t.name}')" style="margin-left:4px;opacity:.5;cursor:pointer;font-size:10px" title="Bookmark this topic" id="rdx-bm-${t.id}">${rdxCoachIsBookmarked('${t.id}') ? '⭐' : '☆'}</span>
+          <span role="button" tabindex="0" onkeydown="rdxKbClick(event)" onclick="event.stopPropagation();rdxCoachToggleBookmark('${t.id}','${t.name}')" style="margin-left:4px;opacity:.5;cursor:pointer;font-size:10px" title="Bookmark this topic" id="rdx-bm-${t.id}">${rdxCoachIsBookmarked('${t.id}') ? '⭐' : '☆'}</span>
         </span>
       `).join('')}</div>
     </div>
@@ -672,7 +673,7 @@ function renderNoMatch(val) {
     <div style="margin-top:16px">
       <div class="group-label">Related Topics</div>
       <div>${getSuggested(val).map(t => `
-        <span class="topic-chip" onclick="startSession('${t.name}', true, '${t.id}')">
+        <span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="topic-chip" onclick="startSession('${t.name}', true, '${t.id}')">
           <span class="chip-dot" style="background:${catColor(t.cat)}"></span>
           ${t.name}
         </span>
@@ -724,8 +725,8 @@ function renderWelcomeChips(gapTopics) {
   const allChips = [...showTopics, ...foundational].slice(0, 7);
 
   chips.innerHTML = allChips.map(t => `
-    <span class="w-chip" onclick="startSession('${t.name}', true, '${t.id}')">${t.name}</span>
-  `).join('') + `<span class="w-chip" onclick="document.getElementById('welcomeInput').focus()" style="border-style:dashed">+ Anything else</span>`;
+    <span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="w-chip" onclick="startSession('${t.name}', true, '${t.id}')">${t.name}</span>
+  `).join('') + `<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="w-chip" onclick="document.getElementById('welcomeInput').focus()" style="border-style:dashed">+ Anything else</span>`;
 }
 
 async function loadFingerprintChips() {
@@ -2377,12 +2378,12 @@ function rdxCoachRenderBookmarks() {
   if (bookmarks.length === 0) { section.style.display = 'none'; return; }
   section.style.display = 'block';
   list.innerHTML = bookmarks.map(function(b) {
-    return '<span onclick="startSession(\'' + b.name.replace(/'/g,"\'") + '\', true, \'' + b.id + '\')" ' +
+    return '<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" onclick="startSession(\'' + b.name.replace(/'/g,"\'") + '\', true, \'' + b.id + '\')" ' +
       'style="display:inline-flex;align-items:center;gap:4px;background:var(--blue-bg,rgba(40,116,166,.08));' +
       'color:var(--blue,#2874A6);border:1px solid rgba(40,116,166,.2);padding:4px 10px;border-radius:12px;' +
       'font-size:12px;font-weight:600;cursor:pointer">' +
       '⭐ ' + b.name +
-      '<span onclick="event.stopPropagation();rdxCoachToggleBookmark(\'' + b.id + '\',\'' + b.name.replace(/'/g,"\'") + '\')" ' +
+      '<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" onclick="event.stopPropagation();rdxCoachToggleBookmark(\'' + b.id + '\',\'' + b.name.replace(/'/g,"\'") + '\')" ' +
       'style="opacity:.5;margin-left:2px;font-size:10px" title="Remove bookmark">×</span>' +
     '</span>';
   }).join('');

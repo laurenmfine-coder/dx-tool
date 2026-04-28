@@ -75,6 +75,7 @@ a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <!-- ── Minimal back-nav breadcrumb ── -->
@@ -97,9 +98,9 @@ a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer
 <div class="ph"><h1>A/I Procedure Lab <span class="badge">PC3 · Diagnostic Tests</span></h1><p>Practice skin testing, oral food challenges, and drug desensitization. Each module assesses ACGME PC3 milestone progression.</p></div>
 
 <div class="mg">
-  <div class="mc on" id="m-skin" onclick="selMod('skin')"><span class="lb" style="background:var(--gnb);color:var(--gn)">Most Common</span><div class="ico">💉</div><div class="tt">Skin Testing Simulator</div><div class="ds">Select allergens, interpret wheal/flare, handle indeterminate results.</div></div>
-  <div class="mc" id="m-ofc" onclick="selMod('ofc')"><span class="lb" style="background:var(--amb);color:var(--am)">High Stakes</span><div class="ico">🥜</div><div class="tt">OFC Protocol Builder</div><div class="ds">Design graded oral food challenge: dosing, intervals, stopping criteria.</div></div>
-  <div class="mc" id="m-desens" onclick="selMod('desens')"><span class="lb" style="background:var(--rdb);color:var(--rd)">Advanced</span><div class="ico">💊</div><div class="tt">Desensitization Planner</div><div class="ds">Aspirin desensitization, penicillin challenge, biologic re-challenge.</div></div>
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mc on" id="m-skin" onclick="selMod('skin')"><span class="lb" style="background:var(--gnb);color:var(--gn)">Most Common</span><div class="ico">💉</div><div class="tt">Skin Testing Simulator</div><div class="ds">Select allergens, interpret wheal/flare, handle indeterminate results.</div></div>
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mc" id="m-ofc" onclick="selMod('ofc')"><span class="lb" style="background:var(--amb);color:var(--am)">High Stakes</span><div class="ico">🥜</div><div class="tt">OFC Protocol Builder</div><div class="ds">Design graded oral food challenge: dosing, intervals, stopping criteria.</div></div>
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mc" id="m-desens" onclick="selMod('desens')"><span class="lb" style="background:var(--rdb);color:var(--rd)">Advanced</span><div class="ico">💊</div><div class="tt">Desensitization Planner</div><div class="ds">Aspirin desensitization, penicillin challenge, biologic re-challenge.</div></div>
 </div>
 
 <div id="out"></div>

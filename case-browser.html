@@ -70,6 +70,7 @@
 
   @media(max-width:640px){.grid,.grid-sm{grid-template-columns:1fr}.filters{flex-direction:column}.search{min-width:auto}.hero-stats{gap:16px}}
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -157,7 +158,7 @@ function renderFeatured() {
 function renderCard(c) {
   var acLabel='ESI '+(c.acuity||3);
   var catLabel=(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1);
-  var h='<div class="card'+(c.featured?' card-featured':'')+'" onclick="launch(\''+c.id+'\')">';
+  var h='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="card'+(c.featured?' card-featured':'')+'" onclick="launch(\''+c.id+'\')">';
   h+='<div class="card-top">';
   h+='<div class="card-acuity esi'+(c.acuity||3)+'">'+acLabel+'</div>';
   h+='<div><div class="card-cc">'+esc(c.cc)+'</div>';

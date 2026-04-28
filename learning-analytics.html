@@ -96,6 +96,7 @@ a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
 <script src="js/rdx-rpfs.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Analytics...</div></div>
@@ -227,7 +228,7 @@ function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
 function renderTabs(){
   var h='';TABS.forEach(function(t){
-    h+='<div class="tab'+(t.id===activeTab?' on':'')+'" onclick="setTab(\''+t.id+'\')">'+t.label+'</div>';
+    h+='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="tab'+(t.id===activeTab?' on':'')+'" onclick="setTab(\''+t.id+'\')">'+t.label+'</div>';
   });document.getElementById('tabBar').innerHTML=h;
 }
 

@@ -168,6 +168,7 @@ a { color: var(--ocean); }
   .layout { padding: 20px 16px; }
 }
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -190,7 +191,7 @@ a { color: var(--ocean); }
     <nav class="header-nav">
       <a href="../faculty-dashboard.html">Faculty Dashboard</a>
       <a href="../analytics-dashboard.html">Analytics</a>
-      <a href="#" onclick="doSignOut()">Sign Out</a>
+      <a role="button" tabindex="0" onkeydown="rdxKbClick(event)" href="#" onclick="doSignOut()">Sign Out</a>
     </nav>
   </div>
 
@@ -311,7 +312,7 @@ a { color: var(--ocean); }
               Available on the Institutional plan.
             </div>
             <a href="mailto:reasondxeducation@gmail.com?subject=ReasonDx Institutional License" class="btn btn-primary" style="text-decoration:none;display:inline-block;margin-bottom:10px">Contact Us to Upgrade →</a>
-            <div style="font-size:11px;color:var(--text-light)">Or <a href="#" onclick="FB.enterPreviewMode()" style="color:var(--ocean)">explore in preview mode</a> to see how it works.</div>
+            <div style="font-size:11px;color:var(--text-light)">Or <a role="button" tabindex="0" onkeydown="rdxKbClick(event)" href="#" onclick="FB.enterPreviewMode()" style="color:var(--ocean)">explore in preview mode</a> to see how it works.</div>
           </div>
         </div>
       </div>
@@ -413,7 +414,7 @@ function buildPresetGrid() {
   var presets = InstitutionalConfig.PRESETS;
   grid.innerHTML = Object.keys(presets).map(function (key) {
     var p = presets[key];
-    return '<div class="preset-card' + (_selectedPreset === key ? ' selected' : '') + '" onclick="selectPreset(\'' + key + '\')">' +
+    return '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="preset-card' + (_selectedPreset === key ? ' selected' : '') + '" onclick="selectPreset(\'' + key + '\')">' +
       '<div class="preset-check"></div>' +
       '<div class="preset-icon">' + p.icon + '</div>' +
       '<div class="preset-label">' + p.label + '</div>' +
@@ -774,11 +775,11 @@ var FB = (function () {
     el.innerHTML=_s.branches.map(function(branch,bi){
       var pChips=PROFESSIONS.map(function(prof){
         var sel=branch.professions.indexOf(prof)!==-1;
-        return '<span class="fb-prof-chip'+(sel?' selected':'')+'" onclick="FB._tbp('+bi+','+JSON.stringify(prof)+')">'+prof+'</span>';
+        return '<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="fb-prof-chip'+(sel?' selected':'')+'" onclick="FB._tbp('+bi+','+JSON.stringify(prof)+')">'+prof+'</span>';
       }).join('');
       var sChips=ALL_PHASES.map(function(p){
         var inc=branch.sequence.indexOf(p.id)!==-1, pos=branch.sequence.indexOf(p.id);
-        return '<span class="fb-seq-chip'+(inc?' active':' disabled-seq')+'" onclick="FB._tbph('+bi+','+p.id+')" title="'+p.label+'">'+
+        return '<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="fb-seq-chip'+(inc?' active':' disabled-seq')+'" onclick="FB._tbph('+bi+','+p.id+')" title="'+p.label+'">'+
           (inc?(pos+1)+'. ':'')+p.icon+' '+p.label+'</span>';
       }).join('');
       return '<div class="fb-branch-card">'+

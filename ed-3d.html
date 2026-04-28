@@ -202,6 +202,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <meta name="twitter:title" content="Emergency Department | ReasonDx">
 <meta name="twitter:description" content="8-room virtual ED with full patient encounters.">
 <script src="js/rdx-difficulty.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
@@ -227,10 +228,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <div class="filter-group">
     <span class="filter-label">Acuity</span>
     <div class="filter-chips" id="esiFilters">
-      <div class="filter-chip esi-1" data-esi="1" onclick="toggleFilter('esi',1)">ESI-1</div>
-      <div class="filter-chip esi-2" data-esi="2" onclick="toggleFilter('esi',2)">ESI-2</div>
-      <div class="filter-chip esi-3" data-esi="3" onclick="toggleFilter('esi',3)">ESI-3</div>
-      <div class="filter-chip esi-4" data-esi="4" onclick="toggleFilter('esi',4)">ESI-4</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip esi-1" data-esi="1" onclick="toggleFilter('esi',1)">ESI-1</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip esi-2" data-esi="2" onclick="toggleFilter('esi',2)">ESI-2</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip esi-3" data-esi="3" onclick="toggleFilter('esi',3)">ESI-3</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip esi-4" data-esi="4" onclick="toggleFilter('esi',4)">ESI-4</div>
     </div>
   </div>
   <div class="filter-divider"></div>
@@ -242,15 +243,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <div class="filter-group">
     <span class="filter-label">Status</span>
     <div class="filter-chips" id="statusFilters">
-      <div class="filter-chip" data-status="waiting" onclick="toggleFilter('status','waiting')">Waiting</div>
-      <div class="filter-chip" data-status="being-seen" onclick="toggleFilter('status','being-seen')">Active</div>
-      <div class="filter-chip" data-status="labs-pending" onclick="toggleFilter('status','labs-pending')">Labs</div>
-      <div class="filter-chip" data-status="admitted" onclick="toggleFilter('status','admitted')">Admitted</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip" data-status="waiting" onclick="toggleFilter('status','waiting')">Waiting</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip" data-status="being-seen" onclick="toggleFilter('status','being-seen')">Active</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip" data-status="labs-pending" onclick="toggleFilter('status','labs-pending')">Labs</div>
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip" data-status="admitted" onclick="toggleFilter('status','admitted')">Admitted</div>
     </div>
   </div>
   <div class="filter-divider"></div>
   <input type="text" class="filter-search" id="searchBox" aria-label="Search…" placeholder="Search…" oninput="applyFilters()">
-  <span class="filter-reset" onclick="clearFilters()">Clear all</span>
+  <span role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-reset" onclick="clearFilters()">Clear all</span>
 </div>
 
 <div class="stats-row" id="statsRow"></div>
@@ -259,12 +260,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <table class="board-table">
     <thead>
       <tr>
-        <th class="sortable" onclick="sortBy('bed')">Bed <span class="sort-arrow">↕</span></th>
-        <th class="sortable" onclick="sortBy('name')">Patient <span class="sort-arrow">↕</span></th>
+        <th role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="sortable" onclick="sortBy('bed')">Bed <span class="sort-arrow">↕</span></th>
+        <th role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="sortable" onclick="sortBy('name')">Patient <span class="sort-arrow">↕</span></th>
         <th>Chief Complaint</th>
-        <th class="sortable" onclick="sortBy('esi')">ESI <span class="sort-arrow">↕</span></th>
-        <th class="sortable" onclick="sortBy('status')">Status <span class="sort-arrow">↕</span></th>
-        <th class="sortable hide-mobile" onclick="sortBy('wait')">Wait <span class="sort-arrow">↕</span></th>
+        <th role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="sortable" onclick="sortBy('esi')">ESI <span class="sort-arrow">↕</span></th>
+        <th role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="sortable" onclick="sortBy('status')">Status <span class="sort-arrow">↕</span></th>
+        <th role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="sortable hide-mobile" onclick="sortBy('wait')">Wait <span class="sort-arrow">↕</span></th>
         <th class="hide-mobile">Provider</th>
         <th style="width:36px"></th>
       </tr>
@@ -427,7 +428,7 @@ function renderBoard(){
     if(p.esi===1)rc+=' row-critical';
     if(p.status==='discharged')rc+=' row-discharged';
 
-    h+='<tr class="'+rc+'" onclick="openCase(\''+esc(p.caseId)+'\')" onmouseenter="showPreview(event,\''+p.id+'\')" onmouseleave="hidePreview()">';
+    h+='<tr role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="'+rc+'" onclick="openCase(\''+esc(p.caseId)+'\')" onmouseenter="showPreview(event,\''+p.id+'\')" onmouseleave="hidePreview()">';
     h+='<td class="bed-cell">'+esc(p.bed)+'</td>';
     h+='<td class="patient-cell"><div class="patient-name">'+esc(p.name)+'</div><span class="patient-age">'+p.age+p.sex+'</span></td>';
     h+='<td class="cc-cell">'+esc(p.cc)+'<div class="cc-category">'+cap(p.category)+'</div></td>';
@@ -517,7 +518,7 @@ function buildCategoryFilters(){
   var cats={};allCases.forEach(function(c){cats[c.category]=(cats[c.category]||0)+1});
   var sorted=Object.keys(cats).sort(function(a,b){return cats[b]-cats[a]});
   var h='';sorted.slice(0,8).forEach(function(cat){
-    h+='<div class="filter-chip" data-category="'+cat+'" onclick="toggleFilter(\'category\',\''+cat+'\')">'+cap(cat)+'</div>';
+    h+='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="filter-chip" data-category="'+cat+'" onclick="toggleFilter(\'category\',\''+cat+'\')">'+cap(cat)+'</div>';
   });
   document.getElementById('catFilters').innerHTML=h;
 }
