@@ -2263,6 +2263,8 @@ function loadCaseData(cb) {
     }
     // Write active case to sessionStorage so consult-callback.html can gate access
     try { sessionStorage.setItem('rdx-active-case', CASE_ID); } catch(e) {}
+    // Phase 3: anchor case dates to learner's session date so dates feel "now"
+    if (window.CaseDateAnchor) { try { CaseDateAnchor.init(); } catch(e) { console.warn('[CaseDateAnchor]', e.message); } }
     if (cb) cb();
   };
   s.onerror = function() {
@@ -2330,6 +2332,10 @@ if (CASE_ID && !S.clinicalSetting) { S.clinicalSetting = 'ed'; S.specialty = 'em
 // HELPERS
 // ===============================================================
 function esc(s){if(!s)return"";const d=document.createElement("div");d.textContent=s;return d.innerHTML}
+// Phase 3: anchored date helpers — show case dates relative to the learner's session
+function _dateAbs(d){return (window.CaseDateAnchor && CaseDateAnchor.isReady && CaseDateAnchor.isReady()) ? CaseDateAnchor.shift(d) : (d||'');}
+function _dateRel(d){return (window.CaseDateAnchor && CaseDateAnchor.isReady && CaseDateAnchor.isReady()) ? CaseDateAnchor.relative(d) : (d||'');}
+function _dateBoth(d){return (window.CaseDateAnchor && CaseDateAnchor.isReady && CaseDateAnchor.isReady()) ? CaseDateAnchor.both(d) : (d||'');}
 function badge(t,c){return'<span class="badge '+(c||"badge-primary")+'">'+esc(t)+'</span>'}
 function sectionCard(title,icon,body,cls){const h=title?'<div class="section-header">'+(icon||"")+' <span class="section-header-title">'+esc(title)+'</span></div>':"";return'<div class="section-card '+(cls||"")+'">'+h+'<div class="section-body">'+body+'</div></div>'}
 function tableHTML(hd,rows){return'<table class="data-table"><thead><tr>'+hd.map(h=>'<th>'+esc(h)+'</th>').join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table>'}
@@ -2471,11 +2477,33 @@ function renderDemographics(){
 }
 
 
-function renderVisits(){return VISITS.map(v=>{const o=S.expanded["v-"+v.id];const tb=v.type.includes("Urgent")||v.type.includes("Emergency")?"badge-danger":v.type.includes("Consult")?"badge-purple":v.type.includes("Telehealth")||v.type.includes("Phone")?"badge-warning":"badge-primary";return sectionCard("","",'<div class="expandable-header" onclick="toggleExpand(\'v-'+v.id+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge(v.type,tb)+'<span style="font-size:14px;font-weight:600">'+esc(v.date)+'</span><span style="font-size:13px;color:var(--text-secondary)">-- '+esc(v.provider)+'</span></div><span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div><div style="font-size:13px;color:var(--text-secondary);margin-top:4px">CC: '+esc(v.cc)+'</div><div class="expand-body '+(o?"open":"")+'" style="padding:4px 0 8px">'+["History of Present Illness","Physical Examination","Assessment","Plan"].map((l,i)=>'<div class="visit-section-label">'+l+'</div><div class="visit-section-text">'+esc([v.hpi,v.exam,v.assessment,v.plan][i])+'</div>').join("")+'</div>')}).join("")}
+function renderVisits(){return VISITS.map(v=>{const o=S.expanded["v-"+v.id];const tb=v.type.includes("Urgent")||v.type.includes("Emergency")?"badge-danger":v.type.includes("Consult")?"badge-purple":v.type.includes("Telehealth")||v.type.includes("Phone")?"badge-warning":"badge-primary";return sectionCard("","",'<div class="expandable-header" onclick="toggleExpand(\'v-'+v.id+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge(v.type,tb)+'<span style="font-size:14px;font-weight:600">'+esc(_dateBoth(v.date))+'</span><span style="font-size:13px;color:var(--text-secondary)">-- '+esc(v.provider)+'</span></div><span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div><div style="font-size:13px;color:var(--text-secondary);margin-top:4px">CC: '+esc(v.cc)+'</div><div class="expand-body '+(o?"open":"")+'" style="padding:4px 0 8px">'+["History of Present Illness","Physical Examination","Assessment","Plan"].map((l,i)=>'<div class="visit-section-label">'+l+'</div><div class="visit-section-text">'+esc([v.hpi,v.exam,v.assessment,v.plan][i])+'</div>').join("")+'</div>')}).join("")}
 function renderMedications(){return sectionCard("Current Medications",I.pill,tableHTML(["Medication","Sig","Prescriber","Start","Refills","Status"],MEDICATIONS.map(m=>'<tr><td class="td-bold">'+esc(m.name)+'</td><td class="td-muted">'+esc(m.sig)+'</td><td class="td-muted">'+esc(m.prescriber)+'</td><td class="td-muted">'+esc(m.start)+'</td><td class="td-muted">'+m.refills+'</td><td>'+badge(m.status,m.status==="PRN"?"badge-warning":"badge-accent")+'</td></tr>')))}
 function renderAllergies(){return sectionCard("Allergies & Adverse Reactions",I.alert,'<div class="allergy-alert-bar">'+I.alert+'<span>'+ALLERGIES.length+' documented allergies — Review before prescribing</span></div>'+tableHTML(["Allergen","Type","Reaction","Severity","Verified"],ALLERGIES.map(a=>'<tr><td class="td-bold">'+esc(a.allergen)+'</td><td>'+badge(a.type)+'</td><td class="td-muted">'+esc(a.reaction)+'</td><td>'+badge(a.severity,a.severity==="Severe"?"badge-danger":a.severity==="Moderate"?"badge-warning":"badge-accent")+'</td><td class="td-muted">'+esc(a.verified)+'</td></tr>')))}
-function renderLabs(){return LABS.map((lab,idx)=>{const o=S.expanded["l-"+idx];const abn=lab.groups.reduce((c,g)=>c+g.results.filter(r=>r.flag).length,0);const hdr='<div class="expandable-header" onclick="toggleExpand(\'l-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(lab.date)+'</span><span class="td-muted">'+esc(lab.time)+'</span>'+badge(lab.status,"badge-accent")+'<span class="td-muted">'+esc(lab.orderedBy)+'</span>'+(abn?badge(abn+" abnormal","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);let rpt='<div class="lab-report"><div class="lab-report-header"><div class="lab-report-title">LABORATORY REPORT</div><div class="lab-report-meta"><span><strong>Patient:</strong> '+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span><span><strong>Accession:</strong> '+esc(lab.accession)+'</span><span><strong>DOB:</strong> '+PATIENT.dob+' | <strong>Sex:</strong> '+(PATIENT.sex||'')+'</span><span><strong>Status:</strong> '+esc(lab.status)+'</span><span><strong>Collected:</strong> '+esc(lab.collected)+' | <strong>Fasting:</strong> '+esc(lab.fasting)+'</span><span><strong>Facility:</strong> '+esc(lab.facility)+'</span><span><strong>Specimen:</strong> '+esc(lab.specimenType)+'</span><span><strong>Ordered By:</strong> '+esc(lab.orderedBy)+'</span></div></div><div class="lab-report-body"><div class="lab-row lab-row-header"><span>Test Name</span><span>Result</span><span>Units</span><span>Reference Range</span><span>Flag</span></div>';lab.groups.forEach(g=>{rpt+='<div class="lab-group-header">'+esc(g.name)+'</div>';g.results.forEach(r=>{rpt+='<div class="lab-row '+(r.flag==="H"?"flagged-h":r.flag==="L"?"flagged-l":"")+'"><span class="lab-test-name">'+esc(r.test)+'</span><span class="lab-value '+(r.flag==="H"?"high":r.flag==="L"?"low":"")+'">'+esc(r.value)+'</span><span class="lab-unit">'+esc(r.unit)+'</span><span class="lab-range">'+esc(r.range)+'</span><span class="lab-flag '+(r.flag==="H"?"high":"low")+'">'+(r.flag?r.flag==="H"?"▲":"▼":"")+'</span></div>'})});rpt+='</div><div class="lab-report-footer"><span>'+esc(lab.date)+' '+esc(lab.time)+' | '+esc(lab.facility)+'</span><span>Electronically verified</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
-function renderImaging(){return IMAGING.map((img,idx)=>{const o=S.expanded["i-"+idx];const hdr='<div class="expandable-header" onclick="toggleExpand(\'i-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(img.date)+'</span><span style="font-size:13px;color:var(--text-secondary)">'+esc(img.study)+'</span>'+(img.modality?'<span style="padding:2px 7px;background:#EBF4FB;color:var(--primary-dark);border-radius:3px;font-size:10px;font-weight:800;font-family:\'IBM Plex Mono\',monospace">'+esc(img.modality)+'</span>':'')+''+badge(img.status,"badge-accent")+(img.priority==="STAT"?badge("STAT","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);const rpt='<div class="imaging-report"><div class="imaging-report-header"><div class="imaging-report-title">'+esc(img.study)+'</div><div class="imaging-meta-grid"><div><span class="imaging-meta-label">Patient</span><br><span class="imaging-meta-value">'+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span></div><div><span class="imaging-meta-label">Accession</span><br><span class="imaging-meta-value">'+esc(img.accession)+'</span></div><div><span class="imaging-meta-label">Ordering</span><br><span class="imaging-meta-value">'+esc(img.orderedBy)+'</span></div><div><span class="imaging-meta-label">Interpreting</span><br><span class="imaging-meta-value">'+esc(img.readBy)+'</span></div><div><span class="imaging-meta-label">Facility</span><br><span class="imaging-meta-value">'+esc(img.facility)+'</span></div><div><span class="imaging-meta-label">Priority</span><br><span class="imaging-meta-value">'+esc(img.priority)+'</span></div></div></div><div class="imaging-report-body"><div class="imaging-section"><div class="imaging-section-label">Clinical Indication</div><div class="imaging-section-text">'+esc(img.clinical)+'</div></div><div class="imaging-section"><div class="imaging-section-label">Technique</div><div class="imaging-section-text">'+esc(img.technique)+'</div></div><div class="imaging-section"><div class="imaging-section-label">Findings</div><div class="imaging-section-text" style="white-space:pre-line">'+esc(img.findings)+'</div></div><div class="imaging-impression"><div class="imaging-impression-label">Impression</div><div class="imaging-section-text" style="white-space:pre-line;font-weight:500">'+esc(img.impression)+'</div></div></div><div class="imaging-report-footer"><span>Dict: '+esc(img.dictated)+' | Ver: '+esc(img.verified)+'</span><span>'+esc(img.readBy)+'</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
+// Phase 3: gate "current visit" labs/imaging for students until they order them.
+// Historical results from prior visits stay visible (read-only context).
+// Heuristic: anything dated within 7 days of the most recent visit = "current visit".
+// Faculty/admin see everything as before.
+function _isCurrentVisitItem(item){
+  if(!window.CaseDateAnchor || !CaseDateAnchor.isReady || !CaseDateAnchor.isReady()) return false;
+  if(!item || !item.date) return false;
+  var anchor = CaseDateAnchor.getMostRecentVisitDate();
+  if(!anchor) return false;
+  var delta = CaseDateAnchor.diffDays(item.date, anchor.toISOString().slice(0,10));
+  if(delta === null) return false;
+  // delta = days from item.date to anchor (anchor - item)
+  // <= 7 days BEFORE the visit (or after) = "this visit"
+  return Math.abs(delta) <= 7;
+}
+function _gateForStudent(items){
+  if(!items || !items.length) return items || [];
+  var role = (window.S && S.currentUser && S.currentUser.role) || '';
+  if(role !== 'student') return items;
+  // Students see only historical (NOT this visit) until they order
+  return items.filter(function(it){ return !_isCurrentVisitItem(it); });
+}
+function renderLabs(){return _gateForStudent(LABS).map((lab,idx)=>{const o=S.expanded["l-"+idx];const abn=lab.groups.reduce((c,g)=>c+g.results.filter(r=>r.flag).length,0);const hdr='<div class="expandable-header" onclick="toggleExpand(\'l-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(_dateBoth(lab.date))+'</span><span class="td-muted">'+esc(lab.time)+'</span>'+badge(lab.status,"badge-accent")+'<span style="font-size:10px;font-weight:700;padding:2px 7px;background:#F1F5F9;color:#64748B;border-radius:4px;letter-spacing:.04em">PRIOR VISIT</span><span class="td-muted">'+esc(lab.orderedBy)+'</span>'+(abn?badge(abn+" abnormal","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);let rpt='<div class="lab-report"><div class="lab-report-header"><div class="lab-report-title">LABORATORY REPORT</div><div class="lab-report-meta"><span><strong>Patient:</strong> '+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span><span><strong>Accession:</strong> '+esc(lab.accession)+'</span><span><strong>DOB:</strong> '+PATIENT.dob+' | <strong>Sex:</strong> '+(PATIENT.sex||'')+'</span><span><strong>Status:</strong> '+esc(lab.status)+'</span><span><strong>Collected:</strong> '+esc(_dateAbs(lab.collected)||lab.collected)+' | <strong>Fasting:</strong> '+esc(lab.fasting)+'</span><span><strong>Facility:</strong> '+esc(lab.facility)+'</span><span><strong>Specimen:</strong> '+esc(lab.specimenType)+'</span><span><strong>Ordered By:</strong> '+esc(lab.orderedBy)+'</span></div></div><div class="lab-report-body"><div class="lab-row lab-row-header"><span>Test Name</span><span>Result</span><span>Units</span><span>Reference Range</span><span>Flag</span></div>';lab.groups.forEach(g=>{rpt+='<div class="lab-group-header">'+esc(g.name)+'</div>';g.results.forEach(r=>{rpt+='<div class="lab-row '+(r.flag==="H"?"flagged-h":r.flag==="L"?"flagged-l":"")+'"><span class="lab-test-name">'+esc(r.test)+'</span><span class="lab-value '+(r.flag==="H"?"high":r.flag==="L"?"low":"")+'">'+esc(r.value)+'</span><span class="lab-unit">'+esc(r.unit)+'</span><span class="lab-range">'+esc(r.range)+'</span><span class="lab-flag '+(r.flag==="H"?"high":"low")+'">'+(r.flag?r.flag==="H"?"▲":"▼":"")+'</span></div>'})});rpt+='</div><div class="lab-report-footer"><span>'+esc(_dateAbs(lab.date))+' '+esc(lab.time)+' | '+esc(lab.facility)+'</span><span>Electronically verified</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
+function renderImaging(){return _gateForStudent(IMAGING).map((img,idx)=>{const o=S.expanded["i-"+idx];const hdr='<div class="expandable-header" onclick="toggleExpand(\'i-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(_dateBoth(img.date))+'</span><span style="font-size:13px;color:var(--text-secondary)">'+esc(img.study)+'</span><span style="font-size:10px;font-weight:700;padding:2px 7px;background:#F1F5F9;color:#64748B;border-radius:4px;letter-spacing:.04em">PRIOR VISIT</span>'+(img.modality?'<span style="padding:2px 7px;background:#EBF4FB;color:var(--primary-dark);border-radius:3px;font-size:10px;font-weight:800;font-family:\'IBM Plex Mono\',monospace">'+esc(img.modality)+'</span>':'')+''+badge(img.status,"badge-accent")+(img.priority==="STAT"?badge("STAT","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);const rpt='<div class="imaging-report"><div class="imaging-report-header"><div class="imaging-report-title">'+esc(img.study)+'</div><div class="imaging-meta-grid"><div><span class="imaging-meta-label">Patient</span><br><span class="imaging-meta-value">'+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span></div><div><span class="imaging-meta-label">Accession</span><br><span class="imaging-meta-value">'+esc(img.accession)+'</span></div><div><span class="imaging-meta-label">Ordering</span><br><span class="imaging-meta-value">'+esc(img.orderedBy)+'</span></div><div><span class="imaging-meta-label">Interpreting</span><br><span class="imaging-meta-value">'+esc(img.readBy)+'</span></div><div><span class="imaging-meta-label">Facility</span><br><span class="imaging-meta-value">'+esc(img.facility)+'</span></div><div><span class="imaging-meta-label">Priority</span><br><span class="imaging-meta-value">'+esc(img.priority)+'</span></div></div></div><div class="imaging-report-body"><div class="imaging-section"><div class="imaging-section-label">Clinical Indication</div><div class="imaging-section-text">'+esc(img.clinical)+'</div></div><div class="imaging-section"><div class="imaging-section-label">Technique</div><div class="imaging-section-text">'+esc(img.technique)+'</div></div><div class="imaging-section"><div class="imaging-section-label">Findings</div><div class="imaging-section-text" style="white-space:pre-line">'+esc(img.findings)+'</div></div><div class="imaging-impression"><div class="imaging-impression-label">Impression</div><div class="imaging-section-text" style="white-space:pre-line;font-weight:500">'+esc(img.impression)+'</div></div></div><div class="imaging-report-footer"><span>Dict: '+esc(_dateAbs(img.dictated)||img.dictated)+' | Ver: '+esc(_dateAbs(img.verified)||img.verified)+'</span><span>'+esc(img.readBy)+'</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
 function renderVitals(){
   var _spark=(window.RDXIntegration)?RDXIntegration.renderVitalsSparkline():'';
   // BMI helper: calculate from wt (lbs) and ht (e.g. "5\'6\"")
@@ -2517,7 +2545,7 @@ function renderVitals(){
                  _bmiOvwt?'background:#FFFBEB;color:#92400E;font-weight:700;padding:2px 5px;border-radius:3px':'';
     var bmiLabel=_bmiObese?' (Obese)':_bmiOvwt?' (Ovwt)':'';
     return'<tr>'+
-      '<td style="font-weight:500">'+esc(v.date)+'</td>'+
+      '<td style="font-weight:500">'+esc(_dateAbs(v.date))+'</td>'+
       '<td>'+badge(v.setting)+'</td>'+
       '<td class="td-mono" style="'+(_bpH?_red:_bpEl?_yellow:'')+'">'+esc(v.bp)+(_bpH?' ▲':_bpEl?' ↑':'')+'</td>'+
       '<td class="td-mono" style="'+(_hrH?_red:_hrL?_low:'')+'">'+v.hr+(_hrH?' ▲':_hrL?' ▼':'')+'</td>'+
@@ -2531,7 +2559,7 @@ function renderVitals(){
   return _spark + sectionCard("Vitals Trend",I.activity,tableHTML(["Date","Setting","BP","HR","RR","Temp","SpO2","Wt / Ht","BMI"],rows));
 }
 
-function renderImmunizations(){return sectionCard("Immunizations",I.syringe,'<div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:12px">✓ '+IMMUNIZATIONS.length+' immunizations on record</div>'+tableHTML(["Vaccine","Date","Site","Lot #","Manufacturer"],IMMUNIZATIONS.map(i=>'<tr><td style="font-weight:500">'+esc(i.vaccine)+'</td><td class="td-muted">'+esc(i.date)+'</td><td class="td-muted">'+esc(i.site)+'</td><td class="td-mono td-muted" style="font-size:12px">'+esc(i.lot)+'</td><td class="td-muted">'+esc(i.mfr)+'</td></tr>')))}
+function renderImmunizations(){return sectionCard("Immunizations",I.syringe,'<div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:12px">✓ '+IMMUNIZATIONS.length+' immunizations on record</div>'+tableHTML(["Vaccine","Date","Site","Lot #","Manufacturer"],IMMUNIZATIONS.map(i=>'<tr><td style="font-weight:500">'+esc(i.vaccine)+'</td><td class="td-muted">'+esc(_dateAbs(i.date))+'</td><td class="td-muted">'+esc(i.site)+'</td><td class="td-mono td-muted" style="font-size:12px">'+esc(i.lot)+'</td><td class="td-muted">'+esc(i.mfr)+'</td></tr>')))}
 function renderHistory(){return '<div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
   + '<div><div style="font-size:12px;font-weight:700;color:#065F46;margin-bottom:2px">✅ Chart review complete?</div>'
   + '<div style="font-size:11px;color:#047857">Before interviewing the patient, form your initial differential from what you have read so far.</div></div>'
@@ -6546,7 +6574,10 @@ render = function(){
   fn.ddx = function(){
     var _chk = (window.DDxCheckpoints && typeof DDxCheckpoints.render === 'function') ? DDxCheckpoints.render() : '';
     var _bld = (window.DdxBuilder && typeof DdxBuilder.renderTab === 'function') ? DdxBuilder.renderTab() : '<p>DDx builder unavailable</p>';
-    return _chk + _bld;
+    // Phase 3: evidence soft-nudge banner + AI grading results
+    var _evBanner  = (window.EvidenceAnalyzer && S.currentUser && S.currentUser.role === 'student') ? EvidenceAnalyzer.renderBanner()  : '';
+    var _evResults = (window.EvidenceAnalyzer && S.currentUser && S.currentUser.role === 'student') ? EvidenceAnalyzer.renderResults() : '';
+    return _chk + _evBanner + _evResults + _bld;
   };
   fn.crt = fn.ddx;
   fn.visits = renderVisits;
@@ -6715,11 +6746,24 @@ function switchTabFromMore(id){
 
 // Labs/Imaging interactive tabs
 function renderLabsInteractive(){
-  let html = renderLabs();
-  const completedStudentLabs = S.labOrders.filter(o=>o.resulted);
-  if(!completedStudentLabs.length && !S.labOrders.filter(o=>!o.resulted).length){
-    html += '<div style="margin-top:16px;padding:12px 16px;background:var(--surface-alt);border-radius:10px;border:1px dashed var(--border);font-size:12px;color:var(--text-muted)">📋 Use <strong>Order Tests</strong> to order labs and imaging. Your results will appear here automatically.</div>';
+  let html = '';
+  // Phase 3: prepend a clear gating banner for students with nothing ordered yet
+  var _gatedLabs = (window.LABS||[]).filter(function(l){ return _isCurrentVisitItem(l); });
+  var _historicalLabs = _gateForStudent(window.LABS||[]);
+  var _hasPending = S.labOrders.filter(o=>!o.resulted).length > 0;
+  var _hasResulted = S.labOrders.filter(o=>o.resulted).length > 0;
+  if(!_hasPending && !_hasResulted){
+    html += '<div style="margin-bottom:16px;padding:14px 18px;background:linear-gradient(135deg,#FEF3C7,#FFFBEB);border:1px solid #FCD34D;border-radius:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">'
+      + '<div style="font-size:24px">🔬</div>'
+      + '<div style="flex:1;min-width:200px"><div style="font-size:13px;font-weight:700;color:#78350F;margin-bottom:2px">No labs ordered for this visit</div>'
+      + '<div style="font-size:12px;color:#92400E;line-height:1.5">Lab results for the current visit are hidden until you order them. '
+      + (_historicalLabs.length ? 'Prior visit labs are shown below for context.' : 'No prior labs on file.')
+      + '</div></div>'
+      + '<button type="button" onclick="switchTab(\'orders\')" style="padding:9px 18px;background:#F59E0B;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Order Labs →</button>'
+      + '</div>';
   }
+  html += renderLabs();
+  const completedStudentLabs = S.labOrders.filter(o=>o.resulted);
   if(completedStudentLabs.length){
     html += '<div style="margin-top:24px;padding-top:16px;border-top:2px dashed var(--border)"><div style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px">'+I.flask+' Your Ordered Lab Results</div>';
     completedStudentLabs.forEach((o,idx)=>{
@@ -6737,11 +6781,22 @@ function renderLabsInteractive(){
 }
 
 function renderImagingInteractive(){
-  let html = renderImaging();
-  const completedStudentImgs = S.imgOrders.filter(o=>o.resulted);
-  if(!completedStudentImgs.length && !S.imgOrders.filter(o=>!o.resulted).length){
-    html += '<div style=\"margin-top:16px;padding:12px 16px;background:var(--surface-alt);border-radius:10px;border:1px dashed var(--border);font-size:12px;color:var(--text-muted)\">🩻 Use <strong>Order Imaging</strong> above to order X-rays, CT, MRI and more.</div>';
+  let html = '';
+  var _historicalImg = _gateForStudent(window.IMAGING||[]);
+  var _hasPending = S.imgOrders.filter(o=>!o.resulted).length > 0;
+  var _hasResulted = S.imgOrders.filter(o=>o.resulted).length > 0;
+  if(!_hasPending && !_hasResulted){
+    html += '<div style="margin-bottom:16px;padding:14px 18px;background:linear-gradient(135deg,#FEF3C7,#FFFBEB);border:1px solid #FCD34D;border-radius:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">'
+      + '<div style="font-size:24px">🩻</div>'
+      + '<div style="flex:1;min-width:200px"><div style="font-size:13px;font-weight:700;color:#78350F;margin-bottom:2px">No imaging ordered for this visit</div>'
+      + '<div style="font-size:12px;color:#92400E;line-height:1.5">Imaging studies for the current visit are hidden until you order them. '
+      + (_historicalImg.length ? 'Prior imaging studies are shown below for context.' : 'No prior imaging on file.')
+      + '</div></div>'
+      + '<button type="button" onclick="switchTab(\'orders\')" style="padding:9px 18px;background:#F59E0B;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">Order Imaging →</button>'
+      + '</div>';
   }
+  html += renderImaging();
+  const completedStudentImgs = S.imgOrders.filter(o=>o.resulted);
   if(completedStudentImgs.length){
     html += '<div style="margin-top:24px;padding-top:16px;border-top:2px dashed var(--border)"><div style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px">'+I.image+' Your Ordered Imaging Results</div>';
     completedStudentImgs.forEach((o,idx)=>{
@@ -6811,6 +6866,8 @@ submitDoc = function(){
 <script src="js/rdx-emr-enhancements.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="js/ddx-checkpoints.js"></script>
+<script src="js/case-date-anchor.js"></script>
+<script src="js/evidence-analyzer.js"></script>
 <script src="rdx-demo-tour.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
 <script src="js/dx-feedback.js"></script>
