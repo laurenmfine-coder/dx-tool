@@ -35,9 +35,18 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
       video: '/demos/ddx-builder.mp4'
     },
     'coach-dx': {
-      title: 'CoachDx: Socratic Reasoning',
-      description: 'CoachDx asks probing questions instead of giving answers. It helps you think through the "why" behind clinical decisions.',
-      video: '/demos/coach-dx.mp4'
+      title: 'CoachDx: Your AI Attending',
+      description: 'CoachDx asks the questions a great attending would. It probes your reasoning instead of handing you answers — so the thinking actually sticks.',
+      video: '/demos/coach-dx.mp4',
+      instructions: {
+        heading: 'How to use it',
+        steps: [
+          { num: '1', title: 'Pick a topic', desc: 'Type any clinical concept, presentation, or topic you\'re struggling with — for example "AKI workup", "interpreting a wide-complex tachycardia", or "DKA management".' },
+          { num: '2', title: 'Answer honestly', desc: 'When CoachDx asks what you already know, share your actual current thinking — even if it feels rough. The AI calibrates to wherever you are.' },
+          { num: '3', title: 'Stay in the questions', desc: 'It will rarely tell you the answer outright. That\'s by design. Push through — the productive struggle is the point.' }
+        ],
+        tip: 'Best for: pre-rounding prep, post-call decompression, study sessions, or any moment you want to pressure-test your reasoning.'
+      }
     },
     'virtual-emr': {
       title: 'Virtual EMR: Practice Clinical Workflow',
@@ -107,18 +116,37 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
     card.style.transform = 'translate(-50%, -50%)';
 
     var html = '';
-    
-    // Video section
-    html += '<div class="rdx-tour-video-wrapper">';
+
+    // Video / intro section. If the video file is available, show it.
+    // Otherwise, show structured instructions if the tour defines them,
+    // and fall back to a generic placeholder only as a last resort.
     if (tour.video && fileExists(tour.video)) {
+      html += '<div class="rdx-tour-video-wrapper">';
       html += '<video class="rdx-tour-video" src="' + tour.video + '" autoplay loop muted playsinline></video>';
-    } else {
-      html += '<div class="rdx-tour-placeholder" onclick="this.querySelector(\'video\')?.play()">';
-      html += '<div class="rdx-tour-placeholder-icon">▶️</div>';
-      html += '<div class="rdx-tour-placeholder-text">Video demo coming soon</div>';
+      html += '</div>';
+    } else if (tour.instructions) {
+      html += '<div class="rdx-tour-instructions">';
+      if (tour.instructions.heading) {
+        html += '<div class="rdx-tour-instructions-heading">' + escapeHtml(tour.instructions.heading) + '</div>';
+      }
+      if (Array.isArray(tour.instructions.steps)) {
+        html += '<ol class="rdx-tour-instructions-list">';
+        tour.instructions.steps.forEach(function(step) {
+          html += '<li class="rdx-tour-instructions-step">';
+          if (step.num) html += '<span class="rdx-tour-instructions-num">' + escapeHtml(step.num) + '</span>';
+          html += '<div class="rdx-tour-instructions-body">';
+          if (step.title) html += '<div class="rdx-tour-instructions-step-title">' + escapeHtml(step.title) + '</div>';
+          if (step.desc) html += '<div class="rdx-tour-instructions-step-desc">' + escapeHtml(step.desc) + '</div>';
+          html += '</div></li>';
+        });
+        html += '</ol>';
+      }
+      if (tour.instructions.tip) {
+        html += '<div class="rdx-tour-instructions-tip">💡 ' + escapeHtml(tour.instructions.tip) + '</div>';
+      }
       html += '</div>';
     }
-    html += '</div>';
+    // (No more "Video demo coming soon" placeholder — content speaks for itself.)
 
     // Content section
     html += '<div class="rdx-tour-content">';
