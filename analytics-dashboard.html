@@ -1406,9 +1406,25 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // CRT / REASONING ANALYTICS ENGINE
         // Reads from localStorage keys
         // =====================================================
+        // Safe JSON parser: returns the fallback if the stored value is null
+        // OR malformed (corrupted localStorage, partial writes, manual edits).
+        // Without this, one bad entry would throw and halt the rest of the
+        // dashboard render.
+        function _bpSafeParse(key, fallback) {
+            try {
+                var raw = localStorage.getItem(key);
+                if (raw === null || raw === undefined) return fallback;
+                var parsed = JSON.parse(raw);
+                return (parsed === null || parsed === undefined) ? fallback : parsed;
+            } catch(e) {
+                console.warn('[BoardPrep] corrupted localStorage for', key, '— using fallback:', e.message);
+                return fallback;
+            }
+        }
+
         function loadBoardPrepAnalytics() {
             // 1. Core stats
-            const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+            const stats = _bpSafeParse('boardPrepStats', {totalCorrect:0,totalIncorrect:0,sessions:0});
             const total = stats.totalCorrect + stats.totalIncorrect;
             const accuracy = total > 0 ? Math.round(stats.totalCorrect / total * 100) : null;
             
@@ -1420,7 +1436,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             document.getElementById('bpSessionCount').textContent = stats.sessions;
             
             // 2. System heatmap
-            const systemStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const systemStats = _bpSafeParse('boardPrepSystems', {});
             const heatmapEl = document.getElementById('bpSystemHeatmap');
             
             const allSystems = ['Pulmonary','Pharmacology','Neurology','Infectious','Cardiology',
@@ -1448,7 +1464,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             }
             
             // 3. Spaced repetition progress
-            const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+            const history = _bpSafeParse('boardPrepHistory', []);
             let mastered = 0, learning = 0, dueReview = 0;
             const questionTracker = {};
             
@@ -1483,7 +1499,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             }
             
             // 4. Knowledge transfer (variant groups)
-            const variantData = JSON.parse(localStorage.getItem('boardPrepVariants') || '{}');
+            const variantData = _bpSafeParse('boardPrepVariants', {});
             const groupCount = Object.keys(variantData).length;
             let transfers = 0;
             const transferList = [];
@@ -1538,7 +1554,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             biasTypes.forEach(b => biasCount[b.key] = 0);
             
             // Pull from boardPrepPatterns if available
-            const patterns = JSON.parse(localStorage.getItem('boardPrepPatterns') || '{}');
+            const patterns = _bpSafeParse('boardPrepPatterns', {});
             if (patterns.biasEncounters) {
                 Object.entries(patterns.biasEncounters).forEach(([key, count]) => {
                     if (biasCount.hasOwnProperty(key)) biasCount[key] = count;
@@ -1568,8 +1584,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // KNOWLEDGE GAP HEATMAP
         // =====================================================
         function renderKnowledgeHeatmap() {
-            const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
-            const typeStats = JSON.parse(localStorage.getItem('boardPrepTypeStats') || '{}');
+            const sysStats = _bpSafeParse('boardPrepSystems', {});
+            const typeStats = _bpSafeParse('boardPrepTypeStats', {});
             const el = document.getElementById('knowledgeHeatmap');
             if (!Object.keys(sysStats).length) { el.innerHTML = '<div style="text-align:center;color:var(--gray-400);padding:16px;">Complete clinical reasoning sessions to see your knowledge map.</div>'; return; }
 
@@ -1603,7 +1619,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // CRT PROGRESS TRACKER
         // =====================================================
         function renderCrtProgress() {
-            const scores = JSON.parse(localStorage.getItem('crtScores') || '{}');
+            const scores = _bpSafeParse('crtScores', {});
             const el = document.getElementById('crtProgress');
             const empty = document.getElementById('crtEmpty');
             
@@ -1659,7 +1675,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // DYNAMIC STRENGTHS / WEAKNESSES
         // =====================================================
         function renderDynamicPerformance() {
-            const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+            const sysStats = _bpSafeParse('boardPrepSystems', {});
             const entries = Object.entries(sysStats)
                 .filter(([_, d]) => d.total >= 2)
                 .map(([sys, d]) => ({ system: sys, pct: Math.round(d.correct / d.total * 100), total: d.total }));
@@ -1687,7 +1703,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         // ═══════════════════════════════════════════════════
         function wireOrderValidatorPanel() {
             try {
-                const log = JSON.parse(localStorage.getItem('rdx-order-validation-log') || '[]');
+                const log = _bpSafeParse('rdx-order-validation-log', []);
                 if (log.length === 0) return;
                 
                 document.getElementById('ov-empty').style.display = 'none';

@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../rdx-feature-tours.css">
 <script src="../js/rdx-feature-tours.js"></script>
+<script src="/js/rdx-ai-response.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -1990,7 +1991,7 @@ function showEndPanel(topic) {
         messages: [{ role: 'user', content: 'Topic: ' + topic.name + '\n\nTranscript (last 20 messages):\n' + transcript + '\n\nExtract 3 teaching points as JSON array.' }]
       })
     }).then(function(r) { return r.json(); }).then(function(data) {
-      var text = (data.content && data.content[0] && data.content[0].text) || '[]';
+      var text = ((window.RdxAI && window.RdxAI.extractText(data)) || (data.content && data.content[0] && data.content[0].text)) || '[]';
       try {
         var clean = text.replace(/```json|```/g, '').trim();
         var pts = JSON.parse(clean);
@@ -2157,7 +2158,7 @@ async function sendMessage() {
     if (!response.ok) throw new Error('Worker error ' + response.status);
 
     const data = await response.json();
-    const reply = data.content?.[0]?.text || data.reply || 'I had trouble responding -- try again.';
+    const reply = ((window.RdxAI && window.RdxAI.extractText(data)) || data.content?.[0]?.text || data.reply) || 'I had trouble responding -- try again.';
 
     appendMessage('coach', reply);
     messages.push({ role: 'assistant', content: reply });

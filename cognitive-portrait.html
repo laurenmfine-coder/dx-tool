@@ -4,6 +4,7 @@
 <script src="/js/rdx-config.js"></script>
 <script src="/js/rdx-mobile-gate.js"></script>
 <script src="/js/rdx-data-consent.js"></script>
+<script src="/js/rdx-ai-response.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -723,7 +724,7 @@ window.generateILP = async function() {
       })
     });
     var data = await resp.json();
-    var text = (data.content && data.content[0] && data.content[0].text) || '';
+    var text = ((window.RdxAI && window.RdxAI.extractText(data)) || (data.content && data.content[0] && data.content[0].text)) || '';
     text = text.replace(/```json\s*|```\s*/g, '').trim();
     var plan = JSON.parse(text);
 

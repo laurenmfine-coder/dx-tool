@@ -4,6 +4,7 @@
 <script src="/js/rdx-config.js"></script>
 <script src="/js/rdx-mobile-gate.js"></script>
 <script src="/js/rdx-data-consent.js"></script>
+<script src="/js/rdx-ai-response.js"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -495,7 +496,7 @@ async function runAIAnalysis(div) {
       })
     });
     const data = await res.json();
-    const text = data.content?.[0]?.text || null;
+    const text = ((window.RdxAI && window.RdxAI.extractText(data)) || data.content?.[0]?.text) || null;
     document.getElementById('aa-body').innerHTML = text
       ? text.split('\n\n').map(p => `<p style="margin-bottom:10px">${p}</p>`).join('')
       : '<em>Analysis unavailable — check Cloudflare Worker connectivity.</em>';
