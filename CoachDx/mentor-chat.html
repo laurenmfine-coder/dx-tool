@@ -548,18 +548,28 @@ function _rdxInit() {
   renderPicker(TOPICS);
   if (!window._rdxSessionActive) renderWelcomeChips();
 
-  // Check for topic in URL param FIRST -- before any async auth
+  // Check for topic in URL param — pre-fill the welcome input rather than
+  // auto-starting. Lets the learner see the landing context (description,
+  // topic chips, last-session resume) and confirm with Start →.
   const _usp = new URLSearchParams(window.location.search);
   const param = _usp.get('topic') || _usp.get('q');
   if (param) {
-    window.RDX_DEBUG && console.log('[CoachDx] URL param found:', param, 'readyState:', document.readyState);
-    // Small defer so DOM is fully painted before session starts
+    window.RDX_DEBUG && console.log('[CoachDx] URL param found:', param, '— pre-filling input');
     setTimeout(function() {
       try {
-        window.RDX_DEBUG && console.log('[CoachDx] calling startSession with:', param);
-        startSession(param, false);
+        var input = document.getElementById('welcomeInput');
+        if (input) {
+          input.value = param;
+          // Highlight subtly so the learner sees it was pre-filled, then focus
+          input.style.transition = 'background .8s ease';
+          input.style.background = '#FEF3C7';
+          input.focus();
+          // Move caret to end so they can edit if they want
+          try { input.setSelectionRange(input.value.length, input.value.length); } catch(e) {}
+          setTimeout(function() { input.style.background = ''; }, 1200);
+        }
       } catch(e) {
-        console.error('[CoachDx] startSession failed:', e.message, e.stack);
+        console.error('[CoachDx] pre-fill failed:', e.message);
       }
     }, 100);
   } else {
