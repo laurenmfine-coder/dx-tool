@@ -408,19 +408,23 @@ function trackSessionEnd() {
         var client = RDX.getClient();
         var user = RDX.getProfile();
         if (user) {
-          navigator.sendBeacon(
-            client.supabaseUrl + '/rest/v1/analytics_events',
-            JSON.stringify({
-              user_id: user.id,
-              event_type: 'session_end',
-              event_data: {
-                page: _currentPage,
-                duration_seconds: seconds,
-                setting: _setting,
-                case_id: _caseId
-              }
-            })
-          );
+          // sendBeacon needs auth headers like every other Supabase
+          // request, but Beacons don't allow Headers objects — only Blob
+          // with a content-type. The apikey/anon-key has to ride along
+          // in the URL as a query parameter (Supabase supports both).
+          var anonKey = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_ANON_KEY) || '';
+          var url = client.supabaseUrl + '/rest/v1/analytics_events?apikey=' + encodeURIComponent(anonKey);
+          var body = new Blob([JSON.stringify({
+            user_id: user.id,
+            event_type: 'session_end',
+            event_data: {
+              page: _currentPage,
+              duration_seconds: seconds,
+              setting: _setting,
+              case_id: _caseId
+            }
+          })], { type: 'application/json' });
+          try { navigator.sendBeacon(url, body); } catch(e) { /* ignore */ }
         }
       }
     }
