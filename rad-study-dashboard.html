@@ -69,6 +69,7 @@ tr.clickable{cursor:pointer}
 .btn-primary{background:var(--teal);color:#fff;border-color:var(--teal)}.btn-primary:hover{filter:brightness(1.1)}
 .btn-row{display:flex;gap:8px;margin-bottom:16px}
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -211,7 +212,7 @@ function renderSessions() {
     const pd = s.passive_data;
     const conf = pd && pd.implicitConfidence ? pd.implicitConfidence.avgScore.toFixed(2) : '--';
 
-    return `<tr class="clickable" onclick="showTranscript('${s.session_id}')">
+    return `<tr role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="clickable" onclick="showTranscript('${s.session_id}')">
       <td><strong>${esc(s.student_name)}</strong></td>
       <td>${esc(s.training_year)}</td>
       <td>${esc(s.case_id)}</td>

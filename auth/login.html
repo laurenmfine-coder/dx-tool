@@ -94,6 +94,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .legal{margin-top:14px;font-size:11px;color:var(--dim2);text-align:center;line-height:1.5}
 .legal a{color:var(--dim);text-decoration:underline;text-underline-offset:2px}
 </style>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -138,7 +139,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <label for="siPassword">Password</label>
         <input type="password" id="siPassword" placeholder="••••••••" autocomplete="current-password"
           onkeydown="if(event.key==='Enter')doSignIn()">
-        <div class="forgot-row"><a href="#" onclick="doForgotPassword();return false">Forgot password?</a></div>
+        <div class="forgot-row"><a role="button" tabindex="0" onkeydown="rdxKbClick(event)" href="#" onclick="doForgotPassword();return false">Forgot password?</a></div>
       </div>
       <button class="btn-primary" id="btnSignIn" type="button" onclick="doSignIn()">Sign In</button>
 

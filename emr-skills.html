@@ -212,6 +212,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 </style>
 <script src="/js/nav-global.js"></script>
 <link rel="stylesheet" href="/mobile.css">
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -226,7 +227,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 
 <div class="stations">
 
-  <div class="station-card" onclick="openStation('orders')">
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="station-card" onclick="openStation('orders')">
     <div class="station-accent s1-accent"></div>
     <div class="station-head">
       <div class="station-num s1-num">⬡ Station 1</div>
@@ -245,7 +246,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
     </div>
   </div>
 
-  <div class="station-card" onclick="openStation('notes')">
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="station-card" onclick="openStation('notes')">
     <div class="station-accent s2-accent"></div>
     <div class="station-head">
       <div class="station-num s2-num">⬡ Station 2</div>
@@ -264,7 +265,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
     </div>
   </div>
 
-  <div class="station-card" onclick="openStation('rounds')">
+  <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="station-card" onclick="openStation('rounds')">
     <div class="station-accent s3-accent"></div>
     <div class="station-head">
       <div class="station-num s3-num">⬡ Station 3</div>
@@ -286,7 +287,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 </div>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="stationModal" style="display:none" onclick="if(event.target===this)closeStation()">
+<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="modal-overlay" id="stationModal" style="display:none" onclick="if(event.target===this)closeStation()">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title" id="modalTitle">Station</div>

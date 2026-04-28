@@ -224,6 +224,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 </script>
 
 <link rel="stylesheet" href="/mobile.css">
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <a href="#rdx-main" style="position:absolute;top:-100px;left:0;background:#2874A6;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:10000;transition:top .15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to main content</a>
@@ -252,7 +253,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     
     <!-- Hero CTA -->
     <div style="margin-top:6px;margin-bottom:10px">
-      <a href="#" id="heroCTA" onclick="startQuickCase();return false" style="
+      <a role="button" tabindex="0" onkeydown="rdxKbClick(event)" href="#" id="heroCTA" onclick="startQuickCase();return false" style="
         display:inline-block;background:#2874A6;color:#fff;padding:16px 40px;
         border-radius:12px;font-size:18px;font-weight:700;text-decoration:none;
         transition:all .2s;box-shadow:0 4px 12px rgba(40,116,166,0.3)">
@@ -561,17 +562,17 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <!-- NEW USER VIEW: clean single-mode strip with expandable "More" -→
     <div id="newUserStrip" style="display:none">
       <div class="stats" role="tablist" aria-label="Study mode">
-        <div class="stat active" data-mode="simulate" aria-controls="grid" onclick="setMode('simulate')">
+        <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="stat active" data-mode="simulate" aria-controls="grid" onclick="setMode('simulate')">
           <div class="stat-num">500+</div>
           <div class="stat-label">Simulation</div>
           <div class="stat-desc">AI patient encounters</div>
         </div>
-        <div class="stat" data-mode="practice" aria-controls="grid" onclick="setMode('practice')">
+        <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="stat" data-mode="practice" aria-controls="grid" onclick="setMode('practice')">
           <div class="stat-num">364</div>
           <div class="stat-label">Virtual EMR</div>
           <div class="stat-desc">Full chart + documentation</div>
         </div>
-        <div class="stat" onclick="document.getElementById('newUserStrip').style.display='none';document.getElementById('fullStrip').style.display='block';gtag&&gtag('event','explore_modes_click')" style="cursor:pointer;max-width:140px">
+        <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="stat" onclick="document.getElementById('newUserStrip').style.display='none';document.getElementById('fullStrip').style.display='block';gtag&&gtag('event','explore_modes_click')" style="cursor:pointer;max-width:140px">
           <div class="stat-num" style="font-size:1.2rem;color:rgba(255,255,255,0.65)">＋</div>
           <div class="stat-label" style="color:rgba(255,255,255,0.5)">More Modes</div>
           <div class="stat-desc" style="color:rgba(255,255,255,0.3)">Coach, Learn, EMR</div>
@@ -1267,7 +1268,7 @@ function _renderCardHtml(c) {
   }
 
   var _isDone = _completedCases.has(c.id);
-  var h='<div class="card" onclick="launch(\''+esc(c.id)+'\')" style="position:relative" tabindex="0" role="button">';
+  var h='<div onkeydown="rdxKbClick(event)" class="card" onclick="launch(\''+esc(c.id)+'\')" style="position:relative" tabindex="0" role="button">';
   if(_isDone) h+='<div style="position:absolute;top:8px;right:8px;background:#059669;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.04em;z-index:2">✓ Done</div>';
   h+='<div class="card-top">';
   h+='<div class="'+iconClass+'">'+iconSymbol+'</div>';

@@ -203,6 +203,7 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--bg);
 <link rel="stylesheet" href="/mobile.css">
 <meta property="og:image" content="https://reasondx.com/icons/og-image.jpg">
 <link rel="canonical" href="https://www.reasondx.com/faculty-dashboard.html">
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 
@@ -563,7 +564,7 @@ function renderOverview() {
     html += '<div class="fac-queue" style="margin-bottom:28px">';
     pending.forEach(function(sub, i) {
       var initials2 = initials(sub.studentDisplay || sub.studentName);
-      html += '<div class="fac-queue-item needs-grading" onclick="openGrade(' + JSON.stringify(i) + ')">';
+      html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="fac-queue-item needs-grading" onclick="openGrade(' + JSON.stringify(i) + ')">';
       html += '<div class="fac-queue-avatar">' + esc(initials2) + '</div>';
       html += '<div><div class="fac-queue-name">' + esc(sub.studentDisplay || sub.studentName) + '</div>';
       html += '<div class="fac-queue-meta">' + esc(sub.week || 'Case Submission') + ' · ' + (sub.caseId||'Unknown case') + '</div></div>';
@@ -650,10 +651,10 @@ function renderSubsList(subs) {
     var _subKey = esc(sub.studentName) + '__' + esc(sub.week||'');
     html += '<div class="fac-queue-item ' + (graded?'':'needs-grading') + '" style="position:relative">';
     html += '<input type="checkbox" class="rdx-sub-check" data-student="' + esc(sub.studentName) + '" data-week="' + esc(sub.week||'') + '" onclick="event.stopPropagation();rdxUpdateSelectedCount()" style="flex-shrink:0;width:15px;height:15px;cursor:pointer">';
-    html += '<div class="fac-queue-avatar" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')" style="cursor:pointer">' + esc(initials(sub.studentDisplay||sub.studentName)) + '</div>';
-    html += '<div style="flex:1;cursor:pointer" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')"><div class="fac-queue-name">' + esc(sub.studentDisplay||sub.studentName) + '</div>';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="fac-queue-avatar" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')" style="cursor:pointer">' + esc(initials(sub.studentDisplay||sub.studentName)) + '</div>';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" style="flex:1;cursor:pointer" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')"><div class="fac-queue-name">' + esc(sub.studentDisplay||sub.studentName) + '</div>';
     html += '<div class="fac-queue-meta">' + esc(sub.week||'Submission') + ' · submitted ' + relTime(sub.timestamp) + '</div></div>';
-    html += '<div class="fac-queue-right" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')" style="cursor:pointer">' + (graded ? '<span class="fac-status-pill graded">✓ Graded</span>' : '<span class="fac-status-pill pending">Grade →</span>') + '</div>';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="fac-queue-right" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')" style="cursor:pointer">' + (graded ? '<span class="fac-status-pill graded">✓ Graded</span>' : '<span class="fac-status-pill pending">Grade →</span>') + '</div>';
     html += '</div>';
   });
   html += '</div>';
@@ -1284,7 +1285,7 @@ function renderStudentView() {
     var assignments = getAssignments();
     var assignedTo = Object.keys(assignments).find(function(f){ return (assignments[f]||[]).indexOf(s.username)>=0; });
     var assignedLabel = assignedTo ? (getUsers()[assignedTo] ? getUsers()[assignedTo].displayName : assignedTo) : '—';
-    html += '<div data-svuid="' + esc(s.username) + '" onclick="svSelectStudent(this.dataset.svuid)" style="padding:14px;border:2px solid ' + (isSelected ? 'var(--primary)' : 'var(--border)') + ';border-radius:10px;cursor:pointer;background:' + (isSelected ? 'var(--primary-light)' : '#fff') + ';transition:all .15s">';
+    html += '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" data-svuid="' + esc(s.username) + '" onclick="svSelectStudent(this.dataset.svuid)" style="padding:14px;border:2px solid ' + (isSelected ? 'var(--primary)' : 'var(--border)') + ';border-radius:10px;cursor:pointer;background:' + (isSelected ? 'var(--primary-light)' : '#fff') + ';transition:all .15s">';
     html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
     html += '<div style="width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">' + esc(initials(s.displayName)) + '</div>';
     html += '<div><div style="font-size:13px;font-weight:700">' + esc(s.displayName) + '</div><div style="font-size:11px;color:var(--text-muted)">' + esc(s.username) + '</div></div>';
@@ -2596,7 +2597,7 @@ document.addEventListener('DOMContentLoaded', init);
 <script src="/js/nav-global.js"></script>
 
 <!-- ── STUDENT PROFILE MODAL ─────────────────────────────── -->
-<div id="rdx-student-profile-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto" onclick="if(event.target===this)closeStudentProfile()">
+<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" id="rdx-student-profile-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto" onclick="if(event.target===this)closeStudentProfile()">
   <div style="background:#fff;border-radius:18px;max-width:760px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2);overflow:hidden">
     <div id="rdx-stp-header" style="background:linear-gradient(135deg,#1B4F72,#2874A6);padding:24px 28px;display:flex;align-items:center;justify-content:space-between">
       <div>

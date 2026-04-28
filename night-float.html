@@ -229,6 +229,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
 <script src="js/rdx-supabase.js"></script>
 <script src="auth/auth-guard.js"></script>
 <script src="js/rdx-difficulty.js"></script>
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
@@ -248,17 +249,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
   <div class="setup-section">
     <h3>1. Build Your Patient List</h3>
     <div class="mode-grid">
-      <div class="mode-card selected" data-mode="random" onclick="selectListMode(this)">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card selected" data-mode="random" onclick="selectListMode(this)">
         <div class="mode-icon">🎲</div>
         <div class="mode-name">Randomize</div>
         <div class="mode-desc">Generate a random cross-cover list. Different patients every time — covers a mix of conditions and acuity levels.</div>
       </div>
-      <div class="mode-card" data-mode="topic" onclick="selectListMode(this)">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card" data-mode="topic" onclick="selectListMode(this)">
         <div class="mode-icon">🎯</div>
         <div class="mode-name">Choose by Topic</div>
         <div class="mode-desc">Select specific conditions to practice. Build your list around areas you want to strengthen.</div>
       </div>
-      <div class="mode-card" data-mode="emr" onclick="selectListMode(this)">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="mode-card" data-mode="emr" onclick="selectListMode(this)">
         <div class="mode-icon">🏥</div>
         <div class="mode-name">EMR Cases (255)</div>
         <div class="mode-desc">Pull patients from the full ReasonDx case library with real ED-to-floor handoff data.</div>
@@ -275,17 +276,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
   <div class="setup-section">
     <h3>2. Practice Mode</h3>
     <div class="practice-grid">
-      <div class="practice-card selected" data-practice="pages" onclick="selectPractice(this)">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="practice-card selected" data-practice="pages" onclick="selectPractice(this)">
         <div class="pc-icon">📟</div>
         <div class="pc-name">Nurse Pages</div>
         <div class="pc-desc">Respond to pages about your patients</div>
       </div>
-      <div class="practice-card" data-practice="admits" onclick="selectPractice(this)">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="practice-card" data-practice="admits" onclick="selectPractice(this)">
         <div class="pc-icon">🚑</div>
         <div class="pc-name">ED Admissions</div>
         <div class="pc-desc">Accept new patients from the ED</div>
       </div>
-      <div class="practice-card" data-practice="choose" onclick="selectPractice(this)">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="practice-card" data-practice="choose" onclick="selectPractice(this)">
         <div class="pc-icon">📋</div>
         <div class="pc-name">Pick & Practice</div>
         <div class="pc-desc">Choose specific scenarios to work through</div>
@@ -319,8 +320,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
     </div>
     <div id="sidebar">
       <div id="sidebar-tabs">
-        <div class="stab active" data-tab="pages" onclick="switchTab('pages')">📟 Pages</div>
-        <div class="stab" data-tab="tasks" onclick="switchTab('tasks')">📋 Tasks</div>
+        <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="stab active" data-tab="pages" onclick="switchTab('pages')">📟 Pages</div>
+        <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="stab" data-tab="tasks" onclick="switchTab('tasks')">📋 Tasks</div>
       </div>
       <div id="sidebar-content">
         <div id="tab-pages"></div>
@@ -331,10 +332,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
 </div>
 
 <!-- Page toast notification -->
-<div id="page-toast"><div class="toast-inner" onclick="dismissToast()"><span id="toast-text"></span><div class="toast-sub">Click to view</div></div></div>
+<div id="page-toast"><div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="toast-inner" onclick="dismissToast()"><span id="toast-text"></span><div class="toast-sub">Click to view</div></div></div>
 
 <!-- Page response panel -->
-<div id="page-response" onclick="if(event.target===this)closePageResponse()">
+<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" id="page-response" onclick="if(event.target===this)closePageResponse()">
 <div id="page-response-inner">
   <div class="pr-header">
     <div>
@@ -869,7 +870,7 @@ function renderPatientList() {
     card.className = 'ipass-card';
     card.id = 'pt-card-'+i;
     card.innerHTML = `
-      <div class="ipass-header" onclick="toggleCard(${i})">
+      <div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="ipass-header" onclick="toggleCard(${i})">
         <div class="ipass-sev ${p.severity}"></div>
         <div class="ipass-info">
           <div class="ipass-name">${p.name}, ${p.age}${p.sex}</div>
@@ -1074,7 +1075,7 @@ function renderTasks() {
   });
   let html = `<div style="padding:6px 8px;font-size:11px;color:var(--dim)">${taskList.filter(t=>!t.done).length} pending · ${taskList.filter(t=>t.done).length} done</div>`;
   sorted.forEach(t => {
-    html += `<div class="task-item${t.done?' done':''}" onclick="toggleTask(${t.id})">
+    html += `<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="task-item${t.done?' done':''}" onclick="toggleTask(${t.id})">
       <div class="task-check">${t.done?'✓':''}</div>
       <div style="flex:1">
         <div>${t.text}</div>

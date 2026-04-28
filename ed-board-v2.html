@@ -269,6 +269,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ED Board | ReasonDx">
 <meta name="twitter:description" content="Virtual ED track board simulation.">
+<script src="/js/rdx-kb-click.js"></script>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
@@ -298,7 +299,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     </table>
   </div>
 </div>
-<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
 <div class="detail-panel" id="detailPanel">
   <div class="panel-header"><div class="panel-patient-info"><h2 id="panelName">—</h2><div class="panel-patient-meta"><span id="panelAge">—</span><span>MRN: <span id="panelMRN">—</span></span><span id="panelBed">—</span></div></div><button type="button" class="panel-close" onclick="closePanel()">✕</button></div>
   <div class="emr-tabs" id="emrTabs"></div>
@@ -671,7 +672,7 @@ function renderBoard() {
   }
   body.innerHTML = patients.map(function(p) {
     var wait = Math.floor((Date.now()-p.arrivalTime)/60000);
-    return '<tr class="' + (p.id===selectedPatientId?'active':'') + '" onclick="selectPatient(\'' + p.id + '\')">' +
+    return '<tr role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="' + (p.id===selectedPatientId?'active':'') + '" onclick="selectPatient(\'' + p.id + '\')">' +
       '<td><span class="bed-number">' + p.bed + '</span></td>' +
       '<td><div class="patient-name">' + p.name + '</div><div class="patient-demo">' + p.age + p.gender + '</div></td>' +
       '<td class="cc-cell">' + p.boardCC + '</td>' +
@@ -924,7 +925,7 @@ function renderExam(p) {
         '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">' +
           '<div class="sys-icon">'+s.icon+'</div>' +
           '<div class="sys-name" style="flex:1">'+s.name+' — Select maneuvers</div>' +
-          '<span onclick="collapseExam()" style="cursor:pointer;font-size:18px;color:var(--text-muted)">✕</span>' +
+          '<span role="button" tabindex="0" onkeydown="rdxKbClick(event)" onclick="collapseExam()" style="cursor:pointer;font-size:18px;color:var(--text-muted)">✕</span>' +
         '</div>' +
         '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">' +
           maneuvers.map(function(m,i){
@@ -938,7 +939,7 @@ function renderExam(p) {
         '>🩺 Perform Exam'+(d._selectedManeuvers && d._selectedManeuvers.length>0 ? ' ('+d._selectedManeuvers.length+' selected)' : ' — select at least one')+'</button>' +
       '</div>';
     }
-    return '<div class="exam-system" onclick="expandExam(\''+s.key+'\')">' +
+    return '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="exam-system" onclick="expandExam(\''+s.key+'\')">' +
       '<div class="sys-icon">'+s.icon+'</div>' +
       '<div style="flex:1"><div class="sys-name">'+s.name+'</div></div>' +
       '<span style="font-size:11px;color:var(--text-muted)">Tap to examine →</span></div>';
@@ -1788,7 +1789,7 @@ function openDisposition(type) {
     {id:'xfer',icon:'🚑',label:'Outside Hospital',desc:'Transfer to higher level of care'}
   ];
   document.getElementById('dispoBody').innerHTML = options.map(function(o) {
-    return '<div class="dispo-option" onclick="selectDispo(this,\''+o.id+'\')"><div class="dispo-icon">'+o.icon+'</div><div><div class="dispo-label">'+o.label+'</div><div class="dispo-desc">'+o.desc+'</div></div></div>';
+    return '<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="dispo-option" onclick="selectDispo(this,\''+o.id+'\')"><div class="dispo-icon">'+o.icon+'</div><div><div class="dispo-label">'+o.label+'</div><div class="dispo-desc">'+o.desc+'</div></div></div>';
   }).join('');
   document.getElementById('dispoModal').classList.add('open');
 }
