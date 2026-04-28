@@ -27,7 +27,12 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
 
   let sb = null;
   try {
-    if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (window._rdxSbClient) {
+      sb = window._rdxSbClient;
+    } else if (window.supabase) {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      window._rdxSbClient = sb;
+    }
   } catch(e) {}
 
   // Get current user email from various sources

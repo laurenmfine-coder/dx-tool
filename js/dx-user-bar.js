@@ -68,9 +68,9 @@
   // Sign out
   window.rdxSignOut = function() {
     try {
-      var sb = window.supabase && window.supabase.createClient
-        ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-        : null;
+      var sb = window._rdxSbClient || (window.supabase && window.supabase.createClient
+        ? (window._rdxSbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY))
+        : null);
       if (sb) {
         sb.auth.signOut().then(function() {
           localStorage.removeItem('reasondx-user');
@@ -92,8 +92,11 @@
   function init() {
     var sb = null;
     try {
-      if (window.supabase && window.supabase.createClient) {
+      if (window._rdxSbClient) {
+        sb = window._rdxSbClient;
+      } else if (window.supabase && window.supabase.createClient) {
         sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        window._rdxSbClient = sb;
       }
     } catch(e) {}
 

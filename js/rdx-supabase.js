@@ -30,10 +30,14 @@ var currentUser = null;
 var currentProfile = null;
 
 function init() {
-  if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+  if (window._rdxSbClient) {
+    supabase = window._rdxSbClient;
+  } else if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    window._rdxSbClient = supabase;
   } else if (typeof supabaseJs !== 'undefined') {
     supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    window._rdxSbClient = supabase;
   } else {
     console.warn('[RDX] Supabase JS library not loaded. Analytics will use localStorage fallback.');
     return false;
@@ -416,13 +420,25 @@ async function getMilestones(userId) {
 // ═══════════════════════════════════════
 async function trackEvent(eventType, attemptId, eventData) {
   if (!supabase) return fallbackStore('event', eventType, eventData);
+  // Drop telemetry events when there's no logged-in user — the
+  // analytics_events table has user_id NOT NULL and inserting null
+  // returns 400. Anonymous-page telemetry should be a no-op, not an
+  // error in the console.
+  if (!currentUser || !currentUser.id) return null;
+  if (!eventType) return null;
 
-  return await supabase.from('analytics_events').upsert({
-    user_id: currentUser ? currentUser.id : null,
-    attempt_id: attemptId || null,
-    event_type: eventType,
-    event_data: eventData || {}
-  }, { onConflict: 'user_id,attempt_id,event_type', ignoreDuplicates: true });
+  try {
+    return await supabase.from('analytics_events').upsert({
+      user_id: currentUser.id,
+      attempt_id: attemptId || null,
+      event_type: eventType,
+      event_data: eventData || {}
+    }, { onConflict: 'user_id,attempt_id,event_type', ignoreDuplicates: true });
+  } catch(e) {
+    // Telemetry must never break the app — swallow and warn.
+    console.warn('[RDX] trackEvent failed:', e && e.message);
+    return null;
+  }
 }
 
 // ═══════════════════════════════════════

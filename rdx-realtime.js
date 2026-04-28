@@ -32,8 +32,13 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
   // ── Init Supabase client ──────────────────────────────────────────────────
   function getClient() {
     if (_client) return _client;
+    if (window._rdxSbClient) {
+      _client = window._rdxSbClient;
+      return _client;
+    }
     if (window.supabase && window.supabase.createClient) {
       _client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      window._rdxSbClient = _client;
       return _client;
     }
     throw new Error('Supabase client not available');

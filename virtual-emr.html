@@ -2293,8 +2293,8 @@ function loadCaseData(cb) {
     ALLERGIES = d.allergies || [];
     VITALS = d.vitals || [];
     VISITS = d.visits || [];
-    LABS = d.labs || [];
-    IMAGING = d.imaging || [];
+    LABS = (d.labs || []).map(_normalizeLab);
+    IMAGING = (d.imaging || []).map(_normalizeImg);
     IMMUNIZATIONS = d.immunizations || [];
     FAMILY_HISTORY = d.familyHistory || [];
     SOCIAL_HISTORY = d.socialHistory || [];
@@ -2554,7 +2554,78 @@ function _gateForStudent(items){
   // Students see only historical (NOT this visit) until they order
   return items.filter(function(it){ return !_isCurrentVisitItem(it); });
 }
-function renderLabs(){return _gateForStudent(LABS).map((lab,idx)=>{const o=S.expanded["l-"+idx];const abn=lab.groups.reduce((c,g)=>c+g.results.filter(r=>r.flag).length,0);const hdr='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="expandable-header" onclick="toggleExpand(\'l-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(_dateBoth(lab.date))+'</span><span class="td-muted">'+esc(lab.time)+'</span>'+badge(lab.status,"badge-accent")+'<span style="font-size:10px;font-weight:700;padding:2px 7px;background:#F1F5F9;color:#64748B;border-radius:4px;letter-spacing:.04em">PRIOR VISIT</span><span class="td-muted">'+esc(lab.orderedBy)+'</span>'+(abn?badge(abn+" abnormal","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);let rpt='<div class="lab-report"><div class="lab-report-header"><div class="lab-report-title">LABORATORY REPORT</div><div class="lab-report-meta"><span><strong>Patient:</strong> '+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span><span><strong>Accession:</strong> '+esc(lab.accession)+'</span><span><strong>DOB:</strong> '+PATIENT.dob+' | <strong>Sex:</strong> '+(PATIENT.sex||'')+'</span><span><strong>Status:</strong> '+esc(lab.status)+'</span><span><strong>Collected:</strong> '+esc(_dateAbs(lab.collected)||lab.collected)+' | <strong>Fasting:</strong> '+esc(lab.fasting)+'</span><span><strong>Facility:</strong> '+esc(lab.facility)+'</span><span><strong>Specimen:</strong> '+esc(lab.specimenType)+'</span><span><strong>Ordered By:</strong> '+esc(lab.orderedBy)+'</span></div></div><div class="lab-report-body"><div class="lab-row lab-row-header"><span>Test Name</span><span>Result</span><span>Units</span><span>Reference Range</span><span>Flag</span></div>';lab.groups.forEach(g=>{rpt+='<div class="lab-group-header">'+esc(g.name)+'</div>';g.results.forEach(r=>{rpt+='<div class="lab-row '+(r.flag==="H"?"flagged-h":r.flag==="L"?"flagged-l":"")+'"><span class="lab-test-name">'+esc(r.test)+'</span><span class="lab-value '+(r.flag==="H"?"high":r.flag==="L"?"low":"")+'">'+esc(r.value)+'</span><span class="lab-unit">'+esc(r.unit)+'</span><span class="lab-range">'+esc(r.range)+'</span><span class="lab-flag '+(r.flag==="H"?"high":"low")+'">'+(r.flag?r.flag==="H"?"▲":"▼":"")+'</span></div>'})});rpt+='</div><div class="lab-report-footer"><span>'+esc(_dateAbs(lab.date))+' '+esc(lab.time)+' | '+esc(lab.facility)+'</span><span>Electronically verified</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
+
+// Normalize a lab object into the shape renderLabs expects.
+// Two known case-data schemas in production:
+//   1. Flat:   { date, panel, results: [...] }            (newer cases)
+//   2. Nested: { date, time, status, groups: [{name,results:[...]}] }  (older cases)
+// Some cases also use { test, ref } in the result rows where renderLabs
+// expects { test, range }. Normalize all of these into the nested form
+// with `groups`, `range`, and sensible defaults so the renderer can't
+// trip on missing keys.
+function _normalizeLab(l) {
+  if (!l || typeof l !== 'object') return l;
+  // If already in the nested form, just defend the result-row keys
+  if (Array.isArray(l.groups)) {
+    l.groups.forEach(function(g) {
+      if (g && Array.isArray(g.results)) {
+        g.results.forEach(function(r) {
+          if (r && r.range === undefined && r.ref !== undefined) r.range = r.ref;
+        });
+      }
+    });
+    return l;
+  }
+  // Flat form: convert into one group whose name is the panel/title
+  var groupName = l.panel || l.name || l.title || 'Results';
+  var rows = Array.isArray(l.results) ? l.results : [];
+  var normRows = rows.map(function(r) {
+    if (!r || typeof r !== 'object') return r;
+    var copy = {};
+    for (var k in r) if (Object.prototype.hasOwnProperty.call(r, k)) copy[k] = r[k];
+    if (copy.range === undefined && copy.ref !== undefined) copy.range = copy.ref;
+    return copy;
+  });
+  var out = {};
+  for (var k in l) if (Object.prototype.hasOwnProperty.call(l, k)) out[k] = l[k];
+  out.groups = [{ name: groupName, results: normRows }];
+  // Sensible defaults for fields the renderer reads but cases may omit
+  if (out.time === undefined)         out.time = '';
+  if (out.status === undefined)       out.status = 'Final';
+  if (out.orderedBy === undefined)    out.orderedBy = '';
+  if (out.accession === undefined)    out.accession = '';
+  if (out.fasting === undefined)      out.fasting = '';
+  if (out.facility === undefined)     out.facility = '';
+  if (out.specimenType === undefined) out.specimenType = '';
+  if (out.collected === undefined)    out.collected = out.date || '';
+  return out;
+}
+
+// Same for imaging entries: defend against missing keys without altering
+// the case-data shape on disk. The renderer reads many fields and any
+// missing one would throw inside esc() if undefined sneaks in.
+function _normalizeImg(im) {
+  if (!im || typeof im !== 'object') return im;
+  var out = {};
+  for (var k in im) if (Object.prototype.hasOwnProperty.call(im, k)) out[k] = im[k];
+  if (out.time === undefined)       out.time = '';
+  if (out.status === undefined)     out.status = 'Final';
+  if (out.orderedBy === undefined)  out.orderedBy = '';
+  if (out.readBy === undefined)     out.readBy = '';
+  if (out.accession === undefined)  out.accession = '';
+  if (out.modality === undefined)   out.modality = '';
+  if (out.facility === undefined)   out.facility = '';
+  if (out.priority === undefined)   out.priority = 'Routine';
+  if (out.clinical === undefined)   out.clinical = '';
+  if (out.technique === undefined)  out.technique = '';
+  if (out.findings === undefined)   out.findings = '';
+  if (out.impression === undefined) out.impression = '';
+  if (out.dictated === undefined)   out.dictated = out.date || '';
+  if (out.verified === undefined)   out.verified = out.date || '';
+  if (out.study === undefined)      out.study = out.name || out.title || 'Imaging Study';
+  return out;
+}
+function renderLabs(){return _gateForStudent(LABS).map((lab,idx)=>{const o=S.expanded["l-"+idx];const _groups=Array.isArray(lab.groups)?lab.groups:[];const abn=_groups.reduce((c,g)=>c+(Array.isArray(g.results)?g.results.filter(r=>r&&r.flag).length:0),0);const hdr='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="expandable-header" onclick="toggleExpand(\'l-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(_dateBoth(lab.date))+'</span><span class="td-muted">'+esc(lab.time)+'</span>'+badge(lab.status,"badge-accent")+'<span style="font-size:10px;font-weight:700;padding:2px 7px;background:#F1F5F9;color:#64748B;border-radius:4px;letter-spacing:.04em">PRIOR VISIT</span><span class="td-muted">'+esc(lab.orderedBy)+'</span>'+(abn?badge(abn+" abnormal","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);let rpt='<div class="lab-report"><div class="lab-report-header"><div class="lab-report-title">LABORATORY REPORT</div><div class="lab-report-meta"><span><strong>Patient:</strong> '+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span><span><strong>Accession:</strong> '+esc(lab.accession)+'</span><span><strong>DOB:</strong> '+PATIENT.dob+' | <strong>Sex:</strong> '+(PATIENT.sex||'')+'</span><span><strong>Status:</strong> '+esc(lab.status)+'</span><span><strong>Collected:</strong> '+esc(_dateAbs(lab.collected)||lab.collected)+' | <strong>Fasting:</strong> '+esc(lab.fasting)+'</span><span><strong>Facility:</strong> '+esc(lab.facility)+'</span><span><strong>Specimen:</strong> '+esc(lab.specimenType)+'</span><span><strong>Ordered By:</strong> '+esc(lab.orderedBy)+'</span></div></div><div class="lab-report-body"><div class="lab-row lab-row-header"><span>Test Name</span><span>Result</span><span>Units</span><span>Reference Range</span><span>Flag</span></div>';_groups.forEach(g=>{rpt+='<div class="lab-group-header">'+esc(g.name)+'</div>';(Array.isArray(g.results)?g.results:[]).forEach(r=>{if(!r)return;rpt+='<div class="lab-row '+(r.flag==="H"?"flagged-h":r.flag==="L"?"flagged-l":"")+'"><span class="lab-test-name">'+esc(r.test)+'</span><span class="lab-value '+(r.flag==="H"?"high":r.flag==="L"?"low":"")+'">'+esc(r.value)+'</span><span class="lab-unit">'+esc(r.unit)+'</span><span class="lab-range">'+esc(r.range)+'</span><span class="lab-flag '+(r.flag==="H"?"high":"low")+'">'+(r.flag?r.flag==="H"?"▲":"▼":"")+'</span></div>'})});rpt+='</div><div class="lab-report-footer"><span>'+esc(_dateAbs(lab.date))+' '+esc(lab.time)+' | '+esc(lab.facility)+'</span><span>Electronically verified</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
 function renderImaging(){return _gateForStudent(IMAGING).map((img,idx)=>{const o=S.expanded["i-"+idx];const hdr='<div role="button" tabindex="0" onkeydown="rdxKbClick(event)" class="expandable-header" onclick="toggleExpand(\'i-'+idx+'\')"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">'+esc(_dateBoth(img.date))+'</span><span style="font-size:13px;color:var(--text-secondary)">'+esc(img.study)+'</span><span style="font-size:10px;font-weight:700;padding:2px 7px;background:#F1F5F9;color:#64748B;border-radius:4px;letter-spacing:.04em">PRIOR VISIT</span>'+(img.modality?'<span style="padding:2px 7px;background:#EBF4FB;color:var(--primary-dark);border-radius:3px;font-size:10px;font-weight:800;font-family:\'IBM Plex Mono\',monospace">'+esc(img.modality)+'</span>':'')+''+badge(img.status,"badge-accent")+(img.priority==="STAT"?badge("STAT","badge-danger"):"")+'</div><div style="display:flex;align-items:center;gap:6px">'+(o?'':' <span style="font-size:10px;color:var(--text-muted);font-style:italic">click to expand</span>')+'<span class="expand-icon '+(o?"open":"")+'">'+ I.chevDown+'</span></div>';if(!o)return sectionCard("","",hdr);const rpt='<div class="imaging-report"><div class="imaging-report-header"><div class="imaging-report-title">'+esc(img.study)+'</div><div class="imaging-meta-grid"><div><span class="imaging-meta-label">Patient</span><br><span class="imaging-meta-value">'+esc(PATIENT.name)+' ('+PATIENT.mrn+')</span></div><div><span class="imaging-meta-label">Accession</span><br><span class="imaging-meta-value">'+esc(img.accession)+'</span></div><div><span class="imaging-meta-label">Ordering</span><br><span class="imaging-meta-value">'+esc(img.orderedBy)+'</span></div><div><span class="imaging-meta-label">Interpreting</span><br><span class="imaging-meta-value">'+esc(img.readBy)+'</span></div><div><span class="imaging-meta-label">Facility</span><br><span class="imaging-meta-value">'+esc(img.facility)+'</span></div><div><span class="imaging-meta-label">Priority</span><br><span class="imaging-meta-value">'+esc(img.priority)+'</span></div></div></div><div class="imaging-report-body"><div class="imaging-section"><div class="imaging-section-label">Clinical Indication</div><div class="imaging-section-text">'+esc(img.clinical)+'</div></div><div class="imaging-section"><div class="imaging-section-label">Technique</div><div class="imaging-section-text">'+esc(img.technique)+'</div></div><div class="imaging-section"><div class="imaging-section-label">Findings</div><div class="imaging-section-text" style="white-space:pre-line">'+esc(img.findings)+'</div></div><div class="imaging-impression"><div class="imaging-impression-label">Impression</div><div class="imaging-section-text" style="white-space:pre-line;font-weight:500">'+esc(img.impression)+'</div></div></div><div class="imaging-report-footer"><span>Dict: '+esc(_dateAbs(img.dictated)||img.dictated)+' | Ver: '+esc(_dateAbs(img.verified)||img.verified)+'</span><span>'+esc(img.readBy)+'</span></div></div>';return sectionCard("","",hdr+'<div class="expand-body open" style="margin-top:16px">'+rpt+'</div>')}).join("")}
 function renderVitals(){
   var _spark=(window.RDXIntegration)?RDXIntegration.renderVitalsSparkline():'';
@@ -2672,7 +2743,7 @@ function renderPatientInterview() {
 
   var _input = '<div style="padding:10px 14px;border-top:1px solid #E2E8F0;background:#fff;display:flex;gap:8px">'
     + '<button type="button" id="ptMicBtn" onclick="toggleVoice(&quot;ptInput&quot;,&quot;ptMicBtn&quot;)" class="mic-btn" title="Voice input" style="padding:8px;border:none;background:transparent;cursor:pointer;font-size:16px;flex-shrink:0">🎙</button>'
-    + '<input id="ptInput" type="text" placeholder="Ask Jennifer a question..." '
+    + '<input id="ptInput" type="text" placeholder="Ask ' + esc(_ptName) + ' a question..." '
     + 'style="flex:1;padding:9px 12px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;font-family:inherit;outline:none" '
     + 'onkeydown="if(event.key===&quot;Enter&quot; && !event.shiftKey){event.preventDefault();sendPatientMessage()}">'
     + '<button onclick="sendPatientMessage()" style="padding:9px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap"'
@@ -6685,7 +6756,23 @@ render = function(){
     fn.labs = renderLabsInteractive;
     fn.imaging = renderImagingInteractive;
     fn.orders = function() {
-      return renderOrderDocSwitcher('orders') + renderOrders();
+      var html = renderOrderDocSwitcher('orders');
+      try {
+        html += renderOrders();
+      } catch(e) {
+        // If renderOrders throws (race condition with case load, malformed
+        // S.labOrders, etc.), still show the order-action buttons so the
+        // student can place orders. Without this fallback the entire panel
+        // appears blank below the switcher.
+        console.error('[orders] renderOrders failed:', e && e.message, e && e.stack);
+        html += '<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;padding:14px 16px;background:linear-gradient(135deg,#F0F7FF,#F8FAFC);border-radius:10px;border:1px solid var(--border-light)">'
+          + '<button type="button" class="btn-submit" style="padding:11px 20px;font-size:13px;border-radius:8px" onclick="showLabOrderDialog()">' + (window.I&&I.flask||'🧪') + ' Order Labs</button>'
+          + '<button type="button" class="btn-submit" style="background:var(--accent);padding:11px 20px;font-size:13px;border-radius:8px" onclick="showImgOrderDialog()">' + (window.I&&I.image||'📷') + ' Order Imaging</button>'
+          + '<button type="button" class="btn-submit" style="background:#6A1B9A;padding:11px 20px;font-size:13px;border-radius:8px" onclick="showReferralDialog()">' + (window.I&&I.people||'👥') + ' Consult</button>'
+          + '</div>'
+          + '<div style="padding:16px 20px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;font-size:12px;color:#92400E"><strong>Note:</strong> Order list display had an issue, but you can still place orders using the buttons above. (' + (e && e.message || 'unknown') + ')</div>';
+      }
+      return html;
     };
   } else {
     fn.problems = renderProblems;
