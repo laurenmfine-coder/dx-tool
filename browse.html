@@ -1031,24 +1031,29 @@ var PRAC_DATA=SIM_DATA.filter(function(c){ return _EMR_VALID_IDS.has(c.id); }).m
 var COACH_DATA=[];var _coachDataLoaded=false;
 var LEARN_DATA=[];var _learnDataLoaded=false;
 // ── Update stat strip numbers from actual data ──────────────────────
-(function() {
-  function _updateStatNums() {
+// Only overwrite when the data for that mode is actually loaded. SIM and
+// PRAC are inline so always available; COACH and LEARN are lazy-loaded
+// on mode switch, so we re-run this fn after each lazy load.
+window._rdxUpdateStatNums = function() {
     var counts = {
       simulate: SIM_DATA.length,
       practice: PRAC_DATA.length,
-      coach:    COACH_DATA.length,
-      learn:    LEARN_DATA.length,
+      coach:    _coachDataLoaded ? COACH_DATA.length : null,
+      learn:    _learnDataLoaded ? LEARN_DATA.length : null,
     };
     document.querySelectorAll('.stat[data-mode]').forEach(function(el) {
       var mode = el.dataset.mode;
-      if (counts[mode] !== undefined) {
-        var numEl = el.querySelector('.stat-num');
-        if (numEl && /^\d+$/.test(numEl.textContent.trim())) {
-          numEl.textContent = counts[mode];
-        }
+      if (counts[mode] === null || counts[mode] === undefined) return;
+      var numEl = el.querySelector('.stat-num');
+      // Only overwrite a hardcoded numeric placeholder (e.g. "54"),
+      // never a fallback like "150+", "500+", or an emoji.
+      if (numEl && /^\d+$/.test(numEl.textContent.trim())) {
+        numEl.textContent = counts[mode];
       }
     });
-  }
+};
+(function() {
+  var _updateStatNums = window._rdxUpdateStatNums;
   // Run after DOM ready — data is inline so already available
   function _initBrowse() {
   // Welcome banner for new registrants arriving from auth/register.html
@@ -1091,13 +1096,13 @@ function setMode(m){ window._rdxBatchSize = 24; window._showAll = false; _rdxSor
   // Lazy-load mode data on first use
   if (m === 'coach' && !_coachDataLoaded) {
     var s = document.createElement('script'); s.src = '/data/coach-data.js';
-    s.onload = function() { _coachDataLoaded = true; render(); };
+    s.onload = function() { _coachDataLoaded = true; if(window._rdxUpdateStatNums) window._rdxUpdateStatNums(); render(); };
     s.onerror = function() { _coachDataLoaded = true; if(typeof rdxGenToast==='function') rdxGenToast('Could not load coaching topics — please refresh'); render(); };
     document.head.appendChild(s); return;
   }
   if (m === 'learn' && !_learnDataLoaded) {
     var s = document.createElement('script'); s.src = '/data/learn-data.js';
-    s.onload = function() { _learnDataLoaded = true; render(); };
+    s.onload = function() { _learnDataLoaded = true; if(window._rdxUpdateStatNums) window._rdxUpdateStatNums(); render(); };
     s.onerror = function() { _learnDataLoaded = true; if(typeof rdxGenToast==='function') rdxGenToast('Could not load modules — please refresh'); render(); };
     document.head.appendChild(s); return;
   }MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(function(b){var isMActive=b.dataset.mode===m; b.classList.toggle('active',isMActive); if(b.getAttribute('role')==='tab') b.setAttribute('aria-selected',isMActive?'true':'false');});
