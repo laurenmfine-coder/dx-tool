@@ -656,6 +656,57 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .sidebar-btn.rdx-step-future{opacity:.45;cursor:not-allowed}
 .sidebar-btn.rdx-step-done{color:#10B981}
 .sidebar-btn.rdx-step-done.active{color:#2874A6}
+/* PHASE 2: Primary-action pulse — highlights the recommended next click */
+.sidebar-btn.rdx-primary-action{
+  position:relative;background:linear-gradient(90deg,#FFF8E1,#FFFDF5);
+  color:#1A3A5C;font-weight:700;
+  border-left:4px solid #F59E0B;
+  box-shadow:0 0 0 0 rgba(245,158,11,.55);
+  animation:rdxPrimaryPulse 1.8s ease-in-out infinite;
+}
+.sidebar-btn.rdx-primary-action::after{
+  content:"→";position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:14px;font-weight:700;color:#F59E0B;
+  animation:rdxArrowNudge 1.4s ease-in-out infinite;
+}
+.sidebar-btn.rdx-primary-action:hover{background:linear-gradient(90deg,#FEF3C7,#FFF8E1);padding-left:20px}
+.sidebar-btn.rdx-primary-action.active{background:linear-gradient(90deg,#FEF3C7,#FFF8E1);color:#92400E}
+@keyframes rdxPrimaryPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.55)}
+  50%{box-shadow:0 0 0 6px rgba(245,158,11,0)}
+}
+@keyframes rdxArrowNudge{
+  0%,100%{transform:translateY(-50%) translateX(0)}
+  50%{transform:translateY(-50%) translateX(3px)}
+}
+/* PHASE 2: Recede past phases (still clickable, just visually quieter) */
+.sidebar-btn.rdx-step-done:not(.active){opacity:.7}
+.sidebar-btn.rdx-step-done:not(.active):hover{opacity:1}
+/* PHASE 2: Clickable step-header dividers (done/current states) */
+.rdx-sidebar-step-header.rdx-divider-clickable{cursor:pointer;transition:filter .15s,transform .15s}
+.rdx-sidebar-step-header.rdx-divider-clickable:hover{filter:brightness(.97)}
+.rdx-sidebar-step-header.rdx-divider-clickable:active{transform:scale(.99)}
+.rdx-sidebar-step-header.rdx-divider-locked{cursor:default;opacity:.7}
+/* PHASE 2: Chart-essentials "More" expander (desktop) */
+.rdx-chart-more-toggle{
+  width:100%;padding:7px 16px;border:none;background:transparent;cursor:pointer;
+  display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;
+  font-family:'DM Sans',sans-serif;color:var(--text-muted);
+  text-align:left;transition:background .15s;
+}
+.rdx-chart-more-toggle:hover{background:var(--surface-alt);color:var(--text-secondary)}
+.rdx-chart-more-toggle .rdx-chart-more-caret{
+  font-size:9px;transition:transform .2s;display:inline-block;width:10px;
+}
+.rdx-chart-more-toggle.expanded .rdx-chart-more-caret{transform:rotate(90deg)}
+.rdx-chart-more-list{display:none;border-left:2px solid var(--border-light);margin-left:14px}
+.rdx-chart-more-list.expanded{display:block}
+.rdx-chart-more-list .sidebar-btn{padding-left:18px;font-size:12px}
+.rdx-chart-more-list .sidebar-btn:hover{padding-left:22px}
+.rdx-chart-more-hint{
+  padding:2px 16px 6px 30px;font-size:10px;color:var(--text-muted);
+  font-style:italic;line-height:1.3;
+}
 /* sidebar AI tool descriptions on hover */
 .sidebar-btn[data-ai-desc]{position:relative}
 .sidebar-btn[data-ai-desc]:hover::after{
@@ -6651,6 +6702,31 @@ render = function(){
     for(var s=0;s<_STEP_ORDER.length;s++){ if(_STEP_TABS[_STEP_ORDER[s]].indexOf(tabId)>=0) return s; }
     return 0;
   }
+  // PHASE 2: Primary action = first canonical tab of the current step.
+  // This is what we want to draw the learner's eye to.
+  var _STEP_PRIMARY_TAB = {chart:'demographics', interview:'interview', ddx:'ddx', orders:'orders', debrief:'oral'};
+  var _curStepKey = _STEP_ORDER[_curStepIdx];
+  var _primaryActionTabId = (role==='student') ? (_STEP_PRIMARY_TAB[_curStepKey] || null) : null;
+  // PHASE 2: Chart-essentials (always visible) vs More (collapsed by default)
+  var CHART_ESSENTIAL_IDS = ['demographics','problems','vitals','medications','allergies'];
+  // Init expander state once (default collapsed)
+  if(typeof S._chartMoreOpen === 'undefined') S._chartMoreOpen = false;
+  var _chartMoreOpen = !!S._chartMoreOpen;
+  var _chartMoreTabIds = []; // populated during build for the toggle hint
+  // PHASE 2: helper to render a single tab button (factored out so we can reuse it for chart-more list)
+  function _renderTabBtn(t){
+    var stepIdx2 = _getTabStepIdx(t.id);
+    var stepState = stepIdx2 < _curStepIdx ? 'done' : stepIdx2 === _curStepIdx ? 'current' : 'future';
+    var _stepCls = stepState==='future' ? ' rdx-step-future' : stepState==='done' ? ' rdx-step-done' : '';
+    // Mark the primary action — pulses to grab the learner's attention
+    var _primaryCls = (t.id === _primaryActionTabId && stepState !== 'future') ? ' rdx-primary-action' : '';
+    var pinned=(window.RDXWorkspace&&(RDXWorkspace.load().emr_pinned||[]).indexOf(t.id)>=0)?'pinned':'';
+    var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):'';
+    var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
+    var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
+    var _onclick = stepState==='future' ? 'onclick="_showStepLocked(\''+t.id+'\')"' : 'onclick="switchTab(\''+t.id+'\')"';
+    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+_primaryCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" title="'+(stepState==='future'?'Complete earlier steps first':'')+'">'+(stepState==='future'?'<span style="font-size:10px;margin-right:2px;opacity:.5">🔒</span>':'')+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+  }
   var sb = tabs.map(function(t){
     if(t.divider && t.stepId){
       var stepIdx = _STEP_ORDER.indexOf(t.stepId);
@@ -6661,23 +6737,48 @@ render = function(){
       var cText   = state==='done'?'#059669':state==='active'?'#2874A6':'#94A3B8';
       var cNum    = state==='done'?'#10B981':state==='active'?'#2874A6':'#E2E8F0';
       var numContent = state==='done'?'✓':(t.stepNum||'');
-      return '<div class="rdx-section-label rdx-sidebar-step-header" style="border-top:2px solid '+cBorder+';background:'+cBg+'">'
+      // PHASE 2: Make divider clickable for done/current — jumps to first tab in that step
+      var _dividerClickable = (state==='done' || state==='active');
+      var _dividerCls = _dividerClickable ? ' rdx-divider-clickable' : ' rdx-divider-locked';
+      var _dividerJump = _STEP_PRIMARY_TAB[t.stepId];
+      var _dividerOnclick = _dividerClickable && _dividerJump
+        ? ' onclick="switchTab(\''+_dividerJump+'\')" role="button" tabindex="0" title="Go to '+label.replace(/[①②③④⑤]\s*/,'')+'"'
+        : '';
+      return '<div class="rdx-section-label rdx-sidebar-step-header'+_dividerCls+'"'+_dividerOnclick+' style="border-top:2px solid '+cBorder+';background:'+cBg+'">'
         + '<span class="step-num" style="background:'+cNum+';color:'+(state==='future'?'#94A3B8':'#fff')+'">'+numContent+'</span>'
         + '<span style="font-size:10px;font-weight:700;color:'+cText+';letter-spacing:.04em">'+label+'</span>'
         + '</div>';
     }
     if(t.divider){ return ''; }
-    var stepIdx2 = _getTabStepIdx(t.id);
-    var stepState = stepIdx2 < _curStepIdx ? 'done' : stepIdx2 === _curStepIdx ? 'current' : 'future';
-    var _stepCls = stepState==='future' ? ' rdx-step-future' : stepState==='done' ? ' rdx-step-done' : '';
-    var pri=PRIMARY_TAB_IDS.indexOf(t.id)>=0?'primary':'secondary';
-    var pinned=(window.RDXWorkspace&&(RDXWorkspace.load().emr_pinned||[]).indexOf(t.id)>=0)?'pinned':'';
-    var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):'';
-    var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
-    var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
-    var _onclick = stepState==='future' ? 'onclick="_showStepLocked(\''+t.id+'\')"' : 'onclick="switchTab(\''+t.id+'\')"';
-    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" title="'+(stepState==='future'?'Complete earlier steps first':'')+'">'+(stepState==='future'?'<span style="font-size:10px;margin-right:2px;opacity:.5">🔒</span>':'')+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+    // PHASE 2: For students, route chart-tier non-essentials through the More expander.
+    // Render them in a separate pass below; emit a placeholder marker here so we know where to inject.
+    if(role==='student' && _STEP_TABS.chart.indexOf(t.id) >= 0 && CHART_ESSENTIAL_IDS.indexOf(t.id) < 0){
+      _chartMoreTabIds.push(t);
+      if(t.id === 'visits') return '__CHART_MORE_INSERT__'; // first non-essential = insertion point
+      return '';
+    }
+    return _renderTabBtn(t);
   }).join('');
+  // PHASE 2: Build the chart-more expander and inject at the marker (student role only)
+  if(role==='student' && _chartMoreTabIds.length){
+    var _moreLabels = _chartMoreTabIds.map(function(t){return t.label}).join(', ');
+    var _moreCaret = '<span class="rdx-chart-more-caret">▸</span>';
+    // If any tab in the More list is currently active, force-expand so the learner sees their location
+    var _activeInMore = _chartMoreTabIds.some(function(t){return t.id === S.activeTab});
+    var _expandedCls = (_chartMoreOpen || _activeInMore) ? ' expanded' : '';
+    var _moreToggle = '<button type="button" class="rdx-chart-more-toggle'+_expandedCls+'" onclick="toggleChartMore()" aria-expanded="'+(_chartMoreOpen||_activeInMore)+'">'
+      + _moreCaret + '<span>More chart sections</span></button>'
+      + '<div class="rdx-chart-more-hint">'+_moreLabels+'</div>'
+      + '<div class="rdx-chart-more-list'+_expandedCls+'">'
+      + _chartMoreTabIds.map(_renderTabBtn).join('')
+      + '</div>';
+    sb = sb.replace('__CHART_MORE_INSERT__', _moreToggle);
+  } else {
+    // Faculty/admin: render the would-be chart-more tabs inline normally
+    if(_chartMoreTabIds.length){
+      sb = sb.replace('__CHART_MORE_INSERT__', _chartMoreTabIds.map(_renderTabBtn).join(''));
+    }
+  }
   if (typeof wrapSidebarAISection === 'function') sb = wrapSidebarAISection(sb);
   if (window.RDXGuide) sb += RDXGuide.renderSidebarToggle();
   if (window.GuidedMode && GuidedMode.isActive()) sb += GuidedMode.renderStepper();
@@ -6711,6 +6812,12 @@ function closeMoreTabs(){
 function switchTabFromMore(id){
   closeMoreTabs();
   switchTab(id);
+}
+// PHASE 2: Toggle the desktop chart-essentials More expander
+function toggleChartMore(){
+  if(typeof S === 'undefined' || !S) return;
+  S._chartMoreOpen = !S._chartMoreOpen;
+  render();
 }
 
 // Labs/Imaging interactive tabs
