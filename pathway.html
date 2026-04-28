@@ -1253,10 +1253,8 @@ async function sendToAI(userMessage) {
     });
     if (!resp.ok) throw new Error('API error: ' + resp.status);
     var data = await resp.json();
-    var aiText = data.response || data.content || '';
-    if (typeof aiText === 'object' && aiText.content) {
-      aiText = aiText.content.map(function(b) { return b.text || ''; }).join('\n');
-    }
+    var aiText = extractAIText(data);
+    if (!aiText || !aiText.trim()) throw new Error('Empty AI response');
     state.convHistory.push({ role: 'assistant', content: aiText });
     // Extract concept mastery signals from AI response
     extractConceptSignals(aiText, state.activeTopic);
@@ -1274,6 +1272,24 @@ async function sendToAI(userMessage) {
   state.isLoading = false;
   render();
   scrollToBottom();
+}
+
+// Pulls AI text out of any of the several response shapes the worker can return.
+// Returns '' if nothing usable is found — callers should treat that as an error.
+function extractAIText(data) {
+  if (!data) return '';
+  if (typeof data === 'string') return data;
+  if (typeof data.response === 'string') return data.response;
+  if (typeof data.content === 'string') return data.content;
+  if (data.response && Array.isArray(data.response.content)) {
+    return data.response.content.map(function(b) { return b.text || ''; }).join('\n');
+  }
+  if (Array.isArray(data.content)) {
+    // Standard Anthropic API: data.content = [{type:'text', text:'...'}]
+    return data.content.map(function(b) { return b.text || ''; }).join('\n');
+  }
+  if (typeof data.message === 'string') return data.message;
+  return '';
 }
 
 
@@ -1611,10 +1627,8 @@ window.MX = {
     })
     .then(function(r) { if (!r.ok) throw new Error('API ' + r.status); return r.json(); })
     .then(function(data) {
-      var aiText = data.response || data.content || '';
-      if (typeof aiText === 'object' && aiText.content) {
-        aiText = aiText.content.map(function(b) { return b.text || ''; }).join('\n');
-      }
+      var aiText = extractAIText(data);
+      if (!aiText || !aiText.trim()) throw new Error('Empty AI response');
       state.convHistory.push({ role: 'assistant', content: aiText });
       state.messages.push({ role: 'tutor', content: aiText });
       state.isLoading = false;
@@ -1622,7 +1636,7 @@ window.MX = {
       scrollToBottom();
     })
     .catch(function(err) {
-      console.error(err);
+      console.error('[pathway] startSession AI error, using welcome fallback:', err && err.message);
       state.messages.push({
         role: 'tutor',
         content: '**Welcome!** Let\u2019s explore **' + (topic ? topic.name : 'this topic') + '** together.\n\n**What do you already know about this topic?** Even a rough idea is a great starting point.'
