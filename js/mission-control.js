@@ -127,7 +127,7 @@
       body:'Submit for AI coaching on diagnostic accuracy, reasoning framework, documentation quality, cognitive bias patterns (anchoring, premature closure), and evidence-based management.',
       nextLabel: null, nextTab: null },
     coach: { icon:'🧠', heading:'CoachDx Attending',
-      body:'Present your case: patient, CC, differential with reasoning. Your AI attending will push your thinking with Socratic questions — not give you the answer. Use this before and after ordering.',
+      body:'Your AI attending. Use it ANYTIME — talk through your differential, ask why a finding matters, get unstuck on what to do next, or debrief after submission. Socratic, not spoon-feeding.',
       nextLabel: null, nextTab: null }
   };
 
@@ -376,7 +376,7 @@
         html += '<div style="font-size:11px;color:#1B4F72;line-height:1.7">';
         html += '<div>\u2460 Follow the <strong>5 steps</strong> in the top bar</div>';
         html += '<div>\u2461 Hover the sidebar icons for chart sections</div>';
-        html += '<div>\u2462 Use CoachDx to talk through your reasoning</div>';
+        html += '<div>\u2462 Use <strong>CoachDx</strong> anytime to talk through your reasoning</div>';
         html += '<div>\u2463 Submit your note for AI feedback</div>';
         html += '</div>';
         if (isGuest) html += '<div style="margin-top:8px;font-size:11px;color:#1B4F72"><a href="/auth/register.html" style="color:#2874A6;font-weight:600">Create a free account</a> to save progress.</div>';

@@ -1770,14 +1770,12 @@ var urlTopic = params.get('topic');
 
 loadProgress();
 
-if (urlSystem && urlTopic) {
-  var vs = SYSTEMS.find(function(s) { return s.id === urlSystem; });
-  if (vs) {
-    var vt = vs.topics.find(function(t) { return t.id === urlTopic; });
-    if (vt) { state.activeSystem = urlSystem; MX.startSession(urlTopic); }
-    else { state.activeSystem = urlSystem; state.view = 'topics'; render(); }
-  } else { render(); }
-// Common topic aliases — short IDs to canonical system+topic
+// Common topic aliases — short IDs to canonical system+topic.
+// Declared here at module scope (not inside an if-branch) so every
+// routing branch below can read it. Earlier this lived inside the
+// (urlSystem && urlTopic) branch, which meant `?topic=acs` (no
+// system) hit the else-if branch and threw a TypeError trying to
+// access the undefined alias table.
 var TOPIC_ALIASES = {
   'anemia':        {system:'anemia-rbc',          topic:'anemia-rbc'},
   'infection':     {system:'id-foundations',      topic:'fever-workup'},
@@ -1795,7 +1793,19 @@ var TOPIC_ALIASES = {
   'acid-base':     {system:'electrolytes-acidbase',topic:'abg-interpret'},
   'electrolytes':  {system:'electrolytes-acidbase',topic:'electrolytes-acidbase'},
   'potassium':     {system:'electrolytes-acidbase',topic:'potassium'},
+  'thyroid':       {system:'endocrine-thyroid',   topic:'thyroid-physiology'},
+  'shock':         {system:'shock-states',        topic:'shock-classification'},
+  'anaphylaxis':   {system:'anaphylaxis-acute',   topic:'anaphylaxis-mechanism'},
+  'dyslipidemia':  {system:'lipid-metabolism',    topic:'dyslipidemia-mgmt'}
 };
+
+if (urlSystem && urlTopic) {
+  var vs = SYSTEMS.find(function(s) { return s.id === urlSystem; });
+  if (vs) {
+    var vt = vs.topics.find(function(t) { return t.id === urlTopic; });
+    if (vt) { state.activeSystem = urlSystem; MX.startSession(urlTopic); }
+    else { state.activeSystem = urlSystem; state.view = 'topics'; render(); }
+  } else { render(); }
 } else if (urlTopic && !urlSystem) {
   // Check alias table first
   if (TOPIC_ALIASES[urlTopic]) {

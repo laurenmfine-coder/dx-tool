@@ -4068,7 +4068,7 @@ var SIDEBAR_TOOLTIPS = {
   'documentation': 'Write Note — Write your H&P with Assessment & Plan. AI scores it on submit.',
   'oral':          'Present Case — Practice your oral presentation to your attending.',
   // AI coaching
-  'coach':         'CoachDx — AI attending. Talk through your reasoning. Socratic, not spoon-feeding.',
+  'coach':         'CoachDx — your AI attending. Talk through reasoning, get unstuck mid-case, or debrief at the end. Socratic, not spoon-feeding.',
   'autofeedback':  'AI Feedback — Auto-generated scoring of your note by section after submit.',
   'feedback':      'Faculty Feedback — Your faculty\'s annotations and grade on your note.',
 };
@@ -4163,7 +4163,7 @@ function renderWorkflowBar(activeTab) {
     { id:'interview',label:'Patient Interview', icon:'🗣️', tabs:['interview'] },
     { id:'ddx',      label:'My Differential',   icon:'🧠', tabs:['ddx','crt'] },
     { id:'orders',   label:'Order & Document',  icon:'📝', tabs:['orders','documentation'] },
-    { id:'debrief',  label:'Debrief & Present', icon:'🎯', tabs:['oral','coach','autofeedback','feedback'] },
+    { id:'debrief',  label:'Coach & Debrief',  icon:'🎯', tabs:['oral','coach','autofeedback','feedback'] },
   ];
   var activeStep = 0;
   steps.forEach(function(s, i){ if(s.tabs.indexOf(activeTab)>=0) activeStep=i; });
@@ -4179,7 +4179,7 @@ function renderWorkflowBar(activeTab) {
       interview:'talk to the patient',
       ddx:      'form your differential',
       orders:   'order & document',
-      debrief:  'debrief & present'
+      debrief:  'coach, debrief & present'
     };
     var _sub = _subtitles[step.id] || '';
     html += '<button class="rdx-wf-step'+cls+'" onclick="switchTab(\''+destTab+'\')">'
@@ -7074,6 +7074,7 @@ submitDoc = function(){
 <script src="js/rdx-workspace.js"></script>
 
 <script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-help-fab.js" defer></script>
 <!-- nav-global.js removed: emr-shell.js handles EMR navigation -->
 
 <!-- Feature Tours (autoShow disabled — Mission Control handles orientation) -->

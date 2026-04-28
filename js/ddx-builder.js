@@ -71,6 +71,19 @@
           html += '<button type="button" onclick="DdxBuilder._remove('+i+')" style="padding:3px 6px;border:1px solid var(--danger-light,#FFEBEE);border-radius:4px;background:var(--danger-light,#FFEBEE);cursor:pointer;font-size:11px;color:var(--danger,#C62828);font-family:inherit" title="Remove">\u2715</button>';
           html += '</div></div>';
 
+          // Quick-help row: nudge students toward the AI tools when they have a named diagnosis.
+          // - "Coach me on this" → CoachDx tab with starter chip pre-filled to discuss this dx
+          // - "Mechanism →" → pathway.html (MechanismDx) with topic= the diagnosis name; pathway's
+          //                   name-matching will resolve to the best concept page available.
+          if (e.diagnosis && e.diagnosis.trim()) {
+            var _dx = e.diagnosis.trim();
+            var _coachTxt = 'Help me think through whether this is ' + _dx + '. What would change my mind?';
+            html += '<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">';
+            html += '<button type="button" onclick="DdxBuilder._coachOn('+i+')" style="display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid #DDD6FE;border-radius:14px;background:#F5F3FF;color:#5B21B6;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit" title="Talk to CoachDx about this diagnosis">\uD83E\uDDE0 Coach me on this</button>';
+            html += '<a href="pathway.html?topic=' + encodeURIComponent(_dx) + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid #BBF7D0;border-radius:14px;background:#F0FDF4;color:#166534;font-size:11px;font-weight:600;text-decoration:none;font-family:inherit" title="Look up the underlying mechanism in MechanismDx">\uD83D\uDCDA Mechanism \u2192</a>';
+            html += '</div>';
+          }
+
           var conf=e.confidence||50;
           html += '<div style="margin-bottom:10px;display:flex;align-items:center;gap:8px">';
           html += '<span style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;min-width:72px">Likelihood</span>';
@@ -156,6 +169,33 @@
       var c=entries[idx].category||'likely';
       entries[idx].category = c==='likely'?'must-not-miss':c==='must-not-miss'?'both':'likely';
       MissionControl.setDdxEntries(entries); if(window.render)render();
+    },
+    // Switch to the CoachDx tab and pre-fill its input with a question
+    // about this specific diagnosis. If the input doesn't exist yet
+    // (CoachDx hasn't rendered), schedule the prefill for after render.
+    _coachOn: function(idx) {
+      var entries = MissionControl.getDdxEntries();
+      var dx = entries && entries[idx] && entries[idx].diagnosis;
+      if (!dx) return;
+      var prompt = 'Help me think through whether this is ' + dx + '. What would change my mind?';
+      // Switch tab first
+      if (window.switchTab) window.switchTab('coach');
+      // Now prefill — coach input may need a tick to mount after switchTab→render
+      var tries = 0;
+      function fill() {
+        var inp = document.getElementById('coachInput');
+        if (inp) {
+          inp.value = prompt;
+          inp.focus();
+          try { inp.setSelectionRange(prompt.length, prompt.length); } catch(e) {}
+          inp.style.borderColor = '#2874A6';
+          inp.style.background = '#EBF4FB';
+          setTimeout(function(){ inp.style.borderColor=''; inp.style.background=''; }, 1500);
+          return;
+        }
+        if (tries++ < 20) setTimeout(fill, 50);
+      }
+      fill();
     }
   };
 
