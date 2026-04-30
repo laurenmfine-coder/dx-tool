@@ -402,7 +402,7 @@ const AgentTools = {
 
   recommendNextCase: function(studentHistory, availableCases) {
     if (!studentHistory.found || !availableCases || availableCases.length === 0) {
-      return { caseId: availableCases[0] || 'DYS-001', reason: 'First case — starting with default' };
+      return { caseId: availableCases[0] || 'stemi-v1', reason: 'First case — starting with default' };
     }
 
     var completed = studentHistory.patterns.completedCaseIds || [];
