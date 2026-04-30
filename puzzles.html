@@ -393,11 +393,29 @@ window.rdxPbClose = function() {
 function _pbShowFeedback(p) {
   var fb = document.getElementById('rdx-pb-feedback');
   if (!fb) return;
+  // Pull next-step recommendations from the smart linker (same logic
+  // as the daily puzzle uses)
+  var nextSteps = (typeof window._puzzleNextSteps === 'function') ? window._puzzleNextSteps(p) : null;
+  var nextStepHtml = '';
+  if (nextSteps) {
+    nextStepHtml = '<div style="margin-top:14px;padding:12px 14px;background:#EBF5FB;border:1px solid #BEE3F8;border-radius:10px">'
+      + '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1B4F72;margin-bottom:8px">Take it further</div>'
+      + '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+    if (nextSteps.caseId) {
+      nextStepHtml += '<a href="/virtual-emr.html?case=' + nextSteps.caseId + '" style="background:#2874A6;color:#fff;padding:7px 12px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none">Practice: ' + _pbEsc(nextSteps.caseLabel) + ' →</a>';
+    }
+    if (nextSteps.moduleId) {
+      nextStepHtml += '<a href="/mechanism/' + nextSteps.moduleId + '-module.html" style="background:#fff;color:#1B4F72;padding:7px 12px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid #BEE3F8">Review: ' + _pbEsc(nextSteps.moduleLabel) + ' →</a>';
+    }
+    nextStepHtml += '</div></div>';
+  }
+
   fb.innerHTML = ''
     + '<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:18px">'
     +   '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#475569;margin-bottom:8px">Expert analysis</div>'
     +   '<div style="font-size:13.5px;line-height:1.7;color:var(--text)">' + _pbEsc(p.teaching) + '</div>'
-    + '</div>';
+    + '</div>'
+    + nextStepHtml;
   fb.style.display = 'block';
   // Disable input + buttons
   var ans = document.getElementById('rdx-pb-answer');
@@ -932,28 +950,217 @@ function updateStreak(p) {
     ? 'Current streak: <strong>' + streak + ' day' + (streak !== 1 ? 's' : '') + '</strong>'
     : 'Start your streak today';
 
-  // Post-answer related-case suggestion. Only renders after the user
-  // has submitted a puzzle (when p is passed in). On initial page load
-  // updateStreak is called without p — bail out cleanly so we don't
-  // throw on p.type.
+  // Post-answer next-step recommendation. Picks both a case (for practice)
+  // and a mechanism module (for review) by scanning the puzzle's content
+  // for clinical keywords. Better than the previous type-based map because
+  // 11 different "Anchoring Check" puzzles can have 11 different topics.
   if (!p) return;
 
-  var relatedMap = {
-    'Lab Shift': 'stemi-v1', 'Threshold Decision': 'dka-v1', 'Risk Priority': 'septic-shock-urosepsis',
-    'Scope Decision': 'pneumonia', 'Communication': 'stroke-v1', 'Postpartum': 'eclampsia',
-    'Sensory': 'counseling-scenarios', 'Pacing': 'chf-v1'
-  };
-  var relCase = relatedMap[p.type] || 'anaphylaxis';
+  var nextSteps = _puzzleNextSteps(p);
   var nexEl = document.getElementById('rdx-post-puzzle-cta');
   if (!nexEl) {
     nexEl = document.createElement('div');
     nexEl.id = 'rdx-post-puzzle-cta';
-    nexEl.style.cssText = 'margin-top:16px;padding:12px 16px;background:#EBF5FB;border-radius:10px;border:1px solid #BEE3F8;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:12px';
+    nexEl.style.cssText = 'margin-top:16px;padding:14px 18px;background:#EBF5FB;border-radius:10px;border:1px solid #BEE3F8;font-size:13px';
     document.getElementById('puzzleStreak').after(nexEl);
   }
-  nexEl.innerHTML = '<span style="color:#1B4F72">Put this into practice:</span>' +
-    '<a href="/virtual-emr.html?case=' + relCase + '" style="background:#2874A6;color:#fff;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap">Try related case →</a>';
+  var html = '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1B4F72;margin-bottom:10px">Take it further</div>';
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+  if (nextSteps.caseId) {
+    html += '<a href="/virtual-emr.html?case=' + nextSteps.caseId + '" style="background:#2874A6;color:#fff;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px">'
+      + '<span>Practice the case:</span><span style="font-weight:500;opacity:.9">' + nextSteps.caseLabel + '</span><span>→</span></a>';
+  }
+  if (nextSteps.moduleId) {
+    html += '<a href="/mechanism/' + nextSteps.moduleId + '-module.html" style="background:#fff;color:#1B4F72;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;text-decoration:none;border:1px solid #BEE3F8;display:inline-flex;align-items:center;gap:6px">'
+      + '<span>Review the mechanism:</span><span style="font-weight:500;opacity:.9">' + nextSteps.moduleLabel + '</span><span>→</span></a>';
+  }
+  html += '</div>';
+  nexEl.innerHTML = html;
 }
+
+// ── Per-puzzle next-step picker ─────────────────────────────────
+// Scans a puzzle's scenario + prompt + teaching for clinical keywords,
+// picks the best matching case and mechanism module. The order of the
+// keyword table matters: more specific patterns come first so they
+// match before more general ones (e.g. "PE" matches before "chest pain").
+//
+// Each entry: { match: regex, caseId, caseLabel, moduleId, moduleLabel }
+// Either caseId or moduleId may be empty if no good fit exists.
+var _PUZZLE_LINKS = [
+  // Cardiology
+  { match: /\b(stemi|st elevation|st-elevation|cath lab|door[\s-]to[\s-]balloon)/i, caseId: 'stemi-v1', caseLabel: 'STEMI', moduleId: 'acs', moduleLabel: 'ACS' },
+  { match: /\b(nstemi|non-st|troponin (positive|elevated|rising))/i, caseId: 'nstemi-v1', caseLabel: 'NSTEMI', moduleId: 'acs', moduleLabel: 'ACS' },
+  { match: /\b(unstable angina|acs\b|acute coronary)/i, caseId: 'acute-coronary-syndrome', caseLabel: 'ACS', moduleId: 'acs', moduleLabel: 'ACS' },
+  { match: /\b(pericarditis|pleuritic.*lying|leaning forward|pericardial)/i, caseId: 'pericarditis-v1', caseLabel: 'Pericarditis', moduleId: 'acs', moduleLabel: 'Cardiology' },
+  { match: /\b(tamponade|pulsus paradoxus|beck'?s triad)/i, caseId: 'cardiac-tamponade', caseLabel: 'Tamponade', moduleId: 'acs', moduleLabel: 'Cardiology' },
+  { match: /\b(aortic dissection|tearing.*back|bp differential|widened mediastinum)/i, caseId: 'aortic-dissection-back', caseLabel: 'Aortic dissection', moduleId: 'vascular', moduleLabel: 'Vascular' },
+  { match: /\b(complete heart block|3rd degree av|third-degree av)/i, caseId: 'complete-heart-block', caseLabel: 'Heart block', moduleId: 'afib', moduleLabel: 'Arrhythmia' },
+  { match: /\b(vt|ventricular tachycardia|wide complex)/i, caseId: 'vt-syncope', caseLabel: 'VT syncope', moduleId: 'afib', moduleLabel: 'Arrhythmia' },
+  { match: /\b(afib|atrial fibrillation|af with rvr|warfarin.*inr)/i, caseId: 'arc-hf-medicine', caseLabel: 'AFib + HF', moduleId: 'afib', moduleLabel: 'AFib' },
+  { match: /\b(chf|heart failure|bnp|hfrEF|hfpef|s3 gallop)/i, caseId: 'chf-v1', caseLabel: 'CHF exacerbation', moduleId: 'heart-failure', moduleLabel: 'Heart failure' },
+  { match: /\b(mitral regurg|new murmur.*apex|papillary muscle)/i, caseId: 'chf-exacerbation', caseLabel: 'Acute MR', moduleId: 'heart-failure', moduleLabel: 'Heart failure' },
+
+  // Pulmonary
+  { match: /\b(pulmonary embolism|\bpe\b|d-dimer.*[12]\d{3}|pleuritic.*spo2)/i, caseId: 'pe-v1', caseLabel: 'Pulmonary embolism', moduleId: 'pulmonary', moduleLabel: 'Pulmonary' },
+  { match: /\b(tension ptx|tension pneumothorax|tracheal deviation)/i, caseId: 'tension-ptx', caseLabel: 'Tension PTX', moduleId: 'pulmonary', moduleLabel: 'Pulmonary' },
+  { match: /\b(asthma|status asthmaticus|bronchospasm.*albuterol)/i, caseId: 'asthma-exacerbation', caseLabel: 'Asthma', moduleId: 'asthma', moduleLabel: 'Asthma' },
+  { match: /\b(copd|copd exacerbation|chronic bronchitis)/i, caseId: 'copd-v1', caseLabel: 'COPD', moduleId: 'copd', moduleLabel: 'COPD' },
+  { match: /\b(pneumonia|cap\b|community-acquired|consolidation)/i, caseId: 'pneumonia', caseLabel: 'CAP', moduleId: 'pneumonia', moduleLabel: 'Pneumonia' },
+  { match: /\b(epiglottitis|stridor.*acute|bacterial tracheitis)/i, caseId: 'epiglottitis', caseLabel: 'Epiglottitis', moduleId: 'pediatrics', moduleLabel: 'Pediatrics' },
+  { match: /\b(barking cough|croup|stridor.*night)/i, caseId: 'severe-croup', caseLabel: 'Severe croup', moduleId: 'pediatrics', moduleLabel: 'Pediatrics' },
+
+  // Neurology
+  { match: /\b(sah|subarachnoid|thunderclap|worst headache.*life)/i, caseId: 'sah-v1', caseLabel: 'SAH', moduleId: 'stroke', moduleLabel: 'Stroke' },
+  { match: /\b(stroke|tpa\b|nihss|left mca|right mca|hemiplegia|mca stroke)/i, caseId: 'stroke-v1', caseLabel: 'Stroke', moduleId: 'stroke', moduleLabel: 'Stroke' },
+  { match: /\b(status epilepticus|seizure.*continuous)/i, caseId: 'status-epilepticus', caseLabel: 'Status epilepticus', moduleId: 'seizures-epilepsy', moduleLabel: 'Seizures' },
+  { match: /\b(seizure|epilepsy|new[\s-]onset seizure)/i, caseId: 'new-seizure-mass', caseLabel: 'New seizure', moduleId: 'seizures-epilepsy', moduleLabel: 'Seizures' },
+  { match: /\b(meningitis|kernig|brudzinski|csf.*neutrophil)/i, caseId: 'meningitis-v1', caseLabel: 'Bacterial meningitis', moduleId: 'cns-infections-gbs', moduleLabel: 'CNS infections' },
+  { match: /\b(gbs|guillain[\s-]barr[ée]|ascending weakness|areflexia)/i, caseId: 'meningitis-v1', caseLabel: 'GBS pattern', moduleId: 'cns-infections-gbs', moduleLabel: 'GBS' },
+  { match: /\b(cauda equina|saddle anesthesia|sphincter tone)/i, caseId: 'cauda-equina', caseLabel: 'Cauda equina', moduleId: 'msk-orthopedic', moduleLabel: 'Spine' },
+  { match: /\b(epidural hematoma|lucid interval|herniation|uncal)/i, caseId: 'epidural-hematoma', caseLabel: 'Epidural hematoma', moduleId: 'trauma', moduleLabel: 'Neurotrauma' },
+  { match: /\b(subdural)/i, caseId: 'subdural-hematoma', caseLabel: 'Subdural hematoma', moduleId: 'trauma', moduleLabel: 'Neurotrauma' },
+
+  // Endocrine / metabolic
+  { match: /\b(dka|diabetic ketoacidosis|anion gap.*ketone|hco3 [4-9]\b)/i, caseId: 'dka-v1', caseLabel: 'DKA', moduleId: 'endocrine', moduleLabel: 'Endocrine' },
+  { match: /\b(thyroid storm|hyperthyroid.*crisis)/i, caseId: 'thyroid-storm', caseLabel: 'Thyroid storm', moduleId: 'endocrine', moduleLabel: 'Endocrine' },
+  { match: /\b(adrenal crisis|addison|cortisol stim)/i, caseId: 'adrenal-crisis', caseLabel: 'Adrenal crisis', moduleId: 'endocrine', moduleLabel: 'Endocrine' },
+  { match: /\b(hyperkalemia|peaked t|k\+? [67]\.\d|potassium 6)/i, caseId: 'hyperkalemia-cardiac', caseLabel: 'Hyperkalemia', moduleId: 'electrolytes-acidbase', moduleLabel: 'Electrolytes' },
+  { match: /\b(hyponatremia|na 1[12]\d|sodium correction|cpm)/i, caseId: 'severe-hyponatremia', caseLabel: 'Severe hyponatremia', moduleId: 'electrolytes-acidbase', moduleLabel: 'Electrolytes' },
+  { match: /\b(siadh|inappropriate adh)/i, caseId: 'severe-hyponatremia', caseLabel: 'SIADH', moduleId: 'electrolytes-acidbase', moduleLabel: 'Electrolytes' },
+
+  // Renal
+  { match: /\b(aki|acute kidney injury|fena|muddy brown|atn)/i, caseId: 'aki-differential', caseLabel: 'AKI workup', moduleId: 'aki', moduleLabel: 'AKI' },
+
+  // GI / surgical
+  { match: /\b(appendicitis|mcburney|rovsing|psoas sign)/i, caseId: 'appendicitis-v1', caseLabel: 'Appendicitis', moduleId: 'gi-hepatology', moduleLabel: 'GI' },
+  { match: /\b(aaa|abdominal aortic|pulsatile mass)/i, caseId: 'aaa-v1', caseLabel: 'AAA', moduleId: 'vascular', moduleLabel: 'Vascular' },
+  { match: /\b(mesenteric ischemia|pain out of proportion.*bowel)/i, caseId: 'mesenteric-ischemia', caseLabel: 'Mesenteric ischemia', moduleId: 'vascular', moduleLabel: 'Vascular' },
+  { match: /\b(sbo|small bowel obstruction|strangulation)/i, caseId: 'sbo-strangulation', caseLabel: 'SBO', moduleId: 'gi-hepatology', moduleLabel: 'GI' },
+  { match: /\b(cholecystitis|murphy.*sign|gallbladder)/i, caseId: 'acute-cholecystitis', caseLabel: 'Acute cholecystitis', moduleId: 'gi-hepatology', moduleLabel: 'GI' },
+  { match: /\b(pancreatitis|lipase|amylase.*elevat)/i, caseId: 'severe-pancreatitis', caseLabel: 'Severe pancreatitis', moduleId: 'gi-hepatology', moduleLabel: 'GI' },
+  { match: /\b(intussusception|currant jelly|sausage mass)/i, caseId: 'intussusception', caseLabel: 'Intussusception', moduleId: 'pediatrics', moduleLabel: 'Pediatrics' },
+
+  // Infectious / sepsis
+  { match: /\b(septic shock|urosepsis|qsofa|lactate.*[2-9]\.\d)/i, caseId: 'septic-shock-urosepsis', caseLabel: 'Septic shock', moduleId: 'sepsis', moduleLabel: 'Sepsis' },
+  { match: /\b(neutropenic fever|febrile neutropenia)/i, caseId: 'neutropenic-fever', caseLabel: 'Neutropenic fever', moduleId: 'sepsis', moduleLabel: 'Oncology' },
+  { match: /\b(necrotizing fasciitis|nec fasc|crepitus.*skin)/i, caseId: 'nec-fasciitis', caseLabel: 'Nec fasciitis', moduleId: 'sepsis', moduleLabel: 'Sepsis' },
+  { match: /\b(fournier|scrotal.*pain.*severe)/i, caseId: 'fournier-gangrene', caseLabel: 'Fournier', moduleId: 'sepsis', moduleLabel: 'Sepsis' },
+  { match: /\b(ludwig|submandibular.*bilateral|elevated.*tongue)/i, caseId: 'ludwigs-angina', caseLabel: "Ludwig's angina", moduleId: 'sepsis', moduleLabel: 'Sepsis' },
+  { match: /\b(peritonsillar|quinsy|trismus.*tonsil)/i, caseId: 'peritonsillar-abscess', caseLabel: 'PTA', moduleId: 'sepsis', moduleLabel: 'ENT' },
+
+  // Allergy / immunology
+  { match: /\b(anaphylaxis|epinephrine.*im|biphasic)/i, caseId: 'anaphylaxis', caseLabel: 'Anaphylaxis', moduleId: 'anaphylaxis', moduleLabel: 'Anaphylaxis' },
+  { match: /\b(ace.*angioedema|bradykinin)/i, caseId: 'ace-angioedema', caseLabel: 'ACE angioedema', moduleId: 'drug-allergy', moduleLabel: 'Drug allergy' },
+  { match: /\b(sjs|stevens[\s-]johnson|ten\b|toxic epidermal)/i, caseId: 'sjs-ten', caseLabel: 'SJS/TEN', moduleId: 'drug-allergy', moduleLabel: 'Drug allergy' },
+  { match: /\b(amox.*rash|mono.*rash|ebv|monospot)/i, caseId: 'sjs-ten', caseLabel: 'EBV + amox rash', moduleId: 'drug-allergy', moduleLabel: 'Drug allergy' },
+  { match: /\b(food allergy|food[\s-]induced anaphylaxis|shellfish allergy)/i, caseId: 'anaphylaxis', caseLabel: 'Food anaphylaxis', moduleId: 'food-allergy', moduleLabel: 'Food allergy' },
+
+  // OB/GYN
+  { match: /\b(eclampsia|preeclampsia|hellp|magnesium sulfate)/i, caseId: 'eclampsia', caseLabel: 'Eclampsia', moduleId: 'ob', moduleLabel: 'OB' },
+  { match: /\b(ectopic|positive bhcg.*adnexal)/i, caseId: 'ectopic-pregnancy', caseLabel: 'Ectopic', moduleId: 'ob', moduleLabel: 'OB' },
+  { match: /\b(postpartum.*headache|postpartum hypertension)/i, caseId: 'eclampsia', caseLabel: 'Postpartum HTN', moduleId: 'ob', moduleLabel: 'OB' },
+
+  // Hematology
+  { match: /\b(itp|immune thrombocytopenia|platelet.*1\d,000)/i, caseId: 'dic-massive-transfusion', caseLabel: 'Thrombocytopenia', moduleId: 'hematology', moduleLabel: 'Hematology' },
+  { match: /\b(dic|disseminated intravascular)/i, caseId: 'dic-massive-transfusion', caseLabel: 'DIC', moduleId: 'hematology', moduleLabel: 'Hematology' },
+  { match: /\b(hemolytic anemia|coombs|haptoglobin|spherocytes)/i, caseId: 'dic-massive-transfusion', caseLabel: 'Hemolytic anemia', moduleId: 'hematology', moduleLabel: 'Hematology' },
+  { match: /\b(hus|atypical hus|schistocytes|tma)/i, caseId: 'dic-massive-transfusion', caseLabel: 'Atypical HUS', moduleId: 'hematology', moduleLabel: 'Hematology' },
+
+  // Toxicology
+  { match: /\b(lithium|bipolar.*level|ssri.*lithium)/i, caseId: 'serotonin-syndrome', caseLabel: 'Lithium concerns', moduleId: 'psychiatric-pharmacotherapy', moduleLabel: 'Psych pharmacology' },
+  { match: /\b(acetaminophen|tylenol|apap|n[\s-]?acetylcysteine)/i, caseId: 'apap-overdose', caseLabel: 'APAP overdose', moduleId: 'toxicology', moduleLabel: 'Toxicology' },
+  { match: /\b(salicylate|aspirin overdose|tinnitus.*tachypnea)/i, caseId: 'salicylate-toxicity', caseLabel: 'Salicylate toxicity', moduleId: 'toxicology', moduleLabel: 'Toxicology' },
+  { match: /\b(serotonin syndrome|clonus|hyperthermia.*ssri)/i, caseId: 'serotonin-syndrome', caseLabel: 'Serotonin syndrome', moduleId: 'toxicology', moduleLabel: 'Toxicology' },
+
+  // Surgical / orthopedic
+  { match: /\b(testicular torsion|cremasteric|prehn)/i, caseId: 'testicular-torsion', caseLabel: 'Testicular torsion', moduleId: 'msk-orthopedic', moduleLabel: 'Surgical' },
+  { match: /\b(compartment syndrome|pain out of proportion|6 p)/i, caseId: 'compartment-syndrome', caseLabel: 'Compartment syndrome', moduleId: 'msk-orthopedic', moduleLabel: 'Orthopedic' },
+  { match: /\b(septic arthritis|joint.*aspirat|crystal)/i, caseId: 'septic-arthritis', caseLabel: 'Septic arthritis', moduleId: 'msk-orthopedic', moduleLabel: 'Orthopedic' },
+  { match: /\b(hip fracture|hip pain.*fall|orif)/i, caseId: 'hip-fracture-anticoag', caseLabel: 'Hip fracture', moduleId: 'msk-orthopedic', moduleLabel: 'Orthopedic' },
+  { match: /\b(acute limb ischemia|6 p|cold pulseless)/i, caseId: 'acute-limb-ischemia', caseLabel: 'Limb ischemia', moduleId: 'vascular', moduleLabel: 'Vascular' },
+  { match: /\b(low back pain|back pain.*night|red flag.*back|spine.*red flag|saddle paresthes)/i, caseId: 'cauda-equina', caseLabel: 'Spine red flags', moduleId: 'msk-orthopedic', moduleLabel: 'Spine' },
+  { match: /\b(addison|primary adrenal insufficiency|cortisol.*aldosterone)/i, caseId: 'adrenal-crisis', caseLabel: 'Adrenal insufficiency', moduleId: 'endocrine', moduleLabel: 'Endocrine' },
+
+  // Ophthalmology
+  { match: /\b(angle[\s-]closure|halos.*lights|fixed mid-dilated)/i, caseId: 'angle-closure-glaucoma', caseLabel: 'Angle closure', moduleId: 'ophthalmology', moduleLabel: 'Ophthalmology' },
+  { match: /\b(crao|central retinal artery|sudden.*vision.*loss)/i, caseId: 'crao', caseLabel: 'CRAO', moduleId: 'retinal-disorders', moduleLabel: 'Retinal disorders' },
+  { match: /\b(optic neuritis|eye pain.*movement|color desaturation|ms\b.*eye)/i, caseId: 'crao', caseLabel: 'Optic neuritis', moduleId: 'neuro-ophthalmology', moduleLabel: 'Neuro-ophthalmology' },
+  { match: /\b(slit[\s-]lamp|amsler|fundus|retinopath|macular|drusen)/i, caseId: 'crao', caseLabel: 'Ocular exam', moduleId: 'ophthalmology', moduleLabel: 'Ophthalmology' },
+
+  // Environmental
+  { match: /\b(heat stroke|core temp.*4[01]|heat exhaustion)/i, caseId: 'heat-stroke', caseLabel: 'Heat stroke', moduleId: 'environmental-occupational', moduleLabel: 'Environmental' },
+  { match: /\b(hypothermia|core temp.*[12][0-9]\b|warming)/i, caseId: 'severe-hypothermia', caseLabel: 'Severe hypothermia', moduleId: 'environmental-occupational', moduleLabel: 'Environmental' },
+
+  // Pharmacology / mechanism
+  { match: /\b(ace inhibitor|raas|angiotensin)/i, caseId: 'chf-v1', caseLabel: 'CHF management', moduleId: 'pharmacotherapy', moduleLabel: 'Pharmacotherapy' },
+  { match: /\b(warfarin|inr|coumadin|cyp.*interaction)/i, caseId: 'arc-hf-medicine', caseLabel: 'AFib + warfarin', moduleId: 'pharmacotherapy', moduleLabel: 'Pharmacotherapy' },
+  { match: /\b(azithromycin|cyp3a4|drug interaction)/i, caseId: 'pneumonia', caseLabel: 'CAP treatment', moduleId: 'pharmacotherapy', moduleLabel: 'Pharmacotherapy' },
+  { match: /\b(metformin|gfr|egfr|lactic acidosis|t2dm.*ckd)/i, caseId: 'aki-differential', caseLabel: 'AKI in T2DM', moduleId: 'pharmacotherapy', moduleLabel: 'Pharmacotherapy' },
+  { match: /\b(vancomycin|trough|aucs?\b|nephrotoxic.*drug)/i, caseId: 'aki-differential', caseLabel: 'Drug-induced AKI', moduleId: 'pharmacotherapy', moduleLabel: 'Pharmacotherapy' },
+
+  // Pediatrics fallback
+  { match: /\b(neonate|infant|febrile infant|less than 60 days)/i, caseId: 'epiglottitis', caseLabel: 'Pediatric airway', moduleId: 'pediatrics', moduleLabel: 'Pediatrics' },
+  { match: /\b(kawasaki|polymorphous rash|strawberry tongue)/i, caseId: 'epiglottitis', caseLabel: 'Pediatric exam', moduleId: 'pediatrics', moduleLabel: 'Pediatrics' },
+  { match: /\b(meningococcal|petechiae.*lethargy)/i, caseId: 'meningitis-v1', caseLabel: 'Meningococcemia', moduleId: 'pediatrics', moduleLabel: 'Pediatrics' },
+
+  // Geriatrics fallback
+  { match: /\b(falls?\b|geriatric|delirium|polypharmacy|failure to thrive)/i, caseId: 'hip-fracture-anticoag', caseLabel: 'Geriatric fall', moduleId: 'geriatrics', moduleLabel: 'Geriatrics' },
+
+  // Dental
+  { match: /\b(leukoplakia|oral cancer|tongue.*lesion)/i, caseId: 'ludwigs-angina', caseLabel: 'Oral pathology', moduleId: 'oral-medicine', moduleLabel: 'Oral medicine' },
+
+  // OT / PT (clinical reasoning)
+  { match: /\b(dunn|sensory processing|sensory integration)/i, caseId: 'anaphylaxis', caseLabel: 'Reasoning case', moduleId: 'ot-clinical-reasoning', moduleLabel: 'OT reasoning' },
+  { match: /\b(occupational therapy|sensory profile)/i, caseId: 'anaphylaxis', caseLabel: 'Reasoning case', moduleId: 'ot-clinical-reasoning', moduleLabel: 'OT reasoning' },
+  { match: /\b(physical therapy|gait training|mobility)/i, caseId: 'anaphylaxis', caseLabel: 'Reasoning case', moduleId: 'pt-clinical-reasoning', moduleLabel: 'PT reasoning' },
+];
+
+// Type-level fallbacks when no specific keyword match — at least gives
+// a thematically appropriate suggestion.
+var _PUZZLE_TYPE_FALLBACK = {
+  'Lab Shift':            { caseId: 'aki-differential', caseLabel: 'Lab-driven case', moduleId: 'electrolytes-acidbase', moduleLabel: 'Lab interpretation' },
+  'Physical Exam Finding':{ caseId: 'pericarditis-v1', caseLabel: 'Bedside diagnosis',  moduleId: 'acs', moduleLabel: 'Cardiac exam' },
+  'Missing Evidence':     { caseId: 'pe-v1',           caseLabel: 'Disconfirming workup', moduleId: 'pulmonary', moduleLabel: 'Differential' },
+  'Time Pressure':        { caseId: 'stemi-v1',        caseLabel: 'Time-critical case', moduleId: 'acs', moduleLabel: 'Time-critical care' },
+  'Distinguishing Case':  { caseId: 'sah-v1',          caseLabel: 'Same complaint, different dx', moduleId: 'stroke', moduleLabel: 'Differential' },
+  'Source Check':         { caseId: 'appendicitis-v1', caseLabel: 'Triangulation case', moduleId: 'gi-hepatology', moduleLabel: 'Diagnostic reasoning' },
+  'Risk Priority':        { caseId: 'septic-shock-urosepsis', caseLabel: 'FMEA case', moduleId: 'sepsis', moduleLabel: 'Risk stratification' },
+  'Anchoring Check':      { caseId: 'pe-v1',           caseLabel: 'Reframing case', moduleId: 'pulmonary', moduleLabel: 'Cognitive bias' },
+  'Mechanism First':      { caseId: 'dka-v1',          caseLabel: 'Mechanism-driven case', moduleId: 'endocrine', moduleLabel: 'Pathophysiology' },
+  'Mechanism Bridge':     { caseId: 'chf-v1',          caseLabel: 'Mechanism case', moduleId: 'pharmacotherapy', moduleLabel: 'Mechanism' },
+  'Threshold Decision':   { caseId: 'dka-v1',          caseLabel: 'Threshold case', moduleId: 'electrolytes-acidbase', moduleLabel: 'Thresholds' },
+  'Communication':        { caseId: 'stroke-v1',       caseLabel: 'Communication case', moduleId: 'stroke', moduleLabel: 'Communication' },
+  'Postpartum':           { caseId: 'eclampsia',       caseLabel: 'Postpartum case', moduleId: 'ob', moduleLabel: 'OB' },
+  'Polypharmacy Check':   { caseId: 'hip-fracture-anticoag', caseLabel: 'Polypharmacy case', moduleId: 'geriatrics', moduleLabel: 'Geriatrics' },
+};
+
+function _puzzleNextSteps(p) {
+  // Build searchable text from puzzle content
+  var text = (p.scenario + ' ' + p.prompt + ' ' + (p.teaching || '')).toLowerCase();
+
+  // Try keyword match first — first match wins (table is ordered by specificity)
+  for (var i = 0; i < _PUZZLE_LINKS.length; i++) {
+    var link = _PUZZLE_LINKS[i];
+    if (link.match.test(text)) {
+      return {
+        caseId: link.caseId,
+        caseLabel: link.caseLabel,
+        moduleId: link.moduleId,
+        moduleLabel: link.moduleLabel
+      };
+    }
+  }
+
+  // Fallback to type-based mapping
+  var fallback = _PUZZLE_TYPE_FALLBACK[p.type];
+  if (fallback) return fallback;
+
+  // Last resort
+  return { caseId: 'anaphylaxis', caseLabel: 'Practice a case', moduleId: 'ai-diagnostic-methods', moduleLabel: 'Diagnostic reasoning' };
+}
+
+// Expose to window so the puzzle browse modal can use the same logic
+window._puzzleNextSteps = _puzzleNextSteps;
 
 renderPuzzle();
 </script>
