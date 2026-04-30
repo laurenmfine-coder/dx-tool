@@ -102,7 +102,9 @@
     'pt-rotator-cuff-rehab':        { mechanismModule: 'pt-clinical-reasoning-module',coachTopic: 'msk-shoulder-impingement', category: 'musculoskeletal' },
     'diabetic-retinopathy-od':      { mechanismModule: 'retinal-disorders-module',    coachTopic: 'diabetic-retinopathy', category: 'ophthalmology' },
     'ot-polytrauma-tbi':            { mechanismModule: 'trauma-module',               coachTopic: 'trauma',         category: 'rehabilitation' },
-    'ruptured-aaa':                 { mechanismModule: 'vascular-module',             coachTopic: 'aortic-dissection', category: 'vascular' }
+    'ruptured-aaa':                 { mechanismModule: 'vascular-module',             coachTopic: 'aortic-dissection', category: 'vascular' },
+    'acute-aortic-dissection':      { mechanismModule: 'vascular-module',             coachTopic: 'aortic-dissection', category: 'cardiovascular' },
+    'aortic-dissection':            { mechanismModule: 'vascular-module',             coachTopic: 'aortic-dissection', category: 'cardiovascular' }
   };
 
   // Display labels
@@ -177,27 +179,67 @@
     if (document.getElementById('rdx-pillar-fab')) return;
     var caseId = resolveCaseId();
     if (!caseId) return; // no case loaded yet
+
+    // Look up the curated mapping. If this case is not in CASE_TO_PILLARS,
+    // we still render the FAB with generic fallbacks so the learner has
+    // a way out of the case to mechanism review or coach without losing
+    // their place. Coverage of the curated map is ~10%; the fallback
+    // path covers the other ~90% of cases.
     var pillars = CASE_TO_PILLARS[caseId];
-    if (!pillars) return; // case not in map; skip silently
+    var hasMapping = !!pillars;
 
-    var mechLabel  = MODULE_LABELS[pillars.mechanismModule] || 'Pathophysiology';
-    var coachLabel = COACH_LABELS[pillars.coachTopic] || 'this case';
+    // Try to derive a sensible topic label from the case's chief
+    // complaint (set by the EMR loader as window.PATIENT.chiefComplaint).
+    // Falls back to a humanized version of the slug.
+    var ccTopic = '';
+    try {
+      if (window.PATIENT && window.PATIENT.chiefComplaint) {
+        ccTopic = String(window.PATIENT.chiefComplaint).slice(0, 80);
+      }
+    } catch(e) {}
+    var humanizedSlug = caseId.replace(/-/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
 
-    // FAB
+    var mechLabel, coachLabel, mechSubLabel, mechHref, coachHref, browseHref, browseSub;
+
+    if (hasMapping) {
+      mechLabel    = MODULE_LABELS[pillars.mechanismModule] || 'Pathophysiology';
+      mechSubLabel = 'MechanismDx: ' + mechLabel;
+      coachLabel   = COACH_LABELS[pillars.coachTopic] || humanizedSlug;
+      mechHref     = '/mechanism/' + pillars.mechanismModule + '.html?return=virtual-emr&case=' + encodeURIComponent(caseId);
+      coachHref    = '/CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=virtual-emr&caseId=' + encodeURIComponent(caseId);
+      browseHref   = '/browse.html?cat=' + encodeURIComponent(pillars.category) + '&exclude=' + encodeURIComponent(caseId);
+      browseSub    = 'More ' + (pillars.category || 'similar') + ' cases';
+    } else {
+      // Fallback: link to the MechanismDx hub, an unstructured Coach
+      // session keyed off the chief complaint, and the full case browser.
+      mechLabel    = 'Browse all topics';
+      mechSubLabel = 'MechanismDx hub';
+      coachLabel   = ccTopic || humanizedSlug;
+      mechHref     = '/mechanism/index.html';
+      coachHref    = '/CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=virtual-emr&caseId=' + encodeURIComponent(caseId);
+      browseHref   = '/browse.html?mode=simulate&exclude=' + encodeURIComponent(caseId);
+      browseSub    = 'Browse all cases';
+    }
+
+    // FAB — labeled pill so its purpose is obvious at a glance.
+    // The previous design was a 48px ⇄ circle with no label, which
+    // tested poorly for discoverability with new users.
     var fab = document.createElement('button');
     fab.id = 'rdx-pillar-fab';
-    fab.setAttribute('aria-label', 'Switch pillars');
-    fab.title = 'Switch to MechanismDx, CoachDx, or related cases';
-    fab.innerHTML = '<span style="font-size:18px;line-height:1">⇄</span>';
+    fab.setAttribute('aria-label', 'Switch to MechanismDx, CoachDx, or another case');
+    fab.title = 'Switch to MechanismDx, CoachDx, or another case';
+    fab.innerHTML = '<span style="font-size:15px;line-height:1">⇄</span><span style="font-size:13px;font-weight:700;letter-spacing:.01em">Mechanism · Coach</span>';
     fab.style.cssText = [
-      'position:fixed','bottom:24px','left:24px','width:48px','height:48px',
-      'border-radius:50%','background:#2874A6','color:#fff','border:none',
-      'cursor:pointer','box-shadow:0 4px 16px rgba(0,0,0,.25)','z-index:9000',
+      'position:fixed','bottom:24px','left:24px',
+      'padding:11px 16px 11px 14px','gap:8px',
+      'border-radius:999px','background:#2874A6','color:#fff','border:none',
+      'cursor:pointer','box-shadow:0 4px 16px rgba(40,116,166,.35)','z-index:9000',
       'display:flex','align-items:center','justify-content:center',
-      'font-family:inherit','transition:transform .15s, background .15s'
+      'font-family:inherit','transition:transform .15s, background .15s, box-shadow .15s',
+      'min-height:44px'
     ].join(';');
-    fab.onmouseover = function() { fab.style.background = '#1B4F72'; fab.style.transform = 'scale(1.05)'; };
-    fab.onmouseout  = function() { fab.style.background = '#2874A6'; fab.style.transform = 'scale(1)'; };
+    fab.onmouseover = function() { fab.style.background = '#1B4F72'; fab.style.transform = 'scale(1.03)'; fab.style.boxShadow = '0 6px 20px rgba(40,116,166,.5)'; };
+    fab.onmouseout  = function() { fab.style.background = '#2874A6'; fab.style.transform = 'scale(1)'; fab.style.boxShadow = '0 4px 16px rgba(40,116,166,.35)'; };
 
     // Popover
     var pop = document.createElement('div');
@@ -232,18 +274,13 @@
 
     var caseLabel = caseId.replace(/-/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
 
-    var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-    var mechHref  = '/mechanism/' + pillars.mechanismModule + '.html?return=virtual-emr&case=' + encodeURIComponent(caseId);
-    var coachHref = '/CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=virtual-emr&caseId=' + encodeURIComponent(caseId);
-    var browseHref= '/browse.html?cat=' + encodeURIComponent(pillars.category) + '&exclude=' + encodeURIComponent(caseId);
-
     pop.innerHTML = [
       '<div class="rdx-pp-header">Currently in: ' + caseLabel + '</div>',
       '<a href="' + mechHref + '">',
       '  <div class="rdx-pp-icon">🔬</div>',
       '  <div>',
       '    <div class="rdx-pp-title">Review the mechanism</div>',
-      '    <div class="rdx-pp-sub">MechanismDx: ' + mechLabel + '</div>',
+      '    <div class="rdx-pp-sub">' + mechSubLabel + '</div>',
       '  </div>',
       '</a>',
       '<a href="' + coachHref + '">',
@@ -257,7 +294,7 @@
       '  <div class="rdx-pp-icon">📋</div>',
       '  <div>',
       '    <div class="rdx-pp-title">Try a related case</div>',
-      '    <div class="rdx-pp-sub">More ' + (pillars.category || 'similar') + ' cases</div>',
+      '    <div class="rdx-pp-sub">' + browseSub + '</div>',
       '  </div>',
       '</a>'
     ].join('');
