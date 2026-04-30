@@ -32,7 +32,7 @@
 <script src="/rdx-semantic-search.js"></script>
 <style>
 :root{
-  --bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--text:#1E293B;--ts:#64748B;--tm:#94A3B8;
+  --bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--border-l:#F1F5F9;--text:#1E293B;--ts:#64748B;--tm:#94A3B8;
   --blue:#2874A6;--blue-l:#EBF5FB;--blue-d:#1B4F72;--blue-mid:#3B8FCE;
   --purple:#7C3AED;--purple-l:#F5F3FF;
   --green:#059669;--green-l:#ECFDF5;
@@ -75,31 +75,64 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .section-meta{font-size:.8rem;color:var(--ts)}
 
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.search{flex:1;min-width:220px;padding:10px 16px;border:1.5px solid var(--border);border-radius:9px;font-size:16px;font-family:inherit;outline:none;background:#fff;color:var(--text);transition:border .15s,box-shadow .15s} /* 16px prevents iOS auto-zoom */
+.search{flex:1;min-width:220px;padding:13px 18px 13px 44px;border:1.5px solid var(--border);border-radius:10px;font-size:16px;font-family:inherit;outline:none;background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%2394A3B8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') no-repeat 14px center;color:var(--text);transition:border .15s,box-shadow .15s;font-weight:500} /* 16px prevents iOS auto-zoom */
 .search:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.12)}
 .search::placeholder{color:var(--tm)}
-.fbtn{padding:7px 14px;border:1.5px solid var(--border);border-radius:8px;background:#fff;font-size:.78rem;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
-.fbtn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
-.fbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
 
-.count-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.count-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px}
 .count{font-size:.82rem;color:var(--ts);font-weight:500}
 .puzzle-link{font-size:.78rem;color:var(--blue);text-decoration:none;font-weight:600;transition:opacity .15s}
 .puzzle-link:hover{opacity:.7}
 
-/* Sort & group control — sits above the grid, lets learners reorganize on demand */
-.organize-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:18px;box-shadow:var(--shadow)}
-.organize-label{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tm)}
+/* Category filter pills — promoted to primary navigation. Bigger, with case counts. */
+#filterBtns{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 14px;align-items:center}
+.fbtn{
+  padding:8px 14px;border:1.5px solid var(--border);border-radius:999px;
+  background:#fff;font-size:.82rem;font-weight:600;color:var(--text);
+  cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:6px
+}
+.fbtn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
+.fbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.fbtn .fbtn-count{
+  font-size:.7rem;font-weight:600;opacity:.65;
+  background:rgba(15,23,42,.05);padding:1px 6px;border-radius:8px
+}
+.fbtn.on .fbtn-count{background:rgba(255,255,255,.2);opacity:.95}
+
+/* Organize bar — collapsed by default; only power users open it */
+.organize-toggle{
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;border:none;color:var(--ts);
+  font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;
+  padding:6px 0;letter-spacing:.01em;
+}
+.organize-toggle:hover{color:var(--blue)}
+.organize-toggle .chev{transition:transform .15s;display:inline-block;font-size:.7rem}
+.organize-toggle.open .chev{transform:rotate(180deg)}
+.organize-bar{
+  display:none;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:12px 14px;background:#fff;border:1px solid var(--border);
+  border-radius:10px;margin-bottom:18px;box-shadow:0 1px 2px rgba(15,23,42,.04)
+}
+.organize-bar.open{display:flex}
+.organize-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tm)}
 .organize-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.organize-btn{padding:6px 12px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:.78rem;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.organize-btn{padding:5px 11px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:.76rem;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
 .organize-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
 .organize-btn.on{background:var(--blue);border-color:var(--blue);color:#fff}
 .organize-divider{width:1px;height:20px;background:var(--border);flex-shrink:0}
-.organize-section-header{font-family:"DM Serif Display",Georgia,serif;font-size:1.05rem;color:var(--text);margin:24px 0 12px;padding:6px 0 8px;border-bottom:1.5px solid var(--blue-l)}
-.organize-section-header em{font-style:normal;color:var(--ts);font-family:"DM Sans",sans-serif;font-size:.78rem;font-weight:500;margin-left:8px;letter-spacing:.02em}
+.organize-section-header{
+  font-family:"DM Serif Display",Georgia,serif;
+  font-size:1.15rem;color:var(--text);
+  margin:28px 0 14px;padding:8px 0 10px;
+  border-bottom:1.5px solid var(--blue-l);
+  display:flex;align-items:baseline;gap:12px;
+}
+.organize-section-header em{font-style:normal;color:var(--ts);font-family:"DM Sans",sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.02em;margin-left:auto}
 .organize-section-header:first-of-type{margin-top:0}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
 .empty{text-align:center;padding:60px;color:var(--ts);font-size:.9rem}
 
 @keyframes rdx-shimmer {
@@ -125,20 +158,21 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .card{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:12px;padding:18px 20px;cursor:pointer;transition:all .18s;position:relative;
-  box-shadow:var(--shadow);
-  display:flex;flex-direction:column
+  border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s;position:relative;
+  box-shadow:0 1px 2px rgba(15,23,42,.04);
+  display:flex;flex-direction:column;
+  min-height:96px;
 }
 .card:hover{
   border-color:var(--blue);
-  box-shadow:0 4px 16px rgba(40,116,166,.12);
-  transform:translateY(-2px)
+  box-shadow:0 4px 14px rgba(40,116,166,.10);
+  transform:translateY(-1px)
 }
 .card:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.card-top{display:flex;align-items:flex-start;gap:11px;margin-bottom:6px}
 .card-icon{
-  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:1rem;flex-shrink:0;background:#F1F5F9;border:1px solid var(--border);color:var(--ts)
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.92rem;flex-shrink:0;background:#F1F5F9;border:1px solid var(--border);color:var(--ts)
 }
 .card-icon.acuity-1{background:#FEF2F2;border-color:#FCA5A5;color:#DC2626}
 .card-icon.acuity-2{background:#FFF7ED;border-color:#FDBA74;color:#EA580C}
@@ -146,37 +180,46 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .card-icon.acuity-4{background:#F0FDF4;border-color:#86EFAC;color:#059669}
 .card-icon.acuity-5{background:#EFF6FF;border-color:#93C5FD;color:#2563EB}
 .card-title{
-  font-size:1rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px;
+  font-size:.95rem;font-weight:700;color:var(--text);line-height:1.32;margin-bottom:3px;
   display:flex;align-items:baseline;gap:8px
 }
-.card-title-main{flex:1}
+.card-title-main{flex:1;min-width:0}
+/* SIM/EMR/COACH/LEARN mode badge — visible but de-emphasized; mode is implied by which tab they're on */
 .card-badge{
-  font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:5px;
-  text-transform:uppercase;letter-spacing:.05em;flex-shrink:0
+  font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:4px;
+  text-transform:uppercase;letter-spacing:.04em;flex-shrink:0;opacity:.75
 }
 .badge-sim{background:#EBF5FB;color:var(--blue-d);border:1px solid #AED6F1}
 .badge-prac{background:#ECFDF5;color:#047857;border:1px solid #A7F3D0}
 .badge-coach{background:#F5F3FF;color:#6D28D9;border:1px solid #DDD6FE}
 .badge-learn{background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA}
-.card-sub{font-size:.84rem;color:var(--ts);line-height:1.5}
-.card-social-proof{display:flex;gap:14px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:.72rem;color:var(--tm);flex-wrap:wrap}
+.card-sub{font-size:.81rem;color:var(--ts);line-height:1.45}
+.card-social-proof{display:flex;gap:12px;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--border-l);font-size:.7rem;color:var(--tm);flex-wrap:wrap}
 .card-social-proof span{display:flex;align-items:center;gap:3px}
 .card-social-proof .sp-count{color:var(--text);font-weight:600}
-/* Tag row: lighter, more readable, less competing for attention */
-.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);align-items:center}
+/* Tag row: deliberately quiet. Cards should read at a glance, not be a pill collage. */
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:auto;padding-top:10px;align-items:center}
 .tag{
-  font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:5px;
+  font-size:.66rem;font-weight:600;padding:2px 7px;border-radius:4px;
   letter-spacing:.01em;
-  background:#F8FAFC;color:var(--ts);
+  background:transparent;color:var(--ts);
   border:1px solid var(--border);
-  display:inline-flex;align-items:center;gap:4px
+  display:inline-flex;align-items:center;gap:3px
 }
 .tag-cat{background:var(--blue-l);color:var(--blue-d);border-color:#AED6F1}
-.tag-featured{background:#F5F3FF;color:#6D28D9;border-color:#DDD6FE}
 .tag-acuity1{background:#FEF2F2;color:#991B1B;border-color:#FCA5A5}
 .tag-acuity2{background:#FFF7ED;color:#9A3412;border-color:#FDBA74}
 /* Time tag — softer, secondary metadata */
-.tag-time{background:#F8FAFC;color:var(--tm);border-color:var(--border);font-weight:500}
+.tag-time{background:transparent;color:var(--tm);border-color:var(--border);font-weight:500}
+/* Featured corner ribbon — used instead of a Featured pill on the card body */
+.card.featured{border-color:#C4B5FD;background:linear-gradient(to bottom,#FAFAFF 0%,#fff 24px)}
+.card.featured::before{
+  content:'★ Featured';
+  position:absolute;top:-1px;right:-1px;
+  background:#7C3AED;color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.04em;
+  padding:3px 8px 4px;border-radius:0 10px 0 8px;
+  box-shadow:0 2px 4px rgba(124,58,237,.25);
+}
 
 /* Puzzle banner */
 .puzzle-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 18px;margin:0 0 0;cursor:pointer;text-decoration:none;transition:background .18s}
@@ -850,30 +893,23 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <h2 id="sectionTitle" style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0"></h2>
     <p id="sectionMeta" style="font-size:13px;color:rgba(255,255,255,0.6);margin:0"></p>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-  <button id="rdx-hide-done-btn" onclick="rdxToggleHideDone()" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">Hide completed</button>
-</div>
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-  <select id="rdx-sort-select" onchange="rdxSetSort(this.value)" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);padding:5px 10px 5px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;outline:none;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22><path d=%22M1 1l5 5 5-5%22 stroke=%22rgba(255,255,255,.6)%22 stroke-width=%221.5%22 fill=%22none%22/></svg>');background-repeat:no-repeat;background-position:right 10px center;padding-right:28px">
-    <option value="recommended">Sort: Recommended</option>
-    <option value="az">Sort: A → Z</option>
-    <option value="quickest">Sort: Quickest first</option>
-    <option value="hardest">Sort: Hardest first</option>
-  </select>
-</div>
-<div class="filters">
+  <div class="filters">
     <input type="text" class="search" id="searchInput" placeholder="Search by presentation, symptom, or diagnosis..." oninput="handleSearch()" aria-label="Search ReasonDx content">
   </div>
   <div id="filterBtns" style="display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px;"></div>
   <div class="count-bar">
     <span class="count" id="count"></span>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button type="button" class="organize-toggle" id="organizeToggle" onclick="rdxToggleOrganize()" aria-expanded="false" aria-controls="organizeBar">
+        <span>⇅ Sort &amp; view</span><span class="chev" aria-hidden="true">▾</span>
+      </button>
+      <button type="button" id="rdx-hide-done-btn" onclick="rdxToggleHideDone()" class="organize-toggle" style="font-size:.78rem">Hide completed</button>
       <a href="/puzzles.html" class="puzzle-link">Daily Puzzle &rarr;</a>
       <a href="/ipe-crda.html" style="font-size:11px;font-weight:700;color:#1A7A4A;background:#E9F7EF;border:1px solid #A9DFBF;border-radius:6px;padding:3px 8px;text-decoration:none" title="Interprofessional Education">🤝 IPE</a>
       <a href="/baseline-assessment.html" id="baseline-link" style="display:none;font-size:11px;font-weight:700;color:#784212;background:#FEF5E7;border:1px solid #FAD7A0;border-radius:6px;padding:3px 8px;text-decoration:none" title="Take baseline assessment">🧠 Baseline</a>
     </div>
   </div>
-  <!-- Organize bar — let users choose how to sort and group cards -->
+  <!-- Organize bar — collapsed by default, opens via the Sort & view toggle above -->
   <div class="organize-bar" id="organizeBar" role="toolbar" aria-label="Organize cards">
     <span class="organize-label">Sort by</span>
     <div class="organize-group" id="sortGroup">
@@ -1127,7 +1163,26 @@ function setMode(m){ window._rdxBatchSize = 24; window._showAll = false; _rdxSor
                     learn:'— mechanism-first pathophysiology'};
     labelEl.textContent = modeDesc[m] || 'below';
   }
-  var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');if(btns){btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS_SHORT[c]||CAT_LABELS[c]||c)+'</button>';}).join('');
+  var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');if(btns){
+  // Compute per-category case counts from current data so users see the
+  // size of each bucket before they click. Helps orient first-time users
+  // who otherwise have no way to know if Allergy has 5 cases or 50.
+  var _data = getData();
+  var _profForCount = CURRENT_PROF;
+  var _matchingData = _data.filter(function(c){
+    return !_profForCount || !c.profession || c.profession === _profForCount;
+  });
+  var _catCounts = {};
+  _matchingData.forEach(function(c){ _catCounts[c.cat] = (_catCounts[c.cat]||0) + 1; });
+  var _allCount = _matchingData.length;
+  var _allLabel = '<button class="fbtn'+(CAT==='all'?' on':'')+'" data-cat="all" onclick="setCat(\'all\')">All <span class="fbtn-count">'+_allCount+'</span></button>';
+  var _catBtns = cats.map(function(c){
+    var n = _catCounts[c] || 0;
+    if (n === 0) return ''; // skip empty categories
+    var label = esc(CAT_LABELS_SHORT[c]||CAT_LABELS[c]||c);
+    return '<button class="fbtn'+(CAT===c?' on':'')+'" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+label+' <span class="fbtn-count">'+n+'</span></button>';
+  }).join('');
+  btns.innerHTML = _allLabel + _catBtns;
   // Profession filter chip — show if user has a profession set
   var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'Physical Therapy',ot:'Occupational Therapy',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'MBS',vet:'Vet Medicine'};
   var userProfId=null;try{var _u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProfId=(_u.professionProfile&&_u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
@@ -1268,7 +1323,8 @@ function _renderCardHtml(c) {
   }
 
   var _isDone = _completedCases.has(c.id);
-  var h='<div onkeydown="rdxKbClick(event)" class="card" onclick="launch(\''+esc(c.id)+'\')" style="position:relative" tabindex="0" role="button">';
+  var _featuredCls = c.featured ? ' featured' : '';
+  var h='<div onkeydown="rdxKbClick(event)" class="card'+_featuredCls+'" onclick="launch(\''+esc(c.id)+'\')" style="position:relative" tabindex="0" role="button">';
   if(_isDone) h+='<div style="position:absolute;top:8px;right:8px;background:#059669;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.04em;z-index:2">✓ Done</div>';
   h+='<div class="card-top">';
   h+='<div class="'+iconClass+'">'+iconSymbol+'</div>';
@@ -1281,19 +1337,24 @@ function _renderCardHtml(c) {
   h+='</div></div>';
   h+='<div class="card-tags">';
   h+='<span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';
-  if(MODE==='simulate'&&_EMR_VALID_IDS&&_EMR_VALID_IDS.has(c.id)){
+  // Suppress redundant "EMR" tag when MODE is simulate — every sim case
+  // runs in the EMR by definition. Showing it on every card just adds
+  // noise without telling users anything they did not already know.
+  if(MODE==='practice'&&_EMR_VALID_IDS&&_EMR_VALID_IDS.has(c.id)){
     h+='<span class="tag" style="background:#EBF5FB;color:#1B4F72;border:1px solid #AED6F1;font-weight:700">🏥 EMR</span>';
   }
   var timeEst = c.acuity === 1 ? '15-20 min' : c.acuity === 2 ? '12-15 min' : c.acuity === 3 ? '10-12 min' : c.acuity === 4 ? '7-10 min' : '5-7 min';
   h+='<span class="tag tag-time">⏱ '+timeEst+'</span>';
-  if(c.featured) h+='<span class="tag tag-featured">Featured</span>';
   if(c.studyCase && window.RDXStudySequencer && !RDXStudySequencer.isCaseFreelyAccessible(c.id)){
     h+='<span class="tag" style="background:#FFF7ED;color:#9A3412;font-weight:700;border:1px solid #FDBA74">🔒 Study</span>';
   }
   if(c.arcId && c.arcOrder){h+='<span class="tag" style="background:#F5F3FF;color:#6D28D9;font-weight:700;border:1px solid #DDD6FE">📚 Series · Case '+(c.arcOrder||1)+'</span>';}
   if(c.profession){var profLabels={medicine:'Medicine',pa:'Physician Assistant',pharmacy:'Pharmacy',pt:'Physical Therapy',ot:'Occupational Therapy',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'Med Sciences',vet:'🐾 Veterinary'};h+='<span class="tag" style="background:#ECFDF5;color:#047857;font-weight:700;border:1px solid #A7F3D0">'+(profLabels[c.profession]||c.profession)+'</span>';}
-  if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';
-  else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';
+  // Suppress acuity pill when grouping by Urgency — every card in a
+  // "Critical" or "Urgent" section already announces its acuity at the
+  // section header, so the per-card pill is redundant noise.
+  if((MODE==='simulate'||MODE==='practice')&&c.acuity===1&&_rdxGroup!=='urgency') h+='<span class="tag tag-acuity1">Critical</span>';
+  else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2&&_rdxGroup!=='urgency') h+='<span class="tag tag-acuity2">Urgent</span>';
   h+='</div>';
   if (MODE === 'simulate' && window._socialProof && window._socialProof[c.id]) {
     var sp = window._socialProof[c.id];
@@ -1382,6 +1443,19 @@ function rdxToggleHideDone() {
   var btn = document.getElementById('rdx-hide-done-btn');
   if (btn) btn.textContent = current ? 'Hide completed' : 'Show completed';
   render();
+}
+
+// Toggle the organize bar (Sort & view). Most users never touch sort
+// or group; folding the bar behind a disclosure removes a row of 8
+// buttons that was competing for attention with the actual category
+// chips and the case grid.
+function rdxToggleOrganize() {
+  var bar = document.getElementById('organizeBar');
+  var btn = document.getElementById('organizeToggle');
+  if (!bar || !btn) return;
+  var open = bar.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 // Init button label on load
 (function() {
