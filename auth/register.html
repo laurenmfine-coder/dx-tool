@@ -174,7 +174,7 @@ window.addEventListener('load', async function() {
           lastLogin: new Date().toISOString()
         }));
       } catch(e) {}
-      window.location.href = '/browse.html?welcome=1';
+      window.location.href = '/dashboard.html';
     }
   }
 });
@@ -221,17 +221,17 @@ async function handleRegister(e) {
           allowSkip: true,
           onComplete: function(profile) {
             if (profile) profile.save();
-            setTimeout(function() { window.location.href = '/browse.html?welcome=1'; }, 400);
+            setTimeout(function() { window.location.href = '/dashboard.html'; }, 400);
           },
           onSkip: function() {
-            setTimeout(function() { window.location.href = '/browse.html?welcome=1'; }, 200);
+            setTimeout(function() { window.location.href = '/dashboard.html'; }, 200);
           }
         });
         modal.inject();
       }, 800);
     } else {
       // No profession modal — redirect directly
-      setTimeout(function() { window.location.href = '/browse.html?welcome=1'; }, 1500);
+      setTimeout(function() { window.location.href = '/dashboard.html'; }, 1500);
     }
   }
 }

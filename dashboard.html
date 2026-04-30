@@ -210,6 +210,45 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </script>
 
 
+  <!-- First-time-user welcome panel — replaces the Weekly Reasoning Brief
+       for users with zero completed cases. The brief is meant for returning
+       users with session data; for a brand new account it shows an
+       apologetic empty state that makes the dashboard look broken. -->
+  <div id="rdx-firstrun-panel" style="display:none;background:linear-gradient(135deg,#0F2A47 0%,#1B4F72 60%,#2874A6 100%);border-radius:16px;padding:28px 28px 22px;margin-bottom:22px;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-30px;top:-30px;font-size:160px;opacity:.06;pointer-events:none;line-height:1">🩺</div>
+    <div style="position:relative">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px">Day 1 — Start here</div>
+      <div style="font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:8px">Start with your first case</div>
+      <div style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.78);max-width:560px;margin-bottom:18px">
+        Pick up a real patient chart in a full virtual EMR. Take their history, build your differential, and your AI attending will coach your reasoning along the way.
+      </div>
+      <a id="rdx-firstrun-cta" href="virtual-emr.html?cx=0238-e580" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1B4F72;padding:13px 24px;border-radius:10px;font-size:14px;font-weight:800;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.2);transition:transform .15s">
+        <span id="rdx-firstrun-cta-label">Begin: Chest pain workup</span>
+        <span style="font-size:16px">→</span>
+      </a>
+      <div style="margin-top:14px;font-size:13px"><a href="/browse.html?mode=simulate" style="color:rgba(255,255,255,.7);text-decoration:underline;text-underline-offset:3px">Browse all cases instead →</a></div>
+
+      <div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px">How it works</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="font-size:20px;line-height:1">📋</span>
+            <div style="font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.78)"><strong style="color:#fff">Read the chart</strong><br>Real labs, vitals, meds, and imaging.</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="font-size:20px;line-height:1">💬</span>
+            <div style="font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.78)"><strong style="color:#fff">Talk to the patient</strong><br>An AI patient answers your questions.</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="font-size:20px;line-height:1">🧠</span>
+            <div style="font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.78)"><strong style="color:#fff">Reason out loud</strong><br>Your AI attending coaches your thinking.</div>
+          </div>
+        </div>
+        <div style="margin-top:14px"><a href="how-it-works.html" style="font-size:13px;color:rgba(255,255,255,.7);text-decoration:underline;text-underline-offset:3px">See the full walkthrough →</a></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ProfessionCoach Brief Widget -->
   <div id="prof-coach-widget">
     <div class="pcw-card">
@@ -237,6 +276,50 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
     </div>
   </div>
+
+  <script>
+  // First-run gating: if the user has done zero cases, hide the Weekly Brief
+  // (which has no data to show) and reveal the first-run welcome panel
+  // instead. Profession-aware starter case mirrors the homepage's
+  // PROF_CONFIG so a new pharmacy student lands on the pharmacy case, etc.
+  (function() {
+    var simCount = 0;
+    var profId   = '';
+    try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+    try {
+      var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+      profId = (u.professionProfile && u.professionProfile.professionId) || '';
+    } catch(e) {}
+
+    if (simCount > 0) return; // returning user, leave the Weekly Brief alone
+
+    // Profession-aware first case — token URLs (?cx=) match the homepage.
+    var FIRSTRUN = {
+      medicine: { token: '0238-e580',  label: 'Begin: Chest pain workup' },
+      pa:       { token: '0238-e580',  label: 'Begin: Chest pain workup' },
+      // Token map for arc-hf-* and dental-extraction-anticoag may not exist
+      // in case-tokens; for those we fall back to slug-based ?case= URLs
+      // which the EMR rewrites internally.
+      nursing:  { slug: 'arc-hf-nursing',             label: 'Begin: Heart failure (nursing)' },
+      pharmacy: { slug: 'arc-hf-pharmacy',            label: 'Begin: Heart failure (pharmacy)' },
+      pt:       { slug: 'arc-hf-pt',                  label: 'Begin: Heart failure (PT)' },
+      ot:       { slug: 'arc-hf-ot',                  label: 'Begin: Heart failure (OT)' },
+      dental:   { slug: 'dental-extraction-anticoag', label: 'Begin: Dental extraction on anticoagulation' }
+    };
+    var pick = FIRSTRUN[profId] || FIRSTRUN.medicine;
+    var href = pick.token ? ('virtual-emr.html?cx=' + pick.token) : ('virtual-emr.html?case=' + encodeURIComponent(pick.slug));
+
+    var cta = document.getElementById('rdx-firstrun-cta');
+    var lbl = document.getElementById('rdx-firstrun-cta-label');
+    if (cta) cta.href = href;
+    if (lbl) lbl.textContent = pick.label;
+
+    var panel = document.getElementById('rdx-firstrun-panel');
+    var brief = document.getElementById('prof-coach-widget');
+    if (panel) panel.style.display = 'block';
+    if (brief) brief.style.display = 'none';
+  })();
+  </script>
 
   <!-- Profession Identity Bar -->
   <div id="prof-identity-bar">
@@ -942,8 +1025,16 @@ function initDashboard() {
     }
   }
 
-  // Load ProfessionCoach brief
-  loadBrief(profId);
+  // Load ProfessionCoach brief — but only for users who have done at least
+  // one case. For brand-new accounts there is no session data; the brief
+  // would either error or render an apologetic empty state at the top of
+  // the dashboard. The first-run welcome panel (above) replaces it
+  // visually for those users.
+  var _firstRunSimCount = 0;
+  try { _firstRunSimCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+  if (_firstRunSimCount > 0) {
+    loadBrief(profId);
+  }
 }
 
 function loadBrief(profId) {

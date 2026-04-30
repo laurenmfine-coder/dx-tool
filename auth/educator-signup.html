@@ -280,8 +280,11 @@ async function handleCallback() {
     }));
   } catch (e) {}
 
-  // ── Redirect to browse page ───────────────────────────────────
-  window.location.href = '/browse.html?welcome=educator';
+  // ── Redirect to dashboard ─────────────────────────────────────
+  // Faculty banner is rendered on the dashboard for any faculty user
+  // (initDashboard checks user.role), so the welcome=educator UX is
+  // preserved without that param.
+  window.location.href = '/dashboard.html';
 }
 
 /* ── ON LOAD ── */
@@ -297,7 +300,7 @@ window.addEventListener('load', async () => {
   if (sb) {
     const { data } = await sb.auth.getSession();
     if (data.session) {
-      window.location.href = '/browse.html';
+      window.location.href = '/dashboard.html';
     }
   }
 });

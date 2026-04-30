@@ -199,17 +199,27 @@ function getSB() {
   return _sb;
 }
 
-/* ── REDIRECT TARGET (preserves ?next=) ── */
+/* ── REDIRECT TARGET (preserves ?next=) ──
+ * After a successful login or signup, send the user to /dashboard.html
+ * by default. The previous default was /index.html, the marketing
+ * homepage, which still showed the "Try Instantly · No Signup
+ * Required" badge to a user who had just signed up. The dashboard is
+ * the actual workspace and surfaces the first-run welcome panel for
+ * brand new accounts.
+ *
+ * If a ?next= param is present (e.g. they tried to view a protected
+ * page and were bounced to login), honor it instead so they end up
+ * where they were going. */
 function getRedirectTarget() {
   var p = new URLSearchParams(window.location.search);
   var next = p.get('next');
-  if (!next) return '../index.html';
+  if (!next) return '../dashboard.html';
   // Only allow same-origin redirects
   try {
     var u = new URL(next, window.location.origin);
     if (u.origin === window.location.origin) return u.pathname + u.search + u.hash;
   } catch(e) {}
-  return '../index.html';
+  return '../dashboard.html';
 }
 
 /* Build a redirectTo URL that preserves ?next= through the OAuth round-trip */
