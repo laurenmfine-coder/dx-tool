@@ -46,6 +46,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
 <script src="/data/rdx-beta-puzzles.js"></script>
 </head>
 <body>
+<!-- ── Weekly progress strip (sits above daily puzzle) ──────────────
+     Shows the user's puzzle activity for the current week with light
+     visibility — no score, no percentage, no rank. Just a count and
+     a small set of dots showing which puzzle types they've tried.
+     Reads from rdx_puzzle_attempts in localStorage. Hidden in the
+     first session (no attempts) to avoid empty-state noise. -->
+<div id="rdx-progress-strip" style="display:none;max-width:640px;margin:18px auto 0;padding:14px 20px;background:#fff;border:1px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ts);margin-bottom:3px">This week</div>
+      <div style="font-size:14px;color:var(--text)"><span id="rdx-prog-count" style="font-weight:700">0</span> <span id="rdx-prog-count-label">puzzles</span> · <span id="rdx-prog-types-count">0</span> types tried</div>
+    </div>
+    <div id="rdx-prog-dots" style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;max-width:280px"></div>
+  </div>
+</div>
+
 <div class="puzzle-wrap">
   <div class="puzzle-header">
     <h1>Daily Reasoning Puzzle</h1>
@@ -67,6 +83,395 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
     <a href="browse.html" style="font-size:.82rem;color:var(--ts);text-decoration:none">&larr; Back to Browse</a>
   </div>
 </div>
+
+<!-- ── Puzzle browse section ────────────────────────────────────────
+     Self-directed practice surface. Surfaces all 94 puzzles in a
+     filterable card grid so students who want to grind specific
+     types or specialties can do so directly, instead of waiting for
+     the daily rotation. Filter by type (existing field) and
+     specialty (profession field). Cards use the rdx-cards visual
+     language to match the rest of the site.
+
+     Opens puzzles in a modal — keeps the daily puzzle flow above
+     untouched and avoids fighting with currentIndex rotation. -->
+<div id="rdx-puzzle-browse" style="max-width:1080px;margin:0 auto 40px;padding:0 24px;width:100%">
+  <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+    <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:500;line-height:1.2;color:var(--text);margin:0">Browse the library</h2>
+    <span id="rdx-pb-count" style="font-size:12px;color:var(--ts);font-weight:500"></span>
+  </div>
+  <p style="font-size:13px;color:var(--ts);margin:0 0 16px;max-width:600px;line-height:1.55">All <span id="rdx-pb-total">0</span> reasoning puzzles. Pick by type or specialty if you want to drill a specific skill.</p>
+
+  <!-- Search + filters -->
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+    <div style="position:relative;flex:1;min-width:240px;max-width:400px">
+      <input type="text" id="rdx-pb-search" placeholder="Search by topic, finding, or keyword" oninput="rdxPbFilter()" style="width:100%;padding:10px 14px 10px 36px;border:1px solid var(--border);border-radius:10px;font-size:13.5px;font-family:inherit;outline:none;transition:border-color .12s">
+      <svg style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--ts)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+  </div>
+
+  <!-- Type chips -->
+  <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap" id="rdx-pb-type-chips"></div>
+  <!-- Profession chips -->
+  <div style="display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap" id="rdx-pb-prof-chips"></div>
+
+  <div class="rdx-cards-grid" id="rdx-pb-grid" style="grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px"></div>
+
+  <!-- Empty state -->
+  <div id="rdx-pb-empty" style="display:none;padding:40px 20px;text-align:center;color:var(--ts);font-size:14px">No puzzles match those filters. <a href="#" onclick="rdxPbReset();return false" style="color:var(--blue);font-weight:600;text-decoration:none">Clear filters</a></div>
+</div>
+
+<!-- ── Puzzle browse modal (renders the selected puzzle inline) ───── -->
+<div id="rdx-pb-modal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:9999;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 16px">
+  <div style="background:#fff;border-radius:14px;max-width:680px;width:100%;padding:28px 32px;margin:auto 0;box-shadow:0 10px 40px rgba(0,0,0,.3);position:relative">
+    <button onclick="rdxPbClose()" aria-label="Close" style="position:absolute;top:14px;right:14px;background:transparent;border:none;font-size:22px;color:#94A3B8;cursor:pointer;padding:4px 10px;line-height:1;font-family:inherit">×</button>
+    <div id="rdx-pb-modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ──────────────────────────────────────────────────────────────────
+// Puzzle attempt tracking. Pure client-side. localStorage keys:
+//   rdx_puzzle_attempts: [{id, type, completed, timestamp}, ...]
+//
+// We use the puzzle's array index as a stable id since the existing
+// PUZZLES array doesn't have id fields. New attempts append; old
+// entries (>90 days) get pruned to keep storage bounded.
+// ──────────────────────────────────────────────────────────────────
+window.RDXPuzzleTracking = (function() {
+  var KEY = 'rdx_puzzle_attempts';
+
+  function read() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) { return []; }
+  }
+
+  function write(arr) {
+    try {
+      // Keep last 200 only
+      if (arr.length > 200) arr = arr.slice(-200);
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    } catch(e) {}
+  }
+
+  function logAttempt(id, type, completed) {
+    var arr = read();
+    arr.push({ id: id, type: type, completed: !!completed, ts: Date.now() });
+    write(arr);
+    // Refresh progress strip
+    if (typeof renderProgressStrip === 'function') renderProgressStrip();
+    // Track to gtag if present
+    try { if (window.gtag) window.gtag('event', 'puzzle_attempt', { puzzle_id: id, type: type, completed: completed }); } catch(e) {}
+  }
+
+  function getThisWeek() {
+    var arr = read();
+    var weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    return arr.filter(function(a) { return a.ts >= weekAgo; });
+  }
+
+  function getAttemptedIds() {
+    var arr = read();
+    return new Set(arr.map(function(a) { return a.id; }));
+  }
+
+  return { logAttempt: logAttempt, getThisWeek: getThisWeek, getAttemptedIds: getAttemptedIds, read: read };
+})();
+
+// ──────────────────────────────────────────────────────────────────
+// Weekly progress strip
+// ──────────────────────────────────────────────────────────────────
+function renderProgressStrip() {
+  var strip = document.getElementById('rdx-progress-strip');
+  if (!strip) return;
+  var thisWeek = window.RDXPuzzleTracking.getThisWeek();
+  var completed = thisWeek.filter(function(a) { return a.completed; });
+  if (completed.length === 0) {
+    strip.style.display = 'none';
+    return;
+  }
+  strip.style.display = 'block';
+  document.getElementById('rdx-prog-count').textContent = completed.length;
+  document.getElementById('rdx-prog-count-label').textContent = completed.length === 1 ? 'puzzle' : 'puzzles';
+  // Unique types
+  var typesSet = new Set(completed.map(function(a) { return a.type; }));
+  document.getElementById('rdx-prog-types-count').textContent = typesSet.size;
+
+  // Render dots — one per unique type tried this week, in muted color.
+  // Hover shows the type name. Caps at 12 dots so a heavy week doesn't
+  // overflow the row.
+  var dotsHost = document.getElementById('rdx-prog-dots');
+  var allTypes = Array.from(typesSet).slice(0, 12);
+  dotsHost.innerHTML = allTypes.map(function(t) {
+    return '<span title="' + t + '" style="width:10px;height:10px;border-radius:50%;background:#185FA5;display:inline-block;opacity:.85"></span>';
+  }).join('');
+  // If the user has tried fewer types than 8 (the core puzzle types),
+  // show empty dots for the remaining slots so it reads as progress
+  // toward something rather than just a count.
+  var emptySlots = Math.max(0, 8 - allTypes.length);
+  for (var i = 0; i < emptySlots; i++) {
+    dotsHost.innerHTML += '<span style="width:10px;height:10px;border-radius:50%;background:transparent;border:1px solid #CBD5E1;display:inline-block"></span>';
+  }
+}
+
+// ──────────────────────────────────────────────────────────────────
+// Puzzle browse
+// ──────────────────────────────────────────────────────────────────
+var _pbState = {
+  type: 'all',
+  prof: 'all',
+  query: '',
+  selected: null
+};
+
+function _pbAllPuzzles() {
+  // Add a stable id to each puzzle for tracking. Idx in array works.
+  return PUZZLES.map(function(p, i) {
+    return Object.assign({}, p, { id: p.id || 'puzzle-' + i, _idx: i });
+  });
+}
+
+function _pbBuildChips() {
+  var all = _pbAllPuzzles();
+  // Type counts
+  var typeCounts = {};
+  var profCounts = {};
+  all.forEach(function(p) {
+    typeCounts[p.type] = (typeCounts[p.type] || 0) + 1;
+    var prof = p.profession || 'medicine';
+    profCounts[prof] = (profCounts[prof] || 0) + 1;
+  });
+
+  // Type chips — sorted by count, top 10 only (others under "More")
+  var typesSorted = Object.keys(typeCounts).sort(function(a, b) { return typeCounts[b] - typeCounts[a]; });
+  var topTypes = typesSorted.slice(0, 10);
+  var typeHost = document.getElementById('rdx-pb-type-chips');
+  typeHost.innerHTML = '<span class="rdx-pb-chip" data-filter="type" data-value="all" onclick="rdxPbSetFilter(\'type\',\'all\')">All types <span class="rdx-pb-chip-n">' + all.length + '</span></span>'
+    + topTypes.map(function(t) {
+      return '<span class="rdx-pb-chip" data-filter="type" data-value="' + t.replace(/"/g,'&quot;') + '" onclick="rdxPbSetFilter(\'type\',\'' + t.replace(/'/g,"\\'") + '\')">' + t + ' <span class="rdx-pb-chip-n">' + typeCounts[t] + '</span></span>';
+    }).join('');
+
+  // Profession chips
+  var profLabels = { medicine: 'Medicine', pa: 'PA', pharmacy: 'Pharmacy', pt: 'PT', ot: 'OT', optometry: 'Optometry', dentistry: 'Dentistry', nursing: 'Nursing', mbs: 'Med Sciences', vet: 'Veterinary' };
+  var profsSorted = Object.keys(profCounts).sort(function(a, b) { return profCounts[b] - profCounts[a]; });
+  var profHost = document.getElementById('rdx-pb-prof-chips');
+  profHost.innerHTML = '<span class="rdx-pb-chip" data-filter="prof" data-value="all" onclick="rdxPbSetFilter(\'prof\',\'all\')">All audiences <span class="rdx-pb-chip-n">' + all.length + '</span></span>'
+    + profsSorted.map(function(pr) {
+      var lbl = profLabels[pr] || (pr.charAt(0).toUpperCase() + pr.slice(1));
+      return '<span class="rdx-pb-chip" data-filter="prof" data-value="' + pr + '" onclick="rdxPbSetFilter(\'prof\',\'' + pr + '\')">' + lbl + ' <span class="rdx-pb-chip-n">' + profCounts[pr] + '</span></span>';
+    }).join('');
+
+  _pbUpdateChipStates();
+}
+
+function _pbUpdateChipStates() {
+  document.querySelectorAll('.rdx-pb-chip').forEach(function(el) {
+    var f = el.getAttribute('data-filter');
+    var v = el.getAttribute('data-value');
+    var active = (f === 'type' && v === _pbState.type) || (f === 'prof' && v === _pbState.prof);
+    el.classList.toggle('active', active);
+  });
+}
+
+window.rdxPbSetFilter = function(filter, value) {
+  _pbState[filter] = value;
+  _pbUpdateChipStates();
+  rdxPbFilter();
+};
+
+window.rdxPbReset = function() {
+  _pbState.type = 'all';
+  _pbState.prof = 'all';
+  _pbState.query = '';
+  document.getElementById('rdx-pb-search').value = '';
+  _pbUpdateChipStates();
+  rdxPbFilter();
+};
+
+window.rdxPbFilter = function() {
+  _pbState.query = (document.getElementById('rdx-pb-search').value || '').toLowerCase().trim();
+  _pbRender();
+};
+
+function _pbEsc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function _pbRender() {
+  var all = _pbAllPuzzles();
+  var attempted = window.RDXPuzzleTracking.getAttemptedIds();
+  var q = _pbState.query;
+  var filtered = all.filter(function(p) {
+    if (_pbState.type !== 'all' && p.type !== _pbState.type) return false;
+    if (_pbState.prof !== 'all' && (p.profession || 'medicine') !== _pbState.prof) return false;
+    if (q) {
+      var hay = (p.scenario + ' ' + p.prompt + ' ' + p.type + ' ' + (p.teaching || '')).toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('rdx-pb-count').textContent = filtered.length === all.length
+    ? 'all ' + all.length
+    : filtered.length + ' of ' + all.length;
+  document.getElementById('rdx-pb-total').textContent = all.length;
+
+  var grid = document.getElementById('rdx-pb-grid');
+  var empty = document.getElementById('rdx-pb-empty');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // Render cards. Headline = the prompt (the actual question being asked),
+  // teaser = a brief snippet of the scenario. Eyebrow = the puzzle type.
+  grid.innerHTML = filtered.map(function(p) {
+    var done = attempted.has(p.id);
+    // Build a short headline from prompt — first 90 chars
+    var headline = p.prompt || p.scenario || 'Reasoning challenge';
+    if (headline.length > 110) headline = headline.substring(0, 107) + '…';
+    // Teaser from scenario
+    var teaser = p.scenario || '';
+    if (teaser.length > 130) teaser = teaser.substring(0, 127) + '…';
+
+    var profLabels = { medicine: 'Medicine', pa: 'PA', pharmacy: 'Pharmacy', pt: 'PT', ot: 'OT', optometry: 'Optometry', dentistry: 'Dentistry', nursing: 'Nursing', mbs: 'Med Sciences', vet: 'Veterinary' };
+    var profLabel = profLabels[p.profession] || (p.profession ? (p.profession.charAt(0).toUpperCase() + p.profession.slice(1)) : 'All');
+
+    return '<a class="rdx-card' + (done ? ' rdx-card--done' : '') + '" data-acuity="3" '
+      + 'href="#" onclick="rdxPbOpen(\'' + _pbEsc(p.id) + '\');return false">'
+      + '<div class="rdx-card-eyebrow">'
+      +   '<span class="rdx-card-eyebrow-dot"></span>'
+      +   '<span class="rdx-card-eyebrow-label">' + _pbEsc(p.type) + '</span>'
+      +   '<span class="rdx-card-eyebrow-meta">~2 min</span>'
+      + '</div>'
+      + '<h3 class="rdx-card-headline">' + _pbEsc(headline) + '</h3>'
+      + '<p class="rdx-card-teaser">' + _pbEsc(teaser) + '</p>'
+      + '<div class="rdx-card-footer">'
+      +   '<span class="rdx-card-cat">' + _pbEsc(profLabel) + '</span>'
+      +   '<span class="rdx-card-cta">' + (done ? 'Re-do →' : 'Start →') + '</span>'
+      + '</div>'
+      + '</a>';
+  }).join('');
+}
+
+window.rdxPbOpen = function(id) {
+  var all = _pbAllPuzzles();
+  var p = all.find(function(x) { return x.id === id; });
+  if (!p) return;
+  _pbState.selected = p;
+
+  // Track open
+  if (window.gtag) try { window.gtag('event', 'puzzle_browse_opened', { puzzle_id: id, type: p.type }); } catch(e) {}
+
+  var body = document.getElementById('rdx-pb-modal-body');
+  body.innerHTML = ''
+    + '<div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0C447C;background:#EBF5FB;border:1px solid #AED6F1;padding:4px 10px;border-radius:4px;display:inline-block;margin-bottom:14px">' + _pbEsc(p.type) + '</div>'
+    + '<div style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:18px">' + _pbEsc(p.scenario) + '</div>'
+    + '<div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.45">' + _pbEsc(p.prompt) + '</div>'
+    + '<textarea id="rdx-pb-answer" placeholder="Your reasoning..." style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;font-size:13.5px;font-family:inherit;resize:vertical;min-height:90px;outline:none"></textarea>'
+    + '<div style="display:flex;gap:10px;margin-top:14px">'
+    +   '<button onclick="rdxPbSubmit()" style="background:var(--blue);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit">Submit</button>'
+    +   '<button onclick="rdxPbReveal()" style="background:transparent;color:var(--text);border:1px solid var(--border);padding:10px 18px;border-radius:8px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:inherit">Reveal expert analysis</button>'
+    + '</div>'
+    + '<div id="rdx-pb-feedback" style="display:none"></div>';
+
+  document.getElementById('rdx-pb-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+};
+
+window.rdxPbClose = function() {
+  document.getElementById('rdx-pb-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  _pbState.selected = null;
+  // Re-render to update done state
+  _pbRender();
+};
+
+function _pbShowFeedback(p) {
+  var fb = document.getElementById('rdx-pb-feedback');
+  if (!fb) return;
+  fb.innerHTML = ''
+    + '<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-top:18px">'
+    +   '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#475569;margin-bottom:8px">Expert analysis</div>'
+    +   '<div style="font-size:13.5px;line-height:1.7;color:var(--text)">' + _pbEsc(p.teaching) + '</div>'
+    + '</div>';
+  fb.style.display = 'block';
+  // Disable input + buttons
+  var ans = document.getElementById('rdx-pb-answer');
+  if (ans) ans.disabled = true;
+}
+
+window.rdxPbSubmit = function() {
+  var p = _pbState.selected;
+  if (!p) return;
+  window.RDXPuzzleTracking.logAttempt(p.id, p.type, true);
+  _pbShowFeedback(p);
+};
+
+window.rdxPbReveal = function() {
+  var p = _pbState.selected;
+  if (!p) return;
+  // Reveal without marking as completed — counts as opened only
+  _pbShowFeedback(p);
+};
+
+// Boot the browse surface — wait for DOMContentLoaded so PUZZLES
+// (defined in the inline script block lower in the page) is available.
+function _pbBoot() {
+  if (typeof PUZZLES === 'undefined') return;
+  _pbBuildChips();
+  _pbRender();
+  renderProgressStrip();
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _pbBoot);
+} else {
+  _pbBoot();
+}
+</script>
+
+<style>
+.rdx-pb-chip {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: background .12s, border-color .12s;
+  white-space: nowrap;
+}
+.rdx-pb-chip:hover {
+  background: var(--blue-l);
+  border-color: rgba(40,116,166,.3);
+}
+.rdx-pb-chip.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.rdx-pb-chip.active .rdx-pb-chip-n {
+  background: rgba(255,255,255,.25);
+  color: #fff;
+}
+.rdx-pb-chip-n {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  background: var(--bg);
+  border-radius: 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ts);
+}
+#rdx-pb-search:focus { border-color: var(--blue); }
+</style>
 
 <!-- ── Beta puzzles section ─────────────────────────────────────────
      New format experiment: 5 MCQ puzzles + 3 express cases. We're
@@ -491,6 +896,7 @@ function renderPuzzle() {
 
 function submitPuzzle() {
   var p = PUZZLES[currentIndex];
+  var answer = document.getElementById('puzzleAnswer').value || '';
     var fb = document.getElementById('puzzleFeedback');
   fb.className = 'puzzle-feedback show teaching';
   fb.innerHTML = '<div style="font-weight:700;margin-bottom:6px">Expert Analysis</div>' + p.teaching;
@@ -502,7 +908,10 @@ function submitPuzzle() {
   streak++;
   localStorage.setItem('rdx_puzzle_streak', streak);
   localStorage.setItem('rdx_puzzle_date', today);
-  updateStreak();
+  updateStreak(p);
+
+  // Track attempt for the browse/progress system
+  if (window.RDXPuzzleTracking) window.RDXPuzzleTracking.logAttempt(p.id || ('idx-' + currentIndex), p.type, true);
 
   // Log
   try {
@@ -518,12 +927,17 @@ function skipPuzzle() {
   renderPuzzle();
 }
 
-function updateStreak() {
+function updateStreak(p) {
   document.getElementById('puzzleStreak').innerHTML = streak > 0
     ? 'Current streak: <strong>' + streak + ' day' + (streak !== 1 ? 's' : '') + '</strong>'
     : 'Start your streak today';
 
-  // Post-answer: show related case suggestion
+  // Post-answer related-case suggestion. Only renders after the user
+  // has submitted a puzzle (when p is passed in). On initial page load
+  // updateStreak is called without p — bail out cleanly so we don't
+  // throw on p.type.
+  if (!p) return;
+
   var relatedMap = {
     'Lab Shift': 'stemi-v1', 'Threshold Decision': 'dka-v1', 'Risk Priority': 'septic-shock-urosepsis',
     'Scope Decision': 'pneumonia', 'Communication': 'stroke-v1', 'Postpartum': 'eclampsia',
