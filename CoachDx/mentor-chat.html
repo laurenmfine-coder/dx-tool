@@ -550,30 +550,62 @@ function _rdxInit() {
   renderPicker(TOPICS);
   if (!window._rdxSessionActive) renderWelcomeChips();
 
-  // Check for topic in URL param — pre-fill the welcome input rather than
-  // auto-starting. Lets the learner see the landing context (description,
-  // topic chips, last-session resume) and confirm with Start →.
+  // Check for topic in URL param. Behavior depends on whether the user came
+  // from another pillar (e.g. ?ref=mechanism from a MechanismDx module's
+  // "Discuss with Coach" button) or just bookmarked a deep link.
+  //
+  //  - With ?ref=mechanism (or any ref): auto-start the session. The user
+  //    has already chosen what they want to discuss; making them tap Start
+  //    a second time is unnecessary friction and looks broken.
+  //  - Without ref: pre-fill the input only, so they can confirm. This
+  //    preserves the older bookmark / share-link behavior.
   const _usp = new URLSearchParams(window.location.search);
   const param = _usp.get('topic') || _usp.get('q');
+  const fromOtherPillar = !!_usp.get('ref');
   if (param) {
-    window.RDX_DEBUG && console.log('[CoachDx] URL param found:', param, '— pre-filling input');
-    setTimeout(function() {
-      try {
-        var input = document.getElementById('welcomeInput');
-        if (input) {
-          input.value = param;
-          // Highlight subtly so the learner sees it was pre-filled, then focus
-          input.style.transition = 'background .8s ease';
-          input.style.background = '#FEF3C7';
-          input.focus();
-          // Move caret to end so they can edit if they want
-          try { input.setSelectionRange(input.value.length, input.value.length); } catch(e) {}
-          setTimeout(function() { input.style.background = ''; }, 1200);
+    window.RDX_DEBUG && console.log('[CoachDx] URL param found:', param, 'ref=', _usp.get('ref'));
+
+    if (fromOtherPillar) {
+      // Try to match against the structured TOPICS list by name or id
+      const needle = param.trim().toLowerCase();
+      const matched = TOPICS.find(t =>
+        t.name.toLowerCase() === needle ||
+        t.id.toLowerCase() === needle ||
+        t.name.toLowerCase().replace(/\s+&\s+/g, ' and ') === needle.replace(/\s+&\s+/g, ' and ')
+      );
+      // Defer one tick so DOM is settled, then auto-start
+      setTimeout(function() {
+        try {
+          if (matched) {
+            startSession(matched.name, true, matched.id);
+          } else {
+            // Freeform topic: still auto-start, just without structured prompt
+            startSession(param, false);
+          }
+        } catch(e) {
+          console.error('[CoachDx] auto-start failed, falling back to pre-fill:', e.message);
+          var input = document.getElementById('welcomeInput');
+          if (input) { input.value = param; input.focus(); }
         }
-      } catch(e) {
-        console.error('[CoachDx] pre-fill failed:', e.message);
-      }
-    }, 100);
+      }, 150);
+    } else {
+      // Plain bookmark / share link: pre-fill so the user confirms
+      setTimeout(function() {
+        try {
+          var input = document.getElementById('welcomeInput');
+          if (input) {
+            input.value = param;
+            input.style.transition = 'background .8s ease';
+            input.style.background = '#FEF3C7';
+            input.focus();
+            try { input.setSelectionRange(input.value.length, input.value.length); } catch(e) {}
+            setTimeout(function() { input.style.background = ''; }, 1200);
+          }
+        } catch(e) {
+          console.error('[CoachDx] pre-fill failed:', e.message);
+        }
+      }, 100);
+    }
   } else {
     window.RDX_DEBUG && console.log('[CoachDx] No URL param. search=', window.location.search);
   }
