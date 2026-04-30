@@ -232,21 +232,20 @@
 
     var caseLabel = caseId.replace(/-/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
 
-    var returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-    var mechHref  = '/mechanism/' + pillars.mechanismModule + '.html?return=virtual-emr&case=' + encodeURIComponent(caseId);
-    var coachHref = '/CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=virtual-emr&caseId=' + encodeURIComponent(caseId);
+    // Related-case still navigates full-page (user is intentionally leaving this case).
+    // Mechanism + Coach use the slide-over drawer so the case stays underneath.
     var browseHref= '/browse.html?cat=' + encodeURIComponent(pillars.category) + '&exclude=' + encodeURIComponent(caseId);
 
     pop.innerHTML = [
       '<div class="rdx-pp-header">Currently in: ' + caseLabel + '</div>',
-      '<a href="' + mechHref + '">',
+      '<a href="#" data-pillar="mechanism">',
       '  <div class="rdx-pp-icon">🔬</div>',
       '  <div>',
       '    <div class="rdx-pp-title">Review the mechanism</div>',
       '    <div class="rdx-pp-sub">MechanismDx: ' + mechLabel + '</div>',
       '  </div>',
       '</a>',
-      '<a href="' + coachHref + '">',
+      '<a href="#" data-pillar="coach">',
       '  <div class="rdx-pp-icon">🧠</div>',
       '  <div>',
       '    <div class="rdx-pp-title">Ask the coach</div>',
@@ -264,6 +263,41 @@
 
     document.body.appendChild(fab);
     document.body.appendChild(pop);
+
+    // Wire drawer triggers (mechanism / coach). Falls back to full-page nav
+    // if RdxDrawer is unavailable for any reason.
+    pop.querySelectorAll('a[data-pillar]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        pop.style.display = 'none';
+        var which = a.getAttribute('data-pillar');
+        if (window.RdxDrawer && typeof window.RdxDrawer.open === 'function') {
+          if (which === 'mechanism') {
+            window.RdxDrawer.open({
+              pillar: 'mechanism',
+              module: pillars.mechanismModule,
+              caseId: caseId,
+              title: mechLabel
+            });
+          } else if (which === 'coach') {
+            window.RdxDrawer.open({
+              pillar: 'coach',
+              topic: coachLabel,
+              coachId: pillars.coachTopic,
+              caseId: caseId,
+              title: coachLabel
+            });
+          }
+        } else {
+          // Drawer not loaded; navigate full-page as a graceful fallback
+          if (which === 'mechanism') {
+            window.location.href = '/mechanism/' + pillars.mechanismModule + '.html?case=' + encodeURIComponent(caseId);
+          } else if (which === 'coach') {
+            window.location.href = '/CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=virtual-emr&caseId=' + encodeURIComponent(caseId);
+          }
+        }
+      });
+    });
 
     // Toggle behavior
     fab.addEventListener('click', function(e) {
