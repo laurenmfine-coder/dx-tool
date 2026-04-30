@@ -1674,6 +1674,27 @@ function doSemanticSearch(q) {
       injectProfessionBanner(e.detail.profile);
     }
   });
+
+  // ── URL param: ?cat=<category> and ?q=<search> ──────────────────────────
+  // Lets other pages (e.g. the in-case pillar switcher) deep-link into browse
+  // with a category filter or pre-filled search.
+  (function applyUrlFilters() {
+    var p = new URLSearchParams(window.location.search);
+    var cat = p.get('cat');
+    var q = p.get('q');
+    if (!cat && !q) return;
+    setTimeout(function() {
+      if (q) {
+        var s = document.getElementById('searchInput');
+        if (s) { s.value = q; if (typeof handleSearch === 'function') handleSearch(); }
+      }
+      if (cat && typeof setCat === 'function') {
+        var btn = document.querySelector('.fbtn[data-cat="' + cat + '"]');
+        if (btn) btn.click();
+        else setCat(cat);
+      }
+    }, 250);
+  })();
 })();
 </script>
 
