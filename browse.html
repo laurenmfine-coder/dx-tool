@@ -29,6 +29,7 @@
 <script src="js/nav-global.js"></script>
 <script src="js/rdx-super-agent.js"></script>
 <script src="emr-data/crt-index.js"></script>
+<script src="emr-data/manifest.js"></script>
 <script src="emr-data/case-tokens.js"></script>
 <script src="/rdx-semantic-search.js"></script>
 <style>
@@ -1403,6 +1404,7 @@ function renderDailyPicks() {
     // full context, since SIM_DATA entries don't carry chiefComplaint.
     var ccLookup = (window.CRT_INDEX && window.CRT_INDEX[pick.id]) || {};
     var resolved = _resolveCardText({
+      id: pick.id,
       displayTitle: pick.displayTitle || pick.title,
       displaySubtitle: pick.displaySubtitle || pick.sub,
       chiefComplaint: ccLookup.chiefComplaint,
@@ -1490,6 +1492,16 @@ var displayedItems = (_rdxGroup === 'none') ? filtered.slice(0, itemsToShow) : f
 // chest pain in a young adult, worse lying flat") regardless of
 // how the underlying case data was authored.
 //
+// Three sources of clinical context, in priority order:
+//   1. SIM_FEATURED hand-curated title/sub (5 cases — gold standard)
+//   2. EMR_MANIFEST cc field — hand-written rich chief complaints
+//      for ~193 cases. Format: "RLQ abdominal pain, nausea, low-
+//      grade fever × 18hrs". Used when CRT_INDEX chiefComplaint is
+//      sparse or just an acronym.
+//   3. CRT_INDEX chiefComplaint — slash-separated clinical chunks.
+//      The first chunk usually maps to displayTitle; the remaining
+//      chunks get joined into the subtitle when otherwise empty.
+//
 // Three failure modes this fixes:
 //   1. Demographic-only titles ("Child", "Infant", "Elderly Patient")
 //      where the actual complaint is buried in chiefComplaint after
@@ -1499,12 +1511,35 @@ var displayedItems = (_rdxGroup === 'none') ? filtered.slice(0, itemsToShow) : f
 //      for patient-continuity arcs. Fix: surface the clinical
 //      scenario from chiefComplaint as the headline; keep the patient
 //      name as the subtitle so the continuity is preserved.
-//   3. Two-word slash titles like "Fall / Hip Pain" parsed as
-//      title="Fall" and subtitle="Hip Pain" — combine them into a
-//      single readable phrase.
+//   3. Short titles ("AKI", "Confusion", "Chest Pain") with no
+//      subtitle. Fix: build the subtitle from manifest.cc if available,
+//      else from the remaining chunks of chiefComplaint.
+
+// Build a flat lookup from EMR_MANIFEST: caseId → rich cc, diagnosis,
+// presentation. Manifest is a list of presentation groups, each with
+// a cases array. We flatten once at module load so the resolver runs
+// in O(1) per case.
+var _MANIFEST_BY_ID = (function() {
+  var map = {};
+  if (!window.EMR_MANIFEST) return map;
+  window.EMR_MANIFEST.forEach(function(group) {
+    if (!group.cases) return;
+    group.cases.forEach(function(c) {
+      if (c.id) {
+        map[c.id] = {
+          cc: c.cc || '',
+          diagnosis: c.diagnosis || '',
+          presentation: group.presentation || ''
+        };
+      }
+    });
+  });
+  return map;
+})();
+
 var _DEMOGRAPHIC_HEAD = /^(infant|neonate|child|adult|male\b|female\b|elderly( patient| woman| man)?|\d+\s*(yo|year[\s-]?old|wk|mo|week|month|day)|young athlete|young patient)/i;
 var _LIKELY_NAME = /^(?:[A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})$/;
-var _CLINICAL_RE = /(pain|fever|cough|swell|bleed|altered|weak|headache|rash|peeling|vomit|nausea|syncope|seizure|dizz|dyspnea|stridor|wheez|breath|sob|chest pressure|hypotens|hypoxia|hypothermia|hypogly|hypergly|tachy|brady|edema|pruri|jaund|tinn|murmur|stiff|paralys|aphasia|hemiplegia|drool|trismus|hemoptysis|hematemesis|melena|hematuria|distens|prolapse|incontinen|retention|burn|bite|sting|injury|trauma|crush|fracture|dislocat|abrasion|laceration|wound|lesion|mass|tumor|abscess|infection|sepsis|shock|crisis|emergency|attack|arrest|overdose|toxic|withdraw|reaction|allergy|anaphyl|asthma|copd|chf|dka|aki|uti|pe\b|dvt|ckd|hf\b|stemi|nstemi|ami|ulcer|obstruction|perforation|herniation|ischemia|infarct|hemorrhage|necrosis|peritonitis|cellulitis|encephalop|meningitis|deliri|psychosis|catatoni|agitation|confusion|unresponsive|tachycardia|bradycardia|palpit|tinnitus|deafness|blindness|vision loss|amaurosis|diplopia|photophobia|aspiration|drooling|tearing|throat|red eye|sore|dry|itching|burning|tingling|numbness|paresthes|claudication|fasciculation|rigidity|hypertension|hypotension|tachypnea|bradypnea|orthopnea|pnd\b|cyanosis|pallor|flushing|diaphores|fatigue|weakness|malaise|anorexia|polyuria|polydips|oliguria|anuria|dysuria|hematochez|diarrhea|constipation|hyperthermia|fall|drop attack|near-syncope|presyncope|cardiac arrest|respiratory failure|septic shock|cardiogenic shock|hypercalcemia|hyperkalemia|hypokalemia|hyponatremia|hypernatremia|hypomagnesemia|acidosis|alkalosis|ketosis|ketoacidosis|hyperosmolar|pneumonia|pneumonias|bronchitis|bronchospasm|laryng|epiglott|tonsillit|sinusitis|otitis|conjunctivit|keratit|uveit|cataract|glaucoma|retinopath|maculopath|amblyopia|strabismus|nystagmus|tremor|chorea|dystonia|ataxia|gait|imbalance|fall risk|recurrent|chronic|acute|subacute|relapsing|exacerbation|crisis|flare|attack|complication|deterioration)/i;
+var _CLINICAL_RE = /(pain|fever|cough|swell|bleed|altered|weak|headache|rash|peeling|vomit|nausea|syncope|seizure|dizz|dyspnea|stridor|wheez|breath|sob|chest pressure|hypotens|hypoxia|hypothermia|hypogly|hypergly|tachy|brady|edema|pruri|jaund|tinn|murmur|stiff|paralys|aphasia|hemiplegia|drool|trismus|hemoptysis|hematemesis|melena|hematuria|distens|prolapse|incontinen|retention|burn|bite|sting|injury|trauma|crush|fracture|dislocat|abrasion|laceration|wound|lesion|mass|tumor|abscess|infection|sepsis|shock|crisis|emergency|attack|arrest|overdose|toxic|withdraw|reaction|allergy|anaphyl|asthma|copd|chf|dka|aki|uti|pe\b|dvt|ckd|hf\b|stemi|nstemi|ami|ams\b|ulcer|obstruction|perforation|herniation|ischemia|infarct|hemorrhage|necrosis|peritonitis|cellulitis|encephalop|meningitis|deliri|psychosis|catatoni|agitation|agitated|confusion|confused|unresponsive|tachycardia|bradycardia|palpit|tinnitus|deafness|blindness|vision loss|amaurosis|diplopia|photophobia|aspiration|drooling|tearing|throat|red eye|sore|dry|itching|burning|tingling|numbness|paresthes|claudication|fasciculation|rigidity|hypertension|hypotension|tachypnea|bradypnea|orthopnea|pnd\b|cyanosis|pallor|flushing|diaphores|fatigue|weakness|malaise|anorexia|polyuria|polydips|oliguria|anuria|dysuria|hematochez|diarrhea|constipation|hyperthermia|fall|drop attack|near-syncope|presyncope|cardiac arrest|respiratory failure|septic shock|cardiogenic shock|hypercalcemia|hyperkalemia|hypokalemia|hyponatremia|hypernatremia|hypomagnesemia|acidosis|alkalosis|ketosis|ketoacidosis|hyperosmolar|pneumonia|pneumonias|bronchitis|bronchospasm|laryng|epiglott|tonsillit|sinusitis|otitis|conjunctivit|keratit|uveit|cataract|glaucoma|retinopath|maculopath|amblyopia|strabismus|nystagmus|tremor|chorea|dystonia|ataxia|gait|imbalance|fall risk|recurrent|chronic|acute|subacute|relapsing|exacerbation|crisis|flare|attack|complication|deterioration|chills|mute|temp \d|chest tight|substernal|tearing|crushing)/i;
 
 function _looksLikeDemographic(s) {
   if (!s) return false;
@@ -1526,10 +1561,47 @@ function _toSentenceCase(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+// Convert a chunk that looks like a clinical detail into a teaser-style
+// fragment. "Troponin 1.2" → "troponin 1.2"; "AFib on Warfarin" stays.
+// We only lowercase the first letter when it's not part of an acronym.
+function _teaserChunk(s) {
+  if (!s) return '';
+  s = s.trim();
+  // Skip if it starts with an acronym (3+ uppercase letters in a row)
+  if (/^[A-Z]{3,}/.test(s)) return s;
+  // Skip if it's mostly uppercase (e.g. "ECG Changes" — keep as is)
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+// Build a teaser from chiefComplaint chunks, skipping the chunk that
+// matches the title. Returns the joined remaining chunks.
+function _teaserFromCC(cc, titleToSkip) {
+  if (!cc) return '';
+  var parts = cc.split(/\s*\/\s*/).map(function(s){ return s.trim(); }).filter(Boolean);
+  // Skip pure demographic chunks at the start
+  while (parts.length && _looksLikeDemographic(parts[0])) parts.shift();
+  // Skip the chunk that matches the title (first match only, so we don't
+  // skip a legit second chunk that happens to share words)
+  var titleLower = (titleToSkip || '').toLowerCase().trim();
+  if (titleLower) {
+    var matchIdx = parts.findIndex(function(p) { return p.toLowerCase() === titleLower; });
+    if (matchIdx > -1) parts.splice(matchIdx, 1);
+  }
+  if (!parts.length) return '';
+  // Join up to 3 chunks with commas; lowercase first letter of each except
+  // when it's an acronym start.
+  var teaser = parts.slice(0, 3).map(_teaserChunk).join(', ');
+  return teaser;
+}
+
 function _resolveCardText(c) {
   var rawTitle = (c.displayTitle || c.title || '').trim();
   var rawSub   = (c.displaySubtitle || c.sub || '').trim();
   var cc       = (c.chiefComplaint || '').trim();
+
+  // Lookup richer data from manifest
+  var manifestEntry = (c.id && _MANIFEST_BY_ID[c.id]) || null;
+  var manifestCC = manifestEntry ? manifestEntry.cc : '';
 
   // Default: use the authored values
   var title = rawTitle;
@@ -1540,10 +1612,8 @@ function _resolveCardText(c) {
   // the patient name) and use that as the headline; keep the name as
   // the subtitle so patient continuity is preserved.
   if (c.arcId && _looksLikePatientName(rawTitle) && cc) {
-    // chiefComplaint format is typically "Margaret Chen / Post-ORIF Hip Day 3 / AFib on Warfarin / Cr 1.4"
     var parts = cc.split(/\s*\/\s*/).map(function(s){ return s.trim(); });
     if (parts.length > 1 && _looksLikePatientName(parts[0])) {
-      // Use the next 1-2 clinical-looking chunks as the title
       var clinicalParts = parts.slice(1).filter(function(p){ return p.length > 0; });
       if (clinicalParts.length) {
         title = clinicalParts[0];
@@ -1554,30 +1624,52 @@ function _resolveCardText(c) {
       }
     }
   }
-  // CASE 2: Title is a bare demographic word ("Child", "Infant", "Elderly Patient").
-  // Pull the actual complaint from chiefComplaint (skip past the demographic
-  // chunk to the next slash-separated piece).
-  else if (_looksLikeDemographic(rawTitle) && cc) {
-    var parts2 = cc.split(/\s*\/\s*/).map(function(s){ return s.trim(); });
-    var clinicalIdx = parts2.findIndex(function(p){ return _CLINICAL_RE.test(p); });
-    if (clinicalIdx > -1) {
-      title = parts2[clinicalIdx];
-      // Append the next clinical chunk if the title is short.
-      // Don't lowercase — preserves acronyms.
-      if (title.length < 25 && parts2[clinicalIdx + 1] && _CLINICAL_RE.test(parts2[clinicalIdx + 1])) {
-        title += ', ' + parts2[clinicalIdx + 1];
+  // CASE 2: Title is a bare demographic word ("Child", "Infant", "Elderly Patient", "52yo").
+  // Pull the actual complaint from chiefComplaint or manifest.
+  else if (_looksLikeDemographic(rawTitle)) {
+    // Prefer manifest cc when available — it's hand-written and cleaner.
+    // Use it as title only if short; otherwise put it in subtitle.
+    if (manifestCC) {
+      if (manifestCC.length < 50) {
+        title = manifestCC;
+        subtitle = rawTitle;
+      } else {
+        // Long manifest cc reads better as subtitle. Build a short title
+        // by taking the first phrase that contains clinical content.
+        var clauses = manifestCC.split(/[,—]/).map(function(s){ return s.trim(); });
+        var titleClause = clauses.find(function(s) { return _CLINICAL_RE.test(s) && s.length < 60 && s.length > 4; });
+        title = titleClause || (clauses[0].length < 60 ? clauses[0] : 'Clinical presentation');
+        subtitle = manifestCC;
       }
-      // Subtitle: keep the demographic context (Child, Elderly, etc.)
-      subtitle = rawTitle;
+    } else if (cc) {
+      var parts2 = cc.split(/\s*\/\s*/).map(function(s){ return s.trim(); });
+      var clinicalIdx = parts2.findIndex(function(p){ return _CLINICAL_RE.test(p); });
+      if (clinicalIdx > -1) {
+        title = parts2[clinicalIdx];
+        if (title.length < 25 && parts2[clinicalIdx + 1] && _CLINICAL_RE.test(parts2[clinicalIdx + 1])) {
+          title += ', ' + parts2[clinicalIdx + 1];
+        }
+        subtitle = rawTitle;
+      }
     }
   }
-  // CASE 3: Title is short (one or two words from a slash-separated CC) and
-  // the subtitle is the missing other half. Combine them: "Fall" + "Hip Pain"
-  // becomes "Fall with hip pain". Reads better as a single phrase.
+  // CASE 3: Title is short and subtitle exists. Several sub-paths:
+  //   3a. Both short and there are more chunks → keep title, drop sub,
+  //       let enrichment build a richer subtitle.
+  //   3b. Sub is long enough to read as a teaser → keep both as-is.
+  //   3c. Sub is short (1-3 words) and complementary → combine.
   else if (rawTitle && rawSub && rawTitle.length < 18 && !rawSub.match(/^\d/) && !_looksLikeDemographic(rawSub)) {
-    // Don't combine if the sub is clearly a separate clinical detail
-    // (e.g. "BP 178/96" or "INR 1.8") — those read better as subtitles.
-    if (!/^\w{1,4}\s*\d|^\d+\s*\w/.test(rawSub) && rawSub.length < 50) {
+    var ccChunks = cc ? cc.split(/\s*\/\s*/).filter(Boolean).length : 0;
+    if (rawSub.length >= 30) {
+      // 3b: sub already reads as a teaser; keep both
+      title = rawTitle;
+      subtitle = rawSub;
+    } else if (rawTitle.length < 15 && ccChunks >= 3) {
+      // 3a: both short and more chunks available; let enrichment fill in
+      title = rawTitle;
+      subtitle = '';
+    } else if (!/^\w{1,4}\s*\d|^\d+\s*\w/.test(rawSub) && rawSub.length < 25) {
+      // 3c: combine title and short sub into one phrase
       title = rawTitle + (rawTitle.match(/[a-z]$/i) ? ', ' : ' ') + rawSub;
       subtitle = '';
     }
@@ -1590,24 +1682,40 @@ function _resolveCardText(c) {
     if (parts3[1]) subtitle = parts3[1];
   }
 
-  // Old fallback parsing (kept for any remaining edge cases)
-  if (!c.displayTitle && title && !subtitle) {
-    var ageMatch = title.match(/(\d+(?:-\w+)?-?(?:yo|year-old|Week-Old|mo))/i);
-    if (ageMatch) {
-      subtitle = ageMatch[1];
-      title = title.replace(ageMatch[0], '').replace(/^\s*[\/\-—]\s*/, '').trim();
-    }
-    if (title.includes(' / ') && !subtitle) {
-      var parts4 = title.split(' / ');
-      title = parts4[0];
-      if (parts4[1]) subtitle = parts4[1];
-    }
-  }
-
-  // Final cleanup: strip leading dashes/em-dashes, sentence-case, trim
+  // Final cleanup before subtitle enrichment
   title = (title || '').replace(/^[—\-\s]+/, '').trim();
   title = _toSentenceCase(title);
   subtitle = (subtitle || '').trim();
+
+  // ENRICHMENT PASS — fill empty subtitle with richer context.
+  // If the subtitle is empty after the above logic, try to build one
+  // from manifest cc (preferred — hand-written) or from remaining
+  // chiefComplaint chunks. Skip enrichment for arc cases (subtitle
+  // is the patient name; that's intentional) and demographic-rescue
+  // cases (subtitle is the demographic; that's intentional).
+  var isArcCase = c.arcId && _looksLikePatientName(subtitle);
+  var isDemoRescue = _looksLikeDemographic(subtitle);
+  if (!subtitle && !isArcCase && !isDemoRescue) {
+    // Prefer manifest.cc — it's a single hand-written sentence
+    if (manifestCC && manifestCC.toLowerCase() !== title.toLowerCase()) {
+      subtitle = manifestCC;
+    } else {
+      // Build from remaining chiefComplaint chunks
+      subtitle = _teaserFromCC(cc, title);
+    }
+  }
+
+  // Strip backslash escapes from manifest data (× was \u00D7 in source)
+  if (subtitle) subtitle = subtitle.replace(/\\u00D7/g, '×').replace(/\\u/g, '');
+
+  // De-duplicate: if subtitle starts with the title (manifest case), strip
+  // the duplicate prefix so we don't see the same phrase twice.
+  if (subtitle && title && subtitle.toLowerCase().indexOf(title.toLowerCase()) === 0) {
+    var rest = subtitle.substring(title.length).replace(/^\s*[—–\-,]\s*/, '').trim();
+    subtitle = rest || subtitle;
+    // If rest is empty, drop the subtitle to avoid duplicate
+    if (!rest) subtitle = '';
+  }
 
   return { title: title, subtitle: subtitle };
 }
@@ -1627,6 +1735,7 @@ function _renderCardHtml(c) {
   // from CRT_INDEX. This is a pure read, no mutation.
   var crtEntry = (window.CRT_INDEX && window.CRT_INDEX[c.id]) || {};
   var resolved = _resolveCardText({
+    id: c.id,
     displayTitle: c.displayTitle || c.title,
     displaySubtitle: c.displaySubtitle || c.sub,
     chiefComplaint: crtEntry.chiefComplaint || c.chiefComplaint,
