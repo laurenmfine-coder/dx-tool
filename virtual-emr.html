@@ -81,6 +81,34 @@
 </head>
 <body>
 <script>
+// Legacy slug rewrites — the SIM_FEATURED list on browse.html previously
+// used placeholder IDs (DYS-001 etc) that did not correspond to real cases.
+// Bookmarks, screenshots, shared links, and stale browser history may still
+// point to those IDs. Rewrite them to real cases before any further routing
+// runs, so a stale link never reaches the case-not-found error state.
+(function() {
+  try {
+    var p = new URLSearchParams(window.location.search);
+    var legacy = p.get('case');
+    if (!legacy) return;
+    var rewrites = {
+      'DYS-001':   'hypersensitivity-pneumonitis',
+      'DYS-002':   'cap-with-sepsis',
+      'COUGH-001': 'tb-immigration',
+      'CHEST-001': 'pericarditis-v1',
+      'FEVER-001': 'ludwigs-angina'
+    };
+    if (rewrites[legacy]) {
+      var newCase = rewrites[legacy];
+      var keep = [];
+      p.forEach(function(v, k) { if (k !== 'case') keep.push(k + '=' + encodeURIComponent(v)); });
+      keep.unshift('case=' + encodeURIComponent(newCase));
+      window.location.replace('/virtual-emr.html?' + keep.join('&'));
+    }
+  } catch(e) {}
+})();
+</script>
+<script>
 // Immediate redirect — runs before anything else loads
 (function() {
   var p = new URLSearchParams(window.location.search);
@@ -813,6 +841,25 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   .sidebar-btn svg{width:16px;height:16px}
   /* Hide secondary tabs on mobile — they go in the overflow panel */
   .sidebar-btn[data-priority="secondary"]{display:none}
+
+  /* On mobile the sidebar is a horizontal bottom tab bar. Decorative
+     elements that work in the desktop vertical sidebar (the chart-more
+     expander, the step-header dividers, the AI-section wrapper) break
+     the horizontal flex layout and overlap the buttons. Hide them; the
+     functionality they provide is already covered by the More overflow
+     bottom-sheet on mobile. */
+  .sidebar > .rdx-section-label,
+  .sidebar > .rdx-sidebar-step-header,
+  .sidebar .rdx-chart-more-toggle,
+  .sidebar .rdx-chart-more-hint,
+  .sidebar .rdx-chart-more-list { display:none !important }
+  /* The AI section wrapper itself becomes a flex item; collapse it so its
+     button children (Mission Control etc) flow as siblings of the other
+     primary tabs. */
+  .sidebar > .rdx-sidebar-ai-section{
+    display:contents; background:none !important; border:none !important;
+    padding:0 !important; margin:0 !important;
+  }
   /* More button (mobile only) */
   .sidebar-more-btn{
     flex:1 1 0;min-width:0;padding:6px 4px;border:none;background:transparent;
@@ -6844,7 +6891,12 @@ render = function(){
     var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
     var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
     var _onclick = stepState==='future' ? 'onclick="_showStepLocked(\''+t.id+'\')"' : 'onclick="switchTab(\''+t.id+'\')"';
-    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+_primaryCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" title="'+(stepState==='future'?'Complete earlier steps first':'')+'">'+(stepState==='future'?'<span style="font-size:10px;margin-right:2px;opacity:.5">🔒</span>':'')+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+    // Mobile: only PRIMARY_TAB_IDS show in the bottom tab bar; everything
+    // else is reachable via the More overflow sheet. The CSS rule
+    // .sidebar-btn[data-priority="secondary"]{display:none} (mobile only)
+    // takes care of the actual hiding.
+    var _priority = (PRIMARY_TAB_IDS.indexOf(t.id) >= 0) ? 'primary' : 'secondary';
+    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+_primaryCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" data-priority="'+_priority+'" title="'+(stepState==='future'?'Complete earlier steps first':'')+'">'+(stepState==='future'?'<span style="font-size:10px;margin-right:2px;opacity:.5">🔒</span>':'')+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
   }
   var sb = tabs.map(function(t){
     if(t.divider && t.stepId){
