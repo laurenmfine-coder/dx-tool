@@ -18,6 +18,7 @@
 <meta property="og:title" content="Browse Clinical Cases | ReasonDx">
 <meta property="og:description" content="Browse 500+ clinical reasoning cases across medicine, nursing, pharmacy, PA, PT, OT, dentistry, and optometry. Free AI-powered patient simulations. No signup required.">
 <link rel="canonical" href="https://www.reasondx.com/browse.html">
+<link rel="stylesheet" href="/css/rdx-cards.css">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
@@ -888,6 +889,39 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       </div>
     </div>
   </div>
+
+  <!-- ── Daily picks hero (Prototype D) ─────────────────────────────
+       Three personalized cases shown as the front door before the
+       catalog grid. Hidden when the user is searching or has applied
+       a category filter (catalog mode takes over). -->
+  <div id="rdx-daily-picks" style="margin:24px 0 28px;display:none">
+    <div class="rdx-cards-section-header">
+      <div>
+        <h2 class="rdx-cards-section-title">Today's picks</h2>
+        <p class="rdx-cards-section-sub">Three cases chosen for you, refreshed daily.</p>
+      </div>
+      <span class="rdx-cards-section-meta" id="rdx-daily-picks-date"></span>
+    </div>
+    <div class="rdx-cards-grid rdx-cards-grid--hero" id="rdx-daily-picks-grid">
+      <!-- populated by renderDailyPicks() -->
+    </div>
+    <div class="rdx-cards-doors">
+      <a class="rdx-cards-door" href="#" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'});return false">
+        <div>
+          <div class="rdx-cards-door-text-title">Browse all <span id="rdx-daily-total-count">520</span> cases</div>
+          <div class="rdx-cards-door-text-sub">Filter by specialty, acuity, or duration</div>
+        </div>
+        <svg class="rdx-cards-door-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="rdx-cards-door" href="#" onclick="document.getElementById('searchInput').focus();return false">
+        <div>
+          <div class="rdx-cards-door-text-title">Search the library</div>
+          <div class="rdx-cards-door-text-sub">By symptom, diagnosis, or keyword</div>
+        </div>
+        <svg class="rdx-cards-door-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+    </div>
+  </div>
   
   <div id="mode-header" style="display:none;padding:0 0 16px 0">
     <h2 id="sectionTitle" style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0"></h2>
@@ -927,7 +961,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       <button class="organize-btn" data-group="duration" aria-pressed="false">Duration</button>
     </div>
   </div>
-  <div class="grid" id="grid" role="tabpanel">
+  <div class="grid rdx-cards-grid rdx-cards-grid--catalog" id="grid" role="tabpanel">
     <!-- Skeleton cards shown before data loads -->
     <div class="rdx-skeleton-card" id="rdx-skel-1"><div class="rdx-skeleton-line" style="width:60%"></div><div class="rdx-skeleton-line" style="width:40%"></div><div class="rdx-skeleton-line" style="width:80%;margin-top:12px"></div></div>
     <div class="rdx-skeleton-card" id="rdx-skel-2"><div class="rdx-skeleton-line" style="width:55%"></div><div class="rdx-skeleton-line" style="width:35%"></div><div class="rdx-skeleton-line" style="width:70%;margin-top:12px"></div></div>
@@ -1272,7 +1306,153 @@ function _rdxGroupKeys(c, mode){
   return { key: 'all', label: '' };
 }
 
-function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var _completedCases=new Set();try{var _cc=JSON.parse(localStorage.getItem('rdx-completed-cases')||'[]');_cc.forEach(function(id){_completedCases.add(id);});}catch(e){}var data=getData();var _hideDone=localStorage.getItem('rdx-hide-done')==='1';var filtered=data.filter(function(c){if(_hideDone&&_completedCases.has(c.id)) return false;if(CAT!=='all'&&c.cat!==CAT) return false;if(CURRENT_PROF&&c.profession&&c.profession!==CURRENT_PROF) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
+// ── Daily picks hero ─────────────────────────────────────────────
+// Three personalized cases shown above the catalog grid. Pulled from
+// the active dataset (SIM_DATA / PRAC_DATA), filtered by user
+// profession when set, then bucketed into Quick (acuity 4-5),
+// Featured (acuity 2-3), and Tough (acuity 1). Selection is
+// date-seeded so everyone sees the same picks for a given day,
+// keeping the "today's picks" framing consistent.
+//
+// Hidden when MODE is not simulate/practice, when the user has
+// applied a filter or search, or when the user is grouping the grid.
+function _rdxDailyPickFor(pool, dayHash) {
+  if (!pool || !pool.length) return null;
+  return pool[dayHash % pool.length];
+}
+
+function renderDailyPicks() {
+  var grid = document.getElementById('rdx-daily-picks-grid');
+  var box  = document.getElementById('rdx-daily-picks');
+  if (!grid || !box) return;
+
+  // Show only on the simulate front door, with no search/filter applied
+  var q = (document.getElementById('searchInput').value || '').trim();
+  var noFilter = (CAT === 'all') && !q && _rdxGroup === 'none';
+  var validMode = (MODE === 'simulate' || MODE === 'practice');
+  if (!validMode || !noFilter) {
+    box.style.display = 'none';
+    return;
+  }
+
+  // Pull the dataset
+  var data = getData();
+  if (!data || data.length < 3) { box.style.display = 'none'; return; }
+
+  // Profession filter: if user has profession set, prefer matching cases
+  var userProf = null;
+  try {
+    var u = JSON.parse(localStorage.getItem('rdx_user') || localStorage.getItem('reasondx-user') || '{}');
+    userProf = (u.professionProfile && u.professionProfile.professionId) || localStorage.getItem('rdx-profession');
+  } catch(e) {}
+
+  var profMatch = userProf ? data.filter(function(c){ return !c.profession || c.profession === userProf; }) : data;
+  // If profession filter empties pulls, fall back to all data
+  if (profMatch.length < 30) profMatch = data;
+
+  // Bucket by acuity
+  var quick    = profMatch.filter(function(c){ return c.acuity >= 4; });        // 5-7 to 7-10 min
+  var featured = profMatch.filter(function(c){ return c.acuity === 2 || c.acuity === 3; }); // 10-15 min
+  var tough    = profMatch.filter(function(c){ return c.acuity === 1; });        // 15-20 min critical
+
+  // Fallbacks if any bucket is empty
+  if (!quick.length)    quick    = profMatch.slice();
+  if (!featured.length) featured = profMatch.slice();
+  if (!tough.length)    tough    = profMatch.slice();
+
+  // Date seed: same picks for everyone on a given day
+  var now = new Date();
+  var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  var dayHash = dayOfYear + now.getFullYear() * 1000;
+
+  var quickPick    = _rdxDailyPickFor(quick,    dayHash);
+  var featuredPick = _rdxDailyPickFor(featured, dayHash + 7);
+  var toughPick    = _rdxDailyPickFor(tough,    dayHash + 13);
+
+  // Make sure no duplicates across the three slots
+  var seen = {};
+  function dedupe(pick, pool, offset) {
+    if (!pick) return null;
+    if (!seen[pick.id]) { seen[pick.id] = 1; return pick; }
+    for (var i = 1; i < pool.length; i++) {
+      var alt = pool[(dayHash + offset + i) % pool.length];
+      if (!seen[alt.id]) { seen[alt.id] = 1; return alt; }
+    }
+    return pick;
+  }
+  featuredPick = dedupe(featuredPick, featured, 7);
+  quickPick    = dedupe(quickPick,    quick,    0);
+  toughPick    = dedupe(toughPick,    tough,    13);
+
+  // Date label
+  var dateEl = document.getElementById('rdx-daily-picks-date');
+  if (dateEl) {
+    var weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    dateEl.textContent = weekdays[now.getDay()] + ' · ' + months[now.getMonth()] + ' ' + now.getDate();
+  }
+
+  // Total count for the Browse all door
+  var totalEl = document.getElementById('rdx-daily-total-count');
+  if (totalEl) totalEl.textContent = data.length;
+
+  // Render a single card
+  function renderPick(pick, slot) {
+    if (!pick) return '';
+    var title = pick.displayTitle || pick.title || '';
+    var sub   = pick.displaySubtitle || pick.sub || '';
+    // Build a teaser. If we have a subtitle, use it. Otherwise, derive
+    // a generic teaser from the slot type so the card never feels empty.
+    var teaser = sub ||
+      (slot === 'quick' ? 'A bread-and-butter case. Solid for warming up.' :
+       slot === 'tough' ? 'Multifactorial. This one will test your prioritization.' :
+       'Time-pressured presentation. Your call.');
+    var catLabel = (CAT_LABELS[pick.cat] || (pick.cat || '').charAt(0).toUpperCase() + (pick.cat || '').slice(1)) || '—';
+
+    // Eyebrow label varies by slot
+    var eyebrow = slot === 'quick' ? 'Quick warm-up' :
+                  slot === 'tough' ? 'If you\'re up for it' :
+                  'Today\'s pick';
+    var meta = pick.acuity === 1 ? '15–20 min' :
+               pick.acuity === 2 ? '12–15 min' :
+               pick.acuity === 3 ? '10–12 min' :
+               pick.acuity === 4 ? '7–10 min' :
+                                   '5 min';
+    var featuredCls = (slot === 'featured') ? ' rdx-card--featured' : '';
+    var ctaText = slot === 'featured' ? 'Start the case →' : 'Start →';
+
+    // Link target — same logic as the main launch() function
+    var href;
+    if (MODE === 'practice') {
+      var tok = (window.RDX_CASE_TOKENS && window.RDX_CASE_TOKENS.slugToToken)
+        ? window.RDX_CASE_TOKENS.slugToToken[pick.id] : null;
+      href = 'virtual-emr.html?' + (tok ? 'cx=' + tok : 'case=' + encodeURIComponent(pick.id));
+    } else {
+      href = 'virtual-emr.html?case=' + encodeURIComponent(pick.id);
+    }
+
+    return '<a class="rdx-card' + featuredCls + '" data-acuity="' + (pick.acuity || 3) + '" href="' + href + '">'
+      + '<div class="rdx-card-eyebrow">'
+      +   '<span class="rdx-card-eyebrow-dot"></span>'
+      +   '<span class="rdx-card-eyebrow-label">' + eyebrow + '</span>'
+      +   '<span class="rdx-card-eyebrow-meta">' + meta + '</span>'
+      + '</div>'
+      + '<h3 class="rdx-card-headline">' + esc(title) + '</h3>'
+      + (teaser ? '<p class="rdx-card-teaser">' + esc(teaser) + '</p>' : '')
+      + '<div class="rdx-card-footer">'
+      +   '<span class="rdx-card-cat">' + esc(catLabel) + '</span>'
+      +   '<span class="rdx-card-cta">' + ctaText + '</span>'
+      + '</div>'
+      + '</a>';
+  }
+
+  grid.innerHTML = renderPick(quickPick, 'quick')
+                 + renderPick(featuredPick, 'featured')
+                 + renderPick(toughPick, 'tough');
+  box.style.display = 'block';
+}
+
+function render(){renderDailyPicks();var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var _completedCases=new Set();try{var _cc=JSON.parse(localStorage.getItem('rdx-completed-cases')||'[]');_cc.forEach(function(id){_completedCases.add(id);});}catch(e){}var data=getData();var _hideDone=localStorage.getItem('rdx-hide-done')==='1';var filtered=data.filter(function(c){if(_hideDone&&_completedCases.has(c.id)) return false;if(CAT!=='all'&&c.cat!==CAT) return false;if(CURRENT_PROF&&c.profession&&c.profession!==CURRENT_PROF) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
   // Profession arc cases first if profession matches
   var userProf=null;try{var u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProf=(u.professionProfile&&u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
   var aArc=a.arcId&&a.profession&&a.profession===userProf?1:0;
@@ -1296,13 +1476,6 @@ var displayedItems = (_rdxGroup === 'none') ? filtered.slice(0, itemsToShow) : f
 
 // Per-card render — factored so both the flat grid and grouped sections use it
 function _renderCardHtml(c) {
-  var badgeClass=MODE==='simulate'?'badge-sim':MODE==='practice'?'badge-prac':MODE==='coach'?'badge-coach':'badge-learn';
-  var badgeText=MODE==='simulate'?'SIM':MODE==='practice'?'EMR':MODE==='coach'?'COACH':'LEARN';
-
-  // Urgency icon
-  var iconClass = 'card-icon acuity-' + (c.acuity || 3);
-  var iconSymbol = c.acuity === 1 ? '⚠️' : c.acuity === 2 ? '🔸' : c.acuity === 3 ? '◉' : c.acuity === 4 ? '○' : '·';
-
   // Use displayTitle/displaySubtitle if available, otherwise fall back to old parsing
   var title = c.displayTitle || c.title || '';
   var subtitle = c.displaySubtitle || c.sub || '';
@@ -1322,50 +1495,68 @@ function _renderCardHtml(c) {
     title = title.replace(/^[—\-\s]+/, '').trim();
   }
 
+  // Eyebrow varies by mode + acuity. Catalog cards stay terse.
+  var eyebrow;
+  if (MODE === 'coach')   eyebrow = 'Coach topic';
+  else if (MODE === 'learn') eyebrow = 'Module';
+  else if (c.acuity === 1) eyebrow = 'Critical';
+  else if (c.acuity === 2) eyebrow = 'Urgent';
+  else if (c.acuity === 3) eyebrow = 'Moderate';
+  else                     eyebrow = 'Routine';
+
+  var meta = c.acuity === 1 ? '15–20 min' :
+             c.acuity === 2 ? '12–15 min' :
+             c.acuity === 3 ? '10–12 min' :
+             c.acuity === 4 ? '7–10 min' :
+                              '5–7 min';
+  var catLabel = (CAT_LABELS[c.cat] || (c.cat || '').charAt(0).toUpperCase() + (c.cat || '').slice(1)) || '—';
+
   var _isDone = _completedCases.has(c.id);
-  var _featuredCls = c.featured ? ' featured' : '';
-  var h='<div onkeydown="rdxKbClick(event)" class="card'+_featuredCls+'" onclick="launch(\''+esc(c.id)+'\')" style="position:relative" tabindex="0" role="button">';
-  if(_isDone) h+='<div style="position:absolute;top:8px;right:8px;background:#059669;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.04em;z-index:2">✓ Done</div>';
-  h+='<div class="card-top">';
-  h+='<div class="'+iconClass+'">'+iconSymbol+'</div>';
-  h+='<div style="flex:1">';
-  h+='<div class="card-title">';
-  h+='<span class="card-title-main">'+esc(title)+'</span>';
-  h+='<span class="card-badge '+badgeClass+'">'+badgeText+'</span>';
-  h+='</div>';
-  if(subtitle) h+='<div class="card-sub">'+esc(subtitle)+'</div>';
-  h+='</div></div>';
-  h+='<div class="card-tags">';
-  h+='<span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';
-  // Suppress redundant "EMR" tag when MODE is simulate — every sim case
-  // runs in the EMR by definition. Showing it on every card just adds
-  // noise without telling users anything they did not already know.
-  if(MODE==='practice'&&_EMR_VALID_IDS&&_EMR_VALID_IDS.has(c.id)){
-    h+='<span class="tag" style="background:#EBF5FB;color:#1B4F72;border:1px solid #AED6F1;font-weight:700">🏥 EMR</span>';
+  var _featuredCls = c.featured ? ' rdx-card--featured' : '';
+  var _doneCls = _isDone ? ' rdx-card--done' : '';
+  var _acuity = c.acuity || 3;
+
+  var h = '<a class="rdx-card' + _featuredCls + _doneCls + '" data-acuity="' + _acuity + '" '
+        + 'href="#" onclick="launch(\'' + esc(c.id) + '\');return false" '
+        + 'onkeydown="rdxKbClick(event)" tabindex="0" role="button">';
+  h += '<div class="rdx-card-eyebrow">';
+  h +=   '<span class="rdx-card-eyebrow-dot"></span>';
+  h +=   '<span class="rdx-card-eyebrow-label">' + eyebrow + '</span>';
+  h +=   '<span class="rdx-card-eyebrow-meta">' + meta + '</span>';
+  h += '</div>';
+  h += '<h3 class="rdx-card-headline">' + esc(title) + '</h3>';
+  if (subtitle) h += '<p class="rdx-card-teaser">' + esc(subtitle) + '</p>';
+
+  // Tail markers — only show when materially distinct from the eyebrow
+  var tail = '';
+  if (c.profession) {
+    var profLabels = {medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'MBS',vet:'Veterinary'};
+    tail = (profLabels[c.profession] || c.profession);
   }
-  var timeEst = c.acuity === 1 ? '15-20 min' : c.acuity === 2 ? '12-15 min' : c.acuity === 3 ? '10-12 min' : c.acuity === 4 ? '7-10 min' : '5-7 min';
-  h+='<span class="tag tag-time">⏱ '+timeEst+'</span>';
-  if(c.studyCase && window.RDXStudySequencer && !RDXStudySequencer.isCaseFreelyAccessible(c.id)){
-    h+='<span class="tag" style="background:#FFF7ED;color:#9A3412;font-weight:700;border:1px solid #FDBA74">🔒 Study</span>';
+  if (c.arcId && c.arcOrder) {
+    tail = (tail ? tail + ' · ' : '') + 'Series · ' + c.arcOrder;
   }
-  if(c.arcId && c.arcOrder){h+='<span class="tag" style="background:#F5F3FF;color:#6D28D9;font-weight:700;border:1px solid #DDD6FE">📚 Series · Case '+(c.arcOrder||1)+'</span>';}
-  if(c.profession){var profLabels={medicine:'Medicine',pa:'Physician Assistant',pharmacy:'Pharmacy',pt:'Physical Therapy',ot:'Occupational Therapy',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'Med Sciences',vet:'🐾 Veterinary'};h+='<span class="tag" style="background:#ECFDF5;color:#047857;font-weight:700;border:1px solid #A7F3D0">'+(profLabels[c.profession]||c.profession)+'</span>';}
-  // Suppress acuity pill when grouping by Urgency — every card in a
-  // "Critical" or "Urgent" section already announces its acuity at the
-  // section header, so the per-card pill is redundant noise.
-  if((MODE==='simulate'||MODE==='practice')&&c.acuity===1&&_rdxGroup!=='urgency') h+='<span class="tag tag-acuity1">Critical</span>';
-  else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2&&_rdxGroup!=='urgency') h+='<span class="tag tag-acuity2">Urgent</span>';
-  h+='</div>';
+  if (c.studyCase && window.RDXStudySequencer && !RDXStudySequencer.isCaseFreelyAccessible(c.id)) {
+    tail = (tail ? tail + ' · ' : '') + '🔒 Study';
+  }
+
+  h += '<div class="rdx-card-footer">';
+  h +=   '<span class="rdx-card-cat">' + esc(catLabel) + (tail ? ' · ' + esc(tail) : '') + '</span>';
+  h +=   '<span class="rdx-card-cta">Start →</span>';
+  h += '</div>';
+
+  // Social proof, if available — sits below the footer rule
   if (MODE === 'simulate' && window._socialProof && window._socialProof[c.id]) {
     var sp = window._socialProof[c.id];
-    var spHtml = '<div class="card-social-proof">';
-    if (sp.completion_count > 0) spHtml += '<span>✅ <span class="sp-count">' + sp.completion_count + '</span> completed</span>';
-    if (sp.avg_time_seconds > 0) { var m=Math.floor(sp.avg_time_seconds/60),s=(sp.avg_time_seconds%60).toString().padStart(2,'0'); spHtml += '<span>⏱ avg ' + m + ':' + s + '</span>'; }
-    if (sp.avg_rating) spHtml += '<span>⭐ ' + parseFloat(sp.avg_rating).toFixed(1) + '</span>';
-    spHtml += '</div>';
-    h += spHtml;
+    var spParts = [];
+    if (sp.completion_count > 0) spParts.push('✓ ' + sp.completion_count + ' completed');
+    if (sp.avg_rating) spParts.push('★ ' + parseFloat(sp.avg_rating).toFixed(1));
+    if (spParts.length) {
+      h += '<div style="margin-top:8px;padding-top:8px;border-top:0.5px solid #F1F5F9;font-size:10.5px;color:#94A3B8;font-weight:500">' + spParts.join(' · ') + '</div>';
+    }
   }
-  h+='</div>';
+
+  h += '</a>';
   return h;
 }
 
@@ -1396,7 +1587,7 @@ if (_rdxGroup === 'none') {
     var bk = _buckets[k];
     _html += '<div class="organize-section">'
       + '<div class="organize-section-header">' + esc(bk.label) + '<em>· ' + bk.items.length + (bk.items.length===1?' '+(MODE==='coach'?'topic':MODE==='learn'?'module':'case'):' '+(MODE==='coach'?'topics':MODE==='learn'?'modules':'cases')) + '</em></div>'
-      + '<div class="grid">' + bk.items.map(_renderCardHtml).join('') + '</div>'
+      + '<div class="grid rdx-cards-grid rdx-cards-grid--catalog">' + bk.items.map(_renderCardHtml).join('') + '</div>'
       + '</div>';
   });
   grid.innerHTML = _html;
