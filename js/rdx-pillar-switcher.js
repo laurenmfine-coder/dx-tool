@@ -598,6 +598,11 @@
     'vascular-injury-with-limb-ischemia':                     { mechanismModule: 'vascular-module', coachTopic: 'aortic-dissection', category: 'vascular' }
   };
 
+  // Expose for other modules that want to route by case (e.g. the
+  // end-of-case "what next" panel in renderAutoFeedback). This is
+  // the canonical case → pillar map; nothing else should duplicate it.
+  window.RDX_CASE_PILLARS = CASE_TO_PILLARS;
+
   // Display labels
   var COACH_LABELS = {
     'stemi':'STEMI','afib':'Atrial Fibrillation','aki':'Acute Kidney Injury',
@@ -647,6 +652,10 @@
     'trauma-module':'Trauma','vascular-module':'Vascular','neuro-ophthalmology-module':'Neuro-Ophthalmology',
     'neurologic-rehabilitation-module':'Neurologic Rehabilitation','geriatrics-module':'Geriatrics'
   };
+
+  // Expose label maps for the same reasons we exposed CASE_TO_PILLARS.
+  window.RDX_COACH_LABELS  = COACH_LABELS;
+  window.RDX_MODULE_LABELS = MODULE_LABELS;
 
   // ──────────────────────────────────────────────────────────────
   // Resolve current case from URL

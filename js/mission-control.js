@@ -348,7 +348,27 @@
     renderHeaderBadge: function() {
       var done=this.getCompletedCount(), total=this.getTotalCount(), dots='';
       for (var i=0;i<total;i++) dots+='<span style="display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 1px;background:'+(i<done?'#2874A6':'rgba(255,255,255,.3)')+'"></span>';
-      return '<button type="button" onclick="MissionControl.toggle();render()" style="display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;margin-left:12px" title="Mission Control">\uD83D\uDCCB <span>'+done+'/'+total+'</span><span style="display:inline-flex;align-items:center;gap:1px">'+dots+'</span><span style="opacity:.6">'+this.getElapsed()+'</span></button>';
+      // Two buttons: an explicit Help affordance for users who want
+      // orientation, and the progress badge for users tracking
+      // their own pace. The Help button is more discoverable than
+      // expecting users to recognize the progress badge as a help
+      // entry point.
+      var helpBtn = '<button type="button" onclick="MissionControl.toggle();render()" '
+        + 'style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:11px;font-weight:700;font-family:inherit;cursor:pointer;margin-left:12px;transition:background .15s" '
+        + 'title="Open Mission Control: see step-by-step guidance, where you are in the case, and what to do next" '
+        + 'onmouseover="this.style.background=\'rgba(255,255,255,.18)\'" '
+        + 'onmouseout="this.style.background=\'rgba(255,255,255,.1)\'">'
+        + '<span style="font-size:12px">\u2753</span>'
+        + '<span>Help</span>'
+        + '</button>';
+      var progressBadge = '<button type="button" onclick="MissionControl.toggle();render()" '
+        + 'style="display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;margin-left:8px" '
+        + 'title="Mission Control progress: tasks completed and elapsed time. Click to open the panel.">'
+        + '\uD83D\uDCCB <span>'+done+'/'+total+'</span>'
+        + '<span style="display:inline-flex;align-items:center;gap:1px">'+dots+'</span>'
+        + '<span style="opacity:.6">'+this.getElapsed()+'</span>'
+        + '</button>';
+      return helpBtn + progressBadge;
     },
 
     renderTipBar: function(tabId) {
