@@ -34,7 +34,30 @@
     'urticaria-module':            { caseId:'hereditary-angioedema',        caseLabel:'Hereditary Angioedema',          coachId:'hae' },
     'ai-basic-science-module':     { caseId:'anaphylaxis',                  caseLabel:'Anaphylaxis',                    coachId:'anaphylaxis' },
     'ai-diagnostic-methods-module':{ caseId:'penicillin-allergy-delabeling',caseLabel:'PCN Allergy Delabeling',         coachId:'drug-allergy' },
-    'clinic-ambulatory-module':    { caseId:'type2-diabetes-outpatient',    caseLabel:'T2DM Outpatient',                coachId:'diabetes' }
+    'clinic-ambulatory-module':    { caseId:'type2-diabetes-outpatient',    caseLabel:'T2DM Outpatient',                coachId:'diabetes' },
+
+    // ── Bridge entries added April 2026 (closing the augmentation loop) ──
+    'cognitive-rehabilitation-module':  { caseId:'dementia-with-acute-delirium',  caseLabel:'Dementia with Acute Delirium',   coachId:'delirium' },
+    'dermatology-module':               { caseId:'sjs-ten',                       caseLabel:'SJS / TEN',                      coachId:'sjs-ten' },
+    'environmental-occupational-module':{ caseId:'heat-stroke',                   caseLabel:'Exertional Heat Stroke',         coachId:'overdose' },
+    'geriatrics-module':                { caseId:'dementia-with-acute-delirium',  caseLabel:'Geriatric Polypharmacy & Delirium', coachId:'falls' },
+    'mcat-biochemistry-module':         { caseId:'mbs-dka-cascade',               caseLabel:'DKA Biochemistry Cascade',       coachId:'dka-endo' },
+    'msk-orthopedic-module':            { caseId:'rhabdomyolysis',                caseLabel:'Rhabdomyolysis',                 coachId:'msk-red-flag-lbp' },
+    'neuro-ophthalmology-module':       { caseId:'optic-neuritis',                caseLabel:'Optic Neuritis',                 coachId:'optic-nerve-disorders' },
+    'neurologic-rehabilitation-module': { caseId:'tbi-return-to-work-ot',         caseLabel:'TBI Rehabilitation',             coachId:'stroke-neuro' },
+    'oncology-module':                  { caseId:'febrile-neutropenia',           caseLabel:'Febrile Neutropenia',            coachId:'leukemia-lymphoma' },
+    'ophthalmology-module':             { caseId:'neovascular-glaucoma-od',       caseLabel:'Neovascular Glaucoma',           coachId:'glaucoma-management' },
+    'oral-medicine-module':             { caseId:'dental-ludwigs-angina',         caseLabel:"Ludwig's Angina",                coachId:'dental-emergency-triage' },
+    'ot-clinical-reasoning-module':     { caseId:'sci-adl-goals-ot',              caseLabel:'SCI: ADL Goal Setting',          coachId:'ptot-goal-management' },
+    'pain-management-module':           { caseId:'musculoskeletal-back-pain',     caseLabel:'Chronic Back Pain',              coachId:'pharm-opioid-risk' },
+    'pediatrics-module':                { caseId:'croup-epiglottitis-ddx',        caseLabel:'Croup vs Epiglottitis',          coachId:'fever-peds' },
+    'pharmacogenomics-module':          { caseId:'pharmacy-warfarin-cyp',         caseLabel:'Warfarin and CYP Genotype',      coachId:'pharmacogenomics' },
+    'pharmacotherapy-module':           { caseId:'pharmacy-warfarin-cyp',         caseLabel:'Warfarin Pharmacotherapy',       coachId:'drug-allergy' },
+    'psychiatric-pharmacotherapy-module':{ caseId:'serotonin-syndrome',           caseLabel:'Serotonin Syndrome',             coachId:'depression' },
+    'pt-clinical-reasoning-module':     { caseId:'pt-rotator-cuff-rehab',         caseLabel:'Rotator Cuff Rehabilitation',    coachId:'msk-shoulder-impingement' },
+    'retinal-disorders-module':         { caseId:'diabetic-retinopathy-od',       caseLabel:'Diabetic Retinopathy',           coachId:'diabetic-retinopathy' },
+    'trauma-module':                    { caseId:'ot-polytrauma-tbi',             caseLabel:'Polytrauma with TBI',            coachId:'trauma' },
+    'vascular-module':                  { caseId:'ruptured-aaa',                  caseLabel:'Ruptured AAA',                   coachId:'aortic-dissection' }
   };
 
   var COACH_LABELS = {
@@ -50,7 +73,17 @@
     'seizure':'Seizures & Epilepsy','sepsis-id':'Sepsis & Septic Shock',
     'stroke-neuro':'Ischemic Stroke','overdose':'Toxicology / Overdose',
     'hae':'Hereditary Angioedema','diabetes':'Diabetes Management',
-    'afib':'Atrial Fibrillation','mastocytosis':'Mastocytosis / MCAS'
+    'afib':'Atrial Fibrillation','mastocytosis':'Mastocytosis / MCAS',
+    // Added April 2026
+    'delirium':'Delirium','sjs-ten':'SJS / TEN','falls':'Falls & Frailty',
+    'msk-red-flag-lbp':'Red Flag Back Pain','optic-nerve-disorders':'Optic Nerve Disorders',
+    'leukemia-lymphoma':'Leukemia & Lymphoma','glaucoma-management':'Glaucoma',
+    'dental-emergency-triage':'Dental Emergency Triage',
+    'ptot-goal-management':'Goal Management Training','pharm-opioid-risk':'Opioid Risk Assessment',
+    'fever-peds':'Pediatric Fever','pharmacogenomics':'Pharmacogenomics',
+    'depression':'Depression','msk-shoulder-impingement':'Shoulder Impingement',
+    'diabetic-retinopathy':'Diabetic Retinopathy','trauma':'Trauma & Massive Transfusion',
+    'aortic-dissection':'Aortic Dissection'
   };
 
   var filename = window.location.pathname.split('/').pop().replace('.html', '');
