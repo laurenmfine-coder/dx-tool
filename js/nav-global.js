@@ -52,6 +52,10 @@
       font-size: 0.72rem; color: rgba(255,255,255,0.45); white-space: nowrap;
       max-width: 160px; overflow: hidden; text-overflow: ellipsis;
     }
+    /* Pillar links (left of nav, beside logo) */
+    #rdx-global-nav .rdx-nav-pillars {
+      display: flex; align-items: center; gap: 2px; margin-left: 14px;
+    }
     /* Hamburger */
     #rdx-global-nav .rdx-hamburger {
       display: none; background: none; border: none; cursor: pointer; padding: 6px;
@@ -76,6 +80,7 @@
     body { padding-top: 52px; }
     @media (max-width: 768px) {
       #rdx-global-nav .rdx-nav-links { display: none; }
+      #rdx-global-nav .rdx-nav-pillars { display: none; }
       #rdx-global-nav .rdx-nav-actions { display: none; }
       #rdx-global-nav .rdx-hamburger { display: block; }
       #rdx-global-nav .rdx-user-email { display: none; }
@@ -96,10 +101,16 @@
     const dashLink = isFaculty
       ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/faculty-dashboard.html">Faculty Dashboard</a>`
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/dashboard.html">Dashboard</a>`;
+    // Pillar links — visible to everyone (signed in or not). Critical for first-time
+    // visitors (e.g. demo audiences) to discover all three pillars from any page.
+    const pillarLinks = `
+      <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/browse.html">Cases</a>
+      <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/mechanism/index.html">MechanismDx</a>
+      <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/CoachDx/mentor-chat.html">CoachDx</a>
+    `;
+
     const authActions = userEmail
-      ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/browse.html">Browse</a>
-         <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/CoachDx/mentor-chat.html">CoachDx</a>
-         <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/puzzles.html">Puzzles</a>
+      ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/puzzles.html">Puzzles</a>
          ${dashLink}
          <button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()">Sign Out</button>`
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html">Sign In</a>
@@ -116,8 +127,12 @@
 
     nav.innerHTML = `
       <a class="rdx-logo" href="/browse.html">Reason<span>Dx</span></a>
+      <div class="rdx-nav-pillars">${pillarLinks}</div>
       ${_whatsNewBtn}
       <div class="rdx-nav-actions" style="margin-left:auto">${authActions}</div>
+      <button class="rdx-hamburger" onclick="rdxToggleDrawer()" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     `;
 
     // Build mobile drawer
@@ -128,6 +143,14 @@
       if (document.body) document.body.appendChild(drawer);
     }
     drawer.innerHTML = `
+      <a href="/browse.html" class="${isActive('/browse.html')}">📋 Cases</a>
+      <a href="/mechanism/index.html" class="${isActive('/mechanism/')}">🔬 MechanismDx</a>
+      <a href="/CoachDx/mentor-chat.html" class="${isActive('/CoachDx/')}">🧠 CoachDx</a>
+      ${userEmail ? `
+        <a href="/puzzles.html" class="${isActive('/puzzles')}">🧩 Puzzles</a>
+        <a href="${isFaculty ? '/faculty-dashboard.html' : '/dashboard.html'}" class="${isActive('dashboard')}">📊 ${isFaculty ? 'Faculty Dashboard' : 'Dashboard'}</a>
+      ` : ''}
+      <div class="rdx-drawer-divider"></div>
       <div class="rdx-drawer-actions">
         ${userEmail
           ? '<button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()" style="flex:1">Sign Out</button>'
@@ -136,6 +159,12 @@
       </div>
     `;
   }
+
+  // Mobile drawer toggle
+  window.rdxToggleDrawer = function() {
+    var d = document.getElementById('rdx-mobile-drawer');
+    if (d) d.classList.toggle('open');
+  };
 
   // Sign out handler
   window.rdxSignOut = async function() {
