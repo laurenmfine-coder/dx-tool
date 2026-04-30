@@ -776,20 +776,36 @@
 
     var caseLabel = caseId.replace(/-/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
 
+    // First-time intro shown once per browser. The pillar names are
+    // platform-specific jargon — a brand-new user does not know what
+    // MechanismDx or CoachDx mean. Brief one-liner under the header
+    // explains what each choice gives them. Once they have opened
+    // the popover once we shrink the header back to just the case
+    // label so it does not get in the way during real work.
+    var hasOpenedPop = false;
+    try { hasOpenedPop = !!localStorage.getItem('rdx-pillar-pop-seen'); } catch(e) {}
+    var headerHtml = hasOpenedPop
+      ? '<div class="rdx-pp-header">Currently in: ' + caseLabel + '</div>'
+      : '<div class="rdx-pp-header" style="padding-bottom:8px">'
+        + '<div>Currently in: ' + caseLabel + '</div>'
+        + '<div style="font-weight:400;color:#64748B;text-transform:none;letter-spacing:0;font-size:11px;line-height:1.5;margin-top:6px">'
+        + 'Three ways to dig deeper without leaving this case:'
+        + '</div></div>';
+
     pop.innerHTML = [
-      '<div class="rdx-pp-header">Currently in: ' + caseLabel + '</div>',
+      headerHtml,
       '<a href="#" data-pillar="mechanism">',
       '  <div class="rdx-pp-icon">🔬</div>',
       '  <div>',
       '    <div class="rdx-pp-title">Review the mechanism</div>',
-      '    <div class="rdx-pp-sub">' + mechSubLabel + '</div>',
+      '    <div class="rdx-pp-sub">Pathophysiology Q&amp;A &middot; ' + mechLabel + '</div>',
       '  </div>',
       '</a>',
       '<a href="#" data-pillar="coach">',
       '  <div class="rdx-pp-icon">🧠</div>',
       '  <div>',
-      '    <div class="rdx-pp-title">Ask the coach</div>',
-      '    <div class="rdx-pp-sub">CoachDx: ' + coachLabel + '</div>',
+      '    <div class="rdx-pp-title">Talk it through with the coach</div>',
+      '    <div class="rdx-pp-sub">Socratic AI attending &middot; ' + coachLabel + '</div>',
       '  </div>',
       '</a>',
       '<a href="' + browseHref + '">',
@@ -844,6 +860,12 @@
       e.stopPropagation();
       var open = pop.style.display === 'flex';
       pop.style.display = open ? 'none' : 'flex';
+      // Mark the intro as seen the first time the popover is opened.
+      // Next time the user opens it the header collapses back to just
+      // the case label (intro lines disappear).
+      if (!open) {
+        try { localStorage.setItem('rdx-pillar-pop-seen', '1'); } catch(e) {}
+      }
     });
 
     // Close on outside click

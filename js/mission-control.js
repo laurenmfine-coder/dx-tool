@@ -204,8 +204,21 @@
           _state.ddxSnapshots = saved.ddxSnapshots || [];
         }
       } catch(e) {}
-      // MC starts closed — students open it intentionally
-      _state.open = false;
+      // Auto-open on the user's very first case. The Mission Control
+      // panel contains the "How this works" orientation block plus
+      // context-aware Where-You-Are guidance. Hiding it by default
+      // meant new users saw an empty-looking EMR with no signposts;
+      // they had no way to discover the panel existed without first
+      // reading the small badge in the header.
+      // After the first case the user has the muscle memory; the
+      // panel reverts to closed-by-default so it does not get in
+      // the way during real work.
+      if (this.isFirstCase()) {
+        _state.open = true;
+        this.markSeen();
+      } else {
+        _state.open = false;
+      }
       _injectHelpFab();
       _updateTabArrow();
       setTimeout(_pulseOnce, 1400);
@@ -219,11 +232,15 @@
       _state.startTime = Date.now();
       _injectHelpFab();
       _updateTabArrow();
-      // MC starts closed for guests too — tip bar guides them instead
-      _state.open = false;
-      if (!localStorage.getItem('rdx-mc-guest-seen')) {
-        localStorage.setItem('rdx-mc-guest-seen', '1');
-      }
+      // Auto-open for guests too — they get the same orientation
+      // panel a first-time student gets, plus a "Create a free
+      // account" prompt at the bottom of the panel. The flag below
+      // ensures we only auto-open the first time per browser; on
+      // subsequent guest visits the panel reverts to closed.
+      var alreadySeen = false;
+      try { alreadySeen = !!localStorage.getItem('rdx-mc-guest-seen'); } catch(e) {}
+      _state.open = !alreadySeen;
+      try { localStorage.setItem('rdx-mc-guest-seen', '1'); } catch(e) {}
       setTimeout(_pulseOnce, 1400);
     },
 
@@ -371,15 +388,24 @@
 
       // Welcome / orientation — brief, actionable
       if (this.isFirstCase()||isGuest) {
-        html += '<div style="margin:14px 16px 0;padding:12px 14px;background:#EBF5FB;border-radius:10px;border-left:3px solid #2874A6">';
-        html += '<div style="font-size:12px;font-weight:700;color:#2874A6;margin-bottom:5px">\uD83D\uDC4B How this works</div>';
-        html += '<div style="font-size:11px;color:#1B4F72;line-height:1.7">';
-        html += '<div>\u2460 Follow the <strong>5 steps</strong> in the top bar</div>';
-        html += '<div>\u2461 Hover the sidebar icons for chart sections</div>';
-        html += '<div>\u2462 Use <strong>CoachDx</strong> anytime to talk through your reasoning</div>';
-        html += '<div>\u2463 Submit your note for AI feedback</div>';
+        html += '<div style="margin:14px 16px 0;padding:14px 14px 12px;background:#EBF5FB;border-radius:10px;border-left:3px solid #2874A6">';
+        html += '<div style="font-size:12px;font-weight:700;color:#2874A6;margin-bottom:8px">\uD83D\uDC4B How this works</div>';
+        html += '<div style="font-size:11.5px;color:#1B4F72;line-height:1.7">';
+        html += '<div style="margin-bottom:3px">Work through the case in five steps:</div>';
+        html += '<div style="margin-left:4px"><strong>\u2460 Chart Review</strong> &mdash; read the chart</div>';
+        html += '<div style="margin-left:4px"><strong>\u2461 Patient Interview</strong> &mdash; talk to the AI patient</div>';
+        html += '<div style="margin-left:4px"><strong>\u2462 My Differential</strong> &mdash; build your DDx</div>';
+        html += '<div style="margin-left:4px"><strong>\u2463 Order &amp; Document</strong> &mdash; orders and a note</div>';
+        html += '<div style="margin-left:4px"><strong>\u2464 Coach &amp; Debrief</strong> &mdash; AI feedback</div>';
         html += '</div>';
-        if (isGuest) html += '<div style="margin-top:8px;font-size:11px;color:#1B4F72"><a href="/auth/register.html" style="color:#2874A6;font-weight:600">Create a free account</a> to save progress.</div>';
+        html += '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(40,116,166,.18);font-size:11px;color:#1B4F72;line-height:1.5">';
+        html += '<strong>Need a mechanism review or want to talk it out?</strong> Tap the blue \u21C4 <em>Mechanism &middot; Coach</em> pill at the bottom-left at any time.';
+        html += '</div>';
+        // Quick tour CTA — opens the existing video walkthrough
+        if (window.RdxTours && window.RdxTours.show) {
+          html += '<button type="button" onclick="if(window.RdxTours)RdxTours.show(\'virtual-emr\');" style="margin-top:10px;width:100%;padding:8px 12px;background:#2874A6;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;'+FF+'cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">\u25B6 Watch the 30-second walkthrough</button>';
+        }
+        if (isGuest) html += '<div style="margin-top:10px;font-size:11px;color:#1B4F72;text-align:center"><a href="/auth/register.html" style="color:#2874A6;font-weight:600">Create a free account</a> to save progress.</div>';
         html += '</div>';
       }
 
