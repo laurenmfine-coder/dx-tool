@@ -95,15 +95,15 @@ window.RDX_BRANCHED = [
       n2: {
         prompt: "Neurosurgery is on the way. The patient is bagged and ready for intubation. What is your induction plan?",
         choices: [
-          { label: "Etomidate 0.3 mg/kg + rocuronium, head of bed 30°, hyperventilate to PaCO2 30",
+          { label: "Etomidate + rocuronium, head of bed elevated, mild hyperventilation",
             hint: "Neuro-protective RSI",
             tone: 'good',
             consequenceHead: "Tubed cleanly. ICP optimized.",
-            consequence: "Etomidate maintains hemodynamics. The mild hyperventilation buys you ICP reduction while the mannitol takes effect. Head of bed up improves venous drainage.",
-            teaching: "Neuro-protective RSI: avoid agents that raise ICP or drop cerebral perfusion pressure. Etomidate is hemodynamically neutral. Brief hyperventilation (PaCO2 30-35) reduces ICP via cerebral vasoconstriction — useful as a bridge but NOT sustained (rebound). Rocuronium > succinylcholine here (succinylcholine can transiently raise ICP).",
+            consequence: "Etomidate maintains hemodynamics. The mild hyperventilation buys you ICP reduction while the osmotherapy takes effect. Head of bed up improves venous drainage.",
+            teaching: "Neuro-protective RSI: avoid agents that raise ICP or drop cerebral perfusion pressure. Etomidate is hemodynamically neutral. Brief mild hyperventilation reduces ICP via cerebral vasoconstriction — useful as a bridge but NOT sustained (rebound). Rocuronium is preferred over succinylcholine here because succinylcholine can transiently raise ICP.",
             next: 'n3'
           },
-          { label: "Ketamine 2 mg/kg + succinylcholine, head flat for line access",
+          { label: "Ketamine + succinylcholine, head flat for line access",
             hint: "Standard ED RSI",
             tone: 'bad',
             consequenceHead: "ICP spikes during induction.",
@@ -111,12 +111,12 @@ window.RDX_BRANCHED = [
             teaching: "Two errors. Ketamine has historically been considered ICP-raising though the modern evidence is more nuanced — but in a clear herniation picture, etomidate is safer. Succinylcholine causes a transient ICP rise from fasciculations, which is the last thing this patient needs. And HOB flat reduces venous drainage. Always elevate the head in suspected ICP elevation.",
             next: 'n3'
           },
-          { label: "Propofol 2 mg/kg + rocuronium",
+          { label: "Propofol + rocuronium",
             hint: "Drops ICP via sedation",
             tone: 'warn',
             consequenceHead: "Tubed, but the BP dropped.",
-            consequence: "Propofol does reduce ICP, but it also dropped this patient's MAP from 130 to 70. Cerebral perfusion pressure (MAP minus ICP) just collapsed.",
-            teaching: "Propofol reduces ICP — true. But it also drops MAP, and in a herniating patient with already-compromised cerebral perfusion, hypotension is catastrophic. CPP = MAP − ICP. If you lower ICP by 10 but lower MAP by 60, you've made perfusion worse. Etomidate preserves hemodynamics; that matters more than the modest ICP benefit.",
+            consequence: "Propofol does reduce ICP, but it also dropped this patient's MAP substantially. Cerebral perfusion pressure (MAP minus ICP) just collapsed.",
+            teaching: "Propofol reduces ICP — true. But it also drops MAP, and in a herniating patient with already-compromised cerebral perfusion, hypotension is catastrophic. CPP = MAP − ICP. If you lower ICP modestly but lower MAP profoundly, you've made perfusion worse. Etomidate preserves hemodynamics; that matters more than the modest ICP benefit.",
             next: 'n3'
           }
         ]
@@ -125,28 +125,28 @@ window.RDX_BRANCHED = [
       n3: {
         prompt: "You have one more decision before neurosurgery arrives. Pick your osmotherapy.",
         choices: [
-          { label: "Mannitol 1 g/kg IV bolus over 10 minutes",
+          { label: "Mannitol IV bolus",
             hint: "Classic choice",
             tone: 'good',
             consequenceHead: "Pupil starts to react. Buying time.",
-            consequence: "Within 5 minutes the right pupil shrinks from 6mm to 4mm and shows sluggish reactivity. You've bought a window for the OR. Neurosurgery walks in.",
-            teaching: "Mannitol 1 g/kg is the most evidence-supported osmotic agent for emergent ICP reduction. Effect onset 5-10 minutes, peak 30-60 minutes. Watch for hypotension (osmotic diuresis) and follow serum osmolality — keep <320 mOsm/kg.",
+            consequence: "Within minutes the right pupil shrinks from 6mm to 4mm and shows sluggish reactivity. You've bought a window for the OR. Neurosurgery walks in.",
+            teaching: "Mannitol is the most evidence-supported osmotic agent for emergent ICP reduction. Onset is rapid; effect peaks over the following half hour or so. Watch for hypotension from the osmotic diuresis and follow serum osmolality.",
             next: 'end-good'
           },
-          { label: "Hypertonic saline 23.4% 30 mL IV push via central line",
+          { label: "Hypertonic saline IV push via central line",
             hint: "More potent in some cases",
             tone: 'good',
             consequenceHead: "Pupil reacts. Excellent choice.",
             consequence: "Hypertonic saline takes effect rapidly. The right pupil shrinks to 4mm. Neurosurgery arrives and takes the patient to the OR.",
-            teaching: "Hypertonic saline (23.4% via central access, or 3% via peripheral) is increasingly preferred over mannitol in some institutions: faster onset, no diuresis-induced hypotension, sustained effect. The evidence base for HTS in herniation is growing. Either is defensible. Both are correct.",
+            teaching: "Hypertonic saline (concentrated formulations require central access; more dilute formulations can run peripheral) is increasingly preferred over mannitol in some institutions: faster onset, no diuresis-induced hypotension, sustained effect. The evidence base for HTS in herniation is growing. Either is defensible. Both are correct.",
             next: 'end-good'
           },
           { label: "Hold osmotherapy until neurosurgery arrives and decides",
             hint: "Defer to specialist",
             tone: 'bad',
             consequenceHead: "Patient herniates further.",
-            consequence: "By the time neurosurgery arrives 4 minutes later, both pupils are fixed. The decompression is performed but the prognosis is poor.",
-            teaching: "Osmotherapy is not a specialist decision in an unstable herniating patient. The evidence is unambiguous: mannitol or HTS, immediately, while waiting for neurosurgery. Deferring 'because the specialist isn't here yet' is the deferential trap that kills patients in time-critical decisions. Treat to the standard of care; let the specialist refine, not initiate.",
+            consequence: "By the time neurosurgery arrives a few minutes later, both pupils are fixed. The decompression is performed but the prognosis is poor.",
+            teaching: "Osmotherapy is not a specialist decision in an unstable herniating patient. The evidence is unambiguous: mannitol or HTS, immediately, while waiting for neurosurgery. Deferring 'because the specialist isn't here yet' is the deferential trap that costs minutes in time-critical decisions. Treat to the standard of care; let the specialist refine, not initiate.",
             next: 'end-bad'
           }
         ]
