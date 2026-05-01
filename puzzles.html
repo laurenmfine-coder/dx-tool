@@ -62,6 +62,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
 .puzzle-concept-pill.hit  {background:#D1FAE5;color:#065F46;border:1px solid #A7F3D0}
 .puzzle-concept-pill.miss {background:#F3F4F6;color:#6B7280;border:1px solid #E5E7EB;text-decoration:line-through;text-decoration-color:#9CA3AF}
 .puzzle-coverage-calibration{font-size:.78rem;color:var(--ts);margin-top:10px;font-style:italic;line-height:1.5}
+/* ── Second-beat (B-shape: differential then management) ──────────── */
+.puzzle-step2{margin-top:20px;padding:18px;background:#FAFAFA;border:1.5px dashed #D1D5DB;border-radius:12px}
+.puzzle-step2-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.puzzle-step2-badge{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#fff;background:var(--blue);padding:3px 9px;border-radius:4px}
+.puzzle-step2-title{font-size:.82rem;font-weight:700;color:var(--text)}
+.puzzle-step2 .puzzle-prompt{font-size:.94rem;margin-bottom:14px}
+.puzzle-step2 .puzzle-input{min-height:70px}
+.puzzle-step2-feedback{margin-top:16px;padding:14px;background:#fff;border:1px solid var(--border);border-radius:8px;font-size:.88rem;line-height:1.6;display:none}
+.puzzle-step2-feedback.show{display:block}
 .puzzle-streak{text-align:center;margin-top:24px;font-size:.82rem;color:var(--ts)}
 .puzzle-streak strong{color:var(--blue)}
 .puzzle-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
@@ -759,7 +768,23 @@ var PUZZLES = [
       { token: 'CT angiography',    synonyms: ['ct angiography', 'cta', 'ct-pa', 'ct pulmonary angiogram', 'ctpa'] },
       { token: 'ACS less likely',   synonyms: ['acs', 'acute coronary', 'mi', 'myocardial infarction', 'troponin would be higher', 'troponin too low'] },
       { token: 'Aortic dissection', synonyms: ['aortic dissection', 'dissection', 'aorta'] }
-    ]
+    ],
+    // ── B-shape follow-up beat ────────────────────────────────────
+    // Step 1 was the differential shift (cognitive). Step 2 is the
+    // management decision (action). This is the differential-then-
+    // management pattern: same scenario, different competency. The
+    // learner has to commit to a confidence level on each step
+    // independently, which gives us per-step calibration data.
+    followUp: {
+      prompt: 'CT-PA confirms a saddle PE. Heart rate 118, BP 92/58, troponin now 0.18. RV strain on echo. What is your next step in management and why?',
+      teaching: 'This is intermediate-high risk PE (submassive): hemodynamic borderline + RV dysfunction + troponin elevation. Anticoagulation alone is insufficient — escalate. Options: (1) Systemic thrombolytics (tPA 100mg over 2h) — reserved for true hemodynamic collapse or impending arrest given bleeding risk. (2) Catheter-directed thrombolysis — preferred when available, lower tPA dose, comparable efficacy with less bleeding. (3) Surgical/mechanical thrombectomy — for contraindications to lysis. Heparin alone is wrong here; the RV is failing. The nuance: stable submassive PE is a judgment call, but unstable submassive (this patient) needs escalation now, before frank shock.',
+      keyConcepts: [
+        { token: 'Thrombolysis or escalation', synonyms: ['thromboly', 'tpa', 'alteplase', 'lytic', 'cdt', 'catheter-directed', 'thrombectomy', 'embolectomy'] },
+        { token: 'RV strain matters',          synonyms: ['rv', 'right ventric', 'right heart', 'strain', 'dysfunction'] },
+        { token: 'Heparin alone insufficient', synonyms: ['heparin alone', 'not just heparin', 'beyond heparin', 'anticoag alone', 'anticoagulation alone', 'submassive', 'intermediate-high'] },
+        { token: 'Hemodynamic concern',        synonyms: ['hemodynamic', 'unstable', 'hypotens', 'shock', 'bp', 'blood pressure'] }
+      ]
+    }
   },
   {type:'Physical Exam Finding',scenario:'68-year-old female with progressive dyspnea over 3 weeks. On exam: JVD, bilateral crackles to mid-lung, S3 gallop, 2+ pitting edema.',prompt:'You find a new harsh systolic murmur loudest at the apex radiating to the axilla. Does this change your working diagnosis of CHF exacerbation? Why or why not?',teaching:'New mitral regurgitation in the setting of CHF changes management significantly. Acute MR can be the CAUSE of the decompensation (papillary muscle rupture, endocarditis, chordal rupture) rather than a consequence. This patient needs an urgent echo to evaluate valve function. The CHF treatment is the same, but the underlying cause matters for definitive management.'},
   {type:'Missing Evidence',scenario:'24-year-old female with sudden-onset pleuritic chest pain, tachycardia, and SpO2 91%. Colleague says: "This is definitely a PE."',prompt:'What single finding, if present, would make you disagree?',teaching:'Fever. PE rarely causes fever >38.5°C. If this patient is febrile, pneumonia or empyema becomes much more likely than PE. Other disconfirming findings: productive purulent sputum (pneumonia), unilateral leg swelling absent (reduces PE probability), pleuritic pain that worsens with inspiration AND position (more consistent with pleurisy/pericarditis).'},
@@ -776,7 +801,25 @@ var PUZZLES = [
   {type:'Risk Priority',scenario:'Your patient has a platelet count of 18,000. The team is debating urgent intervention. Diagnosis is immune thrombocytopenia (ITP).',prompt:'At what platelet threshold and clinical scenario do you treat versus observe? Rank urgency: elective surgery tomorrow, mild gum bleeding, no bleeding, ICH risk.',teaching:'ITP treatment thresholds: (1) ICH/life-threatening bleeding → immediate IVIG + steroids + platelets. (2) Wet bleeding → treat if <30,000. (3) Dry purpura/no bleeding → treat if <20,000-30,000. (4) Elective surgery → target >50,000 (>80,000 neuro/ophth) — postpone if below. Treat based on bleeding risk, not number alone.'},
   // ── NEUROLOGY ──
   {type:'Physical Exam Finding',scenario:'45-year-old male with progressive proximal weakness over 3 weeks, areflexia, mild stocking-glove sensory loss, and prior GI illness 2 weeks ago.',prompt:'This is classic ascending weakness. What single exam finding would make you call neurosurgery instead of neurology?',teaching:'Bowel or bladder dysfunction. Ascending weakness + areflexia = Guillain-Barré (GBS) — neurology emergency. But urinary retention, rectal tone loss, or a sensory level on the trunk = spinal cord compression — neurosurgery emergency. GBS gets IVIG or plasmapheresis; cord compression gets emergent MRI ± surgical decompression. Never skip the sphincter exam in ascending weakness.'},
-  {type:'Anchoring Check',scenario:'19-year-old with headache, fever, stiff neck. LP: WBC 840 (98% neutrophils), protein 180, glucose 28 (serum 92). You started empiric ceftriaxone.',prompt:'Your intern says "wait for cultures before adding anything else." What two additional agents must you consider adding immediately and why?',teaching:'(1) Vancomycin — empiric coverage for ceftriaxone-resistant S. pneumoniae (up to 30% resistance in some regions). Do NOT wait for sensitivities. (2) Dexamethasone 0.15mg/kg q6h × 4 days — before or with first antibiotic dose. Reduces mortality and hearing loss in pneumococcal meningitis (NNT ~8). Bacterial meningitis has 20-30% mortality even with correct antibiotics.'},
+  {type:'Anchoring Check',scenario:'19-year-old with headache, fever, stiff neck. LP: WBC 840 (98% neutrophils), protein 180, glucose 28 (serum 92). You started empiric ceftriaxone.',prompt:'Your intern says "wait for cultures before adding anything else." What two additional agents must you consider adding immediately and why?',teaching:'(1) Vancomycin — empiric coverage for ceftriaxone-resistant S. pneumoniae (up to 30% resistance in some regions). Do NOT wait for sensitivities. (2) Dexamethasone 0.15mg/kg q6h × 4 days — before or with first antibiotic dose. Reduces mortality and hearing loss in pneumococcal meningitis (NNT ~8). Bacterial meningitis has 20-30% mortality even with correct antibiotics.',
+    keyConcepts: [
+      { token: 'Vancomycin',    synonyms: ['vancomycin', 'vanc'] },
+      { token: 'Dexamethasone', synonyms: ['dexamethasone', 'dex', 'steroids', 'glucocorticoid'] },
+      { token: 'Resistance concern', synonyms: ['resist', 'pneumococcus', 's. pneumoniae', 'strep pneumo'] },
+      { token: 'Mortality reduction', synonyms: ['mortality', 'death', 'hearing loss', 'morbid'] }
+    ],
+    followUp: {
+      prompt: 'Twelve hours in: she is more somnolent, GCS dropped from 15 to 12, and you note new bilateral 6th nerve palsies. CT head shows mild cerebral edema, no mass effect, no hydrocephalus. What is happening, and what changes immediately?',
+      teaching: 'Increased ICP from cerebritis/edema, with early signs of brainstem compromise (CN VI palsies are sensitive but non-specific for raised ICP). This is the second-leading cause of mortality in bacterial meningitis after the infection itself. Immediate steps: (1) Head of bed 30°. (2) Hyperosmolar therapy — 3% saline bolus or mannitol 0.5–1 g/kg. (3) Avoid hypotonic fluids and over-aggressive fluid resuscitation. (4) Neurosurgery consult for ICP monitoring or EVD if hydrocephalus develops. (5) Continue dexamethasone — already on board, reduces edema. Do NOT do another LP for "monitoring" — risk of herniation. The trap: people focus on tuning antibiotics when the patient is actually deteriorating from a complication of the infection itself. The infection is on track; the brain is the new problem.',
+      keyConcepts: [
+        { token: 'Raised ICP',         synonyms: ['icp', 'intracranial pressure', 'cerebral edema', 'edema'] },
+        { token: 'Hyperosmolar therapy', synonyms: ['hyperosmolar', 'hypertonic', '3%', 'mannitol', 'saline'] },
+        { token: 'Head of bed',        synonyms: ['head of bed', 'hob', 'elevate', '30 degree'] },
+        { token: 'No repeat LP',       synonyms: ['no lp', 'avoid lp', 'no repeat tap', 'herniation', 'do not lp'] },
+        { token: 'Neurosurgery',       synonyms: ['neurosurg', 'evd', 'monitor', 'shunt'] }
+      ]
+    }
+  },
   // ── RHEUMATOLOGY ──
   {type:'Lab Shift',scenario:'38-year-old female with 6 weeks of symmetric small joint arthritis (MCPs, PIPs), morning stiffness >1 hour, fatigue, and low-grade fever. RF positive, anti-CCP strongly positive, ESR 88.',prompt:'Anti-CCP just came back strongly positive. How does this change your management urgency compared to if it were negative?',teaching:'Anti-CCP is highly specific (>95%) for RA and predicts aggressive, erosive disease. Strongly positive = (1) High risk of rapid joint destruction without treatment. (2) DMARD therapy imperative ideally within 12 weeks of symptom onset. (3) Rheumatology referral within 2 weeks. The window: early methotrexate ± hydroxychloroquine significantly improves long-term joint outcomes.'},
   {type:'Missing Evidence',scenario:'52-year-old male with proximal muscle weakness, difficulty rising from a chair, dysphagia, and heliotrope rash. CK 4,200. You are diagnosing dermatomyositis.',prompt:'Before starting immunosuppression, what workup is non-negotiable — and why would delaying treatment to complete it be wrong?',teaching:'Malignancy screening: dermatomyositis is paraneoplastic in 20-25% of adults (ovarian, lung, colorectal, pancreatic, nasopharyngeal). CT chest/abdomen/pelvis + age-appropriate cancer screening required. But do NOT delay steroids — dysphagia + ILD can be fatal. Run the workup simultaneously. Finding malignancy changes management: treating the cancer may resolve the myositis.'},
@@ -1106,50 +1149,63 @@ function submitPuzzle(confidence) {
   var fb = document.getElementById('puzzleFeedback');
   var frame = _confidenceFrame(confidence);
 
-  // Hide the confidence UI now that they've committed; show the
-  // "next puzzle" affordance instead.
+  // Hide the confidence UI now that they've committed.
   var conf = document.getElementById('puzzleConfidence');
   if (conf) conf.classList.add('hidden');
+
+  // If the puzzle has a follow-up beat, defer the "Next puzzle"
+  // affordance until after step 2 is also submitted. Otherwise show
+  // it now (one-step puzzle, classic flow).
+  var hasFollowUp = !!(p.followUp && p.followUp.prompt);
   var actions = document.getElementById('puzzleActions');
-  if (actions) actions.style.display = 'flex';
+  if (actions && !hasFollowUp) actions.style.display = 'flex';
 
   fb.className = 'puzzle-feedback show teaching';
   // Headline carries the confidence tag so the learner sees the
-  // commitment they just made reflected back at them. That feedback
-  // loop — "you said X, here's the truth" — is what makes the puzzle
-  // feel like a game instead of a flashcard.
+  // commitment they just made reflected back at them.
   var tagHtml = frame.tag
     ? '<span class="puzzle-cf-tag ' + frame.tone + '">' + frame.tag + '</span>'
     : '';
 
   // Option 2 layered on top of Option 1: score the answer against
-  // the puzzle's keyConcepts (when tagged). Render the coverage bar
-  // BELOW the teaching so the teaching is still the primary content.
+  // the puzzle's keyConcepts (when tagged).
   var coverage = _scoreConcepts(p, answer);
   var coverageHtml = _coverageHtml(coverage, confidence);
+
+  // If the puzzle has a follow-up beat (B-shape: differential first,
+  // then management), append the step-2 panel inside the feedback div.
+  // The user reads the teaching, then commits to step 2 with its own
+  // confidence gate. No new DOM at the page level — the step-2 panel
+  // is scoped inside .puzzle-feedback so it scrolls with the teaching.
+  var step2Html = hasFollowUp ? _renderStep2(p) : '';
 
   fb.innerHTML =
     '<div style="font-weight:700;margin-bottom:6px">' + tagHtml + frame.headline + '</div>' +
     p.teaching +
-    coverageHtml;
+    coverageHtml +
+    step2Html;
   fb.style.display = 'block';
 
   document.getElementById('puzzleAnswer').disabled = true;
 
-  // Update streak (still unconditional — daily-streak preservation is
-  // a separate engagement mechanic from per-puzzle scoring).
+  // Streak: only count the daily streak on STEP 1 commit. The streak
+  // is per-puzzle-per-day, not per-beat. Step 2 of the same puzzle
+  // shouldn't increment streak again.
   streak++;
   localStorage.setItem('rdx_puzzle_streak', streak);
   localStorage.setItem('rdx_puzzle_date', today);
   updateStreak(p);
 
-  // Track attempt for the browse/progress system. The third arg used
-  // to be hardcoded `true` (everything was "correct"). Now we pass
-  // the confidence level so post-hoc analysis can look at calibration:
-  // Option 2 will compare confidence vs concept-coverage score, which
-  // is the actual win.
+  // Track the step 1 attempt. If there's a follow-up, step 2 will fire
+  // its own log entry on submit so calibration analysis can compare
+  // confidence-step1 vs confidence-step2 for the same scenario.
   if (window.RDXPuzzleTracking) {
-    window.RDXPuzzleTracking.logAttempt(p.id || ('idx-' + currentIndex), p.type, true, { confidence: confidence || 'unrated' });
+    window.RDXPuzzleTracking.logAttempt(
+      p.id || ('idx-' + currentIndex),
+      p.type,
+      true,
+      { confidence: confidence || 'unrated', step: hasFollowUp ? 1 : null }
+    );
   }
 
   // Per-attempt history for calibration insights.
@@ -1158,12 +1214,106 @@ function submitPuzzle(confidence) {
     history.push({
       date: today,
       type: p.type,
+      step: hasFollowUp ? 1 : null,
       answered: true,
       words: answer.split(/\s+/).filter(Boolean).length,
       confidence: confidence || 'unrated',
       coverageScore: coverage ? coverage.score : null,
       coverageHits: coverage ? coverage.hits.length : null,
       coverageTotal: coverage ? coverage.total : null
+    });
+    if (history.length > 90) history = history.slice(-90);
+    localStorage.setItem('rdx_puzzle_history', JSON.stringify(history));
+  } catch(e) {}
+}
+
+// ── Step 2 (B-shape: follow-up beat) ──────────────────────────────
+// Rendered inside the step 1 feedback div after step 1 reveal. Has
+// its own prompt, textarea, and confidence gate. The badge "Now"
+// signals the temporal beat shift — we've moved past the diagnosis,
+// now the question is action. That framing matters: it mirrors how
+// clinicians actually think (work up, then act) and gives the learner
+// two distinct competencies in one micro-case.
+function _renderStep2(p) {
+  var fu = p.followUp || {};
+  return '' +
+    '<div class="puzzle-step2" id="puzzleStep2">' +
+      '<div class="puzzle-step2-header">' +
+        '<span class="puzzle-step2-badge">Now</span>' +
+        '<span class="puzzle-step2-title">Next beat</span>' +
+      '</div>' +
+      '<div class="puzzle-prompt">' + fu.prompt + '</div>' +
+      '<textarea class="puzzle-input" id="puzzleAnswer2" placeholder="Your reasoning..."></textarea>' +
+      '<div class="puzzle-confidence" id="puzzleConfidence2" style="margin-top:14px">' +
+        '<div class="puzzle-confidence-label">Same gate — how confident now?</div>' +
+        '<div class="puzzle-confidence-buttons">' +
+          '<button class="puzzle-cf-btn puzzle-cf-sure"   onclick="submitPuzzleStep2(\'sure\')">Sure</button>' +
+          '<button class="puzzle-cf-btn puzzle-cf-pretty" onclick="submitPuzzleStep2(\'pretty\')">Pretty sure</button>' +
+          '<button class="puzzle-cf-btn puzzle-cf-guess"  onclick="submitPuzzleStep2(\'guessing\')">Guessing</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="puzzle-step2-feedback" id="puzzleStep2Feedback"></div>' +
+    '</div>';
+}
+
+function submitPuzzleStep2(confidence) {
+  var p = PUZZLES[currentIndex];
+  var fu = p.followUp || {};
+  var answer = (document.getElementById('puzzleAnswer2') || {}).value || '';
+  var frame = _confidenceFrame(confidence);
+
+  // Hide step 2's confidence gate, disable its textarea.
+  var conf2 = document.getElementById('puzzleConfidence2');
+  if (conf2) conf2.classList.add('hidden');
+  var ans2 = document.getElementById('puzzleAnswer2');
+  if (ans2) ans2.disabled = true;
+
+  // Now reveal step 2's teaching + coverage. We treat followUp as a
+  // mini-puzzle for scoring: it has its own keyConcepts (optional)
+  // and we run the same _scoreConcepts logic against fu.
+  var coverage2 = _scoreConcepts(fu, answer);
+  var coverageHtml2 = _coverageHtml(coverage2, confidence);
+  var tagHtml = frame.tag
+    ? '<span class="puzzle-cf-tag ' + frame.tone + '">' + frame.tag + '</span>'
+    : '';
+
+  var fb2 = document.getElementById('puzzleStep2Feedback');
+  if (fb2) {
+    fb2.classList.add('show');
+    fb2.innerHTML =
+      '<div style="font-weight:700;margin-bottom:6px">' + tagHtml + frame.headline + '</div>' +
+      fu.teaching +
+      coverageHtml2;
+  }
+
+  // Now that step 2 is committed, surface the "Next puzzle" action.
+  var actions = document.getElementById('puzzleActions');
+  if (actions) actions.style.display = 'flex';
+
+  // Track the step 2 attempt separately. Same id, step=2, so the
+  // calibration cross-tab can compare per-step confidence within the
+  // same puzzle.
+  if (window.RDXPuzzleTracking) {
+    window.RDXPuzzleTracking.logAttempt(
+      p.id || ('idx-' + currentIndex),
+      p.type,
+      true,
+      { confidence: confidence || 'unrated', step: 2 }
+    );
+  }
+
+  try {
+    var history = JSON.parse(localStorage.getItem('rdx_puzzle_history') || '[]');
+    history.push({
+      date: today,
+      type: p.type,
+      step: 2,
+      answered: true,
+      words: answer.split(/\s+/).filter(Boolean).length,
+      confidence: confidence || 'unrated',
+      coverageScore: coverage2 ? coverage2.score : null,
+      coverageHits: coverage2 ? coverage2.hits.length : null,
+      coverageTotal: coverage2 ? coverage2.total : null
     });
     if (history.length > 90) history = history.slice(-90);
     localStorage.setItem('rdx_puzzle_history', JSON.stringify(history));
