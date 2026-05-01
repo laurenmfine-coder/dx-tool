@@ -179,6 +179,64 @@ body{
 .panel .neighbors .edge-dot.shares-presentation{background:var(--pres)}
 .panel .neighbors .edge-dot.what-if-twist{background:var(--twist)}
 
+/* Type badge on puzzle and branched-case links. The badge tells the
+   learner what kind of reasoning the puzzle drills before they click
+   through (e.g., "Lab Shift", "Anchoring Check"). Honest labeling:
+   these are categories, not difficulty markers. */
+.panel .content-list .type-badge{
+  display:inline-block; margin-left:6px;
+  font-size:.66rem; font-weight:600; letter-spacing:.3px;
+  padding:1px 6px; border-radius:999px;
+  background:#F1F5F9; color:var(--ts);
+  vertical-align:1px;
+}
+.panel .content-list .type-badge-branched{
+  background:#FEF3C7; color:#92400E;
+}
+
+/* Copy-link button: educators paste shareable URLs into syllabi.
+   Sits at the bottom of the panel content. */
+.panel .copy-link-row{margin-top:16px; padding-top:14px; border-top:1px dashed var(--border)}
+.panel .copy-link{
+  font-family:inherit; font-size:.78rem; cursor:pointer;
+  background:none; border:1px dashed var(--border); color:var(--ts);
+  padding:6px 10px; border-radius:6px;
+  display:inline-flex; align-items:center; gap:6px;
+  transition:all .12s;
+}
+.panel .copy-link:hover{border-style:solid; border-color:var(--blue); color:var(--blue-d); background:var(--blue-l)}
+.panel .copy-link.copied{background:#ECFDF5; border-color:#10B981; color:#065F46; border-style:solid}
+
+/* Request-a-concept form: closes the loop with learners who hit a
+   missing concept. Sits between the graph row and the educational
+   disclaimer footer. */
+.request-row{margin-top:24px}
+.request-form{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; padding:14px 16px;
+}
+.request-label{
+  display:block; font-size:.85rem; font-weight:600; color:var(--text);
+  margin-bottom:8px;
+}
+.request-input-row{display:flex; gap:8px; flex-wrap:wrap}
+.request-input-row input{
+  flex:1 1 240px; min-width:0;
+  padding:8px 12px; font-size:.9rem; font-family:inherit;
+  background:var(--bg); border:1px solid var(--border); color:var(--text);
+  border-radius:8px; outline:none;
+}
+.request-input-row input:focus{border-color:var(--blue); background:#fff}
+.request-submit{
+  font-family:inherit; font-size:.85rem; font-weight:600; cursor:pointer;
+  padding:8px 16px; border-radius:8px;
+  background:var(--blue); color:#fff; border:1px solid var(--blue);
+}
+.request-submit:hover{background:var(--blue-d); border-color:var(--blue-d)}
+.request-status{margin-top:8px; font-size:.8rem; min-height:1em; line-height:1.4}
+.request-status.success{color:#065F46}
+.request-status.warn{color:#92400E}
+
 /* Mobile slide-up sheet: on small screens, the panel becomes a fixed
    bottom sheet that rises over the graph. The desktop side panel
    stays hidden in that mode. */
@@ -263,6 +321,22 @@ footer a{color:var(--ts)}
       <strong>Click any node</strong> to see its summary, content links, and direct neighbors. Click an edge to see how two concepts relate.
     </div>
   </aside>
+</div>
+
+<!-- Request-a-concept form: closes the feedback loop with learners
+     who hit a missing concept. Submission fires an analytics event;
+     no backend wiring beyond the existing analytics_events table. -->
+<div class="request-row">
+  <form id="request-form" class="request-form">
+    <label for="request-input" class="request-label">Don't see a concept you wanted?</label>
+    <div class="request-input-row">
+      <input id="request-input" type="text" maxlength="160"
+             placeholder="e.g. heart block, atypical MI, cardiogenic shock"
+             autocomplete="off">
+      <button type="submit" class="request-submit">Send</button>
+    </div>
+    <div id="request-status" class="request-status" aria-live="polite"></div>
+  </form>
 </div>
 
 <footer>
@@ -437,19 +511,35 @@ const network = new vis.Network(
   }
 );
 
-// After stabilization: focus the default node (chest pain hub). The
-// hint message above the graph tells the learner there's more to
-// explore; an autonomous camera move on first load is more
-// disorienting than helpful.
+// After stabilization: focus the default node (chest pain hub), unless
+// the URL carries a ?node=<id> deep link, in which case we focus that
+// node and open the panel directly. Educators paste these into syllabi
+// and social channels.
 network.once('stabilizationIterationsDone', function() {
   try {
-    if (MAP.defaultFocus) {
-      network.focus(MAP.defaultFocus, {
-        scale: 1.05,
+    const urlParams = new URLSearchParams(window.location.search);
+    const deepLinkId = urlParams.get('node');
+    const validDeepLink = deepLinkId && MAP.nodes.some(n => n.id === deepLinkId);
+    const focusId = validDeepLink ? deepLinkId : MAP.defaultFocus;
+
+    if (focusId) {
+      network.focus(focusId, {
+        scale: validDeepLink ? 1.2 : 1.05,
         animation: { duration: 400, easingFunction: 'easeInOutQuad' }
       });
+      // For deep links, also select the node and open the panel so the
+      // recipient lands on its content immediately.
+      if (validDeepLink) {
+        network.selectNodes([deepLinkId]);
+        const node = MAP.nodes.find(n => n.id === deepLinkId);
+        if (node) renderNode(node);
+      }
     }
-    track('graph_load', { node_count: MAP.nodes.length, edge_count: MAP.edges.length });
+    track('graph_load', {
+      node_count: MAP.nodes.length,
+      edge_count: MAP.edges.length,
+      deep_link: validDeepLink ? deepLinkId : null
+    });
   } catch(e) {}
 });
 
@@ -457,21 +547,82 @@ network.once('stabilizationIterationsDone', function() {
 
 const panel = document.getElementById('panel');
 
+// ─── Puzzle metadata cache ───────────────────────────────────────────
+// Fetch puzzles.html once on first node click, parse out the puzzle
+// type for each puzzle id, cache in memory. Used to render category
+// tags on puzzle references in the side panel so learners know what
+// kind of reasoning each puzzle drills before they click through.
+const PUZZLE_META = {};      // id -> { type, scenarioHead }
+let puzzleMetaState = 'idle'; // 'idle' | 'loading' | 'ready' | 'failed'
+const puzzleMetaListeners = [];
+
+async function ensurePuzzleMeta() {
+  if (puzzleMetaState === 'ready' || puzzleMetaState === 'loading') return;
+  puzzleMetaState = 'loading';
+  try {
+    const res = await fetch('/puzzles.html', { credentials: 'same-origin' });
+    if (!res.ok) throw new Error('puzzles.html ' + res.status);
+    const text = await res.text();
+    // Extract the PUZZLES array body. Each puzzle is a top-level object
+    // literal inside the array; we walk char-by-char counting braces.
+    const startIdx = text.indexOf('var PUZZLES = [');
+    if (startIdx === -1) throw new Error('PUZZLES array not found');
+    const arrStart = text.indexOf('[', startIdx);
+    let depth = 0, inObj = false, buf = '', i = arrStart + 1, idx = 0;
+    while (i < text.length) {
+      const c = text[i];
+      if (c === '{' && depth === 0) { inObj = true; buf = ''; }
+      if (inObj) buf += c;
+      if (c === '{') depth++;
+      else if (c === '}') {
+        depth--;
+        if (depth === 0 && inObj) {
+          idx++;
+          // Pull the type field; first scenario phrase for preview.
+          const tMatch = buf.match(/type:\s*['"]([^'"]+)['"]/);
+          const sMatch = buf.match(/scenario:\s*['"]([^'"]+)['"]/);
+          PUZZLE_META[idx] = {
+            type: tMatch ? tMatch[1] : '',
+            scenarioHead: sMatch ? sMatch[1].slice(0, 80) : ''
+          };
+          inObj = false; buf = '';
+        }
+      }
+      i++;
+      if (depth === 0 && !inObj && text.slice(i, i + 2) === '];') break;
+    }
+    puzzleMetaState = 'ready';
+    puzzleMetaListeners.forEach(fn => { try { fn(); } catch(e) {} });
+    puzzleMetaListeners.length = 0;
+  } catch(err) {
+    puzzleMetaState = 'failed';
+    // No retry; the page degrades to no type tags. Not worth surfacing.
+  }
+}
+
 function parseContentRefs(contentStr) {
   // contentStr like "Branched: chest-pain-2am | Puzzles: #1, #7, #37, #122"
-  // Split into linkable pieces.
+  // Returns array of { kind, label, href, id } items.
   const items = [];
   const segments = contentStr.split('|').map(s => s.trim());
   for (const seg of segments) {
     if (seg.startsWith('Branched:')) {
       const ids = seg.replace('Branched:', '').split(',').map(s => s.trim()).filter(Boolean);
       for (const id of ids) {
-        items.push({ kind: 'branched', label: 'Branched case: ' + id, href: '/branched.html?id=' + encodeURIComponent(id) });
+        items.push({
+          kind: 'branched', id: id,
+          label: 'Branched case: ' + id,
+          href: '/branched.html?id=' + encodeURIComponent(id)
+        });
       }
     } else if (seg.startsWith('Puzzles:')) {
       const nums = seg.replace('Puzzles:', '').split(',').map(s => s.trim().replace('#', '')).filter(Boolean);
       for (const n of nums) {
-        items.push({ kind: 'puzzle', label: 'Daily puzzle #' + n, href: '/puzzles.html?id=' + encodeURIComponent(n) });
+        items.push({
+          kind: 'puzzle', id: n,
+          label: 'Daily puzzle #' + n,
+          href: '/puzzles.html?id=' + encodeURIComponent(n)
+        });
       }
     }
   }
@@ -514,16 +665,38 @@ function closePanel() {
   if (!isMobileLayout()) renderEmpty();
 }
 
+function renderRefHtml(refs) {
+  if (!refs.length) {
+    return '<div class="panel-empty" style="font-size:.84rem">No content tagged yet.</div>';
+  }
+  return '<ul class="content-list">' + refs.map(r => {
+    let typeBadge = '';
+    if (r.kind === 'puzzle' && PUZZLE_META[r.id] && PUZZLE_META[r.id].type) {
+      typeBadge = '<span class="type-badge">' + PUZZLE_META[r.id].type + '</span>';
+    } else if (r.kind === 'branched') {
+      typeBadge = '<span class="type-badge type-badge-branched">Branched case</span>';
+    }
+    return '<li><a href="' + r.href + '" data-track-content="' + r.kind + '" data-track-href="' + r.href + '">' +
+      r.label + typeBadge + '</a></li>';
+  }).join('') + '</ul>';
+}
+
 function renderNode(n) {
   const refs = parseContentRefs(n.content || '');
   const neigh = neighborsOf(n.id);
 
-  let refsHtml = '<div class="panel-empty" style="font-size:.84rem">No content tagged yet.</div>';
-  if (refs.length) {
-    refsHtml = '<ul class="content-list">' + refs.map(r =>
-      '<li><a href="' + r.href + '" data-track-content="' + r.kind + '" data-track-href="' + r.href + '">' + r.label + '</a></li>'
-    ).join('') + '</ul>';
+  // Kick off puzzle metadata fetch on first node interaction. Render
+  // again when it lands so the type badges populate.
+  ensurePuzzleMeta();
+  if (puzzleMetaState !== 'ready' && refs.some(r => r.kind === 'puzzle')) {
+    puzzleMetaListeners.push(() => {
+      // Only re-render if the same node is still selected.
+      const stillSelected = network.getSelectedNodes && network.getSelectedNodes()[0] === n.id;
+      if (stillSelected) renderNode(n);
+    });
   }
+
+  const refsHtml = renderRefHtml(refs);
 
   let neighHtml = '';
   if (neigh.length) {
@@ -537,13 +710,21 @@ function renderNode(n) {
       }).join('') + '</div>';
   }
 
+  // Copy-link button: educators paste these into syllabi. Uses the
+  // current node id so the recipient lands on the same neighborhood.
+  const copyLinkHtml =
+    '<button class="copy-link" data-copy-node="' + n.id + '" title="Copy a shareable link to this node">' +
+      '<span aria-hidden="true">🔗</span> Copy link to this concept' +
+    '</button>';
+
   panel.innerHTML =
     '<button class="panel-close" id="panel-close" aria-label="Close panel">&times;</button>' +
     '<div><span class="kind-tag ' + n.kind + '">' + n.kind + '</span></div>' +
     '<h2>' + n.label + '</h2>' +
     '<div class="summary">' + n.summary + '</div>' +
     '<div class="section-h">Content</div>' + refsHtml +
-    neighHtml;
+    neighHtml +
+    '<div class="copy-link-row">' + copyLinkHtml + '</div>';
 
   wirePanelInteractions(n);
   openPanel();
@@ -576,6 +757,39 @@ function wirePanelInteractions(currentNode) {
         content_kind: a.getAttribute('data-track-content'),
         href: a.getAttribute('data-track-href')
       });
+    });
+  });
+
+  // Copy-link button: writes a shareable URL with ?node= to the
+  // clipboard and shows brief inline confirmation. Falls back to a
+  // visible URL prompt if Clipboard API is unavailable (older browsers
+  // or non-secure contexts).
+  panel.querySelectorAll('button[data-copy-node]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nodeId = btn.getAttribute('data-copy-node');
+      const url = window.location.origin + window.location.pathname + '?node=' + encodeURIComponent(nodeId);
+      const showConfirm = (msg) => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = msg;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.classList.remove('copied');
+        }, 1600);
+      };
+      const fallback = () => {
+        // Older browsers: select-and-prompt approach
+        try { window.prompt('Copy this link:', url); } catch(e) {}
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(
+          () => showConfirm('✓ Link copied'),
+          () => fallback()
+        );
+      } else {
+        fallback();
+      }
+      track('copy_link', { node_id: nodeId });
     });
   });
 }
@@ -769,6 +983,37 @@ searchInput.addEventListener('keydown', (ev) => {
   }
 });
 
+// ─── Request-a-concept form ──────────────────────────────────────────
+// Sends the request as a 'cta_click' analytics event (already on the
+// allowlist). No backend; review weekly via Supabase to prioritize
+// authoring. Confirmation is inline; nothing leaves the page.
+(function wireRequestForm() {
+  const form = document.getElementById('request-form');
+  const input = document.getElementById('request-input');
+  const status = document.getElementById('request-status');
+  if (!form || !input || !status) return;
+
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const text = (input.value || '').trim();
+    if (!text) return;
+    if (text.length < 3) {
+      status.textContent = 'Please add a few more characters so we know what to look for.';
+      status.className = 'request-status warn';
+      return;
+    }
+    track('concept_requested', { text: text.slice(0, 160) });
+    input.value = '';
+    status.textContent = "Got it. Thanks for telling us what's missing.";
+    status.className = 'request-status success';
+    setTimeout(() => {
+      if (status.classList.contains('success')) {
+        status.textContent = '';
+        status.className = 'request-status';
+      }
+    }, 4000);
+  });
+})();
 </script>
 
 </body>
