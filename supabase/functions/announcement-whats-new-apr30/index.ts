@@ -17,8 +17,13 @@
 // Test send (recommend before live send):
 //   curl ... -d '{"test_email": "your@email.com"}'
 //
-// Live send to all weekly_email_eligible:
-//   curl ... -d '{}'
+// Live send to all weekly_email_eligible — REQUIRES explicit flag:
+//   curl ... -d '{"confirm_send": true}'
+//
+// A bare {} body (or any body without one of the three flags above)
+// will be REJECTED with 400. This is intentional. On Apr 30 a malformed
+// PowerShell body parsed as {}, fell through to live send, and 77
+// subscribers got the email without a dry-run preview first.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
@@ -127,19 +132,50 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 Deno.serve(async (req) => {
   let testEmail = null;
   let dryRun = false;
+  let confirmSend = false;
   let extraEmails: Array<{email: string, full_name?: string}> = [];
+  let parseFailed = false;
 
   if (req.method === "POST") {
     try {
       const b = await req.json();
       testEmail = b?.test_email || null;
       dryRun = b?.dry_run === true;
+      confirmSend = b?.confirm_send === true;
       if (Array.isArray(b?.extra_emails)) {
         extraEmails = b.extra_emails.map((e: any) =>
           typeof e === 'string' ? { email: e } : e
         );
       }
-    } catch(e) {}
+    } catch(e) {
+      // The Apr 30 incident: PowerShell mangled the JSON body, the parse
+      // threw, the catch was empty, and the function fell through to a
+      // live send to all 77 subscribers. We now treat any parse failure
+      // as a hard abort. If you want to send live, the body has to parse
+      // AND carry confirm_send: true.
+      parseFailed = true;
+    }
+  }
+
+  if (parseFailed) {
+    return new Response(
+      JSON.stringify({
+        error: "Could not parse request body as JSON. Aborting to avoid an unintended live send. Pass a valid JSON body, e.g. {\"dry_run\": true} or {\"test_email\": \"you@example.com\"} or {\"confirm_send\": true} for a real send."
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  // Hard gate: no test_email, no dry_run, no confirm_send → abort.
+  // This is the load-bearing safety. A bare {} or empty body used to
+  // trigger a live send to everyone; now it returns an error.
+  if (!testEmail && !dryRun && !confirmSend) {
+    return new Response(
+      JSON.stringify({
+        error: "Refusing to send. Pass one of: dry_run:true (preview), test_email:'...' (single recipient), or confirm_send:true (live send to all weekly_email_eligible)."
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
