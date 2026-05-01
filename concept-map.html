@@ -27,7 +27,7 @@
   --bg:#F8FAFC; --surface:#fff; --border:#E2E8F0; --text:#1E293B;
   --ts:#64748B; --blue:#2874A6; --blue-l:#EBF5FB; --blue-d:#1F5C82;
   --hub:#2874A6; --concept:#5DADE2; --mechanism:#A569BD;
-  --diff:#DC2626; --mech-edge:#A569BD; --pres:#16A085; --twist:#E67E22;
+  --diff:#DC2626; --mech-edge:#5B6E8F; --pres:#16A085; --twist:#E67E22;
 }
 *{box-sizing:border-box}
 body{
@@ -76,9 +76,15 @@ body{
   user-select:none;
 }
 .chip.active{background:var(--blue-l); border-color:var(--blue); color:var(--blue-d)}
-.chip .swatch{width:10px;height:10px;border-radius:2px;display:inline-block}
-.chip[data-edge="differential-pair"] .swatch{background:var(--diff)}
-.chip[data-edge="shares-mechanism"] .swatch{background:var(--mech-edge)}
+/* Swatches render as small line segments to match the visual
+   appearance of edges in the graph. The dashed swatch on
+   shares-mechanism mirrors the dashed edge style. */
+.chip .swatch{width:14px;height:3px;border-radius:1px;display:inline-block}
+.chip[data-edge="differential-pair"] .swatch{background:var(--diff); height:4px}
+.chip[data-edge="shares-mechanism"] .swatch{
+  background:repeating-linear-gradient(to right, var(--mech-edge) 0 3px, transparent 3px 5px);
+  height:3px;
+}
 .chip[data-edge="shares-presentation"] .swatch{background:var(--pres)}
 .chip[data-edge="what-if-twist"] .swatch{background:var(--twist)}
 
@@ -228,7 +234,7 @@ footer a{color:var(--ts)}
     <span aria-hidden="true">🔍</span>
     <input id="search" type="text" placeholder="Search concepts (e.g. tamponade, AFib, cardiology)" autocomplete="off">
   </div>
-  <div class="chip-group" id="edge-filters">
+  <div class="chip-group" id="edge-filters" aria-label="Filter edges by relationship type. Same colors mark edges in the graph and dots on neighbor buttons.">
     <span class="chip active" data-edge="all">All edges</span>
     <span class="chip" data-edge="differential-pair"><span class="swatch"></span>Differential pair</span>
     <span class="chip" data-edge="shares-mechanism"><span class="swatch"></span>Shares mechanism</span>
@@ -246,7 +252,7 @@ footer a{color:var(--ts)}
     </div>
     <div class="graph-hint" id="graph-hint">
       <span class="hint-icon" aria-hidden="true">👆</span>
-      <span>Drag to pan, scroll or pinch to zoom. Tap any node to see its content.</span>
+      <span>Tap any node to see its content. Pinch or scroll to zoom.</span>
       <button class="hint-dismiss" id="graph-hint-dismiss" aria-label="Dismiss hint">Got it</button>
     </div>
     <div id="graph"></div>
@@ -352,7 +358,7 @@ const KIND_STYLE = {
 };
 const EDGE_COLOR = {
   'differential-pair':   '#DC2626',
-  'shares-mechanism':    '#A569BD',
+  'shares-mechanism':    '#5B6E8F',
   'shares-presentation': '#16A085',
   'what-if-twist':       '#E67E22'
 };
@@ -431,22 +437,18 @@ const network = new vis.Network(
   }
 );
 
-// After stabilization: fit the whole graph briefly so learners see the
-// full extent (heart failure and arrhythmia hubs are off-screen at the
-// chest pain default zoom), then animate-zoom into the chest pain hub.
-// The two-stage motion communicates "there's more here than you see"
-// without any text.
+// After stabilization: focus the default node (chest pain hub). The
+// hint message above the graph tells the learner there's more to
+// explore; an autonomous camera move on first load is more
+// disorienting than helpful.
 network.once('stabilizationIterationsDone', function() {
   try {
-    network.fit({ animation: { duration: 400, easingFunction: 'easeInOutQuad' } });
-    setTimeout(function() {
-      if (MAP.defaultFocus) {
-        network.focus(MAP.defaultFocus, {
-          scale: 1.15,
-          animation: { duration: 800, easingFunction: 'easeInOutQuad' }
-        });
-      }
-    }, 1100);
+    if (MAP.defaultFocus) {
+      network.focus(MAP.defaultFocus, {
+        scale: 1.05,
+        animation: { duration: 400, easingFunction: 'easeInOutQuad' }
+      });
+    }
     track('graph_load', { node_count: MAP.nodes.length, edge_count: MAP.edges.length });
   } catch(e) {}
 });
@@ -525,7 +527,7 @@ function renderNode(n) {
 
   let neighHtml = '';
   if (neigh.length) {
-    neighHtml = '<div class="section-h">Connected to (most relevant first)</div><div class="neighbors">' +
+    neighHtml = '<div class="section-h">Connected to</div><div class="neighbors">' +
       neigh.map(x => {
         const target = MAP.nodes.find(nn => nn.id === x.id);
         if (!target) return '';
