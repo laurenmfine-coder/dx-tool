@@ -15,8 +15,13 @@
 <script src="/js/rdx-supabase.js"></script>
 <script src="/js/rdx-data-consent.js"></script>
 
-<!-- Concept map data -->
-<script src="/data/rdx-concept-map.js"></script>
+<!-- Concept map data: manifest declares available domains; each
+     domain's data file is loaded statically below. The active domain
+     is selected from ?domain= or defaults to the first manifest
+     entry. Adding a new domain requires editing the manifest, adding
+     the data file, and adding one script tag here. -->
+<script src="/data/concept-maps/manifest.js"></script>
+<script src="/data/concept-maps/cardiology.js"></script>
 
 <!-- vis.js network rendering. Loaded from jsdelivr (already on the
      site CSP script-src allowlist; unpkg is not). -->
@@ -49,6 +54,32 @@ body{
   padding:10px 14px; border-radius:8px; font-size:.82rem;
   margin-bottom:18px; line-height:1.5;
 }
+
+/* Domain switcher: tab strip rendered above the beta banner when
+   multiple domains are registered. The active tab matches the
+   current ?domain= or the default. */
+.domain-switcher{
+  display:flex; flex-wrap:wrap; gap:6px;
+  margin-bottom:14px;
+}
+.domain-switcher .domain-tab{
+  font-family:inherit; font-size:.85rem; font-weight:600; cursor:pointer;
+  padding:6px 14px; border-radius:8px;
+  background:var(--surface); border:1px solid var(--border); color:var(--ts);
+  text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+  transition:all .12s;
+}
+.domain-switcher .domain-tab:hover{border-color:var(--blue); color:var(--blue-d)}
+.domain-switcher .domain-tab.active{
+  background:var(--blue); color:#fff; border-color:var(--blue);
+}
+.domain-switcher .domain-tab.active:hover{background:var(--blue-d); border-color:var(--blue-d); color:#fff}
+.domain-switcher .beta-tag{
+  font-size:.62rem; font-weight:700; letter-spacing:.4px;
+  padding:1px 5px; border-radius:3px;
+  background:#FEF3C7; color:#92400E;
+}
+.domain-switcher .domain-tab.active .beta-tag{background:rgba(255,255,255,0.25); color:#fff}
 
 /* Top control bar: search + filter chips */
 .controls{
@@ -283,7 +314,12 @@ footer a{color:var(--ts)}
   <div class="meta">Browse by relationship. Click any node to see its content. Hover an edge to see why two concepts are linked.</div>
 </div>
 
-<div class="beta-banner">
+<!-- Domain switcher: tab strip rendered when multiple domains are
+     registered. Hidden when only one domain exists (cleaner first
+     impression in the beta period). -->
+<div class="domain-switcher" id="domain-switcher" hidden></div>
+
+<div class="beta-banner" id="beta-banner">
   <strong>Beta.</strong> A small slice of the platform's content shown as a navigable graph. Right now this covers cardiology only. We're testing whether browsing by relationship helps you find related topics to study. Feedback welcome.
 </div>
 
@@ -361,11 +397,91 @@ function track(action, data) {
 
 // ─── Build vis.js datasets ───────────────────────────────────────────
 
-const MAP = window.RDX_CONCEPT_MAP;
+// Resolve the active domain. Priority order:
+//   1. ?domain=<id> in the URL, if it matches a registered domain
+//   2. The domain that contains the ?node=<id> in the URL (for old
+//      deep links from before the domain switcher landed)
+//   3. The first entry in the manifest
+const MANIFEST = window.RDX_CONCEPT_MAP_MANIFEST || [];
+const REGISTRY = window.RDX_CONCEPT_MAPS || {};
+
+function resolveActiveDomain() {
+  const params = new URLSearchParams(window.location.search);
+  const domainParam = params.get('domain');
+  const nodeParam = params.get('node');
+
+  // 1. Explicit domain param wins if valid
+  if (domainParam && REGISTRY[domainParam]) return domainParam;
+
+  // 2. If a node deep link is present, find which domain contains it
+  if (nodeParam) {
+    for (const m of MANIFEST) {
+      const map = REGISTRY[m.id];
+      if (map && map.nodes && map.nodes.some(n => n.id === nodeParam)) {
+        return m.id;
+      }
+    }
+  }
+
+  // 3. Default: first manifest entry, or 'cardiology' as a hard fallback
+  return (MANIFEST[0] && MANIFEST[0].id) || 'cardiology';
+}
+
+const ACTIVE_DOMAIN = resolveActiveDomain();
+let MAP = REGISTRY[ACTIVE_DOMAIN];
+
+// Backward compatibility: any external code that references the old
+// global gets the active domain's map.
+window.RDX_CONCEPT_MAP = MAP;
+
 if (!MAP) {
   document.getElementById('graph').innerHTML =
     '<div style="padding:40px;text-align:center;color:#64748B">Concept map data failed to load.</div>';
 }
+
+// Update the page title to reflect the active domain.
+(function updateTitleAndHeader() {
+  if (!MAP) return;
+  const label = MAP.domainLabel || (MAP.domain && MAP.domain[0].toUpperCase() + MAP.domain.slice(1)) || '';
+  if (label) {
+    document.title = 'Concept Map: ' + label + ' (Beta) | ReasonDx';
+    const headerEl = document.querySelector('.header h1');
+    if (headerEl) headerEl.textContent = 'Concept Map: ' + label;
+    // Update beta banner to reflect the active domain.
+    const banner = document.getElementById('beta-banner');
+    if (banner) {
+      banner.innerHTML = '<strong>Beta.</strong> A small slice of the platform\'s content shown as a navigable graph. ' +
+        'You\'re viewing the <strong>' + label + '</strong> domain. We\'re testing whether browsing by relationship helps you find related topics to study. Feedback welcome.';
+    }
+  }
+})();
+
+// Render the domain switcher when more than one domain is registered.
+(function renderDomainSwitcher() {
+  const switcher = document.getElementById('domain-switcher');
+  if (!switcher) return;
+  if (!MANIFEST.length || MANIFEST.length < 2) {
+    switcher.hidden = true;
+    return;
+  }
+  switcher.hidden = false;
+  switcher.innerHTML = MANIFEST.map(m => {
+    const isActive = m.id === ACTIVE_DOMAIN;
+    const betaTag = m.beta ? ' <span class="beta-tag">BETA</span>' : '';
+    return '<a class="domain-tab' + (isActive ? ' active' : '') + '" ' +
+           'href="?domain=' + encodeURIComponent(m.id) + '" ' +
+           'data-domain="' + m.id + '">' + m.label + betaTag + '</a>';
+  }).join('');
+  // Track domain switches as analytics events.
+  switcher.querySelectorAll('a.domain-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetDomain = tab.getAttribute('data-domain');
+      if (targetDomain && targetDomain !== ACTIVE_DOMAIN) {
+        track('domain_switch', { from: ACTIVE_DOMAIN, to: targetDomain });
+      }
+    });
+  });
+})();
 
 // Fallback: if vis.js failed to load (CDN block, CSP, network), render a
 // readable text-based view of the concepts grouped by hub so the page
@@ -770,14 +886,18 @@ function wirePanelInteractions(currentNode) {
     });
   });
 
-  // Copy-link button: writes a shareable URL with ?node= to the
-  // clipboard and shows brief inline confirmation. Falls back to a
-  // visible URL prompt if Clipboard API is unavailable (older browsers
-  // or non-secure contexts).
+  // Copy-link button: writes a shareable URL with ?domain=&node= to
+  // the clipboard and shows brief inline confirmation. Falls back to
+  // a visible URL prompt if the Clipboard API is unavailable (older
+  // browsers or non-secure contexts). The domain param ensures the
+  // recipient lands in the right domain even when the platform has
+  // multiple domains registered.
   panel.querySelectorAll('button[data-copy-node]').forEach(btn => {
     btn.addEventListener('click', () => {
       const nodeId = btn.getAttribute('data-copy-node');
-      const url = window.location.origin + window.location.pathname + '?node=' + encodeURIComponent(nodeId);
+      const url = window.location.origin + window.location.pathname +
+                  '?domain=' + encodeURIComponent(ACTIVE_DOMAIN) +
+                  '&node=' + encodeURIComponent(nodeId);
       const showConfirm = (msg) => {
         const orig = btn.innerHTML;
         btn.innerHTML = msg;
@@ -904,45 +1024,12 @@ document.querySelectorAll('#edge-filters .chip').forEach(chip => {
 });
 
 // ─── Search (with organ-system aliases) ──────────────────────────────
-// Maps common organ-system names to nodes so learners coming in with
-// textbook expectations land somewhere reasonable.
-const SEARCH_ALIASES = {
-  'cardiology':       'acute-chest-pain',
-  'cardiac':          'acute-chest-pain',
-  'cardio':           'acute-chest-pain',
-  'chest pain':       'acute-chest-pain',
-  'cv':               'acute-chest-pain',
-  'mi':               'acs',
-  'heart attack':     'acs',
-  'stemi':            'acs',
-  'nstemi':           'acs',
-  'dissection':       'aortic-dissection',
-  'aortic':           'aortic-dissection',
-  'pe':               'pulmonary-embolism',
-  'embolism':         'pulmonary-embolism',
-  'embolus':          'pulmonary-embolism',
-  'tamponade':        'tamponade',
-  'pericardial':      'pericarditis',
-  'chf':              'heart-failure',
-  'hf':               'heart-failure',
-  'hfref':            'heart-failure',
-  'hfpef':            'heart-failure',
-  'afib':             'afib-anticoag',
-  'atrial fib':       'afib-anticoag',
-  'a-fib':            'afib-anticoag',
-  'warfarin':         'afib-anticoag',
-  'anticoag':         'afib-anticoag',
-  'wpw':              'wpw',
-  'pre-excitation':   'wpw',
-  'vfib':             'vfib-code',
-  'v-fib':            'vfib-code',
-  'cardiac arrest':   'vfib-code',
-  'acls':             'vfib-code',
-  'beta blocker':     'beta1-mechanism',
-  'beta-blocker':     'beta1-mechanism',
-  'sglt2':            'sglt2-cardiometabolic',
-  'sglti':            'sglt2-cardiometabolic'
-};
+// Aliases are defined per-domain in the data file, so each domain
+// can route its own organ-system shorthand. Cross-domain aliases
+// (when authored) live in the active domain's alias map; if a
+// learner types "stroke" while in the cardiology domain, the alias
+// won't resolve and they'll fall through to substring search.
+const SEARCH_ALIASES = (MAP && MAP.searchAliases) || {};
 
 function findNodeBySearch(q) {
   const norm = (q || '').trim().toLowerCase();
