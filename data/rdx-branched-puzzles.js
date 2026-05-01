@@ -170,6 +170,139 @@ window.RDX_BRANCHED = [
         url: 'https://www.ncbi.nlm.nih.gov/books/NBK542246/'
       }
     ]
+  },
+
+  // ── CASE 2: CHEST PAIN AT 2 AM ───────────────────────────────────
+  // Diagnostic reasoning under uncertainty. ACS vs aortic dissection
+  // vs PE share an opening presentation but diverge on workup, and
+  // the wrong workup for any one of them harms the patient. Target
+  // learner: M3/M4. Tests parallel workup, anchoring resistance, and
+  // probability updating when a discriminating finding lands.
+  {
+    id: 'chest-pain-2am',
+    title: 'Chest pain at 2 AM',
+    summary: 'A 58-year-old presents with chest pain. The vitals are subtle, the story is murky, and three different killers are on your differential.',
+    category: 'cardiovascular',
+    acuity: 3,
+    timeEstimate: 5,
+
+    scenarioTag: 'ED, overnight, mid-shift',
+    scenario: "58-year-old man, no prior cardiac history, presents at 2 AM with substernal chest pain that began 90 minutes ago while watching TV. He describes it as a deep ache, constant since onset, not clearly worse with exertion or breathing. He has hypertension, takes lisinopril, and smokes a pack a day. Vitals: BP 168/94 right arm, HR 102, RR 20, SpO2 95% on room air, afebrile. He looks uncomfortable but not in extremis. The first ECG shows sinus tachycardia with nonspecific T-wave flattening in the lateral leads. Initial troponin pending.",
+    timerStrip: 'Three killers on the differential. The wrong workup for any of them harms the patient.',
+
+    nodes: {
+      n1: {
+        prompt: "What do you do FIRST?",
+        choices: [
+          { label: "Aspirin and heparin now, repeat ECG in 15 minutes, troponin trend",
+            hint: "Treat presumed ACS empirically",
+            tone: 'warn',
+            consequenceHead: "You started an ACS pathway on a differential that is not narrowed yet.",
+            consequence: "Aspirin is reasonable. Heparin commits you to one diagnosis before you have ruled out the alternatives. The patient receives the first dose while you wait on the second troponin.",
+            teaching: "Aspirin alone is defensible early in an undifferentiated chest pain workup with concerning features. Full anticoagulation (heparin) is a different commitment: it makes one of your top three differentials (aortic dissection) catastrophically worse. The discipline early in an undifferentiated presentation is to treat what is reversibly time-critical (oxygen if hypoxic, aspirin if no contraindication) while you actively narrow the differential, not to lock into one diagnosis on the first ECG.",
+            next: 'n2'
+          },
+          { label: "Parallel workup: aspirin, both-arm BP, bedside ultrasound, CXR, troponin trend, D-dimer if low pretest probability for PE",
+            hint: "Run the discriminators in parallel",
+            tone: 'good',
+            consequenceHead: "Right move. You are narrowing all three differentials at once.",
+            consequence: "Aspirin is given. The nurse cycles the right arm cuff while you grab the ultrasound. The X-ray tech is on the way. You are buying yourself the discriminating data you need before you commit to a pathway.",
+            teaching: "When the differential includes ACS, aortic dissection, and PE, sequential workup costs you time on whichever diagnosis you did not pick first. Parallel workup uses cheap, fast tests as discriminators: both-arm BP (asymmetry suggests dissection), CXR (mediastinal width, pneumothorax, effusion), bedside echo (pericardial effusion, RV strain), and a focused history for PE risk factors. You commit to a pathway after the discriminators come back, not before.",
+            next: 'n2'
+          },
+          { label: "Activate the cath lab based on the lateral T-wave changes",
+            hint: "Treat as STEMI-equivalent",
+            tone: 'bad',
+            consequenceHead: "Cath lab activated on nonspecific findings.",
+            consequence: "The interventional cardiologist arrives, reviews the ECG, and pushes back. Nonspecific lateral T-wave flattening in a tachycardic patient is not a STEMI-equivalent. The activation is stood down, and you have lost trust on a shift where you may need it again.",
+            teaching: "Cath lab activation criteria are specific: ST elevation meeting criteria, posterior MI pattern, new LBBB with concerning features (Sgarbossa), or specific high-risk patterns like de Winter T-waves or Wellens. Nonspecific T-wave changes in a tachycardic patient are not on that list. Over-activation degrades the system's response to real STEMIs and signals diagnostic anchoring.",
+            next: 'n2'
+          }
+        ]
+      },
+
+      n2: {
+        prompt: "Discriminators come back. Right arm BP 168/94, left arm BP 142/82. CXR shows a subtly widened mediastinum that the radiologist on call calls 'borderline, recommend correlation.' Troponin returns at the upper limit of normal. The patient now mentions the pain radiates between his shoulder blades. What is your next move?",
+        choices: [
+          { label: "CT angiography of the chest with aortic protocol",
+            hint: "Image for dissection",
+            tone: 'good',
+            consequenceHead: "Right pivot. You updated on the new data.",
+            consequence: "CTA shows a Stanford type A dissection extending from the aortic root to the descending aorta. Cardiothoracic surgery is paged. The patient is moved to the OR within the hour.",
+            teaching: "Three findings just shifted your probabilities: inter-arm BP differential (greater than 20 mmHg systolic is concerning), a borderline-widened mediastinum, and interscapular pain radiation. None alone is diagnostic; together they raise dissection from 'on the differential' to 'rule out now.' The right test is CT angiography of the chest with aortic protocol. A normal troponin does not rule out dissection (and a slightly elevated one can occur with coronary involvement of the dissection flap). This is the case where anchoring on ACS would have been catastrophic if heparin had been given.",
+            next: 'n3'
+          },
+          { label: "Continue ACS workup: serial troponins, repeat ECG, start heparin given the borderline troponin",
+            hint: "Borderline troponin = ACS",
+            tone: 'bad',
+            consequenceHead: "Heparin started on a dissection.",
+            consequence: "Within 30 minutes the patient becomes hypotensive and diaphoretic. A bedside echo shows a pericardial effusion with tamponade physiology. The CT you finally order shows a type A dissection that is now bleeding into the pericardium. The heparin made the bleeding worse.",
+            teaching: "An upper-limit-of-normal troponin in the setting of inter-arm BP asymmetry, mediastinal widening, and interscapular pain is not an ACS picture. The discriminating data has moved you off ACS, but you stayed anchored. Anticoagulation in an aortic dissection is catastrophic: it accelerates bleeding into the false lumen, the pericardium, or the mediastinum. The lesson is that probability updating goes both ways: new data should move your differential, not just confirm your starting hypothesis.",
+            next: 'end-bad'
+          },
+          { label: "Order a D-dimer to evaluate for PE before imaging",
+            hint: "Rule out PE first",
+            tone: 'warn',
+            consequenceHead: "D-dimer ordered, but you are slow-walking a dissection.",
+            consequence: "The D-dimer comes back elevated (as it often does in dissection). You now have a positive screen with multiple possible explanations and have not advanced toward the diagnosis. The patient is becoming more uncomfortable.",
+            teaching: "D-dimer is a screening test for PE in low-pretest-probability patients. In a patient whose discriminators (inter-arm BP, mediastinal widening, interscapular radiation) point toward dissection, D-dimer is not the right next test, and an elevated result will not tell you which of your two top differentials it represents. D-dimer is also frequently elevated in dissection itself, which is one of the reasons it is not used to rule dissection in or out. Move directly to CT angiography when dissection is the leading diagnosis.",
+            next: 'n3'
+          }
+        ]
+      },
+
+      n3: {
+        prompt: "CT angiography confirms a Stanford type A aortic dissection. The patient's BP is now 172/98, HR 108, and he is more anxious. Cardiothoracic surgery is en route. What is your management while you wait?",
+        choices: [
+          { label: "IV beta blocker first, then a vasodilator if BP remains elevated, target HR under 60 and SBP 100 to 120",
+            hint: "Rate first, then pressure",
+            tone: 'good',
+            consequenceHead: "Hemodynamics controlled. Patient stable for OR.",
+            consequence: "The beta blocker brings the heart rate down and reduces aortic wall stress. BP comes down with the addition of a vasodilator. The patient is stable when surgery arrives.",
+            teaching: "In aortic dissection, the priority is reducing aortic wall stress, which is a function of both blood pressure AND the rate of pressure rise (dP/dt). Heart rate matters as much as systolic pressure: a fast heart rate with a high pressure produces a high dP/dt and propagates the dissection. Beta blockade comes first. A vasodilator alone causes reflex tachycardia, which raises dP/dt and worsens the dissection. The standard targets are heart rate under 60 and systolic blood pressure between 100 and 120 mmHg.",
+            next: 'end-good'
+          },
+          { label: "IV vasodilator alone to bring the systolic pressure down quickly",
+            hint: "Drop the pressure first",
+            tone: 'bad',
+            consequenceHead: "Reflex tachycardia. Patient deteriorates.",
+            consequence: "The blood pressure comes down but the heart rate climbs to 130. The patient becomes diaphoretic. A repeat scan shows the dissection has propagated.",
+            teaching: "Vasodilator monotherapy in dissection causes reflex tachycardia, which increases dP/dt and worsens the dissection. The principle is rate before pressure: a beta blocker (or another agent that controls heart rate) goes first, and a vasodilator is added if pressure remains elevated. This is one of the most counterintuitive points in dissection management because the high blood pressure feels like the obvious target.",
+            next: 'end-bad'
+          },
+          { label: "Hold all antihypertensives and let surgery decide on arrival",
+            hint: "Defer to specialist",
+            tone: 'bad',
+            consequenceHead: "Dissection propagates while you wait.",
+            consequence: "Over the next 20 minutes the patient becomes hypotensive. A bedside echo shows new pericardial effusion. The dissection has extended into the pericardium.",
+            teaching: "Hemodynamic control in a confirmed aortic dissection is not a specialist-only decision. The standard of care is immediate rate and pressure control while awaiting surgery; deferring loses the window when control is most achievable. The same deferential trap applies in herniation, in massive PE, and in any time-critical condition where the consultant is minutes away.",
+            next: 'end-bad'
+          }
+        ]
+      }
+    },
+
+    endings: {
+      'end-good': {
+        title: 'Patient to OR with controlled hemodynamics.',
+        verdict: 'You ran an undifferentiated chest pain workup the way it should be run: parallel discriminators early, probability updating when the data moved, and the right specific intervention once the diagnosis was clear. Each of the three killers required a different next step, and you avoided the trap of treating any of them before the differential narrowed.'
+      },
+      'end-bad': {
+        title: 'Outcome: hemodynamic instability before OR.',
+        verdict: 'The opening was undifferentiated but the discriminators were doing real work. The choice that cost the most was the one where the data had already moved the diagnosis but the workup had not moved with it. In a three-killer differential, anchoring is the most expensive error because the wrong treatment for the wrong diagnosis is actively harmful, not just inefficient.'
+      }
+    },
+
+    references: [
+      {
+        citation: 'Levy D, Sharma S, Grigorova Y, et al. Aortic Dissection. StatPearls. NIH Bookshelf. Updated 2023.',
+        url: 'https://www.ncbi.nlm.nih.gov/books/NBK441963/'
+      },
+      {
+        citation: 'Isselbacher EM, Preventza O, Hamilton Black J 3rd, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation.',
+        url: 'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106'
+      }
+    ]
   }
 
   // ── ADDITIONAL CASES ─────────────────────────────────────────────
