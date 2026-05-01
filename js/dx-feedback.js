@@ -166,9 +166,25 @@
 
   // ── Init ───────────────────────────────────────────────────────
   function init() {
-    // Don't show on admin, auth, or already-shown pages
-    var path = window.location.pathname;
-    if (/admin|auth|login|register|faculty-dashboard|analytics-dashboard/i.test(path)) return;
+    // Suppression: don't show on admin, auth, faculty, demo, or
+    // landing/marketing pages. The widget is for in-flow learners,
+    // not for staff or marketing-page visitors. Pages can opt out by
+    // matching any of these path tokens. Adjust the list when adding
+    // a new page family that should be excluded.
+    var path = window.location.pathname.toLowerCase();
+    var SKIP = [
+      'admin', 'auth', 'login', 'register',
+      'faculty-dashboard', 'analytics-dashboard', 'pd-analytics',
+      'faculty-agent', 'faculty-ai-report', 'faculty-observe',
+      'osce-faculty-report', 'cohort-analytics',
+      'case-author', 'admin-embed', 'admin-review', 'admin-guidelines',
+      'demo.html', 'demo-coachdx', 'demo-viewer', 'cruise-demo',
+      'rdx-empty-states', 'puzzle-branched-demo',
+      '404', 'terms.html'
+    ];
+    for (var i = 0; i < SKIP.length; i++) {
+      if (path.indexOf(SKIP[i]) !== -1) return;
+    }
 
     // Wait for DOM
     if (document.readyState === 'loading') {
