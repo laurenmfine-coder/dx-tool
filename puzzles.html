@@ -82,6 +82,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
 .puzzle-references li{margin-bottom:4px}
 .puzzle-references li:last-child{margin-bottom:0}
 .puzzle-references-url{font-family:Consolas,Menlo,monospace;font-size:.72rem;color:#6B7280;word-break:break-all;display:block;margin-top:1px}
+/* ── Educational disclaimer (universal footer on every puzzle) ─────
+   Appears after teaching + references on every puzzle. Standardized
+   wording for legal clarity and learner expectations: this is a
+   reasoning-practice tool, not a clinical decision aid. */
+.puzzle-disclaimer{margin-top:12px;padding:10px 14px;font-size:.7rem;line-height:1.5;color:#6B7280;font-style:italic;border-top:1px dashed #E5E7EB;padding-top:10px}
 .puzzle-streak{text-align:center;margin-top:24px;font-size:.82rem;color:var(--ts)}
 .puzzle-streak strong{color:var(--blue)}
 .puzzle-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
@@ -1337,6 +1342,15 @@ function _coverageHtml(coverage, confidence) {
   '</div>';
 }
 
+// Standard educational disclaimer. Appears on every puzzle reveal.
+// Reasoning-practice framing only — never positioned as a clinical
+// decision aid. If legal review ever requires updated wording, this
+// is the single source of truth.
+var PUZZLE_DISCLAIMER_HTML =
+  '<div class="puzzle-disclaimer">' +
+    'Educational use only. ReasonDx puzzles support clinical reasoning practice and are not a substitute for clinical judgment, current guidelines, or institutional protocols. No medication doses are included by design. Verify all clinical decisions against primary sources for actual patient care.' +
+  '</div>';
+
 // Renders the references block. Plain text only — citations and URLs
 // are displayed but no <a href> tags. This is intentional:
 //   - Avoids the legal exposure of endorsing third-party sites when
@@ -1404,11 +1418,17 @@ function submitPuzzle(confidence) {
   // a follow-up, step 2 will render them; if not, render them now.
   var refsHtml = hasFollowUp ? '' : _referencesHtml(p);
 
+  // Disclaimer appears on every reveal. For B-shape puzzles, only on
+  // step 2's reveal (the LAST beat) — we don't want learners to see it
+  // twice in the same puzzle.
+  var disclaimerHtml = hasFollowUp ? '' : PUZZLE_DISCLAIMER_HTML;
+
   fb.innerHTML =
     '<div style="font-weight:700;margin-bottom:6px">' + tagHtml + frame.headline + '</div>' +
     p.teaching +
     coverageHtml +
     refsHtml +
+    disclaimerHtml +
     step2Html;
   fb.style.display = 'block';
 
@@ -1510,7 +1530,8 @@ function submitPuzzleStep2(confidence) {
       '<div style="font-weight:700;margin-bottom:6px">' + tagHtml + frame.headline + '</div>' +
       fu.teaching +
       coverageHtml2 +
-      _referencesHtml(p);  // references appear after the LAST beat
+      _referencesHtml(p) +  // references appear after the LAST beat
+      PUZZLE_DISCLAIMER_HTML;  // disclaimer always last
   }
 
   // Now that step 2 is committed, surface the "Next puzzle" action.

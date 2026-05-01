@@ -146,6 +146,8 @@ body{
 .summary-references li{margin-bottom:4px}
 .summary-references li:last-child{margin-bottom:0}
 .summary-references-url{font-family:Consolas,Menlo,monospace;font-size:.72rem;color:#6B7280;word-break:break-all;display:block;margin-top:1px}
+/* Educational disclaimer — universal footer on every case summary */
+.summary-disclaimer{margin-top:14px;padding:10px 14px;font-size:.7rem;line-height:1.5;color:#6B7280;font-style:italic;border-top:1px dashed #E5E7EB;padding-top:10px}
 
 /* Feedback widget — minimal: was this useful + optional one-line note */
 .feedback{
@@ -486,6 +488,12 @@ function showSummary() {
         '</div>';
     }
   }
+  // Universal educational disclaimer — appears at the end of every
+  // completed case. Same wording as the daily-puzzle disclaimer.
+  refsBlock.innerHTML +=
+    '<div class="summary-disclaimer">' +
+      'Educational use only. ReasonDx cases support clinical reasoning practice and are not a substitute for clinical judgment, current guidelines, or institutional protocols. No medication doses are included by design. Verify all clinical decisions against primary sources for actual patient care.' +
+    '</div>';
 
   // Reset feedback widget visibility (in case of restart)
   document.getElementById('feedback-note').classList.remove('show');
