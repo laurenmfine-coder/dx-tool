@@ -18,8 +18,9 @@
 <!-- Concept map data -->
 <script src="/data/rdx-concept-map.js"></script>
 
-<!-- vis.js network rendering. Pinned to a specific version for stability. -->
-<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<!-- vis.js network rendering. Loaded from jsdelivr (already on the
+     site CSP script-src allowlist; unpkg is not). -->
+<script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 
 <style>
 :root{
@@ -216,6 +217,64 @@ const MAP = window.RDX_CONCEPT_MAP;
 if (!MAP) {
   document.getElementById('graph').innerHTML =
     '<div style="padding:40px;text-align:center;color:#64748B">Concept map data failed to load.</div>';
+}
+
+// Fallback: if vis.js failed to load (CDN block, CSP, network), render a
+// readable text-based view of the concepts grouped by hub so the page
+// isn't an empty box.
+if (typeof vis === 'undefined' || !vis.Network) {
+  const graphEl = document.getElementById('graph');
+  if (graphEl && MAP) {
+    const hubs = MAP.nodes.filter(n => n.kind === 'hub');
+    const concepts = MAP.nodes.filter(n => n.kind === 'concept');
+    const mechs = MAP.nodes.filter(n => n.kind === 'mechanism');
+
+    function relatedNodes(hubId) {
+      const out = new Set();
+      for (const e of MAP.edges) {
+        if (e.from === hubId) out.add(e.to);
+        else if (e.to === hubId) out.add(e.from);
+      }
+      return [...out].map(id => MAP.nodes.find(n => n.id === id)).filter(Boolean);
+    }
+
+    let html = '<div style="padding:24px;overflow-y:auto;height:100%;font-size:.9rem;line-height:1.5">';
+    html += '<div style="background:#FEF3C7;border:1px solid #FDE68A;color:#92400E;padding:10px 14px;border-radius:8px;font-size:.82rem;margin-bottom:18px">';
+    html += '<strong>Graph view unavailable.</strong> Showing concepts as a list. The interactive graph requires a script that did not load on this connection.';
+    html += '</div>';
+    for (const hub of hubs) {
+      html += '<div style="margin-bottom:24px"><div style="font-weight:700;font-size:1.05rem;color:#2874A6;margin-bottom:6px">' + hub.label + '</div>';
+      html += '<div style="color:#64748B;margin-bottom:8px">' + hub.summary + '</div>';
+      const related = relatedNodes(hub.id);
+      if (related.length) {
+        html += '<ul style="list-style:none;padding:0;margin:0">';
+        for (const r of related) {
+          html += '<li style="padding:4px 0;border-bottom:1px dashed #E2E8F0">';
+          html += '<strong>' + r.label + '</strong> — <span style="color:#64748B">' + r.summary + '</span>';
+          html += '</li>';
+        }
+        html += '</ul>';
+      }
+      html += '</div>';
+    }
+    if (mechs.length) {
+      html += '<div style="margin-bottom:24px"><div style="font-weight:700;font-size:1.05rem;color:#7D3C98;margin-bottom:6px">Cross-cutting mechanisms</div>';
+      html += '<ul style="list-style:none;padding:0;margin:0">';
+      for (const m of mechs) {
+        html += '<li style="padding:4px 0"><strong>' + m.label + '</strong> — <span style="color:#64748B">' + m.summary + '</span></li>';
+      }
+      html += '</ul></div>';
+    }
+    html += '</div>';
+    graphEl.innerHTML = html;
+    try {
+      if (window.RDX && RDX.track && RDX.track.event) {
+        RDX.track.event('cta_click', null, { surface: 'concept_map', action: 'fallback_rendered', reason: 'vis_unavailable' });
+      }
+    } catch(e) {}
+  }
+  // Skip the rest of the script (graph init) — fallback handles display.
+  throw new Error('vis-network unavailable; fallback rendered');
 }
 
 const KIND_STYLE = {
