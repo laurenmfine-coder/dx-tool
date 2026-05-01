@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branched Decision Cases | ReasonDx</title>
+<meta name="description" content="Decide and live with the consequence. Branched clinical reasoning cases where each choice changes what happens next.">
+<link rel="canonical" href="https://www.reasondx.com/branched.html">
+
+<!-- Shared platform scripts. We need RDX for analytics tracking on
+     the new format. The analytics_events RLS policy added earlier
+     accepts anon-session-keyed inserts for the event_type allowlist
+     including 'case_start' and 'case_complete' — both fire here. -->
+<script src="/js/rdx-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
+<script src="/js/rdx-supabase.js"></script>
+<script src="/js/rdx-data-consent.js"></script>
+
+<!-- Library data -->
+<script src="/data/rdx-branched-puzzles.js"></script>
+
+<style>
+:root{
+  --bg:#F8FAFC; --surface:#fff; --border:#E2E8F0; --text:#1E293B;
+  --ts:#64748B; --blue:#2874A6; --blue-l:#EBF5FB;
+  --good:#10B981; --good-l:#ECFDF5;
+  --warn:#F59E0B; --warn-l:#FFFBEB;
+  --bad:#DC2626;  --bad-l:#FEF2F2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding:0;
+  font-family:'DM Sans','IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh;
+}
+.wrap{max-width:680px;margin:0 auto;padding:32px 20px}
+.header{margin-bottom:24px}
+.header .breadcrumb{font-size:.78rem;color:var(--ts);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-bottom:6px}
+.header .breadcrumb a{color:var(--ts);text-decoration:none}
+.header .breadcrumb a:hover{color:var(--blue)}
+.header h1{font-size:1.4rem;margin:0 0 6px;letter-spacing:-.02em}
+.header .meta{font-size:.86rem;color:var(--ts)}
+
+/* Beta banner — sets expectations honestly */
+.beta-banner{
+  background:#FEF3C7; border:1px solid #FDE68A; color:#92400E;
+  padding:10px 14px; border-radius:8px; font-size:.82rem;
+  margin-bottom:18px; line-height:1.5;
+}
+.beta-banner strong{color:#78350F}
+
+.scenario-card{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:14px; padding:24px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04); margin-bottom:18px;
+}
+.scenario-tag{
+  display:inline-block; font-size:.68rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.8px;
+  padding:4px 10px; border-radius:4px; margin-bottom:10px;
+  background:var(--bad-l); color:var(--bad);
+}
+.scenario-text{font-size:.96rem; line-height:1.65; margin-bottom:16px}
+.timer-strip{
+  display:flex; align-items:center; gap:8px;
+  font-size:.82rem; color:var(--bad); font-weight:600;
+  background:var(--bad-l); padding:8px 12px; border-radius:8px;
+  border:1px solid #FECACA;
+}
+
+.prompt{font-size:1rem; font-weight:700; margin:18px 0 12px; line-height:1.4}
+.choices{display:flex; flex-direction:column; gap:10px}
+.choice{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:10px; padding:14px 16px; cursor:pointer;
+  font-size:.92rem; line-height:1.5; transition:all .15s;
+  text-align:left; font-family:inherit; color:var(--text);
+}
+.choice:hover{border-color:var(--blue); background:var(--blue-l); transform:translateY(-1px)}
+.choice:disabled{opacity:.5; cursor:default; transform:none}
+.choice .label{font-weight:600; display:block; margin-bottom:2px}
+.choice .hint{font-size:.78rem; color:var(--ts); display:block}
+
+.consequence{
+  margin-top:18px; padding:16px 18px;
+  border-radius:10px; line-height:1.6; font-size:.92rem;
+  display:none; animation:slide-in .25s ease;
+}
+.consequence.show{display:block}
+.consequence.good{background:var(--good-l); border:1px solid #A7F3D0; color:#065F46}
+.consequence.warn{background:var(--warn-l); border:1px solid #FED7AA; color:#92400E}
+.consequence.bad {background:var(--bad-l);  border:1px solid #FECACA; color:#991B1B}
+.consequence-head{font-weight:700; font-size:.88rem; margin-bottom:6px; letter-spacing:-.01em}
+.consequence-teaching{margin-top:10px; padding-top:10px; border-top:1px solid currentColor; opacity:.85; font-size:.86rem}
+@keyframes slide-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.continue-btn{
+  margin-top:14px; padding:10px 20px;
+  background:var(--blue); color:#fff; border:none; border-radius:8px;
+  font-weight:600; font-size:.88rem; cursor:pointer; font-family:inherit;
+  transition:background .15s; display:none;
+}
+.continue-btn.show{display:inline-block}
+.continue-btn:hover{background:#1B4F72}
+
+.progress{
+  display:flex; gap:6px; margin-bottom:24px;
+}
+.progress-step{
+  flex:1; height:6px; border-radius:3px; background:#E5E7EB;
+  transition:background .25s;
+}
+.progress-step.active{background:var(--blue)}
+.progress-step.done  {background:var(--good)}
+.progress-step.failed{background:var(--bad)}
+
+.summary{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:14px; padding:28px; margin-top:18px;
+  display:none;
+}
+.summary.show{display:block; animation:slide-in .3s ease}
+.summary h2{font-size:1.2rem; margin:0 0 14px}
+.summary .verdict{font-size:.96rem; line-height:1.6; margin-bottom:16px}
+.summary .path{
+  background:#F8FAFC; padding:14px 16px; border-radius:8px;
+  font-size:.84rem; line-height:1.7; color:var(--ts);
+}
+.summary .path strong{color:var(--text)}
+.summary-actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+.summary-actions button, .summary-actions a{
+  padding:10px 18px; border-radius:8px; font-weight:600;
+  font-size:.86rem; cursor:pointer; font-family:inherit; text-decoration:none;
+  border:none; transition:all .15s;
+  display:inline-block;
+}
+.summary-actions .primary{background:var(--blue); color:#fff}
+.summary-actions .primary:hover{background:#1B4F72}
+.summary-actions .secondary{background:#fff; color:var(--blue); border:1.5px solid var(--blue)}
+
+/* References block — same plain-text style as daily puzzles */
+.summary-references{margin-top:18px;padding:12px 14px;background:#FAFAFA;border-left:3px solid #D1D5DB;border-radius:0 6px 6px 0;font-size:.78rem;line-height:1.55;color:#374151}
+.summary-references-title{font-size:.66rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#6B7280;margin-bottom:6px}
+.summary-references ol{margin:0;padding-left:18px}
+.summary-references li{margin-bottom:4px}
+.summary-references li:last-child{margin-bottom:0}
+.summary-references-url{font-family:Consolas,Menlo,monospace;font-size:.72rem;color:#6B7280;word-break:break-all;display:block;margin-top:1px}
+
+/* Feedback widget — minimal: was this useful + optional one-line note */
+.feedback{
+  margin-top:18px; padding:14px 16px;
+  background:#F8FAFC; border:1px dashed #CBD5E1; border-radius:10px;
+}
+.feedback-q{font-size:.82rem;font-weight:600;margin-bottom:8px}
+.feedback-buttons{display:flex; gap:8px; margin-bottom:8px}
+.feedback-btn{
+  padding:6px 14px; border-radius:6px; border:1.5px solid var(--border);
+  background:#fff; font-family:inherit; font-size:.82rem; cursor:pointer;
+  transition:all .15s;
+}
+.feedback-btn:hover{transform:translateY(-1px); box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.feedback-btn.up:hover{border-color:var(--good); background:var(--good-l); color:#065F46}
+.feedback-btn.down:hover{border-color:var(--bad); background:var(--bad-l); color:#991B1B}
+.feedback-btn.selected{font-weight:700; transform:translateY(-1px)}
+.feedback-btn.up.selected{border-color:var(--good); background:var(--good-l); color:#065F46}
+.feedback-btn.down.selected{border-color:var(--bad); background:var(--bad-l); color:#991B1B}
+.feedback-note{
+  width:100%; padding:8px 10px; border:1px solid var(--border);
+  border-radius:6px; font-family:inherit; font-size:.82rem; resize:vertical;
+  min-height:46px; outline:none; transition:border .15s; display:none;
+  margin-top:6px;
+}
+.feedback-note:focus{border-color:var(--blue)}
+.feedback-note.show{display:block}
+.feedback-thanks{font-size:.78rem; color:var(--good); margin-top:6px; font-style:italic; display:none}
+.feedback-thanks.show{display:block}
+
+/* Library / case picker (when no ?id= param or ?id=invalid) */
+.library{display:none}
+.library.show{display:block}
+.library-card{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-bottom:12px;
+  cursor:pointer; transition:all .15s; text-decoration:none; color:inherit;
+  display:block;
+}
+.library-card:hover{border-color:var(--blue); box-shadow:0 2px 8px rgba(0,0,0,.06); transform:translateY(-1px)}
+.library-card-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.library-card-title{font-size:1rem;font-weight:700;letter-spacing:-.01em;flex:1}
+.library-card-acuity{
+  font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+  padding:2px 7px;border-radius:3px;
+}
+.library-card-acuity[data-acuity="1"]{background:#E0F2FE;color:#075985}
+.library-card-acuity[data-acuity="2"]{background:#DBEAFE;color:#1E3A8A}
+.library-card-acuity[data-acuity="3"]{background:var(--warn-l);color:#92400E}
+.library-card-acuity[data-acuity="4"]{background:var(--bad-l);color:#991B1B}
+.library-card-summary{font-size:.86rem;color:var(--ts);line-height:1.5}
+.library-card-meta{font-size:.74rem;color:var(--ts);text-transform:uppercase;letter-spacing:.6px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Beta banner — set expectations -->
+  <div class="beta-banner">
+    <strong>Beta.</strong> Branched cases are a new format we're testing. Each case is a clinical scenario where you make 3-5 decisions, and each choice changes what happens next. Your feedback at the end helps us decide which formats to invest in.
+  </div>
+
+  <div class="header">
+    <div class="breadcrumb"><a href="puzzles.html">&larr; Puzzles</a> · Branched Decision Cases</div>
+    <h1 id="page-title">Branched Decision Cases</h1>
+    <div class="meta" id="page-meta">Pick a case to start.</div>
+  </div>
+
+  <!-- Library / case picker (shown when no specific case is selected) -->
+  <div class="library" id="library"></div>
+
+  <!-- Active case (shown when ?id=<slug> resolves to a case) -->
+  <div id="case-area" style="display:none">
+    <div class="progress" id="progress"></div>
+    <div id="puzzle-stage"></div>
+    <div class="summary" id="summary">
+      <h2 id="summary-title"></h2>
+      <div class="verdict" id="summary-verdict"></div>
+      <div class="path" id="summary-path"></div>
+      <div id="summary-references-block"></div>
+
+      <!-- Feedback widget -->
+      <div class="feedback" id="feedback">
+        <div class="feedback-q">Was this case useful?</div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn up" onclick="submitFeedback('up')">👍 Yes</button>
+          <button class="feedback-btn down" onclick="submitFeedback('down')">👎 Not really</button>
+        </div>
+        <textarea class="feedback-note" id="feedback-note" placeholder="Optional: one-line note about what worked or didn't (the prompt didn't match the scoring, a choice was unclear, etc.)" maxlength="500"></textarea>
+        <div class="feedback-thanks" id="feedback-thanks">Thanks. Logged.</div>
+      </div>
+
+      <div class="summary-actions">
+        <button class="primary" onclick="restart()">Try again</button>
+        <a class="secondary" href="branched.html">More cases</a>
+        <a class="secondary" href="puzzles.html">Back to puzzles</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── Resolution: which case (if any) to load ────────────────────────
+function getCaseFromUrl() {
+  try {
+    var m = window.location.search.match(/[?&]id=([a-zA-Z0-9_\-]+)/);
+    if (!m) return null;
+    var slug = m[1];
+    var lib = window.RDX_BRANCHED || [];
+    for (var i = 0; i < lib.length; i++) {
+      if (lib[i].id === slug) return lib[i];
+    }
+    return null;  // slug given but not found — fall back to library
+  } catch(e) { return null; }
+}
+
+var PUZZLE = getCaseFromUrl();
+
+// ─── Engine state ──────────────────────────────────────────────────
+var path = [];
+var currentNode = null;
+var failed = false;
+var startedAt = null;        // ms timestamp for time-on-case metric
+var feedbackSubmitted = false;
+
+// ─── Tracking helpers ──────────────────────────────────────────────
+function track(eventType, data) {
+  // Telemetry must never break the page. Wrap and swallow.
+  try {
+    if (window.RDX && RDX.track && RDX.track.event) {
+      RDX.track.event(eventType, null, data || {});
+    }
+  } catch(e) {}
+}
+
+// ─── Library view (shown when no case specified) ───────────────────
+function renderLibrary() {
+  var lib = (window.RDX_BRANCHED || []);
+  var libEl = document.getElementById('library');
+  document.getElementById('case-area').style.display = 'none';
+  document.getElementById('page-title').textContent = 'Branched Decision Cases';
+  document.getElementById('page-meta').textContent =
+    lib.length === 1
+      ? 'One case in the beta library. More coming.'
+      : lib.length + ' cases in the beta library.';
+
+  if (!lib.length) {
+    libEl.innerHTML = '<div style="padding:24px;text-align:center;color:var(--ts)">No cases available yet.</div>';
+    libEl.classList.add('show');
+    return;
+  }
+
+  var html = '';
+  lib.forEach(function(c) {
+    html += '<a class="library-card" href="branched.html?id=' + encodeURIComponent(c.id) + '">' +
+      '<div class="library-card-header">' +
+        '<div class="library-card-title">' + c.title + '</div>' +
+        (c.acuity
+          ? '<span class="library-card-acuity" data-acuity="' + c.acuity + '">' +
+              (c.acuity === 4 ? 'Critical' : c.acuity === 3 ? 'Urgent' : c.acuity === 2 ? 'Serious' : 'Routine') +
+            '</span>'
+          : '') +
+      '</div>' +
+      '<div class="library-card-summary">' + c.summary + '</div>' +
+      '<div class="library-card-meta">' +
+        (c.category || 'general') +
+        (c.timeEstimate ? ' · ~' + c.timeEstimate + ' min' : '') +
+      '</div>' +
+    '</a>';
+  });
+  libEl.innerHTML = html;
+  libEl.classList.add('show');
+
+  track('page_view', { page: 'branched-library', case_count: lib.length });
+}
+
+// ─── Case view ─────────────────────────────────────────────────────
+function bootCase() {
+  document.getElementById('library').classList.remove('show');
+  document.getElementById('case-area').style.display = 'block';
+
+  // Build progress strip dynamically based on number of nodes in case
+  var nodeIds = Object.keys(PUZZLE.nodes);
+  var progEl = document.getElementById('progress');
+  progEl.innerHTML = nodeIds.map(function(_, i) {
+    return '<div class="progress-step' + (i === 0 ? ' active' : '') + '"></div>';
+  }).join('');
+
+  // Header reflects this case
+  document.getElementById('page-title').textContent = PUZZLE.title || 'Branched Case';
+  var meta = [];
+  if (PUZZLE.acuity >= 3) meta.push('High acuity');
+  if (PUZZLE.category) meta.push(PUZZLE.category.charAt(0).toUpperCase() + PUZZLE.category.slice(1));
+  if (PUZZLE.timeEstimate) meta.push('~' + PUZZLE.timeEstimate + ' min');
+  document.getElementById('page-meta').textContent = meta.join(' · ');
+
+  currentNode = nodeIds[0];
+  startedAt = Date.now();
+  track('case_start', { case_id: PUZZLE.id, format: 'branched' });
+
+  render();
+}
+
+function render() {
+  var stage = document.getElementById('puzzle-stage');
+  if (currentNode.indexOf('end-') === 0) return showSummary();
+
+  var node = PUZZLE.nodes[currentNode];
+  var html = '';
+
+  if (path.length === 0) {
+    html += '<div class="scenario-card">' +
+      (PUZZLE.scenarioTag ? '<span class="scenario-tag">' + PUZZLE.scenarioTag + '</span>' : '') +
+      '<div class="scenario-text">' + PUZZLE.scenario + '</div>' +
+      (PUZZLE.timerStrip
+        ? '<div class="timer-strip">⚠ ' + PUZZLE.timerStrip + '</div>'
+        : '') +
+    '</div>';
+  }
+
+  html += '<div class="scenario-card">' +
+    '<div class="prompt">' + node.prompt + '</div>' +
+    '<div class="choices" id="choices">';
+  node.choices.forEach(function(c, i) {
+    html += '<button class="choice" data-i="' + i + '" onclick="pick(' + i + ')">' +
+      '<span class="label">' + c.label + '</span>' +
+      (c.hint ? '<span class="hint">' + c.hint + '</span>' : '') +
+    '</button>';
+  });
+  html += '</div>' +
+    '<div class="consequence" id="consequence"></div>' +
+    '<button class="continue-btn" id="continueBtn" onclick="next()">Continue &rarr;</button>' +
+  '</div>';
+
+  stage.innerHTML = html;
+}
+
+function pick(i) {
+  var node = PUZZLE.nodes[currentNode];
+  var choice = node.choices[i];
+  path.push({ node: currentNode, choice: i, label: choice.label, tone: choice.tone });
+
+  var buttons = document.querySelectorAll('#choices .choice');
+  buttons.forEach(function(btn, idx) {
+    btn.disabled = true;
+    if (idx === i) {
+      btn.style.borderColor = (
+        choice.tone === 'good' ? '#10B981' :
+        choice.tone === 'warn' ? '#F59E0B' : '#DC2626'
+      );
+      btn.style.background = (
+        choice.tone === 'good' ? '#ECFDF5' :
+        choice.tone === 'warn' ? '#FFFBEB' : '#FEF2F2'
+      );
+      btn.style.opacity = '1';
+    }
+  });
+
+  var cons = document.getElementById('consequence');
+  cons.className = 'consequence show ' + choice.tone;
+  cons.innerHTML =
+    '<div class="consequence-head">' + choice.consequenceHead + '</div>' +
+    '<div>' + choice.consequence + '</div>' +
+    '<div class="consequence-teaching"><em>Why:</em> ' + choice.teaching + '</div>';
+
+  var stepIdx = Object.keys(PUZZLE.nodes).indexOf(currentNode);
+  var step = document.querySelectorAll('.progress-step')[stepIdx];
+  if (step) {
+    step.classList.remove('active');
+    step.classList.add(choice.tone === 'bad' ? 'failed' : 'done');
+  }
+
+  if (choice.next === 'end-bad' || (PUZZLE.endings && PUZZLE.endings[choice.next] && choice.next.indexOf('end-bad') === 0)) {
+    failed = true;
+  }
+  PUZZLE._pendingNext = choice.next;
+  document.getElementById('continueBtn').classList.add('show');
+
+  if (choice.next.indexOf('end-') !== 0) {
+    var nextIdx = Object.keys(PUZZLE.nodes).indexOf(choice.next);
+    var nextStep = document.querySelectorAll('.progress-step')[nextIdx];
+    if (nextStep) nextStep.classList.add('active');
+  }
+
+  // Per-choice telemetry. Useful for "which decision points are
+  // splitting users" analysis once data accumulates.
+  track('pathway_step', {
+    case_id: PUZZLE.id,
+    format: 'branched',
+    node: currentNode,
+    choice_index: i,
+    tone: choice.tone
+  });
+}
+
+function next() {
+  currentNode = PUZZLE._pendingNext;
+  render();
+}
+
+function showSummary() {
+  var stage = document.getElementById('puzzle-stage');
+  stage.style.display = 'none';
+
+  var ending = PUZZLE.endings[currentNode];
+  document.getElementById('summary-title').textContent = ending.title;
+  document.getElementById('summary-verdict').textContent = ending.verdict;
+
+  var pathHtml = '<strong>Your path:</strong><br>';
+  path.forEach(function(p, i) {
+    var color = (
+      p.tone === 'good' ? '#065F46' :
+      p.tone === 'warn' ? '#92400E' : '#991B1B'
+    );
+    pathHtml += (i + 1) + '. <span style="color:' + color + '">' + p.label + '</span><br>';
+  });
+  document.getElementById('summary-path').innerHTML = pathHtml;
+
+  // References block
+  var refsBlock = document.getElementById('summary-references-block');
+  refsBlock.innerHTML = '';
+  if (Array.isArray(PUZZLE.references) && PUZZLE.references.length) {
+    var items = PUZZLE.references.map(function(r) {
+      var c = (r && r.citation) ? r.citation : '';
+      var u = (r && r.url) ? r.url : '';
+      if (!c && !u) return '';
+      return '<li>' + (c || '') +
+        (u ? '<span class="summary-references-url">' + u + '</span>' : '') +
+      '</li>';
+    }).filter(Boolean).join('');
+    if (items) {
+      refsBlock.innerHTML =
+        '<div class="summary-references">' +
+          '<div class="summary-references-title">Learn more</div>' +
+          '<ol>' + items + '</ol>' +
+        '</div>';
+    }
+  }
+
+  // Reset feedback widget visibility (in case of restart)
+  document.getElementById('feedback-note').classList.remove('show');
+  document.getElementById('feedback-thanks').classList.remove('show');
+  document.querySelectorAll('.feedback-btn').forEach(function(b) {
+    b.classList.remove('selected');
+    b.disabled = false;
+  });
+  feedbackSubmitted = false;
+
+  document.getElementById('summary').classList.add('show');
+
+  // Completion telemetry
+  var elapsed = startedAt ? Math.round((Date.now() - startedAt) / 1000) : null;
+  track('case_complete', {
+    case_id: PUZZLE.id,
+    format: 'branched',
+    ending: currentNode,
+    failed: failed,
+    duration_seconds: elapsed,
+    steps_taken: path.length,
+    path_tones: path.map(function(p) { return p.tone; })
+  });
+}
+
+function restart() {
+  path = [];
+  currentNode = Object.keys(PUZZLE.nodes)[0];
+  failed = false;
+  startedAt = Date.now();
+  document.getElementById('summary').classList.remove('show');
+  document.getElementById('puzzle-stage').style.display = 'block';
+  document.querySelectorAll('.progress-step').forEach(function(s, i) {
+    s.classList.remove('done', 'failed', 'active');
+    if (i === 0) s.classList.add('active');
+  });
+  track('case_start', { case_id: PUZZLE.id, format: 'branched', restart: true });
+  render();
+}
+
+// ─── Feedback widget ──────────────────────────────────────────────
+// Minimal: thumbs up/down on completed case + optional one-line note.
+// Stored to analytics_events with event_type = 'cta_click' (already on
+// the anon RLS allowlist) so we don't need a new table or migration.
+// Once the format graduates from beta we can split this into its own
+// 'format_feedback' table for richer analysis.
+function submitFeedback(direction) {
+  if (feedbackSubmitted && direction !== 'note') return;
+
+  document.querySelectorAll('.feedback-btn').forEach(function(b) {
+    b.classList.remove('selected');
+  });
+  document.querySelector('.feedback-btn.' + direction).classList.add('selected');
+
+  // Always show the note field after a thumbs click — they may want
+  // to elaborate even on a positive vote.
+  document.getElementById('feedback-note').classList.add('show');
+
+  // Capture the immediate thumbs vote
+  track('cta_click', {
+    cta: 'branched_feedback',
+    case_id: PUZZLE.id,
+    direction: direction,
+    note: ''
+  });
+
+  // Wire up note submit on blur if we haven't already
+  var noteEl = document.getElementById('feedback-note');
+  if (!noteEl._wired) {
+    noteEl._wired = true;
+    noteEl.addEventListener('blur', function() {
+      var note = (noteEl.value || '').trim();
+      if (!note) return;
+      var dirSelected = document.querySelector('.feedback-btn.selected');
+      track('cta_click', {
+        cta: 'branched_feedback_note',
+        case_id: PUZZLE.id,
+        direction: dirSelected ? (dirSelected.classList.contains('up') ? 'up' : 'down') : 'unrated',
+        note: note.slice(0, 300)
+      });
+      document.getElementById('feedback-thanks').classList.add('show');
+      noteEl.disabled = true;
+    });
+  }
+
+  feedbackSubmitted = true;
+  // Show thanks message even without a note submission
+  setTimeout(function() {
+    document.getElementById('feedback-thanks').classList.add('show');
+  }, 250);
+}
+
+// ─── Boot ─────────────────────────────────────────────────────────
+if (PUZZLE) {
+  // Wait for RDX to be ready before booting (ensures track() works
+  // for the case_start event). If RDX isn't loaded after 1.5s, boot
+  // anyway — telemetry is non-essential.
+  function boot() {
+    bootCase();
+  }
+  if (window.RDX && window.RDX.ready) {
+    boot();
+  } else {
+    var tries = 0;
+    var interval = setInterval(function() {
+      tries++;
+      if ((window.RDX && window.RDX.ready) || tries > 30) {
+        clearInterval(interval);
+        boot();
+      }
+    }, 50);
+  }
+} else {
+  renderLibrary();
+}
+</script>
+</body>
+</html>
