@@ -371,7 +371,7 @@ function buildEdges(filter) {
     .map((e, i) => {
       const isDiff = e.type === 'differential-pair';
       const isMech = e.type === 'shares-mechanism';
-      return {
+      const edgeData = {
         id: 'e' + i,
         from: e.from, to: e.to,
         // Differential-pair edges carry the most pedagogical weight in the
@@ -389,6 +389,23 @@ function buildEdges(filter) {
         title: e.note,
         _edge: e
       };
+      // Discriminator label on differential-pair edges. Tells the
+      // learner what data point distinguishes the two diagnoses
+      // without requiring them to click. White stroke on the text
+      // keeps it legible when it sits on top of an edge.
+      if (e.label) {
+        edgeData.label = e.label;
+        edgeData.font = {
+          size: 11,
+          color: '#1E293B',
+          face: 'DM Sans',
+          strokeWidth: 4,
+          strokeColor: '#FFFFFF',
+          align: 'middle',
+          background: 'rgba(255,255,255,0.85)'
+        };
+      }
+      return edgeData;
     });
 }
 
