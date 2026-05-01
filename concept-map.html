@@ -469,20 +469,30 @@ function buildEdges(filter) {
         title: e.note,
         _edge: e
       };
-      // Discriminator label on differential-pair edges. Tells the
-      // learner what data point distinguishes the two diagnoses
-      // without requiring them to click. White stroke on the text
-      // keeps it legible when it sits on top of an edge.
+      // Edge label: any edge can carry a discriminator/teaching label.
+      // Differential-pair labels render larger and bolder because they
+      // carry the highest-priority teaching point (the data that
+      // distinguishes two diagnoses). Other edge labels are quieter,
+      // visible on hover/zoom but not competing for attention.
       if (e.label) {
         edgeData.label = e.label;
-        edgeData.font = {
-          size: 11,
+        edgeData.font = isDiff ? {
+          size: 12,
           color: '#1E293B',
           face: 'DM Sans',
+          bold: true,
           strokeWidth: 4,
           strokeColor: '#FFFFFF',
           align: 'middle',
-          background: 'rgba(255,255,255,0.85)'
+          background: 'rgba(255,255,255,0.92)'
+        } : {
+          size: 10,
+          color: '#475569',
+          face: 'DM Sans',
+          strokeWidth: 3,
+          strokeColor: '#FFFFFF',
+          align: 'middle',
+          background: 'rgba(255,255,255,0.75)'
         };
       }
       return edgeData;
