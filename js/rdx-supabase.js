@@ -418,36 +418,95 @@ async function getMilestones(userId) {
 // ═══════════════════════════════════════
 // ANALYTICS EVENTS
 // ═══════════════════════════════════════
+
+// Anonymous identity helpers. We track two grain sizes:
+//   - session ID: per browser tab session (sessionStorage). Resets when
+//     the tab closes. Right grain for "first 5 minutes" funnel analysis.
+//   - visitor ID: per browser, persistent (localStorage). Lets us see
+//     return visits from the same browser even when not signed in, and
+//     can be joined to a future profile if the visitor signs up later.
+//
+// Both are UUIDs generated client-side. They never identify a real
+// person — they identify a browser. No PII.
+function _rdxGenUuid() {
+  // crypto.randomUUID is in all modern browsers. Fall back to a
+  // RFC4122 v4 polyfill for the ancient ones.
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    try { return crypto.randomUUID(); } catch(_) {}
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = (Math.random() * 16) | 0;
+    var v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+function _rdxAnonSessionId() {
+  try {
+    var existing = sessionStorage.getItem('rdx-anon-session');
+    if (existing) return existing;
+    var fresh = _rdxGenUuid();
+    sessionStorage.setItem('rdx-anon-session', fresh);
+    return fresh;
+  } catch(_) {
+    // Private mode / storage blocked. Fall back to an in-memory ID
+    // for the lifetime of this page load. Better than no signal.
+    if (!window.__rdxAnonSessionFallback) window.__rdxAnonSessionFallback = _rdxGenUuid();
+    return window.__rdxAnonSessionFallback;
+  }
+}
+
+function _rdxAnonVisitorId() {
+  try {
+    var existing = localStorage.getItem('rdx-anon-visitor');
+    if (existing) return existing;
+    var fresh = _rdxGenUuid();
+    localStorage.setItem('rdx-anon-visitor', fresh);
+    return fresh;
+  } catch(_) {
+    return null;  // optional, OK to be null
+  }
+}
+
 async function trackEvent(eventType, attemptId, eventData) {
   if (!supabase) return fallbackStore('event', eventType, eventData);
-  // Drop telemetry events when there's no logged-in user — the
-  // analytics_events table has user_id NOT NULL and inserting null
-  // returns 400. Anonymous-page telemetry should be a no-op, not an
-  // error in the console.
-  if (!currentUser || !currentUser.id) {
-    if (window.RDX_DEV) console.log('[RDX] trackEvent skipped (anonymous):', eventType);
-    return null;
-  }
   if (!eventType) return null;
 
-  try {
-    // Plain insert. The previous implementation used upsert with
-    // onConflict: 'user_id,attempt_id,event_type' and ignoreDuplicates,
-    // which silently dropped every repeat event of the same type per
-    // user (page_view, chart_tab_view, crt_answer_submit, etc.) and
-    // also depended on a unique index that does not exist on the
-    // analytics_events table. Result: ~2 rows in 2 months. We want
-    // every event recorded, so a plain insert is correct here.
-    var result = await supabase.from('analytics_events').insert({
+  // Build the insert row based on whether we have a logged-in user
+  // or just an anonymous browser session.
+  //
+  // The analytics_events table has a CHECK constraint that exactly
+  // ONE of (user_id, anonymous_session_id) is set. If we ever set
+  // both we'll get an error from that constraint, which is the
+  // correct behavior — the row would be ambiguous.
+  var row;
+  if (currentUser && currentUser.id) {
+    row = {
       user_id: currentUser.id,
       attempt_id: attemptId || null,
       event_type: eventType,
       event_data: eventData || {}
-    });
+    };
+  } else {
+    // Anonymous path. Sends through the anon RLS policy
+    // (anon_event_insert) which has a CHECK enforcing event_type
+    // allowlist, attempt_id NULL, and a 4KB cap on event_data.
+    row = {
+      user_id: null,
+      anonymous_session_id: _rdxAnonSessionId(),
+      anonymous_visitor_id: _rdxAnonVisitorId(),
+      attempt_id: null,  // anonymous events can't tie to an attempts row
+      event_type: eventType,
+      event_data: eventData || {}
+    };
+  }
+
+  try {
+    var result = await supabase.from('analytics_events').insert(row);
     if (result && result.error) {
       console.warn('[RDX] trackEvent insert error:', result.error.message || result.error);
     } else if (window.RDX_DEV) {
-      console.log('[RDX] trackEvent inserted:', eventType);
+      console.log('[RDX] trackEvent inserted:', eventType, currentUser ? '(user)' : '(anon)');
     }
     return result;
   } catch(e) {
@@ -824,6 +883,12 @@ window.RDX = {
     milestone: updateMilestone,
     event: trackEvent
   },
+
+  // Anonymous-browser identity helpers. Exposed so other modules
+  // (rdx-analytics-tracker.js trackSessionEnd, etc.) can read the
+  // same session/visitor IDs trackEvent uses for inserts.
+  anonSessionId: _rdxAnonSessionId,
+  anonVisitorId: _rdxAnonVisitorId,
 
   // Analytics
   analytics: {

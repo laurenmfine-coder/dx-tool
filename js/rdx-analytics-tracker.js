@@ -97,6 +97,17 @@ function instrumentEMR() {
       milestoneTags: getMilestoneTags(_caseId),
       metadata: { page: _currentPage }
     });
+    // Also fire a lightweight 'case_start' analytics_events row.
+    // RDX.track.caseStart writes to case_attempts and skips for
+    // anonymous users (no profile to link). The event below writes
+    // to analytics_events, which DOES accept anonymous_session_id,
+    // so the anonymous funnel includes case-start signal — the
+    // single most important event for first-5-minutes analysis.
+    RDX.track.event('case_start', null, {
+      case_id: _caseId,
+      setting: _setting || 'ed',
+      page: _currentPage
+    });
     log('Case started: ' + _caseId + ' in ' + _setting);
   }
 
@@ -402,69 +413,85 @@ function trackSessionEnd() {
   // Track time spent when user leaves the page
   window.addEventListener('beforeunload', function() {
     var seconds = elapsed();
-    if (seconds > 5) { // Only track meaningful sessions
-      if (window.RDX && window.RDX.getClient && window.RDX.getClient()) {
-        var client = RDX.getClient();
-        var user = RDX.getProfile();
-        if (!user) return;
+    if (seconds <= 5) return; // Only track meaningful sessions
+    if (!window.RDX || !window.RDX.getClient || !window.RDX.getClient()) return;
 
-        var anonKey = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_ANON_KEY) || '';
-        // Pull the access token from the supabase-js v2 in-memory session.
-        // sendBeacon was the original approach but it can't set an
-        // Authorization header — only Blob+content-type — so RLS on
-        // analytics_events rejected every send. fetch with keepalive:true
-        // keeps the request alive past unload AND lets us set headers,
-        // which is what RLS requires.
-        var session = client.auth && client.auth.session && client.auth.session();
-        // supabase-js v2 exposes session via getSession() (async); the
-        // synchronous accessor is gone. Fall back to the cached token
-        // on the client if present.
-        var accessToken = '';
-        try {
-          if (client.auth && client.auth._currentSession) {
-            accessToken = client.auth._currentSession.access_token || '';
-          }
-        } catch(_) {}
-        if (!accessToken && session && session.access_token) {
-          accessToken = session.access_token;
+    var client = RDX.getClient();
+    var user = RDX.getProfile && RDX.getProfile();
+    var anonKey = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_ANON_KEY) || '';
+
+    // For authenticated users, send with their JWT. For anonymous
+    // browsers, send through the anon RLS policy (anon_event_insert)
+    // with the session and visitor IDs that trackEvent uses for
+    // every other anonymous insert. Both paths land in the same
+    // analytics_events table.
+    var accessToken = '';
+    try {
+      if (client.auth && client.auth._currentSession) {
+        accessToken = client.auth._currentSession.access_token || '';
+      }
+    } catch(_) {}
+    var session = client.auth && client.auth.session && client.auth.session();
+    if (!accessToken && session && session.access_token) {
+      accessToken = session.access_token;
+    }
+
+    var body;
+    if (user && user.id) {
+      body = {
+        user_id: user.id,
+        event_type: 'session_end',
+        event_data: {
+          page: _currentPage,
+          duration_seconds: seconds,
+          setting: _setting,
+          case_id: _caseId
         }
-
-        var url = client.supabaseUrl + '/rest/v1/analytics_events';
-        var payload = JSON.stringify({
-          user_id: user.id,
-          event_type: 'session_end',
-          event_data: {
-            page: _currentPage,
-            duration_seconds: seconds,
-            setting: _setting,
-            case_id: _caseId
-          }
-        });
-
-        try {
-          fetch(url, {
-            method: 'POST',
-            keepalive: true,
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': anonKey,
-              'Authorization': accessToken ? ('Bearer ' + accessToken) : ('Bearer ' + anonKey),
-              'Prefer': 'return=minimal'
-            },
-            body: payload
-          });
-        } catch(_) {
-          // Last-ditch fallback. This will likely fail RLS but at least
-          // attempts delivery if fetch+keepalive isn't supported.
-          if (navigator.sendBeacon) {
-            try {
-              navigator.sendBeacon(
-                url + '?apikey=' + encodeURIComponent(anonKey),
-                new Blob([payload], { type: 'application/json' })
-              );
-            } catch(__) {}
-          }
+      };
+    } else {
+      // Anonymous path. RDX exposes the same session/visitor ID
+      // helpers used by trackEvent so all anonymous events for one
+      // browser tab share an anonymous_session_id.
+      var sid = (RDX.anonSessionId && RDX.anonSessionId()) || null;
+      var vid = (RDX.anonVisitorId && RDX.anonVisitorId()) || null;
+      if (!sid) return;  // can't track without a session id
+      body = {
+        user_id: null,
+        anonymous_session_id: sid,
+        anonymous_visitor_id: vid,
+        event_type: 'session_end',
+        event_data: {
+          page: _currentPage,
+          duration_seconds: seconds,
+          setting: _setting,
+          case_id: _caseId
         }
+      };
+    }
+
+    var url = client.supabaseUrl + '/rest/v1/analytics_events';
+    var payload = JSON.stringify(body);
+
+    try {
+      fetch(url, {
+        method: 'POST',
+        keepalive: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': anonKey,
+          'Authorization': accessToken ? ('Bearer ' + accessToken) : ('Bearer ' + anonKey),
+          'Prefer': 'return=minimal'
+        },
+        body: payload
+      });
+    } catch(_) {
+      if (navigator.sendBeacon) {
+        try {
+          navigator.sendBeacon(
+            url + '?apikey=' + encodeURIComponent(anonKey),
+            new Blob([payload], { type: 'application/json' })
+          );
+        } catch(__) {}
       }
     }
   });
