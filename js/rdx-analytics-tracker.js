@@ -403,28 +403,67 @@ function trackSessionEnd() {
   window.addEventListener('beforeunload', function() {
     var seconds = elapsed();
     if (seconds > 5) { // Only track meaningful sessions
-      // Use sendBeacon for reliable delivery on page unload
-      if (navigator.sendBeacon && window.RDX && window.RDX.getClient()) {
+      if (window.RDX && window.RDX.getClient && window.RDX.getClient()) {
         var client = RDX.getClient();
         var user = RDX.getProfile();
-        if (user) {
-          // sendBeacon needs auth headers like every other Supabase
-          // request, but Beacons don't allow Headers objects — only Blob
-          // with a content-type. The apikey/anon-key has to ride along
-          // in the URL as a query parameter (Supabase supports both).
-          var anonKey = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_ANON_KEY) || '';
-          var url = client.supabaseUrl + '/rest/v1/analytics_events?apikey=' + encodeURIComponent(anonKey);
-          var body = new Blob([JSON.stringify({
-            user_id: user.id,
-            event_type: 'session_end',
-            event_data: {
-              page: _currentPage,
-              duration_seconds: seconds,
-              setting: _setting,
-              case_id: _caseId
-            }
-          })], { type: 'application/json' });
-          try { navigator.sendBeacon(url, body); } catch(e) { /* ignore */ }
+        if (!user) return;
+
+        var anonKey = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_ANON_KEY) || '';
+        // Pull the access token from the supabase-js v2 in-memory session.
+        // sendBeacon was the original approach but it can't set an
+        // Authorization header — only Blob+content-type — so RLS on
+        // analytics_events rejected every send. fetch with keepalive:true
+        // keeps the request alive past unload AND lets us set headers,
+        // which is what RLS requires.
+        var session = client.auth && client.auth.session && client.auth.session();
+        // supabase-js v2 exposes session via getSession() (async); the
+        // synchronous accessor is gone. Fall back to the cached token
+        // on the client if present.
+        var accessToken = '';
+        try {
+          if (client.auth && client.auth._currentSession) {
+            accessToken = client.auth._currentSession.access_token || '';
+          }
+        } catch(_) {}
+        if (!accessToken && session && session.access_token) {
+          accessToken = session.access_token;
+        }
+
+        var url = client.supabaseUrl + '/rest/v1/analytics_events';
+        var payload = JSON.stringify({
+          user_id: user.id,
+          event_type: 'session_end',
+          event_data: {
+            page: _currentPage,
+            duration_seconds: seconds,
+            setting: _setting,
+            case_id: _caseId
+          }
+        });
+
+        try {
+          fetch(url, {
+            method: 'POST',
+            keepalive: true,
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': anonKey,
+              'Authorization': accessToken ? ('Bearer ' + accessToken) : ('Bearer ' + anonKey),
+              'Prefer': 'return=minimal'
+            },
+            body: payload
+          });
+        } catch(_) {
+          // Last-ditch fallback. This will likely fail RLS but at least
+          // attempts delivery if fetch+keepalive isn't supported.
+          if (navigator.sendBeacon) {
+            try {
+              navigator.sendBeacon(
+                url + '?apikey=' + encodeURIComponent(anonKey),
+                new Blob([payload], { type: 'application/json' })
+              );
+            } catch(__) {}
+          }
         }
       }
     }

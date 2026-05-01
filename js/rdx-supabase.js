@@ -424,16 +424,32 @@ async function trackEvent(eventType, attemptId, eventData) {
   // analytics_events table has user_id NOT NULL and inserting null
   // returns 400. Anonymous-page telemetry should be a no-op, not an
   // error in the console.
-  if (!currentUser || !currentUser.id) return null;
+  if (!currentUser || !currentUser.id) {
+    if (window.RDX_DEV) console.log('[RDX] trackEvent skipped (anonymous):', eventType);
+    return null;
+  }
   if (!eventType) return null;
 
   try {
-    return await supabase.from('analytics_events').upsert({
+    // Plain insert. The previous implementation used upsert with
+    // onConflict: 'user_id,attempt_id,event_type' and ignoreDuplicates,
+    // which silently dropped every repeat event of the same type per
+    // user (page_view, chart_tab_view, crt_answer_submit, etc.) and
+    // also depended on a unique index that does not exist on the
+    // analytics_events table. Result: ~2 rows in 2 months. We want
+    // every event recorded, so a plain insert is correct here.
+    var result = await supabase.from('analytics_events').insert({
       user_id: currentUser.id,
       attempt_id: attemptId || null,
       event_type: eventType,
       event_data: eventData || {}
-    }, { onConflict: 'user_id,attempt_id,event_type', ignoreDuplicates: true });
+    });
+    if (result && result.error) {
+      console.warn('[RDX] trackEvent insert error:', result.error.message || result.error);
+    } else if (window.RDX_DEV) {
+      console.log('[RDX] trackEvent inserted:', eventType);
+    }
+    return result;
   } catch(e) {
     // Telemetry must never break the app — swallow and warn.
     console.warn('[RDX] trackEvent failed:', e && e.message);
