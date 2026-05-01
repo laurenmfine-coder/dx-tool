@@ -1,6 +1,6 @@
 # ReasonDx Puzzle Audit Report
 
-Generated: 2026-05-01 18:26 UTC
+Generated: 2026-05-01 18:33 UTC
 
 ## Summary
 
@@ -9,8 +9,8 @@ Generated: 2026-05-01 18:26 UTC
 - **With references**: 30 (24%)
 - **With B-shape followUp**: 7 (6%)
 - **Errors found**: 0
-- **Warnings found**: 86
-- **Puzzles flagged**: 22 of 124
+- **Warnings found**: 77
+- **Puzzles flagged**: 17 of 124
 
 ## Findings by code
 
@@ -18,7 +18,7 @@ Generated: 2026-05-01 18:26 UTC
 |------|----------|-------|---------|
 | PROMPT_ALIGNMENT | warn | 40 | keyConcept not invited by prompt — learner may not know to address it |
 | SYNONYM_ECHO | warn | 31 | keyConcept synonym appears in scenario — free hit by parroting |
-| POSSIBLE_DOSE | warn | 13 | Possible medication dose detected (verify it's not a vital sign or duration) |
+| POSSIBLE_DOSE | warn | 4 | Possible medication dose detected (verify it's not a vital sign or duration) |
 | CLICHE | warn | 2 | Cliché phrase detected |
 
 ## ✅ No errors — schema is clean
@@ -29,15 +29,7 @@ Generated: 2026-05-01 18:26 UTC
 
 > 52-year-old male with substernal chest pressure for 2 hours. Your differential: …
 
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in followUp.teaching: "100mg" — context: "...) Systemic thrombolytics (tPA 100mg over 2h) — reserved for true ..."
 - ⚠️ `PROMPT_ALIGNMENT` — main keyConcept[2] "CT angiography" — no synonym or token word found in prompt. Learner may not know to address this.
-
-### Puzzle 4 — Time Pressure
-
-> You are the overnight resident. 78-year-old male found unresponsive. Nurse repor…
-
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in teaching: "1g" — context: "...Head of bed 30°. (3) Mannitol 1g/kg or hypertonic saline 23.4%..."
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in teaching: "30mL" — context: "...kg or hypertonic saline 23.4% 30mL IV push. (4) Call neurosurger..."
 
 ### Puzzle 5 — Distinguishing Case
 
@@ -49,36 +41,16 @@ Generated: 2026-05-01 18:26 UTC
 
 > 19-year-old with headache, fever, stiff neck. LP: WBC 840 (98% neutrophils), pro…
 
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in followUp.teaching: "1 g" — context: "... saline bolus or mannitol 0.5–1 g/kg. (3) Avoid hypotonic fluid..."
 - ⚠️ `PROMPT_ALIGNMENT` — main keyConcept[0] "Vancomycin" — no synonym or token word found in prompt. Learner may not know to address this.
 - ⚠️ `PROMPT_ALIGNMENT` — main keyConcept[1] "Dexamethasone" — no synonym or token word found in prompt. Learner may not know to address this.
 - ⚠️ `PROMPT_ALIGNMENT` — followUp keyConcept[0] "Raised ICP" — no synonym or token word found in prompt. Learner may not know to address this.
 - ⚠️ `PROMPT_ALIGNMENT` — followUp keyConcept[1] "Hyperosmolar therapy" — no synonym or token word found in prompt. Learner may not know to address this.
-
-### Puzzle 25 — Anchoring Check
-
-> 66-year-old admitted for "COPD exacerbation," day 2, responding poorly to bronch…
-
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in teaching: "500mL" — context: "...rgent pericardiocentesis. (3) 500mL NS bolus — tamponade is prelo..."
 
 ### Puzzle 30 — Risk Priority
 
 > ED waiting room: A) 72M syncope now asymptomatic. B) 28F worst headache of life,…
 
 - ⚠️ `CLICHE` — cliché phrase detected: "crushing chest pain"
-
-### Puzzle 39 — Lab Shift
-
-> 72-year-old with pneumonia, day 3 of ceftriaxone. Temperature normalized, WBC 9,…
-
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in teaching: "125mg" — context: "...r <1.5x baseline → vancomycin 125mg QID or fidaxomicin 200mg BID ..."
-
-### Puzzle 45 — Source Check
-
-> Your attending recommends high-dose aspirin (650mg TID) for an acute gout flare,…
-
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in scenario: "650mg" — context: "...recommends high-dose aspirin (650mg TID) for an acute gout flare,..."
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in teaching: "50mg" — context: "...te gout: NSAIDs (indomethacin 50mg TID or naproxen 500mg BID x 5..."
 
 ### Puzzle 76 — Medication Safety
 
@@ -91,12 +63,6 @@ Generated: 2026-05-01 18:26 UTC
 > A 5-day-old breastfed term infant is brought in for "yellow color" noted by pare…
 
 - ⚠️ `POSSIBLE_DOSE` — possible medication dose in scenario: "0.4 mg" — context: "...ly indirect), direct fraction 0.4 mg/dL. Normal vitals...."
-
-### Puzzle 102 — Time Pressure
-
-> A 68-year-old woman presents with 3 days of new-onset right-sided headache, scal…
-
-- ⚠️ `POSSIBLE_DOSE` — possible medication dose in teaching: "60mg" — context: "...oids immediately — prednisone 60mg/day or IV methylprednisolone ..."
 
 ### Puzzle 109 — Mechanism First
 
