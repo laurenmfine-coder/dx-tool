@@ -765,20 +765,35 @@ if (document.readyState === 'loading') {
 
 <script>
 var PUZZLES = [
-  {type:'Lab Shift',scenario:'52-year-old male with substernal chest pressure for 2 hours. Your differential: ACS, PE, aortic dissection, pericarditis.',prompt:'Troponin comes back 0.04 ng/mL (normal <0.04). D-dimer is 2,400. What changes in your differential and why?',teaching:'Borderline troponin + markedly elevated D-dimer shifts the probability toward PE over ACS. ACS typically has higher troponin at 2 hours. D-dimer >2000 has high specificity for PE. Aortic dissection can also elevate D-dimer — consider CT angiography.',
+  {type:'Lab Shift',scenario:'52-year-old male with substernal chest pressure for 2 hours. Your differential: ACS, PE, aortic dissection, pericarditis.',prompt:'Troponin comes back 0.04 ng/mL (normal <0.04). D-dimer is 2,400. (1) Reorder your differential and explain why ACS becomes less likely with this troponin. (2) Name the imaging study you would order next. (3) Explain what would still keep aortic dissection on your list despite suspecting PE.',teaching:'Borderline troponin + markedly elevated D-dimer shifts the probability toward PE over ACS. ACS typically has higher troponin at 2 hours. D-dimer >2000 has high specificity for PE. Aortic dissection can also elevate D-dimer — consider CT angiography.',
     keyConcepts:[
-      // Tagging note (first puzzle — worked example):
-      // Each entry is one concept a strong answer would mention.
+      // Tagging rule: every keyConcept MUST be explicitly invited by
+      // the prompt. If the prompt doesn't ask the learner to address
+      // a concept, scoring them on it punishes good answers to the
+      // question that was actually asked.
+      //
+      // Bad: prompt "What changes in your differential?" with concept
+      // "CT angiography" — the prompt didn't ask about imaging, so a
+      // strong learner who answers what was asked gets dinged.
+      //
+      // Good: prompt "(1) Reorder your differential. (2) Name the
+      // imaging study you'd order. (3) Explain what would still keep
+      // dissection on the list." — every concept is mapped to a
+      // specific ask in the prompt.
+      //
+      // Practical: write the prompt as a numbered list of explicit
+      // sub-asks, one sub-ask per scored concept (or one sub-ask
+      // covering 2 closely-paired concepts). Bloat is a worse failure
+      // mode than mismatch — keep concepts to 3-5 per beat.
+      //
       // 'token' is the canonical phrase shown to the learner if they
       // missed it. 'synonyms' is the list of strings the matcher
-      // accepts (case-insensitive substring match). Keep the list
-      // short — 3-5 concepts per puzzle. Anything more dilutes the
-      // signal and the score becomes noise.
+      // accepts (case-insensitive substring match).
       { token: 'PE',                synonyms: ['pe', 'pulmonary embolism', 'pulmonary embolus'] },
       { token: 'D-dimer',           synonyms: ['d-dimer', 'd dimer', 'ddimer'] },
       { token: 'CT angiography',    synonyms: ['ct angiography', 'cta', 'ct-pa', 'ct pulmonary angiogram', 'ctpa'] },
-      { token: 'ACS less likely',   synonyms: ['acs', 'acute coronary', 'mi', 'myocardial infarction', 'troponin would be higher', 'troponin too low'] },
-      { token: 'Aortic dissection', synonyms: ['aortic dissection', 'dissection', 'aorta'] }
+      { token: 'ACS less likely',   synonyms: ['troponin too low', 'troponin would be higher', 'acs less', 'less likely acs', 'rule out acs', 'rules out acs', 'against acs', 'not acs'] },
+      { token: 'Aortic dissection still possible', synonyms: ['dissection still', 'still dissection', 'rule out dissection', 'dissection on differential', 'cant rule out dissection', 'cannot rule out dissection', 'd-dimer in dissection', 'dissection elevates', 'dissection raises', 'dissection causes'] }
     ],
     // ── B-shape follow-up beat ────────────────────────────────────
     // Step 1 was the differential shift (cognitive). Step 2 is the
@@ -787,7 +802,7 @@ var PUZZLES = [
     // learner has to commit to a confidence level on each step
     // independently, which gives us per-step calibration data.
     followUp: {
-      prompt: 'CT-PA confirms a saddle PE. Heart rate 118, BP 92/58, troponin now 0.18. RV strain on echo. What is your next step in management and why?',
+      prompt: 'CT-PA confirms a saddle PE. Heart rate 118, BP 92/58, troponin now 0.18. RV strain on echo. (1) Risk-stratify this PE — what specifically tells you it is not low-risk? (2) Why is anticoagulation alone insufficient here? (3) Name the escalation options and which you would choose first.',
       teaching: 'This is intermediate-high risk PE (submassive): hemodynamic borderline + RV dysfunction + troponin elevation. Anticoagulation alone is insufficient — escalate. Options: (1) Systemic thrombolytics (tPA 100mg over 2h) — reserved for true hemodynamic collapse or impending arrest given bleeding risk. (2) Catheter-directed thrombolysis — preferred when available, lower tPA dose, comparable efficacy with less bleeding. (3) Surgical/mechanical thrombectomy — for contraindications to lysis. Heparin alone is wrong here; the RV is failing. The nuance: stable submassive PE is a judgment call, but unstable submassive (this patient) needs escalation now, before frank shock.',
       keyConcepts: [
         { token: 'Thrombolysis or escalation', synonyms: ['thromboly', 'tpa', 'alteplase', 'lytic', 'cdt', 'catheter-directed', 'thrombectomy', 'embolectomy'] },
@@ -900,7 +915,7 @@ var PUZZLES = [
       }
     ]
   },
-  {type:'Anchoring Check',scenario:'19-year-old with headache, fever, stiff neck. LP: WBC 840 (98% neutrophils), protein 180, glucose 28 (serum 92). You started empiric ceftriaxone.',prompt:'Your intern says "wait for cultures before adding anything else." What two additional agents must you consider adding immediately and why?',teaching:'(1) Vancomycin — empiric coverage for ceftriaxone-resistant S. pneumoniae (up to 30% resistance in some regions). Do NOT wait for sensitivities. (2) Dexamethasone 0.15mg/kg q6h × 4 days — before or with first antibiotic dose. Reduces mortality and hearing loss in pneumococcal meningitis (NNT ~8). Bacterial meningitis has 20-30% mortality even with correct antibiotics.',
+  {type:'Anchoring Check',scenario:'19-year-old with headache, fever, stiff neck. LP: WBC 840 (98% neutrophils), protein 180, glucose 28 (serum 92). You started empiric ceftriaxone.',prompt:'Your intern says "wait for cultures before adding anything else." Name two additional agents to add now. For each: (1) state the agent, (2) name the specific organism or coverage gap that drives the choice (e.g., resistance), and (3) cite the mortality or morbidity reduction that justifies starting before culture data.',teaching:'(1) Vancomycin — empiric coverage for ceftriaxone-resistant S. pneumoniae (up to 30% resistance in some regions). Do NOT wait for sensitivities. (2) Dexamethasone 0.15mg/kg q6h × 4 days — before or with first antibiotic dose. Reduces mortality and hearing loss in pneumococcal meningitis (NNT ~8). Bacterial meningitis has 20-30% mortality even with correct antibiotics.',
     keyConcepts: [
       { token: 'Vancomycin',    synonyms: ['vancomycin', 'vanc'] },
       { token: 'Dexamethasone', synonyms: ['dexamethasone', 'dex', 'steroids', 'glucocorticoid'] },
@@ -908,10 +923,10 @@ var PUZZLES = [
       { token: 'Mortality reduction', synonyms: ['mortality', 'death', 'hearing loss', 'morbid'] }
     ],
     followUp: {
-      prompt: 'Twelve hours in: she is more somnolent, GCS dropped from 15 to 12, and you note new bilateral 6th nerve palsies. CT head shows mild cerebral edema, no mass effect, no hydrocephalus. What is happening, and what changes immediately?',
+      prompt: 'Twelve hours in: she is more somnolent, GCS dropped from 15 to 12, and you note new bilateral 6th nerve palsies. CT head shows mild cerebral edema, no mass effect, no hydrocephalus. (1) What syndrome is this and what is the underlying mechanism? (2) Name two bedside maneuvers and one pharmacologic intervention you would do in the next ten minutes. (3) Should you repeat the LP for monitoring, and why or why not? (4) Who else should be consulted now?',
       teaching: 'Increased ICP from cerebritis/edema, with early signs of brainstem compromise (CN VI palsies are sensitive but non-specific for raised ICP). This is the second-leading cause of mortality in bacterial meningitis after the infection itself. Immediate steps: (1) Head of bed 30°. (2) Hyperosmolar therapy — 3% saline bolus or mannitol 0.5–1 g/kg. (3) Avoid hypotonic fluids and over-aggressive fluid resuscitation. (4) Neurosurgery consult for ICP monitoring or EVD if hydrocephalus develops. (5) Continue dexamethasone — already on board, reduces edema. Do NOT do another LP for "monitoring" — risk of herniation. The trap: people focus on tuning antibiotics when the patient is actually deteriorating from a complication of the infection itself. The infection is on track; the brain is the new problem.',
       keyConcepts: [
-        { token: 'Raised ICP',         synonyms: ['icp', 'intracranial pressure', 'cerebral edema', 'edema'] },
+        { token: 'Raised ICP',         synonyms: ['icp', 'intracranial pressure', 'raised pressure', 'increased pressure', 'elevated pressure'] },
         { token: 'Hyperosmolar therapy', synonyms: ['hyperosmolar', 'hypertonic', '3%', 'mannitol', 'saline'] },
         { token: 'Head of bed',        synonyms: ['head of bed', 'hob', 'elevate', '30 degree'] },
         { token: 'No repeat LP',       synonyms: ['no lp', 'avoid lp', 'no repeat tap', 'herniation', 'do not lp'] },
