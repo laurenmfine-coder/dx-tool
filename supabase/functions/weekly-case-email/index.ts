@@ -303,8 +303,44 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 Deno.serve(async (req) => {
   let testEmail = null;
   let isResend = false;
+  let confirmSend = false;
+  let parseFailed = false;
   if (req.method === "POST") {
-    try { const b = await req.json(); testEmail = b?.test_email || null; isResend = !!b?.resend; } catch(e) {}
+    try {
+      const b = await req.json();
+      testEmail = b?.test_email || null;
+      isResend = !!b?.resend;
+      confirmSend = b?.confirm_send === true;
+    } catch(e) {
+      parseFailed = true;
+    }
+  }
+
+  if (parseFailed) {
+    return new Response(
+      JSON.stringify({
+        error: "Could not parse request body as JSON. Aborting to avoid an unintended live send."
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  // Hard gate: a live send to all weekly_email_eligible requires
+  // confirm_send: true. The pg_cron schedule passes this flag in its
+  // body. Any other caller (manual curl with bare {}, dashboard test,
+  // misconfigured caller) that doesn't pass confirm_send is rejected.
+  //
+  // Apr 30 incident: an unscheduled send went out at 1pm ET on a
+  // Thursday. The cron is set for Mon/Wed at 12:00 UTC, so cron is not
+  // the cause. The function previously treated any POST with a parsed
+  // body as a live-send-to-all, including {} from manual triggers.
+  if (!testEmail && !confirmSend) {
+    return new Response(
+      JSON.stringify({
+        error: "Refusing to send. Pass test_email:'...' for a single recipient or confirm_send:true for a live send to all weekly_email_eligible."
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);

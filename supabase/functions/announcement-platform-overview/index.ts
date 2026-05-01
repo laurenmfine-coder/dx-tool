@@ -158,20 +158,41 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 Deno.serve(async (req) => {
   let testEmail = null;
   let dryRun = false;
+  let confirmSend = false;
   let extraEmails: Array<{email: string, full_name?: string}> = [];
+  let parseFailed = false;
 
   if (req.method === "POST") {
     try {
       const b = await req.json();
       testEmail = b?.test_email || null;
       dryRun = b?.dry_run === true;
+      confirmSend = b?.confirm_send === true;
       // extra_emails: array of {email, full_name?} OR array of strings
       if (Array.isArray(b?.extra_emails)) {
         extraEmails = b.extra_emails.map((e: any) =>
           typeof e === 'string' ? { email: e } : e
         );
       }
-    } catch(e) {}
+    } catch(e) {
+      parseFailed = true;
+    }
+  }
+
+  if (parseFailed) {
+    return new Response(
+      JSON.stringify({ error: "Could not parse request body as JSON. Aborting." }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  if (!testEmail && !dryRun && !confirmSend) {
+    return new Response(
+      JSON.stringify({
+        error: "Refusing to send. Pass dry_run:true, test_email:'...', or confirm_send:true."
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
