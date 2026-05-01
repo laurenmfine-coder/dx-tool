@@ -34,9 +34,37 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
 .puzzle-feedback.show{display:block}
 .puzzle-feedback.correct{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46}
 .puzzle-feedback.teaching{background:var(--blue-l);border:1px solid rgba(40,116,166,.2);color:#1B4F72}
+/* ── Confidence rating (Option 1: forced commitment before reveal) ── */
+.puzzle-confidence{margin-top:16px;padding:14px 16px;background:#F8FAFC;border:1px solid var(--border);border-radius:10px}
+.puzzle-confidence.hidden{display:none}
+.puzzle-confidence-label{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:10px}
+.puzzle-confidence-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.puzzle-cf-btn{flex:1;min-width:90px;padding:10px 12px;border:1.5px solid var(--border);background:#fff;border-radius:8px;font-size:.86rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;color:var(--text)}
+.puzzle-cf-btn:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.puzzle-cf-sure:hover  {border-color:#10B981;color:#065F46;background:#ECFDF5}
+.puzzle-cf-pretty:hover{border-color:#2874A6;color:#1B4F72;background:var(--blue-l)}
+.puzzle-cf-guess:hover {border-color:#F59E0B;color:#92400E;background:#FFFBEB}
+.puzzle-confidence-hint{font-size:.72rem;color:var(--ts);margin-top:8px;font-style:italic}
+.puzzle-cf-tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 8px;border-radius:4px;margin-right:8px}
+.puzzle-cf-tag.sure    {background:#D1FAE5;color:#065F46}
+.puzzle-cf-tag.pretty  {background:#DBEAFE;color:#1E3A8A}
+.puzzle-cf-tag.guessing{background:#FEF3C7;color:#92400E}
+/* ── Concept-coverage scoring (Option 2: graded answer matching) ── */
+.puzzle-coverage{margin-top:14px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:10px}
+.puzzle-coverage-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.puzzle-coverage-title{font-size:.78rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.6px}
+.puzzle-coverage-score{font-size:.92rem;font-weight:700;color:var(--blue)}
+.puzzle-coverage-bar{display:flex;gap:3px;margin-bottom:10px}
+.puzzle-coverage-seg{flex:1;height:8px;border-radius:3px;background:#E5E7EB;transition:background .25s}
+.puzzle-coverage-seg.hit{background:#10B981}
+.puzzle-coverage-concepts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.puzzle-concept-pill{font-size:.74rem;padding:4px 10px;border-radius:12px;font-weight:500}
+.puzzle-concept-pill.hit  {background:#D1FAE5;color:#065F46;border:1px solid #A7F3D0}
+.puzzle-concept-pill.miss {background:#F3F4F6;color:#6B7280;border:1px solid #E5E7EB;text-decoration:line-through;text-decoration-color:#9CA3AF}
+.puzzle-coverage-calibration{font-size:.78rem;color:var(--ts);margin-top:10px;font-style:italic;line-height:1.5}
 .puzzle-streak{text-align:center;margin-top:24px;font-size:.82rem;color:var(--ts)}
 .puzzle-streak strong{color:var(--blue)}
-.puzzle-nav{display:flex;justify-content:center;gap:12px;margin-top:20px}
+.puzzle-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
 </style>
 
 <link rel="stylesheet" href="/mobile.css">
@@ -72,15 +100,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
     <div class="puzzle-scenario" id="puzzleScenario"></div>
     <div class="puzzle-prompt" id="puzzlePrompt"></div>
     <textarea class="puzzle-input" id="puzzleAnswer" placeholder="Your reasoning..."></textarea>
-    <div class="puzzle-actions">
-      <button class="puzzle-btn puzzle-btn-primary" onclick="submitPuzzle()">Submit</button>
-      <button class="puzzle-btn puzzle-btn-secondary" onclick="skipPuzzle()">Skip</button>
+    <div class="puzzle-confidence" id="puzzleConfidence">
+      <div class="puzzle-confidence-label">Before you see the answer — how confident are you?</div>
+      <div class="puzzle-confidence-buttons">
+        <button class="puzzle-cf-btn puzzle-cf-sure"   data-confidence="sure"    onclick="submitPuzzle('sure')">Sure</button>
+        <button class="puzzle-cf-btn puzzle-cf-pretty" data-confidence="pretty"  onclick="submitPuzzle('pretty')">Pretty sure</button>
+        <button class="puzzle-cf-btn puzzle-cf-guess"  data-confidence="guessing" onclick="submitPuzzle('guessing')">Guessing</button>
+      </div>
+      <div class="puzzle-confidence-hint">Pick one to reveal the expert analysis.</div>
+    </div>
+    <div class="puzzle-actions" id="puzzleActions" style="display:none">
+      <button class="puzzle-btn puzzle-btn-secondary" onclick="skipPuzzle()">Next puzzle &rarr;</button>
     </div>
     <div class="puzzle-feedback" id="puzzleFeedback"></div>
   </div>
   <div class="puzzle-streak" id="puzzleStreak"></div>
   <div class="puzzle-nav">
     <a href="browse.html" style="font-size:.82rem;color:var(--ts);text-decoration:none">&larr; Back to Browse</a>
+    <a href="puzzle-branched-demo.html" style="font-size:.82rem;color:var(--ts);text-decoration:none;margin-left:auto" title="Prototype: branched decision puzzle format">Try branched format &rarr;</a>
   </div>
 </div>
 
@@ -708,7 +745,22 @@ if (document.readyState === 'loading') {
 
 <script>
 var PUZZLES = [
-  {type:'Lab Shift',scenario:'52-year-old male with substernal chest pressure for 2 hours. Your differential: ACS, PE, aortic dissection, pericarditis.',prompt:'Troponin comes back 0.04 ng/mL (normal <0.04). D-dimer is 2,400. What changes in your differential and why?',teaching:'Borderline troponin + markedly elevated D-dimer shifts the probability toward PE over ACS. ACS typically has higher troponin at 2 hours. D-dimer >2000 has high specificity for PE. Aortic dissection can also elevate D-dimer — consider CT angiography.'},
+  {type:'Lab Shift',scenario:'52-year-old male with substernal chest pressure for 2 hours. Your differential: ACS, PE, aortic dissection, pericarditis.',prompt:'Troponin comes back 0.04 ng/mL (normal <0.04). D-dimer is 2,400. What changes in your differential and why?',teaching:'Borderline troponin + markedly elevated D-dimer shifts the probability toward PE over ACS. ACS typically has higher troponin at 2 hours. D-dimer >2000 has high specificity for PE. Aortic dissection can also elevate D-dimer — consider CT angiography.',
+    keyConcepts:[
+      // Tagging note (first puzzle — worked example):
+      // Each entry is one concept a strong answer would mention.
+      // 'token' is the canonical phrase shown to the learner if they
+      // missed it. 'synonyms' is the list of strings the matcher
+      // accepts (case-insensitive substring match). Keep the list
+      // short — 3-5 concepts per puzzle. Anything more dilutes the
+      // signal and the score becomes noise.
+      { token: 'PE',                synonyms: ['pe', 'pulmonary embolism', 'pulmonary embolus'] },
+      { token: 'D-dimer',           synonyms: ['d-dimer', 'd dimer', 'ddimer'] },
+      { token: 'CT angiography',    synonyms: ['ct angiography', 'cta', 'ct-pa', 'ct pulmonary angiogram', 'ctpa'] },
+      { token: 'ACS less likely',   synonyms: ['acs', 'acute coronary', 'mi', 'myocardial infarction', 'troponin would be higher', 'troponin too low'] },
+      { token: 'Aortic dissection', synonyms: ['aortic dissection', 'dissection', 'aorta'] }
+    ]
+  },
   {type:'Physical Exam Finding',scenario:'68-year-old female with progressive dyspnea over 3 weeks. On exam: JVD, bilateral crackles to mid-lung, S3 gallop, 2+ pitting edema.',prompt:'You find a new harsh systolic murmur loudest at the apex radiating to the axilla. Does this change your working diagnosis of CHF exacerbation? Why or why not?',teaching:'New mitral regurgitation in the setting of CHF changes management significantly. Acute MR can be the CAUSE of the decompensation (papillary muscle rupture, endocarditis, chordal rupture) rather than a consequence. This patient needs an urgent echo to evaluate valve function. The CHF treatment is the same, but the underlying cause matters for definitive management.'},
   {type:'Missing Evidence',scenario:'24-year-old female with sudden-onset pleuritic chest pain, tachycardia, and SpO2 91%. Colleague says: "This is definitely a PE."',prompt:'What single finding, if present, would make you disagree?',teaching:'Fever. PE rarely causes fever >38.5°C. If this patient is febrile, pneumonia or empyema becomes much more likely than PE. Other disconfirming findings: productive purulent sputum (pneumonia), unilateral leg swelling absent (reduces PE probability), pleuritic pain that worsens with inspiration AND position (more consistent with pleurisy/pericarditis).'},
   {type:'Time Pressure',scenario:'You are the overnight resident. 78-year-old male found unresponsive. Nurse reports sudden onset 10 minutes ago. GCS 7 (E1V2M4). Right pupil 6mm fixed, left 3mm reactive.',prompt:'You have 60 seconds before the attending arrives. What do you do RIGHT NOW and why?',teaching:'This is a neurosurgical emergency — herniation syndrome (blown pupil = uncal herniation). Immediate actions: (1) Protect airway — RSI with etomidate/succinylcholine, avoid ketamine. (2) Head of bed 30°. (3) Mannitol 1g/kg or hypertonic saline 23.4% 30mL IV push. (4) Call neurosurgery STAT for emergent decompression. (5) STAT CT head — but do NOT delay treatment for imaging. Every minute of herniation causes irreversible damage.'},
@@ -956,34 +1008,163 @@ function renderPuzzle() {
   document.getElementById('puzzlePrompt').textContent = p.prompt;
   document.getElementById('puzzleAnswer').value = '';
   document.getElementById('puzzleAnswer').disabled = false;
+  // Reset feedback and reveal the confidence buttons; hide the
+  // post-reveal "Next puzzle" action until the learner commits.
   document.getElementById('puzzleFeedback').className = 'puzzle-feedback';
   document.getElementById('puzzleFeedback').style.display = 'none';
+  var conf = document.getElementById('puzzleConfidence');
+  if (conf) conf.classList.remove('hidden');
+  var actions = document.getElementById('puzzleActions');
+  if (actions) actions.style.display = 'none';
   updateStreak();
 }
 
-function submitPuzzle() {
+// Frame the teaching response based on the confidence the learner
+// committed to BEFORE seeing the answer. The confidence step is the
+// load-bearing engagement mechanic: it forces a moment of self-
+// assessment, which is itself a clinical reasoning skill (calibration).
+// We don't grade the textarea content — that's Option 2, layered on
+// top of this. Here we only grade the act of committing.
+function _confidenceFrame(level) {
+  if (level === 'sure')      return { tag: 'Sure',       headline: 'You called it', tone: 'sure' };
+  if (level === 'pretty')    return { tag: 'Pretty sure', headline: 'Worth checking', tone: 'pretty' };
+  if (level === 'guessing')  return { tag: 'Guessing',    headline: 'Tricky one — here is the reasoning', tone: 'guessing' };
+  return                            { tag: '',            headline: 'Expert analysis', tone: '' };
+}
+
+// ── Option 2: concept-coverage scoring ────────────────────────────
+// Tokenize the learner's answer and check it against each puzzle's
+// keyConcepts synonym list. Returns { hits, misses, score, total }.
+// Returns null if the puzzle has no keyConcepts (graceful no-op for
+// untagged puzzles — only the first puzzle is tagged tonight as a
+// worked example; the rest will fall back to no coverage bar).
+function _scoreConcepts(puzzle, answer) {
+  if (!puzzle || !Array.isArray(puzzle.keyConcepts) || !puzzle.keyConcepts.length) return null;
+  var lower = (answer || '').toLowerCase();
+  // Strip punctuation that would prevent substring match across word
+  // boundaries — "PE." should match "pe", "D-dimer," should match
+  // "d-dimer". Keep hyphens since they're meaningful in terms like
+  // "D-dimer" and "CT-PA".
+  lower = lower.replace(/[.,!?;:()"'`]/g, ' ').replace(/\s+/g, ' ');
+
+  var hits = [], misses = [];
+  puzzle.keyConcepts.forEach(function(concept) {
+    var matched = (concept.synonyms || [concept.token]).some(function(syn) {
+      return lower.indexOf(syn.toLowerCase()) !== -1;
+    });
+    (matched ? hits : misses).push(concept.token);
+  });
+  return {
+    hits: hits,
+    misses: misses,
+    total: puzzle.keyConcepts.length,
+    score: hits.length / puzzle.keyConcepts.length
+  };
+}
+
+// Renders the coverage bar HTML. The cross-axis with confidence is
+// the actual win: a learner who said "Sure" but matched 1/5 concepts
+// gets a calibration nudge that no flashcard app gives.
+function _coverageHtml(coverage, confidence) {
+  if (!coverage) return '';
+  var segs = '';
+  for (var i = 0; i < coverage.total; i++) {
+    segs += '<div class="puzzle-coverage-seg' + (i < coverage.hits.length ? ' hit' : '') + '"></div>';
+  }
+  var pills = coverage.hits.map(function(t) {
+    return '<span class="puzzle-concept-pill hit">' + t + '</span>';
+  }).concat(coverage.misses.map(function(t) {
+    return '<span class="puzzle-concept-pill miss">' + t + '</span>';
+  })).join('');
+
+  // Calibration commentary: compare what they committed to against
+  // what they actually mentioned. This is the moment that turns
+  // confidence + coverage into a real game mechanic.
+  var calibration = '';
+  if (confidence === 'sure' && coverage.score < 0.5) {
+    calibration = 'You said "Sure" but mentioned ' + coverage.hits.length + ' of ' + coverage.total + ' key concepts. Worth flagging this one for review — confidence and recall don\'t always agree.';
+  } else if (confidence === 'guessing' && coverage.score >= 0.6) {
+    calibration = 'You said "Guessing" but you covered ' + coverage.hits.length + ' of ' + coverage.total + ' key concepts. Give yourself credit — your intuition was better than you thought.';
+  } else if (confidence === 'pretty' && coverage.score >= 0.8) {
+    calibration = 'Calibrated. You said "Pretty sure" and your answer touched ' + coverage.hits.length + ' of ' + coverage.total + ' key concepts.';
+  }
+
+  return '<div class="puzzle-coverage">' +
+    '<div class="puzzle-coverage-header">' +
+      '<div class="puzzle-coverage-title">Concepts in your answer</div>' +
+      '<div class="puzzle-coverage-score">' + coverage.hits.length + ' / ' + coverage.total + '</div>' +
+    '</div>' +
+    '<div class="puzzle-coverage-bar">' + segs + '</div>' +
+    '<div class="puzzle-coverage-concepts">' + pills + '</div>' +
+    (calibration ? '<div class="puzzle-coverage-calibration">' + calibration + '</div>' : '') +
+  '</div>';
+}
+
+function submitPuzzle(confidence) {
   var p = PUZZLES[currentIndex];
   var answer = document.getElementById('puzzleAnswer').value || '';
-    var fb = document.getElementById('puzzleFeedback');
+  var fb = document.getElementById('puzzleFeedback');
+  var frame = _confidenceFrame(confidence);
+
+  // Hide the confidence UI now that they've committed; show the
+  // "next puzzle" affordance instead.
+  var conf = document.getElementById('puzzleConfidence');
+  if (conf) conf.classList.add('hidden');
+  var actions = document.getElementById('puzzleActions');
+  if (actions) actions.style.display = 'flex';
+
   fb.className = 'puzzle-feedback show teaching';
-  fb.innerHTML = '<div style="font-weight:700;margin-bottom:6px">Expert Analysis</div>' + p.teaching;
+  // Headline carries the confidence tag so the learner sees the
+  // commitment they just made reflected back at them. That feedback
+  // loop — "you said X, here's the truth" — is what makes the puzzle
+  // feel like a game instead of a flashcard.
+  var tagHtml = frame.tag
+    ? '<span class="puzzle-cf-tag ' + frame.tone + '">' + frame.tag + '</span>'
+    : '';
+
+  // Option 2 layered on top of Option 1: score the answer against
+  // the puzzle's keyConcepts (when tagged). Render the coverage bar
+  // BELOW the teaching so the teaching is still the primary content.
+  var coverage = _scoreConcepts(p, answer);
+  var coverageHtml = _coverageHtml(coverage, confidence);
+
+  fb.innerHTML =
+    '<div style="font-weight:700;margin-bottom:6px">' + tagHtml + frame.headline + '</div>' +
+    p.teaching +
+    coverageHtml;
   fb.style.display = 'block';
 
   document.getElementById('puzzleAnswer').disabled = true;
 
-  // Update streak
+  // Update streak (still unconditional — daily-streak preservation is
+  // a separate engagement mechanic from per-puzzle scoring).
   streak++;
   localStorage.setItem('rdx_puzzle_streak', streak);
   localStorage.setItem('rdx_puzzle_date', today);
   updateStreak(p);
 
-  // Track attempt for the browse/progress system
-  if (window.RDXPuzzleTracking) window.RDXPuzzleTracking.logAttempt(p.id || ('idx-' + currentIndex), p.type, true);
+  // Track attempt for the browse/progress system. The third arg used
+  // to be hardcoded `true` (everything was "correct"). Now we pass
+  // the confidence level so post-hoc analysis can look at calibration:
+  // Option 2 will compare confidence vs concept-coverage score, which
+  // is the actual win.
+  if (window.RDXPuzzleTracking) {
+    window.RDXPuzzleTracking.logAttempt(p.id || ('idx-' + currentIndex), p.type, true, { confidence: confidence || 'unrated' });
+  }
 
-  // Log
+  // Per-attempt history for calibration insights.
   try {
     var history = JSON.parse(localStorage.getItem('rdx_puzzle_history') || '[]');
-    history.push({ date: today, type: p.type, answered: true, words: answer.split(/\s+/).length });
+    history.push({
+      date: today,
+      type: p.type,
+      answered: true,
+      words: answer.split(/\s+/).filter(Boolean).length,
+      confidence: confidence || 'unrated',
+      coverageScore: coverage ? coverage.score : null,
+      coverageHits: coverage ? coverage.hits.length : null,
+      coverageTotal: coverage ? coverage.total : null
+    });
     if (history.length > 90) history = history.slice(-90);
     localStorage.setItem('rdx_puzzle_history', JSON.stringify(history));
   } catch(e) {}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branched Puzzle Prototype | ReasonDx</title>
+<meta name="description" content="Prototype for branched decision puzzles. One worked example to evaluate the format before scaling.">
+
+<style>
+:root{
+  --bg:#F8FAFC; --surface:#fff; --border:#E2E8F0; --text:#1E293B;
+  --ts:#64748B; --blue:#2874A6; --blue-l:#EBF5FB;
+  --good:#10B981; --good-l:#ECFDF5;
+  --warn:#F59E0B; --warn-l:#FFFBEB;
+  --bad:#DC2626;  --bad-l:#FEF2F2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding:0;
+  font-family:'DM Sans','IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh;
+}
+.wrap{max-width:680px;margin:0 auto;padding:32px 20px}
+.header{margin-bottom:24px}
+.header .breadcrumb{font-size:.78rem;color:var(--ts);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-bottom:6px}
+.header h1{font-size:1.4rem;margin:0 0 6px;letter-spacing:-.02em}
+.header .meta{font-size:.86rem;color:var(--ts)}
+
+.scenario-card{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:14px; padding:24px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04); margin-bottom:18px;
+}
+.scenario-tag{
+  display:inline-block; font-size:.68rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.8px;
+  padding:4px 10px; border-radius:4px; margin-bottom:10px;
+  background:var(--bad-l); color:var(--bad);
+}
+.scenario-text{font-size:.96rem; line-height:1.65; margin-bottom:16px}
+.timer-strip{
+  display:flex; align-items:center; gap:8px;
+  font-size:.82rem; color:var(--bad); font-weight:600;
+  background:var(--bad-l); padding:8px 12px; border-radius:8px;
+  border:1px solid #FECACA;
+}
+
+.prompt{font-size:1rem; font-weight:700; margin:18px 0 12px; line-height:1.4}
+.choices{display:flex; flex-direction:column; gap:10px}
+.choice{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:10px; padding:14px 16px; cursor:pointer;
+  font-size:.92rem; line-height:1.5; transition:all .15s;
+  text-align:left; font-family:inherit; color:var(--text);
+}
+.choice:hover{border-color:var(--blue); background:var(--blue-l); transform:translateY(-1px)}
+.choice:disabled{opacity:.5; cursor:default; transform:none}
+.choice .label{font-weight:600; display:block; margin-bottom:2px}
+.choice .hint{font-size:.78rem; color:var(--ts); display:block}
+
+.consequence{
+  margin-top:18px; padding:16px 18px;
+  border-radius:10px; line-height:1.6; font-size:.92rem;
+  display:none; animation:slide-in .25s ease;
+}
+.consequence.show{display:block}
+.consequence.good{background:var(--good-l); border:1px solid #A7F3D0; color:#065F46}
+.consequence.warn{background:var(--warn-l); border:1px solid #FED7AA; color:#92400E}
+.consequence.bad {background:var(--bad-l);  border:1px solid #FECACA; color:#991B1B}
+.consequence-head{font-weight:700; font-size:.88rem; margin-bottom:6px; letter-spacing:-.01em}
+.consequence-teaching{margin-top:10px; padding-top:10px; border-top:1px solid currentColor; opacity:.85; font-size:.86rem}
+@keyframes slide-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.continue-btn{
+  margin-top:14px; padding:10px 20px;
+  background:var(--blue); color:#fff; border:none; border-radius:8px;
+  font-weight:600; font-size:.88rem; cursor:pointer; font-family:inherit;
+  transition:background .15s; display:none;
+}
+.continue-btn.show{display:inline-block}
+.continue-btn:hover{background:#1B4F72}
+
+.progress{
+  display:flex; gap:6px; margin-bottom:24px;
+}
+.progress-step{
+  flex:1; height:6px; border-radius:3px; background:#E5E7EB;
+  transition:background .25s;
+}
+.progress-step.active{background:var(--blue)}
+.progress-step.done  {background:var(--good)}
+.progress-step.failed{background:var(--bad)}
+
+.summary{
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:14px; padding:28px; margin-top:18px;
+  display:none;
+}
+.summary.show{display:block; animation:slide-in .3s ease}
+.summary h2{font-size:1.2rem; margin:0 0 14px}
+.summary .verdict{font-size:.96rem; line-height:1.6; margin-bottom:16px}
+.summary .path{
+  background:#F8FAFC; padding:14px 16px; border-radius:8px;
+  font-size:.84rem; line-height:1.7; color:var(--ts);
+}
+.summary .path strong{color:var(--text)}
+.summary-actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+.summary-actions button, .summary-actions a{
+  padding:10px 18px; border-radius:8px; font-weight:600;
+  font-size:.86rem; cursor:pointer; font-family:inherit; text-decoration:none;
+  border:none; transition:all .15s;
+}
+.summary-actions .primary{background:var(--blue); color:#fff}
+.summary-actions .primary:hover{background:#1B4F72}
+.summary-actions .secondary{background:#fff; color:var(--blue); border:1.5px solid var(--blue)}
+
+.proto-banner{
+  background:#FEF3C7; border:1px solid #FDE68A; color:#92400E;
+  padding:10px 14px; border-radius:8px; font-size:.82rem;
+  margin-bottom:18px; line-height:1.5;
+}
+.proto-banner strong{color:#78350F}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="proto-banner">
+    <strong>Prototype.</strong> One worked example of a branched decision puzzle, to evaluate the format before deciding whether to convert more puzzles to this shape. Three decision points. Each choice produces a real consequence and may end the case early.
+  </div>
+
+  <div class="header">
+    <div class="breadcrumb">Branched Decision Puzzle</div>
+    <h1>The Blown Pupil</h1>
+    <div class="meta">High acuity · Neurosurgical emergency · ~3 minutes</div>
+  </div>
+
+  <div class="progress" id="progress">
+    <div class="progress-step active"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+  </div>
+
+  <div id="puzzle-stage"></div>
+
+  <div class="summary" id="summary">
+    <h2 id="summary-title"></h2>
+    <div class="verdict" id="summary-verdict"></div>
+    <div class="path" id="summary-path"></div>
+    <div class="summary-actions">
+      <button class="primary" onclick="restart()">Try again</button>
+      <a class="secondary" href="puzzles.html">Back to puzzles</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── Puzzle data ────────────────────────────────────────────────────
+// The data shape is intentionally explicit. Each node has a prompt,
+// a set of choices, and each choice has a consequence (good/warn/bad)
+// + teaching + a `next` pointer (or 'end' to terminate the case).
+//
+// Authoring cost per puzzle: roughly 5x a current text-box puzzle.
+// The teaching that's currently in one paragraph gets distributed
+// across 3-5 consequence blocks. The clinical reasoning depth is the
+// same; the dramatic structure is added.
+//
+// This prototype uses one puzzle (the herniation case from the main
+// puzzle catalog). If we like the format, we'll convert 5-10 of the
+// highest-tension scenarios first, not all 79.
+//
+// Time-pressure framing is optional. Used here because the original
+// puzzle is explicitly time-pressured ("60 seconds before the
+// attending arrives"). For non-time-pressured cases, omit the
+// timerStrip flag and the urgent visual.
+
+var PUZZLE = {
+  id: 'herniation-overnight',
+  scenarioTag: 'Overnight, you are alone',
+  scenario: "78-year-old male found unresponsive on the floor of his hospital room. Nurse reports sudden onset 10 minutes ago. GCS 7 (E1V2M4). Right pupil 6mm fixed; left pupil 3mm reactive. Vitals: BP 188/104, HR 52, RR 8 and irregular. The attending is 6 minutes away.",
+  timerStrip: 'Cushing triad + blown pupil. Every minute matters.',
+
+  nodes: {
+    n1: {
+      prompt: "What do you do FIRST?",
+      choices: [
+        { label: "Call neurosurgery STAT and start emergent treatment in parallel",
+          hint: "Treat and call simultaneously",
+          tone: 'good',
+          consequenceHead: "Right move.",
+          consequence: "You hit the page button while moving. The nurse is already at the head of the bed. You ask her to bring up mannitol and prepare for intubation while you call.",
+          teaching: "In a herniation syndrome you cannot afford to do steps sequentially. Treatment, imaging, and consultation all start at once. The blown pupil + Cushing triad (hypertension, bradycardia, irregular respiration) is a clinical diagnosis — you do not wait for CT to start treatment.",
+          next: 'n2'
+        },
+        { label: "Order STAT CT head, then decide treatment based on results",
+          hint: "Image first to confirm",
+          tone: 'bad',
+          consequenceHead: "Patient deteriorates while in CT.",
+          consequence: "By the time the scan is read, the patient has bilateral fixed pupils and is posturing. The herniation has progressed past the salvageable window.",
+          teaching: "Imaging is critical for surgical planning but it is NEVER the first step in a presumed herniation. The clinical signs (blown pupil + Cushing triad + decreased GCS) are diagnostic enough to start treatment. Imaging happens DURING treatment, not before it.",
+          next: 'end-bad'
+        },
+        { label: "Reassess GCS to confirm the decline before acting",
+          hint: "Verify before treating",
+          tone: 'warn',
+          consequenceHead: "Lost minutes you didn't have.",
+          consequence: "You spend 90 seconds on a careful neuro exam. The findings are unchanged. You now begin treatment — but the herniation has progressed and the prognosis is worse.",
+          teaching: "Repeating the exam is a defensible instinct, but in a clear herniation picture (asymmetric blown pupil + decreased GCS + abnormal vitals) the diagnosis is already made. The exam window should be seconds, not minutes. Your finding will not change; your patient's brain will.",
+          next: 'n2'
+        }
+      ]
+    },
+
+    n2: {
+      prompt: "Neurosurgery is on the way. The patient is bagged and ready for intubation. What is your induction plan?",
+      choices: [
+        { label: "Etomidate 0.3 mg/kg + rocuronium, head of bed 30°, hyperventilate to PaCO2 30",
+          hint: "Neuro-protective RSI",
+          tone: 'good',
+          consequenceHead: "Tubed cleanly. ICP optimized.",
+          consequence: "Etomidate maintains hemodynamics. The mild hyperventilation buys you ICP reduction while the mannitol takes effect. Head of bed up improves venous drainage.",
+          teaching: "Neuro-protective RSI: avoid agents that raise ICP or drop cerebral perfusion pressure. Etomidate is hemodynamically neutral. Brief hyperventilation (PaCO2 30-35) reduces ICP via cerebral vasoconstriction — useful as a bridge but NOT sustained (rebound). Rocuronium > succinylcholine here (succinylcholine can transiently raise ICP).",
+          next: 'n3'
+        },
+        { label: "Ketamine 2 mg/kg + succinylcholine, head flat for line access",
+          hint: "Standard ED RSI",
+          tone: 'bad',
+          consequenceHead: "ICP spikes during induction.",
+          consequence: "Succinylcholine fasciculations transiently raise ICP. Head flat compromises venous drainage further. The patient's pupil exam worsens as you place the tube.",
+          teaching: "Two errors. Ketamine has historically been considered ICP-raising though the modern evidence is more nuanced — but in a clear herniation picture, etomidate is safer. Succinylcholine causes a transient ICP rise from fasciculations, which is the last thing this patient needs. And HOB flat reduces venous drainage. Always elevate the head in suspected ICP elevation.",
+          next: 'n3'
+        },
+        { label: "Propofol 2 mg/kg + rocuronium",
+          hint: "Drops ICP via sedation",
+          tone: 'warn',
+          consequenceHead: "Tubed, but the BP dropped.",
+          consequence: "Propofol does reduce ICP, but it also dropped this patient's MAP from 130 to 70. Cerebral perfusion pressure (MAP minus ICP) just collapsed.",
+          teaching: "Propofol reduces ICP — true. But it also drops MAP, and in a herniating patient with already-compromised cerebral perfusion, hypotension is catastrophic. CPP = MAP − ICP. If you lower ICP by 10 but lower MAP by 60, you've made perfusion worse. Etomidate preserves hemodynamics; that matters more than the modest ICP benefit.",
+          next: 'n3'
+        }
+      ]
+    },
+
+    n3: {
+      prompt: "You have one more decision before neurosurgery arrives. Pick your osmotherapy.",
+      choices: [
+        { label: "Mannitol 1 g/kg IV bolus over 10 minutes",
+          hint: "Classic choice",
+          tone: 'good',
+          consequenceHead: "Pupil starts to react. Buying time.",
+          consequence: "Within 5 minutes the right pupil shrinks from 6mm to 4mm and shows sluggish reactivity. You've bought a window for the OR. Neurosurgery walks in.",
+          teaching: "Mannitol 1 g/kg is the most evidence-supported osmotic agent for emergent ICP reduction. Effect onset 5-10 minutes, peak 30-60 minutes. Watch for hypotension (osmotic diuresis) and follow serum osmolality — keep <320 mOsm/kg.",
+          next: 'end-good'
+        },
+        { label: "Hypertonic saline 23.4% 30 mL IV push via central line",
+          hint: "More potent in some cases",
+          tone: 'good',
+          consequenceHead: "Pupil reacts. Excellent choice.",
+          consequence: "Hypertonic saline takes effect rapidly. The right pupil shrinks to 4mm. Neurosurgery arrives and takes the patient to the OR.",
+          teaching: "Hypertonic saline (23.4% via central access, or 3% via peripheral) is increasingly preferred over mannitol in some institutions: faster onset, no diuresis-induced hypotension, sustained effect. The evidence base for HTS in herniation is growing. Either is defensible. Both are correct.",
+          next: 'end-good'
+        },
+        { label: "Hold osmotherapy until neurosurgery arrives and decides",
+          hint: "Defer to specialist",
+          tone: 'bad',
+          consequenceHead: "Patient herniates further.",
+          consequence: "By the time neurosurgery arrives 4 minutes later, both pupils are fixed. The decompression is performed but the prognosis is poor.",
+          teaching: "Osmotherapy is not a specialist decision in an unstable herniating patient. The evidence is unambiguous: mannitol or HTS, immediately, while waiting for neurosurgery. Deferring 'because the specialist isn't here yet' is the deferential trap that kills patients in time-critical decisions. Treat to the standard of care; let the specialist refine, not initiate.",
+          next: 'end-bad'
+        }
+      ]
+    }
+  },
+
+  endings: {
+    'end-good': {
+      title: 'Patient to OR with reactive pupil.',
+      verdict: 'You ran the herniation algorithm cleanly. Treatment in parallel with diagnosis, neuro-protective induction, osmotherapy started before the specialist arrived. The patient has a fighting chance.'
+    },
+    'end-bad': {
+      title: 'Outcome: bilateral fixed pupils on arrival to OR.',
+      verdict: 'Time was the limiting reagent. The specific choice that cost minutes is what to revisit. The clinical picture was unambiguous from the start; the question was always whether you would treat in parallel or sequentially.'
+    }
+  }
+};
+
+// ─── Engine ─────────────────────────────────────────────────────────
+var path = [];
+var currentNode = 'n1';
+var failed = false;
+
+function render() {
+  var stage = document.getElementById('puzzle-stage');
+  if (currentNode.indexOf('end-') === 0) return showSummary();
+
+  var node = PUZZLE.nodes[currentNode];
+  var html = '';
+
+  // Scenario card always visible at the top of the first node
+  if (path.length === 0) {
+    html += '<div class="scenario-card">' +
+      '<span class="scenario-tag">' + PUZZLE.scenarioTag + '</span>' +
+      '<div class="scenario-text">' + PUZZLE.scenario + '</div>' +
+      (PUZZLE.timerStrip
+        ? '<div class="timer-strip">⚠ ' + PUZZLE.timerStrip + '</div>'
+        : '') +
+    '</div>';
+  }
+
+  html += '<div class="scenario-card">' +
+    '<div class="prompt">' + node.prompt + '</div>' +
+    '<div class="choices" id="choices">';
+  node.choices.forEach(function(c, i) {
+    html += '<button class="choice" data-i="' + i + '" onclick="pick(' + i + ')">' +
+      '<span class="label">' + c.label + '</span>' +
+      '<span class="hint">' + c.hint + '</span>' +
+    '</button>';
+  });
+  html += '</div>' +
+    '<div class="consequence" id="consequence"></div>' +
+    '<button class="continue-btn" id="continueBtn" onclick="next()">Continue &rarr;</button>' +
+  '</div>';
+
+  stage.innerHTML = html;
+}
+
+function pick(i) {
+  var node = PUZZLE.nodes[currentNode];
+  var choice = node.choices[i];
+  path.push({ node: currentNode, choice: i, label: choice.label, tone: choice.tone });
+
+  // Lock all choice buttons; highlight the picked one's tone
+  var buttons = document.querySelectorAll('#choices .choice');
+  buttons.forEach(function(btn, idx) {
+    btn.disabled = true;
+    if (idx === i) {
+      btn.style.borderColor = (
+        choice.tone === 'good' ? '#10B981' :
+        choice.tone === 'warn' ? '#F59E0B' : '#DC2626'
+      );
+      btn.style.background = (
+        choice.tone === 'good' ? '#ECFDF5' :
+        choice.tone === 'warn' ? '#FFFBEB' : '#FEF2F2'
+      );
+      btn.style.opacity = '1';
+    }
+  });
+
+  // Reveal consequence
+  var cons = document.getElementById('consequence');
+  cons.className = 'consequence show ' + choice.tone;
+  cons.innerHTML =
+    '<div class="consequence-head">' + choice.consequenceHead + '</div>' +
+    '<div>' + choice.consequence + '</div>' +
+    '<div class="consequence-teaching"><em>Why:</em> ' + choice.teaching + '</div>';
+
+  // Update progress strip
+  var stepIdx = Object.keys(PUZZLE.nodes).indexOf(currentNode);
+  var step = document.querySelectorAll('.progress-step')[stepIdx];
+  if (step) {
+    step.classList.remove('active');
+    step.classList.add(choice.tone === 'bad' ? 'failed' : 'done');
+  }
+
+  // Set up continuation
+  if (choice.next === 'end-bad') failed = true;
+  PUZZLE._pendingNext = choice.next;
+
+  document.getElementById('continueBtn').classList.add('show');
+
+  // Activate the next progress step if not ending
+  if (choice.next.indexOf('end-') !== 0) {
+    var nextIdx = Object.keys(PUZZLE.nodes).indexOf(choice.next);
+    var nextStep = document.querySelectorAll('.progress-step')[nextIdx];
+    if (nextStep) nextStep.classList.add('active');
+  }
+}
+
+function next() {
+  currentNode = PUZZLE._pendingNext;
+  render();
+}
+
+function showSummary() {
+  var stage = document.getElementById('puzzle-stage');
+  stage.style.display = 'none';
+
+  var ending = PUZZLE.endings[currentNode];
+  document.getElementById('summary-title').textContent = ending.title;
+  document.getElementById('summary-verdict').textContent = ending.verdict;
+
+  var pathHtml = '<strong>Your path:</strong><br>';
+  path.forEach(function(p, i) {
+    var color = (
+      p.tone === 'good' ? '#065F46' :
+      p.tone === 'warn' ? '#92400E' : '#991B1B'
+    );
+    pathHtml += (i + 1) + '. <span style="color:' + color + '">' + p.label + '</span><br>';
+  });
+  document.getElementById('summary-path').innerHTML = pathHtml;
+  document.getElementById('summary').classList.add('show');
+}
+
+function restart() {
+  path = [];
+  currentNode = 'n1';
+  failed = false;
+  document.getElementById('summary').classList.remove('show');
+  document.getElementById('puzzle-stage').style.display = 'block';
+  // Reset progress strip
+  document.querySelectorAll('.progress-step').forEach(function(s, i) {
+    s.classList.remove('done', 'failed', 'active');
+    if (i === 0) s.classList.add('active');
+  });
+  render();
+}
+
+// Boot
+render();
+</script>
+</body>
+</html>
