@@ -94,8 +94,44 @@ body{
   background:var(--surface); border:1px solid var(--border);
   border-radius:12px; padding:0; overflow:hidden;
 }
+
+/* Hint caption above the graph: tells new users they can pan/zoom.
+   Auto-fades after first interaction; dismissible. */
+.graph-hint{
+  display:flex; align-items:center; gap:8px;
+  padding:8px 12px; background:#F1F5F9; border-bottom:1px solid var(--border);
+  font-size:.78rem; color:var(--ts);
+}
+.graph-hint .hint-icon{
+  font-size:.85rem; opacity:.7;
+}
+.graph-hint .hint-dismiss{
+  margin-left:auto; background:none; border:none; cursor:pointer;
+  color:var(--ts); font-family:inherit; font-size:.78rem; padding:2px 6px;
+  border-radius:4px;
+}
+.graph-hint .hint-dismiss:hover{background:#E2E8F0; color:var(--text)}
+.graph-hint.fading{opacity:0; transition:opacity .4s ease-out}
+
+/* Inline legend: row above the graph (and inside the graph card on
+   desktop), so the color coding is visible while interacting. */
+.legend{
+  display:flex; flex-wrap:wrap; gap:14px;
+  font-size:.78rem; color:var(--ts);
+  padding:8px 12px; border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+.legend-item{display:inline-flex; align-items:center; gap:6px}
+.legend-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.legend-dot.hub{background:var(--hub)}
+.legend-dot.concept{background:var(--concept)}
+.legend-dot.mechanism{
+  background:var(--mechanism); width:10px; height:10px;
+  transform:rotate(45deg); border-radius:1px;
+}
+
 #graph{width:100%; height:560px}
-@media (max-width: 820px){ #graph{ height: 420px } }
+@media (max-width: 820px){ #graph{ height: 460px } }
 
 .panel-card{padding:16px}
 .panel-empty{color:var(--ts); font-size:.9rem; line-height:1.5}
@@ -127,18 +163,45 @@ body{
   font-family:inherit; font-size:.78rem; cursor:pointer;
   background:var(--bg); border:1px solid var(--border); color:var(--text);
   padding:4px 9px; border-radius:6px;
+  display:inline-flex; align-items:center; gap:6px;
 }
 .panel .neighbors button:hover{background:var(--blue-l); border-color:var(--blue); color:var(--blue-d)}
+/* Edge-type indicator dot on neighbor buttons */
+.panel .neighbors .edge-dot{width:7px; height:7px; border-radius:50%; display:inline-block}
+.panel .neighbors .edge-dot.differential-pair{background:var(--diff)}
+.panel .neighbors .edge-dot.shares-mechanism{background:var(--mech-edge)}
+.panel .neighbors .edge-dot.shares-presentation{background:var(--pres)}
+.panel .neighbors .edge-dot.what-if-twist{background:var(--twist)}
 
-.legend{
-  font-size:.78rem; color:var(--ts); margin-top:10px;
-  display:flex; flex-wrap:wrap; gap:14px;
+/* Mobile slide-up sheet: on small screens, the panel becomes a fixed
+   bottom sheet that rises over the graph. The desktop side panel
+   stays hidden in that mode. */
+.panel-card .panel-close{
+  display:none; background:none; border:none; cursor:pointer;
+  font-size:1.4rem; line-height:1; color:var(--ts);
+  padding:4px 8px; border-radius:6px;
+  position:absolute; top:10px; right:10px;
 }
-.legend-item{display:inline-flex; align-items:center; gap:6px}
-.legend-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
-.legend-dot.hub{background:var(--hub)}
-.legend-dot.concept{background:var(--concept)}
-.legend-dot.mechanism{background:var(--mechanism)}
+.panel-card .panel-close:hover{background:var(--bg); color:var(--text)}
+
+@media (max-width: 820px){
+  .panel-card{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:1000;
+    border-radius:16px 16px 0 0;
+    border:1px solid var(--border);
+    border-bottom:none;
+    box-shadow:0 -8px 24px rgba(0,0,0,.10);
+    max-height:70vh;
+    overflow-y:auto;
+    transform:translateY(100%);
+    transition:transform .28s ease-out;
+    padding:18px 16px 24px;
+  }
+  .panel-card.open{transform:translateY(0)}
+  .panel-card .panel-close{display:block}
+  .panel-card .panel-empty{display:none}
+}
 
 footer{
   margin-top:24px; padding-top:16px; border-top:1px solid var(--border);
@@ -176,19 +239,24 @@ footer a{color:var(--ts)}
 
 <div class="graph-row">
   <div class="graph-card">
+    <div class="legend" aria-label="Node type legend">
+      <span class="legend-item"><span class="legend-dot hub"></span> Hub</span>
+      <span class="legend-item"><span class="legend-dot concept"></span> Concept</span>
+      <span class="legend-item"><span class="legend-dot mechanism"></span> Mechanism (cross-cutting)</span>
+    </div>
+    <div class="graph-hint" id="graph-hint">
+      <span class="hint-icon" aria-hidden="true">👆</span>
+      <span>Drag to pan, scroll or pinch to zoom. Tap any node to see its content.</span>
+      <button class="hint-dismiss" id="graph-hint-dismiss" aria-label="Dismiss hint">Got it</button>
+    </div>
     <div id="graph"></div>
   </div>
-  <aside class="panel-card panel" id="panel">
+  <aside class="panel-card panel" id="panel" aria-live="polite">
+    <button class="panel-close" id="panel-close" aria-label="Close panel">&times;</button>
     <div class="panel-empty">
       <strong>Click any node</strong> to see its summary, content links, and direct neighbors. Click an edge to see how two concepts relate.
     </div>
   </aside>
-</div>
-
-<div class="legend">
-  <span class="legend-item"><span class="legend-dot hub"></span> Hub</span>
-  <span class="legend-item"><span class="legend-dot concept"></span> Concept</span>
-  <span class="legend-item"><span class="legend-dot mechanism"></span> Mechanism (cross-cutting)</span>
 </div>
 
 <footer>
@@ -300,16 +368,28 @@ function buildNodes() {
 function buildEdges(filter) {
   return MAP.edges
     .filter(e => filter === 'all' || e.type === filter)
-    .map((e, i) => ({
-      id: 'e' + i,
-      from: e.from, to: e.to,
-      color: { color: EDGE_COLOR[e.type] || '#94A3B8', highlight: EDGE_COLOR[e.type] || '#1E293B' },
-      width: e.type === 'differential-pair' ? 2.5 : 1.5,
-      dashes: e.type === 'shares-mechanism',
-      smooth: { type: 'continuous', roundness: 0.2 },
-      title: e.note,
-      _edge: e
-    }));
+    .map((e, i) => {
+      const isDiff = e.type === 'differential-pair';
+      const isMech = e.type === 'shares-mechanism';
+      return {
+        id: 'e' + i,
+        from: e.from, to: e.to,
+        // Differential-pair edges carry the most pedagogical weight in the
+        // chest pain hub. Render them thicker, fully saturated, and with a
+        // subtle glow so the three killers jump out at first glance.
+        color: {
+          color: EDGE_COLOR[e.type] || '#94A3B8',
+          highlight: EDGE_COLOR[e.type] || '#1E293B',
+          opacity: isDiff ? 1.0 : 0.75
+        },
+        width: isDiff ? 3.5 : 1.5,
+        selectionWidth: isDiff ? 4.5 : 2.5,
+        dashes: isMech,
+        smooth: { type: 'continuous', roundness: 0.2 },
+        title: e.note,
+        _edge: e
+      };
+    });
 }
 
 // vis network setup
@@ -334,12 +414,22 @@ const network = new vis.Network(
   }
 );
 
-// Default focus: center on the configured default node after stabilization
+// After stabilization: fit the whole graph briefly so learners see the
+// full extent (heart failure and arrhythmia hubs are off-screen at the
+// chest pain default zoom), then animate-zoom into the chest pain hub.
+// The two-stage motion communicates "there's more here than you see"
+// without any text.
 network.once('stabilizationIterationsDone', function() {
   try {
-    if (MAP.defaultFocus) {
-      network.focus(MAP.defaultFocus, { scale: 1.15, animation: { duration: 600, easingFunction: 'easeInOutQuad' } });
-    }
+    network.fit({ animation: { duration: 400, easingFunction: 'easeInOutQuad' } });
+    setTimeout(function() {
+      if (MAP.defaultFocus) {
+        network.focus(MAP.defaultFocus, {
+          scale: 1.15,
+          animation: { duration: 800, easingFunction: 'easeInOutQuad' }
+        });
+      }
+    }, 1100);
     track('graph_load', { node_count: MAP.nodes.length, edge_count: MAP.edges.length });
   } catch(e) {}
 });
@@ -347,10 +437,6 @@ network.once('stabilizationIterationsDone', function() {
 // ─── Side panel rendering ────────────────────────────────────────────
 
 const panel = document.getElementById('panel');
-
-function renderEmpty() {
-  panel.innerHTML = '<div class="panel-empty"><strong>Click any node</strong> to see its summary, content links, and direct neighbors. Click an edge to see how two concepts relate.</div>';
-}
 
 function parseContentRefs(contentStr) {
   // contentStr like "Branched: chest-pain-2am | Puzzles: #1, #7, #37, #122"
@@ -379,7 +465,34 @@ function neighborsOf(nodeId) {
     if (e.from === nodeId) out.push({ id: e.to, type: e.type });
     else if (e.to === nodeId) out.push({ id: e.from, type: e.type });
   }
+  // Sort by edge-type priority so the highest-yield relationships
+  // appear first. Differential pairs are most pedagogically valuable;
+  // mechanism shares teach the underlying physiology; presentation
+  // shares are recognition pattern overlap; what-if twists are the
+  // B-shape pivots from existing puzzles.
+  const PRIORITY = {
+    'differential-pair':   0,
+    'shares-mechanism':    1,
+    'what-if-twist':       2,
+    'shares-presentation': 3
+  };
+  out.sort((a, b) => (PRIORITY[a.type] ?? 99) - (PRIORITY[b.type] ?? 99));
   return out;
+}
+
+// Mobile detection helper. The slide-up sheet uses the same breakpoint
+// as the CSS media query (820px).
+function isMobileLayout() {
+  return window.matchMedia && window.matchMedia('(max-width: 820px)').matches;
+}
+function openPanel() {
+  panel.classList.add('open');
+}
+function closePanel() {
+  panel.classList.remove('open');
+  // On desktop, also reset to empty state. On mobile, keep the content
+  // so the sheet animates out cleanly without flicker.
+  if (!isMobileLayout()) renderEmpty();
 }
 
 function renderNode(n) {
@@ -395,22 +508,34 @@ function renderNode(n) {
 
   let neighHtml = '';
   if (neigh.length) {
-    neighHtml = '<div class="section-h">Connected to</div><div class="neighbors">' +
+    neighHtml = '<div class="section-h">Connected to (most relevant first)</div><div class="neighbors">' +
       neigh.map(x => {
         const target = MAP.nodes.find(nn => nn.id === x.id);
         if (!target) return '';
-        return '<button data-jump="' + target.id + '">' + target.label + '</button>';
+        return '<button data-jump="' + target.id + '" data-edge-type="' + x.type + '" title="' + x.type.replace(/-/g, ' ') + '">' +
+          '<span class="edge-dot ' + x.type + '"></span>' + target.label +
+          '</button>';
       }).join('') + '</div>';
   }
 
   panel.innerHTML =
+    '<button class="panel-close" id="panel-close" aria-label="Close panel">&times;</button>' +
     '<div><span class="kind-tag ' + n.kind + '">' + n.kind + '</span></div>' +
     '<h2>' + n.label + '</h2>' +
     '<div class="summary">' + n.summary + '</div>' +
     '<div class="section-h">Content</div>' + refsHtml +
     neighHtml;
 
-  // Wire neighbor jump buttons
+  wirePanelInteractions(n);
+  openPanel();
+}
+
+function wirePanelInteractions(currentNode) {
+  // Close button
+  const closeBtn = panel.querySelector('#panel-close');
+  if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+  // Neighbor jump buttons
   panel.querySelectorAll('button[data-jump]').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-jump');
@@ -419,15 +544,19 @@ function renderNode(n) {
       const target = MAP.nodes.find(nn => nn.id === targetId);
       if (target) {
         renderNode(target);
-        track('neighbor_jump', { from: n.id, to: targetId });
+        if (currentNode) track('neighbor_jump', { from: currentNode.id, to: targetId });
       }
     });
   });
 
-  // Wire content-link tracking
+  // Content-link tracking
   panel.querySelectorAll('a[data-track-content]').forEach(a => {
     a.addEventListener('click', () => {
-      track('content_open', { node_id: n.id, content_kind: a.getAttribute('data-track-content'), href: a.getAttribute('data-track-href') });
+      track('content_open', {
+        node_id: currentNode ? currentNode.id : null,
+        content_kind: a.getAttribute('data-track-content'),
+        href: a.getAttribute('data-track-href')
+      });
     });
   });
 }
@@ -439,24 +568,29 @@ function renderEdge(e) {
   const toLabel = toNode ? toNode.label : e.to;
 
   panel.innerHTML =
+    '<button class="panel-close" id="panel-close" aria-label="Close panel">&times;</button>' +
     '<div><span class="kind-tag concept" style="background:#FEF3C7;color:#92400E">edge</span></div>' +
     '<h2>' + fromLabel + ' &nbsp;↔&nbsp; ' + toLabel + '</h2>' +
     '<div style="font-size:.78rem;color:#64748B;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">' + e.type.replace(/-/g, ' ') + '</div>' +
     '<div class="summary">' + e.note + '</div>' +
     '<div class="neighbors" style="margin-top:12px">' +
-      '<button data-jump="' + e.from + '">' + fromLabel + '</button>' +
-      '<button data-jump="' + e.to + '">' + toLabel + '</button>' +
+      '<button data-jump="' + e.from + '" data-edge-type="' + e.type + '"><span class="edge-dot ' + e.type + '"></span>' + fromLabel + '</button>' +
+      '<button data-jump="' + e.to + '" data-edge-type="' + e.type + '"><span class="edge-dot ' + e.type + '"></span>' + toLabel + '</button>' +
     '</div>';
 
-  panel.querySelectorAll('button[data-jump]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-jump');
-      network.selectNodes([targetId]);
-      network.focus(targetId, { scale: 1.2, animation: { duration: 500 } });
-      const target = MAP.nodes.find(nn => nn.id === targetId);
-      if (target) renderNode(target);
-    });
-  });
+  wirePanelInteractions(null);
+  openPanel();
+}
+
+// Empty-state helper for the desktop side panel close behavior
+function renderEmpty() {
+  panel.innerHTML =
+    '<button class="panel-close" id="panel-close" aria-label="Close panel">&times;</button>' +
+    '<div class="panel-empty">' +
+    '<strong>Click any node</strong> to see its summary, content links, and direct neighbors. Click an edge to see how two concepts relate.' +
+    '</div>';
+  const closeBtn = panel.querySelector('#panel-close');
+  if (closeBtn) closeBtn.addEventListener('click', closePanel);
 }
 
 // ─── Network event handlers ──────────────────────────────────────────
@@ -481,8 +615,37 @@ network.on('selectEdge', function(params) {
   }
 });
 network.on('deselectNode', function(params) {
+  // On desktop, deselecting clears the panel back to the empty hint.
+  // On mobile we don't auto-clear because the user closes via the X
+  // button on the sheet; auto-clearing on every tap-elsewhere creates
+  // jumpy behavior on touch devices.
+  if (isMobileLayout()) return;
   if (!params.nodes || !params.nodes.length) renderEmpty();
 });
+
+// ─── Initial wiring for the empty panel state ────────────────────────
+// The panel's empty state was rendered by the static HTML; ensure its
+// close button (relevant on mobile) and auto-fade hint behavior are
+// both wired up now.
+(function initialWiring() {
+  const initialClose = document.getElementById('panel-close');
+  if (initialClose) initialClose.addEventListener('click', closePanel);
+
+  // Hint dismiss button + auto-fade after first node click.
+  const hint = document.getElementById('graph-hint');
+  const hintDismiss = document.getElementById('graph-hint-dismiss');
+  function fadeHint() {
+    if (!hint || hint.classList.contains('fading')) return;
+    hint.classList.add('fading');
+    setTimeout(() => { if (hint) hint.style.display = 'none'; }, 450);
+  }
+  if (hintDismiss) hintDismiss.addEventListener('click', fadeHint);
+  // Auto-fade after first interaction with the graph (drag, click,
+  // zoom). The user has clearly figured it out by then.
+  network.once('click', fadeHint);
+  network.once('dragStart', fadeHint);
+  network.once('zoom', fadeHint);
+})();
 
 // ─── Edge filter chips ───────────────────────────────────────────────
 
