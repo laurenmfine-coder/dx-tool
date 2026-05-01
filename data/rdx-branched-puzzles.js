@@ -303,6 +303,141 @@ window.RDX_BRANCHED = [
         url: 'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106'
       }
     ]
+  },
+
+  // ── CASE 3: HEMATEMESIS IN CIRRHOSIS ─────────────────────────────
+  // Diagnostic reasoning under uncertainty in a cirrhotic with upper
+  // GI bleed. Variceal vs peptic vs Mallory-Weiss share the opening
+  // (hematemesis, hypotension), but the cirrhosis-specific
+  // resuscitation rules diverge sharply from "give blood until the
+  // hemoglobin is up." Tests restrictive transfusion strategy,
+  // pre-endoscopy octreotide and antibiotic prophylaxis, and
+  // post-banding rebleed risk stratification. M3/M4 target.
+  {
+    id: 'cirrhosis-gi-bleed',
+    title: 'Hematemesis at 11 PM',
+    summary: 'A cirrhotic patient arrives in shock with hematemesis. Aggressive resuscitation feels right and is exactly the wrong instinct.',
+    category: 'gi',
+    acuity: 4,
+    timeEstimate: 5,
+
+    scenarioTag: 'ED resus bay, evening',
+    scenario: "54-year-old woman with cirrhosis (Child-Pugh B, alcohol use disorder, last drink yesterday) brought in by EMS after vomiting bright red blood twice at home. She is pale and diaphoretic but answering questions. Vitals: BP 92/58, HR 118, RR 22, SpO2 96% on room air, afebrile. Abdomen distended with shifting dullness, no peritoneal signs. Two large-bore IVs are in. Initial labs pending. The nurse is asking what you want for resuscitation.",
+    timerStrip: 'Cirrhotic GI bleed. The resuscitation rules are not the trauma rules.',
+
+    nodes: {
+      n1: {
+        prompt: "What is your resuscitation strategy?",
+        choices: [
+          { label: "Restrictive transfusion: target hemoglobin around 7, balanced crystalloid for perfusion, type and cross",
+            hint: "Permissive low hemoglobin",
+            tone: 'good',
+            consequenceHead: "Right strategy. You are not making the bleed worse.",
+            consequence: "You hold off on empiric blood products. The first hemoglobin returns at 8.2. The patient's mental status holds, perfusion improves with measured crystalloid, and you have not raised her portal pressure.",
+            teaching: "In acute upper GI bleed in cirrhosis, the evidence supports a restrictive transfusion strategy with a hemoglobin trigger around 7 g/dL (higher only with significant comorbid cardiovascular disease or hemodynamic instability not responsive to volume). Aggressive transfusion to a higher hemoglobin paradoxically raises portal pressure and increases the rate of rebleeding from varices. The trauma instinct (transfuse to a higher target) actively worsens outcomes here. The Villanueva trial established this in 2013 and the finding has held up in subsequent guidelines.",
+            next: 'n2'
+          },
+          { label: "Massive transfusion protocol: PRBCs, FFP, and platelets in a 1:1:1 ratio to keep up with the bleeding",
+            hint: "Hemorrhagic shock = MTP",
+            tone: 'bad',
+            consequenceHead: "Portal pressure climbs. The bleed worsens.",
+            consequence: "Three units of PRBCs and matched FFP go in over the next hour. The hemoglobin reaches 10. Within 20 minutes the patient vomits another large volume of blood and her blood pressure drops further.",
+            teaching: "Massive transfusion protocols are designed for traumatic hemorrhagic shock, where the priority is replacing what is being lost while controlling the source. In cirrhotic variceal bleeding, the same approach raises portal pressure as the intravascular volume is restored, and the variceal bleed accelerates. Restrictive transfusion (target around 7) is the evidence-based approach. The instinct to transfuse aggressively in a hypotensive bleeding patient is a trauma rule that does not transfer to this physiology.",
+            next: 'end-bad'
+          },
+          { label: "Aggressive crystalloid resuscitation, hold blood products until hemoglobin is known",
+            hint: "Crystalloid first",
+            tone: 'warn',
+            consequenceHead: "Volume on board, but you over-resuscitated.",
+            consequence: "Several liters of crystalloid go in quickly. The blood pressure improves. The hemoglobin returns at 7.8 but the patient now appears more distended and her oxygen saturation is dropping.",
+            teaching: "Large-volume crystalloid in a cirrhotic with portal hypertension worsens ascites, can precipitate hepatic hydrothorax or pulmonary edema, and dilutes clotting factors that are already low. Targeted, measured crystalloid for perfusion (not aggressive volume loading) plus selective transfusion at a hemoglobin around 7 is the right balance. Crystalloid is not free in a cirrhotic in the way it can feel free in a young trauma patient.",
+            next: 'n2'
+          }
+        ]
+      },
+
+      n2: {
+        prompt: "Hemoglobin is 8.2. The patient is hemodynamically stabilized on measured resuscitation. GI is en route for endoscopy in 90 minutes. What do you start now, before the scope?",
+        choices: [
+          { label: "Octreotide infusion AND ceftriaxone, plus pantoprazole",
+            hint: "Vasoactive + antibiotic + acid suppression",
+            tone: 'good',
+            consequenceHead: "All three go in. You have covered the differential.",
+            consequence: "The octreotide drip is started. Ceftriaxone is given. Pantoprazole goes in. By the time GI arrives, the patient has had every pre-endoscopy intervention that reduces mortality.",
+            teaching: "Three pre-endoscopy interventions in a cirrhotic with upper GI bleed: vasoactive agent (octreotide reduces splanchnic blood flow and helps with variceal bleeding even before the diagnosis is confirmed), prophylactic antibiotics (ceftriaxone reduces mortality independent of whether infection is present, because cirrhotics with GI bleed have a high rate of bacterial translocation and SBP), and a PPI (covers the peptic component of the differential). All three are started empirically before endoscopy because you do not know yet whether the source is variceal, peptic, or both, and the first two have mortality benefit specifically in cirrhosis.",
+            next: 'n3'
+          },
+          { label: "Pantoprazole only, hold octreotide and antibiotics until endoscopy confirms a variceal source",
+            hint: "Wait for the diagnosis",
+            tone: 'bad',
+            consequenceHead: "Mortality-reducing interventions delayed.",
+            consequence: "The pantoprazole goes in. Endoscopy in 90 minutes confirms variceal bleeding, which is then banded. On hospital day 2, the patient develops fever and altered mental status; ascitic fluid analysis shows SBP. She had not received antibiotic prophylaxis on admission.",
+            teaching: "Antibiotic prophylaxis (typically ceftriaxone) in cirrhotic GI bleed is not contingent on the source being variceal. The mortality benefit comes from preventing SBP and other bacterial infections, which are common in cirrhotics with GI bleed regardless of bleeding source. Octreotide is similarly started empirically because (a) you do not yet know the source, (b) the side effect profile is benign, and (c) waiting for endoscopy to confirm variceal bleeding before starting it gives up the early treatment window.",
+            next: 'end-bad'
+          },
+          { label: "Octreotide and pantoprazole, hold antibiotics unless there is fever or signs of infection",
+            hint: "Antibiotics only if infected",
+            tone: 'bad',
+            consequenceHead: "You missed the prophylactic indication.",
+            consequence: "The octreotide and pantoprazole go in. Endoscopy confirms varices, banded successfully. Two days later the patient develops SBP and decompensates further.",
+            teaching: "The antibiotic indication in cirrhotic GI bleed is prophylactic, not therapeutic: you give it to prevent SBP and other bacterial infections that are common in cirrhotics with GI bleed even when no infection is clinically apparent at presentation. Ceftriaxone is the standard agent. Waiting for fever or signs of infection misses the point of the intervention; by the time SBP is clinically apparent, the prophylaxis window has closed and the mortality benefit is lost.",
+            next: 'n3'
+          }
+        ]
+      },
+
+      n3: {
+        prompt: "Endoscopy reveals actively bleeding esophageal varices, which are banded successfully. The patient is admitted to the ICU. On hospital day 1, she is hemodynamically stable but her Child-Pugh score is now C and her HVPG (hepatic venous pressure gradient) was estimated at greater than 20 mmHg during the procedure. What do you recommend next?",
+        choices: [
+          { label: "Early TIPS within 72 hours given high-risk features",
+            hint: "Pre-emptive TIPS for high rebleed risk",
+            tone: 'good',
+            consequenceHead: "Right call for a high-risk patient.",
+            consequence: "Hepatology and IR agree. The TIPS is placed within 72 hours of the index bleed. The patient does well and is discharged on day 7 with secondary prophylaxis arranged.",
+            teaching: "Early (pre-emptive) TIPS within 72 hours of presentation is recommended for high-risk variceal bleeders: Child-Pugh C up to a threshold (commonly cited as up to 13 points), or Child-Pugh B with active bleeding at endoscopy, or HVPG above 20 mmHg. The Garcia-Pagan trial and subsequent data show reduced rebleeding and mortality versus standard secondary prophylaxis in this group. The instinct to default to medical management plus elective evaluation undertreats the high-risk subset.",
+            next: 'end-good'
+          },
+          { label: "Standard secondary prophylaxis: nonselective beta blocker plus a planned repeat banding session, no TIPS",
+            hint: "Medical management default",
+            tone: 'warn',
+            consequenceHead: "Defensible for an average patient, suboptimal here.",
+            consequence: "The patient is started on a nonselective beta blocker and scheduled for surveillance banding. On day 5 she rebleeds and requires emergent TIPS under less favorable conditions.",
+            teaching: "Nonselective beta blocker plus surveillance banding is the standard secondary prophylaxis for an average-risk variceal bleeder. The error here is missing the high-risk features (Child-Pugh C, HVPG above 20) that change the recommendation to early pre-emptive TIPS. The data show that the high-risk group has a much higher rebleed rate without TIPS, and emergent TIPS after rebleed has worse outcomes than pre-emptive TIPS within 72 hours.",
+            next: 'end-bad'
+          },
+          { label: "Place a Sengstaken-Blakemore tube prophylactically in case of rebleed",
+            hint: "Balloon tamponade as bridge",
+            tone: 'bad',
+            consequenceHead: "Wrong indication. Real risk added.",
+            consequence: "The tube is placed. The patient develops esophageal pressure necrosis after several hours and the tube is removed. No rebleed has occurred but you have introduced a complication where there was none.",
+            teaching: "Balloon tamponade (Sengstaken-Blakemore or Minnesota tube) is a temporizing rescue measure for uncontrolled variceal bleeding when endoscopic control has failed and definitive therapy (TIPS or surgery) is being arranged. It is not used prophylactically. Complications include esophageal pressure necrosis, perforation, and aspiration. Prophylactic placement adds risk without benefit. The right pre-emptive measure for a high-rebleed-risk patient is early TIPS, not balloon tamponade.",
+            next: 'end-bad'
+          }
+        ]
+      }
+    },
+
+    endings: {
+      'end-good': {
+        title: 'Patient stabilized, early TIPS placed, discharged with secondary prophylaxis.',
+        verdict: 'You ran the cirrhotic GI bleed playbook the way it should be run: restrictive transfusion (not the trauma rule), the three pre-endoscopy interventions empirically before the source was known, and pre-emptive TIPS for the high-risk subset rather than defaulting to standard medical management. Each of those decisions is a place where the average instinct is wrong, and each has mortality data behind it.'
+      },
+      'end-bad': {
+        title: 'Outcome: rebleed or preventable complication.',
+        verdict: 'The cirrhotic GI bleed has rules that diverge from both general resuscitation instincts and average-risk variceal management. The choices that cost the most are the ones where the trauma instinct (transfuse aggressively) or the wait-for-the-diagnosis instinct (hold antibiotics until source is known) overrode the cirrhosis-specific evidence. Restrictive transfusion, empiric octreotide and ceftriaxone, and pre-emptive TIPS for high-risk patients are the three highest-yield teaching points in this case.'
+      }
+    },
+
+    references: [
+      {
+        citation: 'Cagir B, Cirino LM. Esophageal Variceal Hemorrhage. StatPearls. NIH Bookshelf. Updated 2023.',
+        url: 'https://www.ncbi.nlm.nih.gov/books/NBK448078/'
+      },
+      {
+        citation: 'Pedersen JS, Bendtsen F, Moller S. Management of cirrhotic ascites. StatPearls. NIH Bookshelf. Updated 2023.',
+        url: 'https://www.ncbi.nlm.nih.gov/books/NBK430832/'
+      }
+    ]
   }
 
   // ── ADDITIONAL CASES ─────────────────────────────────────────────
