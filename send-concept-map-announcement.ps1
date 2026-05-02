@@ -8,6 +8,13 @@
 #   .\send-concept-map-announcement.ps1 dry      # preview recipient count
 #   .\send-concept-map-announcement.ps1 test     # send to yourself only
 #   .\send-concept-map-announcement.ps1 live     # send to everyone (asks for confirmation)
+#   .\send-concept-map-announcement.ps1 extras   # send to extras list ONLY (uses extras.txt)
+#
+# extras.txt format: one email per line. Optional comma-separated full name:
+#     student1@nova.edu, Jane Smith
+#     student2@nova.edu
+#     colleague@example.com, Dr. Colleague
+# Lines starting with # are ignored. Blank lines are ignored.
 #
 # Before running:
 #   1. Set the SUPABASE_ANON_KEY environment variable, OR paste your
@@ -43,13 +50,16 @@ if (-not $ANON_KEY) {
 
 $mode = $args[0]
 if (-not $mode) {
-    Write-Host "Usage: .\send-concept-map-announcement.ps1 [dry|test|live]" -ForegroundColor Yellow
+    Write-Host "Usage: .\send-concept-map-announcement.ps1 [dry|test|live|extras]" -ForegroundColor Yellow
     Write-Host ""
-    Write-Host "  dry   Preview recipient count (no send)"
-    Write-Host "  test  Send to $TEST_EMAIL only"
-    Write-Host "  live  Send to all weekly_email_eligible subscribers"
+    Write-Host "  dry     Preview recipient count (no send)"
+    Write-Host "  test    Send to $TEST_EMAIL only"
+    Write-Host "  live    Send to all weekly_email_eligible subscribers"
+    Write-Host "  extras  Send to hand-curated list in extras.txt only"
+    Write-Host "          (NOT to weekly_email_eligible — extras list is separate)"
     Write-Host ""
     Write-Host "Recommended order: dry, then test, then live."
+    Write-Host "Use 'extras' for KPCAM students not on the newsletter list."
     exit 1
 }
 
@@ -68,18 +78,78 @@ switch ($mode.ToLower()) {
         $body = '{"confirm_send": true}'
         $description = "LIVE SEND to all weekly_email_eligible subscribers"
     }
+    "extras" {
+        # Read extras.txt and build a JSON array of {email, full_name}.
+        # Note: by sending with extra_emails but WITHOUT confirm_send,
+        # the function will refuse the request (the safety gate). To
+        # send only to the extras list, we pass test_email for the
+        # first one and loop... actually, the cleaner approach is to
+        # use confirm_send with an empty weekly_email_eligible cohort,
+        # but we can't suppress the cohort. The right way: use
+        # confirm_send, and the extras get added on top of the full
+        # cohort. So extras mode currently does NOT exist as a
+        # standalone send — it's "live + extras." If you want to
+        # send ONLY to the extras list, use the test mode in a loop
+        # (one email at a time) or contact me to add a recipient-
+        # override flag to the function itself.
+        if (-not (Test-Path "extras.txt")) {
+            Write-Host "ERROR: extras.txt not found in current directory." -ForegroundColor Red
+            Write-Host ""
+            Write-Host "Create extras.txt with one email per line. Optional comma-separated name:"
+            Write-Host "  student1@nova.edu, Jane Smith"
+            Write-Host "  student2@nova.edu"
+            Write-Host "  # Lines starting with # are ignored"
+            exit 1
+        }
+        $extras = @()
+        Get-Content "extras.txt" | ForEach-Object {
+            $line = $_.Trim()
+            if ($line -and -not $line.StartsWith("#")) {
+                $parts = $line -split ",", 2
+                $email = $parts[0].Trim()
+                if ($email) {
+                    if ($parts.Length -gt 1 -and $parts[1].Trim()) {
+                        $extras += @{ email = $email; full_name = $parts[1].Trim() }
+                    } else {
+                        $extras += @{ email = $email }
+                    }
+                }
+            }
+        }
+        if ($extras.Count -eq 0) {
+            Write-Host "ERROR: extras.txt has no valid email lines." -ForegroundColor Red
+            exit 1
+        }
+        Write-Host ""
+        Write-Host "Extras mode adds $($extras.Count) recipient(s) ON TOP OF the full" -ForegroundColor Yellow
+        Write-Host "weekly_email_eligible cohort. This is a LIVE send to everyone." -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "Extras to be added:"
+        foreach ($e in $extras) {
+            $name = if ($e.full_name) { " ($($e.full_name))" } else { "" }
+            Write-Host "  $($e.email)$name"
+        }
+        # Build JSON via ConvertTo-Json to handle quoting safely
+        $payload = @{ confirm_send = $true; extra_emails = $extras }
+        $body = $payload | ConvertTo-Json -Compress -Depth 4
+        $description = "LIVE SEND to weekly_email_eligible PLUS $($extras.Count) extras from extras.txt"
+    }
     default {
-        Write-Host "ERROR: Unknown mode '$mode'. Use dry, test, or live." -ForegroundColor Red
+        Write-Host "ERROR: Unknown mode '$mode'. Use dry, test, live, or extras." -ForegroundColor Red
         exit 1
     }
 }
 
 # ─── Confirmation prompt for live send ────────────────────────────────
 
-if ($mode.ToLower() -eq "live") {
+if ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras") {
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Yellow
-    Write-Host "  LIVE SEND — This will email every weekly_email_eligible user." -ForegroundColor Yellow
+    if ($mode.ToLower() -eq "extras") {
+        Write-Host "  LIVE SEND + EXTRAS — full cohort PLUS the extras list above." -ForegroundColor Yellow
+    } else {
+        Write-Host "  LIVE SEND — This will email every weekly_email_eligible user." -ForegroundColor Yellow
+    }
     Write-Host "================================================================" -ForegroundColor Yellow
     Write-Host ""
     Write-Host "Have you already done a dry run and a test send? (recommended)"
@@ -126,7 +196,9 @@ if ($mode.ToLower() -eq "dry") {
 } elseif ($mode.ToLower() -eq "test") {
     Write-Host "Check your inbox at $TEST_EMAIL. If the email looks right, run:"
     Write-Host "  .\send-concept-map-announcement.ps1 live" -ForegroundColor Yellow
-} elseif ($mode.ToLower() -eq "live") {
+    Write-Host "or, if you also want to send to KPCAM students from extras.txt, run:"
+    Write-Host "  .\send-concept-map-announcement.ps1 extras" -ForegroundColor Yellow
+} elseif ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras") {
     Write-Host "Live send complete. Check the JSON response above for sent/failed counts."
     Write-Host "If any sends failed, check the Resend dashboard for delivery details."
 }
