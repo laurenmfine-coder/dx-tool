@@ -33,6 +33,12 @@ window.RDX_CONCEPT_MAP_MANIFEST = [
     label: "Infectious Disease",
     src: "/data/concept-maps/infectious-disease.js",
     beta: true
+  },
+  {
+    id: "endocrinology",
+    label: "Endocrinology",
+    src: "/data/concept-maps/endocrinology.js",
+    beta: true
   }
   // Add more domains here as they are authored. Keep beta:true until
   // the domain has been validated through usage data.
