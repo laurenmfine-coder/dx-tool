@@ -21,6 +21,12 @@ window.RDX_CONCEPT_MAP_MANIFEST = [
     label: "Cardiology",
     src: "/data/concept-maps/cardiology.js",
     beta: true
+  },
+  {
+    id: "neurology",
+    label: "Neurology",
+    src: "/data/concept-maps/neurology.js",
+    beta: true
   }
   // Add more domains here as they are authored. Keep beta:true until
   // the domain has been validated through usage data.
