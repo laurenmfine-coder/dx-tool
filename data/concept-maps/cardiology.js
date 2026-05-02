@@ -60,7 +60,14 @@ window.RDX_CONCEPT_MAPS["cardiology"] = {
     "beta blocker": "beta1-mechanism",
     "beta-blocker": "beta1-mechanism",
     "sglt2": "sglt2-cardiometabolic",
-    "sglti": "sglt2-cardiometabolic"
+    "sglti": "sglt2-cardiometabolic",
+    "endocarditis": "endocarditis",
+    "ie": "endocarditis",
+    "infective endocarditis": "endocarditis",
+    "duke criteria": "endocarditis",
+    "hyperkalemia": "hyperkalemia-ecg",
+    "potassium": "hyperkalemia-ecg",
+    "peaked t": "hyperkalemia-ecg"
   },
   nodes: [
     { id: "acute-chest-pain",
@@ -108,11 +115,16 @@ window.RDX_CONCEPT_MAPS["cardiology"] = {
       kind: "concept",
       summary: "Diffuse ST elevation, friction rub, post-cardiac-injury syndrome.",
       content: "Puzzles: #26" },
+    { id: "endocarditis",
+      label: "Infective endocarditis",
+      kind: "concept",
+      summary: "Fever, new murmur, peripheral stigmata, blood cultures positive. IV drug use is a major risk factor and shifts the right-sided valve probability. Embolic complications (cerebral, splenic, renal) are common; the cerebral path is the cross-domain teaching point.",
+      content: "Puzzles: #19, #33" },
     { id: "copd-vs-hf",
       label: "COPD exacerbation vs decompensated HF",
       kind: "concept",
-      summary: "BNP, anchoring, the patient with both diseases.",
-      content: "Puzzles: #8" },
+      summary: "BNP, anchoring, the patient with both diseases. Includes the COPD-vs-PE diagnostic problem (puzzle #81): a known COPD patient who isn't responding to standard exacerbation management often has a second pathology (PE most commonly).",
+      content: "Puzzles: #8, #29, #81" },
     { id: "cardiorenal",
       label: "Cardiorenal syndrome",
       kind: "concept",
@@ -138,6 +150,11 @@ window.RDX_CONCEPT_MAPS["cardiology"] = {
       kind: "concept",
       summary: "CHA2DS2-VASc, warfarin INR management, supratherapeutic reversal.",
       content: "Puzzles: #59, #92" },
+    { id: "hyperkalemia-ecg",
+      label: "Hyperkalemia and the ECG",
+      kind: "concept",
+      summary: "Peaked T waves, PR prolongation, QRS widening, sine wave morphology. The ECG changes track potassium severity and are reversible with treatment. Recognition prevents the lethal late finding (sine wave, asystole).",
+      content: "Puzzles: #46" },
     { id: "beta1-mechanism",
       label: "Beta-1 receptors and contractility",
       kind: "mechanism",
@@ -213,5 +230,40 @@ window.RDX_CONCEPT_MAPS["cardiology"] = {
     { from: "sglt2-cardiometabolic", to: "heart-failure", type: "shares-mechanism",
       label: "HF mortality benefit",
       note: "SGLT2i benefit in HFrEF and HFpEF; mechanism not fully understood." },
+
+    // ── Path A additions: filling within-map gaps ───────────────────
+    // Endocarditis cluster
+    { from: "endocarditis", to: "acs", type: "shares-presentation",
+      label: "fever + new murmur",
+      note: "Endocarditis can present like ACS when chest pain is from septic emboli to coronaries or from valvular dysfunction. The fever and new murmur point away from pure ischemia." },
+    { from: "endocarditis", to: "arrhythmia", type: "shares-mechanism",
+      label: "abscess + AV block",
+      note: "Aortic root abscess from endocarditis classically extends into the conduction system, producing new AV block. New conduction disease in a febrile patient with a murmur is endocarditis until proven otherwise." },
+    { from: "endocarditis", to: "tamponade", type: "shares-mechanism",
+      label: "pericardial extension",
+      note: "Endocarditis can extend to the pericardium with effusion or purulent pericarditis; both can progress to tamponade. Same anatomical compartment as in pericarditis-tamponade progression." },
+
+    // Hyperkalemia connection
+    { from: "arrhythmia", to: "hyperkalemia-ecg", type: "shares-mechanism",
+      label: "reversible arrhythmia",
+      note: "Hyperkalemia is the canonical reversible cause of malignant arrhythmia. The ECG changes track potassium and reverse with calcium, insulin/dextrose, and dialysis." },
+
+    // Heart failure missing connections
+    { from: "heart-failure", to: "vfib-code", type: "shares-mechanism",
+      label: "sudden cardiac death",
+      note: "Heart failure (especially HFrEF) is the leading risk factor for sudden cardiac death. ICDs are indicated for primary prevention based on EF and clinical criteria. The mechanism is structural and electrical remodeling." },
+    { from: "heart-failure", to: "acs", type: "shares-mechanism",
+      label: "ischemic cardiomyopathy",
+      note: "Ischemic cardiomyopathy from prior infarcts is the most common cause of HFrEF in the US. The ACS-to-HF pipeline is the dominant epidemiology of heart failure." },
+
+    // ── Cross-domain: endocarditis to stroke (septic emboli) ────────
+    // This is the integration teaching: a different cardiac source of
+    // stroke than AFib, with different management (you don't
+    // anticoagulate active endocarditis-related embolic stroke).
+    { from: "endocarditis",
+      to: { domain: "neurology", node: "ischemic-stroke" },
+      type: "shares-mechanism",
+      label: "septic emboli to brain",
+      note: "Endocarditis is the second-most-common cardiac source of embolic stroke after AFib, but the management is opposite: anticoagulation in active IE-related stroke is contraindicated because of mycotic aneurysm rupture risk. Different cardiac source, different management." },
   ]
 };

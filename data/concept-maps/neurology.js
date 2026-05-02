@@ -67,7 +67,11 @@ window.RDX_CONCEPT_MAPS["neurology"] = {
     "neuroleptic": "nms-vs-serotonin",
     "intracranial pressure": "intracranial-pressure",
     "cerebral perfusion": "cerebral-perfusion",
-    "watershed": "cerebral-perfusion"
+    "watershed": "cerebral-perfusion",
+    "dermatomyositis": "inflammatory-myopathy",
+    "polymyositis": "inflammatory-myopathy",
+    "myositis": "inflammatory-myopathy",
+    "heliotrope": "inflammatory-myopathy"
   },
   nodes: [
     // ── Hubs ────────────────────────────────────────────────────────
@@ -147,6 +151,11 @@ window.RDX_CONCEPT_MAPS["neurology"] = {
       kind: "concept",
       summary: "Progressive bilateral leg weakness, hyperreflexia, Babinski, sensory level on the trunk. Distinguishes from peripheral disease by upper motor neuron findings. Cord compression is a surgical emergency.",
       content: "Puzzles: #52" },
+    { id: "inflammatory-myopathy",
+      label: "Inflammatory myopathy",
+      kind: "concept",
+      summary: "Proximal symmetric weakness over weeks. Heliotrope rash and Gottron papules in dermatomyositis; CK markedly elevated. Distinguish from neuromuscular junction disease (fatigability) and motor neuron disease (UMN/LMN signs).",
+      content: "Puzzles: #16" },
     { id: "nms-vs-serotonin",
       label: "NMS vs serotonin syndrome",
       kind: "concept",
@@ -257,6 +266,33 @@ window.RDX_CONCEPT_MAPS["neurology"] = {
       to: { domain: "cardiology", node: "heart-failure" },
       type: "shares-mechanism",
       label: "low forward flow",
-      note: "Cerebral blood flow depends on cardiac output. Heart failure produces watershed-pattern hypoperfusion; severe HF can cause cardiogenic encephalopathy. The mechanism is the same as cardiorenal syndrome, applied to the brain." }
+      note: "Cerebral blood flow depends on cardiac output. Heart failure produces watershed-pattern hypoperfusion; severe HF can cause cardiogenic encephalopathy. The mechanism is the same as cardiorenal syndrome, applied to the brain." },
+
+    // ── Path A additions: filling within-map gaps ───────────────────
+    // SAH and bacterial meningitis both reach herniation directly,
+    // not just through the ICP mechanism node. The direct edge names
+    // a high-stakes clinical decision.
+    { from: "subarachnoid-hemorrhage", to: "herniation-icp", type: "shares-mechanism",
+      label: "post-rupture herniation",
+      note: "SAH is one of the leading causes of post-rupture herniation, especially with intraventricular extension and hydrocephalus. The progression from SAH to herniation is rapid and the warning signs (declining mental status, pupillary asymmetry) are easily missed early." },
+    { from: "bacterial-meningitis", to: "herniation-icp", type: "shares-mechanism",
+      label: "LP risk if focal signs",
+      note: "Severe bacterial meningitis raises ICP through inflammation and edema. The clinical teaching: don't LP a patient with focal findings, papilledema, or impaired mental status without imaging first; herniation risk is real. Empiric antibiotics first if any delay." },
+
+    // Inflammatory myopathy fits the weakness differential
+    { from: "acute-weakness", to: "inflammatory-myopathy", type: "differential-pair",
+      label: "proximal + CK elevation",
+      note: "Symmetric proximal weakness with elevated CK and rash distinguishes from neuromuscular junction disease (fatigability), motor neuron disease (UMN/LMN signs), and myelopathy (UMN signs)." },
+
+    // ── Cross-domain: delirium and heart failure ────────────────────
+    // Low cardiac output is an underappreciated cause of delirium in
+    // older patients. Different presentation than the cerebral
+    // perfusion mechanism-node edge: the clinical entity rather than
+    // the physiology.
+    { from: "delirium-dementia",
+      to: { domain: "cardiology", node: "heart-failure" },
+      type: "shares-mechanism",
+      label: "low CO encephalopathy",
+      note: "Heart failure with low cardiac output is an often-missed cause of delirium in older patients, especially superimposed on baseline dementia. The teaching: when looking for the precipitant of acute confusion, the cardiac exam is part of the workup, not a separate consultation." }
   ]
 };
