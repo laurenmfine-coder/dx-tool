@@ -115,21 +115,26 @@ function buildHtml(user: any): string {
 </body></html>`;
 }
 
-async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
+async function sendEmail(to: string, subject: string, html: string, scheduledAt: string | null = null): Promise<boolean> {
   try {
+    const body: any = {
+      from: FROM_EMAIL,
+      to: [to],
+      reply_to: REPLY_TO,
+      subject,
+      html
+    };
+    // Resend accepts scheduled_at as either ISO 8601 timestamp or natural
+    // language ("in 1 hour", "tomorrow at 9am ET"). Pass through as-is;
+    // Resend will reject malformed values and we'll see the error.
+    if (scheduledAt) body.scheduled_at = scheduledAt;
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [to],
-        reply_to: REPLY_TO,
-        subject,
-        html
-      })
+      body: JSON.stringify(body)
     });
     if (!res.ok) {
       const errText = await res.text();
@@ -137,7 +142,7 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
       return false;
     }
     const data = await res.json();
-    console.log(`Sent to ${to}: ${data.id}`);
+    console.log(`Sent to ${to}: ${data.id}${scheduledAt ? ' (scheduled: ' + scheduledAt + ')' : ''}`);
     return true;
   } catch (e) {
     console.error(`Error for ${to}:`, e);
@@ -149,6 +154,7 @@ Deno.serve(async (req) => {
   let testEmail = null;
   let dryRun = false;
   let confirmSend = false;
+  let scheduledAt: string | null = null;
   let extraEmails: Array<{email: string, full_name?: string}> = [];
   let parseFailed = false;
 
@@ -158,6 +164,12 @@ Deno.serve(async (req) => {
       testEmail = b?.test_email || null;
       dryRun = b?.dry_run === true;
       confirmSend = b?.confirm_send === true;
+      // scheduled_at: ISO 8601 timestamp ("2026-05-02T13:00:00Z") or
+      // natural language ("tomorrow at 9am ET"). Resend handles both.
+      // When set, the Resend API queues the message instead of sending
+      // immediately. The function still runs synchronously now and you
+      // get back the schedule confirmation per recipient.
+      scheduledAt = b?.scheduled_at || null;
       if (Array.isArray(b?.extra_emails)) {
         extraEmails = b.extra_emails.map((e: any) =>
           typeof e === 'string' ? { email: e } : e
@@ -231,13 +243,20 @@ Deno.serve(async (req) => {
 
   let sent = 0, failed = 0;
   for (const user of users) {
-    const success = await sendEmail(user.email, subject, buildHtml(user));
+    const success = await sendEmail(user.email, subject, buildHtml(user), scheduledAt);
     if (success) sent++; else failed++;
     await new Promise(r => setTimeout(r, 100));
   }
 
   return new Response(
-    JSON.stringify({ success: true, sent, failed, total: users.length }),
+    JSON.stringify({
+      success: true,
+      sent, failed, total: users.length,
+      scheduled_at: scheduledAt || null,
+      note: scheduledAt
+        ? "Messages queued at Resend for delivery at the scheduled time. Manage or cancel from the Resend dashboard."
+        : "Messages sent immediately."
+    }),
     { headers: { "Content-Type": "application/json" } }
   );
 });

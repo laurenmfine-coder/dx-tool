@@ -5,16 +5,24 @@
 # the JSON body on Apr 30. Bakes in the JSON so quoting can't go wrong.
 #
 # Usage (from PowerShell, in the dx-tool repo root):
-#   .\send-concept-map-announcement.ps1 dry      # preview recipient count
-#   .\send-concept-map-announcement.ps1 test     # send to yourself only
-#   .\send-concept-map-announcement.ps1 live     # send to everyone (asks for confirmation)
-#   .\send-concept-map-announcement.ps1 extras   # send to extras list ONLY (uses extras.txt)
+#   .\send-concept-map-announcement.ps1 dry       # preview recipient count
+#   .\send-concept-map-announcement.ps1 test      # send to yourself only
+#   .\send-concept-map-announcement.ps1 live      # send to everyone NOW (asks for confirmation)
+#   .\send-concept-map-announcement.ps1 schedule  # queue at Resend for a specific time
+#   .\send-concept-map-announcement.ps1 extras    # send to extras list ON TOP OF cohort
 #
 # extras.txt format: one email per line. Optional comma-separated full name:
 #     student1@nova.edu, Jane Smith
 #     student2@nova.edu
 #     colleague@example.com, Dr. Colleague
 # Lines starting with # are ignored. Blank lines are ignored.
+#
+# Schedule mode prompts for a delivery time. Resend accepts:
+#   - ISO 8601:           2026-05-02T13:00:00Z
+#   - Natural language:   tomorrow at 9am ET
+# When scheduled, the API call runs NOW (you see immediately whether it
+# worked) and Resend holds the message until the scheduled time. You can
+# cancel queued messages from the Resend dashboard up until delivery.
 #
 # Before running:
 #   1. Set the SUPABASE_ANON_KEY environment variable, OR paste your
@@ -50,15 +58,15 @@ if (-not $ANON_KEY) {
 
 $mode = $args[0]
 if (-not $mode) {
-    Write-Host "Usage: .\send-concept-map-announcement.ps1 [dry|test|live|extras]" -ForegroundColor Yellow
+    Write-Host "Usage: .\send-concept-map-announcement.ps1 [dry|test|live|schedule|extras]" -ForegroundColor Yellow
     Write-Host ""
-    Write-Host "  dry     Preview recipient count (no send)"
-    Write-Host "  test    Send to $TEST_EMAIL only"
-    Write-Host "  live    Send to all weekly_email_eligible subscribers"
-    Write-Host "  extras  Send to hand-curated list in extras.txt only"
-    Write-Host "          (NOT to weekly_email_eligible — extras list is separate)"
+    Write-Host "  dry       Preview recipient count (no send)"
+    Write-Host "  test      Send to $TEST_EMAIL only"
+    Write-Host "  live      Send to all weekly_email_eligible NOW"
+    Write-Host "  schedule  Queue at Resend for a specific time (asks when)"
+    Write-Host "  extras    Send to weekly_email_eligible PLUS extras.txt"
     Write-Host ""
-    Write-Host "Recommended order: dry, then test, then live."
+    Write-Host "Recommended order: dry, then test, then live or schedule."
     Write-Host "Use 'extras' for KPCAM students not on the newsletter list."
     exit 1
 }
@@ -134,19 +142,42 @@ switch ($mode.ToLower()) {
         $body = $payload | ConvertTo-Json -Compress -Depth 4
         $description = "LIVE SEND to weekly_email_eligible PLUS $($extras.Count) extras from extras.txt"
     }
+    "schedule" {
+        Write-Host ""
+        Write-Host "Schedule mode: queues the email at Resend for a specific time." -ForegroundColor Cyan
+        Write-Host ""
+        Write-Host "Examples of valid input:"
+        Write-Host "  2026-05-02T13:00:00Z       (ISO 8601, UTC)"
+        Write-Host "  2026-05-02T09:00:00-04:00  (ISO 8601 with timezone offset)"
+        Write-Host "  tomorrow at 9am ET         (natural language)"
+        Write-Host "  in 14 hours                (natural language)"
+        Write-Host ""
+        $when = Read-Host "When should this be delivered?"
+        if (-not $when -or -not $when.Trim()) {
+            Write-Host "Cancelled. No schedule input provided." -ForegroundColor Cyan
+            exit 0
+        }
+        # Build payload via ConvertTo-Json so quoting is bulletproof
+        $payload = @{ confirm_send = $true; scheduled_at = $when.Trim() }
+        $body = $payload | ConvertTo-Json -Compress
+        $description = "SCHEDULED SEND to all weekly_email_eligible at: $($when.Trim())"
+    }
     default {
-        Write-Host "ERROR: Unknown mode '$mode'. Use dry, test, live, or extras." -ForegroundColor Red
+        Write-Host "ERROR: Unknown mode '$mode'. Use dry, test, live, schedule, or extras." -ForegroundColor Red
         exit 1
     }
 }
 
 # ─── Confirmation prompt for live send ────────────────────────────────
 
-if ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras") {
+if ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras" -or $mode.ToLower() -eq "schedule") {
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Yellow
     if ($mode.ToLower() -eq "extras") {
         Write-Host "  LIVE SEND + EXTRAS — full cohort PLUS the extras list above." -ForegroundColor Yellow
+    } elseif ($mode.ToLower() -eq "schedule") {
+        Write-Host "  SCHEDULED SEND — queues at Resend for the time you specified." -ForegroundColor Yellow
+        Write-Host "  You can cancel from the Resend dashboard up until delivery." -ForegroundColor Yellow
     } else {
         Write-Host "  LIVE SEND — This will email every weekly_email_eligible user." -ForegroundColor Yellow
     }
@@ -194,10 +225,13 @@ if ($mode.ToLower() -eq "dry") {
     Write-Host "If the recipient count looks right, run:"
     Write-Host "  .\send-concept-map-announcement.ps1 test" -ForegroundColor Yellow
 } elseif ($mode.ToLower() -eq "test") {
-    Write-Host "Check your inbox at $TEST_EMAIL. If the email looks right, run:"
-    Write-Host "  .\send-concept-map-announcement.ps1 live" -ForegroundColor Yellow
-    Write-Host "or, if you also want to send to KPCAM students from extras.txt, run:"
-    Write-Host "  .\send-concept-map-announcement.ps1 extras" -ForegroundColor Yellow
+    Write-Host "Check your inbox at $TEST_EMAIL. If the email looks right:"
+    Write-Host "  .\send-concept-map-announcement.ps1 live      (send NOW)" -ForegroundColor Yellow
+    Write-Host "  .\send-concept-map-announcement.ps1 schedule  (queue for later)" -ForegroundColor Yellow
+    Write-Host "  .\send-concept-map-announcement.ps1 extras    (cohort + KPCAM extras)" -ForegroundColor Yellow
+} elseif ($mode.ToLower() -eq "schedule") {
+    Write-Host "Messages queued at Resend for the scheduled time." -ForegroundColor Green
+    Write-Host "View or cancel queued messages at https://resend.com/emails"
 } elseif ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras") {
     Write-Host "Live send complete. Check the JSON response above for sent/failed counts."
     Write-Host "If any sends failed, check the Resend dashboard for delivery details."
