@@ -103,7 +103,7 @@ function buildHtml(user: any): string {
     <table cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px">
       <tr>
         <td style="vertical-align:middle;padding-right:14px">
-          <img src="https://www.reasondx.com/email-assets/lauren-headshot.jpg" alt="Lauren Fine" width="64" height="64" style="display:block;width:64px;height:64px;border-radius:32px;border:2px solid #e2e8f0">
+          <img src="https://www.reasondx.com/images/lauren-fine.jpg" alt="Lauren Fine" width="64" height="64" style="display:block;width:64px;height:64px;border-radius:32px;border:2px solid #e2e8f0">
         </td>
         <td style="vertical-align:middle">
           <div style="font-size:14px;color:#475569;line-height:1.5">Thanks,</div>
