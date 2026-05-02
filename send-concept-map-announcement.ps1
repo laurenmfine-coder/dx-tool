@@ -1,4 +1,4 @@
-# send-concept-map-announcement.ps1
+﻿# send-concept-map-announcement.ps1
 #
 # Helper script for sending the ReasonDx concept-map-beta announcement.
 # Uses curl.exe explicitly to bypass the PowerShell alias that mangled
@@ -31,7 +31,7 @@
 #        supabase functions deploy announcement-concept-map-beta
 #   3. Run dry first, then test, then live. In that order.
 
-# ─── Configuration ─────────────────────────────────────────────────────
+# --- Configuration -----------------------------------------------------
 
 $FUNCTION_URL = "https://lpwbiqpojisqgezycupw.supabase.co/functions/v1/announcement-concept-map-beta"
 $TEST_EMAIL   = "ReasonDxeducation@gmail.com"
@@ -54,7 +54,7 @@ if (-not $ANON_KEY) {
     exit 1
 }
 
-# ─── Argument handling ─────────────────────────────────────────────────
+# --- Argument handling -------------------------------------------------
 
 $mode = $args[0]
 if (-not $mode) {
@@ -71,7 +71,7 @@ if (-not $mode) {
     exit 1
 }
 
-# ─── Build the body for each mode ─────────────────────────────────────
+# --- Build the body for each mode -------------------------------------
 
 switch ($mode.ToLower()) {
     "dry" {
@@ -96,7 +96,7 @@ switch ($mode.ToLower()) {
         # but we can't suppress the cohort. The right way: use
         # confirm_send, and the extras get added on top of the full
         # cohort. So extras mode currently does NOT exist as a
-        # standalone send — it's "live + extras." If you want to
+        # standalone send - it's "live + extras." If you want to
         # send ONLY to the extras list, use the test mode in a loop
         # (one email at a time) or contact me to add a recipient-
         # override flag to the function itself.
@@ -168,18 +168,18 @@ switch ($mode.ToLower()) {
     }
 }
 
-# ─── Confirmation prompt for live send ────────────────────────────────
+# --- Confirmation prompt for live send --------------------------------
 
 if ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras" -or $mode.ToLower() -eq "schedule") {
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Yellow
     if ($mode.ToLower() -eq "extras") {
-        Write-Host "  LIVE SEND + EXTRAS — full cohort PLUS the extras list above." -ForegroundColor Yellow
+        Write-Host "  LIVE SEND + EXTRAS - full cohort PLUS the extras list above." -ForegroundColor Yellow
     } elseif ($mode.ToLower() -eq "schedule") {
-        Write-Host "  SCHEDULED SEND — queues at Resend for the time you specified." -ForegroundColor Yellow
+        Write-Host "  SCHEDULED SEND - queues at Resend for the time you specified." -ForegroundColor Yellow
         Write-Host "  You can cancel from the Resend dashboard up until delivery." -ForegroundColor Yellow
     } else {
-        Write-Host "  LIVE SEND — This will email every weekly_email_eligible user." -ForegroundColor Yellow
+        Write-Host "  LIVE SEND - This will email every weekly_email_eligible user." -ForegroundColor Yellow
     }
     Write-Host "================================================================" -ForegroundColor Yellow
     Write-Host ""
@@ -191,7 +191,7 @@ if ($mode.ToLower() -eq "live" -or $mode.ToLower() -eq "extras" -or $mode.ToLowe
     }
 }
 
-# ─── Send ─────────────────────────────────────────────────────────────
+# --- Send -------------------------------------------------------------
 
 Write-Host ""
 Write-Host "Mode: $description" -ForegroundColor Cyan
