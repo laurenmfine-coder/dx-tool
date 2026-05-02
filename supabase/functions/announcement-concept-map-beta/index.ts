@@ -100,10 +100,17 @@ function buildHtml(user: any): string {
       This is a real beta and the goal is to learn whether the format is worth investing in further. Honest reactions, including "this didn't help me," are exactly what I need.
     </p>
 
-    <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 28px">
-      Thanks,<br>
-      Lauren
-    </p>
+    <table cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px">
+      <tr>
+        <td style="vertical-align:middle;padding-right:14px">
+          <img src="https://www.reasondx.com/email-assets/lauren-headshot.jpg" alt="Lauren Fine" width="64" height="64" style="display:block;width:64px;height:64px;border-radius:32px;border:2px solid #e2e8f0">
+        </td>
+        <td style="vertical-align:middle">
+          <div style="font-size:14px;color:#475569;line-height:1.5">Thanks,</div>
+          <div style="font-size:18px;color:#1F5C82;line-height:1.4;font-weight:600;font-family:Georgia, 'Times New Roman', serif">Lauren</div>
+        </td>
+      </tr>
+    </table>
 
     <div style="border-top:1px solid #e2e8f0;padding-top:18px;font-size:12px;color:#94a3b8;line-height:1.6">
       Lauren Fine, MD &middot; Founder, ReasonDx<br>
