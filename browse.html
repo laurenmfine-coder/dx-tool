@@ -2562,6 +2562,45 @@ function startRandomEasyCase() {
 })();
 </script>
 
+<script>
+// ── Faculty-only tool injection ───────────────────────────────────────
+// The Faculty analytics page (/faculty.html) used to live in the tools
+// strip for everyone, which was noise for the 95% of learners who
+// aren't faculty. We removed it from the default markup and now inject
+// it client-side only when the logged-in user has a faculty/admin/PD
+// role. Same role check as the welcome banner above.
+(function() {
+  function injectFacultyTool() {
+    var user = {};
+    try { user = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+    var isFaculty = user.role === 'faculty' || user.role === 'admin' || user.role === 'program_director';
+    if (!isFaculty) return;
+    // Find the tools strip and the Skills Lab entry to insert after it.
+    var skillsLab = document.querySelector('a[href="/emr-skills.html"].stat');
+    if (!skillsLab || !skillsLab.parentNode) return;
+    if (document.getElementById('rdx-faculty-tool-stat')) return;
+    var facultyTool = document.createElement('a');
+    facultyTool.id = 'rdx-faculty-tool-stat';
+    facultyTool.href = '/faculty.html';
+    facultyTool.className = 'stat';
+    facultyTool.title = 'Cohort analytics and student performance';
+    facultyTool.style.cssText = 'text-decoration:none;border-left:1px solid rgba(255,255,255,0.15);opacity:0.85;position:relative';
+    facultyTool.onmouseover = function() { this.style.opacity = '1'; };
+    facultyTool.onmouseout = function() { this.style.opacity = '0.85'; };
+    facultyTool.innerHTML =
+      '<div class="stat-num" style="color:#F59E0B;font-size:28px">👩‍⚕️</div>' +
+      '<div class="stat-label" style="color:rgba(245,158,11,.8)">Faculty ↗</div>' +
+      '<div class="stat-desc">Cohort analytics</div>';
+    skillsLab.parentNode.insertBefore(facultyTool, skillsLab.nextSibling);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectFacultyTool);
+  } else {
+    injectFacultyTool();
+  }
+})();
+</script>
+
 <!-- Feedback widget: floating thumbs-up/down + comment, every page. -->
 <script src="/js/dx-feedback.js" defer></script>
 
