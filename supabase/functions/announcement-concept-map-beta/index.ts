@@ -115,6 +115,16 @@ function buildHtml(user: any): string {
     <div style="border-top:1px solid #e2e8f0;padding-top:18px;font-size:12px;color:#94a3b8;line-height:1.6">
       Lauren Fine, MD &middot; Founder, ReasonDx<br>
       Reply to this email anytime. I read every one.
+      <div style="margin-top:10px;font-size:12px;color:#94a3b8">
+        More from me:
+        <a href="https://laurenfine.com" style="color:#64748b;text-decoration:none;border-bottom:1px solid #cbd5e1">laurenfine.com</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://substack.com/@permissiontochange/posts" style="color:#64748b;text-decoration:none;border-bottom:1px solid #cbd5e1">Substack</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.linkedin.com/in/lauren-fine-md/" style="color:#64748b;text-decoration:none;border-bottom:1px solid #cbd5e1">LinkedIn</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.youtube.com/watch?v=sLYEH6-Mshw" style="color:#64748b;text-decoration:none;border-bottom:1px solid #cbd5e1">TEDx talk</a>
+      </div>
     </div>
 
   </div>
