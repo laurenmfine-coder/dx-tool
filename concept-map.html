@@ -210,6 +210,20 @@ body{
 .panel .neighbors .edge-dot.shares-presentation{background:var(--pres)}
 .panel .neighbors .edge-dot.what-if-twist{background:var(--twist)}
 
+/* Cross-domain neighbor tag: signals the button navigates to a
+   foreign domain rather than jumping within the current view. */
+.panel .neighbors .cross-domain-tag{
+  margin-left:6px;
+  font-size:.65rem; font-weight:700; letter-spacing:.3px;
+  text-transform:uppercase;
+  padding:1px 5px; border-radius:3px;
+  background:var(--blue-l); color:var(--blue-d);
+}
+.panel .neighbors button[data-jump-cross]{
+  border-style:dashed;
+}
+.panel .neighbors button[data-jump-cross]:hover .cross-domain-tag{background:#fff; color:var(--blue-d)}
+
 /* Type badge on puzzle and branched-case links. The badge tells the
    learner what kind of reasoning the puzzle drills before they click
    through (e.g., "Lab Shift", "Anchoring Check"). Honest labeling:
@@ -554,35 +568,165 @@ const EDGE_COLOR = {
 };
 
 function buildNodes() {
-  return MAP.nodes.map(n => Object.assign({}, KIND_STYLE[n.kind] || KIND_STYLE.concept, {
+  // Native nodes: full styling, full size.
+  const native = MAP.nodes.map(n => Object.assign({}, KIND_STYLE[n.kind] || KIND_STYLE.concept, {
     id: n.id,
     label: n.label,
     title: n.summary,
     _node: n
   }));
+  // Portal nodes: foreign endpoints reachable from the active domain.
+  // Rendered smaller, dashed border, desaturated, with a domain tag so
+  // the learner knows clicking them leaves the current domain.
+  const portals = collectPortalNodes().map(p => {
+    const baseStyle = KIND_STYLE[p.kind] || KIND_STYLE.concept;
+    return {
+      id: portalNodeId(p.domain, p.node),
+      label: p.label + '\n[' + p.domainLabel + ']',
+      title: p.summary + '\n\nClick to open in ' + p.domainLabel + '.',
+      shape: baseStyle.shape,
+      size: Math.round((baseStyle.size || 22) * 0.7),
+      color: {
+        background: 'rgba(255,255,255,0.6)',
+        border: baseStyle.color || '#5DADE2',
+        highlight: { background: '#fff', border: baseStyle.color || '#5DADE2' }
+      },
+      borderWidth: 2,
+      borderWidthSelected: 3,
+      shapeProperties: { borderDashes: [5, 4] },
+      font: {
+        size: 11,
+        color: '#475569',
+        face: 'DM Sans',
+        multi: false,
+        background: 'rgba(255,255,255,0.0)',
+        strokeWidth: 3,
+        strokeColor: '#FFFFFF'
+      },
+      _portal: p
+    };
+  });
+  return native.concat(portals);
 }
+
+// ─── Cross-domain edge support ───────────────────────────────────────
+// An edge endpoint can be a string (a node id in the same domain) or
+// an object { domain, node } (a node id in another domain). Edges
+// declared in any domain whose source-or-target lands in the active
+// domain are rendered in the active view, with the foreign endpoint
+// shown as a "portal node" that navigates to the other domain on
+// click.
+
+// Normalize an endpoint to { domain, node }. A string is interpreted
+// as a node id in the supplied default domain.
+function parseEndpoint(ep, defaultDomain) {
+  if (typeof ep === 'string') return { domain: defaultDomain, node: ep };
+  if (ep && typeof ep === 'object' && ep.domain && ep.node) return ep;
+  return null;
+}
+
+// Stable portal-node id derived from foreign domain + node.
+function portalNodeId(domain, node) {
+  return '__portal__' + domain + '__' + node;
+}
+
+// Walk every registered domain's edges and find any edge that touches
+// the active domain on at least one endpoint and crosses into another
+// domain on the other endpoint. Returns an array of normalized edges
+// with both endpoints in { domain, node } form.
+function collectCrossDomainEdges() {
+  const out = [];
+  const seen = new Set(); // de-duplicate edges that get declared in both domains
+  for (const domainId of Object.keys(REGISTRY)) {
+    const domainMap = REGISTRY[domainId];
+    if (!domainMap || !domainMap.edges) continue;
+    for (const e of domainMap.edges) {
+      const from = parseEndpoint(e.from, domainId);
+      const to = parseEndpoint(e.to, domainId);
+      if (!from || !to) continue;
+      // Skip same-domain edges entirely; they'll be picked up by the
+      // active-domain edge list directly. We only collect edges that
+      // span domains.
+      if (from.domain === to.domain) continue;
+      // Skip edges that don't touch the active domain at all.
+      if (from.domain !== ACTIVE_DOMAIN && to.domain !== ACTIVE_DOMAIN) continue;
+      // De-duplicate: an edge declared in both domains should only
+      // render once. Canonicalize by sorting domain+node pairs.
+      const key = [from.domain + ':' + from.node, to.domain + ':' + to.node]
+        .sort().join('|') + '|' + e.type;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ ...e, from, to, _sourceDomain: domainId });
+    }
+  }
+  return out;
+}
+
+// Foreign endpoints reachable from the active domain via cross-domain
+// edges. Returns an array of { domain, domainLabel, node, label,
+// summary, kind } for each unique foreign endpoint.
+function collectPortalNodes() {
+  const portals = new Map(); // key -> portal info
+  for (const e of collectCrossDomainEdges()) {
+    const foreign = e.from.domain !== ACTIVE_DOMAIN ? e.from : e.to;
+    const key = foreign.domain + ':' + foreign.node;
+    if (portals.has(key)) continue;
+    const foreignMap = REGISTRY[foreign.domain];
+    if (!foreignMap) continue;
+    const foreignNode = (foreignMap.nodes || []).find(n => n.id === foreign.node);
+    if (!foreignNode) continue;
+    portals.set(key, {
+      domain: foreign.domain,
+      domainLabel: foreignMap.domainLabel || foreign.domain,
+      node: foreign.node,
+      label: foreignNode.label,
+      summary: foreignNode.summary,
+      kind: foreignNode.kind
+    });
+  }
+  return Array.from(portals.values());
+}
+
 function buildEdges(filter) {
-  return MAP.edges
+  // Native edges: both endpoints in the active domain.
+  const native = (MAP.edges || [])
+    .filter(e => {
+      const from = parseEndpoint(e.from, ACTIVE_DOMAIN);
+      const to = parseEndpoint(e.to, ACTIVE_DOMAIN);
+      return from && to && from.domain === ACTIVE_DOMAIN && to.domain === ACTIVE_DOMAIN;
+    })
+    .map(e => ({ ...e, from: e.from, to: e.to, _isCross: false }));
+
+  // Cross-domain edges: one endpoint in the active domain, the other
+  // remapped to a portal node id within this view.
+  const cross = collectCrossDomainEdges().map(e => {
+    const fromInActive = e.from.domain === ACTIVE_DOMAIN;
+    const fromId = fromInActive ? e.from.node : portalNodeId(e.from.domain, e.from.node);
+    const toId = (e.to.domain === ACTIVE_DOMAIN) ? e.to.node : portalNodeId(e.to.domain, e.to.node);
+    return { ...e, from: fromId, to: toId, _isCross: true };
+  });
+
+  return native.concat(cross)
     .filter(e => filter === 'all' || e.type === filter)
     .map((e, i) => {
       const isDiff = e.type === 'differential-pair';
       const isMech = e.type === 'shares-mechanism';
+      const isCross = e._isCross;
       const edgeData = {
         id: 'e' + i,
         from: e.from, to: e.to,
-        // Differential-pair edges carry the most pedagogical weight in the
-        // chest pain hub. Render them thicker, fully saturated, and with a
-        // subtle glow so the three killers jump out at first glance.
         color: {
           color: EDGE_COLOR[e.type] || '#94A3B8',
           highlight: EDGE_COLOR[e.type] || '#1E293B',
-          opacity: isDiff ? 1.0 : 0.75
+          // Cross-domain edges render slightly faded so they read as
+          // boundary connections rather than primary navigation.
+          opacity: isCross ? 0.55 : (isDiff ? 1.0 : 0.75)
         },
         width: isDiff ? 3.5 : 1.5,
         selectionWidth: isDiff ? 4.5 : 2.5,
-        dashes: isMech,
+        dashes: isMech || isCross,
         smooth: { type: 'continuous', roundness: 0.2 },
-        title: e.note,
+        title: e.note + (isCross ? '\n\n(Crosses to another domain. Click the portal node to navigate.)' : ''),
         _edge: e
       };
       // Edge label: any edge can carry a discriminator/teaching label.
@@ -757,22 +901,55 @@ function parseContentRefs(contentStr) {
 
 function neighborsOf(nodeId) {
   const out = [];
+  // Native edges in the active domain.
   for (const e of MAP.edges) {
-    if (e.from === nodeId) out.push({ id: e.to, type: e.type });
-    else if (e.to === nodeId) out.push({ id: e.from, type: e.type });
+    const from = parseEndpoint(e.from, ACTIVE_DOMAIN);
+    const to = parseEndpoint(e.to, ACTIVE_DOMAIN);
+    if (!from || !to) continue;
+    if (from.node === nodeId && from.domain === ACTIVE_DOMAIN) {
+      out.push({
+        id: to.node, type: e.type,
+        crossDomain: to.domain !== ACTIVE_DOMAIN ? to.domain : null
+      });
+    } else if (to.node === nodeId && to.domain === ACTIVE_DOMAIN) {
+      out.push({
+        id: from.node, type: e.type,
+        crossDomain: from.domain !== ACTIVE_DOMAIN ? from.domain : null
+      });
+    }
+  }
+  // Cross-domain edges declared in OTHER domains that touch this node.
+  // collectCrossDomainEdges() already de-dupes, so we only need to
+  // include edges declared elsewhere where this node is one endpoint.
+  for (const e of collectCrossDomainEdges()) {
+    // Skip edges declared in the active domain (already counted above).
+    if (e._sourceDomain === ACTIVE_DOMAIN) continue;
+    const fromInActive = e.from.domain === ACTIVE_DOMAIN && e.from.node === nodeId;
+    const toInActive = e.to.domain === ACTIVE_DOMAIN && e.to.node === nodeId;
+    if (!fromInActive && !toInActive) continue;
+    const foreign = fromInActive ? e.to : e.from;
+    out.push({ id: foreign.node, type: e.type, crossDomain: foreign.domain });
   }
   // Sort by edge-type priority so the highest-yield relationships
   // appear first. Differential pairs are most pedagogically valuable;
   // mechanism shares teach the underlying physiology; presentation
   // shares are recognition pattern overlap; what-if twists are the
-  // B-shape pivots from existing puzzles.
+  // B-shape pivots from existing puzzles. Within each tier, native
+  // neighbors come before cross-domain ones (more contextually
+  // relevant for the current view).
   const PRIORITY = {
     'differential-pair':   0,
     'shares-mechanism':    1,
     'what-if-twist':       2,
     'shares-presentation': 3
   };
-  out.sort((a, b) => (PRIORITY[a.type] ?? 99) - (PRIORITY[b.type] ?? 99));
+  out.sort((a, b) => {
+    const pa = (PRIORITY[a.type] ?? 99) - (PRIORITY[b.type] ?? 99);
+    if (pa !== 0) return pa;
+    const ca = a.crossDomain ? 1 : 0;
+    const cb = b.crossDomain ? 1 : 0;
+    return ca - cb;
+  });
   return out;
 }
 
@@ -828,6 +1005,22 @@ function renderNode(n) {
   if (neigh.length) {
     neighHtml = '<div class="section-h">Connected to</div><div class="neighbors">' +
       neigh.map(x => {
+        if (x.crossDomain) {
+          // Cross-domain neighbor: resolve from the foreign domain's
+          // registry and render with a portal indicator.
+          const foreignMap = REGISTRY[x.crossDomain];
+          if (!foreignMap) return '';
+          const foreignNode = (foreignMap.nodes || []).find(nn => nn.id === x.id);
+          if (!foreignNode) return '';
+          const foreignLabel = foreignMap.domainLabel || x.crossDomain;
+          return '<button data-jump-cross="' + x.crossDomain + ':' + x.id + '" ' +
+            'data-edge-type="' + x.type + '" ' +
+            'title="' + x.type.replace(/-/g, ' ') + ' \u2014 in ' + foreignLabel + '">' +
+            '<span class="edge-dot ' + x.type + '"></span>' +
+            foreignNode.label +
+            '<span class="cross-domain-tag">' + foreignLabel + ' \u2192</span>' +
+            '</button>';
+        }
         const target = MAP.nodes.find(nn => nn.id === x.id);
         if (!target) return '';
         return '<button data-jump="' + target.id + '" data-edge-type="' + x.type + '" title="' + x.type.replace(/-/g, ' ') + '">' +
@@ -861,7 +1054,7 @@ function wirePanelInteractions(currentNode) {
   const closeBtn = panel.querySelector('#panel-close');
   if (closeBtn) closeBtn.addEventListener('click', closePanel);
 
-  // Neighbor jump buttons
+  // Neighbor jump buttons (same domain)
   panel.querySelectorAll('button[data-jump]').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-jump');
@@ -872,6 +1065,28 @@ function wirePanelInteractions(currentNode) {
         renderNode(target);
         if (currentNode) track('neighbor_jump', { from: currentNode.id, to: targetId });
       }
+    });
+  });
+
+  // Cross-domain jump buttons: navigate to the foreign domain.
+  panel.querySelectorAll('button[data-jump-cross]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ref = btn.getAttribute('data-jump-cross') || '';
+      const sep = ref.indexOf(':');
+      if (sep <= 0) return;
+      const targetDomain = ref.slice(0, sep);
+      const targetNode = ref.slice(sep + 1);
+      track('portal_navigate', {
+        from_domain: ACTIVE_DOMAIN,
+        from_node: currentNode ? currentNode.id : null,
+        to_domain: targetDomain,
+        to_node: targetNode,
+        via: 'panel_neighbor'
+      });
+      const url = window.location.pathname +
+                  '?domain=' + encodeURIComponent(targetDomain) +
+                  '&node=' + encodeURIComponent(targetNode);
+      window.location.href = url;
     });
   });
 
@@ -961,6 +1176,25 @@ function renderEmpty() {
 network.on('selectNode', function(params) {
   const nodeId = params.nodes && params.nodes[0];
   if (!nodeId) return;
+  // Portal node: clicking navigates to the foreign domain. Decoded
+  // from the id format set by portalNodeId().
+  if (typeof nodeId === 'string' && nodeId.indexOf('__portal__') === 0) {
+    const rest = nodeId.slice('__portal__'.length);
+    const sep = rest.indexOf('__');
+    if (sep > 0) {
+      const targetDomain = rest.slice(0, sep);
+      const targetNode = rest.slice(sep + 2);
+      track('portal_navigate', { from_domain: ACTIVE_DOMAIN, to_domain: targetDomain, to_node: targetNode });
+      // Hard navigation. The target page reloads with the foreign
+      // domain active and the foreign node focused.
+      const url = window.location.pathname +
+                  '?domain=' + encodeURIComponent(targetDomain) +
+                  '&node=' + encodeURIComponent(targetNode);
+      window.location.href = url;
+      return;
+    }
+  }
+  // Native node: render in the side panel as before.
   const node = MAP.nodes.find(n => n.id === nodeId);
   if (node) {
     renderNode(node);
