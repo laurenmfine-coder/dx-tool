@@ -2,6 +2,16 @@
  * ReasonDx Email Worker — Loops.so
  * Cloudflare Worker: routes performance events → Loops API
  *
+ * KILL-SWITCH: As of May 2026, ReasonDx is migrating away from Loops.
+ * LOOPS_ENABLED is set to false to disable all outbound Loops API calls
+ * while keeping the Worker functional (returns success without sending).
+ * The Loops integration code below is preserved for now in case we need
+ * to re-enable temporarily, but the intent is to delete it entirely once
+ * the Loops account is closed.
+ *
+ * To re-enable temporarily: change LOOPS_ENABLED to true.
+ * To remove permanently: delete this file and remove the Worker route.
+ *
  * Secret: LOOPS_API_KEY (Cloudflare → Settings → Variables and Secrets)
  *
  * In Loops (app.loops.so), create a Loop for each event:
@@ -20,6 +30,7 @@
  *   facultyWeeklyDigest   — weekly faculty summary (from cron)
  */
 
+const LOOPS_ENABLED = false;
 const LOOPS_API = 'https://app.loops.so/api/v1';
 
 async function upsertContact(apiKey, email, firstName, lastName, props) {
@@ -96,6 +107,16 @@ export default {
 
     const { eventType, email, firstName, lastName, data = {} } = body;
     if (!eventType || !email) return new Response('Missing eventType or email', { status: 400 });
+
+    // Kill-switch: when Loops is disabled, accept the event and return
+    // success without making any external API calls. Platform behavior
+    // is unchanged from the caller's perspective; nothing goes to Loops.
+    if (!LOOPS_ENABLED) {
+      console.log(`[loops-disabled] Event ignored: ${eventType} for ${email}`);
+      return new Response(JSON.stringify({ ok: true, events: [], note: 'loops-disabled' }), {
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      });
+    }
 
     const apiKey = env.LOOPS_API_KEY;
     if (!apiKey) return new Response('LOOPS_API_KEY not configured', { status: 500 });
