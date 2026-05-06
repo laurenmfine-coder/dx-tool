@@ -2287,6 +2287,10 @@ function loadCaseData(cb) {
     }
     // Fire case_started GA4 event
     try { if(window.gtag) gtag('event','case_started',{case_id:CASE_ID,case_category:(d.meta&&d.meta.category)||'unknown',case_acuity:(d.meta&&d.meta.acuity)||0,setting:URL_SETTING||'default'}); } catch(e) {}
+    // Stamp case start time for reasoning telemetry (used by
+    // _trackOrderTiming to compute time_in_case_sec on order events).
+    S._caseStartTs = Date.now();
+    S._tabsVisited = {};
     // -- Multi-encounter support --
     // If case has encounters keyed by setting, merge selected encounter over base
     if (d.encounters && S.clinicalSetting && d.encounters[S.clinicalSetting]) {
@@ -4409,7 +4413,7 @@ function _showStepLocked(tabId) {
   setTimeout(function(){ toast.style.opacity='0'; toast.style.transition='opacity .4s'; setTimeout(function(){ if(toast.parentNode) toast.parentNode.removeChild(toast); }, 400); }, 4000);
 }
 
-function switchTab(id){document.dispatchEvent(new CustomEvent('rdx-tab-switch',{detail:{tab:id}}));if(window.RDXGuide)RDXGuide.trackTabVisit(id);if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackSection(id)}if(window.MissionControl&&S.currentUser&&S.currentUser.role==="student"){MissionControl.trackTab(id);MissionControl.addDwell(id,3)}S.activeTab=id;if(S.currentUser)loadUserData();render()}
+function switchTab(id){document.dispatchEvent(new CustomEvent('rdx-tab-switch',{detail:{tab:id}}));if(window.RDXGuide)RDXGuide.trackTabVisit(id);if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackSection(id)}if(window.MissionControl&&S.currentUser&&S.currentUser.role==="student"){MissionControl.trackTab(id);MissionControl.addDwell(id,3)}if(!S._tabsVisited)S._tabsVisited={};S._tabsVisited[id]=true;S.activeTab=id;if(S.currentUser)loadUserData();render()}
 function toggleExpand(k){var wasOpen=S.expanded[k];S.expanded[k]=!S.expanded[k];if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackExpand(k,!wasOpen)}render()}
 function changeWeek(w){S.encounterWeek=w;loadUserData();render()}
 
@@ -5129,8 +5133,56 @@ function resultImgOrder_auto(idx) {
   render();
 }
 // ─────────────────────────────────────────────────────────────────────────────
+// REASONING TELEMETRY: order_before_history
+//
+// Free-navigation mode lets students place orders before doing the
+// patient interview or building a differential — which is fine in some
+// cases (a STAT order in a coding patient) and a reasoning red flag in
+// others (premature closure on chest-pain workup before any history).
+//
+// Each time an order is placed, we check whether the student had
+// visited the interview tab and whether they had any DDx entries.
+// If neither happened, fire a 'order_before_history' event with the
+// order details. The signal is used by the reasoning fingerprint to
+// detect anchoring and premature closure patterns.
+//
+// Fires to gtag (Google Analytics) immediately. Also queued to the
+// Supabase analytics_events pipeline if it's working — but the GA
+// fire is the primary record.
+// ─────────────────────────────────────────────────────────────────────────────
+function _trackOrderTiming(orderType, orderName) {
+  try {
+    var hasInterview = !!(S._tabsVisited && S._tabsVisited.interview);
+    var hasDdx = !!(window.MissionControl && MissionControl.getDdxEntries
+                    && MissionControl.getDdxEntries().length >= 1);
+    var preExistingOrders = (S.labOrders||[]).length + (S.imgOrders||[]).length
+                          + (S.referralOrders||[]).length;
+    // 'Before history' = no interview AND no DDx, AND this is the first
+    // order in the session. Subsequent orders aren't 'premature' just
+    // because the student is still in order-mode — only the first one is
+    // diagnostic of the reasoning pattern.
+    var isPremature = !hasInterview && !hasDdx && preExistingOrders === 0;
+    if (isPremature && window.gtag) {
+      window.gtag('event', 'order_before_history', {
+        case_id: CASE_ID,
+        order_type: orderType,
+        order_name: orderName,
+        time_in_case_sec: Math.round((Date.now() - (S._caseStartTs || Date.now())) / 1000)
+      });
+    }
+    // Also stash on the chart tracker for the per-case fingerprint
+    if (window.ChartTracker && ChartTracker.trackReasoningFlag) {
+      ChartTracker.trackReasoningFlag('order_before_history', {
+        type: orderType, name: orderName, premature: isPremature
+      });
+    }
+  } catch(e) { /* never block order placement on telemetry */ }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 function _placeLabOrder(id,cat,vResult,action){
+  _trackOrderTiming('lab', cat.name);
   var newOrder = {id:id, name:cat.name, orderedAt:new Date().toLocaleString(),
     resulted:false, resultData:null,
     validation:vResult?{status:vResult.status,alertCount:vResult.alerts.length}:null};
@@ -5187,6 +5239,7 @@ function orderImg(id){
   _placeImgOrder(id,cat,null,'placed');
 }
 function _placeImgOrder(id,cat,vResult,action){
+  _trackOrderTiming('imaging', cat.name);
   var newOrder = {id:id, name:cat.name, orderedAt:new Date().toLocaleString(),
     resulted:false, resultData:null,
     validation:vResult?{status:vResult.status,alertCount:vResult.alerts.length}:null};
@@ -5225,6 +5278,7 @@ function placeReferral(){
   const reason=document.getElementById("refReason").value.trim();
   const urgency=document.getElementById("refUrgency").value;
   if(!reason){showToast("Enter reason for referral");return}
+  _trackOrderTiming('referral', specialty);
   S.referralOrders.push({specialty,reason,urgency,orderedAt:new Date().toLocaleString()});
   saveStudentData("referrals",S.referralOrders);
   hideAnnotationPopover();showToast("✓ Referral to "+specialty+" placed");render();
@@ -6916,16 +6970,42 @@ render = function(){
                          (S.referralOrders && S.referralOrders.length > 0));
   var _hasNote       = S.submitted || Object.values(S.noteFields||{}).some(function(v){
                          return v && v.trim().length > 50; });
-  // Unlock levels: 0=chart always, 1=after chart, 2=after interview, 3=after ddx, 4=after orders+note
-  var _unlockedStepIdx = 0;
-  if (_hasInterview || _hasDdx) _unlockedStepIdx = Math.max(_unlockedStepIdx, 1);
-  if (_hasDdx)                  _unlockedStepIdx = Math.max(_unlockedStepIdx, 2);
-  if (_hasOrders || _hasNote)   _unlockedStepIdx = Math.max(_unlockedStepIdx, 3);
-  if (_hasNote)                 _unlockedStepIdx = Math.max(_unlockedStepIdx, 4);
+  // FREE NAVIGATION MODE: all steps unlocked from case start.
+  //
+  // Previously, steps unlocked sequentially (chart → interview → ddx →
+  // orders → note → debrief). Students couldn't place orders before
+  // building a differential, couldn't write a note before placing
+  // orders, etc. Real clinicians don't reason that way — they form
+  // hypotheses early, jump to relevant data, revise as new info comes
+  // in. Forcing a fixed sequence prevented students from showing us
+  // their actual reasoning.
+  //
+  // Now every step is reachable from the start. The step states
+  // ('done' / 'current' / 'future') are still computed below for
+  // visual coaching cues (the workflow bar still highlights where
+  // the student IS in their reasoning), but the sidebar tabs no
+  // longer block clicks.
+  //
+  // The ChartTracker, MissionControl, and reasoning fingerprint all
+  // continue to record what was done and when — and now they capture
+  // RICHER data because students can express reasoning patterns
+  // (premature closure, anchoring, pivot-miss) that the gates
+  // previously hid. See order_before_history event for one example.
+  var _unlockedStepIdx = 4; // all steps unlocked
+  // Step state for visual coaching (kept for the workflow bar):
+  var _coachUnlockedStepIdx = 0;
+  if (_hasInterview || _hasDdx) _coachUnlockedStepIdx = Math.max(_coachUnlockedStepIdx, 1);
+  if (_hasDdx)                  _coachUnlockedStepIdx = Math.max(_coachUnlockedStepIdx, 2);
+  if (_hasOrders || _hasNote)   _coachUnlockedStepIdx = Math.max(_coachUnlockedStepIdx, 3);
+  if (_hasNote)                 _coachUnlockedStepIdx = Math.max(_coachUnlockedStepIdx, 4);
   // Current active step
   var _activeStepIdx = 0;
   _STEP_ORDER.forEach(function(s,i){ if(_STEP_TABS[s].indexOf(S.activeTab)>=0) _activeStepIdx=i; });
-  var _curStepIdx = Math.max(_activeStepIdx, _unlockedStepIdx);
+  // Free-nav: _unlockedStepIdx is always 4 (everything reachable), so it
+  // can't drive the visual 'where am I?' coaching state any more. Use
+  // the coach-unlocked index instead, which reflects what the student
+  // has actually completed in their reasoning sequence.
+  var _curStepIdx = Math.max(_activeStepIdx, _coachUnlockedStepIdx);
   function _getTabStepIdx(tabId) {
     for(var s=0;s<_STEP_ORDER.length;s++){ if(_STEP_TABS[_STEP_ORDER[s]].indexOf(tabId)>=0) return s; }
     return 0;
@@ -6952,13 +7032,16 @@ render = function(){
     var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):'';
     var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
     var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
-    var _onclick = stepState==='future' ? 'onclick="_showStepLocked(\''+t.id+'\')"' : 'onclick="switchTab(\''+t.id+'\')"';
+    // Free-nav: every step is clickable. The 'rdx-step-future' visual
+    // class still dims tabs the student hasn't earned via reasoning
+    // progress (acts as a soft coaching nudge), but no tab is gated.
+    var _onclick = 'onclick="switchTab(\''+t.id+'\')"';
     // Mobile: only PRIMARY_TAB_IDS show in the bottom tab bar; everything
     // else is reachable via the More overflow sheet. The CSS rule
     // .sidebar-btn[data-priority="secondary"]{display:none} (mobile only)
     // takes care of the actual hiding.
     var _priority = (PRIMARY_TAB_IDS.indexOf(t.id) >= 0) ? 'primary' : 'secondary';
-    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+_primaryCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" data-priority="'+_priority+'" title="'+(stepState==='future'?'Complete earlier steps first':'')+'">'+(stepState==='future'?'<span style="font-size:10px;margin-right:2px;opacity:.5">🔒</span>':'')+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+_primaryCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" data-priority="'+_priority+'">'+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
   }
   var sb = tabs.map(function(t){
     if(t.divider && t.stepId){
