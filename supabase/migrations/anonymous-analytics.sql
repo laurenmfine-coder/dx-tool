@@ -114,7 +114,15 @@ CREATE POLICY anon_event_insert
       'ed_disposition',
       'mission_control_open',
       'mission_control_task_complete',
-      'cta_click'
+      'cta_click',
+      -- Reasoning telemetry (added with free-navigation EMR change).
+      -- These events capture cognitive patterns the platform now exposes
+      -- because the chart is no longer phase-gated.
+      'order_before_history',
+      'order_placed',
+      'ddx_updated',
+      'ddx_unchanged_after_data',
+      'reasoning_pause'
     )
 
     -- attempt_id must be NULL for anonymous events. There's no
