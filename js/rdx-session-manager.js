@@ -140,6 +140,29 @@ window.RDXSessionManager = (function() {
       
       if (error) throw error;
       
+      // Also write to external_subscribers — this is what the weekly
+      // email pipeline actually reads from (via the
+      // weekly_email_eligible view). Without this, an in-platform
+      // signup never makes it to the weekly list. Best-effort:
+      // failure here doesn't roll back the user_sessions write or
+      // affect the user-facing success path.
+      try {
+        await supabase
+          .from('external_subscribers')
+          .upsert({
+            email: email,
+            source: source ? ('platform-' + source) : 'platform',
+            segment: 'Platform Signup',
+            email_weekly_case: true
+          }, {
+            onConflict: 'email',
+            ignoreDuplicates: true  // existing subscribers should not be overwritten
+          });
+      } catch (extErr) {
+        // Non-fatal; user_sessions still succeeded.
+        console.warn('external_subscribers upsert failed (non-fatal):', extErr);
+      }
+
       // Track conversion
       trackEvent('email_captured', {
         source: source,
