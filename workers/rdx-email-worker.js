@@ -1,25 +1,25 @@
 /**
- * ReasonDx Email Worker — Loops.so
+ * ReasonDx + Lauren Fine Coaching Email Worker — Loops.so
  * Cloudflare Worker: routes performance events → Loops API
  *
- * KILL-SWITCH: As of May 2026, ReasonDx is migrating away from Loops.
- * LOOPS_ENABLED is set to false to disable all outbound Loops API calls
- * while keeping the Worker functional (returns success without sending).
- * The Loops integration code below is preserved for now in case we need
- * to re-enable temporarily, but the intent is to delete it entirely once
- * the Loops account is closed.
+ * Status (May 2026): Loops re-enabled. Worker now serves BOTH:
+ *   - ReasonDx platform events (source: ReasonDx)
+ *   - Lauren Fine coaching lead captures (source: LaurenFine)
  *
- * To re-enable temporarily: change LOOPS_ENABLED to true.
- * To remove permanently: delete this file and remove the Worker route.
+ * Contacts are tagged by source field so the two streams can be filtered
+ * and segmented separately in the Loops dashboard.
+ *
+ * To disable temporarily: change LOOPS_ENABLED to false.
  *
  * Secret: LOOPS_API_KEY (Cloudflare → Settings → Variables and Secrets)
  *
  * In Loops (app.loops.so), create a Loop for each event:
  *   Trigger: "Event received" → eventName below
  *   Variables available in email: {{lastDiagnosis}}, {{lastSpecialty}},
- *   {{casesCompleted}}, {{lastDdxAccuracy}}, {{firstName}}
+ *   {{casesCompleted}}, {{lastDdxAccuracy}}, {{firstName}},
+ *   {{worksheetDownloaded}}, {{leadSource}}
  *
- * Events fired by this worker:
+ * ReasonDx events:
  *   simulationCompleted   — every sim finish
  *   firstSimulation       — first sim ever
  *   ddxStruggle           — DDx accuracy < 50%
@@ -28,23 +28,30 @@
  *   emrSubmitted          — first EMR note submitted
  *   reengagement7Day      — 7 days inactive (from cron)
  *   facultyWeeklyDigest   — weekly faculty summary (from cron)
+ *
+ * Coaching (laurenfine.com) events:
+ *   coachingLeadCapture   — worksheet download or other lead capture
  */
 
-const LOOPS_ENABLED = false;
+const LOOPS_ENABLED = true;
 const LOOPS_API = 'https://app.loops.so/api/v1';
 
 async function upsertContact(apiKey, email, firstName, lastName, props) {
+  // Default to ReasonDx; coaching leads override via props.source / props.userGroup
+  const source = props.source || 'ReasonDx';
+  const userGroup = props.userGroup || (props.role === 'faculty' ? 'Faculty' : 'Student');
+  const payload = { email, firstName: firstName || '', lastName: lastName || '', ...props, source, userGroup };
   // Try update first; if 404, create
   const updateRes = await fetch(`${LOOPS_API}/contacts/update`, {
     method: 'PUT',
     headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, firstName: firstName || '', lastName: lastName || '', source: 'ReasonDx', userGroup: props.role === 'faculty' ? 'Faculty' : 'Student', ...props }),
+    body: JSON.stringify(payload),
   });
   if (updateRes.status === 404) {
     await fetch(`${LOOPS_API}/contacts/create`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, firstName: firstName || '', lastName: lastName || '', source: 'ReasonDx', userGroup: props.role === 'faculty' ? 'Faculty' : 'Student', ...props }),
+      body: JSON.stringify(payload),
     });
   }
 }
@@ -76,6 +83,8 @@ function resolveEvents(eventType, data) {
   if (eventType === 'browse_signup')  events.push('browseSignup');
   if (eventType === 'faculty_weekly') events.push('facultyWeeklyDigest');
   if (eventType === 'quick_bounce')   events.push('quickBounce');
+  // Lauren Fine coaching site
+  if (eventType === 'coaching_lead')  events.push('coachingLeadCapture');
   return events;
 }
 
@@ -92,6 +101,17 @@ function buildContactProps(data) {
   if (data.role)        props.role        = data.role;
   if (data.timeOnPageSeconds !== undefined) props.lastBounceSeconds = String(data.timeOnPageSeconds);
   if (data.page)        props.lastBouncePage = data.page;
+  // Lauren Fine coaching site fields
+  if (data.source === 'LaurenFine') {
+    props.source = 'LaurenFine';
+    props.userGroup = 'CoachingLead';
+  }
+  if (data.worksheet)   props.worksheetDownloaded = data.worksheet;
+  if (data.leadStage)   props.leadStage    = data.leadStage;
+  if (data.utmSource)   props.utmSource    = data.utmSource;
+  if (data.utmMedium)   props.utmMedium    = data.utmMedium;
+  if (data.utmCampaign) props.utmCampaign  = data.utmCampaign;
+  if (data.referrer)    props.referrer     = data.referrer;
   return props;
 }
 
