@@ -108,6 +108,7 @@ function buildContactProps(data) {
   }
   if (data.worksheet)   props.worksheetDownloaded = data.worksheet;
   if (data.leadStage)   props.leadStage    = data.leadStage;
+  if (data.alsoSubstack !== undefined) props.alsoSubstack = data.alsoSubstack === true || data.alsoSubstack === 'true';
   if (data.utmSource)   props.utmSource    = data.utmSource;
   if (data.utmMedium)   props.utmMedium    = data.utmMedium;
   if (data.utmCampaign) props.utmCampaign  = data.utmCampaign;
