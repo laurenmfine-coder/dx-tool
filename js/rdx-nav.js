@@ -1,3 +1,4 @@
+try{if(!/^\/(index.html)?$/.test(location.pathname)){location.replace('/');}}catch(e){}
 /* rdx-nav.js — ReasonDx Navigation v6 — 3-Pillar Architecture */
 (function() {
   'use strict';
