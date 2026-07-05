@@ -1,3 +1,4 @@
+try{if(!/^\/(index.html)?$/.test(location.pathname)){location.replace('/');}}catch(e){}
 // ReasonDx — Central Configuration
 // Single source of truth for Supabase URL and anon key
 // Load this script before any other RDX scripts that need Supabase
