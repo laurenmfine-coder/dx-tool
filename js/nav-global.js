@@ -1,3 +1,4 @@
+try{if(!/^\/(index.html)?$/.test(location.pathname)){location.replace('/');}}catch(e){}
 // ReasonDx Global Navigation — self-contained, auth-aware
 (function() {
   if (document.getElementById('rdx-global-nav')) return;
